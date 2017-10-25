@@ -1,0 +1,114 @@
+t_rows2,t_rows2_lab,iotables_label_r,ordering_r
+B1G,Value added at basic prices,gva_bp,75
+B2G_B3G,"Operating surplus, gross",operating_surplus_gross,73
+B2N_B3N,"Operating surplus, net",operating_surplus_net,72
+B3G,Gross mixed income,mixed_income_gross,74
+CPA_A01,"Products of agriculture, hunting and related services",agriculture,1
+CPA_A02,"Products of forestry, logging and related services",forestry,2
+CPA_A03,Fish and other fishing products; aquaculture products; support services to fishing,fishing,3
+CPA_B,Mining and quarrying,mining,4
+CPA_C10-C12,"Food, beverages and tobacco products",food_beverages_tobacco,5
+CPA_C13-C15,"Textiles, wearing apparel, leather and related products",textiles_apparel,6
+CPA_C16,"Wood and of products of wood and cork, except furniture; articles of straw and plaiting materials",wood_products,7
+CPA_C17,Paper and paper products,paper_products,8
+CPA_C18,Printing and recording services,printing_recording,9
+CPA_C19,Coke and refined petroleum products,coke_refined_petrol,10
+CPA_C20,Chemicals and chemical products,chemical,11
+CPA_C21,Basic pharmaceutical products and pharmaceutical preparations,basic_pharmaceutical,12
+CPA_C22,Rubber and plastic products,rubber_plasic,13
+CPA_C23,Other non-metallic mineral products,mineral_products,14
+CPA_C24,Basic metals,basic_metals,15
+CPA_C25,"Fabricated metal products, except machinery and equipment",fabricated_metal,16
+CPA_C26,"Computer, electronic and optical products",computer_electronic_optical,17
+CPA_C27,Electrical equipment,electrical_equipment,18
+CPA_C28,Machinery and equipment n.e.c.,machinery,19
+CPA_C29,"Motor vehicles, trailers and semi-trailers",motor_vechicles,20
+CPA_C30,Other transport equipment,other_transport_equipment,21
+CPA_C31_C32,Furniture and other manufactured goods,furniture,22
+CPA_C33,Repair and installation services of machinery and equipment,repair_machinery,23
+CPA_D35,"Electricity, gas, steam and air conditioning",eletricity_gas_steam,24
+CPA_E36,Natural water; water treatment and supply services,water_services,25
+CPA_E37-E39,"Sewerage services; sewage sludge; waste collection, treatment and disposal services; materials recovery services; remediation services and other waste management services",sewage,26
+CPA_F,Constructions and construction works,construcion,27
+CPA_G45,Wholesale and retail trade and repair services of motor vehicles and motorcycles,trade_motor_vechicles,28
+CPA_G46,"Wholesale trade services, except of motor vehicles and motorcycles",wholesale_trade,29
+CPA_G47,"Retail trade services, except of motor vehicles and motorcycles",retail_trade,30
+CPA_H49,Land transport services and transport services via pipelines,land_transport,31
+CPA_H50,Water transport services,water_transport,32
+CPA_H51,Air transport services,air_transport,33
+CPA_H52,Warehousing and support services for transportation,warehousing,34
+CPA_H53,Postal and courier services,post_courier,35
+CPA_I,Accommodation and food services,accommodation_food,36
+CPA_J58,Publishing services,publishing,37
+CPA_J59_J60,"Motion picture, video and television programme production services, sound recording and music publishing; programming and broadcasting services",audiovisual,38
+CPA_J61,Telecommunications services,telecommunications,39
+CPA_J62_J63,"Computer programming, consultancy and related services; Information services",computer_programing_consulting,40
+CPA_K64,"Financial services, except insurance and pension funding",financial_services,41
+CPA_K65,"Insurance, reinsurance and pension funding services, except compulsory social security",insurance,42
+CPA_K66,Services auxiliary to financial services and insurance services,auxiliary_financial_services,43
+CPA_L68,Real estate services,real_estate_ab,44.5
+CPA_L68A,Imputed rents of owner-occupied dwellings,real_estate_imputed_a,44
+CPA_L68B,Real estate services excluding imputed rents,real_estate _services_b,45
+CPA_M69_M70,Legal and accounting services; services of head offices; management consultancy services,legal_accounting_consulting,46
+CPA_M71,Architectural and engineering services; technical testing and analysis services,architectural_engineering,47
+CPA_M72,Scientific research and development services,research_development,48
+CPA_M73,Advertising and market research services,advertising_marketing,49
+CPA_M74_M75,"Other professional, scientific and technical services and veterinary services",other_professional_services,50
+CPA_N77,Rental and leasing services,rental_leasing,51
+CPA_N78,Employment services,employment_services,52
+CPA_N79,"Travel agency, tour operator and other reservation services and related services",travel_agency_services,53
+CPA_N80-N82,"Security and investigation services; services to buildings and landscape; office administrative, office support and other business support services",security_investigation,54
+CPA_O84,Public administration and defence services; compulsory social security services,public_administration,55
+CPA_P85,Education services,education,56
+CPA_Q86,Human health services,human_health,57
+CPA_Q87_Q88,Residential care services; social work services without accommodation,residential_care,58
+CPA_R90-R92,"Creative, arts, entertainment, library, archive, museum, other cultural services; gambling and betting services",creative_industries,59
+CPA_R93,Sporting services and amusement and recreation services,sport_recreation,60
+CPA_S94,Services furnished by membership organisations,membership_organizations,61
+CPA_S95,Repair services of computers and personal and household goods,repair_computer_durables,62
+CPA_S96,Other personal services,other_personal_services,63
+CPA_T,Services of households as employers; undifferentiated goods and services produced by households for own use,household_services,64
+CPA_TOTAL,Total,total,66
+CPA_U,Services provided by extraterritorial organisations and bodies,extraterriorial_organizations,65
+D1,Compensation of employees,compensation_employees,68
+D11,Gross Wages and salaries,wages_salaries,69
+D21_M_D31,Taxes less subsidies on products,net_tax_production,78
+D29_M_D39,Other net taxes on production,net_tax_production_other,70
+K1,Consumption of fixed capital,consumption_fixed_capital,71
+P2PP,Total intermediate consumption at purchasers' prices,intermediate_consumption_pp,67
+P7,Imports cif,import_goods_services,83
+P7_S21,Intra EU imports cif,import_goods_services_EU,79
+P7_S2111,Imports of goods and services from EMU members (cif),import_goods_services_MU,80
+P7_S2112,Imports of goods and services from EMU non-members(cif),import_goods_services_non_MU,81
+P7_S22,Extra EU imports cif,import_goods_services_non-EU,82
+SUPBP,Supply at basic prices,total_supply_bp,84
+P1,Output at basic prices,output_bp,76
+TOT_CA,Total adjusted,NA,NA
+CPA_A,"Products of agriculture, forestry and fishing",NA,NA
+CPA_B-E,Industrial products (except construction works),NA,NA
+CPA_G-I,Wholesale and retail trade; transportation and storage; accommodation and food services,NA,NA
+CPA_J,Information and communication services,NA,NA
+CPA_K,Financial and insurance services,NA,NA
+CPA_L,Real estate services,NA,NA
+CPA_M_N,"Professional, scientific and technical services; administrative and support services",NA,NA
+CPA_O-Q,"Public administration, defence, education, human health and social work services",NA,NA
+CPA_R-U,"Arts, entertainment and recreation; other services; services of household and extra-territorial organizations and bodies",NA,NA
+CPA_A01,Agriculture,agriculture,1
+CPA_C,Manufacturing,manufacturing,2
+CPA_F,Construction,construcion,3
+CPA_G_I,Trade,trade,4
+CPA_business,Business services,business_services,5
+CPA_other,Other services,other_services,6
+CPA_total,Domestic products,total,7
+P7,Imported products,import_goods_services,8
+D21_M_D31,Taxes less subsidies on products,net_tax_production,9
+P2PP,Intermediate consumption/Final,intermediate_consumption_pp,10
+D1,Compensation of employees,compensation_employees,11
+D29_M_D39,Other net taxes on production,net_tax_production_other,12
+K1,Consumption of fixed capital,consumption_fixed_capital,13
+B2N_B3N,Net operating surplus,operating_surplus_net,14
+B1G,Value added at basic prices,gva_bp,15
+P1,Output at basic prices,output_bp,16
+EMP-WS,Wage and salary earners,wage_salary_earner,17
+EMP-FTE,Self-employed,self_employed,18
+EMP,Employment total,employment_total,19

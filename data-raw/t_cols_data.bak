@@ -1,0 +1,105 @@
+"t_cols2","t_cols2_lab","iotables_label_c","ordering_c"
+"CPA_A01","Products of agriculture, hunting and related services","agriculture",1
+"CPA_A02","Products of forestry, logging and related services","forestry",2
+"CPA_A03","Fish and other fishing products; aquaculture products; support services to fishing","fishing",3
+"CPA_B","Mining and quarrying","mining",4
+"CPA_C10-C12","Food, beverages and tobacco products","food_beverages_tobacco",5
+"CPA_C13-C15","Textiles, wearing apparel, leather and related products","textiles_apparel",6
+"CPA_C16","Wood and of products of wood and cork, except furniture; articles of straw and plaiting materials","wood_products",7
+"CPA_C17","Paper and paper products","paper",8
+"CPA_C18","Printing and recording services","printing_recording",9
+"CPA_C19","Coke and refined petroleum products","coke_refined_petrol",10
+"CPA_C20","Chemicals and chemical products","chemical",11
+"CPA_C21","Basic pharmaceutical products and pharmaceutical preparations","basic_pharmaceutical",12
+"CPA_C22","Rubber and plastic products","rubber_plasic",13
+"CPA_C23","Other non-metallic mineral products","mineral_products",14
+"CPA_C24","Basic metals","basic_metals",15
+"CPA_C25","Fabricated metal products, except machinery and equipment","fabricated_metal",16
+"CPA_C26","Computer, electronic and optical products","computer_electronic_optical",17
+"CPA_C27","Electrical equipment","electrical_equipment",18
+"CPA_C28","Machinery and equipment n.e.c.","machinery",19
+"CPA_C29","Motor vehicles, trailers and semi-trailers","motor_vechicles",20
+"CPA_C30","Other transport equipment","other_transport_equipment",21
+"CPA_C31_C32","Furniture and other manufactured goods","furniture",22
+"CPA_C33","Repair and installation services of machinery and equipment","repair_machinery",23
+"CPA_D35","Electricity, gas, steam and air conditioning","eletricity_gas_steam",24
+"CPA_E36","Natural water; water treatment and supply services","water_services",25
+"CPA_E37-E39","Sewerage services; sewage sludge; waste collection, treatment and disposal services; materials recovery services; remediation services and other waste management services","sewage",26
+"CPA_F","Constructions and construction works","construcion",27
+"CPA_G45","Wholesale and retail trade and repair services of motor vehicles and motorcycles","trade_motor_vechicles",28
+"CPA_G46","Wholesale trade services, except of motor vehicles and motorcycles","wholesale_trade",29
+"CPA_G47","Retail trade services, except of motor vehicles and motorcycles","retail_trade",30
+"CPA_H49","Land transport services and transport services via pipelines","land_transport",31
+"CPA_H50","Water transport services","water_transport",32
+"CPA_H51","Air transport services","air_transport",33
+"CPA_H52","Warehousing and support services for transportation","warehousing",34
+"CPA_H53","Postal and courier services","post_courier",35
+"CPA_I","Accommodation and food services","accommodation_food",36
+"CPA_J58","Publishing services","publishing",37
+"CPA_J59_J60","Motion picture, video and television programme production services, sound recording and music publishing; programming and broadcasting services","audiovisual",38
+"CPA_J61","Telecommunications services","telecommunications",39
+"CPA_J62_J63","Computer programming, consultancy and related services; Information services","computer_programing_consulting",40
+"CPA_K64","Financial services, except insurance and pension funding","financial_services",41
+"CPA_K65","Insurance, reinsurance and pension funding services, except compulsory social security","insurance",42
+"CPA_K66","Services auxiliary to financial services and insurance services","auxiliary_financial_services",43
+"CPA_L68","Real estate services","real_estate_ab",44.5
+"CPA_L68A","Imputed rents of owner-occupied dwellings","imputed_rent",44
+"CPA_L68B","Real estate services excluding imputed rents","real_estate _services",45
+"CPA_M69_M70","Legal and accounting services;Services of head offices; management consulting services","legal_accounting_consulting",46
+"CPA_M71","Architectural and engineering services; technical testing and analysis services","architectural_engineering",47
+"CPA_M72","Scientific research and development services","research_development",48
+"CPA_M73","Advertising and market research services","advertising_marketing",49
+"CPA_M74_M75","Other professional, scientific and technical services and veterinary services","other_professional_services",50
+"CPA_N77","Rental and leasing services","rental_leasing",51
+"CPA_N78","Employment services","employment_services",52
+"CPA_N79","Travel agency, tour operator and other reservation services and related services","travel_agency_services",53
+"CPA_N80-N82","Security and investigation services; services to buildings and landscape; office administrative, office support and other business support services","security_investigation",54
+"CPA_O84","Public administration and defence services; compulsory social security services","public_administration",55
+"CPA_P85","Education services","education",56
+"CPA_Q86","Human health services","human_health",57
+"CPA_Q87_Q88","Residential care services; social work services without accommodation","residential_care",58
+"CPA_R90-R92","Creative, arts, entertainment, library, archive, museum, other cultural services; gambling and betting services","creative_industries",59
+"CPA_R93","Sporting services and amusement and recreation services","sport_recreation",60
+"CPA_S94","Services furnished by membership organisations","membership_organizations",61
+"CPA_S95","Repair services of computers and personal and household goods","repair_computer_durables",62
+"CPA_S96","Other personal services","other_personal_services",63
+"CPA_T","Services of households as employers; undifferentiated goods and services produced by households for own use","household_services",64
+"CPA_TOTAL","Total","total",66
+"CPA_U","Services provided by extraterritorial organisations and bodies","extraterriorial_organizations",65
+"FINUBP","Final use at basic prices","total_final_use_bp",81
+"P3","Final consumption expenditure",NA,NA
+"P3_S13","Final consumption expenditure by government","consumption_expenditure_government",69
+"P3_S14","Final consumption expenditure by households","consumption_expenditure_household",67
+"P3_S15","Final consumption expenditure by non-profit organisations serving households (NPISH)","consumption_expenditure_nonprofit",68
+"P5","Gross capital formation",NA,NA
+"P51","Gross fixed capital formation",NA,NA
+"P52","Changes in inventories","inventory_change",73
+"P52_P53","Changes in inventories and valuables",NA,NA
+"P53","Changes in valuables",NA,NA
+"P6","Exports",NA,NA
+"P6_S21","Exports intra EU fob",NA,NA
+"P6_S2111","Exports of goods and services EMU members (fob)",NA,NA
+"P6_S2112","Exports of goods and services to EMU non-members (fob)",NA,NA
+"P6_S22","Exports extra EU fob",NA,NA
+"TUBP","Total use at basic prices",NA,NA
+"CPA_A","Products of agriculture, forestry and fishing",NA,NA
+"CPA_B-E","Industrial products (except construction works)",NA,NA
+"CPA_G-I","Wholesale and retail trade; transportation and storage; accommodation and food services",NA,NA
+"CPA_J","Information and communication services",NA,NA
+"CPA_K","Financial and insurance services",NA,NA
+"CPA_L","Real estate services",NA,NA
+"CPA_M_N","Professional, scientific and technical services; administrative and support services",NA,NA
+"CPA_O-Q","Public administration, defence, education, human health and social work services",NA,NA
+"CPA_R-U","Arts, entertainment and recreation; other services; services of household and extra-territorial organizations and bodies",NA,NA
+"agriculture","Agriculture","agriculture",1
+"manufacturing","Manufacturing","manufacturing",2
+"construcion","Construction","construcion",3
+"trade","Trade","trade",4
+"business_services","Business services","business_services",5
+"other_services","Other services","other_services",6
+"consumption_expenditure_household","Household  expenditure","consumption_expenditure_household",7
+"consumption_expenditure_government","Government expenditure","consumption_expenditure_government",8
+"gross_capital_formation","Gross capital formation","gross_capital_formation",9
+"inventory_change","Inventory change","inventory_change",10
+"export_goods_services","Exports","export_goods_services",11
+"output_bp","Output at basic price","output_bp",12

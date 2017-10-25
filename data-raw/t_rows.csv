@@ -1,0 +1,17 @@
+﻿t_rows,t_rows2,t_rows2_lab
+agriculture,CPA_agriculture,Agriculture
+manufacturing,CPA_manufacturing,Manufacturing
+construction,CPA_construction,Construction
+trade,CPA_trade,Trade
+business_services,CPA_business_services,Business services
+other_services,CPA_other_services,Other services
+domestic_products,domestic_products,Domestic products
+imported_products,imported_products,Imported products
+net_taxes,net_taxes,Taxes less subsidies on products
+final_use,final_use,Intermediate consumption/Final use at purchaser's prices
+compensation_employees,compensation_employees,Compensation of employees
+other_production,other_production,Other net taxes on production
+consumption_capital,consumption_capital,Consumption of fixed capital
+net_surplus,net_surplus,Net operating surplus
+value_prices,value_prices,Value added at basic prices
+output_basic,output_basic,Output at basic prices

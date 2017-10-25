@@ -1,0 +1,95 @@
+t_cols2,t_cols2_lab,iotables_label_c,ordering_c,c_quadrant
+CPA_A01,"Products of agriculture, hunting and related services",agriculture,1,1_2
+CPA_A,"Products of agriculture, forestry and fishing",agriculture_group,1,1_2
+CPA_A02,"Products of forestry, logging and related services",forestry,2,1_2
+CPA_B-E,Industrial products (except construction works),industry_group,2,1_2
+CPA_A03,Fish and other fishing products; aquaculture products; support services to fishing,fishing,3,1_2
+CPA_G-I,Wholesale and retail trade; transportation and storage; accommodation and food services,trade_group,3,1_2
+CPA_B,Mining and quarrying,mining,4,1_2
+CPA_J,Information and communication services,communication_group,4,1_2
+CPA_C10-C12,"Food, beverages and tobacco products",food_beverages_tobacco,5,1_2
+CPA_K,Financial and insurance services,financial_group,5,1_2
+CPA_C13-C15,"Textiles, wearing apparel, leather and related products",textiles_apparel,6,1_2
+CPA_L,Real estate services,real_estate_group,6,1_2
+CPA_C16,"Wood and of products of wood and cork, except furniture; articles of straw and plaiting materials",wood_products,7,1_2
+CPA_M_N,"Professional, scientific and technical services; administrative and support services",professional_group,7,1_2
+CPA_C17,Paper and paper products,paper_products,8,1_2
+CPA_O-Q,"Public administration, defence, education, human health and social work services",public_administration_group,8,1_2
+CPA_C18,Printing and recording services,printing_recording,9,1_2
+CPA_R-U,"Arts, entertainment and recreation; other services; services of household and extra-territorial organizations and bodies",creative_recreational_group,9,1_2
+CPA_C19,Coke and refined petroleum products,coke_refined_petrol,10,1_2
+CPA_C20,Chemicals and chemical products,chemical,11,1_2
+export_goods_services,Exports,export_goods_services,11,3_4
+CPA_C21,Basic pharmaceutical products and pharmaceutical preparations,basic_pharmaceutical,12,1_2
+output_bp,Output at basic price,output_bp,12,3_4
+CPA_C22,Rubber and plastic products,rubber_plasic,13,1_2
+CPA_C23,Other non-metallic mineral products,mineral_products,14,1_2
+CPA_C24,Basic metals,basic_metals,15,1_2
+CPA_C25,"Fabricated metal products, except machinery and equipment",fabricated_metal,16,1_2
+CPA_C26,"Computer, electronic and optical products",computer_electronic_optical,17,1_2
+CPA_C27,Electrical equipment,electrical_equipment,18,1_2
+CPA_C28,Machinery and equipment n.e.c.,machinery,19,1_2
+CPA_C29,"Motor vehicles, trailers and semi-trailers",motor_vechicles,20,1_2
+CPA_C30,Other transport equipment,other_transport_equipment,21,1_2
+CPA_C31_C32,Furniture and other manufactured goods,furniture,22,1_2
+CPA_C33,Repair and installation services of machinery and equipment,repair_machinery,23,1_2
+CPA_D35,"Electricity, gas, steam and air conditioning",eletricity_gas_steam,24,1_2
+CPA_E36,Natural water; water treatment and supply services,water_services,25,1_2
+CPA_E37-E39,"Sewerage services; sewage sludge; waste collection, treatment and disposal services; materials recovery services; remediation services and other waste management services",sewage,26,1_2
+CPA_F,Constructions and construction works,construcion,27,1_2
+CPA_G45,Wholesale and retail trade and repair services of motor vehicles and motorcycles,trade_motor_vechicles,28,1_2
+CPA_G46,"Wholesale trade services, except of motor vehicles and motorcycles",wholesale_trade,29,1_2
+CPA_G47,"Retail trade services, except of motor vehicles and motorcycles",retail_trade,30,1_2
+CPA_H49,Land transport services and transport services via pipelines,land_transport,31,1_2
+CPA_H50,Water transport services,water_transport,32,1_2
+CPA_H51,Air transport services,air_transport,33,1_2
+CPA_H52,Warehousing and support services for transportation,warehousing,34,1_2
+CPA_H53,Postal and courier services,post_courier,35,1_2
+CPA_I,Accommodation and food services,accommodation_food,36,1_2
+CPA_J58,Publishing services,publishing,37,1_2
+CPA_J59_J60,"Motion picture, video and television programme production services, sound recording and music publishing; programming and broadcasting services",audiovisual,38,1_2
+CPA_J61,Telecommunications services,telecommunications,39,1_2
+CPA_J62_J63,"Computer programming, consultancy and related services; Information services",computer_programing_consulting,40,1_2
+CPA_K64,"Financial services, except insurance and pension funding",financial_services,41,1_2
+CPA_K65,"Insurance, reinsurance and pension funding services, except compulsory social security",insurance,42,1_2
+CPA_K66,Services auxiliary to financial services and insurance services,auxiliary_financial_services,43,1_2
+CPA_L68A,Imputed rents of owner-occupied dwellings,real_estate_imputed_a,44,1_2
+CPA_L68,Real estate services,real_estate_ab,44.5,1_2
+CPA_L68B,Real estate services excluding imputed rents,real_estate _services_b,45,1_2
+CPA_M69_M70,Legal and accounting services;Services of head offices; management consulting services,legal_accounting_consulting,46,1_2
+CPA_M71,Architectural and engineering services; technical testing and analysis services,architectural_engineering,47,1_2
+CPA_M72,Scientific research and development services,research_development,48,1_2
+CPA_M73,Advertising and market research services,advertising_marketing,49,1_2
+CPA_M74_M75,"Other professional, scientific and technical services and veterinary services",other_professional_services,50,1_2
+CPA_N77,Rental and leasing services,rental_leasing,51,1_2
+CPA_N78,Employment services,employment_services,52,1_2
+CPA_N79,"Travel agency, tour operator and other reservation services and related services",travel_agency_services,53,1_2
+CPA_N80-N82,"Security and investigation services; services to buildings and landscape; office administrative, office support and other business support services",security_investigation,54,1_2
+CPA_O84,Public administration and defence services; compulsory social security services,public_administration,55,1_2
+CPA_P85,Education services,education,56,1_2
+CPA_Q86,Human health services,human_health,57,1_2
+CPA_Q87_Q88,Residential care services; social work services without accommodation,residential_care,58,1_2
+CPA_R90-R92,"Creative, arts, entertainment, library, archive, museum, other cultural services; gambling and betting services",creative_industries,59,1_2
+CPA_R93,Sporting services and amusement and recreation services,sport_recreation,60,1_2
+CPA_S94,Services furnished by membership organisations,membership_organizations,61,1_2
+CPA_S95,Repair services of computers and personal and household goods,repair_computer_durables,62,1_2
+CPA_S96,Other personal services,other_personal_services,63,1_2
+CPA_T,Services of households as employers; undifferentiated goods and services produced by households for own use,household_services,64,1_2
+CPA_U,Services provided by extraterritorial organisations and bodies,extraterriorial_organizations,65,1_2
+CPA_TOTAL,Total,total,66,1_2
+P3_S14,Final consumption expenditure by households,consumption_expenditure_household,67,3_4
+P3_S15,Final consumption expenditure by non-profit organisations serving households (NPISH),consumption_expenditure_nonprofit,68,3_4
+P3_S13,Final consumption expenditure by government,consumption_expenditure_government,69,3_4
+P3,Final consumption expenditure,consumption_expenditure_final,70,3_4
+P5,Gross capital formation,gross_capital_formation,70,3_4
+P51,Gross fixed capital formation,gross_capital_formation_fixed,71,3_4
+P52,Changes in inventories,inventory_change,73,3_4
+P6_S21,Exports intra EU fob,export_to_EU,76,3_4
+P6_S2112,Exports of goods and services to EMU non-members (fob),export_to_eurozone,77,3_4
+P6_S22,Exports extra EU fob,export_out_eurozone,78,3_4
+P6_S2111,Exports of goods and services EMU members (fob),export_non_EU,79,3_4
+P6,Exports,export_goods_services,80,3_4
+FINUBP,Final use at basic prices,total_final_use_bp,81,3_4
+TUBP,Total use at basic prices,total_use_bp,82,3_4
+P52_P53,Changes in inventories and valuables,inventory_valuables_change,74,3_4
+P53,Changes in valuables,valuables_change,73.5,3_4

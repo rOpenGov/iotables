@@ -1,0 +1,113 @@
+---
+title: "Working with Crotian Symmetric Input-Output Tables"
+author: "Daniel Antal, CFA"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with Crotian Symmetric Input-Output Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Croatia
+
+To show how to work with other IO tables and other data, we include the latest SIOT and employment statistics from Croatia with the package.  Croatia joined the EU after 2010 and the country’s SIOTs are following the Eurostat guidelines but are not available on Eurostat yet. The national Symmetric Input-Output Tables (SIOTs) are created every five years, with a very long statistical work.  For most EU countries the latest SIOT available is based on the 2010 structure of the underlying national economy.  Because Croatia was not a member state at the time, it uses a temporary SIOT that is identical in most aspects to the Eurostat standard SIOTs. 
+
+There are some technical differences that can be obtains from DZS. 
+The most important practical differences are:
+
+* The SIOT is not available on Eurostat, and no reproducible function exists to get it. To overcome this shortfall, the SIOT is included in the package as packaged data with code how it was imported from the official Excel file.
+
+* The data is not given in million but thousand national currency units (i.e. kunas).  For some analytical work this has no practical differences (for example, the calculation of some multipliers.)  But when you use currency units in your equation, recognize the difference. 
+
+The data is provided in the same long form that is used by Eurostat. The data file contains all the three parts of the SIOT and aggregation rows. 
+
+The strategy to work with SIOTs in Excel format is the following:
+-	Read in the Excel table with any suitable R excel reader. 
+-	Use t_rows2 columns to describe the rows of the table, use t_cols2 to describe the columns of the table.
+-	You can additionally add longer labels called t_rows2_lab and t_cols2_lab.
+-	Bring the data to a tidy, long-form, for example with plyr or dplyr functions.
+-	Filter out the part of the SIOT you need for your matrix equations with the iotables pre-processing functions. 
+
+You should aim at something similar to `croatia_2010_1700`, the table 1700 for the year 2010. 
+
+```{r echoe=TRUE, results='asis', message = FALSE}
+library (iotables) ; library (dplyr)
+data("croatia_2010_1700")
+labelled_io_table <- croatia_2010_1700
+
+knitr::kable(head(labelled_io_table, 3))
+```
+
+For analytical work you need to filter out the data that is needed for the input-output matrix equations. If you want to calculate the employment multipliers of the Croatian economy, you need to filter out the input flow matrix, the output vector, and you need to obtain a well-formatted employment vector. 
+
+The following code shows the top-left corner of the input_flow matrix.
+
+```{r echo=TRUE, results='asis'}
+require(tidyr)
+tech_hr <- get_technology_data(labelled_io_data = croatia_2010_1700)
+
+input_flow_hr <- input_flow_get(labelled_io_table, 
+                             technology = tech_hr, geo = 'HR', 
+                             unit = "T_NAC") %>%
+  tidyr::gather ( t_cols2, values, !! 2:ncol(.) ) %>%
+  tidyr::spread ( t_cols2, values )
+
+
+output_vector_hr <- output_get(labelled_io_table, tech_hr, geo = 'HR', unit = "T_NAC", named = TRUE)
+
+knitr::kable(head(input_flow_hr)[,1:5])
+```
+
+In this case the `employment_get()` function cannot help, because the table has no employment satellite account. A helper function `employment_aggregate()` and a metadata converter table is included in the package. If you are working with a SIOT that has no employment satellite, you can use a similar simple filtering table to `data ("croatia_employment_aggregation")` to your own data source. Again, a sample data shows how to do this. 
+
+The problem is that you need to filter out aggregation rows, and to re-aggregate the data in the aggregation scheme of the SIOT. First create a tidy data table of your employment data. 
+
+```{r, echoe=TRUE, results='asis'}
+data ("croatia_employment_2013")
+knitr::kable(head(croatia_employment_2013, 4))
+```
+
+Second, create a similar filtering table to our example table. The first column has the key rows of the Croatian employment data export (that you can obtain on the dzs.hr website.) The t_cols2 is the appropriate coding in the Eurostat/DZS SIOT.
+
+```{r, echoe=TRUE, results='asis'}
+data ("croatia_employment_aggregation")
+knitr::kable(head(croatia_employment_aggregation, 4))
+```
+
+At last, use the helper function (which is in fact a very simple dplyr code) to match the employment data with the SIOT columns. 
+
+```{r, echoe=TRUE, results='asis'}
+employment_vector <- employment_aggregate (
+                      employment_df = croatia_employment_2013,
+                       matching = croatia_employment_aggregation )
+show_employment_excerpt <- employment_vector[,1:8]
+knitr::kable(show_employment_excerpt)
+```
+
+Now we can run the analytical functions. This will take a couple of seconds. 
+
+```{r, results='asis', message = FALSE, echo = FALSE}
+#require(iotables)
+employment_indicator <- iotables::input_indicator_create (
+                       employment_vector, output_vector_hr, digits = 4)
+
+input_coefficients <- iotables::input_coefficient_matrix_create(
+  input_flow_hr, output_vector_hr, digits = 4)
+
+L <- iotables::leontieff_matrix_create( technology_coefficients_matrix =
+                                input_coefficients)
+                                
+I <- iotables::leontieff_inverse_create(L)
+
+employment_multipliers <- multiplier_create ( 
+                   input_vector = employment_indicator, 
+                   Im = I, digits = 4 ) %>%
+  tidyr::gather ( t_cols2, values, !! 2:ncol(.)) %>%
+  mutate ( values = values * 1000 )
+
+show_multiplier_excerpt <- employment_multipliers[1:8,]
+
+knitr::kable(show_multiplier_excerpt)
+```
+

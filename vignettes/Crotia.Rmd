@@ -1,0 +1,42 @@
+---
+title: "Working with Crotian Symmetric Input-Output Tables"
+author: "Daniel Antal, CFA"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with Crotian Symmetric Input-Output Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Croatia
+
+To show how to work with other IO tables and other data, we include the latest SIOT and employment statistics from Croatia with the package.  Croatia joined the EU after 2010 and the country's SIOTs are following the Eurostat guidelines but are not available on Eurostat yet. The national Symmetric Input-Output Tables (SIOTs) are created every five years, with a very long statistical work.  For most EU countries the latest SIOT available is based on the 2010 structure of the underlying national economy.  Because Croatia was not a member state at the time, it uses a temporary SIOT that is identical in most aspects to the Eurostat standard SIOTs. 
+
+There are some technical differences that can be obtains from DZS. 
+The most important practical differences are:
+
+* The SIOT is not available on Eurostat, and no reproducible function exists to get it. To overcome this shortfall, the SIOT is included in the package as packaged data with code how it was imported from the official Excel file.
+
+* The data is not given in million but thousand national currency units (i.e. kunas).  For some analytical work this has no practical differences (for example, the calculation of some multipliers.)  But when you use currency units in your equation, recognize the difference. 
+
+The data is provided in the same long form that is used by Eurostat. The data file contains all the three parts of the SIOT and aggregation rows. 
+
+The strategy to work with SIOTs in Excel format is the following:
+-	Read in the Excel table with any suitable R excel reader. 
+-	Use t_rows2 columns to describe the rows of the table, use t_cols2 to describe the columns of the table.
+-	You can additionally add longer labels called t_rows2_lab and t_cols2_lab.
+-	Bring the data to a tidy, long-form, for example with plyr or dplyr functions.
+-	Filter out the part of the SIOT you need for your matrix equations with the iotables pre-processing functions. 
+
+You should aim at something similar to `croatia_2010_1700`, the table 1700 for the year 2010. 
+
+```{r echoe=TRUE, results='asis', message = FALSE}
+library (iotables) ; library (dplyr)
+data("croatia_2010_1700")
+labelled_io_table <- croatia_2010_1700
+
+knitr::kable(head(labelled_io_table, 3))
+```
+
+This vignette needs to be rewritten. 

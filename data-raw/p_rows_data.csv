@@ -1,0 +1,85 @@
+t_rows2,t_rows2_lab,source,iotables_label_r,ordering_r,c_quadrant
+CPA_A01,"Products of agriculture, hunting and related services",naio_10_cp1700,agriculture,1,1_3
+CPA_A02,"Products of forestry, logging and related services",naio_10_cp1700,forestry,2,1_3
+CPA_A03,Fish and other fishing products; aquaculture products; support services to fishing,naio_10_cp1700,fishing,3,1_3
+CPA_B,Mining and quarrying,naio_10_cp1700,mining,4,1_3
+CPA_C10-C12,"Food, beverages and tobacco products",naio_10_cp1700,food_beverages_tobacco,5,1_3
+CPA_C13-C15,"Textiles, wearing apparel, leather and related products",naio_10_cp1700,textiles_apparel,6,1_3
+CPA_C16,"Wood and of products of wood and cork, except furniture; articles of straw and plaiting materials",naio_10_cp1700,wood_products,7,1_3
+CPA_C17,Paper and paper products,naio_10_cp1700,paper_products,8,1_3
+CPA_C18,Printing and recording services,naio_10_cp1700,printing_recording,9,1_3
+CPA_C19,Coke and refined petroleum products,naio_10_cp1700,coke_refined_petrol,10,1_3
+CPA_C20,Chemicals and chemical products,naio_10_cp1700,chemical,11,1_3
+CPA_C21,Basic pharmaceutical products and pharmaceutical preparations,naio_10_cp1700,basic_pharmaceutical,12,1_3
+CPA_C22,Rubber and plastic products,naio_10_cp1700,rubber_plasic,13,1_3
+CPA_C23,Other non-metallic mineral products,naio_10_cp1700,mineral_products,14,1_3
+CPA_C24,Basic metals,naio_10_cp1700,basic_metals,15,1_3
+CPA_C25,"Fabricated metal products, except machinery and equipment",naio_10_cp1700,fabricated_metal,16,1_3
+CPA_C26,"Computer, electronic and optical products",naio_10_cp1700,computer_electronic_optical,17,1_3
+CPA_C27,Electrical equipment,naio_10_cp1700,electrical_equipment,18,1_3
+CPA_C28,Machinery and equipment n.e.c.,naio_10_cp1700,machinery,19,1_3
+CPA_C29,"Motor vehicles, trailers and semi-trailers",naio_10_cp1700,motor_vechicles,20,1_3
+CPA_C30,Other transport equipment,naio_10_cp1700,other_transport_equipment,21,1_3
+CPA_C31_C32,Furniture and other manufactured goods,naio_10_cp1700,furniture,22,1_3
+CPA_C33,Repair and installation services of machinery and equipment,naio_10_cp1700,repair_machinery,23,1_3
+CPA_D35,"Electricity, gas, steam and air conditioning",naio_10_cp1700,eletricity_gas_steam,24,1_3
+CPA_E36,Natural water; water treatment and supply services,naio_10_cp1700,water_services,25,1_3
+CPA_E37-E39,"Sewerage services; sewage sludge; waste collection, treatment and disposal services; materials recovery services; remediation services and other waste management services",naio_10_cp1700,sewage,26,1_3
+CPA_F,Constructions and construction works,naio_10_cp1700,construcion,27,1_3
+CPA_G45,Wholesale and retail trade and repair services of motor vehicles and motorcycles,naio_10_cp1700,trade_motor_vechicles,28,1_3
+CPA_G46,"Wholesale trade services, except of motor vehicles and motorcycles",naio_10_cp1700,wholesale_trade,29,1_3
+CPA_G47,"Retail trade services, except of motor vehicles and motorcycles",naio_10_cp1700,retail_trade,30,1_3
+CPA_H49,Land transport services and transport services via pipelines,naio_10_cp1700,land_transport,31,1_3
+CPA_H50,Water transport services,naio_10_cp1700,water_transport,32,1_3
+CPA_H51,Air transport services,naio_10_cp1700,air_transport,33,1_3
+CPA_H52,Warehousing and support services for transportation,naio_10_cp1700,warehousing,34,1_3
+CPA_H53,Postal and courier services,naio_10_cp1700,post_courier,35,1_3
+CPA_I,Accommodation and food services,naio_10_cp1700,accommodation_food,36,1_3
+CPA_J58,Publishing services,naio_10_cp1700,publishing,37,1_3
+CPA_J59_J60,"Motion picture, video and television programme production services, sound recording and music publishing; programming and broadcasting services",naio_10_cp1700,audiovisual,38,1_3
+CPA_J61,Telecommunications services,naio_10_cp1700,telecommunications,39,1_3
+CPA_J62_J63,"Computer programming, consultancy and related services; Information services",naio_10_cp1700,computer_programing_consulting,40,1_3
+CPA_K64,"Financial services, except insurance and pension funding",naio_10_cp1700,financial_services,41,1_3
+CPA_K65,"Insurance, reinsurance and pension funding services, except compulsory social security",naio_10_cp1700,insurance,42,1_3
+CPA_K66,Services auxiliary to financial services and insurance services,naio_10_cp1700,auxiliary_financial_services,43,1_3
+CPA_L68A,Imputed rents of owner-occupied dwellings,naio_10_cp1700,real_estate_imputed_a,44,1_3
+CPA_L68,Real estate services,naio_10_cp1700,real_estate_ab,44.5,1_3
+CPA_L68B,Real estate services excluding imputed rents,naio_10_cp1700,real_estate _services_b,45,1_3
+CPA_M69_M70,Legal and accounting services; services of head offices; management consultancy services,naio_10_cp1700,legal_accounting_consulting,46,1_3
+CPA_M71,Architectural and engineering services; technical testing and analysis services,naio_10_cp1700,architectural_engineering,47,1_3
+CPA_M72,Scientific research and development services,naio_10_cp1700,research_development,48,1_3
+CPA_M73,Advertising and market research services,naio_10_cp1700,advertising_marketing,49,1_3
+CPA_M74_M75,"Other professional, scientific and technical services and veterinary services",naio_10_cp1700,other_professional_services,50,1_3
+CPA_N77,Rental and leasing services,naio_10_cp1700,rental_leasing,51,1_3
+CPA_N78,Employment services,naio_10_cp1700,employment_services,52,1_3
+CPA_N79,"Travel agency, tour operator and other reservation services and related services",naio_10_cp1700,travel_agency_services,53,1_3
+CPA_N80-N82,"Security and investigation services; services to buildings and landscape; office administrative, office support and other business support services",naio_10_cp1700,security_investigation,54,1_3
+CPA_O84,Public administration and defence services; compulsory social security services,naio_10_cp1700,public_administration,55,1_3
+CPA_P85,Education services,naio_10_cp1700,education,56,1_3
+CPA_Q86,Human health services,naio_10_cp1700,human_health,57,1_3
+CPA_Q87_Q88,Residential care services; social work services without accommodation,naio_10_cp1700,residential_care,58,1_3
+CPA_R90-R92,"Creative, arts, entertainment, library, archive, museum, other cultural services; gambling and betting services",naio_10_cp1700,creative_industries,59,1_3
+CPA_R93,Sporting services and amusement and recreation services,naio_10_cp1700,sport_recreation,60,1_3
+CPA_S94,Services furnished by membership organisations,naio_10_cp1700,membership_organizations,61,1_3
+CPA_S95,Repair services of computers and personal and household goods,naio_10_cp1700,repair_computer_durables,62,1_3
+CPA_S96,Other personal services,naio_10_cp1700,other_personal_services,63,1_3
+CPA_T,Services of households as employers; undifferentiated goods and services produced by households for own use,naio_10_cp1700,household_services,64,1_3
+CPA_U,Services provided by extraterritorial organisations and bodies,naio_10_cp1700,extraterriorial_organizations,65,1_3
+CPA_TOTAL,Total,naio_10_cp1700,total,66,1_3
+P2PP,Total intermediate consumption at purchasers' prices,naio_10_cp1700,intermediate_consumption_pp,67,2_4
+D1,Compensation of employees,naio_10_cp1700,compensation_employees,68,2_4
+D11,Gross Wages and salaries,naio_10_cp1700,wages_salaries,69,2_4
+D29_M_D39,Other net taxes on production,naio_10_cp1700,net_tax_production,70,2_4
+K1,Consumption of fixed capital,naio_10_cp1700,consumption_fixed_capital,71,2_4
+B2N_B3N,"Operating surplus, net",naio_10_cp1700,surplus_mixed_net,72,2_4
+B2G_B3G,"Operating surplus, gross",naio_10_cp1700,surplus_mixed_gross,73,2_4
+B3G,Gross mixed income,naio_10_cp1700,mixed_income_gross,74,2_4
+B1G,Value added at basic prices,naio_10_cp1700,gva,75,2_4
+P1,Output at basic prices,naio_10_cp1700,output,76,2_4
+D21_M_D31,Taxes less subsidies on products,naio_10_cp1700,net_tax_production_other,78,2_4
+P7_S21,Intra EU imports cif,naio_10_cp1700,import_goods_services_EU,79,2_4
+P7_S2111,Imports of goods and services from EMU members (cif),naio_10_cp1700,import_goods_services_MU,80,2_4
+P7_S2112,Imports of goods and services from EMU non-members(cif),naio_10_cp1700,import_goods_services_non_MU,81,2_4
+P7_S22,Extra EU imports cif,naio_10_cp1700,import_goods_services_non-EU,82,2_4
+P7,Imports cif,naio_10_cp1700,import_goods_services,83,2_4
+SUPBP,Supply at basic prices,naio_10_cp1700,total_supply_bp,84,2_4

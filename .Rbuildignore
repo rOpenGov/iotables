@@ -1,0 +1,13 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^README-.*\.png$
+^data-raw$
+^not_included$
+^CONDUCT\.md$
+^\.travis\.yml$
+^cran-comments\.md$
+^iotables/not_included$
+^iotables/not_included/Croatia_example\.R$
+^/iotables/data-raw$
+^iotables\.pdf$

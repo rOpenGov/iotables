@@ -1,0 +1,13 @@
+﻿t_cols,t_cols2,t_cols2_lab
+agriculture,CPA_agriculture,Agriculture
+manufacturing,CPA_manufacturing,Manufacturing
+construction,CPA_construction,Construction
+trade,CPA_trade,Trade
+business_services,CPA_business_services,Business services
+other_services,CPA_other_services,Other services
+private_consumption,private_consumption,Private consumption
+government_consumption,government_consumption,Government consumption
+gross_capital_form,gross_capital_form,Gross fixed capital formulation
+inventory_change,inventory_change,Changes in inventory
+exports,exports,Exports
+output_basic,output_basic,Output at basic prices
