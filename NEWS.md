@@ -16,7 +16,7 @@ New functions are added which enable a very simple IO analysis. As an important 
 * There is a vignette called _Working with Crotian Symmetric Input-Output Tables_ that shows some real-life uses. 
 * Testing on Travis (ubuntu and OSX tests.)
 
-# iotables 0.2 coming soon
+# iotables 0.2 
 The forthcoming update will rewrite and generalize some of the earlier functions. In particular, the following features will be available:
 * Handling 7 types of Eurostat tables, not only the current price table.
 * Closing off households, i.e. including endogenous demand for induced effects.
@@ -25,6 +25,8 @@ The forthcoming update will rewrite and generalize some of the earlier functions
 * The standard system.rda contains the metadata necessary to re-order the bulk files. This will require a lot of patient testing, and it can be always updated with new data sources.
 
 At this point I will go with prepareing a release the table on CRAN. The current version builds without warnings or notes on Windows and Linux. 
+
+iotables 0.2 is moved to rOpenGov.
 
 #Forthcoming 0.3 version 
 For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
