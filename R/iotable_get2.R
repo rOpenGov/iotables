@@ -35,17 +35,20 @@ iotable_get2 <- function ( source = "germany_1990", geo = "DE",
 
 ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750")
-  trow_tcol <-  c("naio_cp17_r2", "naio_17_agg_60_r2", "naio_17_agg_10_r2")
+  trow_tcol <-  c("naio_cp17_r2", "naio_17_agg_60_r2", "naio_17_agg_10_r2", 
+                  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
+  
+  croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   
   if ( source %in% prod_ind ) { 
-    metadata_rows <- metadata %>%
+    metadata_rows <- iotables::metadata %>%
        filter ( variable == "prod_na") 
        dplyr::rename ( prod_na = code) %>%
        dplyr::rename ( prod_na_lab = label ) %>%
        dplyr::rename ( row_order = numeric_label ) %>%
        dplyr::rename ( iotables_row = iotables_label )
        
-    metadata_cols <- metadata %>%
+    metadata_cols <- iotables::metadata %>%
       filter ( variable == "induse") 
     dplyr::rename ( induse = code) %>%
       dplyr::rename ( induse_lab = label )%>%
@@ -54,14 +57,14 @@ iotable_get2 <- function ( source = "germany_1990", geo = "DE",
     
   } else if ( source %in% trow_tcol ) {
     
-    metadata_rows <- metadata %>%
+    metadata_rows <- iotables::metadata %>%
       filter ( variable == "t_rows") %>%
       dplyr::rename ( t_rows2 = code) %>%
       dplyr::rename ( t_rows2_lab = label ) %>%
       dplyr::rename ( row_order = numeric_label ) %>%
       dplyr::rename ( iotables_row = iotables_label )
     
-    metadata_cols <- metadata %>%
+    metadata_cols <- iotables::metadata %>%
       filter ( variable == "t_cols") %>%
       dplyr::rename ( t_cols2 = code) %>%
       dplyr::rename ( t_cols2_lab = label ) %>%
@@ -89,7 +92,13 @@ iotable_get2 <- function ( source = "germany_1990", geo = "DE",
   
   if ( source == "germany_1990") {
     labelled_io_data <- iotables::germany_1990    # use germany example 
-  } else {
+  } else if ( source == "croatia_2010_1700" ) { 
+    labelled_io_data <- croatia_2010_1700 
+  } else if ( source == "croatia_2010_1800" )  {
+    labelled_io_data <- iotables::croatia_2010_1800  
+    } else if ( source == "croatia_2010_1900" )  {
+      labelled_io_data <- iotables::croatia_2010_1900
+    } else {
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_data <- readRDS( tmp_rds ) 
     } else { 
@@ -139,13 +148,16 @@ iotable_get2 <- function ( source = "germany_1990", geo = "DE",
                                                        as.numeric(row_order))) %>%
       mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
                                                        as.numeric(col_order)))
-  } else {
-    iotable_labelled <- iotable %>%
-      mutate_if ( is.factor, as.character ) %>%
-      left_join (., metadata_cols, by = c("t_cols2", "t_cols2_lab"))  %>%
-      left_join ( ., metadata_rows, by = c("t_rows2", "t_rows2_lab")) %>%
-      arrange ( row_order, col_order )
-    
+  } else  {
+    if ( ! source %in% croatia_files ){
+      iotable_labelled <- iotable %>%
+         mutate_if ( is.factor, as.character ) %>%
+        left_join (., metadata_cols, by = c("t_cols2", "t_cols2_lab"))  %>%
+        left_join ( ., metadata_rows, by = c("t_rows2", "t_rows2_lab")) %>%
+        arrange ( row_order, col_order )
+    } else {
+      iotable_labelled <- iotable 
+    }
     iotable_labelled <- iotable_labelled %>%
       mutate ( t_rows2 = forcats::fct_reorder(t_rows2, 
                                               as.numeric( row_order))) %>%
