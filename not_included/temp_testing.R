@@ -14,6 +14,8 @@ check <- iotable_get( source = "germany_1990", geo = 'de', year = 1990,
              unit = "MIO_EUR", labelling  = 'iotables')
 check <- iotable_get( source = "germany_1990", geo = 'DE', year = 1990,
                       unit = "MIO_EUR", labelling  = 'short')
+check <- iotable_get2( source = "germany_1990", geo = 'DE', year = 1990,
+                      unit = "MIO_EUR", labelling  = 'short')
 
 check <- use_table_get( source = "germany_1990", geo = 'DE', year = 1990,
                       unit = "MIO_EUR", labelling  = 'iotables')

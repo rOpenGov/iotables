@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:adms="http://www.w3.org/ns/adms#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:dctype="http://purl.org/dc/dcmitype/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns="http://dd.eionet.europa.eu/property/" xml:base="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/">
+<skos:ConceptScheme rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/">
+<rdfs:label>Rows - Nace Rev. 2</rdfs:label>
+<skos:notation>t_rows2</skos:notation>
+<dcterms:isPartOf rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/"/>
+</skos:ConceptScheme>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/A">
+<skos:notation>A</skos:notation>
+<skos:prefLabel>Agriculture, forestry and fishing</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/B-E">
+<skos:notation>B-E</skos:notation>
+<skos:prefLabel>Industry (except construction)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/G-I">
+<skos:notation>G-I</skos:notation>
+<skos:prefLabel>Wholesale and retail trade, transport, accomodation and food service activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/J">
+<skos:notation>J</skos:notation>
+<skos:prefLabel>Information and communication</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/K">
+<skos:notation>K</skos:notation>
+<skos:prefLabel>Financial and insurance activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/L">
+<skos:notation>L</skos:notation>
+<skos:prefLabel>Real estate activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/M_N">
+<skos:notation>M_N</skos:notation>
+<skos:prefLabel>Professional, scientific and technical activities; administrative and support service activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/O-Q">
+<skos:notation>O-Q</skos:notation>
+<skos:prefLabel>Public administration, defence, education, human health and social work activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/R-U">
+<skos:notation>R-U</skos:notation>
+<skos:prefLabel>Arts, entertainment and recreation; other service activities; activities of household and extra-territorial organizations and bodies</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/A01">
+<skos:notation>A01</skos:notation>
+<skos:prefLabel>Crop and animal production, hunting and related service activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/A02">
+<skos:notation>A02</skos:notation>
+<skos:prefLabel>Forestry and logging</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/A03">
+<skos:notation>A03</skos:notation>
+<skos:prefLabel>Fishing and aquaculture</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/B">
+<skos:notation>B</skos:notation>
+<skos:prefLabel>Mining and quarrying</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C10-C12">
+<skos:notation>C10-C12</skos:notation>
+<skos:prefLabel>Manufacture of food products; beverages and tobacco products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C13-C15">
+<skos:notation>C13-C15</skos:notation>
+<skos:prefLabel>Manufacture of textiles, wearing apparel, leather and related products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C16">
+<skos:notation>C16</skos:notation>
+<skos:prefLabel>Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C17">
+<skos:notation>C17</skos:notation>
+<skos:prefLabel>Manufacture of paper and paper products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C18">
+<skos:notation>C18</skos:notation>
+<skos:prefLabel>Printing and reproduction of recorded media</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C19">
+<skos:notation>C19</skos:notation>
+<skos:prefLabel>Manufacture of coke and refined petroleum products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C20">
+<skos:notation>C20</skos:notation>
+<skos:prefLabel>Manufacture of chemicals and chemical products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C21">
+<skos:notation>C21</skos:notation>
+<skos:prefLabel>Manufacture of basic pharmaceutical products and pharmaceutical preparations</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C22">
+<skos:notation>C22</skos:notation>
+<skos:prefLabel>Manufacture of rubber and plastic products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C23">
+<skos:notation>C23</skos:notation>
+<skos:prefLabel>Manufacture of other non-metallic mineral products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C24">
+<skos:notation>C24</skos:notation>
+<skos:prefLabel>Manufacture of basic metals</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C25">
+<skos:notation>C25</skos:notation>
+<skos:prefLabel>Manufacture of fabricated metal products, except machinery and equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C26">
+<skos:notation>C26</skos:notation>
+<skos:prefLabel>Manufacture of computer, electronic and optical products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C27">
+<skos:notation>C27</skos:notation>
+<skos:prefLabel>Manufacture of electrical equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C28">
+<skos:notation>C28</skos:notation>
+<skos:prefLabel>Manufacture of machinery and equipment n.e.c.</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C29">
+<skos:notation>C29</skos:notation>
+<skos:prefLabel>Manufacture of motor vehicles, trailers and semi-trailers</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C30">
+<skos:notation>C30</skos:notation>
+<skos:prefLabel>Manufacture of other transport equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C31_C32">
+<skos:notation>C31_C32</skos:notation>
+<skos:prefLabel>Manufacture of furniture; other manufacturing</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/C33">
+<skos:notation>C33</skos:notation>
+<skos:prefLabel>Repair and installation of machinery and equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/D35">
+<skos:notation>D35</skos:notation>
+<skos:prefLabel>Electricity, gas, steam and air conditioning supply</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/E36">
+<skos:notation>E36</skos:notation>
+<skos:prefLabel>Water collection, treatment and supply</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/E37-E39">
+<skos:notation>E37-E39</skos:notation>
+<skos:prefLabel>Sewerage, waste management, remediation activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/F">
+<skos:notation>F</skos:notation>
+<skos:prefLabel>Construction</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/G45">
+<skos:notation>G45</skos:notation>
+<skos:prefLabel>Wholesale and retail trade and repair of motor vehicles and motorcycles</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/G46">
+<skos:notation>G46</skos:notation>
+<skos:prefLabel>Wholesale trade, except of motor vehicles and motorcycles</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/G47">
+<skos:notation>G47</skos:notation>
+<skos:prefLabel>Retail trade, except of motor vehicles and motorcycles</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/H49">
+<skos:notation>H49</skos:notation>
+<skos:prefLabel>Land transport and transport via pipelines</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/H50">
+<skos:notation>H50</skos:notation>
+<skos:prefLabel>Water transport</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/H51">
+<skos:notation>H51</skos:notation>
+<skos:prefLabel>Air transport</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/H52">
+<skos:notation>H52</skos:notation>
+<skos:prefLabel>Warehousing and support activities for transportation</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/H53">
+<skos:notation>H53</skos:notation>
+<skos:prefLabel>Postal and courier activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/I">
+<skos:notation>I</skos:notation>
+<skos:prefLabel>Accommodation and food service activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/J58">
+<skos:notation>J58</skos:notation>
+<skos:prefLabel>Publishing activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/J59_J60">
+<skos:notation>J59_J60</skos:notation>
+<skos:prefLabel>Motion picture, video, television programme production; programming and broadcasting activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/J61">
+<skos:notation>J61</skos:notation>
+<skos:prefLabel>Telecommunications</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/J62_J63">
+<skos:notation>J62_J63</skos:notation>
+<skos:prefLabel>Computer programming, consultancy, and information service activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/K64">
+<skos:notation>K64</skos:notation>
+<skos:prefLabel>Financial service activities, except insurance and pension funding</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/K65">
+<skos:notation>K65</skos:notation>
+<skos:prefLabel>Insurance, reinsurance and pension funding, except compulsory social security</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/K66">
+<skos:notation>K66</skos:notation>
+<skos:prefLabel>Activities auxiliary to financial services and insurance activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/L68">
+<skos:notation>L68</skos:notation>
+<skos:prefLabel>Real estate activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/L68B">
+<skos:notation>L68B</skos:notation>
+<skos:prefLabel>Real estate activities excluding imputed rents</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/L68A">
+<skos:notation>L68A</skos:notation>
+<skos:prefLabel>Imputed rents of owner-occupied dwellings</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/M69_M70">
+<skos:notation>M69_M70</skos:notation>
+<skos:prefLabel>Legal and accounting activities; activities of head offices; management consultancy activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/M71">
+<skos:notation>M71</skos:notation>
+<skos:prefLabel>Architectural and engineering activities; technical testing and analysis</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/M72">
+<skos:notation>M72</skos:notation>
+<skos:prefLabel>Scientific research and development</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/M73">
+<skos:notation>M73</skos:notation>
+<skos:prefLabel>Advertising and market research</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/M74_M75">
+<skos:notation>M74_M75</skos:notation>
+<skos:prefLabel>Other professional, scientific and technical activities; veterinary activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/N77">
+<skos:notation>N77</skos:notation>
+<skos:prefLabel>Rental and leasing activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/N78">
+<skos:notation>N78</skos:notation>
+<skos:prefLabel>Employment activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/N79">
+<skos:notation>N79</skos:notation>
+<skos:prefLabel>Travel agency, tour operator reservation service and related activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/N80-N82">
+<skos:notation>N80-N82</skos:notation>
+<skos:prefLabel>Security and investigation, service and landscape, office administrative and support activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/O84">
+<skos:notation>O84</skos:notation>
+<skos:prefLabel>Public administration and defence; compulsory social security</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P85">
+<skos:notation>P85</skos:notation>
+<skos:prefLabel>Education</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/Q86">
+<skos:notation>Q86</skos:notation>
+<skos:prefLabel>Human health activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/Q87_Q88">
+<skos:notation>Q87_Q88</skos:notation>
+<skos:prefLabel>Residential care activities and social work activities without accommodation</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/R90-R92">
+<skos:notation>R90-R92</skos:notation>
+<skos:prefLabel>Creative, arts and entertainment activities; libraries, archives, museums and other cultural activities; gambling and betting activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/R93">
+<skos:notation>R93</skos:notation>
+<skos:prefLabel>Sports activities and amusement and recreation activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/S94">
+<skos:notation>S94</skos:notation>
+<skos:prefLabel>Activities of membership organisations</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/S95">
+<skos:notation>S95</skos:notation>
+<skos:prefLabel>Repair of computers and personal and household goods</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/S96">
+<skos:notation>S96</skos:notation>
+<skos:prefLabel>Other personal service activities</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/T">
+<skos:notation>T</skos:notation>
+<skos:prefLabel>Activities of households as employers; undifferentiated goods- and services-producing activities of households for own use</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/U">
+<skos:notation>U</skos:notation>
+<skos:prefLabel>Activities of extraterritorial organisations and bodies</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/TOTAL">
+<skos:notation>TOTAL</skos:notation>
+<skos:prefLabel>Total</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_A">
+<skos:notation>CPA_A</skos:notation>
+<skos:prefLabel>Products of agriculture, forestry and fishing</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_B-E">
+<skos:notation>CPA_B-E</skos:notation>
+<skos:prefLabel>Industrial products (except construction works)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_G-I">
+<skos:notation>CPA_G-I</skos:notation>
+<skos:prefLabel>Wholesale and retail trade; transportation and storage; accommodation and food services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_J">
+<skos:notation>CPA_J</skos:notation>
+<skos:prefLabel>Information and communication services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_K">
+<skos:notation>CPA_K</skos:notation>
+<skos:prefLabel>Financial and insurance services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_L">
+<skos:notation>CPA_L</skos:notation>
+<skos:prefLabel>Real estate services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_M_N">
+<skos:notation>CPA_M_N</skos:notation>
+<skos:prefLabel>Professional, scientific and technical services; administrative and support services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_O-Q">
+<skos:notation>CPA_O-Q</skos:notation>
+<skos:prefLabel>Public administration, defence, education, human health and social work services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_R-U">
+<skos:notation>CPA_R-U</skos:notation>
+<skos:prefLabel>Arts, entertainment and recreation; other services; services of household and extra-territorial organizations and bodies</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_A01">
+<skos:notation>CPA_A01</skos:notation>
+<skos:prefLabel>Products of agriculture, hunting and related services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_A02">
+<skos:notation>CPA_A02</skos:notation>
+<skos:prefLabel>Products of forestry, logging and related services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_A03">
+<skos:notation>CPA_A03</skos:notation>
+<skos:prefLabel>Fish and other fishing products; aquaculture products; support services to fishing</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_B">
+<skos:notation>CPA_B</skos:notation>
+<skos:prefLabel>Mining and quarrying</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C10-C12">
+<skos:notation>CPA_C10-C12</skos:notation>
+<skos:prefLabel>Food, beverages and tobacco products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C13-C15">
+<skos:notation>CPA_C13-C15</skos:notation>
+<skos:prefLabel>Textiles, wearing apparel, leather and related products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C16">
+<skos:notation>CPA_C16</skos:notation>
+<skos:prefLabel>Wood and of products of wood and cork, except furniture; articles of straw and plaiting materials</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C17">
+<skos:notation>CPA_C17</skos:notation>
+<skos:prefLabel>Paper and paper products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C18">
+<skos:notation>CPA_C18</skos:notation>
+<skos:prefLabel>Printing and recording services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C19">
+<skos:notation>CPA_C19</skos:notation>
+<skos:prefLabel>Coke and refined petroleum products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C20">
+<skos:notation>CPA_C20</skos:notation>
+<skos:prefLabel>Chemicals and chemical products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C21">
+<skos:notation>CPA_C21</skos:notation>
+<skos:prefLabel>Basic pharmaceutical products and pharmaceutical preparations</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C22">
+<skos:notation>CPA_C22</skos:notation>
+<skos:prefLabel>Rubber and plastic products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C23">
+<skos:notation>CPA_C23</skos:notation>
+<skos:prefLabel>Other non-metallic mineral products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C24">
+<skos:notation>CPA_C24</skos:notation>
+<skos:prefLabel>Basic metals</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C25">
+<skos:notation>CPA_C25</skos:notation>
+<skos:prefLabel>Fabricated metal products, except machinery and equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C26">
+<skos:notation>CPA_C26</skos:notation>
+<skos:prefLabel>Computer, electronic and optical products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C27">
+<skos:notation>CPA_C27</skos:notation>
+<skos:prefLabel>Electrical equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C28">
+<skos:notation>CPA_C28</skos:notation>
+<skos:prefLabel>Machinery and equipment n.e.c.</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C29">
+<skos:notation>CPA_C29</skos:notation>
+<skos:prefLabel>Motor vehicles, trailers and semi-trailers</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C30">
+<skos:notation>CPA_C30</skos:notation>
+<skos:prefLabel>Other transport equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C31_C32">
+<skos:notation>CPA_C31_C32</skos:notation>
+<skos:prefLabel>Furniture and other manufactured goods</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_C33">
+<skos:notation>CPA_C33</skos:notation>
+<skos:prefLabel>Repair and installation services of machinery and equipment</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_D35">
+<skos:notation>CPA_D35</skos:notation>
+<skos:prefLabel>Electricity, gas, steam and air conditioning</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_E36">
+<skos:notation>CPA_E36</skos:notation>
+<skos:prefLabel>Natural water; water treatment and supply services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_E37-E39">
+<skos:notation>CPA_E37-E39</skos:notation>
+<skos:prefLabel>Sewerage services; sewage sludge; waste collection, treatment and disposal services; materials recovery services; remediation services and other waste management services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_F">
+<skos:notation>CPA_F</skos:notation>
+<skos:prefLabel>Constructions and construction works</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_G45">
+<skos:notation>CPA_G45</skos:notation>
+<skos:prefLabel>Wholesale and retail trade and repair services of motor vehicles and motorcycles</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_G46">
+<skos:notation>CPA_G46</skos:notation>
+<skos:prefLabel>Wholesale trade services, except of motor vehicles and motorcycles</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_G47">
+<skos:notation>CPA_G47</skos:notation>
+<skos:prefLabel>Retail trade services, except of motor vehicles and motorcycles</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_H49">
+<skos:notation>CPA_H49</skos:notation>
+<skos:prefLabel>Land transport services and transport services via pipelines</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_H50">
+<skos:notation>CPA_H50</skos:notation>
+<skos:prefLabel>Water transport services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_H51">
+<skos:notation>CPA_H51</skos:notation>
+<skos:prefLabel>Air transport services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_H52">
+<skos:notation>CPA_H52</skos:notation>
+<skos:prefLabel>Warehousing and support services for transportation</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_H53">
+<skos:notation>CPA_H53</skos:notation>
+<skos:prefLabel>Postal and courier services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_I">
+<skos:notation>CPA_I</skos:notation>
+<skos:prefLabel>Accommodation and food services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_J58">
+<skos:notation>CPA_J58</skos:notation>
+<skos:prefLabel>Publishing services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_J59_J60">
+<skos:notation>CPA_J59_J60</skos:notation>
+<skos:prefLabel>Motion picture, video and television programme production services, sound recording and music publishing; programming and broadcasting services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_J61">
+<skos:notation>CPA_J61</skos:notation>
+<skos:prefLabel>Telecommunications services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_J62_J63">
+<skos:notation>CPA_J62_J63</skos:notation>
+<skos:prefLabel>Computer programming, consultancy and related services; Information services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_K64">
+<skos:notation>CPA_K64</skos:notation>
+<skos:prefLabel>Financial services, except insurance and pension funding</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_K65">
+<skos:notation>CPA_K65</skos:notation>
+<skos:prefLabel>Insurance, reinsurance and pension funding services, except compulsory social security</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_K66">
+<skos:notation>CPA_K66</skos:notation>
+<skos:prefLabel>Services auxiliary to financial services and insurance services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_L68">
+<skos:notation>CPA_L68</skos:notation>
+<skos:prefLabel>Real estate services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_L68B">
+<skos:notation>CPA_L68B</skos:notation>
+<skos:prefLabel>Real estate services excluding imputed rents</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_L68A">
+<skos:notation>CPA_L68A</skos:notation>
+<skos:prefLabel>Imputed rents of owner-occupied dwellings</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_M69_M70">
+<skos:notation>CPA_M69_M70</skos:notation>
+<skos:prefLabel>Legal and accounting services; services of head offices; management consultancy services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_M71">
+<skos:notation>CPA_M71</skos:notation>
+<skos:prefLabel>Architectural and engineering services; technical testing and analysis services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_M72">
+<skos:notation>CPA_M72</skos:notation>
+<skos:prefLabel>Scientific research and development services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_M73">
+<skos:notation>CPA_M73</skos:notation>
+<skos:prefLabel>Advertising and market research services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_M74_M75">
+<skos:notation>CPA_M74_M75</skos:notation>
+<skos:prefLabel>Other professional, scientific and technical services and veterinary services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_N77">
+<skos:notation>CPA_N77</skos:notation>
+<skos:prefLabel>Rental and leasing services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_N78">
+<skos:notation>CPA_N78</skos:notation>
+<skos:prefLabel>Employment services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_N79">
+<skos:notation>CPA_N79</skos:notation>
+<skos:prefLabel>Travel agency, tour operator and other reservation services and related services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_N80-N82">
+<skos:notation>CPA_N80-N82</skos:notation>
+<skos:prefLabel>Security and investigation services; services to buildings and landscape; office administrative, office support and other business support services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_O84">
+<skos:notation>CPA_O84</skos:notation>
+<skos:prefLabel>Public administration and defence services; compulsory social security services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_P85">
+<skos:notation>CPA_P85</skos:notation>
+<skos:prefLabel>Education services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_Q86">
+<skos:notation>CPA_Q86</skos:notation>
+<skos:prefLabel>Human health services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_Q87_Q88">
+<skos:notation>CPA_Q87_Q88</skos:notation>
+<skos:prefLabel>Residential care services; social work services without accommodation</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_R90-R92">
+<skos:notation>CPA_R90-R92</skos:notation>
+<skos:prefLabel>Creative, arts, entertainment, library, archive, museum, other cultural services; gambling and betting services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_R93">
+<skos:notation>CPA_R93</skos:notation>
+<skos:prefLabel>Sporting services and amusement and recreation services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_S94">
+<skos:notation>CPA_S94</skos:notation>
+<skos:prefLabel>Services furnished by membership organisations</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_S95">
+<skos:notation>CPA_S95</skos:notation>
+<skos:prefLabel>Repair services of computers and personal and household goods</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_S96">
+<skos:notation>CPA_S96</skos:notation>
+<skos:prefLabel>Other personal services</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_T">
+<skos:notation>CPA_T</skos:notation>
+<skos:prefLabel>Services of households as employers; undifferentiated goods and services produced by households for own use</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_U">
+<skos:notation>CPA_U</skos:notation>
+<skos:prefLabel>Services provided by extraterritorial organisations and bodies</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_TOTAL">
+<skos:notation>CPA_TOTAL</skos:notation>
+<skos:prefLabel>Total</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/DP6A">
+<skos:notation>DP6A</skos:notation>
+<skos:prefLabel>Cif/fob adjustments on exports</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/DP7A">
+<skos:notation>DP7A</skos:notation>
+<skos:prefLabel>Cif/fob adjustments on imports</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P33">
+<skos:notation>P33</skos:notation>
+<skos:prefLabel>Direct purchases abroad by residents</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P34">
+<skos:notation>P34</skos:notation>
+<skos:prefLabel>Purchases on the domestic territory by non-residents</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P2PP">
+<skos:notation>P2PP</skos:notation>
+<skos:prefLabel>Total intermediate consumption at purchasers' prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/TOT_CA">
+<skos:notation>TOT_CA</skos:notation>
+<skos:prefLabel>Total adjusted</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P11">
+<skos:notation>P11</skos:notation>
+<skos:prefLabel>Output at basic prices - Market output</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P12">
+<skos:notation>P12</skos:notation>
+<skos:prefLabel>Output at basic prices - Output for own final use</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P13">
+<skos:notation>P13</skos:notation>
+<skos:prefLabel>Output at basic prices - Other non-market output</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/TFINU">
+<skos:notation>TFINU</skos:notation>
+<skos:prefLabel>Final uses at purchasers' prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/FINUBP">
+<skos:notation>FINUBP</skos:notation>
+<skos:prefLabel>Final uses at basic prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/D1">
+<skos:notation>D1</skos:notation>
+<skos:prefLabel>Compensation of employees</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/D11">
+<skos:notation>D11</skos:notation>
+<skos:prefLabel>Gross Wages and salaries</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/D29_M_D39">
+<skos:notation>D29_M_D39</skos:notation>
+<skos:prefLabel>Other net taxes on production</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/K1">
+<skos:notation>K1</skos:notation>
+<skos:prefLabel>Consumption of fixed capital</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/B2N_B3N">
+<skos:notation>B2N_B3N</skos:notation>
+<skos:prefLabel>Operating surplus, net</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/B2G_B3G">
+<skos:notation>B2G_B3G</skos:notation>
+<skos:prefLabel>Operating surplus, gross</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/B3G">
+<skos:notation>B3G</skos:notation>
+<skos:prefLabel>Gross mixed income</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/B1G">
+<skos:notation>B1G</skos:notation>
+<skos:prefLabel>Value added at basic prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P1">
+<skos:notation>P1</skos:notation>
+<skos:prefLabel>Output at basic prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P51">
+<skos:notation>P51</skos:notation>
+<skos:prefLabel>Gross fixed capital formation</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/STAN11">
+<skos:notation>STAN11</skos:notation>
+<skos:prefLabel>Fixed capital stock</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/EMP">
+<skos:notation>EMP</skos:notation>
+<skos:prefLabel>Labour inputs (1.000 persons)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P2I">
+<skos:notation>P2I</skos:notation>
+<skos:prefLabel>Use of imported products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/D21_M_D31">
+<skos:notation>D21_M_D31</skos:notation>
+<skos:prefLabel>Taxes less subsidies on products</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P7_S21">
+<skos:notation>P7_S21</skos:notation>
+<skos:prefLabel>Intra EU imports cif</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P7_S2111">
+<skos:notation>P7_S2111</skos:notation>
+<skos:prefLabel>Imports of goods and services from EMU members (cif)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P7_S2112">
+<skos:notation>P7_S2112</skos:notation>
+<skos:prefLabel>Imports of goods and services from EMU non-members(cif)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P7_S22">
+<skos:notation>P7_S22</skos:notation>
+<skos:prefLabel>Extra EU imports cif</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P7">
+<skos:notation>P7</skos:notation>
+<skos:prefLabel>Imports cif</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/SUPBP">
+<skos:notation>SUPBP</skos:notation>
+<skos:prefLabel>Supply at basic prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P3_S14">
+<skos:notation>P3_S14</skos:notation>
+<skos:prefLabel>Final consumption expenditure by households</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P3_S15">
+<skos:notation>P3_S15</skos:notation>
+<skos:prefLabel>Final consumption expenditure by non-profit organisations serving households (NPISH)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P3_S13">
+<skos:notation>P3_S13</skos:notation>
+<skos:prefLabel>Final consumption expenditure by government</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P3">
+<skos:notation>P3</skos:notation>
+<skos:prefLabel>Final consumption expenditure</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P53">
+<skos:notation>P53</skos:notation>
+<skos:prefLabel>Changes in valuables</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P52">
+<skos:notation>P52</skos:notation>
+<skos:prefLabel>Changes in inventories</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P5">
+<skos:notation>P5</skos:notation>
+<skos:prefLabel>Gross capital formation</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P6_S21">
+<skos:notation>P6_S21</skos:notation>
+<skos:prefLabel>Exports intra EU fob</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P6_S22">
+<skos:notation>P6_S22</skos:notation>
+<skos:prefLabel>Exports extra EU fob</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P6">
+<skos:notation>P6</skos:notation>
+<skos:prefLabel>Exports</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P118">
+<skos:notation>P118</skos:notation>
+<skos:prefLabel>Trade and transport margins</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/SUPPP">
+<skos:notation>SUPPP</skos:notation>
+<skos:prefLabel>Total supply at purchasers' prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/TU">
+<skos:notation>TU</skos:notation>
+<skos:prefLabel>Total use at purchasers' prices</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/BIOMASS">
+<skos:notation>BIOMASS</skos:notation>
+<skos:prefLabel>Biomass</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/FOSSIL">
+<skos:notation>FOSSIL</skos:notation>
+<skos:prefLabel>Fossil fuels</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/MINERAL">
+<skos:notation>MINERAL</skos:notation>
+<skos:prefLabel>Minerals</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/V12110">
+<skos:notation>V12110</skos:notation>
+<skos:prefLabel>Turnover or gross premiums written</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/TOT_ADJ">
+<skos:notation>TOT_ADJ</skos:notation>
+<skos:prefLabel>Total adjustments</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P6_S2111">
+<skos:notation>P6_S2111</skos:notation>
+<skos:prefLabel>Exports of goods and services EMU members (fob)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/P6_S2112">
+<skos:notation>P6_S2112</skos:notation>
+<skos:prefLabel>Exports of goods and services to EMU non-members (fob)</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+<skos:Concept rdf:about="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/CPA_F45">
+<skos:notation>CPA_F45</skos:notation>
+<skos:prefLabel>Constructions and construction works</skos:prefLabel>
+<adms:status rdf:resource="http://dd.eionet.europa.eu/vocabulary/datadictionary/status/valid"/>
+<skos:inScheme rdf:resource="http://dd.eionet.europa.eu/vocabulary/eurostat/t_rows2/"/>
+</skos:Concept>
+</rdf:RDF>
