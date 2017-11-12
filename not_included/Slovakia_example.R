@@ -5,9 +5,14 @@ load_all()
 #saveRDS(iocp, "not_included/eurostat_io_current_prices.rds")
 sk_io <- iotable_get ( source = "naio_cp17_r2", geo = "SK",
                        year = 2010, unit = "MIO_EUR")
+sk_io2 <- iotable_get2 ( source = "naio_cp17_r2", geo = "SK",
+                       year = 2010, unit = "MIO_EUR")
+
 source= "naio_cp17_r2" ; geo= "SK" ; year = 2010 ; unit = "MIO_EUR"
 sk_io_1700 <- iotable_get ( source = "naio_10_cp1700", geo = "SK",
                        year = 2010, unit = "MIO_EUR")
+sk_io_1700_2 <- iotable_get2 ( source = "naio_10_cp1700", geo = "SK",
+                            year = 2010, unit = "MIO_EUR")
 
 labelled_io_data <- sk_io_1700
 
