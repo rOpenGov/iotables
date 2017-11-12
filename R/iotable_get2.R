@@ -42,15 +42,15 @@ iotable_get2 <- function ( source = "germany_1990", geo = "DE",
   
   if ( source %in% prod_ind ) { 
     metadata_rows <- iotables::metadata %>%
-       filter ( variable == "prod_na") 
+       filter ( variable == "prod_na") %>%
        dplyr::rename ( prod_na = code) %>%
        dplyr::rename ( prod_na_lab = label ) %>%
        dplyr::rename ( row_order = numeric_label ) %>%
        dplyr::rename ( iotables_row = iotables_label )
        
     metadata_cols <- iotables::metadata %>%
-      filter ( variable == "induse") 
-    dplyr::rename ( induse = code) %>%
+      filter ( variable == "induse") %>%
+      dplyr::rename ( induse = code) %>%
       dplyr::rename ( induse_lab = label )%>%
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
