@@ -1,6 +1,13 @@
 ##Slovakia_example.R
 library(iotables) ; library(dplyr) ; library (devtools)
 load_all()
+geo <- geo_input <- "SK"
+unit_input <- unit <- "MIO_EUR"
+year = 2010; labelling = "iotables"
+stk_flow <- stk_flow_input <- "DOM"
+keep_total <- FALSE
+households <- TRUE
+
 #iocp <- get_io_current_prices( ) 
 #saveRDS(iocp, "not_included/eurostat_io_current_prices.rds")
 sk_io <- iotable_get ( source = "naio_cp17_r2", geo = "SK",
@@ -12,13 +19,23 @@ source= "naio_cp17_r2" ; geo= "SK" ; year = 2010 ; unit = "MIO_EUR"
 sk_io_1700 <- iotable_get ( source = "naio_10_cp1700", geo = "SK",
                        year = 2010, unit = "MIO_EUR")
 sk_io_1700_2 <- iotable_get2 ( source = "naio_10_cp1700", geo = "SK",
-                            year = 2010, unit = "MIO_EUR")
+                            year = 2010, stk_flow = "IMP", 
+                            unit = "MIO_EUR")
+sk_use_1700_2 <- use_table_get2 ( source = "naio_10_cp1700", geo = "SK",
+                               year = 2010, unit = "MIO_EUR",
+                               stk_flow = "DOM", households = TRUE,
+                               keep_total = TRUE)
+
+DE_use_1700_2 <- use_table_get2 ( source = "germany_1990", geo = "DE",
+                                  year = 1990, unit = "MIO_EUR",
+                                  stk_flow = "DOM", households = TRUE,
+                                  keep_total = TRUE)
 
 labelled_io_data <- sk_io_1700
 
 retrieve_from_temp_bulk <- readRDS(paste0(tempdir(), "\\naio_cp17_r2.rds" ))
 
-sk_use <- use_table_get ( sk_io )
+sk_use <- use_table_get2 ( sk_io_1700_2 )
 
 
 tech_sk <- get_technology_data(sk_io)

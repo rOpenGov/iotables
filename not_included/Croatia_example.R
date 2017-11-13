@@ -1,19 +1,32 @@
 ##Croatia example
 library(iotables) ; library (dplyr) ; library (tidyr)
+source = "croatia_2010_1700" 
+geo = "HR"; geo_input = "HR"
+year = 2010
+unit = "T_NAC"; unit_input <- unit
+labelling = "iotables" 
 
-labelled_io_table <- croatia_2010_1700
+hr_io2 <- iotable_get2 ( source = "croatia_2010_1700", geo = "HR",
+                         year = 2010, unit = "T_NAC")
 
-tech_hr <- get_technology_data(labelled_io_data = croatia_2010_1700)
+hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
+                         year = 2010, unit = "T_NAC", labelling  = "iotables")
+hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
+                            year = 2010, unit = "T_NAC", labelling  = "short")
 
-input_flow_hr <- input_flow_get(labelled_io_table, 
-                             technology = tech_hr, geo = 'HR', 
-                             unit = "T_NAC") %>%
-  tidyr::gather ( t_cols2, values, !! 2:ncol(.) ) %>%
-  tidyr::spread ( t_cols2, values )
+hr_io_1900 <- iotable_get ( source = "croatia_2010_1900", geo = "HR",
+                             year = 2010, unit = "T_NAC")
 
+hr_use_1900 <- use_table_get ( source = "croatia_2010_1900", geo = "HR",
+                            year = 2010, unit = "T_NAC")
+hr_use_1900 <- use_table_get ( source = "croatia_2010_1900", geo = "HR",
+                               year = 2010, unit = "T_NAC", labelling = "iotables")
 
-output_vector_hr <- output_get(labelled_io_table, technology = tech_hr, 
-                            geo = 'HR', unit = "T_NAC", named = TRUE)
+output_vector_hr <- output_get(source = "croatia_2010_1900", geo = "HR",
+                               year = 2010, unit = "T_NAC", labelling = "iotables")
+output_vector_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
+                               year = 2010, unit = "T_NAC", labelling = "iotables")
+
 data ("croatia_employment_2013")
 data ("croatia_employment_aggregation")
 

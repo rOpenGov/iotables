@@ -73,11 +73,6 @@ t_cols_data <- read.csv  ('data-raw/t_cols_data.csv', stringsAsFactors = F)
 p_cols_data <- read.csv ( 'data-raw/p_cols_data.csv', stringsAsFactors = F)
 p_rows_data <- read.csv ("data-raw/p_rows_data.csv", stringsAsFactors = F)
 
-
-metadata <- readxl::read_excel("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/metadata.xlsx", 
-                               sheet = "all")%>%
-  dplyr::arrange( numeric_label )
-
 t_rows_vocabulary <- readxl::read_excel(path = "not_included/t_rows_vocabulary.xlsx")
 names (t_rows_vocabulary  ) <- gsub( ":", "_", names (t_rows_vocabulary  ))
 
@@ -95,5 +90,5 @@ devtools::use_data(t_rows_data, t_cols_data,
                    germany_metadata_rows,
                    germany_metadata_cols,
                    t_rows_vocabulary, t_cols_vocabulary,
-                   induse_vocabulary, prod_na_vocabulary, metadata,
+                   induse_vocabulary, prod_na_vocabulary,
                    internal = TRUE, overwrite = TRUE)
