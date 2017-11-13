@@ -25,8 +25,9 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
                           stk_flow = "DOM", labelling = "iotables") {  
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; 
   values = NULL ; .= NULL #non-standard evaluation creates a varning in build. 
-  iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
+  iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
+  row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   
   if (is.null(geo)) stop ("Error: no country selected.")
   if (! labelling %in% c("iotables", "short")) {
@@ -93,7 +94,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   if ( source == "germany_1990") {
     labelled_io_data <- iotables::germany_1990    # use germany example 
   } else if ( source == "croatia_2010_1700" ) { 
-    labelled_io_data <- croatia_2010_1700 
+    labelled_io_data <- iotables::croatia_2010_1700 
   } else if ( source == "croatia_2010_1800" )  {
     labelled_io_data <- iotables::croatia_2010_1800  
     } else if ( source == "croatia_2010_1900" )  {
