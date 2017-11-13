@@ -22,9 +22,9 @@ The iotables are exactly designed for these tasks.  Currently the package downlo
 
 The aim of this introduction is not to introduce input-output economics, or SIOTs in detail.  The Eurostat manual on input-output tables and the [Eurostat tematic page](http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables) should be consulted for further information about the data and the metadata. 
 
-In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual.  The package function examples can be checked against Jörg Beutel’s published results. 
+In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual.  The package function examples can be checked against Jörg Beutel's published results. 
 
-To show how to work with other IO tables and other data, we include the latest SIOT and employment statistics from Croatia with the package.  Croatia joined the EU after 2010 and the country’s SIOTs are following the Eurostat guidelines but are not available on Eurostat yet.  Because they are almost identical to a Eurostat SIOT, they give a good opportunity to review the real-life processing challenges when you cannot rely on the Eurostat downloader.  The Croatian data are found in several small datasets to show the filtering and joining of real-life data.  
+To show how to work with other IO tables and other data, we include the latest SIOT and employment statistics from Croatia with the package.  Croatia joined the EU after 2010 and the country's SIOTs are following the Eurostat guidelines but are not available on Eurostat yet.  Because they are almost identical to a Eurostat SIOT, they give a good opportunity to review the real-life processing challenges when you cannot rely on the Eurostat downloader.  The Croatian data are found in several small datasets to show the filtering and joining of real-life data.  
 
 > The Croatia vignette is not working with iotables 0.2 will be updated soon.
 
@@ -34,10 +34,10 @@ You can install iotools from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("antaldaniel/iotables")
+devtools::install_github("rOpenGov/iotables")
 
 #with vignettes:
-#devtools::install_github("antaldaniel/iotables", build_vignettes = TRUE)
+#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
 The package is not yet ready for CRAN publication, but it builds without errors and warnings on Windows, Mac OSX and Ubuntu / Linux, and will be released after sufficient testing is made with real-life examples. YOu can follow changes on the NEWS.md file. 
@@ -60,7 +60,7 @@ The different data sources and estimates applied will yield to slightly differen
 
 Currently only some Eurostat products works. This means that the sysdata.rda metadata file of this package understands their labelling, orders them correctly and spreads them out as they should be spread out. You can work with other IO tables, but in this case you have to make sure that you are ordering the symmetric matrix correctly, for example, in your spreadsheet software such as Excel.
 
-There is currently no downloader function for the [OECD STAN](https://stats.oecd.org/Index.aspx?DataSetCode=STAN_IO_TOT_DOM_IMP) SIOT databases, which contain the SIOT’s of some OECD countries, often overlapping with the EU countries who create their SIOTs, but this is planned in the near future.  The code below gets the 2011 Australian SIOT in USD terms in long-form. The next pre-processing steps that are already available for Eurostat will be included in the 0.3 version of the package.
+There is currently no downloader function for the [OECD STAN](https://stats.oecd.org/Index.aspx?DataSetCode=STAN_IO_TOT_DOM_IMP) SIOT databases, which contain the SIOT's of some OECD countries, often overlapping with the EU countries who create their SIOTs, but this is planned in the near future.  The code below gets the 2011 Australian SIOT in USD terms in long-form. The next pre-processing steps that are already available for Eurostat will be included in the 0.3 version of the package.
 
 ```{r oecd_download, eval = FALSE, message = FALSE, echo = FALSE}
 require (RJSDMX) ; require (iotables)
@@ -97,11 +97,11 @@ retrieve_from_temp_bulk <- readRDS(paste0(tempdir(), "\\eurostat/naio_cp17_r2_da
 
 source <- "naio_cp17_r2"
 #Get the temporary file name of any already existing temporary file with:
-tmp_rds <- paste0(tempdir(), "\\", source, 
-          "_", geo, "_", year , "_", unit, ".rds")
+#tmp_rds <- paste0(tempdir(), "\\", source, 
+#          "_", geo, "_", year , "_", unit, ".rds")
 
 #Retrieve the filtered file from the temporary directory
-retrieve_from_temp <- readRDS(tmp_rds)
+#retrieve_from_temp <- readRDS(tmp_rds)
 ```
 
 If you want to make comparisons among countries, over time or different price concepts, you will likely use a lot of data. The temp files are speeding up this process. If you make a reference to any of the tables in your R session the function will always first look for a temporary local file before downloading again the large bulk files (1.8-9 MB in size.)
@@ -120,13 +120,13 @@ In the ESA 2010, the product-by-product input-output table is the most important
 The common parameter formats are given in the description of the functions dealing with the inter-industry flows, or first quadrant of the SIOT. 
 
 ###First quadrant or inter-industry flows
- However, for several reasons, the SIOT’s have a special aggregation scheme that requires the use of special coding.  For some economic reasons, some industries and products are aggregated. This requires the use of special coding for the unusually aggregated industries or products. For example, the transport sectors of the economy are not directly addressed in the input flow.
+ However, for several reasons, the SIOT's have a special aggregation scheme that requires the use of special coding.  For some economic reasons, some industries and products are aggregated. This requires the use of special coding for the unusually aggregated industries or products. For example, the transport sectors of the economy are not directly addressed in the input flow.
 
-The ` use_table_get ()` function extracts only the input flow matrix from the table.  The input-flow matrix contains the structural relations within an economy in a symmetrical matrix. For example, Eurostat’s standard national input flow matrices have a dimension of 63 x 63, and this “field” is filtered out and pre-processed to a matrix.  It is “pre” processing in the economic sense, because the user will most likely further manipulate the input flow matrix before writing actual equations. 
+The ` use_table_get ()` function extracts only the input flow matrix from the table.  The input-flow matrix contains the structural relations within an economy in a symmetrical matrix. For example, Eurostat's standard national input flow matrices have a dimension of 63 x 63, and this “field” is filtered out and pre-processed to a matrix.  It is “pre” processing in the economic sense, because the user will most likely further manipulate the input flow matrix before writing actual equations. 
 
 Any further work usually requires aggregation, disaggregation following these technologies, which, from a data pre-processing point of view requires a lot filtering, joining. It is useful to start the analysis with getting the technology information and storing it in the global environment. The technology data can be added explicitly in each function call. This can save much computing time. If the technology data is not stored in the global or parent environment, each pre-processing function call will try to invoke this function.  
 
-The SIOT’s do not follow a tidy format, because they are formatted in a way to facilitate matrix algebraic manipulations with the data.  However, the standard fields of the SIOT’s can be brought to tidy format. Pre-processing in this case means that the long-format bulk data is wrangled to the standard fields of the SIOT. 
+The SIOT's do not follow a tidy format, because they are formatted in a way to facilitate matrix algebraic manipulations with the data.  However, the standard fields of the SIOT's can be brought to tidy format. Pre-processing in this case means that the long-format bulk data is wrangled to the standard fields of the SIOT. 
 
 * The `unit` parameter is necessary because Eurostat files contain the same data in national currency units and euros.
 
@@ -153,7 +153,7 @@ In all cases, the `households = TRUE` parameter will add the household consumpti
 
 ```{r example_output_household, echo = FALSE, warning = FALSE, message = FALSE}
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
+de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = TRUE, labelling = "iotables")
 print (de_output)
@@ -165,14 +165,14 @@ print (de_output)
 The following function gets the primary input that you want to analyze. The `households` paramter select or deselects the household consumption expenditure column. In case it is selected, it set to default 0.
 
 ```{r example_primary_output, echo = FALSE, warning = FALSE, message = FALSE}
-
-check_primary <- primary_input_get ( input = "wages_salaries",
-                                     source = "naio_cp17_r2", geo = 'SK', year = 2010,
-                                     unit = "MIO_EUR", 
-                                     households = TRUE, labelling  = 'iotables')
+#needs updatign with new vocubulary
+#check_primary <- primary_input_get ( input = "wages_salaries",
+#                                     source = "naio_cp17_r2", geo = 'SK', year = 2010,
+#                                     unit = "MIO_EUR", 
+#                                     households = TRUE, labelling  = 'iotables')
 
 #in (Eurostat) short notation 'wages_salaries' = 'D11' (case sensitive!)
-print (check_primary)
+#print (check_primary)
 ```
 
 
@@ -186,19 +186,19 @@ Practitioners can easily combine the tidy data or the standard matrices returned
 
 The biggest difficulty of working with SIOTs is usually the problem of (pre-)processing important axillary elements, for example the creattion of satellite accounts that strictly conform the SIOT's vectors or matrixes.  For example, when used in matrix algebraic equations with the a 64x64 input-flow table, the employment data must be aggregated (or disaggregated) into a numerical vector that has exactly 64 elements without missing values. Currently the exception handling is designed to throw at least meaningful errors in the process. 
 
-The Eurostat SIOT’s contain only the basic, but already very structured tables, which are in fact three conforming matrices.  The futher axillary tables that are often used, such as employment or CO2 inputs are often found in in different Eurostat statistics, or they cannot be found altogether in Eurostat. The SIOTs have a unique formatting and naming conventions, but unless an EU or OECD member state creates the satellite account together with the SIOT, there are not formatting guidelines to help furher programming. In this case the aim of this package (with later additions) could be to provide even better error handling and meaningful helper functions, but the creation of the satellite accounts will in almost any scenario require further data processing or modelling not covered by the `iotables` package. 
+The Eurostat SIOT's contain only the basic, but already very structured tables, which are in fact three conforming matrices.  The futher axillary tables that are often used, such as employment or CO2 inputs are often found in in different Eurostat statistics, or they cannot be found altogether in Eurostat. The SIOTs have a unique formatting and naming conventions, but unless an EU or OECD member state creates the satellite account together with the SIOT, there are not formatting guidelines to help furher programming. In this case the aim of this package (with later additions) could be to provide even better error handling and meaningful helper functions, but the creation of the satellite accounts will in almost any scenario require further data processing or modelling not covered by the `iotables` package. 
  
 Currently only the `input_indicator_create ()` function is available which can carefully create the indicators by pairing the input vector with the output vector. [It is under reprogramming, will be corrected very soon. Not working in this form.]
 
 ```{r employment_indicator, message = FALSE}
-de_output <- output_get ( source = "germany_1990", geo = "DE",
+de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = TRUE, labelling = "iotables")
-
-de_wages <- primary_input_get ( input = "d1",
-                       source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR", 
-                       households = TRUE, labelling = "iotables")
+#needs updatign with new vocubulary
+#de_wages <- primary_input_get ( input = "d1",
+#                       source = "germany_1990", geo = "DE",
+#                       year = 1990, unit = "MIO_EUR", 
+#                       households = TRUE, labelling = "iotables")
 
 #Wage_indicator <- iotables::input_indicator_create (de_wages, de_output, 4)
 
@@ -208,20 +208,20 @@ de_wages <- primary_input_get ( input = "d1",
 In this case the employment indicator can be found on p499 in the Table 15.14. The combination of the data is not always straightforward. 
 
 ##Analytical functions
-The most frequently used input-output equations are programmed into convenient R functions.   In almost all statistics and data scientific context, data pre-processing is usually the most time consuming effort, and this is probably even more true in the case of SIOT’s, because of their complexity. If all elements are in place, working with the elements is easy with R’s matrix algebraic operators such as `%*%`. (Needless to say that in the othervise userful vectorization nature of R’s main operators and functions is avoidable.)  However, because of the high complexity of the data, any violation of matrix algebraic rules causes a very hard-to-detect problem. If a 63x63 matrix has a single faulty element, the mathematical error message of the matrix operation is not very helpful on localizing and the correcting the element in question. For this reason we create a few helper functions that cover the most used scenarios. 
+The most frequently used input-output equations are programmed into convenient R functions.   In almost all statistics and data scientific context, data pre-processing is usually the most time consuming effort, and this is probably even more true in the case of SIOT's, because of their complexity. If all elements are in place, working with the elements is easy with R's matrix algebraic operators such as `%*%`. (Needless to say that in the othervise userful vectorization nature of R's main operators and functions is avoidable.)  However, because of the high complexity of the data, any violation of matrix algebraic rules causes a very hard-to-detect problem. If a 63x63 matrix has a single faulty element, the mathematical error message of the matrix operation is not very helpful on localizing and the correcting the element in question. For this reason we create a few helper functions that cover the most used scenarios. 
 
 The `leontieff_matrix_create()` function creates the Leontieff-matrix from the appropriate SIOT fields.  The `leontieff_inverse_create(L)` creates the inverse of the Leontieff-matrix which is used in all basic equations.  
 
 ```{r example_leontieff, message = FALSE}
-de_use <- use_table_get ( source = "germany_1990", geo = "DE",
+de_use <- iotables::use_table_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = FALSE, labelling = "iotables")
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
+de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = FALSE, labelling = "iotables")
 
-de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
+de_coeff <- iotables::input_coefficient_matrix_create( de_use, de_output, digits = 4)
 
 L <- iotables::leontieff_matrix_create( technology_coefficients_matrix =
                                 de_coeff )
@@ -232,7 +232,7 @@ print (L)
 The Leontieff matrix shown here can be checked against the Eurostat manuals table 15.9 on page 487. (Beware, the ordering of the industries is different.)
 
 ```{r example_leontieff_inverse, message = FALSE}
-I <- leontieff_inverse_create(L)
+I <- iotables::leontieff_inverse_create(L)
 print (I)
 ```
 
@@ -243,20 +243,20 @@ Finding an error in a 63x63 matrix can be a painstaking excersize. Basic violati
 Using the analytical functions we can calculate the employment multipliers for the German economy in the year 1990. 
 
 ```{r employment_multiplier, message = FALSE}
+#needs updatign with new vocubulary
+#de_emp <- primary_input_get ( input = "emp",
+#                       source = "germany_1990", geo = "DE",
+#                       year = 1990, unit = "MIO_EUR", 
+#                       households = FALSE, labelling = "iotables")
 
-de_emp <- primary_input_get ( input = "emp",
-                       source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR", 
-                       households = FALSE, labelling = "iotables")
+#de_emp_indicator <- input_indicator_create ( de_emp, de_output)
 
-de_emp_indicator <- input_indicator_create ( de_emp, de_output)
-
-employment_multipliers <- multiplier_create ( input_vector  = de_emp_indicator,
-                                              Im = I, digits = 4 )
+#employment_multipliers <- multiplier_create ( input_vector  = de_emp_indicator,
+#                                              Im = I, digits = 4 )
 
 #Identical to equation_solve (employment_indicator, I )
 
-print (employment_multipliers)
+#print (employment_multipliers)
 ```
 
 Checking against the Eurostat manual p502, indeed the agriculture's employment multiplier was the highest in Germany in the year 1990 with a value of  0.0326. 
@@ -264,15 +264,15 @@ Checking against the Eurostat manual p502, indeed the agriculture's employment m
 The package's `testthat` functions in fact are checking with the same rounding the functions against the Eurostat manuals's select values. 
 
 ##Testing and documentation 
-Testing the package has two important difficulties.  One is related to the size of the tables: working with large SIOT’s is resource intensive so some functionality cannot be usefully checked on CRAN.
+Testing the package has two important difficulties.  One is related to the size of the tables: working with large SIOT's is resource intensive so some functionality cannot be usefully checked on CRAN.
 
 For easier automated and human testing the example input-output table is imported from the Eurostat manual.  The "CPA_" preffix makes the formatting similar to the Eurostat raw files. The "t_rows2" and "t_cols2" variable names (and their labelled pairs, i.e. "t_row2_lab" and "t_cols2_lab") follows the naming conventions of Eurostat, too.
 
 ```{r testing, message=FALSE}
 require (tidyr) ; require (dplyr)
-head ( germany_1990, 2)
+head ( iotables::germany_1990, 2)
 
 ```
 
 
-The other problem is that the input-output economics problems are very complex and do not necessarily have existing solutions.  A failure of a function may be due to a bug to be fixed in the code, or maybe the logical consequence of an input failure.  For this reason the test functions are ran with well-documented examples from the literature. The SIOT’s used in these examples and in testing are small, simple or simplified data which are included with the package.  The expected test results are the published and rounded examples from the literature.  Rounding is necessary because the underlying equations often use iterations that may yield slightly different results on different platforms. 
+The other problem is that the input-output economics problems are very complex and do not necessarily have existing solutions.  A failure of a function may be due to a bug to be fixed in the code, or maybe the logical consequence of an input failure.  For this reason the test functions are ran with well-documented examples from the literature. The SIOT's used in these examples and in testing are small, simple or simplified data which are included with the package.  The expected test results are the published and rounded examples from the literature.  Rounding is necessary because the underlying equations often use iterations that may yield slightly different results on different platforms. 
