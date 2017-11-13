@@ -4,9 +4,11 @@
 #' In thousand kunas (T_NAC)
 #' @source   \href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
 #' @format A data frame with 13 variables. 
+#' @usage data(croatia_2010_1700)
 #'\describe{
 #'   \item{t_rows2}{Technology codes in row names, following the Eurostat convention.}
 #'   \item{t_rows2_lab}{Longer labels for t_rows2}
+#'   \item{t_cols2}{Technology codes in column names, following the Eurostat convention.}
 #'   \item{t_cols2_lab}{Longer labels for t_cols2}
 #'   \item{iotables_col}{The standardized iotables column labelling for easier reading.}
 #'   \item{col_order}{The column ordering to keep the matrix legible.}
