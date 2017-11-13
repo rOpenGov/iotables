@@ -5,8 +5,8 @@
 \title{Get an output vector}
 \usage{
 output_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", households = FALSE, skt_flow = "DOM",
-  labelling = "iotables")
+  unit = "MIO_EUR", households = FALSE, labelling = "iotables",
+  skt_flow = "DOM")
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700".}

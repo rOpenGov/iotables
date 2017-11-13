@@ -21,8 +21,8 @@
 
 output_get <- function ( source = "germany_1990", geo = "DE",
                             year = 1990, unit = "MIO_EUR",
-                            households = FALSE, skt_flow = "DOM", 
-                            labelling = "iotables" ) {  
+                            households = FALSE,  
+                            labelling = "iotables" , skt_flow = "DOM") {  
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
