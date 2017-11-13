@@ -27,8 +27,6 @@ wages and final household consumption. This is needed for induced-effects calcul
 \item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
-
-\item{households}{Logical variable. Defaults to FALSE. If TRUE, adds household income and consumption to the matrix for induced effects.}
 }
 \description{
 Create a use (input flow) matrix

@@ -7,7 +7,6 @@
 #' @param households If you need to make household demand endogenous, or "close the households off", TRUE selects 
 #' wages and final household consumption. This is needed for induced-effects calculations.
 #' @param stk_flow Defaults to "DOM", alternative "IMP". 
-#' @param households Logical variable. Defaults to FALSE. If TRUE, adds household income and consumption to the matrix for induced effects.
 #' @param keep_total Logical variable. Defaults to FALSE and removes the totalling row and column from the matrix.  
 #' @param labelling Defaults to "iotables" which gives standard row and column names regardless of the
 #' source of the table, or if it is a product x product, industry x industry or product x industry table.
@@ -36,7 +35,7 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
-  
+
   tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
   source_inputed <- source ; unit_input = unit
   
@@ -49,7 +48,14 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
       household_row <- labelled_io_table[11,1:8]
       household_row[1,8] <- 0
       use_table <- rbind ( use_table, household_row)
-      } #end of household case
+      if ( keep_total == FALSE) use_table <- use_table [ -7, ]
+      } else {
+        if (keep_total == TRUE) {
+          use_table <- labelled_io_table[1:7, 1:7]
+        } else {
+          use_table <- labelled_io_table[1:6, 1:7]
+        }
+     }
     return ( use_table )  #return simplified example table and do not run rest of the code
     } else {
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
