@@ -13,7 +13,6 @@
   \item{t_cols2_lab}{Longer labels for t_cols2}
   \item{iotables_col}{The standardized iotables column labelling for easier reading.}
   \item{col_order}{The column ordering to keep the matrix legible.}
-  \item{t_rows2_lab}{Longer labels for t_cols2}
   \item{iotables_row}{The standardized iotables row labelling for easier reading.}
   \item{row_order}{The row ordering to keep the matrix legible.}
   \item{unit}{Different from Eurostat tables, in thousand national currency units.}
