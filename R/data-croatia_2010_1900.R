@@ -19,8 +19,8 @@
 #'   \item{unit}{Different from Eurostat tables, in thousand national currency units.}
 #'   \item{geo}{ISO / Eurostat country code for Croatia}
 #'   \item{geo_lab}{ISO / Eurostat country name, Croatia.}
-#'   \item{time}{Date of the SIOT}              
-#' }
-#' @keywords data, datasets, input-output table, Croatia
+#'   \item{time}{Date of the SIOT}  
+#'   }                  
+#' @keywords data, datasets, input-output table, Croatia, import
 
 "croatia_2010_1900"

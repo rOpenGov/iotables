@@ -19,8 +19,8 @@
   \item{unit}{Different from Eurostat tables, in thousand national currency units.}
   \item{geo}{ISO / Eurostat country code for Croatia}
   \item{geo_lab}{ISO / Eurostat country name, Croatia.}
-  \item{time}{Date of the SIOT}              
-}}
+  \item{time}{Date of the SIOT}  
+  }}
 \source{
 \href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
 }
@@ -31,8 +31,9 @@ data(croatia_2010_1900)
 1900 - Symmetric input-output table for imports (product x product)
 In thousand kunas (T_NAC)
 }
-\keyword{Croatia}
+\keyword{Croatia,}
 \keyword{data,}
 \keyword{datasets,}
+\keyword{import}
 \keyword{input-output}
 \keyword{table,}
