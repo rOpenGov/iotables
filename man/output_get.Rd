@@ -5,7 +5,8 @@
 \title{Get an output vector}
 \usage{
 output_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", households = FALSE, labelling = "iotables")
+  unit = "MIO_EUR", households = FALSE, skt_flow = "DOM",
+  labelling = "iotables")
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700".}
@@ -22,11 +23,13 @@ wages and final household consumption. This is needed for induced-effects calcul
 \item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
+
+\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
 }
 \description{
 Get an output vector
 }
 \examples{
-output_de <- output_get( source = "germany_1990", geo = 'DE', year = 1990,
-                               unit = "MIO_EUR", labelling  = 'iotables')
+output_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
+                        year = 2010, unit = "T_NAC", labelling = "iotables")
 }
