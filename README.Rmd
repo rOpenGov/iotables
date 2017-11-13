@@ -89,7 +89,7 @@ retrieve_from_temp <- readRDS(tmp_rds)
 ```
 
 
-## |Preprocessing
+## Preprocessing
 
 The ` use_table_get ()` function extracts only the input flow matrix from the table. 
 
@@ -116,7 +116,7 @@ The second quadrant contains the data of macroeconomic demand. Currently only th
 
 In all cases, the `households = TRUE` parameter will add the household consumption expenditure column, and in the case of the use table the wages (or compensation) row.
 
-```{r example_output_household, echo = FALSE, warning = FALSE, message = FALSE}
+```{r example_output_household, eval = FALSE, echo = FALSE, warning = FALSE, message = FALSE}
 
 de_output <- output_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
