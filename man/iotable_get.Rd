@@ -2,10 +2,10 @@
 % Please edit documentation in R/iotable_get.R
 \name{iotable_get}
 \alias{iotable_get}
-\title{Get an input-output table}
+\title{Get an input-output table from bulk file}
 \usage{
 iotable_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", labelling = "iotables")
+  unit = "MIO_EUR", stk_flow = "DOM", labelling = "iotables")
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700".}
@@ -15,6 +15,8 @@ iotable_get(source = "germany_1990", geo = "DE", year = 1990,
 \item{year}{A numeric variable containing the year. Defaults to 2010, because this year has the most data.}
 
 \item{unit}{A character string containing the currency unit, defaults to "MIO_NAC" (million national currency unit). The alternative is "MIO_EUR".}
+
+\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
 
 \item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.

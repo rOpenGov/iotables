@@ -5,7 +5,8 @@
 \title{Create a use (input flow) matrix}
 \usage{
 use_table_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", households = FALSE, labelling = "iotables")
+  unit = "MIO_EUR", stk_flow = "DOM", households = FALSE,
+  keep_total = FALSE, labelling = "iotables")
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700".}
@@ -16,12 +17,18 @@ use_table_get(source = "germany_1990", geo = "DE", year = 1990,
 
 \item{unit}{A character string containing the currency unit, defaults to "MIO_NAC" (million national currency unit). The alternative is "MIO_EUR".}
 
+\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
+
 \item{households}{If you need to make household demand endogenous, or "close the households off", TRUE selects 
 wages and final household consumption. This is needed for induced-effects calculations.}
+
+\item{keep_total}{Logical variable. Defaults to FALSE and removes the totalling row and column from the matrix.}
 
 \item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
+
+\item{households}{Logical variable. Defaults to FALSE. If TRUE, adds household income and consumption to the matrix for induced effects.}
 }
 \description{
 Create a use (input flow) matrix
@@ -30,8 +37,9 @@ Create a use (input flow) matrix
 use_de <- use_table_get( source = "germany_1990", geo = 'DE', year = 1990,
                        unit = "MIO_EUR", labelling  = 'iotables')
 \dontrun{
-sk_use <- use_table_get ( source = "naio_cp17_r2", geo = "SK",
-                          year = 2010, unit = "MIO_EUR", households = "FALSE",
-                          labelling = "iotables" )
+sk_use_1700_2 <- use_table_get2 ( source = "naio_10_cp1700", geo = "SK",
+                                 year = 2010, unit = "MIO_EUR",
+                                 stk_flow = "DOM", households = TRUE,
+                                 keep_total = TRUE)
  }
 }

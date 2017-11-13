@@ -24,7 +24,7 @@
 
 #' @export 
 
-use_table_get2 <- function ( source = "germany_1990", geo = "DE",
+use_table_get <- function ( source = "germany_1990", geo = "DE",
                             year = 1990, unit = "MIO_EUR",
                             households = FALSE, labelling = "iotables" ){  
   
@@ -43,8 +43,8 @@ use_table_get2 <- function ( source = "germany_1990", geo = "DE",
     metadata_rows <- p_rows_data 
     metadata_cols <- p_cols_data  
   } else if ( source %in% trow_tcol ) {
-    metadata_rows <- t_rows_metadata  
-    metadata_cols <- t_cols_metadata 
+    metadata_rows <- t_rows_data  
+    metadata_cols <- t_cols_data 
   } else if ( source == "germany_1990") {
     metadata_rows <-  germany_metadata_rows  
     metadata_cols <-  germany_metadata_cols 

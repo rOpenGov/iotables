@@ -7,7 +7,7 @@ data(germany_1990)
 #croatia_type <- croatia_2010_1700
 #croatia_type$values <- as.character(croatia_type$values)
 
-test_that("get_iotable errors ", {
+test_that("use_table_get errors are correct", {
   expect_error(use_table_get(source = "germany_1990", 
                               geo = 'DE', year = 1990, unit = "MIO_NAC")) 
   expect_error(use_table_get(source = "germany_1990", 
@@ -25,14 +25,8 @@ test_that("correct data is returned", {
   expect_equal(use_table_get(source = "germany_1990", 
                            geo = 'DE', year = 1990, 
                            unit = "MIO_EUR", labelling = "iotables")[1,2], 1131)
-  expect_equal(as.character(use_table_get(source = "germany_1990", 
-                           geo = 'DE', year = 1990, 
-                           unit = "MIO_EUR", labelling = "short")[4,1]), "cpa_g_i")
-  expect_equal(use_table_get(source = "germany_1990", 
-                 geo = 'DE', year = 1990, 
-                 unit = "MIO_EUR", households = TRUE, 
-                 labelling = "short")[7,8], 0)
+  expect_equal(as.character(use_table_get(source = "croatia_2010_1900", geo = "HR",
+                            year = 2010, unit = "T_NAC")[4,1]), "CPA_B")
   })
 
-#Slovakia A01, A01 shoud be 497.37
 

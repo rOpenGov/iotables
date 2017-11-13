@@ -73,7 +73,7 @@ iotables_download <- function ( source = "naio_cp17_r2", stk_flow = "DOM" ) {
   if ( "stk_flow" %in% names ( downloaded )) {
     downloaded <- downloaded %>%
       dplyr::filter ( stk_flow == stk_flow )
-    message ("Type" , stk_flow, " is returned.")
+    message ("Type " , stk_flow, " is returned.")
   }
   
    return( downloaded )
