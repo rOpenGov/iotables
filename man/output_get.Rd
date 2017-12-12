@@ -6,7 +6,7 @@
 \usage{
 output_get(source = "germany_1990", geo = "DE", year = 1990,
   unit = "MIO_EUR", households = FALSE, labelling = "iotables",
-  stk_flow = "DOM")
+  stk_flow = "DOM", keep_total = FALSE)
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700".}
@@ -25,6 +25,8 @@ source of the table, or if it is a product x product, industry x industry or pro
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
 
 \item{stk_flow}{Defaults to "DOM", alternative "IMP".}
+
+\item{keep_total}{Logical variable. Defaults to FALSE and removes the totalling row and column from the matrix.}
 }
 \description{
 Get an output vector

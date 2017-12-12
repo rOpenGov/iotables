@@ -10,6 +10,7 @@
 #' @param labelling Defaults to "iotables" which gives standard row and column names regardless of the
 #' source of the table, or if it is a product x product, industry x industry or product x industry table.
 #' The alternative is "short" which is the original short row or column code of Eurostat or OECD.
+#' @param keep_total Logical variable. Defaults to FALSE and removes the totalling row and column from the matrix.  
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join mutate_if arrange
 #' @importFrom tidyr gather spread 
@@ -22,7 +23,9 @@
 output_get <- function ( source = "germany_1990", geo = "DE",
                             year = 1990, unit = "MIO_EUR",
                             households = FALSE,  
-                            labelling = "iotables" , stk_flow = "DOM") {  
+                            labelling = "iotables" , 
+                            stk_flow = "DOM", 
+                            keep_total = FALSE) {  
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
@@ -77,11 +80,19 @@ output_get <- function ( source = "germany_1990", geo = "DE",
        if ( length( output_row) == 0 ) {
       stop ( "No output data was found.")
     }
-    
-    message ( "Households are added to the matrix.")
-    output_vector <- labelled_io_table[    output_row[1] , 
-                                       c(1:67, household_consumption_col[1]) ] 
-    output_vector [1,68] <- 0
+    if (keep_total == TRUE) {
+      message ( "Households were added to the matrix.")
+      output_vector <- labelled_io_table[    output_row[1] , 
+                                             c(1:67, household_consumption_col[1]) ] 
+      output_vector [1,68] <- 0
+    } else {
+      message ( "Households were added to the matrix.")
+      message ( "Total column was removed from the matrix.")
+      output_vector <- labelled_io_table[    output_row[1] , 
+                                             c(1:66, household_consumption_col[1]) ] 
+      output_vector [1,67] <- 0
+    }
+ 
     
   } else {    #no households 
     output_row <- which (labelled_io_table[[1]] %in%  
@@ -90,7 +101,13 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     if ( length( output_row) == 0 ) {
       stop ( "No output data was found.")
     }
-    output_vector <- labelled_io_table[ output_row[1], 1:67 ] 
+    if (keep_total == TRUE) {
+      output_vector <- labelled_io_table[ output_row[1], 1:67 ] 
+    } else {
+      output_vector <- labelled_io_table[ output_row[1], 1:66 ]
+      message ( "Total column was removed from the matrix.")
+    }
+    
   } # end of no household case 
   return ( output_vector ) 
 }
