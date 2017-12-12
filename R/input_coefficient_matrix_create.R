@@ -20,9 +20,9 @@
 
 input_coefficient_matrix_create <- function ( input_flow, output, 
                                               digits = NULL) {
-  funs = NULL ; . = NULL ;  t_rows2 = NULL #for checking against non-standard evaluation
+  funs <- t_rows2 <-. <- NULL  #for checking against non-standard evaluation
 
-  if ( ! all.equal ( names (input_flow), names ( output )) ) {
+  if ( isTRUE(all.equal (names (input_flow), names (output))) ) {
     stop("Non conforming inputs are given with different column labels.")
   }
   Im <- dplyr::full_join ( input_flow, output, by = names ( input_flow ))
