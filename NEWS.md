@@ -28,8 +28,11 @@ At this point I will go with prepareing a release the table on CRAN. The current
 
 iotables 0.2 is moved to rOpenGov.
 
-# iotables 0.21
-* Correctly handles the total Eurostat national accounts vocabulary, and adds all Croatian (not fully conforming) tables to the package.  There may be some hickups in some functions.
+# iotables 0.2.1
+* Correctly handles the total Eurostat national accounts vocabulary, and adds all Croatian (not fully conforming) tables to the package.  
+
+# iotables 0.2.2
+* Updated README file.  
 
 #Forthcoming 0.3 version 
 For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
