@@ -10,8 +10,26 @@ households <- TRUE
 
 #iocp <- get_io_current_prices( ) 
 #saveRDS(iocp, "not_included/eurostat_io_current_prices.rds")
-sk_io <- iotable_get ( source = "naio_cp17_r2", geo = "SK",
-                       year = 2010, unit = "MIO_EUR")
+sk_use_1700_2 <- use_table_get ( source = "naio_10_cp1700", geo = "SK",
+                                  year = 2010, unit = "MIO_EUR",
+                                  stk_flow = "DOM", households = TRUE,
+                                  keep_total = FALSE)
+output_vector_sk <- output_get(source = "naio_10_cp1700", geo = "SK",
+                               year = 2010, unit = "MIO_EUR", 
+                               labelling = "iotables",  households = TRUE,
+                               keep_total = FALSE)
+sk_coeff <- input_coefficient_matrix_create( 
+  input_flow = sk_use_1700_2,
+  output = output_vector_sk, 
+  digits = 4)
+L <- leontieff_matrix_create( technology_coefficients_matrix =
+                                sk_coeff )
+I <- leontieff_inverse_create(L)
+
+sk_emp <- employment_get ()
+
+input_flow = sk_use_1700_2
+output = output_vector_sk
 sk_io2 <- iotable_get2 ( source = "naio_cp17_r2", geo = "SK",
                        year = 2010, unit = "MIO_EUR")
 
