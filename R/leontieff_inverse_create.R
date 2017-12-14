@@ -2,7 +2,7 @@
 #' 
 #' The inversion takes place after the basic properties of the Leontieff matrix. 
 #' @param leontieff_matrix A Leontieff matrix created by the \code{\link{leontieff_matrix_create}} function. 
-#' @importFrom dplyr mutate_at
+#' @importFrom dplyr mutate_at mutate_if
 #' @examples 
 #' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
 #'                year = 1990, unit = "MIO_EUR", 
@@ -30,8 +30,10 @@ leontieff_inverse_create <- function ( leontieff_matrix ) {
   }
   
   named_inverse <- cbind(as.data.frame(leontieff_matrix [,1]),
-                     as.data.frame(inverse))
+                     as.data.frame(inverse)) %>%
+    mutate_if (is.factor, as.character)
   names ( named_inverse ) <- names (leontieff_matrix)
   row.names ( named_inverse ) <- 1:nrow(named_inverse)
+  
   return(named_inverse)
 }

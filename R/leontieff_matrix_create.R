@@ -2,7 +2,7 @@
 #' 
 #' Create a Leontieff matrix from technology matrix after some basic error handling.
 #' @param technology_coefficients_matrix A technology coefficient matrix created by the \code{\link{input_coefficient_matrix_create}}.
-#' @importFrom dplyr mutate_at
+#' @importFrom dplyr mutate_at mutate_if
 #' @examples 
 #' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
 #'                year = 1990, unit = "MIO_EUR", 
@@ -32,6 +32,8 @@ leontieff_matrix_create <- function ( technology_coefficients_matrix ) {
  
  Leontieff <- cbind(as.data.frame(technology_coefficients_matrix [,1]),
                     as.data.frame(IminusA))
+ Leontieff <- Leontieff %>%
+   mutate_if ( is.factor, as.character(.))
  names ( Leontieff)[1] <- names (technology_coefficients_matrix)[1]
  return (Leontieff)
 }
