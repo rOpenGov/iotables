@@ -6,7 +6,7 @@
 \usage{
 primary_input_get(input = "compensation_employees", source = "germany_1990",
   geo = "DE", year = 1990, unit = "MIO_EUR", households = FALSE,
-  labelling = "iotables")
+  stk_flow = "DOM", labelling = "iotables")
 }
 \arguments{
 \item{input}{A character string or a character vector containing the indicator names. 
@@ -26,6 +26,8 @@ Any of 'compensation_employees', 'wages_salaries', 'mixed_income_gross',
 
 \item{households}{If the household are included in your model (adds final household expenditure column)}
 
+\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
+
 \item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
@@ -37,9 +39,9 @@ You can use the iotables or the original (Eurostat) short labels to select the
 primary input.
 }
 \examples{
- primary_input_get <- primary_input_get(
-                       input = "compensation_employees", 
-                       source = "germany_1990", geo = "DE", 
-                       unit = "MIO_EUR", 
-                       year = 1990, labelling = "short" ) 
+comp_employees_dee <- primary_input_get(
+                            input = "compensation_employees", 
+                            source = "germany_1990", geo = "DE", 
+                            unit = "MIO_EUR", 
+                            year = 1990, labelling = "iotables" ) 
 }
