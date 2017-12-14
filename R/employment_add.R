@@ -10,10 +10,12 @@
 #' @examples 
 #' hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
 #'                             year = 2010, unit = "T_NAC", labelling  = "iotables")
-#' hr_io_1800_emp <- employment_add (source = "croatia_2010_1800", io_table = hr_io_1800 )
+#' hr_io_1800_emp <- employment_add (source = "croatia_2010_1800", 
+#'                                   io_table = hr_io_1800 )
 #' @export 
 
-employment_add <- function ( source = "croatia_2010_1800", io_table = hr_io_1800  ) {
+employment_add <- function ( source = "croatia_2010_1800", 
+                             io_table  ) {
   employment_hr <- NULL
   croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   if ( source %in%  croatia_files) {

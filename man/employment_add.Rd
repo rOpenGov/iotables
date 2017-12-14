@@ -4,7 +4,7 @@
 \alias{employment_add}
 \title{Add employment data to IO table}
 \usage{
-employment_add(source = "croatia_2010_1800", io_table = hr_io_1800)
+employment_add(source = "croatia_2010_1800", io_table)
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700".}
@@ -17,5 +17,6 @@ This function adds well-formatted employment data to the IO table from another s
 \examples{
 hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
                             year = 2010, unit = "T_NAC", labelling  = "iotables")
-hr_io_1800_emp <- employment_add (source = "croatia_2010_1800", io_table = hr_io_1800 )
+hr_io_1800_emp <- employment_add (source = "croatia_2010_1800", 
+                                  io_table = hr_io_1800 )
 }
