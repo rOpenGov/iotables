@@ -31,20 +31,19 @@ equation_solve <- function ( LHS = NULL, Im = NULL ) {
     mutate_if (is.factor, as.character) 
   
   joined <- tryCatch(
-    full_join (LHS, Im, by = names(LHS)), 
-    error = function(e) {
-      message ( "The technology columns are not matching.")
-      return (NULL)
+      full_join (LHS, Im, by = names(LHS)), 
+      error = function(e) {
+        message ( "The technology columns are not matching.")
+        return (NULL)
       }
-  )
-  
-  if ( is.null(joined)) stop("Error: no result is returned.")
+    )
+    if ( is.null(joined)) stop("Error: no result is returned.")
+    lhs <- joined[1,]
+    lhs <- as.numeric(lhs[1,2:ncol(lhs)])
+    im <- joined[2:nrow(joined),]
+    im <- as.matrix(im[,2:ncol(im)])
+   
 
-  lhs <- joined[1,]
-  lhs <- as.numeric(lhs[1,2:ncol(lhs)])
-  im <- joined[2:nrow(joined),]
-  im <- as.matrix(im[,2:ncol(im)])
-  
   solution <- tryCatch(
     lhs %*% im, 
     error = function(e) {
