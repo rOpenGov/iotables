@@ -19,11 +19,13 @@ The function creates the input indicators from the inputs and the outputs.
 \examples{
  
 de_output <- output_get ( source = "germany_1990", geo = "DE",
-                          year = 1990, unit = "MIO_EUR", 
-                          households = FALSE, labelling = "iotables")
+                         year = 1990, unit = "MIO_EUR", 
+                         households = FALSE, labelling = "iotables")
 
-de_emp <- primary_input_get ( input = "emp",
-                              source = "germany_1990", geo = "DE",
-                              year = 1990, unit = "MIO_EUR", 
-                              households = FALSE, labelling = "iotables")
+de_emp <- primary_input_get ( input = "compensation_employees",
+                             source = "germany_1990", geo = "DE",
+                             year = 1990, unit = "MIO_EUR", 
+                             households = FALSE, labelling = "iotables")
+
+de_emp_indicator <- input_indicator_create ( de_emp, de_output)
 }
