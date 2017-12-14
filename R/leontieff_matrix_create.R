@@ -19,6 +19,7 @@
 
 leontieff_matrix_create <- function ( technology_coefficients_matrix ) { 
   . = NULL ; funs = NULL ; vars = NULL
+  
   Tm <- as.matrix (technology_coefficients_matrix[,2:ncol(technology_coefficients_matrix )])
   
   if ( nrow(Tm) != ncol(Tm)) stop("Error: the input matrix is not symmetric.")
@@ -32,8 +33,8 @@ leontieff_matrix_create <- function ( technology_coefficients_matrix ) {
  
  Leontieff <- cbind(as.data.frame(technology_coefficients_matrix [,1]),
                     as.data.frame(IminusA))
- Leontieff <- Leontieff %>%
-   mutate_if ( is.factor, as.character(.))
+
  names ( Leontieff)[1] <- names (technology_coefficients_matrix)[1]
+ Leontieff[,1] <- as.character(Leontieff[,1])
  return (Leontieff)
 }
