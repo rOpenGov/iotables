@@ -88,7 +88,7 @@ You need to aggregate the data, in this case the employment data, exactly into t
 If you have less detailed data, then you have to disaggregate them to higher resolution, which is often not possible, or results in very crude estimates.  Eventually, you have to make sure that your labelling of the industries is consistent with the Eurostat metadata vocabulary ("short codes") or the iotables metadata vocabulary, i.e. you call the construction industry row *CPA_F* or *construction*.
 
 ```{r croatiaemployment, echoe=TRUE, results='asis', message = FALSE}
-kable (head(iotables::employment_hr, 5))
+kable (head(iotables::croatia_employment_2013, 5))
 ```
 
 In case you use the Eurostat metadata vocabulary, your product / industry grouping variable may be called t_row2, or induse, for example. Make sure that you use the same variable name that is name of the key column in your use table. In this case it is `r cat (names(hr_use_1800)[1])`.
@@ -101,13 +101,12 @@ You need to add a matching key column in the beginning of the wide-form vector.
 multiplier_name <- data.frame ( 
   iotables_row = "employment", stringsAsFactors = FALSE)
 
-hr_emp <- employment_hr %>%
-  dplyr::select ( iotables_label, employment ) %>%
-  tidyr::spread ( iotables_label, employment, !!2:ncol(.) )  %>%
+hr_emp <- croatia_employment_2013 %>%
+  dplyr::select ( iotables_row, employment ) %>%
+  tidyr::spread ( iotables_row, employment, !!2:ncol(.) )  %>%
   dplyr::select ( -total, -extraterriorial_organizations ) %>%  
   cbind(data.frame ( 
-  iotables_label = "employment", stringsAsFactors = FALSE), .) %>%
-  dplyr::rename ( iotables_row = iotables_label )
+  iotables_row = "employment", stringsAsFactors = FALSE), .) 
 
 kable (hr_emp[,1:5])
 ##Only the first 5 columns are shown to preserve space.
@@ -121,9 +120,10 @@ hr_emp_indicator <- input_indicator_create (
   output_vector = select (output_vector_hr, -extraterriorial_organizations  )                        )
 
 employment_multipliers_hr <- multiplier_create ( 
-  input_vector  =   hr_emp_indicator,
-  Im = I_hr, 
-  digits = 4 ) %>%
+  input_vector    =   hr_emp_indicator,
+  Im              = I_hr, 
+  multiplier_name = "employment_multiplier",
+  digits          = 4 ) %>%
   tidyr::gather ( t_cols2, values, !! 2:ncol(.)) %>%
   mutate ( values = values * 1000 )%>%
   arrange (., desc(values))

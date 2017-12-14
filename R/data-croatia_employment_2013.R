@@ -8,7 +8,7 @@
 #'   \item{iotables_label}{iotables sytle labels}
 #'   \item{employment}{Employment in the sector in Croatia, not in thousands!}
 #' }
-#' @usage data(employment_hr)
+#' @usage data(croatia_employment_2013)
 #' @keywords data, datasets, Croatia, employmnet
 
-"employment_hr"
+"croatia_employment_2013"

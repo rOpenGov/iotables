@@ -14,15 +14,16 @@ employment_hr <- data.frame (
   
 #employment_hr <- as.data.frame(t (as.matrix ( colSums(hr_emp[, 2:ncol(hr_emp)] , na.rm = TRUE))))
 
-employment_hr<- iotables::metadata %>%
+croatia_employment_2013 <- iotables::metadata %>%
   filter ( group == "Product") %>%
   filter ( variable == "t_cols") %>%
   left_join ( employment_hr) %>%
   select ( code, iotables_label, employment ) %>%
   filter ( stats::complete.cases(.)) %>%
-  mutate_if (is.factor, as.character)
+  mutate_if (is.factor, as.character) %>%
+  dplyr::rename ( iotables_row = iotables_label)
 
-devtools::use_data (employment_hr, overwrite = TRUE)
+devtools::use_data (croatia_employment_2013, overwrite = TRUE)
 
 
 try <- employment_add ( )
