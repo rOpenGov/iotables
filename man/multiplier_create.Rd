@@ -4,12 +4,15 @@
 \alias{multiplier_create}
 \title{Solve a basic equation}
 \usage{
-multiplier_create(input_vector = NULL, Im = NULL, digits = NULL)
+multiplier_create(input_vector = NULL, Im = NULL,
+  multiplier_name = "multiplier", digits = NULL)
 }
 \arguments{
 \item{input_vector}{An input matrix or vector created by the input_indicator_create () function.}
 
 \item{Im}{The Leontieff inverse as a named object created by the leontieff_inverse_create () function.}
+
+\item{multiplier_name}{A variable name to be given to the returned multipliers. Defaults to 'multiplier'.}
 
 \item{digits}{Rounding digits, if omitted, no rounding takes place. #' @examples 
 data (germany_1990)
