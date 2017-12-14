@@ -10,21 +10,23 @@ de_output <- output_get ( source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           households = FALSE, labelling = "short")
 
-de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
+names (de_use)[1] <- names(de_output)[1]
+de_coeff <- input_coefficient_matrix_create( input_flow = de_use, 
+                                             output =  de_output, digits = 4)
 
 L <- leontieff_matrix_create( technology_coefficients_matrix =
                                           de_coeff )
 I <- leontieff_inverse_create(L)
 
 AAL <- L %>%
-  filter ( t_rows2 ==  "cpa_a" ) %>%
+  filter ( t_rows2 ==  "agriculture_group" ) %>%
   select (  agriculture_group ) %>%
   as.numeric(.)
 
 #test against 15.9 p 487
 
 TBI <- I %>%
-  filter ( t_rows2 ==  "cpa_g_i" ) %>%
+  filter ( t_rows2 ==  "trade_group" ) %>%
   select (  business_services_group ) %>%
   as.numeric(.)
 

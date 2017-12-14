@@ -24,7 +24,7 @@ input_coefficients <- input_coefficient_matrix_create (
                            de_use, de_output, digits = 5)
 
 business_agriculture_input <- input_coefficients %>%
-  dplyr::filter ( iotables_label_r == "business_services_group") %>%
+  dplyr::filter ( iotables_row == "business_services_group") %>%
   dplyr::select ( agriculture_group) %>%
   as.numeric(.)
 
