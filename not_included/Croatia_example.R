@@ -6,8 +6,6 @@ year = 2010
 unit = "T_NAC"; unit_input <- unit
 labelling = "iotables" 
 
-hr_io2 <- iotable_get2 ( source = "croatia_2010_1700", geo = "HR",
-                         year = 2010, unit = "T_NAC")
 
 hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
                          year = 2010, unit = "T_NAC", labelling  = "iotables")
@@ -20,12 +18,16 @@ hr_io_1900 <- iotable_get ( source = "croatia_2010_1900", geo = "HR",
 hr_use_1900 <- use_table_get ( source = "croatia_2010_1900", geo = "HR",
                             year = 2010, unit = "T_NAC")
 hr_use_1900 <- use_table_get ( source = "croatia_2010_1900", geo = "HR",
-                               year = 2010, unit = "T_NAC", labelling = "iotables")
+                               year = 2010, unit = "T_NAC", 
+                               labelling = "short")
 
+#gives warning
 output_vector_hr <- output_get(source = "croatia_2010_1900", geo = "HR",
                                year = 2010, unit = "T_NAC", labelling = "iotables")
 output_vector_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
                                year = 2010, unit = "T_NAC", labelling = "iotables")
+
+View ( employment_hr)
 
 data ("croatia_employment_2013")
 data ("croatia_employment_aggregation")
@@ -44,6 +46,9 @@ L_hr <- iotables::leontieff_matrix_create( technology_coefficients_matrix =
                                           input_coefficients)
 
 I_hr <- iotables::leontieff_inverse_create(L_hr)
+
+input_vector = hr_emp
+Im = I_hr
 
 employment_multipliers_hr <- multiplier_create ( 
   input_vector  =   employment_indicator_hr, Im = I_hr, digits = 4 ) %>%
@@ -73,9 +78,7 @@ va_multiplier_hr <- multiplier_create (
 
  data (croatia_2010_1700)
  labelled_io_data = croatia_2010_1700
- primary_input_get <- primary_input_get( 
-                       labelled_io_data = croatia_2010_1700, technology = NULL,
-                       input = "compensation_employees", geo = "HR", 
-                       unit = "T_NAC", 
-                       year = 2010, named = TRUE) 
+ primary_input_get <- primary_input_get(input = "compensation_employees", 
+                      source = "croatia_2010_1700", geo = "HR",unit = "T_NAC", 
+                       year = 2010, households = TRUE) 
  

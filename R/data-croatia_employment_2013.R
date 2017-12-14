@@ -4,10 +4,11 @@
 #' Symmetric input-output table format.
 #' @format A data frame with 107 observations in 2 variables:
 #' \describe{
-#'   \item{employment_label}{Labelling in DZS English language export}
-#'   \item{employment}{Employment in the sector in Croatia.}
+#'   \item{code}{Short labels}
+#'   \item{iotables_label}{iotables sytle labels}
+#'   \item{employment}{Employment in the sector in Croatia, not in thousands!}
 #' }
-#' @usage data(croatia_employment_2013)
+#' @usage data(employment_hr)
 #' @keywords data, datasets, Croatia, employmnet
 
-"croatia_employment_2013"
+"employment_hr"

@@ -31,12 +31,103 @@ The strategy to work with SIOTs in Excel format is the following:
 
 You should aim at something similar to `croatia_2010_1700`, the table 1700 for the year 2010. 
 
-```{r echoe=TRUE, results='asis', message = FALSE}
-library (iotables) ; library (dplyr)
-data("croatia_2010_1700")
-labelled_io_table <- croatia_2010_1700
+```{r croatiaiotable, echoe=TRUE, results='asis', message = FALSE}
+library (iotables); library (dplyr); require (knitr)
+hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
+                         year = 2010, unit = "T_NAC", 
+                         labelling  = "short")
 
-knitr::kable(head(labelled_io_table, 3))
+
+knitr::kable(head(hr_io_1800, 3))
 ```
 
-This vignette needs to be rewritten. 
+Preapring the matrixes for analytical work. By default, the totalling columns are removed from the matrixes. You can leave them for presentation purposes, but for further analytical work they need to be removed.
+
+```{r croatiaiotable2, echoe=TRUE, results='asis', message = FALSE}
+require(iotables); require (knitr)
+hr_use_1800 <- use_table_get ( source = "croatia_2010_1800", geo = "HR",
+                               year = 2010, unit = "T_NAC", 
+                               labelling = "iotables", 
+                               keep_total = FALSE)
+output_vector_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
+                               year = 2010, unit = "T_NAC", 
+                               labelling = "iotables", 
+                               keep_total = FALSE)
+knitr::kable(head(hr_use_1800, 3))
+```
+
+As a first analytical step we create the input coefficient matrix which is the input of the Leontieff-matrix and the Leontieff-inverse. In this case the original table created by DZS contains an empty column / row pair for "extraterriorial_organizations" which causes an error in the inversion of the Leontieff-matrix. We carefully remove both the column and the row to maintain the symmetry of the matrix and create a meaningful Leontieff-inverse. **Keep in mind that for any further additional data you must remove "extraterriorial_organizations" organizations.**
+
+```{r croatiaiotable3, echoe=TRUE, results='asis', message = FALSE}
+require(iotables); require (knitr)
+hr_coeff <- input_coefficient_matrix_create( 
+  input_flow = hr_use_1800,
+  output = output_vector_hr, 
+  digits = 6)
+
+#In case we used 'short' type labels:
+#hr_coeff <- hr_coeff %>%
+#  select ( -U ) %>%
+#  filter ( t_rows2 != "CPA_U")
+
+#In case we used 'iotables' type labels:
+hr_coeff <- hr_coeff %>%
+  select ( -extraterriorial_organizations ) %>%
+  filter ( iotables_row != "extraterriorial_organizations")
+
+L_hr <- leontieff_matrix_create( technology_coefficients_matrix =
+                                hr_coeff )
+I_hr <- leontieff_inverse_create(L_hr)
+knitr::kable(head(hr_coeff, 3))
+```
+
+You cannot rely on the `input_indicator_create` function because the official Croatian input-output tables do not include employment data. Instead we created the following table from the official Croatian employment data. The creation of such auxilliary tables may be needed in other analysis, and it is quiet straightforward but requires judgement and manual work. 
+
+You need to aggregate the data, in this case the employment data, exactly into the industry / product groups of the IO table. In this lucky case, the employment data has a higher resolution, and we need to add various industry / product groups togeher. For example, the CPA_F industry group (construction) is given for three subindustries in the employment statistics of Croatia that we had to simply add together. 
+
+If you have less detailed data, then you have to disaggregate them to higher resolution, which is often not possible, or results in very crude estimates.  Eventually, you have to make sure that your labelling of the industries is consistent with the Eurostat metadata vocabulary ("short codes") or the iotables metadata vocabulary, i.e. you call the construction industry row *CPA_F* or *construction*.
+
+```{r croatiaemployment, echoe=TRUE, results='asis', message = FALSE}
+kable (head(iotables::employment_hr, 5))
+```
+
+In case you use the Eurostat metadata vocabulary, your product / industry grouping variable may be called t_row2, or induse, for example. Make sure that you use the same variable name that is name of the key column in your use table. In this case it is `r cat (names(hr_use_1800)[1])`.
+
+Remember that we need to remove all totalling rows/columns and the extraterritorial organizations. Because we need a wide-format vector, and the employment data has only one dimension, you need to remove them only once: from the rows in case of the original table or from the columns if it is already spread out to wide form. 
+
+You need to add a matching key column in the beginning of the wide-form vector.
+
+```{r croatiaemployment2, echoe=TRUE, results='asis', message = FALSE}
+multiplier_name <- data.frame ( 
+  iotables_row = "employment", stringsAsFactors = FALSE)
+
+hr_emp <- employment_hr %>%
+  dplyr::select ( iotables_label, employment ) %>%
+  tidyr::spread ( iotables_label, employment, !!2:ncol(.) )  %>%
+  dplyr::select ( -total, -extraterriorial_organizations ) %>%  
+  cbind(data.frame ( 
+  iotables_label = "employment", stringsAsFactors = FALSE), .) %>%
+  dplyr::rename ( iotables_row = iotables_label )
+
+kable (hr_emp[,1:5])
+##Only the first 5 columns are shown to preserve space.
+```
+
+Now we can use the iotables functions to get the employment multiplier.
+
+```{r employmentmultipliers, echoe=TRUE, results='asis', message = FALSE}
+hr_emp_indicator <- input_indicator_create (
+  input_matrix = hr_emp, 
+  output_vector = select (output_vector_hr, -extraterriorial_organizations  )                        )
+
+employment_multipliers_hr <- multiplier_create ( 
+  input_vector  =   hr_emp_indicator,
+  Im = I_hr, 
+  digits = 4 ) %>%
+  tidyr::gather ( t_cols2, values, !! 2:ncol(.)) %>%
+  mutate ( values = values * 1000 )%>%
+  arrange (., desc(values))
+
+kable(head(employment_multipliers_hr,23))
+##Only the first 5 columns are shown to preserve space.
+```
