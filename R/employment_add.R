@@ -17,7 +17,7 @@ employment_add <- function ( source = "croatia_2010_1800", io_table = hr_io_1800
   employment_hr <- NULL
   croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   if ( source %in%  croatia_files) {
-    labour_inputs <- iotables::employment_hr
+    labour_inputs <- iotables::croatia_employment_2013
   } else   { stop("No other employment data is available. ") }
   labour_inputs <- io_table [1,]
   labour_inputs[1:length(labour_inputs)] <- NA
