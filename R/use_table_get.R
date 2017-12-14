@@ -39,6 +39,9 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
   tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
   source_inputed <- source ; unit_input = unit
   
+  if ( ! labelling %in% c("iotables", "short")) {
+    stop("Currently only labelling = 'iotables' and labelling = 'short' is supported.")
+  }
   
   if ( source == "germany_1990") {
     labelled_io_table <- iotable_get ( source, geo, year, unit, labelling )     # use germany example 
