@@ -9,7 +9,8 @@
 #' @importFrom forcats fct_reorder
 #' @examples 
 #' hr_io_1800 <- iotable_get ( source = "croatia_2010_1800", geo = "HR",
-#'                             year = 2010, unit = "T_NAC", labelling  = "iotables")
+#'                             year = 2010, unit = "T_NAC", 
+#'                             labelling  = "iotables")
 #' hr_io_1800_emp <- employment_add (source = "croatia_2010_1800", 
 #'                                   io_table = hr_io_1800 )
 #' @export 
