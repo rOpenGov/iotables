@@ -27,6 +27,7 @@ multiplier_create <- function ( input_vector = NULL,
  names (row_name)[1] <- names(input_vector)[1]
  
  named_multipliers <- cbind ( row_name, multipliers )
+ named_multipliers[,1] <- as.character(named_multipliers[,1])
  
  return(named_multipliers)
  }  #end of function  
