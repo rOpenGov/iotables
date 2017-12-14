@@ -5,25 +5,34 @@
 #' @param output_vector A named output vector created by \code{\link{output_get}}.  
 #' @param digits Rounding digits, if omitted, no rounding takes place.  
 #' @examples  
-#' de_output <- output_get ( source = "germany_1990", geo = "DE",
-#'                           year = 1990, unit = "MIO_EUR", 
-#'                           households = FALSE, labelling = "iotables")
+#'de_output <- output_get ( source = "germany_1990", geo = "DE",
+#'                          year = 1990, unit = "MIO_EUR", 
+#'                          households = FALSE, labelling = "iotables")
 #' 
-#' de_emp <- primary_input_get ( input = "emp",
-#'                               source = "germany_1990", geo = "DE",
-#'                               year = 1990, unit = "MIO_EUR", 
-#'                               households = FALSE, labelling = "iotables")
-#' @export 
+#'de_emp <- primary_input_get ( input = "compensation_employees",
+#'                              source = "germany_1990", geo = "DE",
+#'                              year = 1990, unit = "MIO_EUR", 
+#'                              households = FALSE, labelling = "iotables")
+#'
+#'de_emp_indicator <- input_indicator_create ( de_emp, de_output)
+#' @export
 
 input_indicator_create <- function ( input_matrix, output_vector,
                                      digits = NULL ) { 
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
   }
-  if (! all.equal(names(input_matrix), names(output_vector))) {
-    stop ( "Non-conforming inputs and outputs are given, or the column names are not matching.")
+  if ( ncol(input_matrix) != ncol(output_vector)) {
+    stop ( "Different number of columns in the two inputs.")
   }
   
+  if ( !identical ( sort(names(input_matrix)), sort(names(output_vector)))) {
+    stop ( "The two inputs contain dissimilar columns.")
+  }
+  
+  input_matrix_inputed <- input_matrix
+  input_matrix <- input_matrix[names(output_vector)]
+
   #Not elegant
   for ( j in 2:ncol(input_matrix)) {
     if ( as.numeric(output_vector[j])==0) {
