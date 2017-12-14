@@ -15,6 +15,7 @@
 #' @param year A numeric variable containing the year. 
 #' @param unit The currency unit in the input-output table.
 #' @param households If the household are included in your model (adds final household expenditure column)
+#' @param stk_flow Defaults to "DOM", alternative "IMP". 
 #' @param labelling Defaults to "iotables" which gives standard row and column names regardless of the
 #' source of the table, or if it is a product x product, industry x industry or product x industry table.
 #' The alternative is "short" which is the original short row or column code of Eurostat or OECD.
@@ -23,119 +24,88 @@
 #' @importFrom tidyr spread
 #' @importFrom utils data 
 #' @examples
-#'  primary_input_get <- primary_input_get(
-#'                        input = "compensation_employees", 
-#'                        source = "germany_1990", geo = "DE", 
-#'                        unit = "MIO_EUR", 
-#'                        year = 1990, labelling = "short" ) 
+#' comp_employees_dee <- primary_input_get(
+#'                             input = "compensation_employees", 
+#'                             source = "germany_1990", geo = "DE", 
+#'                             unit = "MIO_EUR", 
+#'                             year = 1990, labelling = "iotables" ) 
 #' @export
 
 primary_input_get <- function ( input = "compensation_employees", 
                                 source = "germany_1990", geo = "DE",
                                 year = 1990, unit = "MIO_EUR",
-                                households = FALSE, 
+                                households = FALSE, stk_flow = "DOM",
                                 labelling = "iotables") {
-  time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
-  ordering_r = NULL ; ordering_c = NULL; r_quadrant = NULL; c_quadrant = NULL;
-  iotables_label_r =NULL; iotables_label_c = NULL; 
-  
+  time <- t_cols2 <- t_rows2 <- values <- .<-  NULL #non-standard evaluation creates a varning in build. 
+  iotables_row <- iotables_col <- prod_na <- induse <- NULL
+  unit_input <- unit; geo_input <- geo;  stk_flow_input <- stk_flow
   tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
-  source_inputed <- source ; unit_input = unit
+  source_inputed <- source ; unit_input <- unit
   
-  ##Veryfing source parameter and loading the labelling  ----
-  prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750")
-  trow_tcol <-  c("naio_cp17_r2", "naio_17_agg_60_r2", "naio_17_agg_10_r2")
-  
-  ##loading metadata----
-  if ( source %in% prod_ind ) { 
-    metadata_rows <- p_rows_data 
-    metadata_cols <- p_cols_data  
-  } else if ( source %in% trow_tcol ) {
-    metadata_rows <- t_rows_data  
-    metadata_cols <- t_cols_data 
-  } else if ( source == "germany_1990") {
-    metadata_rows <-  germany_metadata_rows  
-    metadata_cols <-  germany_metadata_cols 
-  } else {
-    stop ("This type of input-output database is not (yet) recognized by iotables.")
+  if (source == "croatia_2010_1900") {
+    stop("The table croatia_2010_1900 is an import table and has no primary input field.")
+  }
+  if (! labelling %in% c("iotables", "short")) {
+    stop("Only iotables or original short columns can be selected.")
   }
   
-  metadata_rows <- dplyr::mutate_if ( metadata_rows, is.factor, as.character )
-  metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
-  
-  ##loading data----
   if ( source == "germany_1990") {
-    labelled_io_table <- iotable_get ( source, geo, year, unit, labelling )     # use germany example 
-    
+    labelled_io_table <- iotable_get ( source = "germany_1990", 
+                                       geo = geo_input, year = year, 
+                                       unit = unit_input, labelling = labelling )     # use germany example 
+    if ( input %in% labelled_io_table[[1]] ) {
+      input_row <- which ( labelled_io_table[[1]] == input )
+    } else {
+      stop("The input is not found in this data source.")
+    }
+    input_vector <- labelled_io_table[input_row,]
+    if (households == TRUE ) {
+      input_vector <- input_vector [1,1:8]
+    } else {
+      input_vector <- input_vector [1,1:7]
+    }
+    return ( input_vector )  #return simplified example table and do not run rest of the code
   } else {
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
-      labelled_io_table <- readRDS( tmp_rds ) 
+      labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
     } else { 
-      labelled_io_table <- iotable_get ( source, geo, year, unit, labelling )  }
+      labelled_io_table <- iotable_get ( source = source, 
+                                         geo = geo_input, year = year, 
+                                         unit = unit_input, labelling = labelling,
+                                         stk_flow = stk_flow_input) }
   } # use eurostat files 
   
-  ##adding households if necessary----
+  labelled_io_table <- labelled_io_table %>% 
+    mutate_if ( is.factor, as.character)
+  
+  if ( input %in% labelled_io_table[[1]] ) {
+    input_row <- which ( labelled_io_table[[1]] == input )
+  } else {
+    stop("The input is not found in this data source.")
+  }
+  
   if (households == TRUE) {
-    if ( any(c('consumption_expenditure_household', 'P3_S14') %in% 
-             metadata_cols $t_cols2)) {
-      metadata_cols$c_quadrant[which(
-        metadata_cols$t_cols2 %in% c('consumption_expenditure_household', 'P3_S14')) ] <- "1_2"
-      message ("Added household consumption.")
-    } else {
-      stop ("Household consumption expenditure is not found in the table.")
-    }
-  } # end of households
-  
-  if ( input %in% metadata_rows$iotables_label_r ) {
-    metadata_rows$r_quadrant[which(metadata_rows$iotables_label_r== input)] <- "input"
-  } else if ( input %in% metadata_rows$t_rows2 ){
-    metadata_rows$r_quadrant[which(metadata_rows$t_rows2 == input )] <- "input"
-  } else { 
-    stop("The request input is not found in the data frame.") 
-  }
-  
-  ##creating return object ----
-  if ( labelling == "iotables" ) {
-    labelled_input <- labelled_io_table %>%
-      tidyr::gather ( iotables_label_c, values, !! 2:ncol(.)) %>%
-      dplyr::mutate_if ( is.factor, as.character ) %>%
-      dplyr::left_join(., metadata_rows, by = "iotables_label_r") %>%
-      dplyr::left_join(., metadata_cols, by = "iotables_label_c") %>%
-      dplyr::mutate ( iotables_label_r = forcats::fct_reorder(iotables_label_r, 
-                                                              as.numeric(ordering_r))) %>%
-      dplyr::mutate ( iotables_label_c = forcats::fct_reorder(iotables_label_c, 
-                                                              as.numeric(ordering_c))) %>%
-      dplyr::arrange (  iotables_label_r,  iotables_label_c ) %>%
-      filter ( r_quadrant == "input") %>%
-      filter ( c_quadrant == "1_2") %>% 
-      dplyr::select ( iotables_label_r,  iotables_label_c,  values ) %>%
-      tidyr::spread ( iotables_label_c, values ) 
+    household_consumption_col <- which ( names (labelled_io_table ) %in% 
+                                           c('final_consumption_households', 'P3_S14'))
     
-  } else if ( labelling == "short" ) {
-    labelled_input <- labelled_io_table %>%
-      tidyr::gather ( t_cols2, values, !! 2:ncol(.)) %>%
-      dplyr::mutate_if ( is.factor, as.character ) %>%
-      dplyr::left_join(., metadata_rows, by = "t_rows2") %>%
-      dplyr::left_join(., metadata_cols, by = "t_cols2") %>%
-      dplyr::mutate ( t_rows2 = forcats::fct_reorder(t_rows2, 
-                                                     as.numeric(ordering_r))) %>%
-      dplyr::mutate ( t_cols2 = forcats::fct_reorder(t_cols2, 
-                                                     as.numeric(ordering_c))) %>%
-      dplyr::arrange (  t_rows2,  t_cols2 ) %>%
-      dplyr::filter ( r_quadrant == "input") %>%
-      dplyr::filter ( c_quadrant == "1_2") %>%
-      dplyr::select ( t_rows2,  t_cols2,  values ) %>%
-      tidyr::spread ( t_cols2, values ) 
-  }  else {
-    stop ("This type of input-output database is not (yet) recognized by iotables.")
-  }
-  
-  if ( households == TRUE ) {
-    labelled_input[1, ncol(labelled_input)] <- 0
-  }
-
-  return( labelled_input ) 
-  
+    if (length( household_consumption_col) > 1 ) {
+      warning ( "Beware, more household consumption items were found in the table.")
+    }
+    if ( length( household_consumption_col) == 0 ) {
+      stop ( "No household consumption data was found.")
+    }
+    message ( "Households are added to the matrix.")
+    input_vector <- labelled_io_table[    input_row, 
+                                          c(1:67, household_consumption_col[1]) ] 
+    input_vector[1, 68] <- 0
+    } else {    #no households 
+      input_vector <- labelled_io_table[input_row, c(1:67) ] 
+    if ( length( input_vector) == 0 ) {
+      stop ( "No primary input data was found.")
+    }
+  } # end of no household case 
+  input_vector[,1] <- as.character(input_vector[,1])
+  return ( input_vector ) 
 }
 
 
