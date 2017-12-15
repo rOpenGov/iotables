@@ -26,6 +26,8 @@ The alternative is "short" which is the original short row or column code of Eur
 This function is used to filter out  a single input-output table from a database, 
 for example a raw file downloaded from the Eurostat website.  It provides some 
 functionality to avoid some pitfalls.
+Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
+directly, rather via this function, if and when it is necessary.
 }
 \examples{
 germany_table <- iotable_get( source = "germany_1990", geo = 'DE', year = 1990,

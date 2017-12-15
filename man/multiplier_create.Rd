@@ -8,16 +8,20 @@ multiplier_create(input_vector = NULL, Im = NULL,
   multiplier_name = "multiplier", digits = NULL)
 }
 \arguments{
-\item{input_vector}{An input matrix or vector created by the input_indicator_create () function.}
+\item{input_vector}{An input matrix or vector created by the \code{\link{input_indicator_create}} function.}
 
-\item{Im}{The Leontieff inverse as a named object created by the leontieff_inverse_create () function.}
+\item{Im}{The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create }}
+function.}
 
-\item{multiplier_name}{A variable name to be given to the returned multipliers. Defaults to 'multiplier'.}
+\item{multiplier_name}{A variable name to be given to the returned multipliers. 
+Defaults to 'multiplier'.}
 
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
 }
 \description{
-This function is in fact a wrapper around the equation_solve () function, adding a name to the multiplier.
+This function is in fact a wrapper around the \code{\link{equation_solve}} function, 
+adding a key column with the name to the multiplier the maintain structural
+consistency.
 }
 \examples{
 de_emp <- primary_input_get ( input = "employment_total",

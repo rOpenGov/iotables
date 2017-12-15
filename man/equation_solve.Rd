@@ -7,14 +7,19 @@
 equation_solve(LHS = NULL, Im = NULL)
 }
 \arguments{
-\item{LHS}{A left-hand side vector with a key column containing the industry or product names for matching, for example the employment coefficients.}
+\item{LHS}{A left-hand side vector with a key column containing the 
+industry or product names for matching, for example the employment coefficients.}
 
-\item{Im}{A Leontieff-inverse with a key column containing the industry or product names for matching.}
+\item{Im}{A Leontieff-inverse with a key column containing the industry or 
+product names for matching.}
 }
 \description{
-The function matches to parts of the matrix equation, using the named formats with row names and solves the matrix equation.
-This function should be used in wrapper functions to solve particular problems. 
-The function only performs the lhs %*% im matrix equation, but after pairing industries and checking for exceptions.
+The function matches to parts of the matrix equation, using the named
+formats with row names and solves the matrix equation.
+This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
+to solve particular problems, but it can be used directly, too.
+The function only performs the lhs %*% im matrix equation, but after 
+pairing industries and checking for exceptions.
 }
 \examples{
 Im = data.frame (

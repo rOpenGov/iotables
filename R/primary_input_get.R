@@ -1,24 +1,28 @@
 #' Get primary inputs
 #'
 #' This function will retrieve any primary input from the input-output table. 
-#' This is a similar function to the employment_get(). 
 #' You can use the iotables or the original (Eurostat) short labels to select the 
 #' primary input.
 #' @param input A character string or a character vector containing the indicator names. 
 #' Any of 'compensation_employees', 'wages_salaries', 'mixed_income_gross', 
 #' 'gva' (for gross value added), 'surplus_mixed_gross', 'surplus_mixed_net',
 #' 'net_tax_production', 'import_goods_services' (and its breakup ..._MU, 
-#'  _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you will get
-#'  an error. The input parameter is case sensitive. 
+#'  _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you 
+#'  will get an error. The input parameter is case sensitive. 
 #' @param source A data source, for example "naio_10_cp1700".
-#' @param geo A country code or a country name, defaults to "SK" that could be written as "Slovakia", too.
+#' @param geo A country code or a country name, defaults to "SK" that 
+#' could be written as "Slovakia", too.
 #' @param year A numeric variable containing the year. 
 #' @param unit The currency unit in the input-output table.
-#' @param households If the household are included in your model (adds final household expenditure column)
+#' @param households If the household are included in your model (adds final 
+#' household expenditure column)
 #' @param stk_flow Defaults to "DOM", alternative "IMP". 
-#' @param labelling Defaults to "iotables" which gives standard row and column names regardless of the
-#' source of the table, or if it is a product x product, industry x industry or product x industry table.
-#' The alternative is "short" which is the original short row or column code of Eurostat or OECD.
+#' @param labelling Defaults to "iotables" which gives standard row and column 
+#' names regardless of the
+#' source of the table, or if it is a product x product, industry x industry or 
+#' product x industry table.
+#' The alternative is "short" which is the original short row or column code of 
+#' Eurostat or OECD.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate
 #' @importFrom tidyr spread

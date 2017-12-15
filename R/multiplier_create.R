@@ -1,9 +1,13 @@
 #' Create multipliers 
 #' 
-#' This function is in fact a wrapper around the equation_solve () function, adding a name to the multiplier.
-#' @param input_vector An input matrix or vector created by the input_indicator_create () function. 
-#' @param Im The Leontieff inverse as a named object created by the leontieff_inverse_create () function. 
-#' @param multiplier_name A variable name to be given to the returned multipliers. Defaults to 'multiplier'.
+#' This function is in fact a wrapper around the \code{\link{equation_solve}} function, 
+#' adding a key column with the name to the multiplier the maintain structural
+#' consistency.
+#' @param input_vector An input matrix or vector created by the \code{\link{input_indicator_create}} function. 
+#' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create }}
+#' function. 
+#' @param multiplier_name A variable name to be given to the returned multipliers. 
+#' Defaults to 'multiplier'.
 #' @param digits Rounding digits, if omitted, no rounding takes place. 
 #' @examples 
 #' de_emp <- primary_input_get ( input = "employment_total",

@@ -11,21 +11,25 @@ input_coefficient_matrix_create(input_flow, output, digits = NULL)
 
 \item{output}{An output vector with a key column, created by \code{\link{output_get}}.}
 
-\item{digits}{An integer showing the precision of the technology matrix in digits. If not given, no rounding is applied.}
+\item{digits}{An integer showing the precision of the technology matrix in digits. 
+If not given, no rounding is applied.}
 }
 \description{
-Create an input coefficient matrix from the input flow matrix and the output vector.
-The two input vectors must have consistent labelling, i.e. the same column names must be 
-found in the use table (input flow) and the output vector.
+Create an input coefficient matrix from the input flow matrix and the
+output vector. The two input vectors must have consistent labelling, i.e
+the same column names must be  found in the use table (input flow) and the
+output vector.
 }
 \details{
-If thera are zero values in the output vector, they will be changed to 0.000001
-and you will get a warning. Some analyitcal equations cannot be solved with zero
-elements. You either have faulty input data, or you have to use some sort of 
-data modification to carry on your analysis. An alternative that is not implemented here,
-because it requires analytical judgement, is the aggregation of elements into larger
-ones that are no longer zero, i.e. merging an industry or product class that has a positive value
-with another industry or product class that is zero.
+If thera are zero values in the output vector, they will be changed to 
+0.000001 and you will get a warning. Some analyitcal equations cannot be 
+solved with zero elements. You either have faulty input data, or you have 
+to use some sort of data modification to carry on your analysis.
+
+An alternative that is not implemented here, because it requires analytical
+judgement, is the aggregation of elements into larger ones that are no longer
+equal to zero, i.e. merging an industry or product class that has a positive 
+value with another industry or product class that is zero.
 }
 \examples{
 de_use <- use_table_get ( source = "germany_1990", geo = "DE",

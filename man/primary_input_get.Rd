@@ -13,28 +13,32 @@ primary_input_get(input = "compensation_employees", source = "germany_1990",
 Any of 'compensation_employees', 'wages_salaries', 'mixed_income_gross', 
 'gva' (for gross value added), 'surplus_mixed_gross', 'surplus_mixed_net',
 'net_tax_production', 'import_goods_services' (and its breakup ..._MU, 
- _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you will get
- an error. The input parameter is case sensitive.}
+ _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you 
+ will get an error. The input parameter is case sensitive.}
 
 \item{source}{A data source, for example "naio_10_cp1700".}
 
-\item{geo}{A country code or a country name, defaults to "SK" that could be written as "Slovakia", too.}
+\item{geo}{A country code or a country name, defaults to "SK" that 
+could be written as "Slovakia", too.}
 
 \item{year}{A numeric variable containing the year.}
 
 \item{unit}{The currency unit in the input-output table.}
 
-\item{households}{If the household are included in your model (adds final household expenditure column)}
+\item{households}{If the household are included in your model (adds final 
+household expenditure column)}
 
 \item{stk_flow}{Defaults to "DOM", alternative "IMP".}
 
-\item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
-source of the table, or if it is a product x product, industry x industry or product x industry table.
-The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
+\item{labelling}{Defaults to "iotables" which gives standard row and column 
+names regardless of the
+source of the table, or if it is a product x product, industry x industry or 
+product x industry table.
+The alternative is "short" which is the original short row or column code of 
+Eurostat or OECD.}
 }
 \description{
 This function will retrieve any primary input from the input-output table. 
-This is a similar function to the employment_get(). 
 You can use the iotables or the original (Eurostat) short labels to select the 
 primary input.
 }

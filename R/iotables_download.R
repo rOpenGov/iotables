@@ -1,6 +1,8 @@
 #' Download input-output tables
 #'
 #' This function downloads standard input-output table files. Currently only Eurostat files are supported.
+#' You are not likely to use this function, because \code{\link{iotable_get}} will
+#' call this function if necessary and properly filter out an input-output table.
 #' The only parameter is the Eurostat code of the table: 
 #' Symmetric input-output table - current prices (NACE Rev. 2) [naio_cp17_r2]
 #' Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)	

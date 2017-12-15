@@ -3,6 +3,8 @@
 #' This function is used to filter out  a single input-output table from a database, 
 #' for example a raw file downloaded from the Eurostat website.  It provides some 
 #' functionality to avoid some pitfalls.
+#' Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
+#' directly, rather via this function, if and when it is necessary. 
 #' @param source A data source, for example "naio_10_cp1700".
 #' @param geo A country code or a country name.  For example, "SK" or as "Slovakia".
 #' @param year A numeric variable containing the year. Defaults to 2010, because this year has the most data. 
@@ -42,7 +44,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   
   if ( source %in% prod_ind ) { 
-    metadata_rows <- iotables::metadata %>%
+    metadata_rows <- iotables::metadata %>%  #tables that follow prod_ind vocabulary
        filter ( variable == "prod_na") %>%
        dplyr::rename ( prod_na = code) %>%
        dplyr::rename ( prod_na_lab = label ) %>%
@@ -56,7 +58,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
-  } else if ( source %in% trow_tcol ) {
+  } else if ( source %in% trow_tcol ) {   #tables that follow trow_tcol vocabulary
     
     metadata_rows <- iotables::metadata %>%
       filter ( variable == "t_rows") %>%
@@ -71,7 +73,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
       dplyr::rename ( t_cols2_lab = label ) %>%
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
-      } else if ( source == "germany_1990" ) {
+      } else if ( source == "germany_1990" ) {  #German simplified tables
         metadata_rows <-  germany_metadata_rows  
         metadata_cols <-  germany_metadata_cols 
       } else {
@@ -103,7 +105,8 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_data <- readRDS( tmp_rds ) 
     } else { 
-      labelled_io_data <- iotables_download ( source, stk_flow = stk_flow_input ) 
+      labelled_io_data <- iotables_download ( source, 
+                                              stk_flow = stk_flow_input ) 
       }
   } # use eurostat files 
   

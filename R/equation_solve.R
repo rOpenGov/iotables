@@ -1,10 +1,16 @@
 #' Solve a basic equation
 #' 
-#' The function matches to parts of the matrix equation, using the named formats with row names and solves the matrix equation.
-#' This function should be used in wrapper functions to solve particular problems. 
-#' The function only performs the lhs %*% im matrix equation, but after pairing industries and checking for exceptions.
-#' @param LHS A left-hand side vector with a key column containing the industry or product names for matching, for example the employment coefficients. 
-#' @param Im A Leontieff-inverse with a key column containing the industry or product names for matching.
+#' The function matches to parts of the matrix equation, using the named
+#' formats with row names and solves the matrix equation.
+#' This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
+#' to solve particular problems, but it can be used directly, too.
+#' The function only performs the lhs %*% im matrix equation, but after 
+#' pairing industries and checking for exceptions.
+#' 
+#' @param LHS A left-hand side vector with a key column containing the 
+#' industry or product names for matching, for example the employment coefficients. 
+#' @param Im A Leontieff-inverse with a key column containing the industry or 
+#' product names for matching.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join mutate_if
 #' @importFrom tidyr spread
@@ -23,7 +29,7 @@
 equation_solve <- function ( LHS = NULL, Im = NULL ) {
 
   if ( is.null(LHS)| is.null(Im) ) stop (
-      "Error: matrix equation inputs are not given")
+      "Error: matrix equation inputs are not given.")
 
   LHS <- LHS %>%
     mutate_if (is.factor, as.character) 
