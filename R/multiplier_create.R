@@ -1,13 +1,23 @@
-#' Solve a basic equation
+#' Create multipliers 
 #' 
 #' This function is in fact a wrapper around the equation_solve () function, adding a name to the multiplier.
 #' @param input_vector An input matrix or vector created by the input_indicator_create () function. 
 #' @param Im The Leontieff inverse as a named object created by the leontieff_inverse_create () function. 
 #' @param multiplier_name A variable name to be given to the returned multipliers. Defaults to 'multiplier'.
 #' @param digits Rounding digits, if omitted, no rounding takes place. #' @examples 
-#' data (germany_1990)
-#' get_input_flow(df = germany_1990, geo = 'DE', year = 1990,
-#'                unit = "M_EUR", named = FALSE)
+#' de_emp <- primary_input_get ( input = "employment_total",
+#'            source = "germany_1990", geo = "DE",
+#'            year = 1990,  
+#'            households = FALSE, labelling = "iotables")
+#' 
+#' de_emp_indicator <- input_indicator_create (de_emp, de_output)
+#' 
+#' employment_multipliers <- multiplier_create ( 
+#'            input_vector    = de_emp_indicator,
+#'            Im              = I_de,
+#'            multiplier_name =  "employment_multiplier", 
+#'            digits = 4 )
+#' 
 #' @export 
 
 multiplier_create <- function ( input_vector = NULL, 
