@@ -4,7 +4,8 @@
 #' @param input_vector An input matrix or vector created by the input_indicator_create () function. 
 #' @param Im The Leontieff inverse as a named object created by the leontieff_inverse_create () function. 
 #' @param multiplier_name A variable name to be given to the returned multipliers. Defaults to 'multiplier'.
-#' @param digits Rounding digits, if omitted, no rounding takes place. #' @examples 
+#' @param digits Rounding digits, if omitted, no rounding takes place. 
+#' @examples 
 #' de_emp <- primary_input_get ( input = "employment_total",
 #'            source = "germany_1990", geo = "DE",
 #'            year = 1990,  

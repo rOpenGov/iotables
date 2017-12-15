@@ -14,7 +14,12 @@ multiplier_create(input_vector = NULL, Im = NULL,
 
 \item{multiplier_name}{A variable name to be given to the returned multipliers. Defaults to 'multiplier'.}
 
-\item{digits}{Rounding digits, if omitted, no rounding takes place. #' @examples 
+\item{digits}{Rounding digits, if omitted, no rounding takes place.}
+}
+\description{
+This function is in fact a wrapper around the equation_solve () function, adding a name to the multiplier.
+}
+\examples{
 de_emp <- primary_input_get ( input = "employment_total",
            source = "germany_1990", geo = "DE",
            year = 1990,  
@@ -26,8 +31,6 @@ employment_multipliers <- multiplier_create (
            input_vector    = de_emp_indicator,
            Im              = I_de,
            multiplier_name =  "employment_multiplier", 
-           digits = 4 )}
-}
-\description{
-This function is in fact a wrapper around the equation_solve () function, adding a name to the multiplier.
+           digits = 4 )
+
 }
