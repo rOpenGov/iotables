@@ -24,7 +24,7 @@
 #' @importFrom tidyr spread
 #' @importFrom utils data 
 #' @examples
-#' comp_employees_dee <- primary_input_get(
+#' comp_employees_de <- primary_input_get(
 #'                             input = "compensation_employees", 
 #'                             source = "germany_1990", geo = "DE", 
 #'                             unit = "MIO_EUR", 
@@ -65,7 +65,7 @@ primary_input_get <- function ( input = "compensation_employees",
       input_vector <- input_vector [1,1:7]
     }
     return ( input_vector )  #return simplified example table and do not run rest of the code
-  } else {
+  } else {                   #end of germany case
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
     } else { 

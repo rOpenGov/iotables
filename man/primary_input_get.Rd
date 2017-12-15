@@ -39,7 +39,7 @@ You can use the iotables or the original (Eurostat) short labels to select the
 primary input.
 }
 \examples{
-comp_employees_dee <- primary_input_get(
+comp_employees_de <- primary_input_get(
                             input = "compensation_employees", 
                             source = "germany_1990", geo = "DE", 
                             unit = "MIO_EUR", 
