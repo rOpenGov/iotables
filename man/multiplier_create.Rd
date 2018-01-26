@@ -24,6 +24,10 @@ adding a key column with the name to the multiplier the maintain structural
 consistency.
 }
 \examples{
+de_output <- output_get ( source = "germany_1990", geo = "DE",
+                         year = 1990, unit = "MIO_EUR",
+                         households = FALSE, labelling = "iotables")
+
 de_emp <- primary_input_get ( input = "employment_total",
            source = "germany_1990", geo = "DE",
            year = 1990,  

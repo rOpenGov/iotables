@@ -10,6 +10,10 @@
 #' Defaults to 'multiplier'.
 #' @param digits Rounding digits, if omitted, no rounding takes place. 
 #' @examples 
+#' de_output <- output_get ( source = "germany_1990", geo = "DE",
+#'                          year = 1990, unit = "MIO_EUR",
+#'                          households = FALSE, labelling = "iotables")
+#' 
 #' de_emp <- primary_input_get ( input = "employment_total",
 #'            source = "germany_1990", geo = "DE",
 #'            year = 1990,  
