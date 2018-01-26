@@ -10,7 +10,7 @@ multiplier_create(input_vector = NULL, Im = NULL,
 \arguments{
 \item{input_vector}{An input matrix or vector created by the \code{\link{input_indicator_create}} function.}
 
-\item{Im}{The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create }}
+\item{Im}{The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}
 function.}
 
 \item{multiplier_name}{A variable name to be given to the returned multipliers. 

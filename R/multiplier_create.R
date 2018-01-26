@@ -4,7 +4,7 @@
 #' adding a key column with the name to the multiplier the maintain structural
 #' consistency.
 #' @param input_vector An input matrix or vector created by the \code{\link{input_indicator_create}} function. 
-#' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create }}
+#' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}
 #' function. 
 #' @param multiplier_name A variable name to be given to the returned multipliers. 
 #' Defaults to 'multiplier'.
