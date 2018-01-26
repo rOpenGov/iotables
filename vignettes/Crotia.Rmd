@@ -120,7 +120,7 @@ hr_emp_indicator <- input_indicator_create (
   output_vector = select (output_vector_hr, -extraterriorial_organizations  )                        )
 
 employment_multipliers_hr <- multiplier_create ( 
-  input_vector    =   hr_emp_indicator,
+  input_vector    = hr_emp_indicator,
   Im              = I_hr, 
   multiplier_name = "employment_multiplier",
   digits          = 4 ) %>%
