@@ -10,6 +10,10 @@
 #' Defaults to 'multiplier'.
 #' @param digits Rounding digits, if omitted, no rounding takes place. 
 #' @examples 
+#' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
+#' year = 1990, unit = "MIO_EUR", 
+#' households = FALSE, labelling = "iotables")
+#' 
 #' de_output <- output_get ( source = "germany_1990", geo = "DE",
 #'                          year = 1990, unit = "MIO_EUR",
 #'                          households = FALSE, labelling = "iotables")
@@ -21,7 +25,8 @@
 #' 
 #' de_emp_indicator <- input_indicator_create (de_emp, de_output)
 #' 
-#' de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
+#' de_coeff <- input_coefficient_matrix_create( de_use,
+#'  de_output, digits = 4)
 #'
 #' L_de <- leontieff_matrix_create( technology_coefficients_matrix =
 #'                                    de_coeff )
