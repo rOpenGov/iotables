@@ -16,7 +16,11 @@ Any of 'compensation_employees', 'wages_salaries', 'mixed_income_gross',
  _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you 
  will get an error. The input parameter is case sensitive.}
 
-\item{source}{A data source, for example "naio_10_cp1700".}
+\item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
+"naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_cp17_r2", "naio_17_agg_60_r2", 
+"naio_17_agg_10_r2", "croatia_2010_1700", "croatia_2010_1800", 
+"croatia_2010_1900". For further information consult the 
+\href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
 \item{geo}{A country code or a country name, defaults to "SK" that 
 could be written as "Slovakia", too.}

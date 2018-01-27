@@ -21,6 +21,12 @@
 #' 
 #' de_emp_indicator <- input_indicator_create (de_emp, de_output)
 #' 
+#' de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
+#'
+#' L_de <- leontieff_matrix_create( technology_coefficients_matrix =
+#'                                    de_coeff )
+#' I_de <- leontieff_inverse_create(L_de)
+#' 
 #' employment_multipliers <- multiplier_create ( 
 #'            input_vector    = de_emp_indicator,
 #'            Im              = I_de,
