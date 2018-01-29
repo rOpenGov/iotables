@@ -30,13 +30,15 @@ output_get <- function ( source = "germany_1990", geo = "DE",
                             labelling = "iotables" , 
                             stk_flow = "DOM", 
                             keep_total = FALSE) {  
+  ##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
+  source_inputed <- source 
   
   tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
-  source_inputed <- source ; unit_input = unit
   
+  ##Exception handling --------------
   if (source == "croatia_2010_1900") {
     stop("The table croatia_2010_1900 is an import table and has no output field.")
   }
@@ -80,6 +82,10 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     }
     output_row <- which (labelled_io_table[[1]] %in%  
                                      c('output_bp', 'P1', 'output') )
+    if (source == "naio_cp17_r2") {
+      output_row <- which (labelled_io_table[[1]] %in%  
+               c('total', "CPA_TOTAL") )
+    }
     
        if ( length( output_row) == 0 ) {
       stop ( "No output data was found.")
@@ -98,9 +104,13 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     }
  
     
-  } else {    #no households 
+  } else {    #no households case
     output_row <- which (labelled_io_table[[1]] %in%  
                            c('output_bp', 'P1', 'output') )
+    if (source == "naio_cp17_r2") {
+      output_row <- which (labelled_io_table[[1]] %in%  
+                             c('total', "CPA_TOTAL") )
+    }
     
     if ( length( output_row) == 0 ) {
       stop ( "No output data was found.")
