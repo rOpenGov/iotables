@@ -2,7 +2,6 @@
 #'
 #' An arrangement of the Eurostat national accounts vocabulary, used to correctly
 #' order wide format rows and columns from bulk long-form tables. 
-#' @source   \href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
 #' @usage data(metadata)
 #' @format A data frame with 10 variables. #' 
 #'\describe{
