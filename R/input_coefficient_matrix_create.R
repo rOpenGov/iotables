@@ -45,7 +45,8 @@ input_coefficient_matrix_create <- function ( input_flow, output,
     for (i in 1:(nrow(Im)-1)) {
       if (Im[output_row, j] == 0 ) {
         Im[output_row, j] <- 0.000001 #avoid division by zero
-        warning("Warning: There were zero output elements. They were changed to 0.000001.") }
+        warning("Warning:", as.character(Im[output_row, 1]), ", ", 
+       as.character(names(Im)[j]), " is zero, it was changed to 0.000001.\n") }
       Im[i,j] <- Im[i,j] / Im[output_row, j]
     }
   } #this is not elegant but works right now.
