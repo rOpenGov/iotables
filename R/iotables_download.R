@@ -32,7 +32,8 @@
 #'  }
 #' @export
 
-iotables_download <- function ( source = "naio_cp17_r2", stk_flow = "DOM" ) {
+iotables_download <- function ( source = "naio_cp17_r2", 
+                                stk_flow = "DOM" ) {
   t_cols2_lab = NULL; t_rows2_lab = NULL; values_lab = NULL
   . = NULL; downloaded <- NULL; downloaded_labelled <- NULL
 
@@ -50,13 +51,19 @@ iotables_download <- function ( source = "naio_cp17_r2", stk_flow = "DOM" ) {
      "\\eurostat/", source, "_date_code_TF.rds" )
 
   #only download the Eurostat bulk file if necessary.
-  if(!file.exists(retrieve_from_temp_bulk)){
-    downloaded <- tryCatch(eurostat::get_eurostat (source),
-                    error=function(e) message ("No data was found with this identifier."))
+  if ( source == "naio_cp17_r2") {
+    downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
+    
   } else {
-    warning ('The bulk Eurostat file is retrieved from the temporary directory.')
-    downloaded <- readRDS( retrieve_from_temp_bulk )
+    if(!file.exists(retrieve_from_temp_bulk)){
+      downloaded <- tryCatch(eurostat::get_eurostat (source),
+                             error=function(e) message ("No data was found with this identifier."))
+    } else {
+      warning ('The bulk Eurostat file is retrieved from the temporary directory.')
+      downloaded <- readRDS( retrieve_from_temp_bulk )
+    }
   }
+  
   
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
