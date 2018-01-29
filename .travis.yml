@@ -4,8 +4,12 @@ language: R
  - oldrel
  - release
  - devel
+ 
 sudo: false
 os:
   - linux
   - osx
 cache: packages
+
+
+Remotes: rOpenGov/iotables
