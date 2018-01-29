@@ -33,7 +33,9 @@ source of the table, or if it is a product x product, industry x industry or pro
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
 }
 \description{
-Create a use (input flow) matrix
+The function invokes the \code{\link{iotable_get}} funciton and selects a national 
+input-output table from the bulk downloaded file. If the file is not 
+downloaded, it downloads it to the temporary directory.
 }
 \examples{
 use_de <- use_table_get( source = "germany_1990", geo = 'DE', year = 1990,

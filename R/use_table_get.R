@@ -1,5 +1,8 @@
 #' Create a use (input flow) matrix
 #' 
+#' The function invokes the \code{\link{iotable_get}} funciton and selects a national 
+#' input-output table from the bulk downloaded file. If the file is not 
+#' downloaded, it downloads it to the temporary directory.
 #' @param source A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
 #' "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_cp17_r2", "naio_17_agg_60_r2", 
 #' "naio_17_agg_10_r2", "croatia_2010_1700", "croatia_2010_1800", 
@@ -36,6 +39,7 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
                             households = FALSE, keep_total = FALSE, 
                             labelling = "iotables" ){  
   
+  ##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
@@ -43,6 +47,7 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
   tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
   source_inputed <- source ; unit_input = unit
   
+  ##Exception handling ---------------
   if ( ! labelling %in% c("iotables", "short")) {
     stop("Currently only labelling = 'iotables' and labelling = 'short' is supported.")
   }
@@ -73,9 +78,13 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
                                          unit = unit_input, labelling = labelling,
                                          stk_flow = stk_flow_input) }
   } # use eurostat files 
+ if (exists ( "labelled_io_table")) {
+   labelled_io_table <- labelled_io_table %>% 
+     mutate_if ( is.factor, as.character)
+ } else {
+   stop("The IO table was not created.")
+ }
 
- labelled_io_table <- labelled_io_table %>% 
-    mutate_if ( is.factor, as.character)
   
  use_table <- labelled_io_table[c(1:66), 1:67]
 
