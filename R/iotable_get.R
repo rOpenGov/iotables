@@ -107,9 +107,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     labelled_io_data <- iotables::croatia_2010_1800  
     } else if ( source == "croatia_2010_1900" )  {
       labelled_io_data <- iotables::croatia_2010_1900
-    } else if ( source == "naio_cp17_r2" ) { 
-      labelled_io_data <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
-      warning("Retrieved from archive.")} else {
+    } else  {
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_data <- readRDS( tmp_rds ) 
     } else { 
