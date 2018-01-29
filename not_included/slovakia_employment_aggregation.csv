@@ -1,4 +1,4 @@
-﻿employment_label_sk,t_cols2
+employment_label_sk,t_cols2
 "(01) Crop and animal production, hunting",CPA_A01
 (02) Forestry and logging,CPA_A02
 (03) Fishing and aquaculture,CPA_A03
@@ -6,10 +6,10 @@
 (06-08) Extraction of crude petroleum and natural gas; mining of metal ores; other mining and quarrying,CPA_B
 (09) Mining support service activities,CPA_B
 (10) Manufacture of food products,CPA_B
-(11-12) Manufacture of beverages; manufacture of tobacco products,CPA_C10-C12
-(13) Manufacture of textiles,CPA_C13-C15
-(14) Manufacture of wearing apparel,CPA_C13-C15
-(15) Manufacture of leather and related products,CPA_C13-C15
+(11-12) Manufacture of beverages; manufacture of tobacco products,CPA_C10-12
+(13) Manufacture of textiles,CPA_C13-15
+(14) Manufacture of wearing apparel,CPA_C13-15
+(15) Manufacture of leather and related products,CPA_C13-15
 "(16) Manufacture of products of wood, cork and straw",CPA_C16
 (17) Manufacture of paper and paper products,CPA_C17
 (18) Printing and reproduction of recorded media,CPA_C18
@@ -25,14 +25,14 @@
 (28) Manufacture of machinery and equipment n.e.c.,CPA_C28
 (29) Manufacture of motor vehicles and trailers,CPA_C29
 (30) Manufacture of other transport equipment,CPA_C30
-(31) Manufacture of furniture,CPA_C31_C32
-(32) Other manufacturing,CPA_C31_C32
+(31) Manufacture of furniture,CPA_C31_32
+(32) Other manufacturing,CPA_C31_32
 (33) Repair and installation of machinery and equipment,CPA_C33
-"(35) Electricity, gas, steam and air conditioning supply",CPA_D35
+"(35) Electricity, gas, steam and air conditioning supply",CPA_D
 "(36) Water collection, treatment and supply",CPA_E36
-(37) Sewerage,CPA_E37-E39
-(38) Waste collection and disposal activities; materials recovery,CPA_E37-E39
-(39) Remediation and other waste management services,CPA_E37-E39
+(37) Sewerage,CPA_E37-39
+(38) Waste collection and disposal activities; materials recovery,CPA_E37-39
+(39) Remediation and other waste management services,CPA_E37-39
 (41) Construction of buildings,CPA_F
 (42) Civil engineering,CPA_F
 (43) Specialised construction activities,CPA_F
@@ -47,36 +47,36 @@
 (55) Accommodation,CPA_I
 (56) Food and beverage service activities,CPA_I
 (58) Publishing activities,CPA_J58
-"(59) Motion picture, video and television programme production",CPA_J59_J60
-(60) Programming and broadcasting activities,CPA_J59_J60
+"(59) Motion picture, video and television programme production",CPA_J59_60
+(60) Programming and broadcasting activities,CPA_J59_60
 (61) Telecommunications,CPA_J61
-"(62) Computer programming, consultancy",CPA_J62_J63
-(63) Information service activities,CPA_J62_J63
+"(62) Computer programming, consultancy",CPA_J62_63
+(63) Information service activities,CPA_J62_63
 "(64) Financial service activities, except insurance and pension funding",CPA_K64
 "(65) Insurance, reinsurance and pension funding",CPA_K65
 (66) Activities auxiliary to financial services and insurance,CPA_K66
 (68) Real estate activities,CPA_L68B
-(69) Legal and accounting activities,CPA_M69_M70
-(70) Activities of head offices; management consultancy,CPA_M69_M70
+(69) Legal and accounting activities,CPA_M69_70
+(70) Activities of head offices; management consultancy,CPA_M69_70
 (71) Architectural and engineering activities,CPA_M71
 (72) Scientific research and development,CPA_M72
 (73) Advertising and market research,CPA_M73
-"(74) Other professional, scientific and technical activities",CPA_M74_M75
-(75) Veterinary activities,CPA_M74_M75
+"(74) Other professional, scientific and technical activities",CPA_M74_75
+(75) Veterinary activities,CPA_M74_75
 (77) Rental and leasing activities,CPA_N77
 (78) Employment activities,CPA_N78
 "(79) Travel agency, tour operator reservation service",CPA_N79
-(80) Security and investigation activities,CPA_N80-N82
-(81) Services to buildings and landscape activities,CPA_N80-N82
-"(82) Office administrative, office support",CPA_N80-N82
-(84) Public administration and defence; compulsory social security,CPA_O84
-(85) Education,CPA_P85
+(80) Security and investigation activities,CPA_N80-82
+(81) Services to buildings and landscape activities,CPA_N80-82
+"(82) Office administrative, office support",CPA_N80-82
+(84) Public administration and defence; compulsory social security,CPA_O
+(85) Education,CPA_P
 (86) Human health activities,CPA_Q86
-(87) Residential care activities,CPA_Q87_Q88
-(88) Social work without accommodation,CPA_Q87_Q88
-"(90) Creative, arts and entertainment activities",CPA_R90-R92
-"(91) Libraries, museums and other cultural activities",CPA_R90-R92
-(92) Gambling and betting activities,CPA_R90-R92
+(87) Residential care activities,CPA_Q87_88
+(88) Social work without accommodation,CPA_Q87_88
+"(90) Creative, arts and entertainment activities",CPA_R90-92
+"(91) Libraries, museums and other cultural activities",CPA_R90-92
+(92) Gambling and betting activities,CPA_R90-92
 "(93) Sports, amusement and recreation activities",CPA_R93
 (94) Activities of membership organisations,CPA_S94
 (95) Repair of computers and household goods,CPA_S95

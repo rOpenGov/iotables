@@ -25,11 +25,3 @@ croatia_employment_2013 <- iotables::metadata %>%
 
 devtools::use_data (croatia_employment_2013, overwrite = TRUE)
 
-
-try <- employment_add ( )
-
-
-labour_inputs <- io_table [1,]
-l
-
-rbind ( io_table, labour_inputs)

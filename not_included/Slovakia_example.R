@@ -10,10 +10,16 @@ households <- TRUE
 
 #iocp <- get_io_current_prices( ) 
 #saveRDS(iocp, "not_included/eurostat_io_current_prices.rds")
-sk_use_1700_2 <- use_table_get ( source = "naio_10_cp1700", geo = "SK",
+labelled_io_table <- iotable_get ( source = "naio_10_cp1750", 
+                                   geo = "CZ")
+
+labelled_io_table <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/SK_2017/data-raw/naio_cp17_r2.rds")
+
+sk_use_1700_2 <- use_table_get ( source = "naio_10_cp1750", geo = "SK",
                                   year = 2010, unit = "MIO_EUR",
                                   stk_flow = "DOM", households = TRUE,
                                   keep_total = FALSE)
+
 output_vector_sk <- output_get(source = "naio_10_cp1700", geo = "SK",
                                year = 2010, unit = "MIO_EUR", 
                                labelling = "iotables",  households = TRUE,

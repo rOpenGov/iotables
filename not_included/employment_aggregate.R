@@ -3,7 +3,7 @@
 #' There are two issues to resolve here. The employment data has aggregation rows that are
 #' duplicates and do not conform the IO tables. The IO tables also have aggregations that
 #' cannot be found in the employment data. 
-#' It may be the case that you have nationsl employment figures in a slightly different
+#' It may be the case that you have national employment figures in a slightly different
 #' format. In this case read in the data anyway in a tidy format and run the function to remove the
 #' unnecessary aggregations and to re-aggregate according to the SIOT format. 
 #' For this filtering the Croatian (English language) employment data filters are included in
@@ -23,6 +23,7 @@
 
 employment_aggregate <- function ( employment_df, matching,
                                    label = "employment_label" ) {
+  #Initialize variables -------
   t_cols2 = NULL; employment = NULL; summarize = NULL; 
   t_rows2 = NULL; group_by = NULL; employment_label = NULL
   
