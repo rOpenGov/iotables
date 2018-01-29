@@ -22,13 +22,15 @@
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
 #' @examples 
-#' germany_table <- iotable_get( source = "germany_1990", geo = 'DE', year = 1990,
-#'              unit = "MIO_EUR", labelling  = 'iotables')
+#' germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
+#'              year = 1990,   unit = "MIO_EUR", 
+#'              labelling  = 'iotables')
 #' @export 
 
 iotable_get <- function ( source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
-                          stk_flow = "DOM", labelling = "iotables") {  
+                          stk_flow = "DOM", labelling = "iotables") { 
+  ##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; 
   values = NULL ; .= NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
@@ -105,7 +107,9 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     labelled_io_data <- iotables::croatia_2010_1800  
     } else if ( source == "croatia_2010_1900" )  {
       labelled_io_data <- iotables::croatia_2010_1900
-    } else {
+    } else if ( source == "naio_cp17_r2" ) { 
+      labelled_io_data <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
+      warning("Retrieved from archive.")} else {
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_data <- readRDS( tmp_rds ) 
     } else { 
@@ -125,10 +129,12 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   available_countries <- c(available_country_codes, available_country_names)
   
   if ( ! year %in% available_years) {
-    stop("Error: no data is available for this year.")
+    stop("Error: no data is available for this year.
+         Available years:",  available_years )
   }
   if ( ! geo %in% available_countries ) {
-    stop("Error: no data is available for this country or geographical unit.")
+    stop("Error: no data is available for this country or geographical unit.
+         Available countries",  available_countries)
   }
   if (geo %in% available_country_names) {
     geo <- as.character(labelled_io_data$geo[which(labelled_io_data$geo_lab == geo)][1])
