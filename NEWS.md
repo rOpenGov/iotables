@@ -32,7 +32,11 @@ iotables 0.2 is moved to rOpenGov.
 * Correctly handles the total Eurostat national accounts vocabulary, and adds all Croatian (not fully conforming) tables to the package.  
 
 # iotables 0.2.2
-* Updated README file and new Croatia vignette.   
+* Updated README file and new Croatia vignette. 
+
+# iotables 0.2.3
+* Eurostat withdrew naio_cp17_r2, and there is a temporary fix to work with archived versions. Some metadata errors and documentation
+errors were corrected.
 
 #Forthcoming 0.3 version 
 For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
