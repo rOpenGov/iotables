@@ -17,9 +17,6 @@
   \item{numeric_label}{ ordering from quadrant, account_group, digit_1, digit_2}     
   \item{iotables_label}{Custom, machine_readable snake format variable names}                     
 }}
-\source{
-\href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
-}
 \usage{
 data(metadata)
 }
