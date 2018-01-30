@@ -18,7 +18,7 @@
 #' At the moment import and domestic tables are not yet supported in the package.
 #' The data is downloaded in the tempdir() under the name the statistical product as an
 #' rds file. (For example: naio_10_cp1750.rds)
-#' The temporary directory is emptied at every normal R sesssion exit.
+#' The temporary directory is emptied at every normal R session exit.
 #' @param source Currently only source = "eurostat" works. Later OECD Stan will be added.
 #' @param stk_flow Defaults to "TOTAL". Possible values are "DOM", "IMP", "TOTAL". In tables
 #' where no distinction is made it is not needed.

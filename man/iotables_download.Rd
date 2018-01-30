@@ -32,7 +32,7 @@ Input-output table at current prices, 6 branches - EU aggregates (naio_17_agg_6)
 At the moment import and domestic tables are not yet supported in the package.
 The data is downloaded in the tempdir() under the name the statistical product as an
 rds file. (For example: naio_10_cp1750.rds)
-The temporary directory is emptied at every normal R sesssion exit.
+The temporary directory is emptied at every normal R session exit.
 }
 \examples{
 \dontrun{

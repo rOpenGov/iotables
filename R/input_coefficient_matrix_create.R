@@ -11,7 +11,7 @@
 #' to use some sort of data modification to carry on your analysis. 
 #' 
 #' An alternative that is not implemented here, because it requires analytical
-#' judgement, is the aggregation of elements into larger ones that are no longer
+#' judgment, is the aggregation of elements into larger ones that are no longer
 #' equal to zero, i.e. merging an industry or product class that has a positive 
 #' value with another industry or product class that is zero.
 #' 
