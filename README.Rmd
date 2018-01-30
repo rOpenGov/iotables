@@ -26,10 +26,10 @@ In order to test the analytical functions of the package and to have a manageabl
 
 ## Installation
 
-You can install iotools from github with:
+You can install iotools from CRAN or the latest development version with github:
 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
+install.packate("iotables")
 devtools::install_github("rOpenGov/iotables")
 
 #with vignettes:
