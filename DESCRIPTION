@@ -2,8 +2,8 @@ Package: iotables
 Type: Package
 Title: Importing and Manipulating Symmetric Input-Output Tables
 Version: 0.2.3
-Author: Daniel Antal, CFA
-Maintainer: "Daniel Antal, CFA <daniel.antal@ceemid.eu>"  
+Author: Daniel Antal CFA
+Maintainer: Daniel Antal <daniel.antal@ceemid.eu>  
 Description: Pre-processing tasks related to working with Eurostat's symmetric input-output
     tables and provide basic input-output economics calculations. The package is 
     a part of rOpenGov to open source open government initiatives.
