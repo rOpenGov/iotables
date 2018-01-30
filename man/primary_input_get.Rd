@@ -45,6 +45,8 @@ Eurostat or OECD.}
 This function will retrieve any primary input from the input-output table. 
 You can use the iotables or the original (Eurostat) short labels to select the 
 primary input.
+If you work with the original Eurostat labels, you can review the codes of
+variables with 'View(metadata)'.
 }
 \examples{
 comp_employees_de <- primary_input_get(
