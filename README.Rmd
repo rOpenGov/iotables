@@ -29,7 +29,7 @@ In order to test the analytical functions of the package and to have a manageabl
 You can install iotools from CRAN or the latest development version with github:
 
 ```{r gh-installation, eval = FALSE}
-install.packate("iotables")
+install.packages("iotables")
 devtools::install_github("rOpenGov/iotables")
 
 #with vignettes:
