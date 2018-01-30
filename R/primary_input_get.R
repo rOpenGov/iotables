@@ -3,6 +3,8 @@
 #' This function will retrieve any primary input from the input-output table. 
 #' You can use the iotables or the original (Eurostat) short labels to select the 
 #' primary input.
+#' If you work with the original Eurostat labels, you can review the codes of
+#' variables with 'View(metadata)'.
 #' @param input A character string or a character vector containing the indicator names. 
 #' Any of 'compensation_employees', 'wages_salaries', 'mixed_income_gross', 
 #' 'gva' (for gross value added), 'surplus_mixed_gross', 'surplus_mixed_net',
