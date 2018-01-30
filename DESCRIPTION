@@ -3,7 +3,7 @@ Type: Package
 Title: Importing And Manipulating Symmetric Input-Output Tables
 Version: 0.2.3
 Author: Daniel Antal, CFA
-Maintainer: Daniel Antal, CFA  <daniel.antal@ceemid.eu>
+Maintainer: "Daniel Antal, CFA"  <daniel.antal@ceemid.eu>
 Description: This package provides the necessary data 
     pre-processing tasks related to working with Eurostat's symmetric input-output
     tables and provide basic input-output economics calculations. The package is 
