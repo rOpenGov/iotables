@@ -36,10 +36,10 @@ iotables 0.2 is moved to rOpenGov.
 
 # iotables 0.2.3
 * Eurostat withdrew naio_cp17_r2, and there is a temporary fix to work with archived versions. Some metadata errors and documentation
-errors were corrected. This version was submitted for CRAN for release.
+errors were corrected. 
 
 # iotables 0.2.4
-* Some documentation improvements.
+* Some documentation improvements. This version was submitted for CRAN for release.
 
 #Forthcoming 0.3 version 
 For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
