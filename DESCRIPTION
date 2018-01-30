@@ -1,6 +1,6 @@
 Package: iotables
 Type: Package
-Title: Importing And Manipulating Symmetric Input-Output Tables
+Title: Importing and Manipulating Symmetric Input-Output Tables
 Version: 0.2.3
 Author: Daniel Antal, CFA
 Maintainer: "Daniel Antal, CFA"  <daniel.antal@ceemid.eu>
