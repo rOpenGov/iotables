@@ -30,7 +30,7 @@ The alternative is "short" which is the original short row or column code of Eur
 
 \item{stk_flow}{Defaults to "DOM", alternative "IMP".}
 
-\item{keep_total}{Logical variable. Defaults to FALSE and removes the totalling row and column from the matrix.}
+\item{keep_total}{Logical variable. Defaults to FALSE and removes the totaling row and column from the matrix.}
 }
 \description{
 Get an output vector

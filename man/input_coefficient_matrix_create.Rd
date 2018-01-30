@@ -21,7 +21,7 @@ the same column names must be  found in the use table (input flow) and the
 output vector.
 }
 \details{
-If thera are zero values in the output vector, they will be changed to 
+If there are zero values in the output vector, they will be changed to 
 0.000001 and you will get a warning. Some analyitcal equations cannot be 
 solved with zero elements. You either have faulty input data, or you have 
 to use some sort of data modification to carry on your analysis.

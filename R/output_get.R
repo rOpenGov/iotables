@@ -14,7 +14,7 @@
 #' @param labelling Defaults to "iotables" which gives standard row and column names regardless of the
 #' source of the table, or if it is a product x product, industry x industry or product x industry table.
 #' The alternative is "short" which is the original short row or column code of Eurostat or OECD.
-#' @param keep_total Logical variable. Defaults to FALSE and removes the totalling row and column from the matrix.  
+#' @param keep_total Logical variable. Defaults to FALSE and removes the totaling row and column from the matrix.  
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join mutate_if arrange
 #' @importFrom tidyr gather spread 

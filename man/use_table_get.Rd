@@ -33,7 +33,7 @@ source of the table, or if it is a product x product, industry x industry or pro
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
 }
 \description{
-The function invokes the \code{\link{iotable_get}} funciton and selects a national 
+The function invokes the \code{\link{iotable_get}} function and selects a national 
 input-output table from the bulk downloaded file. If the file is not 
 downloaded, it downloads it to the temporary directory.
 }

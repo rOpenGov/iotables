@@ -5,7 +5,7 @@
 #' @format A data frame with 107 observations in 2 variables:
 #' \describe{
 #'   \item{code}{Short labels}
-#'   \item{iotables_row}{iotables sytle labels}
+#'   \item{iotables_row}{iotables style labels}
 #'   \item{employment}{Employment in the sector in Croatia, not in thousands!}
 #' }
 #' @usage data(croatia_employment_2013)

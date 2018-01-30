@@ -1,6 +1,6 @@
 #' Create a use (input flow) matrix
 #' 
-#' The function invokes the \code{\link{iotable_get}} funciton and selects a national 
+#' The function invokes the \code{\link{iotable_get}} function and selects a national 
 #' input-output table from the bulk downloaded file. If the file is not 
 #' downloaded, it downloads it to the temporary directory.
 #' @param source A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
