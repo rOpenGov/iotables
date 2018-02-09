@@ -8,23 +8,24 @@ iotable_get(source = "germany_1990", geo = "DE", year = 1990,
   unit = "MIO_EUR", stk_flow = "DOM", labelling = "iotables")
 }
 \arguments{
-\item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
-"naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_cp17_r2", "naio_17_agg_60_r2", 
-"naio_17_agg_10_r2", "croatia_2010_1700", "croatia_2010_1800", 
-"croatia_2010_1900". For further information consult the 
+\item{source}{A data source, for example \code{naio_10_cp1700}. Possible codes are \code{naio_10_cp1700},
+\code{naio_10_cp1750}, \code{naio_10_pyp1700}, \code{naio_10_pyp1750}, \code{naio_cp17_r2}, \code{naio_17_agg_60_r2}, 
+\code{naio_17_agg_10_r2}, \code{croatia_2010_1700}, \code{croatia_2010_1800}, 
+\code{croatia_2010_1900}. For further information consult the 
 \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
-\item{geo}{A country code or a country name.  For example, "SK" or as "Slovakia".}
+\item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
 
-\item{year}{A numeric variable containing the year. Defaults to 2010, because this year has the most data.}
+\item{year}{A numeric variable containing the year. Defaults to \code{2010}, because this year has the most data.}
 
-\item{unit}{A character string containing the currency unit, defaults to "MIO_NAC" (million national currency unit). The alternative is "MIO_EUR".}
+\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
+The alternative is \code{MIO_EUR}.}
 
-\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
+\item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
 
-\item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
+\item{labelling}{Defaults to \code{iotables} which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
-The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
+The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.}
 }
 \description{
 This function is used to filter out  a single input-output table from a database, 
@@ -36,5 +37,5 @@ directly, rather via this function, if and when it is necessary.
 \examples{
 germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
              year = 1990,   unit = "MIO_EUR", 
-             labelling  = 'iotables')
+             labelling  = "iotables")
 }
