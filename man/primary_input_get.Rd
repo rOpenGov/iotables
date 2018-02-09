@@ -27,7 +27,8 @@ could be written as \code{Slovakia}, too.}
 
 \item{year}{A numeric variable containing the year.}
 
-\item{unit}{The currency unit in the input-output table.}
+\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
+The alternative is \code{MIO_EUR}.}
 
 \item{households}{If the household are included in your model (adds final 
 household expenditure column). Defaults to \code{FALSE}.}
