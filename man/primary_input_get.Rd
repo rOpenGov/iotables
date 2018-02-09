@@ -10,35 +10,35 @@ primary_input_get(input = "compensation_employees", source = "germany_1990",
 }
 \arguments{
 \item{input}{A character string or a character vector containing the indicator names. 
-Any of 'compensation_employees', 'wages_salaries', 'mixed_income_gross', 
-'gva' (for gross value added), 'surplus_mixed_gross', 'surplus_mixed_net',
-'net_tax_production', 'import_goods_services' (and its breakup ..._MU, 
+Any of \code{compensation_employees}, \code{wages_salaries}, \code{mixed_income_gross}, 
+\code{gva} (for gross value added), \code{surplus_mixed_gross}, \code{surplus_mixed_net},
+\code{net_tax_production}, \code{import_goods_services} (and its breakup ..._MU, 
  _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you 
  will get an error. The input parameter is case sensitive.}
 
-\item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
-"naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_cp17_r2", "naio_17_agg_60_r2", 
-"naio_17_agg_10_r2", "croatia_2010_1700", "croatia_2010_1800", 
-"croatia_2010_1900". For further information consult the 
+\item{source}{A data source, for example \code{naio_10_cp1700}. Possible codes are \code{naio_10_cp1700},
+\code{naio_10_cp1750}, \code{naio_10_pyp1700}, \code{naio_10_pyp1750}, \code{naio_cp17_r2}, \code{naio_17_agg_60_r2}, 
+\code{naio_17_agg_10_r2}, \code{croatia_2010_1700}, \code{croatia_2010_1800}, 
+\code{croatia_2010_1900}. For further information consult the 
 \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
-\item{geo}{A country code or a country name, defaults to "SK" that 
-could be written as "Slovakia", too.}
+\item{geo}{A country code or a country name, defaults to \code{SK} that 
+could be written as \code{Slovakia}, too.}
 
 \item{year}{A numeric variable containing the year.}
 
 \item{unit}{The currency unit in the input-output table.}
 
 \item{households}{If the household are included in your model (adds final 
-household expenditure column)}
+household expenditure column). Defaults to \code{FALSE}.}
 
-\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
+\item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
 
-\item{labelling}{Defaults to "iotables" which gives standard row and column 
+\item{labelling}{Defaults to \code{iotables} which gives standard row and column 
 names regardless of the
 source of the table, or if it is a product x product, industry x industry or 
 product x industry table.
-The alternative is "short" which is the original short row or column code of 
+The alternative is \code{short} which is the original short row or column code of 
 Eurostat or OECD.}
 }
 \description{
@@ -46,7 +46,7 @@ This function will retrieve any primary input from the input-output table.
 You can use the iotables or the original (Eurostat) short labels to select the 
 primary input.
 If you work with the original Eurostat labels, you can review the codes of
-variables with 'View(metadata)'.
+variables with \code{View(metadata)}.
 }
 \examples{
 comp_employees_de <- primary_input_get(

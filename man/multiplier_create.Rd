@@ -14,7 +14,7 @@ multiplier_create(input_vector = NULL, Im = NULL,
 function.}
 
 \item{multiplier_name}{A variable name to be given to the returned multipliers. 
-Defaults to 'multiplier'.}
+Defaults to \code{multiplier}.}
 
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
 }

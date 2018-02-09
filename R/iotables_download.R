@@ -16,12 +16,12 @@
 #' Input-output table at current prices, 6 branches - EU aggregates (naio_17_agg_6)	 
 #' 
 #' At the moment import and domestic tables are not yet supported in the package.
-#' The data is downloaded in the tempdir() under the name the statistical product as an
-#' rds file. (For example: naio_10_cp1750.rds)
+#' The data is downloaded in the \code{tempdir()}under the name the statistical product as an
+#' rds file. (For example: \code{naio_10_cp1750.rds})
 #' The temporary directory is emptied at every normal R session exit.
-#' @param source Currently only source = "eurostat" works. Later OECD Stan will be added.
-#' @param stk_flow Defaults to "TOTAL". Possible values are "DOM", "IMP", "TOTAL". In tables
-#' where no distinction is made it is not needed.
+#' @param source Currently only source = \code{eurostat} works. Later OECD Stan will be added.
+#' @param stk_flow Defaults to \code{TOTAL}. Possible values are \code{DOM}, \code{IMP}, \code{TOTAL}. 
+#' In tables where no distinction is made it is not needed.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join rename
 #' @importFrom eurostat get_eurostat label_eurostat

@@ -7,7 +7,7 @@
 #' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}
 #' function. 
 #' @param multiplier_name A variable name to be given to the returned multipliers. 
-#' Defaults to 'multiplier'.
+#' Defaults to \code{multiplier}.
 #' @param digits Rounding digits, if omitted, no rounding takes place. 
 #' @examples 
 #' de_use <- use_table_get ( source = "germany_1990", geo = "DE",

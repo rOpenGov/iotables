@@ -15,22 +15,22 @@ output_get(source = "germany_1990", geo = "DE", year = 1990,
 "croatia_2010_1900". For further information consult the 
 \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
-\item{geo}{A country code or a country name.  For example, "SK" or as "Slovakia".}
+\item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
 
 \item{year}{A numeric variable containing the year. Defaults to 2010, because this year has the most data.}
 
-\item{unit}{A character string containing the currency unit, defaults to "MIO_NAC" (million national currency unit). The alternative is "MIO_EUR".}
+\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). The alternative is \code{MIO_EUR}.}
 
 \item{households}{If you need to make household demand endogenous, or "close the households off", TRUE selects 
 wages and final household consumption. This is needed for induced-effects calculations.}
 
-\item{labelling}{Defaults to "iotables" which gives standard row and column names regardless of the
+\item{labelling}{Defaults to \code{iotables} which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
-The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
+The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.}
 
-\item{stk_flow}{Defaults to "DOM", alternative "IMP".}
+\item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
 
-\item{keep_total}{Logical variable. Defaults to FALSE and removes the totaling row and column from the matrix.}
+\item{keep_total}{Logical variable. Defaults to \code{FALSE} and removes the totaling row and column from the matrix.}
 }
 \description{
 Get an output vector
