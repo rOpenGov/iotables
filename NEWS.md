@@ -41,6 +41,9 @@ errors were corrected.
 # iotables 0.2.4
 * Some documentation improvements. This version was submitted for CRAN for release.
 
+# iotables 0.2.5
+* Some documentation improvements.
+
 #Forthcoming 0.3 version 
 For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
 

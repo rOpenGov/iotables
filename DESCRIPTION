@@ -1,8 +1,8 @@
 Package: iotables
 Type: Package
 Title: Importing and Manipulating Symmetric Input-Output Tables
-Version: 0.2.4
-Author: Daniel Antal CFA
+Version: 0.2.5
+Author: Daniel Antal
 Maintainer: Daniel Antal <daniel.antal@ceemid.eu>  
 Description: Pre-processing tasks related to working with Eurostat's symmetric input-output
     tables and provide basic input-output economics calculations. The package is 
