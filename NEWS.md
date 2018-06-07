@@ -44,6 +44,9 @@ errors were corrected.
 # iotables 0.2.5
 * Some documentation improvements.
 
+# iotables 0.2.6
+* Ddownload `naio_10_cp1620` (trade and transport margins) or `naio_10_cp1620` (net taxes) with the parameter `stk_flow="TOTAL"`. 
+
 #Forthcoming 0.3 version 
 For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
 
