@@ -31,7 +31,11 @@ Acquiring data
 
 Eurostat's data can be downloaded in several tidy, long-form, files, and a lot of filtering is needeed to start working with it. In case you need to work with a SIOT given in Excel, for example, Eurostat's pre-2010 files, which cannot be downloaded with the eurostat package, please consult the Croatia vignette. What you want to do is to arrive to a similar format to Eurostat's long-form.
 
-Currently the following Eurostat SIOTs can be used: `naio_10_cp1700`, `naio_10_cp1750`, `naio_10_pyp1700`, `naio_10_pyp1750`, `naio_cp17_r2`, `naio_17_agg_60_r2`, `naio_17_agg_10_r2`. The tables follow a similar structure, but they are differing in two important aspects.
+Currently the following Eurostat SIOTs can be used: `naio_10_cp1700`, `naio_10_cp1750`, `naio_10_pyp1700`, `naio_10_pyp1750`, `naio_cp17_r2`, `naio_17_agg_60_r2`, `naio_17_agg_10_r2`. 
+
+Furthermore, you can get the trade and retail margins with parameters `source = "naio_10_cp1620", stk_dom = "TOTAL"`. If the stk_dom is omitted, it will be added to the query. 
+
+The tables follow a similar structure, but they are differing in two important aspects.
 
 The following example is not run. In this case the `stk_flow` is omitted:
 

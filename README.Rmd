@@ -44,6 +44,9 @@ Eurostat's data can be downloaded in several tidy, long-form, files, and a lot o
 
 Currently the following Eurostat SIOTs can be used: `naio_10_cp1700`, `naio_10_cp1750`, `naio_10_pyp1700`, `naio_10_pyp1750`, `naio_cp17_r2`, `naio_17_agg_60_r2`, `naio_17_agg_10_r2`. The tables follow a similar structure, but they are differing in two important aspects.  
 
+Furthermore, you can download `naio_10_cp1620` (trade and transport margins) and `naio_10_cp1620` (net taxes) with the parameter `stk_flow="TOTAL"`. 
+
+
 The following example is not run. In this case the `stk_flow` is omitted:
 
 ```{r example_download_SK, eval=FALSE}

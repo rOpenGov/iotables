@@ -38,8 +38,8 @@ iotables_download <- function ( source = "naio_cp17_r2",
   . = NULL; downloaded <- NULL; downloaded_labelled <- NULL
 
   possible_sources_60 <- c( "naio_cp17_r2", "naio_10_cp1700", "naio_10_cp1750", 
-                         "naio_10_pyp1700", "naio_10_pyp1750", 
-                         "naio_17_agg_60_r2", "naio_18_agg_60_r2", 
+                         "naio_10_pyp1700", "naio_10_pyp1750", "naio_10_cp1620",
+                         "naio_17_agg_60_r2", "naio_18_agg_60_r2", "naio_10_cp1630",
                          "naio_19_agg_60_r2")
   source <- tolower (source)
   if ( ! source %in%  possible_sources_60 ) {

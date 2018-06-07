@@ -31,7 +31,7 @@
 iotable_get <- function ( source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           stk_flow = "DOM", labelling = "iotables") { 
-  ##Initialize variables ------------
+##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; 
   values = NULL ; .= NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
@@ -42,10 +42,20 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   if (! labelling %in% c("iotables", "short")) {
     stop("Only iotables or original short columns can be selected.")
   }
+  if (! unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC")) {
+    stop("Currency unit must be MIO_NAC, MIO_EUR or T_NAC")
+  }
+  if ( source %in% c("naio_10_cp1620", "naio_10_cp1630")) {
+    if ( stk_flow != "TOTAL") {
+      stk_flow_input <- "TOTAL"
+    warning ( "The parameter stk_flow was changed to TOTAL." )
+    }
+    }
   source_inputed <- source
 
 ##Veryfing source parameter and loading the labelling  ----
-  prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750")
+  prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
+                "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630")
   trow_tcol <-  c("naio_cp17_r2", "naio_17_agg_60_r2", "naio_17_agg_10_r2", 
                   "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
