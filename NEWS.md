@@ -45,8 +45,9 @@ errors were corrected.
 * Some documentation improvements.
 
 # iotables 0.2.6
-* Ddownload `naio_10_cp1620` (trade and transport margins) or `naio_10_cp1620` (net taxes) with the parameter `stk_flow="TOTAL"`. 
+* Ddownload `naio_10_cp1620` (trade and transport margins) or `naio_10_cp1620` (net taxes) with the parameter `stk_flow="TOTAL"`.  Correctly builds on Windows and Mac OS (old and release version) but problem with the dependency `eurostat` in Linux on Travis.
 
-#Forthcoming 0.3 version 
-For the 0.3 version the OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
+
+#Planned for later
+The OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
 
