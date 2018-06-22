@@ -42,9 +42,9 @@ YOu can follow changes on the NEWS.md file.
 
 Eurostat's data can be downloaded in several tidy, long-form, files, and a lot of filtering is needeed to start working with it. In case you need to work with a SIOT given in Excel, for example, Eurostat's pre-2010 files, which cannot be downloaded with the eurostat package, please consult the Croatia vignette. What you want to do is to arrive to a similar format to Eurostat's long-form. 
 
-Currently the following Eurostat SIOTs can be used: `naio_10_cp1700`, `naio_10_cp1750`, `naio_10_pyp1700`, `naio_10_pyp1750`, `naio_cp17_r2`, `naio_17_agg_60_r2`, `naio_17_agg_10_r2`. The tables follow a similar structure, but they are differing in two important aspects.  
+Currently the following Eurostat SIOTs can be used: `naio_10_cp1700`, `naio_10_cp1750`, `naio_10_pyp1700`, `naio_10_pyp1750`. The tables follow a similar structure, but they are differing in two important aspects.  Unfortunately, Eurostat does not publish `naio_cp17_r2`, `naio_17_agg_60_r2`, `naio_17_agg_10_r2` anymore, but if you saved those files, it functions work with them, too, but they cannot be downloaded with `iotable_get` since they are not in the Eurostat database anymore.
 
-Furthermore, you can download `naio_10_cp1620` (trade and transport margins) and `naio_10_cp1620` (net taxes) with the parameter `stk_flow="TOTAL"`. 
+Furthermore, you can download `naio_10_cp1620` (trade and transport margins) and `naio_10_cp1630` (net taxes) with the parameter `stk_flow="TOTAL"`. 
 
 
 The following example is not run. In this case the `stk_flow` is omitted:
