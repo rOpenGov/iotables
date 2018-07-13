@@ -24,7 +24,8 @@
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 #' data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
-#' in the \code{data_directory} or the temporary directory, if it exists.
+#' in the \code{data_directory} or the temporary directory, if it exists. Will force
+#' download only in a new session.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
 #' @importFrom tidyr spread
@@ -135,7 +136,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
                                               force_download = force_download ) 
       }
   } # use eurostat files 
-  
+  labelled_io_data <- readRDS(paste0(tempdir(), "\\", "eurostat/naio_10_cp15_date_code_TF.rds"))
   if ( ! unit_input %in% labelled_io_data$unit ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
@@ -219,7 +220,15 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
       tidyr::spread (t_cols2, values )
   }
   
- return( iotable_labelled_w  )
+  if (!is.null(data_directory) ) {
+    save_file_name <- paste0(
+      data_directory, "/", source, '_', stk_flow, '_', year, '_', unit, '.rds'
+    )
+    message ( "Saving ", save_file_name, '.')
+    saveRDS(iotable_labelled_w, save_file_name)
+  }
+  
+ iotable_labelled_w
 }
 
 

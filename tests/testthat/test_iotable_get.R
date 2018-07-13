@@ -1,6 +1,9 @@
 library (testthat)
 library (iotables)
 context ("Creating an IO Table")
+#iotable_get ( source = "naio_10_cp1620", geo = "CZ", 
+#              stk_flow = "TOTAL", year = 2010, 
+#              unit = "MIO_NAC", data_directory = 'data-raw')
 
 test_that("get_iotable errors ", {
   expect_error(iotable_get(source = "germany_1990", 

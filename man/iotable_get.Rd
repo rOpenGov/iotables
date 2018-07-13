@@ -35,7 +35,8 @@ The alternative is \code{short} which is the original short row or column code o
 data file here with labelling.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
-in the \code{data_directory} or the temporary directory, if it exists.}
+in the \code{data_directory} or the temporary directory, if it exists. Will force
+download only in a new session.}
 }
 \description{
 This function is used to filter out  a single input-output table from a database, 
