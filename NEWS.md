@@ -45,7 +45,7 @@ errors were corrected.
 * Some documentation improvements.
 
 # iotables 0.2.6
-* Download `naio_10_cp1620` (trade and transport margins) or `naio_10_cp1620` (net taxes) with the parameter `stk_flow="TOTAL"`.  Correctly builds on Windows and Mac OS (old and release version) but problem with the dependency `eurostat` in Linux on Travis.
+* Download `naio_10_cp1620` (trade and transport margins) or `naio_10_cp1630` (net taxes) with the parameter `stk_flow="TOTAL"`.  Correctly builds on Windows and Mac OS (old and release version) but problem with the dependency `eurostat` in Linux on Travis.
 
 # iotables 0.2.7 
 Default data directory for faster programmatic use and phasing out discountinued Eurostat statistics. A bit improved messages and documentation.
