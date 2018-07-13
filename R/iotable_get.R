@@ -136,7 +136,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
                                               force_download = force_download ) 
       }
   } # use eurostat files 
-  labelled_io_data <- readRDS(paste0(tempdir(), "\\", "eurostat/naio_10_cp15_date_code_TF.rds"))
+ 
   if ( ! unit_input %in% labelled_io_data$unit ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
