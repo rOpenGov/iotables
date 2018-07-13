@@ -42,6 +42,8 @@ test_that("correct data is returned", {
 
 #Slovakia A01, A01 shoud be 497.37
 
-
-
+#test <- iotable_get ( source = "naio_10_cp1750", stk_flow = "TOTAL",
+#                      geo = "CZ", unit = "MIO_NAC", year = 2010, 
+#                      data_directory = "data-raw", force_download = FALSE)
+# A01, A01 should yield 10,161
 
