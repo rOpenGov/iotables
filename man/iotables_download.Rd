@@ -4,13 +4,17 @@
 \alias{iotables_download}
 \title{Download input-output tables}
 \usage{
-iotables_download(source = "naio_cp17_r2", stk_flow = "DOM")
+iotables_download(source = "naio_cp17_r2", data_directory = NULL,
+  force_download = TRUE)
 }
 \arguments{
 \item{source}{Currently only source = \code{eurostat} works. Later OECD Stan will be added.}
 
-\item{stk_flow}{Defaults to \code{TOTAL}. Possible values are \code{DOM}, \code{IMP}, \code{TOTAL}. 
-In tables where no distinction is made it is not needed.}
+\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
+data file here with labelling.}
+
+\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
+in the \code{data_directory} or the temporary directory, if it exists.}
 }
 \description{
 This function downloads standard input-output table files. Currently only Eurostat files are supported.

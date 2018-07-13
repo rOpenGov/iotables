@@ -5,7 +5,8 @@
 \title{Get an input-output table from bulk file}
 \usage{
 iotable_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", stk_flow = "DOM", labelling = "iotables")
+  unit = "MIO_EUR", stk_flow = "DOM", labelling = "iotables",
+  data_directory = NULL, force_download = TRUE)
 }
 \arguments{
 \item{source}{A data source, for example \code{naio_10_cp1700}. Possible codes are \code{naio_10_cp1700},
@@ -21,11 +22,20 @@ iotable_get(source = "germany_1990", geo = "DE", year = 1990,
 \item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
 The alternative is \code{MIO_EUR}.}
 
-\item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
+\item{stk_flow}{Defaults to \code{DOM} as domestic output, alternative \code{IMP} for imports 
+and code{'TOTAL'} for total output. For \code{source = 'naio_10_cp1620'} and 
+trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
+less subsidies only \code{TOTAL} is not used.}
 
 \item{labelling}{Defaults to \code{iotables} which gives standard row and column names regardless of the
 source of the table, or if it is a product x product, industry x industry or product x industry table.
 The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.}
+
+\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
+data file here with labelling.}
+
+\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
+in the \code{data_directory} or the temporary directory, if it exists.}
 }
 \description{
 This function is used to filter out  a single input-output table from a database, 

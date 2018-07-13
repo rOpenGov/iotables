@@ -20,8 +20,10 @@
 #' rds file. (For example: \code{naio_10_cp1750.rds})
 #' The temporary directory is emptied at every normal R session exit.
 #' @param source Currently only source = \code{eurostat} works. Later OECD Stan will be added.
-#' @param stk_flow Defaults to \code{TOTAL}. Possible values are \code{DOM}, \code{IMP}, \code{TOTAL}. 
-#' In tables where no distinction is made it is not needed.
+#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
+#' data file here with labelling. 
+#' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
+#' in the \code{data_directory} or the temporary directory, if it exists.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join rename
 #' @importFrom eurostat get_eurostat label_eurostat
@@ -33,11 +35,12 @@
 #' @export
 
 iotables_download <- function ( source = "naio_cp17_r2", 
-                                stk_flow = "DOM" ) {
+                                data_directory = NULL,
+                                force_download = TRUE ) {
   t_cols2_lab = NULL; t_rows2_lab = NULL; values_lab = NULL
   . = NULL; downloaded <- NULL; downloaded_labelled <- NULL
 
-  possible_sources_60 <- c( "naio_cp17_r2", "naio_10_cp1700", "naio_10_cp1750", 
+  possible_sources_60 <- c( "naio_10_cp1700", "naio_10_cp1750", 
                          "naio_10_pyp1700", "naio_10_pyp1750", "naio_10_cp1620",
                          "naio_17_agg_60_r2", "naio_18_agg_60_r2", "naio_10_cp1630",
                          "naio_19_agg_60_r2")
@@ -49,25 +52,30 @@ iotables_download <- function ( source = "naio_cp17_r2",
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
      "\\eurostat/", source, "_date_code_TF.rds" )
-
+ 
+  #downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
   #only download the Eurostat bulk file if necessary.
-  if ( source == "naio_cp17_r2") {
-    downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
-    } else {
-    if(!file.exists(retrieve_from_temp_bulk)){
+  
+  if ( !is.null (data_directory)   ) {
+    save_file_name <- paste0(data_directory, "/", source, ".rds")
+    if ( ! force_download && file.exists(save_file_name) )
+      return(readRDS(save_file_name))
+  }
+  
+  if (!file.exists(retrieve_from_temp_bulk) | force_download == TRUE){
       downloaded <- tryCatch(eurostat::get_eurostat (source),
                              error=function(e) message ("No data was found with this identifier."))
     } else {
-      warning ('The bulk Eurostat file is retrieved from the temporary directory.')
+      message ('The bulk Eurostat file is retrieved from the temporary directory.')
       downloaded <- readRDS( retrieve_from_temp_bulk )
     }
-  }
+
   
   
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
     eurostat::label_eurostat (., fix_duplicated = TRUE) %>%          #add meaningful labels to raw data
-    setNames( ., paste0( names (.), "_lab" ) )    %>%  
+    stats::setNames( ., paste0( names (.), "_lab" ) )    %>%  
     dplyr::mutate ( rows = 1:nrow(.) ) %>%  #because long and wide formats are not symmetric
     dplyr::rename ( values = values_lab ) 
   
@@ -76,12 +84,12 @@ iotables_download <- function ( source = "naio_cp17_r2",
   downloaded <- downloaded  %>%
     dplyr::mutate ( rows = 1:nrow(.)) %>%
     dplyr::left_join (., downloaded_labelled, by = c("rows", "values")) 
-  message ("Joined labelled and not labelled data.")
+  #message ("Joined labelled and not labelled data.")
   
   if ( "stk_flow" %in% names ( downloaded )) {
     downloaded <- downloaded %>%
       dplyr::filter ( stk_flow == stk_flow )
-    message ("Type " , stk_flow, " is returned.")
+    #message ("Type " , stk_flow, " is returned.")
   }
   
   if ( source == "naio_cp17_r2" ){
@@ -114,7 +122,13 @@ iotables_download <- function ( source = "naio_cp17_r2",
              "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88", 
              "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D")
     )
-  }
+  } #end of _r2 
   
-   return( downloaded )
+  if( !is.null(data_directory) ) {
+    save_file_name <- paste0(data_directory, "/", source, ".rds")
+    saveRDS( downloaded, file = save_file_name )
+    message ( "Saved the table with stk_flow = ", 
+              stk_flow, " in ", save_file_name )
+  }
+  downloaded
 }

@@ -14,10 +14,17 @@
 #' @param year A numeric variable containing the year. Defaults to \code{2010}, because this year has the most data. 
 #' @param unit A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
 #' The alternative is \code{MIO_EUR}. 
-#' @param stk_flow Defaults to \code{DOM}, alternative \code{IMP}. 
+#' @param stk_flow Defaults to \code{DOM} as domestic output, alternative \code{IMP} for imports 
+#' and code{'TOTAL'} for total output. For \code{source = 'naio_10_cp1620'} and 
+#' trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
+#' less subsidies only \code{TOTAL} is not used.
 #' @param labelling Defaults to \code{iotables} which gives standard row and column names regardless of the
 #' source of the table, or if it is a product x product, industry x industry or product x industry table.
 #' The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.
+#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
+#' data file here with labelling. 
+#' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
+#' in the \code{data_directory} or the temporary directory, if it exists.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
 #' @importFrom tidyr spread
@@ -30,7 +37,9 @@
 
 iotable_get <- function ( source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
-                          stk_flow = "DOM", labelling = "iotables") { 
+                          stk_flow = "DOM", labelling = "iotables", 
+                          data_directory = NULL, 
+                          force_download = TRUE) { 
 ##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; 
   values = NULL ; .= NULL #non-standard evaluation creates a varning in build. 
@@ -56,8 +65,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
 ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630")
-  trow_tcol <-  c("naio_cp17_r2", "naio_17_agg_60_r2", "naio_17_agg_10_r2", 
-                  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
+  trow_tcol <-  c(  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   
   if ( source %in% prod_ind ) { 
@@ -122,8 +130,9 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_data <- readRDS( tmp_rds ) 
     } else { 
-      labelled_io_data <- iotables_download ( source, 
-                                              stk_flow = stk_flow_input ) 
+      labelled_io_data <- iotables_download ( source,
+                                              data_directory = data_directory, 
+                                              force_download = force_download ) 
       }
   } # use eurostat files 
   
