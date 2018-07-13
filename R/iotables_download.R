@@ -4,12 +4,12 @@
 #' You are not likely to use this function, because \code{\link{iotable_get}} will
 #' call this function if necessary and properly filter out an input-output table.
 #' The only parameter is the Eurostat code of the table: 
-#' Symmetric input-output table - current prices (NACE Rev. 2) [naio_cp17_r2]
 #' Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)	
 #' Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
 #' Symmetric input-output table at basic prices (product by product) (previous years prices) (naio_10_pyp1700)
 #' Symmetric input-output table at basic prices (industry by industry) (previous years prices) (naio_10_pyp1750)
-#' 
+#' Table of trade and transport margins (naio_10_cp1620)
+#' Table of taxes less subsidies on product (naio_10_cp1630)	
 #' EU-level tables
 #' Input-output table for domestic output at current prices, 60 branches - EU aggregates (NACE Rev. 2) (naio_18_agg_60_r2)
 #' Input-output table at current prices, 10 branches - EU aggregates (NACE Rev. 2) (naio_17_agg_10_r2)
@@ -34,7 +34,7 @@
 #'  }
 #' @export
 
-iotables_download <- function ( source = "naio_cp17_r2", 
+iotables_download <- function ( source = "naio_10_cp1700", 
                                 data_directory = NULL,
                                 force_download = TRUE ) {
   t_cols2_lab = NULL; t_rows2_lab = NULL; values_lab = NULL
@@ -127,8 +127,8 @@ iotables_download <- function ( source = "naio_cp17_r2",
   if( !is.null(data_directory) ) {
     save_file_name <- paste0(data_directory, "/", source, ".rds")
     saveRDS( downloaded, file = save_file_name )
-    message ( "Saved the table with stk_flow = ", 
-              stk_flow, " in ", save_file_name )
+    message ( "Saved the raw data of this table tpye in ",
+               save_file_name, "." )
   }
   downloaded
 }
