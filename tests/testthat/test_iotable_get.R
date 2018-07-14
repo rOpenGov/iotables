@@ -5,6 +5,12 @@ context ("Creating an IO Table")
 #              stk_flow = "TOTAL", year = 2010, 
 #              unit = "MIO_NAC", data_directory = 'data-raw')
 
+#test <- iotable_get ( source = "naio_10_pyp1620", geo = "CZ", 
+#              stk_flow = "TOTAL", year = 2010, 
+#              unit = "MIO_NAC", data_directory = 'data-raw')
+
+
+
 test_that("get_iotable errors ", {
   expect_error(iotable_get(source = "germany_1990", 
                               geo = 'DE', year = 1990, unit = "MIO_NAC")) #currency not found

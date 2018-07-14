@@ -50,6 +50,9 @@ errors were corrected.
 # iotables 0.2.7 
 Default data directory for faster programmatic use and phasing out discountinued Eurostat statistics. A bit improved messages and documentation.
 
+# iotables 0.2.8
+Handles tables with purchasers' prices.
+
 #Planned for later
 The OECD downloader will work, too. The sysdata.rda has to be updated with correct metadata info for OECD bulk downloaded files.
 

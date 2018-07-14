@@ -65,7 +65,8 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
 
 ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
-                "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630")
+                "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630", 
+                "naio_10_pyp1620", "naio_10_pyp1630" )
   trow_tcol <-  c(  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
   

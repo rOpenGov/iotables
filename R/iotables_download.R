@@ -40,13 +40,13 @@ iotables_download <- function ( source = "naio_10_cp1700",
   t_cols2_lab = NULL; t_rows2_lab = NULL; values_lab = NULL
   . = NULL; downloaded <- NULL; downloaded_labelled <- NULL
 
-  possible_sources_60 <- c( "naio_10_cp1700", "naio_10_cp1750", 
-                         "naio_10_pyp1700", "naio_10_pyp1750", "naio_10_cp1620",
-                         "naio_17_agg_60_r2", "naio_18_agg_60_r2", "naio_10_cp1630",
-                         "naio_19_agg_60_r2")
+  possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
+                         "naio_10_pyp1700", "naio_10_pyp1750",
+                         "naio_10_cp1620", "naio_10_pyp1620", 
+                         "naio_10_cp1630", "naio_10_pyp1630" )
   source <- tolower (source)
-  if ( ! source %in%  possible_sources_60 ) {
-    supported_tables <- paste( possible_sources_60, collapse = ", ")
+  if ( ! source %in%  possible_download_sources ) {
+    supported_tables <- paste( possible_download_sources, collapse = ", ")
     stop (source, " is not in supported tables [", supported_tables, "]") 
   }
   
