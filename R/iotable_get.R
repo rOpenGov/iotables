@@ -222,7 +222,9 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   
   if (!is.null(data_directory) ) {
     save_file_name <- paste0(
-      data_directory, "/", source, '_', stk_flow, '_', year, '_', unit, '.rds'
+      data_directory, "/", geo, '_', year, '_', 
+      source, '_', stk_flow, '_', unit, 
+      '.rds'
     )
     message ( "Saving ", save_file_name, '.')
     saveRDS(iotable_labelled_w, save_file_name)
