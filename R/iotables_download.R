@@ -37,8 +37,8 @@
 iotables_download <- function ( source = "naio_10_cp1700", 
                                 data_directory = NULL,
                                 force_download = TRUE ) {
-  t_cols2_lab = NULL; t_rows2_lab = NULL; values_lab = NULL
-  . = NULL; downloaded <- NULL; downloaded_labelled <- NULL
+  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL
+  . <- downloaded <- downloaded_labelled <- NULL
 
   possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
                          "naio_10_pyp1700", "naio_10_pyp1750",
