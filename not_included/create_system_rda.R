@@ -85,10 +85,14 @@ names (induse_vocabulary  ) <- gsub( ":", "_", names (induse_vocabulary  ))
 prod_na_vocabulary <- readxl::read_excel(path = "not_included/prod_na.xlsx")
 names (prod_na_vocabulary  ) <- gsub( ":", "_", names (prod_na_vocabulary  ))
 
+employment_metadata <- readRDS("not_included/iotables_labor_aggregation_labels.rds")
+
+
 devtools::use_data(t_rows_data, t_cols_data, 
                    p_cols_data, p_rows_data, 
                    germany_metadata_rows,
                    germany_metadata_cols,
                    t_rows_vocabulary, t_cols_vocabulary,
                    induse_vocabulary, prod_na_vocabulary,
+                   employment_metadata,
                    internal = TRUE, overwrite = TRUE)
