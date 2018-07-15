@@ -1,8 +1,8 @@
 #' Get an output vector
 #' 
 #' @param source A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
-#' "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_cp17_r2", "naio_17_agg_60_r2", 
-#' "naio_17_agg_10_r2", "croatia_2010_1700", "croatia_2010_1800", 
+#' "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_10_cp1620", "naio_10_pyp1620",
+#' "naio_10_cp1630", "naio_10_pyp1630", "croatia_2010_1700", "croatia_2010_1800", 
 #' "croatia_2010_1900". For further information consult the 
 #' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
 #' @param geo A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.
