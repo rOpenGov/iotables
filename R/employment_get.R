@@ -41,6 +41,10 @@ employment_get <- function ( geo = "CZ",
   nace_r2 <- values <- code <- variable <- iotables_label <- NULL
   geo_input <- geo; year_input <- year; age_input <- age
   
+  if ( ! labelling %in% c("iotables", 'prod_na', 'induse')) {
+    stop("Labelling must be any of 'iotables', 'prod_na' [product x product] or 'induse' [industry x industry]")
+  }
+  
   save_employment_file <- paste0(data_directory, '/employment_',
                                  tolower(sex),
                                  '_', geo_input, '_', year, '_avg.rds')
@@ -128,35 +132,65 @@ employment_get <- function ( geo = "CZ",
     saveRDS(employment, file = save_employment_file)
   }
   
-  if ( labelling %in% c("iotables", "prod_na" )) {
-    primary_employment_input <- employment %>%
-      filter ( variable == "prod_na" )
-  } else { 
-    primary_employment_input <- employment %>%
-      filter ( variable == "induse" )
-    }
-
   emp_sex <- ifelse ( tolower(sex_input) == "t", "total", 
                     ifelse (tolower(sex_input) == "f", "female", "male" ))
-  prefix <- data.frame ( 
-    iotables_row = paste0("employment_", emp_sex )
-    )
+
   
-  imputed_rent <- data.frame ( 
-    real_estate_imputed_a = 0
-    )
 
   if ( labelling == "iotables" ) {
+    prefix <- data.frame ( 
+      iotables_row = paste0("employment_", emp_sex )
+    )
+    
+    primary_employment_input <- employment %>%
+      filter ( variable == "prod_na" ) #does not matter which, not used
+    
+    imputed_rent <- data.frame ( 
+      real_estate_imputed_a = 0
+    )
     primary_employment_input <-  primary_employment_input %>% 
       ungroup() %>%
       select ( iotables_label, values ) %>%
-      spread  (  iotables_label, values  ) 
-  } else { 
+      spread ( iotables_label, values )    #use iotables_label in this case
+    
+  } else if ( labelling == "prod_na" ){
+    prefix <- data.frame ( 
+      prod_na = paste0("employment_", emp_sex )
+    )
+    
+    primary_employment_input <- employment %>%
+      filter ( variable == "prod_na" )
+    
+    imputed_rent <- data.frame ( 
+      CPA_L68A = 0
+    )
     primary_employment_input <-  primary_employment_input %>% 
       ungroup() %>%
       select ( code, values ) %>%
-      spread ( code, values  ) 
+      spread ( code, values )     #use code for standard Eurostat library
+    
+  } else if (labelling == "induse" ) {
+    prefix <- data.frame ( 
+      induse = paste0("employment_", emp_sex )
+    )
+    
+    primary_employment_input <- employment %>%
+      filter ( variable == "induse" )
+    
+    imputed_rent <- data.frame ( 
+      L68A = 0
+    )
+    primary_employment_input <-  primary_employment_input %>% 
+      ungroup() %>%
+      select ( code, values ) %>%
+      spread ( code, values )      #use code for standard Eurostat library
+    
+  } else {
+    warning("No L68A was added.")
+    return ( primary_employment_input )
   }
+  
+  
   
   return_employment <- cbind( prefix, primary_employment_input )
   return_employment <- cbind ( return_employment, imputed_rent )
