@@ -9,10 +9,16 @@ iotable_get(source = "germany_1990", geo = "DE", year = 1990,
   data_directory = NULL, force_download = TRUE)
 }
 \arguments{
-\item{source}{A data source, for example \code{naio_10_cp1700}. Possible codes are \code{naio_10_cp1700},
-\code{naio_10_cp1750}, \code{naio_10_pyp1700}, \code{naio_10_pyp1750}, \code{naio_cp17_r2}, \code{naio_17_agg_60_r2}, 
-\code{naio_17_agg_10_r2}, \code{croatia_2010_1700}, \code{croatia_2010_1800}, 
-\code{croatia_2010_1900}. For further information consult the 
+\item{source}{A data source, for example \code{naio_10_cp1700}. 
+Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)    
+Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
+Symmetric input-output table at basic prices (product by product) (previous years prices) (naio_10_pyp1700)
+Symmetric input-output table at basic prices (industry by industry) (previous years prices) (naio_10_pyp1750)
+Table of trade and transport margins at basic prices (naio_10_cp1620) and 
+at previous' years prices (naio_10_pyp1620)
+Table of taxes less subsidies on products at basic prices (naio_10_cp1630)    and
+at previous' years prices (naio_10_pyp1630)
+For further information consult the 
 \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
 \item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
