@@ -42,18 +42,25 @@ YOu can follow changes on the NEWS.md file.
 
 Eurostat's data can be downloaded in several tidy, long-form, files, and a lot of filtering is needeed to start working with it. In case you need to work with a SIOT given in Excel, for example, Eurostat's pre-2010 files, which cannot be downloaded with the eurostat package, please consult the Croatia vignette. What you want to do is to arrive to a similar format to Eurostat's long-form. 
 
-Currently the following Eurostat SIOTs can be used: `naio_10_cp1700`, `naio_10_cp1750`, `naio_10_pyp1700`, `naio_10_pyp1750`. The tables follow a similar structure, but they are differing in two important aspects.  Unfortunately, Eurostat does not publish `naio_cp17_r2`, `naio_17_agg_60_r2`, `naio_17_agg_10_r2` anymore, but if you saved those files, it functions work with them, too, but they cannot be downloaded with `iotable_get` since they are not in the Eurostat database anymore.
+Currently the following Eurostat SIOTs can be used: 
 
-Furthermore, you can download `naio_10_cp1620` (trade and transport margins) and `naio_10_cp1630` (net taxes) with the parameter `stk_flow="TOTAL"`. 
+- product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`; 
 
+- industry x industry SIOTS  `naio_10_cp1750` or`naio_10_pyp1750`;
 
-The following example is not run. In this case the `stk_flow` is omitted:
+- trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`, only with  `stk_flow = 'TOTAL'`
+
+- net taxes less subsidies  `naio_10_cp1630` or `naio_10_pyp1630`, only with  `stk_flow = 'TOTAL'`.
+
+The `cp` element refers to basic prices and the `pyp` to previous years' prices.
+
+The following example is not run. 
 
 ```{r example_download_SK, eval=FALSE}
-require (dplyr) ; require (iotables)
+require (iotables)
 
 #Get the Slovak national IO table.
-sk_io <- iotable_get ( source = "naio_cp17_r2", geo = "SK",
+sk_io <- iotable_get ( source = "naio_10_cp1700", geo = "SK",
                        year = 2010, unit = "MIO_EUR", 
                        labelling = "iotables")
 
@@ -76,9 +83,7 @@ The Eurostat bulk downloader will give you a very long file: all country data in
 
 * The `geo` can be inputed with 2 letter country codes or country names. Beware, that Eurostat UK for the United Kingdom instead of GB and EL for Greece instead of GR. 
 
-* The `stk_flow` variable is only used when the 'DOM' and 'IMP' type SIOTs differ in the treatment of iimpots. In the case of SIOTs where the creation process does not differentiate these types, the stk_flow variable should be left at the default setting.
-
-The code above depends on the `get_eurostat()` function of the Eurostat package. This function call will create a temporary .rds file during your session to avoid too large data volumes.  
+* The `stk_flow` variable is only used when there are separate tables for domestic product and imports. In this case you can choose `DOM`, `IMP` or `TOTAL`. When not applicable, rely on the default setting.
 
 ## Preprocessing
 The ` use_table_get ()` function extracts only the input-flow matrix from the table. The ` output_get ()` function extracts the output vector. Because the Eurostat input-output files are very large, we use the simplified German IO table for the examples.  This is also useful for testing the functions as the returned values can be checked against Eurostat manual values.
@@ -131,7 +136,7 @@ de_emp_indicator <- input_indicator_create (de_emp, de_output)
 employment_multipliers <- multiplier_create ( 
   input_vector    = de_emp_indicator,
   Im              = I_de,
-  multiplier_name =  "employment_multiplier", 
+  multiplier_name = "employment_multiplier", 
   digits = 4 )
 
 print (employment_multipliers[1,3])
