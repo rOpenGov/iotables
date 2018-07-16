@@ -38,8 +38,8 @@ employment_get <- function ( geo = "CZ",
                              labelling = 'iotables', 
                              data_directory = NULL,
                              force_download = TRUE) {
-  nace_r2 <- values <- code <- variable <- NULL
-  geo_input = geo; year_input = year; age_input = age
+  nace_r2 <- values <- code <- variable <- iotables_label <- NULL
+  geo_input <- geo; year_input <- year; age_input <- age
   
   save_employment_file <- paste0(data_directory, '/employment_',
                                  tolower(sex),
