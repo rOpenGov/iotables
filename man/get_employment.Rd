@@ -5,7 +5,7 @@
 \title{Get employment data}
 \usage{
 get_employment(geo = "CZ", year = "2010", sex = "Total", age = "Y_GE15",
-  data_directory = NULL, force_download = TRUE)
+  labelling = "iotables", data_directory = NULL, force_download = TRUE)
 }
 \arguments{
 \item{geo}{The country code.}
@@ -19,6 +19,10 @@ female employmnent, \code{"Males"} or \code{"M"} for male employment.}
 \item{age}{Defaults to \code{"Y_GE15"}, which is the Eurostat code for employment in 
 all age groups starting from 15-years-old. Any Eurostat code can be used as a 
 parameter.}
+
+\item{labelling}{Either \code{"iotables"} or the applicable short code, 
+for product x product SIOTs \code{"prod_na"} and in the case of industry x 
+industry SIOTs \code{"induse"}.}
 
 \item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 data file here with labelling.}
