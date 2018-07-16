@@ -8,14 +8,11 @@
 #' Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
 #' Symmetric input-output table at basic prices (product by product) (previous years prices) (naio_10_pyp1700)
 #' Symmetric input-output table at basic prices (industry by industry) (previous years prices) (naio_10_pyp1750)
-#' Table of trade and transport margins (naio_10_cp1620)
-#' Table of taxes less subsidies on product (naio_10_cp1630)	
-#' EU-level tables
-#' Input-output table for domestic output at current prices, 60 branches - EU aggregates (NACE Rev. 2) (naio_18_agg_60_r2)
-#' Input-output table at current prices, 10 branches - EU aggregates (NACE Rev. 2) (naio_17_agg_10_r2)
-#' Input-output table at current prices, 6 branches - EU aggregates (naio_17_agg_6)	 
+#' Table of trade and transport margins at basic prices (naio_10_cp1620) and 
+#' at previous' years prices (naio_10_pyp1620)
+#' Table of taxes less subsidies on products at basic prices (naio_10_cp1630)	and
+#' at previous' years prices (naio_10_pyp1630)
 #' 
-#' At the moment import and domestic tables are not yet supported in the package.
 #' The data is downloaded in the \code{tempdir()}under the name the statistical product as an
 #' rds file. (For example: \code{naio_10_cp1750.rds})
 #' The temporary directory is emptied at every normal R session exit.
