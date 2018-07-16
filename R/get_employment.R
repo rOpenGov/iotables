@@ -9,6 +9,9 @@
 #' @param age Defaults to \code{"Y_GE15"}, which is the Eurostat code for employment in 
 #' all age groups starting from 15-years-old. Any Eurostat code can be used as a 
 #' parameter. 
+#' @param labelling Either \code{"iotables"} or the applicable short code, 
+#' for product x product SIOTs \code{"prod_na"} and in the case of industry x 
+#' industry SIOTs \code{"induse"}.
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 #' data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
@@ -32,10 +35,16 @@ get_employment <- function ( geo = "CZ",
                              year = "2010",
                              sex = "Total", 
                              age = "Y_GE15",
+                             labelling = 'iotables', 
                              data_directory = NULL,
                              force_download = TRUE) {
   nace_r2 <- values <- code <- variable <- NULL
-  geo_input = geo; year_input = year; age_input = age; 
+  geo_input = geo; year_input = year; age_input = age
+  
+  save_employment_file <- paste0(data_directory, '/employment_',
+                                 tolower(sex),
+                                 '_', geo_input, '_', year, '_avg.rds')
+  
   if ( geo_input %in% c("GB", "GR")) {
     if (geo_input == "GB") {
       warning ( "Switching GB to Eurostat abbreviation UK.")
@@ -56,6 +65,9 @@ get_employment <- function ( geo = "CZ",
   if ( !is.null(data_directory)) {
     emp_file_name <- paste0(data_directory, "/", "lfsq_egan22d.rds") 
     if ( ! force_download ) {
+        if ( file.exists(save_employment_file)) {
+          return(readRDS(save_employment_file))
+        }
         try({emp <- readRDS(emp_file_name)})
     }
   }
@@ -105,20 +117,44 @@ get_employment <- function ( geo = "CZ",
     dplyr::rename ( emp_code = nace_r2 ) %>%
     dplyr::ungroup ( ) %>%
     dplyr::left_join ( employment_metadata, by = "emp_code") %>%
-    dplyr::group_by ( code, variable ) %>%
+    dplyr::group_by ( code, variable, iotables_label ) %>%
     dplyr::summarize ( values = sum(values)) %>%
     dplyr::mutate ( geo = geo_input ) %>%
     dplyr::mutate ( year = year_input ) %>%
     dplyr::mutate ( sex = sex ) 
   
-  if ( ! is.null(data_directory)) {
-    save_employment_table <- paste0(data_directory, '/employment_',
-                                    tolower(sex),
-                                    '_', geo, '_', year, '_avg.rds')
-    message ( "Saving ", save_employment_table )
-    saveRDS(employment, file = save_employment_table)
+  if ( ! is.null(data_directory) ) {
+    message ( "Saving ", save_employment_file )
+    saveRDS(employment, file = save_employment_file)
   }
-  employment
+  
+  if ( labelling %in% c("iotables", "prod_na" )) {
+    primary_employment_input <- employment %>%
+      filter ( variable == "prod_na" )
+  } else { 
+    primary_employment_input <- employment %>%
+      filter ( variable == "induse" )
+    }
+
+  emp_sex <- ifelse ( tolower(sex_input) == "t", "total", 
+                    ifelse (tolower(sex_input) == "f", "female", "male" ))
+  prefix <- data.frame ( 
+    iotables_row = paste0("employment_", emp_sex )
+    )
+
+  if ( labelling == "iotables" ) {
+    primary_employment_input <-  primary_employment_input %>% 
+      ungroup() %>%
+      select ( iotables_label, values ) %>%
+      spread  (  iotables_label, values  ) 
+  } else { 
+    primary_employment_input <-  primary_employment_input %>% 
+      ungroup() %>%
+      select ( code, values ) %>%
+      spread ( code, values  ) 
+    }
+  
+  return(cbind(prefix, primary_employment_input))
 }
   
   
