@@ -14,7 +14,7 @@
 #'                              year = 1990, unit = "MIO_EUR", 
 #'                              households = FALSE, labelling = "iotables")
 #'
-#'de_emp_indicator <- input_indicator_create ( de_emp, de_output)
+#'de_emp_indicator <- input_indicator_create ( de_emp, de_output )
 #' @export
 
 input_indicator_create <- function ( input_matrix, output_vector,
