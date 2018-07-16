@@ -121,7 +121,7 @@ employment_get <- function ( geo = "CZ",
     dplyr::summarize ( values = sum(values)) %>%
     dplyr::mutate ( geo = geo_input ) %>%
     dplyr::mutate ( year = year_input ) %>%
-    dplyr::mutate ( sex = sex ) 
+    dplyr::mutate ( sex = sex_input ) 
   
   if ( ! is.null(data_directory) ) {
     message ( "Saving ", save_employment_file )
@@ -141,6 +141,10 @@ employment_get <- function ( geo = "CZ",
   prefix <- data.frame ( 
     iotables_row = paste0("employment_", emp_sex )
     )
+  
+  imputed_rent <- data.frame ( 
+    real_estate_imputed_a = 0
+    )
 
   if ( labelling == "iotables" ) {
     primary_employment_input <-  primary_employment_input %>% 
@@ -152,9 +156,12 @@ employment_get <- function ( geo = "CZ",
       ungroup() %>%
       select ( code, values ) %>%
       spread ( code, values  ) 
-    }
+  }
   
-  return(cbind(prefix, primary_employment_input))
+  return_employment <- cbind( prefix, primary_employment_input )
+  return_employment <- cbind ( return_employment, imputed_rent )
+  
+  return_employment
 }
   
   
