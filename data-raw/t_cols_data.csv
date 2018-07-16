@@ -55,7 +55,7 @@ CPA_K65,"Insurance, reinsurance and pension funding services, except compulsory 
 CPA_K66,Services auxiliary to financial services and insurance services,auxiliary_financial_services,43,1_2
 CPA_L68A,Imputed rents of owner-occupied dwellings,real_estate_imputed_a,44,1_2
 CPA_L68,Real estate services,real_estate_ab,44.5,1_2
-CPA_L68B,Real estate services excluding imputed rents,real_estate _services_b,45,1_2
+CPA_L68B,Real estate services excluding imputed rents,real_estate_services_b,45,1_2
 CPA_M69_M70,Legal and accounting services;Services of head offices; management consulting services,legal_accounting_consulting,46,1_2
 CPA_M71,Architectural and engineering services; technical testing and analysis services,architectural_engineering,47,1_2
 CPA_M72,Scientific research and development services,research_development,48,1_2
