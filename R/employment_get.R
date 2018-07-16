@@ -31,7 +31,7 @@
 #'  }
 #' @export
 
-get_employment <- function ( geo = "CZ", 
+employment_get <- function ( geo = "CZ", 
                              year = "2010",
                              sex = "Total", 
                              age = "Y_GE15",
