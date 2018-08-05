@@ -1,9 +1,10 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 before_install:
-  - sudo apt-get install -y eurostat
+  - sudo apt-get update eurostat
   
 language: R
+
 r:
   - oldrel
   - release
