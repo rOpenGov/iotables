@@ -116,7 +116,8 @@ primary_input_get <- function ( input = "compensation_employees",
     }
   } # end of no household case 
   input_vector[,1] <- as.character(input_vector[,1])
-  return ( input_vector ) 
+  
+  input_vector 
 }
 
 
