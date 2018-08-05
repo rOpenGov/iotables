@@ -190,8 +190,6 @@ employment_get <- function ( geo = "CZ",
     return ( primary_employment_input )
   }
   
-  
-  
   return_employment <- cbind( prefix, primary_employment_input )
   return_employment <- cbind ( return_employment, imputed_rent )
   
