@@ -123,7 +123,8 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     }
     
   } # end of no household case 
-  return ( output_vector ) 
+  
+  output_vector 
 }
 
 
