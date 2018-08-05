@@ -53,4 +53,5 @@ Default data directory for faster programmatic use and phasing out discountinued
 # iotables 0.2.8
 Handles tables with purchasers' prices. Imports Eurostat employment data.
 
-
+# iotables 0.2.9
+Error corrected concerning creation of temporary files on non-Windows environments. No uses `file.path()` to create platform-independent files.
