@@ -4,8 +4,9 @@
 \alias{employment_get}
 \title{Get employment data}
 \usage{
-employment_get(geo = "CZ", year = "2010", sex = "Total", age = "Y_GE15",
-  labelling = "iotables", data_directory = NULL, force_download = TRUE)
+employment_get(geo = "CZ", year = "2010", sex = "Total",
+  age = "Y_GE15", labelling = "iotables", data_directory = NULL,
+  force_download = TRUE)
 }
 \arguments{
 \item{geo}{The country code.}
