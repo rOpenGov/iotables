@@ -4,9 +4,10 @@
 \alias{primary_input_get}
 \title{Get primary inputs}
 \usage{
-primary_input_get(input = "compensation_employees", source = "germany_1990",
-  geo = "DE", year = 1990, unit = "MIO_EUR", households = FALSE,
-  stk_flow = "DOM", labelling = "iotables")
+primary_input_get(input = "compensation_employees",
+  source = "germany_1990", geo = "DE", year = 1990,
+  unit = "MIO_EUR", households = FALSE, stk_flow = "DOM",
+  labelling = "iotables")
 }
 \arguments{
 \item{input}{A character string or a character vector containing the indicator names. 
