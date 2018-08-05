@@ -1,10 +1,13 @@
 ## Test environments
-* local Window 10 install, R 3.4.3
+* local Window 10 install, R 3.5.1
 * ubuntu 14.04 (on travis-ci), R 3.3.3, 3.4.2 and current development version
-* osx R 3.3.3 (on travis-ci)
+* osx R 3.4.4 and 3.5.0 (on travis-ci)
 
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
+##Earlier warning
+I received the following message on 4 Aug 
+"\\" is only valid as a file path separator on Windows.  Please convert to using file.path(), before Aug 18 to safely retain the package on CRAN.
 
-
+I corrected the mistake.

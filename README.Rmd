@@ -67,8 +67,9 @@ sk_io <- iotable_get ( source = "naio_10_cp1700", geo = "SK",
 #labelling = 'short' will keep the Eurostat short labels.
 
 #Retrieve the bulk file from the temporary directory
-retrieve_from_temp_bulk <- readRDS(paste0(tempdir(), "\\eurostat/naio_cp17_r2_date_code_TF.rds" ))
-
+retrieve_from_temp_bulk <- readRDS(file.path(
+  tempdir(), "eurostat", "naio_cp17_r2_date_code_TF.rds")
+  )
 ```
 
 The Eurostat bulk downloader will give you a very long file: all country data in a long-form, with different currencies, and for different years. The `iotable_get` function will filter out a table for you.

@@ -44,7 +44,8 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
 
-  tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
+  tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
+  
   source_inputed <- source ; unit_input = unit
   
   ##Exception handling ---------------

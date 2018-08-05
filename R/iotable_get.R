@@ -117,8 +117,8 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
   
 ##Creating a temporary file name for the input-output table ----
-  tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
-  
+  tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
+
 ##Loading the data and Veryfing other parameters ----  
    if ( nchar(geo) == 2 & geo == tolower(geo)) { 
     geo_input <- toupper(geo)

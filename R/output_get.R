@@ -36,7 +36,7 @@ output_get <- function ( source = "germany_1990", geo = "DE",
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
   source_inputed <- source 
   
-  tmp_rds <- paste0(tempdir(), "\\", source, "_", labelling, ".rds")
+  tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
   
   ##Exception handling --------------
   if (source == "croatia_2010_1900") {
