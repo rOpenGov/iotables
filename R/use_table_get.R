@@ -126,7 +126,8 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
      use_table <- labelled_io_table[1:66, 1:67]
      }
    } # end of no household case 
-    return ( use_table ) 
+    
+ use_table 
 }
 
 
