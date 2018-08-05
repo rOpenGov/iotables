@@ -122,10 +122,12 @@ iotables_download <- function ( source = "naio_10_cp1700",
   } #end of _r2 
   
   if( !is.null(data_directory) ) {
-    save_file_name <- paste0(data_directory, "/", source, ".rds")
+    
+    save_file_name <- file.path(data_directory, paste0(source, ".rds"))
     saveRDS( downloaded, file = save_file_name )
     message ( "Saved the raw data of this table tpye in ",
                save_file_name, "." )
   }
+  
   downloaded
 }
