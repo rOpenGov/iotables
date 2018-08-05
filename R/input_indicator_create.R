@@ -46,8 +46,9 @@ input_indicator_create <- function ( input_matrix, output_vector,
     }
    
   }
+  
   input_matrix[,1] <- as.character (input_matrix[,1])
   input_matrix[1,1] <- paste0(as.character(input_matrix[1,1]), "_indicator")
   
-  return(input_matrix)
+  input_matrix
 }
