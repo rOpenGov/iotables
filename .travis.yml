@@ -25,7 +25,7 @@ env:
  - GITHUB_REPO ropengov/iotables
 
 before_install:
-  - sudo apt-get -qq update
+  #- sudo apt-get -qq update
 
   #install pacakges 
   -RScript -e 'install.packages("eurostat")'
