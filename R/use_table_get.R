@@ -79,15 +79,15 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
                                          unit = unit_input, labelling = labelling,
                                          stk_flow = stk_flow_input) }
   } # use eurostat files 
- if (exists ( "labelled_io_table")) {
+ 
+  if (exists ( "labelled_io_table")) {
    labelled_io_table <- labelled_io_table %>% 
      mutate_if ( is.factor, as.character)
- } else {
+    } else {
    stop("The IO table was not created.")
- }
+   }
 
-  
- use_table <- labelled_io_table[c(1:66), 1:67]
+  if ( source != "germany_1990") use_table <- labelled_io_table[c(1:66), 1:67]
 
  if (households == TRUE) {
    household_consumption_col <- which ( names (labelled_io_table ) %in% 
@@ -119,12 +119,12 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
      message ( "Total row and column removed from the matrix.")
    }
      
-   } else {    #no households 
+   } else {    #no households case -------------------------
    if (keep_total == FALSE )  {
-     use_table <- use_table [1:65,1:66]
+     use_table <- use_table [1:61,1:62]
      message ( "Total row and column removed from the matrix.")
    } else {
-     use_table <- labelled_io_table[1:66, 1:67]
+     use_table <- labelled_io_table[1:62, 1:63]
      }
    } # end of no household case 
     
