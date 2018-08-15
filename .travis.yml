@@ -28,5 +28,6 @@ before_install:
   #- sudo apt-get -qq update
 
   #install pacakges 
-  -RScript -e 'install.packages("eurostat")'
+  - R -q -e 'install.packages("eurostat"); 
+  #-RScript -e 'install.packages("eurostat")'
   
