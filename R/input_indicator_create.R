@@ -22,14 +22,10 @@ input_indicator_create <- function ( input_matrix, output_vector,
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
   }
-  if ( ncol(input_matrix) != ncol(output_vector)) {
-    stop ( "Different number of columns in the two inputs.")
+  if ( ! all ( names ( output_vector) %in% names ( input_matrix ))) {
+    stop ( "Some industries / products do not have input data. ")
   }
-  
-  if ( !identical ( sort(names(input_matrix)), sort(names(output_vector)))) {
-    stop ( "The two inputs contain dissimilar columns.")
-  }
-  
+
   input_matrix_inputed <- input_matrix
   input_matrix <- input_matrix[names(output_vector)]
 
