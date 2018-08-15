@@ -33,6 +33,7 @@ in the \code{data_directory} or the temporary directory, if it exists.}
 }
 \description{
 Download the employment data for a country and arrange it to the 64x64 SIOTS.
+Currently works only with product x product tables.
 }
 \examples{
 \dontrun{
