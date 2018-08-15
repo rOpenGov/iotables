@@ -50,7 +50,8 @@ output_get <- function ( source = "germany_1990", geo = "DE",
   if ( source == "germany_1990") {
     labelled_io_table <- iotable_get ( source = "germany_1990", 
                                        geo = geo_input, year = year, 
-                                       unit = unit_input, labelling = labelling )     # use germany example 
+                                       unit = unit_input, 
+                                       labelling = labelling )     # use germany example 
     output_vector <- labelled_io_table[16,]
     if (households == TRUE ) {
       output_vector <- output_vector [1,1:8]
@@ -71,6 +72,9 @@ output_get <- function ( source = "germany_1990", geo = "DE",
   labelled_io_table <- labelled_io_table %>% 
     mutate_if ( is.factor, as.character)
   
+  total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+  
+  
   if (households == TRUE) {
     household_consumption_col <- which ( names (labelled_io_table ) %in% 
                                            c('final_consumption_households', 'P3_S14'))
@@ -88,8 +92,7 @@ output_get <- function ( source = "germany_1990", geo = "DE",
       stop ( "No output data was found.")
     }
     
-    total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
-    
+     
     if (keep_total == TRUE) {
       message ( "Households were added to the matrix.")
       output_vector <- labelled_io_table[output_row[1] , 
