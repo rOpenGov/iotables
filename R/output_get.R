@@ -46,6 +46,7 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     stop("Only iotables or original short columns can be selected.")
   }
   
+##Germany----
   if ( source == "germany_1990") {
     labelled_io_table <- iotable_get ( source = "germany_1990", 
                                        geo = geo_input, year = year, 
@@ -82,25 +83,22 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     }
     output_row <- which (labelled_io_table[[1]] %in%  
                                      c('output_bp', 'P1', 'output') )
-    if (source == "naio_cp17_r2") {
-      output_row <- which (labelled_io_table[[1]] %in%  
-               c('total', "CPA_TOTAL") )
-    }
-    
-       if ( length( output_row) == 0 ) {
+   
+    if ( length( output_row) == 0 ) {
       stop ( "No output data was found.")
     }
+    
     if (keep_total == TRUE) {
       message ( "Households were added to the matrix.")
-      output_vector <- labelled_io_table[    output_row[1] , 
-                                             c(1:67, household_consumption_col[1]) ] 
-      output_vector [1,68] <- 0
+      output_vector <- labelled_io_table[output_row[1] , 
+                                          c(1:63, household_consumption_col[1]) ] 
+      output_vector [1,64] <- 0
     } else {
       message ( "Households were added to the matrix.")
       message ( "Total column was removed from the matrix.")
       output_vector <- labelled_io_table[    output_row[1] , 
-                                             c(1:66, household_consumption_col[1]) ] 
-      output_vector [1,67] <- 0
+                                             c(1:62, household_consumption_col[1]) ] 
+      output_vector [1,63] <- 0
     }
  
     
@@ -116,9 +114,9 @@ output_get <- function ( source = "germany_1990", geo = "DE",
       stop ( "No output data was found.")
     }
     if (keep_total == TRUE) {
-      output_vector <- labelled_io_table[ output_row[1], 1:67 ] 
+      output_vector <- labelled_io_table[ output_row[1], 1:63 ] 
     } else {
-      output_vector <- labelled_io_table[ output_row[1], 1:66 ]
+      output_vector <- labelled_io_table[ output_row[1], 1:62 ]
       message ( "Total column was removed from the matrix.")
     }
     
