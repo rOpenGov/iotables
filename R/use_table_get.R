@@ -89,6 +89,7 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
 
   if ( source != "germany_1990") use_table <- labelled_io_table[c(1:66), 1:67]
 
+###Addding households, if requested----------------------------------------  
  if (households == TRUE) {
    household_consumption_col <- which ( names (labelled_io_table ) %in% 
               c('final_consumption_households', 'P3_S14'))
@@ -111,20 +112,29 @@ use_table_get <- function ( source = "germany_1990", geo = "DE",
    }
    
    message ( "Households are added to the matrix.")
-   use_table <- labelled_io_table[    c(1:66,household_income_row[1]) , 
-                                  c(1:67, household_consumption_col[1]) ] 
-   use_table [67,68] <- 0
-   if (keep_total == FALSE ) {
-     use_table <- use_table [-66,-67]
-     message ( "Total row and column removed from the matrix.")
    }
-     
+   
+###Creating the table-----------------------------------------   
+   
+   total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+   total_row <- which (labelled_io_table[,1] == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+  
+   if ( households == TRUE ) {
+   use_table <- labelled_io_table[c(1:total_row, household_income_row[1]), 
+                                  c(1:total_col, household_consumption_col[1]) ] 
+   
+   use_table[total_row+1, total_col+1] <- 0
+
+   if (keep_total == FALSE ) {
+     use_table <- use_table [-total_row,-total_col]
+     message ( "Total row and column removed from the matrix.")
+      }
    } else {    #no households case -------------------------
    if (keep_total == FALSE )  {
-     use_table <- use_table [1:61,1:62]
+     use_table <- use_table [1:total_row-1,1:total_col-1]
      message ( "Total row and column removed from the matrix.")
    } else {
-     use_table <- labelled_io_table[1:62, 1:63]
+     use_table <- labelled_io_table[1:total_row, 1:total_col]
      }
    } # end of no household case 
     

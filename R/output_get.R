@@ -88,20 +88,21 @@ output_get <- function ( source = "germany_1990", geo = "DE",
       stop ( "No output data was found.")
     }
     
+    total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+    
     if (keep_total == TRUE) {
       message ( "Households were added to the matrix.")
       output_vector <- labelled_io_table[output_row[1] , 
-                                          c(1:63, household_consumption_col[1]) ] 
-      output_vector [1,64] <- 0
+                                          c(1:total_col, household_consumption_col[1]) ] 
+      output_vector [1,total_col+1] <- 0
     } else {
       message ( "Households were added to the matrix.")
       message ( "Total column was removed from the matrix.")
       output_vector <- labelled_io_table[    output_row[1] , 
-                                             c(1:62, household_consumption_col[1]) ] 
-      output_vector [1,63] <- 0
+                                             c(1:total_col-1,
+                                               household_consumption_col[1]) ] 
+      output_vector [1,total_col] <- 0
     }
- 
-    
   } else {    #no households case
     output_row <- which (labelled_io_table[[1]] %in%  
                            c('output_bp', 'P1', 'output') )
@@ -113,10 +114,13 @@ output_get <- function ( source = "germany_1990", geo = "DE",
     if ( length( output_row) == 0 ) {
       stop ( "No output data was found.")
     }
+    
+    
+    ##Keep total column?
     if (keep_total == TRUE) {
-      output_vector <- labelled_io_table[ output_row[1], 1:63 ] 
+      output_vector <- labelled_io_table[ output_row[1], 1:total_col   ] 
     } else {
-      output_vector <- labelled_io_table[ output_row[1], 1:62 ]
+      output_vector <- labelled_io_table[ output_row[1], 1:total_col-1 ]
       message ( "Total column was removed from the matrix.")
     }
     

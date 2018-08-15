@@ -137,13 +137,13 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     } else  {
     if ( tmp_rds %in% list.files (path = tempdir()) ) {
       labelled_io_data <- readRDS( tmp_rds ) 
-    } else { 
+    } else { #getting or downloading the bulk longform data
       labelled_io_data <- iotables_download ( source,
                                               data_directory = data_directory, 
                                               force_download = force_download ) 
       }
   } # use eurostat files 
- 
+  
   if ( ! unit_input %in% labelled_io_data$unit ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
@@ -165,6 +165,8 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   if (geo %in% available_country_names) {
     geo <- as.character(labelled_io_data$geo[which(labelled_io_data$geo_lab == geo)][1])
   }
+  
+###converting factors to characters------  
   if ( class(labelled_io_data$values) %in% c("character", "factor")) {
     labelled_io_data$values  = trimws(as.character(labelled_io_data$values), which = "both")
     labelled_io_data$values = as.numeric(labelled_io_data$values)
@@ -176,11 +178,15 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     dplyr::filter ( time == as.Date(paste0(as.character(year), "-01-01" ))) %>%
     dplyr::filter ( unit == unit_input ) 
   
-  if ( source %in% prod_ind ) {
+  check <- filter ( labelled_io_data, prod_na  == "CPA_G47") %>%
+    filter ( geo == "SK")
+  
+   if ( source %in% prod_ind ) {
+     
     iotable_labelled <- iotable %>%
       mutate_if ( is.factor, as.character ) %>%
-      left_join (., metadata_cols, by = c("induse", "induse_lab"))  %>%
-      left_join ( ., metadata_rows, by = c("prod_na", "prod_na_lab")) %>%
+      full_join (.,  metadata_cols, by = c("induse", "induse_lab"))  %>%
+      full_join ( ., metadata_rows, by = c("prod_na", "prod_na_lab")) %>%
       mutate ( prod_na = forcats::fct_reorder(prod_na, 
                                               as.numeric(row_order))) %>%
       mutate ( induse = forcats::fct_reorder(induse, 
@@ -189,7 +195,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
                                                        as.numeric(row_order))) %>%
       mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
                                                        as.numeric(col_order))) %>%
-      filter ( stk_flow == stk_flow_input )
+      filter (stk_flow == stk_flow_input ) 
   } else  {
     if ( ! source %in% croatia_files ){
       iotable_labelled <- iotable %>%
@@ -200,6 +206,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
     } else {
       iotable_labelled <- iotable 
     }
+    
     iotable_labelled <- iotable_labelled %>%
       mutate ( t_rows2 = forcats::fct_reorder(t_rows2, 
                                               as.numeric( row_order))) %>%
@@ -220,6 +227,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   } else if ( labelling == "short" & source %in% prod_ind ) {
     iotable_labelled_w <- iotable_labelled %>%
       select (prod_na, induse, values ) %>%
+      filter ( !is.na(prod_na)) %>%
       tidyr::spread (induse, values )
   } else {
     iotable_labelled_w <- iotable_labelled %>%
