@@ -1,9 +1,8 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-
 language: R
 sudo: required
-cache: packages
+#cache: packages
 dist: trusty
 
 r:
@@ -15,16 +14,13 @@ os:
   - linux
   - osx
   
-cache: packages
-
-
 Remotes: rOpenGov/iotables
 
 env:
  global:
  - GITHUB_REPO ropengov/iotables
 
-before_install:
+#before_install:
   #- sudo apt-get -qq update
 
   #install pacakges 
