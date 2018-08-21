@@ -52,10 +52,9 @@ input_coefficient_matrix_create <- function ( input_flow,
   if ( names (Im)[last_col] %in% c("TOTAL", "CPA_TOTAL")) last_col <- last_col -1 
   
   na_to_eps <- function(x) ifelse( x==0, 0.000001, x )
+  first_col <- Im[,1]
   Im <- vapply ( Im[1:output_row-1, c(2:last_col)], na_to_eps, numeric ( output_row - 1) )
-  min ( Im )
-  
-  Im <- Im[1:output_row-1,]
+  Im <- cbind ( first_col[output_row-1,], Im)
   
   Im <- as.data.frame (Im)
   
