@@ -40,6 +40,7 @@
 #' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
+#' @importFrom lubridate year
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
 #'              year = 1990,   unit = "MIO_EUR", 
@@ -129,12 +130,16 @@ iotable_get <- function ( labelled_io_data = NULL,
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
     if ( source == "germany_1990") {
       labelled_io_data <- iotables::germany_1990    # use germany example 
+      labelled_io_data$year = 1990
     } else if ( source == "croatia_2010_1700" ) { 
-      labelled_io_data <- iotables::croatia_2010_1700 
+      labelled_io_data <- iotables::croatia_2010_1700 %>%
+        mutate ( year = lubridate::year ( time ))
     } else if ( source == "croatia_2010_1800" )  {
-      labelled_io_data <- iotables::croatia_2010_1800  
+      labelled_io_data <- iotables::croatia_2010_1800   %>%
+        mutate ( year = lubridate::year ( time ))
     } else if ( source == "croatia_2010_1900" )  {
-      labelled_io_data <- iotables::croatia_2010_1900
+      labelled_io_data <- iotables::croatia_2010_1900 %>%
+        mutate ( year = lubridate::year ( time ))
     } else  {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_data <- readRDS( tmp_rds ) 
@@ -177,7 +182,14 @@ iotable_get <- function ( labelled_io_data = NULL,
    stop ( "There is no available table for country ", geo, " in the year ", year , 
           " with ", unit, " units.")
  }
- iotable <- labelled_io_data$data[[selected_table]]
+
+  if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
+                       "germany_1990")) {
+    iotable <- labelled_io_data$data[[selected_table]]
+  } else {
+    iotable <- labelled_io_data
+  }
+
   
   if ( class(iotable$values) %in% c("character", "factor")) {
     iotable$values  = trimws(as.character(iotable$values), which = "both")
@@ -185,7 +197,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     warning("Warning: original data was converted to numeric format.")
   }
   
-   if ( source %in% prod_ind ) {
+ if ( source %in% prod_ind ) {
      
     iotable_labelled <- iotable %>%
       dplyr::mutate_if ( is.factor, as.character ) %>%
@@ -207,7 +219,7 @@ iotable_get <- function ( labelled_io_data = NULL,
         dplyr::mutate_if ( is.factor, as.character ) %>%
         dplyr::left_join (., metadata_cols, by = c("t_cols2", "t_cols2_lab"))  %>%
         dplyr::left_join ( ., metadata_rows, by = c("t_rows2", "t_rows2_lab")) %>%
-        arrange ( row_order, col_order )
+        dplyr::arrange ( row_order, col_order )
     } else {
       iotable_labelled <- iotable 
     }
