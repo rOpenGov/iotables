@@ -59,7 +59,7 @@ multiplier_create <- function ( input_vector = NULL,
  named_multipliers <- cbind ( row_name, multipliers )
  named_multipliers[,1] <- as.character(named_multipliers[,1])
  
- return(named_multipliers)
+ named_multipliers
  }  #end of function  
 
 
