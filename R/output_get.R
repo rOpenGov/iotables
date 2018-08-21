@@ -5,10 +5,11 @@
 #' "naio_10_cp1630", "naio_10_pyp1630", "croatia_2010_1700", "croatia_2010_1800", 
 #' "croatia_2010_1900". For further information consult the 
 #' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
-#' @param labelled_io_data If you have downloaded a bulk data file with 
-#' \code{\link{iotables_download}}, it is faster to work with the data
+#' @param labelled_io_table If you have created the IO table earlier with 
+#' \code{\link{iotable_get}}, it is faster to work with the data
 #' in the memory. Defaults to \code{NULL} when  the data will be retrieved from
-#' the hard disk or from the Eurostat website invoking the same function.
+#' the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
+#' and \code{\link{iotable_get}}
 #' @param geo A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.
 #' @param year A numeric variable containing the year. Defaults to 2010, because this year has the most data. 
 #' @param unit A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). The alternative is \code{MIO_EUR}. 

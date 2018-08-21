@@ -9,6 +9,12 @@ output_get(labelled_io_table = NULL, source = "germany_1990",
   labelling = "iotables", stk_flow = "DOM", keep_total = FALSE)
 }
 \arguments{
+\item{labelled_io_table}{If you have created the IO table earlier with 
+\code{\link{iotable_get}}, it is faster to work with the data
+in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
+and \code{\link{iotable_get}}}
+
 \item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
 "naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_10_cp1620", "naio_10_pyp1620",
 "naio_10_cp1630", "naio_10_pyp1630", "croatia_2010_1700", "croatia_2010_1800", 
@@ -31,11 +37,6 @@ The alternative is \code{short} which is the original short row or column code o
 \item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
 
 \item{keep_total}{Logical variable. Defaults to \code{FALSE} and removes the totaling row and column from the matrix.}
-
-\item{labelled_io_data}{If you have downloaded a bulk data file with 
-\code{\link{iotables_download}}, it is faster to work with the data
-in the memory. Defaults to \code{NULL} when  the data will be retrieved from
-the hard disk or from the Eurostat website invoking the same function.}
 }
 \description{
 Get an output vector

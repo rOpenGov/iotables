@@ -99,8 +99,8 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
   } else if ( source == "germany_1990" ) {  #German simplified tables
-    metadata_rows <-  germany_metadata_rows  
-    metadata_cols <-  germany_metadata_cols 
+    metadata_rows <-  iotables:::germany_metadata_rows  
+    metadata_cols <-  iotables:::germany_metadata_cols 
   } else {
     stop ("This type of input-output database is not (yet) recognized by iotables.")
   }
