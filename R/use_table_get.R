@@ -106,10 +106,10 @@ use_table_get <- function ( labelled_io_table  = NULL,
     household_consumption_col <- which ( names (labelled_io_table ) %in% 
                                              c('final_consumption_households', 'P3_S14'))
       
-    if (length( household_consumption_col) > 1 ) {
+    if (length( household_consumption_col ) > 1 ) {
         warning ( "Beware, more household consumption items were found in the table.")
       }
-    if ( length( household_consumption_col) == 0 ) {
+    if ( length( household_consumption_col ) == 0 ) {
         stop ( "No household consumption data was found.")
     }
     household_income_row <- which (labelled_io_table[[1]] %in%  
@@ -138,15 +138,15 @@ use_table_get <- function ( labelled_io_table  = NULL,
    use_table[total_row+1, total_col+1] <- 0
 
    if (keep_total == FALSE ) {
-     use_table <- use_table [-total_row,-total_col]
+     use_table <- use_table[-total_row,-total_col]
      message ( "Total row and column removed from the matrix.")
       }
    } else {    #no households case -------------------------
    if (keep_total == FALSE )  {
-     use_table <- use_table [1:total_row-1,1:total_col-1]
+     use_table <- labelled_io_table [1:total_row-1,1:total_col-1]
      message ( "Total row and column removed from the matrix.")
    } else {
-     use_table <- labelled_io_table[1:total_row, 1:total_col]
+     use_table <- use_table[1:total_row, 1:total_col]
      }
    } # end of no household case 
     
