@@ -39,10 +39,22 @@ input_coefficient_matrix_create <- function ( input_flow,
   if ( ! isTRUE(all.equal (names (input_flow), names (output))) ) {
     stop("Non conforming inputs are given with different column labels.")
   }
-  
   input_flow <- dplyr::mutate_if (input_flow, is.factor, as.character )
-  output <- dplyr::mutate_if ( output, is.factor, as.character )
   
+  non_zero <- function (x) {
+    if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
+    ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
+  }
+  
+  non_zero_cols <- vapply ( input_flow[, 1:ncol(input_flow)], non_zero, logical ( 1 ))
+  #non_zero_rows <- which ( rowSums( input_flow[, 2:ncol(input_flow)] ) != 0 )
+  #input_flow <- input_flow[non_zero_rows, non_zero_cols] #should be improved 
+  non_zero_rows <- as.logical (non_zero_cols[-1] ) 
+
+  input_flow <- input_flow [non_zero_rows, non_zero_cols ]
+  output <- dplyr::mutate_if ( output, is.factor, as.character )
+  output <- output [ names (output) %in% names (input_flow )]
+  output  <- dplyr::mutate_if (output, is.factor, as.character )
   Im <- dplyr::full_join ( input_flow, output, by = names ( input_flow ))
   keep_first_name <- names(Im)[1]
   
@@ -76,14 +88,12 @@ input_coefficient_matrix_create <- function ( input_flow,
     }
   }
   
-  na_to_eps <- function(x) ifelse( x==0, 0.000001, x )
+  null_to_eps <- function(x) ifelse( x==0, 0.000001, x )
    
   first_col <- as.data.frame( Im[-output_row,1] )
   names (first_col ) <- keep_first_name
   Im <- vapply ( Im[1:output_row-1, c(2:last_col)],
-                 na_to_eps, numeric ( output_row - 1) )
-  Im2 <- Im
-  
+                 null_to_eps, numeric ( output_row - 1) )
   for ( i in 1:(output_row-1)) {
     for ( j in 1:(last_col-1)) {  
       Im[i, j ] <- as.numeric(Im [i, j ]) / as.numeric(output [j+1] )
