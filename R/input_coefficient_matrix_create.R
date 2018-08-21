@@ -46,24 +46,32 @@ input_coefficient_matrix_create <- function ( input_flow,
   Im <- dplyr::full_join ( input_flow, output, by = names ( input_flow ))
   
   output_row <- nrow(Im)
-  for (j in 2:ncol(Im)) {
-    for (i in 1:(nrow(Im)-1)) {
-      if (Im[output_row, j] == 0 ) {
-        Im[output_row, j] <- 0.000001 #avoid division by zero
-        warning("Warning:", as.character(Im[output_row, 1]), ", ", 
-       as.character(names(Im)[j]), " is zero, it was changed to 0.000001.\n") }
-      Im[i,j] <- Im[i,j] / Im[output_row, j]
-    }
-  } #this is not elegant but works right now.
+  
+  last_col <- ncol (Im)
+  if ( names (Im)[last_col] %in% "P3_S14") last_col <- last_col -1 
+  if ( names (Im)[last_col] %in% c("TOTAL", "CPA_TOTAL")) last_col <- last_col -1 
+  
+  na_to_eps <- function(x) ifelse( x==0, 0.000001, x )
+  Im <- vapply ( Im[1:output_row-1, c(2:last_col)], na_to_eps, numeric ( output_row - 1) )
+  min ( Im )
   
   Im <- Im[1:output_row-1,]
+  
+  Im <- as.data.frame (Im)
+  
   if ( is.null(digits) ) return (Im)
+  
   if ( class(digits) != "numeric") stop ("Error: rounding digits are not given as a numeric input.")
+  
   if ( digits >= 0 ) {
+    
+    round_eps <- function ( x, digits ) {
+      ifelse ( x == 1e-06, x, round ( x, digits ))
+    }
     Im <- Im %>%
-      dplyr::mutate_if(is.numeric, dplyr::funs(round(., digits)))
-    return(Im)
+      dplyr::mutate_if(is.numeric, dplyr::funs(round_eps (., digits)))
   } else {
     stop ("Error: not a valid rounding parameter.\nMust be an integer representing the rounding digits.")
   }
+  Im
 }
