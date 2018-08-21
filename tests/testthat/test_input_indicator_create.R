@@ -17,6 +17,6 @@ test_that("correct data is returned", {
                expected = 0.21, tolerance = .004)
 })
 
-##needs to be checked agian with better examples. 
+##needs to be checked again with better examples. 
 
 

@@ -19,6 +19,9 @@ de_output <- output_get ( source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           households = FALSE, labelling = "iotables")
 
+input_flow = de_use
+output = de_output 
+digits = 5
 
 input_coefficients <- input_coefficient_matrix_create (
                            de_use, de_output, digits = 5)
