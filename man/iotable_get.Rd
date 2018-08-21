@@ -10,6 +10,11 @@ iotable_get(labelled_io_data = NULL, source = "germany_1990",
   force_download = TRUE)
 }
 \arguments{
+\item{labelled_io_data}{If you have downloaded a bulk data file with 
+\code{\link{iotables_download}}, it is faster to work with the data
+in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+the hard disk or from the Eurostat website invoking the same function.}
+
 \item{source}{A data source, for example \code{naio_10_cp1700}. 
 Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)    
 Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
