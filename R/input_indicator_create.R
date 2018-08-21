@@ -14,7 +14,8 @@
 #'                              year = 1990, unit = "MIO_EUR", 
 #'                              households = FALSE, labelling = "iotables")
 #'
-#'de_emp_indicator <- input_indicator_create ( de_emp, de_output )
+#'de_emp_indicator <- input_indicator_create ( input_matrix = de_emp, 
+#                                              output_vector = de_output )
 #' @export
 
 input_indicator_create <- function ( input_matrix,
@@ -24,16 +25,15 @@ input_indicator_create <- function ( input_matrix,
     if (digits<0) digits <- NULL
   }
   
-  
   if ( ! all ( names ( output_vector) %in% names ( input_matrix )) ) {
     
-    if ( names(output_vector) [ ! names ( output_vector) %in%
-                                names ( input_matrix )]  == "P3_S14")  {
+    if ( any( names(output_vector) [ ! names ( output_vector ) %in%
+                                names ( input_matrix )]  == "P3_S14" ) )  {
       input_matrix$P3_S14 <- 0  #case when only households are missing (type-II)
     } 
     
     problem_cols <-  names(input_matrix) [ ! names ( input_matrix ) %in% names ( output_vector )]
-    
+    problem_cols
     if ( ! length(problem_cols) == 0 ) {
     
     if ( "CPA_G47" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_G47 )}
