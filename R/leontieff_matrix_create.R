@@ -38,5 +38,6 @@ leontieff_matrix_create <- function ( technology_coefficients_matrix ) {
 
  names ( Leontieff)[1] <- names (technology_coefficients_matrix)[1]
  Leontieff[,1] <- as.character(Leontieff[,1])
- return (Leontieff)
+ 
+ Leontieff
 }
