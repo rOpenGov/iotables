@@ -27,5 +27,5 @@ de_emp <- primary_input_get ( input = "compensation_employees",
                              year = 1990, unit = "MIO_EUR", 
                              households = FALSE, labelling = "iotables")
 
-de_emp_indicator <- input_indicator_create ( de_emp, de_output )
+de_emp_indicator <- input_indicator_create ( input_matrix = de_emp, 
 }
