@@ -35,7 +35,7 @@ equation_solve <- function ( LHS = NULL, Im = NULL ) {
     mutate_if (is.factor, as.character) 
   Im <- Im %>%
     mutate_if (is.factor, as.character) 
-  
+
   joined <- tryCatch(
       full_join (LHS, Im, by = names(LHS)), 
       error = function(e) {
