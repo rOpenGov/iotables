@@ -46,17 +46,39 @@ input_coefficient_matrix_create <- function ( input_flow,
   Im <- dplyr::full_join ( input_flow, output, by = names ( input_flow ))
   
   output_row <- nrow(Im)
-  
   last_col <- ncol (Im)
-  if ( names (Im)[last_col] %in% "P3_S14") last_col <- last_col -1 
-  if ( names (Im)[last_col] %in% c("TOTAL", "CPA_TOTAL")) last_col <- last_col -1 
+  is_last_cols <- FALSE
+   
+  if ( names (Im)[last_col] %in% "P3_S14" ) {
+    last_col <- last_col -1 
+    last_cols <- data.frame ( 
+      P3_S14 = Im[['P3_S14']]
+      )
+    is_last_cols <- TRUE
+    }
+  if ( names (Im)[last_col] %in% c("TOTAL", "CPA_TOTAL") ) {
+    last_col <- last_col -1  
+    total_name <- names (Im)[last_col+1]
+    
+    total_col <- data.frame (
+      total = Im[, which( names ( Im )%in% c("TOTAL", "CPA_TOTAL") )]
+      )
+   
+    names(total_col) <- total_name 
+    if ( is_last_cols ) {
+      last_cols <- cbind(total_col, last_cols ) #last col already exists 
+    } else {
+      is_last_cols <- TRUE
+      last_cols <- total_col #this will be the last col
+    }
+  }
   
   na_to_eps <- function(x) ifelse( x==0, 0.000001, x )
   first_col <- Im[,1]
   Im <- vapply ( Im[1:output_row-1, c(2:last_col)], na_to_eps, numeric ( output_row - 1) )
-  Im <- cbind ( first_col[output_row-1,], Im)
-  
   Im <- as.data.frame (Im)
+  Im <- cbind ( first_col[output_row-1,], Im)
+  if ( is_last_cols ) Im <- cbind ( Im, last_cols[1:output_row-1, ] )
   
   if ( is.null(digits) ) return (Im)
   
