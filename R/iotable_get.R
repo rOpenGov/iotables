@@ -231,7 +231,7 @@ iotable_get <- function ( labelled_io_data = NULL,
                                               as.numeric( col_order ))) %>%
       dplyr::mutate ( iotables_row = forcats::fct_reorder(iotables_row , 
                                                        as.numeric(row_order))) %>%
-      dplyr:::mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
+      dplyr::mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
                                                          as.numeric( col_order)))
   }
 

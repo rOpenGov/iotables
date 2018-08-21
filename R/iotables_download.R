@@ -29,7 +29,7 @@
 #' @importFrom lubridate year
 #' @examples
 #' \dontrun{
-#'  io_tables <- iotables_download ( source = "naio_cp17_r2" )
+#'  io_tables <- iotables_download ( source = "naio_10_cp1700" )
 #'  }
 #' @export
 
