@@ -4,9 +4,9 @@
 \alias{use_table_get}
 \title{Create a use (input flow) matrix}
 \usage{
-use_table_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", stk_flow = "DOM", households = FALSE,
-  keep_total = FALSE, labelling = "iotables")
+use_table_get(labelled_io_table = NULL, source = "germany_1990",
+  geo = "DE", year = 1990, unit = "MIO_EUR", stk_flow = "DOM",
+  households = FALSE, keep_total = FALSE, labelling = "iotables")
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
@@ -33,17 +33,22 @@ source of the table, or if it is a product x product, industry x industry or pro
 The alternative is "short" which is the original short row or column code of Eurostat or OECD.}
 }
 \description{
-The function invokes the \code{\link{iotable_get}} function and selects a national 
-input-output table from the bulk downloaded file. If the file is not 
-downloaded, it downloads it to the temporary directory.
+Select the use table from a symmetric input-output table.
+ @param labelled_io_table If you have created the IO table earlier with 
+\code{\link{iotable_get}}, it is faster to work with the data
+in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
+and \code{\link{iotable_get}}
 }
 \examples{
 use_de <- use_table_get( source = "germany_1990", geo = 'DE', year = 1990,
                        unit = "MIO_EUR", labelling  = 'iotables')
 \dontrun{
-sk_use_1700_2 <- use_table_get2 ( source = "naio_10_cp1700", geo = "SK",
-                                 year = 2010, unit = "MIO_EUR",
-                                 stk_flow = "DOM", households = TRUE,
-                                 keep_total = TRUE)
+use_table <-  iotables_download ( "naio_10_cp1700" ) \%>\%
+ iotable_get (labelled_io_data = ., geo = "PL", 
+              source = "naio_10_cp1700",
+              year = 2010, unit = "MIO_EUR", 
+              labelling = "short") \%>\%
+ use_table_get ( labelled_io_table = .)
  }
 }
