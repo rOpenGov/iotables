@@ -20,9 +20,6 @@ test_that("primary_input_get errors ", {
 })
 
 test_that("correct data is returned", {
-  expect_equal(as.numeric(primary_input_get(input = "compensation_employees", 
-                   source = "croatia_2010_1700", geo = "HR",unit = "T_NAC", 
-                   year = 2010, households = TRUE)[1,68]),0) 
   expect_equal(as.numeric(primary_input_get(input = "d1", source = "germany_1990", 
                                  geo = 'DE', year = 1990, 
                                  unit = "MIO_EUR", households = TRUE, 

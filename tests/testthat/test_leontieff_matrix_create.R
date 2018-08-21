@@ -18,22 +18,24 @@ L <- leontieff_matrix_create( technology_coefficients_matrix =
                                           de_coeff )
 I <- leontieff_inverse_create(L)
 
+require(dplyr)
 AAL <- L %>%
-  filter ( t_rows2 ==  "agriculture_group" ) %>%
-  select (  agriculture_group ) %>%
-  as.numeric(.)
+  dplyr::filter ( t_rows2 == "cpa_a") %>%
+  dplyr::select (  agriculture_group ) %>%
+  unlist () %>%  as.numeric(.)
 
 #test against 15.9 p 487
 
 TBI <- I %>%
-  filter ( t_rows2 ==  "trade_group" ) %>%
-  select (  business_services_group ) %>%
+  dplyr::filter ( t_rows2 == 'cpa_g_i') %>%
+   dplyr::select (  business_services_group ) %>%
+  unlist () %>%
   as.numeric(.)
 
 #test against 15.10 p 488
 
 test_that("Leontieff matrix values are correct", {
-  expect_equal(AAL,expected= 0.9742, tolerance = .0001)
+  expect_equal(AAL[1],expected= 0.9742, tolerance = .0001)
    })
 
 test_that("Leontieff inverse values are correct", {

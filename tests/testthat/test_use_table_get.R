@@ -20,10 +20,6 @@ test_that("correct data is returned", {
   expect_equal(use_table_get(source = "germany_1990", 
                            geo = 'DE', year = 1990, 
                            unit = "MIO_EUR", labelling = "iotables")[1,2], 1131)
-  expect_equal(as.character(use_table_get(source = "croatia_2010_1900", geo = "HR",
-                            year = 2010, unit = "T_NAC", labelling = 'iotables')[4,1]), "mining")
-  expect_equal(as.character(use_table_get(source = "croatia_2010_1900", geo = "HR",
-                                          year = 2010, unit = "T_NAC", labelling = 'short')[4,1]), "CPA_B")
   })
 
 

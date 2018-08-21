@@ -20,9 +20,6 @@ test_that("output_get errors ", {
 })
 
 test_that("correct data is returned", {
-  expect_equal(as.numeric(output_get(source = "croatia_2010_1800", geo = "HR",
-                                     year = 2010, unit = "T_NAC", 
-                                     labelling = "iotables")[1,2]) , 21488663)
   expect_equal(as.character(output_get(source = "germany_1990", 
                           geo = 'DE', year = 1990, 
                           unit = "MIO_EUR", 
