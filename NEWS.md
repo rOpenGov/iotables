@@ -59,3 +59,7 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 # iotables 0.3.0
 * Correctly handles some countries that differ from the standard SIOT structure. The Czech Republic does not include G47 and I68 imputed rents in the table, which caused problems with the ordering of the table and the creation of coefficients.
 * Uses tidyr::nested() data structures which are far easier handled in highly structured data sets.
+
+
+# iotables 0.3.1
+* Correcting a bug that did not always remove the right columns from use_table_get()
