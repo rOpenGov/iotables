@@ -10,7 +10,7 @@
 #' in the memory. Defaults to \code{NULL} when  the data will be retrieved from
 #' the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
 #' and \code{\link{iotable_get}}
-#' @param geo A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.
+#' @param geo A country code or a country name.  For example, \code{SK} for Slovakia.
 #' @param year A numeric variable containing the year. Defaults to 2010, because this year has the most data. 
 #' @param unit A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). The alternative is \code{MIO_EUR}. 
 #' @param stk_flow Defaults to \code{DOM}, alternative \code{IMP}. 

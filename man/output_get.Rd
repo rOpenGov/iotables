@@ -21,7 +21,7 @@ and \code{\link{iotable_get}}}
 "croatia_2010_1900". For further information consult the 
 \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
-\item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
+\item{geo}{A country code or a country name.  For example, \code{SK} for Slovakia.}
 
 \item{year}{A numeric variable containing the year. Defaults to 2010, because this year has the most data.}
 
