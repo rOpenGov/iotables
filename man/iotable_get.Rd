@@ -4,9 +4,10 @@
 \alias{iotable_get}
 \title{Get an input-output table from bulk file}
 \usage{
-iotable_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", stk_flow = "DOM", labelling = "iotables",
-  data_directory = NULL, force_download = TRUE)
+iotable_get(labelled_io_data = NULL, source = "germany_1990",
+  geo = "DE", year = 1990, unit = "MIO_EUR", stk_flow = "DOM",
+  labelling = "iotables", data_directory = NULL,
+  force_download = TRUE)
 }
 \arguments{
 \item{source}{A data source, for example \code{naio_10_cp1700}. 

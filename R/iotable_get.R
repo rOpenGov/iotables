@@ -42,7 +42,7 @@
 #'              labelling  = "iotables")
 #' @export 
 
-iotable_get <- function ( source = "germany_1990", geo = "DE",
+iotable_get <- function ( labelled_io_data = NULL, source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           stk_flow = "DOM", labelling = "iotables", 
                           data_directory = NULL, 
@@ -54,101 +54,104 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   
-  if (is.null(geo)) stop ("Error: no country selected.")
-  if (! labelling %in% c("iotables", "short")) {
-    stop("Only iotables or original short columns can be selected.")
-  }
-  if (! unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC")) {
-    stop("Currency unit must be MIO_NAC, MIO_EUR or T_NAC")
-  }
-  if ( source %in% c("naio_10_cp1620", "naio_10_cp1630")) {
-    if ( stk_flow != "TOTAL") {
-      stk_flow_input <- "TOTAL"
-    warning ( "The parameter stk_flow was changed to TOTAL." )
+  if ( is.null(labelled_io_data)) {
+    if (is.null(geo)) stop ("Error: no country selected.")
+    if (! labelling %in% c("iotables", "short")) {
+      stop("Only iotables or original short columns can be selected.")
     }
+    if (! unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC")) {
+      stop("Currency unit must be MIO_NAC, MIO_EUR or T_NAC")
     }
-  source_inputed <- source
-
-##Veryfing source parameter and loading the labelling  ----
-  prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
-                "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630", 
-                "naio_10_pyp1620", "naio_10_pyp1630" )
-  trow_tcol <-  c(  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
-  croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
-  
-  if ( source %in% prod_ind ) { 
-    metadata_rows <- iotables::metadata %>%  #tables that follow prod_ind vocabulary
-       filter ( variable == "prod_na") %>%
-       dplyr::rename ( prod_na = code) %>%
-       dplyr::rename ( prod_na_lab = label ) %>%
-       dplyr::rename ( row_order = numeric_label ) %>%
-       dplyr::rename ( iotables_row = iotables_label )
-       
-    metadata_cols <- iotables::metadata %>%
-      filter ( variable == "induse") %>%
-      dplyr::rename ( induse = code) %>%
-      dplyr::rename ( induse_lab = label )%>%
-      dplyr::rename ( col_order = numeric_label ) %>%
-      dplyr::rename ( iotables_col = iotables_label )
+    if ( source %in% c("naio_10_cp1620", "naio_10_cp1630")) {
+      if ( stk_flow != "TOTAL") {
+        stk_flow_input <- "TOTAL"
+        warning ( "The parameter stk_flow was changed to TOTAL." )
+      }
+    }
+    source_inputed <- source
     
-  } else if ( source %in% trow_tcol ) {   #tables that follow trow_tcol vocabulary
+    ##Veryfing source parameter and loading the labelling  ----
+    prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
+                  "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630", 
+                  "naio_10_pyp1620", "naio_10_pyp1630" )
+    trow_tcol <-  c(  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
+    croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
     
-    metadata_rows <- iotables::metadata %>%
-      filter ( variable == "t_rows") %>%
-      dplyr::rename ( t_rows2 = code) %>%
-      dplyr::rename ( t_rows2_lab = label ) %>%
-      dplyr::rename ( row_order = numeric_label ) %>%
-      dplyr::rename ( iotables_row = iotables_label )
+    if ( source %in% prod_ind ) { 
+      metadata_rows <- iotables::metadata %>%  #tables that follow prod_ind vocabulary
+        filter ( variable == "prod_na") %>%
+        dplyr::rename ( prod_na = code) %>%
+        dplyr::rename ( prod_na_lab = label ) %>%
+        dplyr::rename ( row_order = numeric_label ) %>%
+        dplyr::rename ( iotables_row = iotables_label )
+      
+      metadata_cols <- iotables::metadata %>%
+        filter ( variable == "induse") %>%
+        dplyr::rename ( induse = code) %>%
+        dplyr::rename ( induse_lab = label )%>%
+        dplyr::rename ( col_order = numeric_label ) %>%
+        dplyr::rename ( iotables_col = iotables_label )
+      
+    } else if ( source %in% trow_tcol ) {   #tables that follow trow_tcol vocabulary
+      
+      metadata_rows <- iotables::metadata %>%
+        filter ( variable == "t_rows") %>%
+        dplyr::rename ( t_rows2 = code) %>%
+        dplyr::rename ( t_rows2_lab = label ) %>%
+        dplyr::rename ( row_order = numeric_label ) %>%
+        dplyr::rename ( iotables_row = iotables_label )
+      
+      metadata_cols <- iotables::metadata %>%
+        filter ( variable == "t_cols") %>%
+        dplyr::rename ( t_cols2 = code) %>%
+        dplyr::rename ( t_cols2_lab = label ) %>%
+        dplyr::rename ( col_order = numeric_label ) %>%
+        dplyr::rename ( iotables_col = iotables_label )
+    } else if ( source == "germany_1990" ) {  #German simplified tables
+      metadata_rows <-  germany_metadata_rows  
+      metadata_cols <-  germany_metadata_cols 
+    } else {
+      stop ("This type of input-output database is not (yet) recognized by iotables.")
+    }
     
-    metadata_cols <- iotables::metadata %>%
-      filter ( variable == "t_cols") %>%
-      dplyr::rename ( t_cols2 = code) %>%
-      dplyr::rename ( t_cols2_lab = label ) %>%
-      dplyr::rename ( col_order = numeric_label ) %>%
-      dplyr::rename ( iotables_col = iotables_label )
-      } else if ( source == "germany_1990" ) {  #German simplified tables
-        metadata_rows <-  germany_metadata_rows  
-        metadata_cols <-  germany_metadata_cols 
-      } else {
-         stop ("This type of input-output database is not (yet) recognized by iotables.")
-  }
+    metadata_rows <- dplyr::mutate_if ( metadata_rows, is.factor, as.character )
+    metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
+    
+    ##Creating a temporary file name for the input-output table ----
+    tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
+    if ( source == "germany_1990") {
+      labelled_io_data <- iotables::germany_1990    # use germany example 
+    } else if ( source == "croatia_2010_1700" ) { 
+      labelled_io_data <- iotables::croatia_2010_1700 
+    } else if ( source == "croatia_2010_1800" )  {
+      labelled_io_data <- iotables::croatia_2010_1800  
+    } else if ( source == "croatia_2010_1900" )  {
+      labelled_io_data <- iotables::croatia_2010_1900
+    } else  {
+      if ( tmp_rds %in% list.files (path = tempdir()) ) {
+        labelled_io_data <- readRDS( tmp_rds ) 
+      } else { #getting or downloading the bulk longform data
+        labelled_io_data <- iotables_download ( source,
+                                                data_directory = data_directory, 
+                                                force_download = force_download ) 
+      }
+    } # use eurostat files 
+  } #end of possible downloads or data retrieval
   
-  metadata_rows <- dplyr::mutate_if ( metadata_rows, is.factor, as.character )
-  metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
+   ##Loading the data and Veryfing other parameters ----  
   
-##Creating a temporary file name for the input-output table ----
-  tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
-
-##Loading the data and Veryfing other parameters ----  
    if ( nchar(geo) == 2 & geo == tolower(geo)) { 
     geo_input <- toupper(geo)
     geo <- toupper (geo)
     warning("Warning: country code changed to upper case.")
   }
   
-  if ( source == "germany_1990") {
-    labelled_io_data <- iotables::germany_1990    # use germany example 
-  } else if ( source == "croatia_2010_1700" ) { 
-    labelled_io_data <- iotables::croatia_2010_1700 
-  } else if ( source == "croatia_2010_1800" )  {
-    labelled_io_data <- iotables::croatia_2010_1800  
-    } else if ( source == "croatia_2010_1900" )  {
-      labelled_io_data <- iotables::croatia_2010_1900
-    } else  {
-    if ( tmp_rds %in% list.files (path = tempdir()) ) {
-      labelled_io_data <- readRDS( tmp_rds ) 
-    } else { #getting or downloading the bulk longform data
-      labelled_io_data <- iotables_download ( source,
-                                              data_directory = data_directory, 
-                                              force_download = force_download ) 
-      }
-  } # use eurostat files 
-  
   if ( ! unit_input %in% labelled_io_data$unit ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
   
-##Veryifing year and country name input ---
+  ##Veryifing year and country name input ----  
+  
   available_years <- unique (as.numeric(substr(as.character(labelled_io_data$time),1,4)))
   available_country_codes <- as.character(unique(labelled_io_data$geo))
   available_country_names <- as.character(unique(labelled_io_data$geo_lab))
@@ -167,6 +170,7 @@ iotable_get <- function ( source = "germany_1990", geo = "DE",
   }
   
 ###converting factors to characters------  
+  
   if ( class(labelled_io_data$values) %in% c("character", "factor")) {
     labelled_io_data$values  = trimws(as.character(labelled_io_data$values), which = "both")
     labelled_io_data$values = as.numeric(labelled_io_data$values)
