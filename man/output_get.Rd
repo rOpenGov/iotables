@@ -4,9 +4,9 @@
 \alias{output_get}
 \title{Get an output vector}
 \usage{
-output_get(source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", households = FALSE, labelling = "iotables",
-  stk_flow = "DOM", keep_total = FALSE)
+output_get(labelled_io_table = NULL, source = "germany_1990",
+  geo = "DE", year = 1990, unit = "MIO_EUR", households = FALSE,
+  labelling = "iotables", stk_flow = "DOM", keep_total = FALSE)
 }
 \arguments{
 \item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
@@ -31,11 +31,25 @@ The alternative is \code{short} which is the original short row or column code o
 \item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
 
 \item{keep_total}{Logical variable. Defaults to \code{FALSE} and removes the totaling row and column from the matrix.}
+
+\item{labelled_io_data}{If you have downloaded a bulk data file with 
+\code{\link{iotables_download}}, it is faster to work with the data
+in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+the hard disk or from the Eurostat website invoking the same function.}
 }
 \description{
 Get an output vector
 }
 \examples{
-output_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
-                        year = 2010, unit = "T_NAC", labelling = "iotables")
+output_get (  source = "germany_1990", geo = "DE",
+              year = 1990, unit = "MIO_EUR", 
+              stk_flow = "DOM", labelling = "iotables")
+\dontrun{
+output <-  iotables_download ( "naio_10_cp1700" ) \%>\%
+ iotable_get (labelled_io_data = ., geo = "CZ", 
+              source = "naio_10_cp1700",
+              year = 2015, unit = "MIO_NAC", 
+              labelling = "short") \%>\% 
+ output_get ()
+}                              
 }

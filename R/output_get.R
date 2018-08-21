@@ -5,6 +5,10 @@
 #' "naio_10_cp1630", "naio_10_pyp1630", "croatia_2010_1700", "croatia_2010_1800", 
 #' "croatia_2010_1900". For further information consult the 
 #' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
+#' @param labelled_io_data If you have downloaded a bulk data file with 
+#' \code{\link{iotables_download}}, it is faster to work with the data
+#' in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+#' the hard disk or from the Eurostat website invoking the same function.
 #' @param geo A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.
 #' @param year A numeric variable containing the year. Defaults to 2010, because this year has the most data. 
 #' @param unit A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). The alternative is \code{MIO_EUR}. 
@@ -20,16 +24,26 @@
 #' @importFrom tidyr gather spread 
 #' @importFrom forcats fct_reorder
 #' @examples 
-#' output_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
-#'                         year = 2010, unit = "T_NAC", labelling = "iotables")
+#' output_get (  source = "germany_1990", geo = "DE",
+#'               year = 1990, unit = "MIO_EUR", 
+#'               stk_flow = "DOM", labelling = "iotables")
+#'\dontrun{
+#' output <-  iotables_download ( "naio_10_cp1700" ) %>%
+#'  iotable_get (labelled_io_data = ., geo = "CZ", 
+#'               source = "naio_10_cp1700",
+#'               year = 2015, unit = "MIO_NAC", 
+#'               labelling = "short") %>% 
+#'  output_get ()
+#' }                              
 #' @export 
 
-output_get <- function ( source = "germany_1990", geo = "DE",
-                            year = 1990, unit = "MIO_EUR",
-                            households = FALSE,  
-                            labelling = "iotables" , 
-                            stk_flow = "DOM", 
-                            keep_total = FALSE) {  
+output_get <- function ( labelled_io_table = NULL,
+                         source = "germany_1990", geo = "DE",
+                         year = 1990, unit = "MIO_EUR",
+                         households = FALSE,  
+                         labelling = "iotables" , 
+                         stk_flow = "DOM", 
+                         keep_total = FALSE) {  
   ##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
@@ -38,39 +52,42 @@ output_get <- function ( source = "germany_1990", geo = "DE",
   
   tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
   
-  ##Exception handling --------------
-  if (source == "croatia_2010_1900") {
-    stop("The table croatia_2010_1900 is an import table and has no output field.")
-  }
-  if (! labelling %in% c("iotables", "short")) {
-    stop("Only iotables or original short columns can be selected.")
-  }
-  
-##Germany----
-  if ( source == "germany_1990") {
-    labelled_io_table <- iotable_get ( source = "germany_1990", 
-                                       geo = geo_input, year = year, 
-                                       unit = unit_input, 
-                                       labelling = labelling )     # use germany example 
-    output_vector <- labelled_io_table[16,]
-    if (households == TRUE ) {
-      output_vector <- output_vector [1,1:8]
-    } else {
-      output_vector <- output_vector [1,1:7]
+  if ( is.null ( labelled_io_table )) { 
+    ##Exception handling --------------
+    if (source == "croatia_2010_1900") {
+      stop("The table croatia_2010_1900 is an import table and has no output field.")
     }
-    return ( output_vector )  #return simplified example table and do not run rest of the code
-  } else {
-    if ( tmp_rds %in% list.files (path = tempdir()) ) {
-      labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
-    } else { 
-      labelled_io_table <- iotable_get ( source = source, 
+    if (! labelling %in% c("iotables", "short")) {
+      stop("Only iotables or original short columns can be selected.")
+    }
+    
+    ##Germany----
+    if ( source == "germany_1990") {
+      labelled_io_table <- iotable_get ( source = "germany_1990", 
                                          geo = geo_input, year = year, 
-                                         unit = unit_input, labelling = labelling,
-                                         stk_flow = stk_flow_input) }
-  } # use eurostat files 
+                                         unit = unit_input, 
+                                         labelling = labelling )     # use germany example 
+      output_vector <- labelled_io_table[16,]
+      if (households == TRUE ) {
+        output_vector <- output_vector [1,1:8]
+      } else {
+        output_vector <- output_vector [1,1:7]
+      }
+      return ( output_vector )  #return simplified example table and do not run rest of the code
+    } else {
+      if ( tmp_rds %in% list.files (path = tempdir()) ) {
+        labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
+      } else { 
+        labelled_io_table <- iotable_get ( source = source, 
+                                           geo = geo_input, year = year, 
+                                           unit = unit_input, labelling = labelling,
+                                           stk_flow = stk_flow_input) }
+    } # use eurostat files 
+    
+  } 
   
   labelled_io_table <- labelled_io_table %>% 
-    mutate_if ( is.factor, as.character)
+    dplyr::mutate_if ( is.factor, as.character)
   
   total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
   
