@@ -44,6 +44,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   output <- dplyr::mutate_if ( output, is.factor, as.character )
   
   Im <- dplyr::full_join ( input_flow, output, by = names ( input_flow ))
+  keep_first_name <- names(Im)[1]
   
   output_row <- nrow(Im)
   last_col <- ncol (Im)
@@ -76,10 +77,22 @@ input_coefficient_matrix_create <- function ( input_flow,
   }
   
   na_to_eps <- function(x) ifelse( x==0, 0.000001, x )
-  first_col <- Im[,1]
-  Im <- vapply ( Im[1:output_row-1, c(2:last_col)], na_to_eps, numeric ( output_row - 1) )
+   
+  first_col <- as.data.frame( Im[-output_row,1] )
+  names (first_col ) <- keep_first_name
+  Im <- vapply ( Im[1:output_row-1, c(2:last_col)],
+                 na_to_eps, numeric ( output_row - 1) )
+  Im2 <- Im
+  
+  for ( i in 1:(output_row-1)) {
+    for ( j in 1:(last_col-1)) {  
+      Im[i, j ] <- as.numeric(Im [i, j ]) / as.numeric(output [j+1] )
+    }
+  #Im's first col is removed, so last_col is last_col-1
+  }
   Im <- as.data.frame (Im)
-  Im <- cbind ( first_col[output_row-1,], Im)
+
+  Im <- cbind ( first_col, Im)
   if ( is_last_cols ) {
     keep_name <- names ( last_cols )
     last_cols <- as.data.frame(last_cols [-output_row, ])
