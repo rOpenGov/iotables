@@ -49,17 +49,19 @@ input_coefficient_matrix_create <- function ( input_flow,
   last_col <- ncol (Im)
   is_last_cols <- FALSE
    
-  if ( names (Im)[last_col] %in% "P3_S14" ) {
+  if ( names (Im)[last_col] %in% c("P3_S14", "households")) {
     last_col <- last_col -1 
-    last_cols <- data.frame ( 
-      P3_S14 = Im[['P3_S14']]
-      )
+    last_name <- names (Im)[last_col+1]
+    last_cols <- data.frame (
+      total = Im[, which( names ( Im )%in% c("P3_S14", "households") )]
+    )
+    names (last_cols ) <- last_name 
     is_last_cols <- TRUE
-    }
+  }
+  
   if ( names (Im)[last_col] %in% c("TOTAL", "CPA_TOTAL") ) {
     last_col <- last_col -1  
     total_name <- names (Im)[last_col+1]
-    
     total_col <- data.frame (
       total = Im[, which( names ( Im )%in% c("TOTAL", "CPA_TOTAL") )]
       )
@@ -78,8 +80,12 @@ input_coefficient_matrix_create <- function ( input_flow,
   Im <- vapply ( Im[1:output_row-1, c(2:last_col)], na_to_eps, numeric ( output_row - 1) )
   Im <- as.data.frame (Im)
   Im <- cbind ( first_col[output_row-1,], Im)
-  if ( is_last_cols ) Im <- cbind ( Im, last_cols[1:output_row-1, ] )
-  
+  if ( is_last_cols ) {
+    keep_name <- names ( last_cols )
+    last_cols <- as.data.frame(last_cols [-output_row, ])
+    names ( last_cols ) <- keep_name 
+    Im <- cbind ( Im, last_cols )
+  } 
   if ( is.null(digits) ) return (Im)
   
   if ( class(digits) != "numeric") stop ("Error: rounding digits are not given as a numeric input.")
