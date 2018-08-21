@@ -4,23 +4,26 @@
 #' @param input_matrix A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}
 #' @param output_vector A named output vector created by \code{\link{output_get}}.  
 #' @param digits Rounding digits, if omitted, no rounding takes place.  
+#' @importFrom dplyr select 
 #' @examples  
-#'de_output <- output_get ( source = "germany_1990", geo = "DE",
+#' de_output <- output_get ( source = "germany_1990", geo = "DE",
 #'                          year = 1990, unit = "MIO_EUR", 
 #'                          households = FALSE, labelling = "iotables")
 #' 
-#'de_emp <- primary_input_get ( input = "compensation_employees",
+#' de_emp <- primary_input_get ( input = "compensation_employees",
 #'                              source = "germany_1990", geo = "DE",
 #'                              year = 1990, unit = "MIO_EUR", 
 #'                              households = FALSE, labelling = "iotables")
 #'
-#'de_emp_indicator <- input_indicator_create ( input_matrix = de_emp, 
-#                                              output_vector = de_output )
+#' de_emp_indicator <- input_indicator_create ( input_matrix = de_emp, 
+#'                                            output_vector = de_output )
 #' @export
 
 input_indicator_create <- function ( input_matrix,
                                      output_vector,
                                      digits = NULL ) { 
+  CPA_G47 <- CPA_T <- CPA_U <- CPA_L68A <- NULL 
+  
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
   }
