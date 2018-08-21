@@ -17,23 +17,52 @@
 #'de_emp_indicator <- input_indicator_create ( de_emp, de_output )
 #' @export
 
-input_indicator_create <- function ( input_matrix, output_vector,
+input_indicator_create <- function ( input_matrix,
+                                     output_vector,
                                      digits = NULL ) { 
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
   }
-  if ( ! all ( names ( output_vector) %in% names ( input_matrix ))) {
-    stop ( "Some industries / products do not have input data. ")
+  
+  
+  if ( ! all ( names ( output_vector) %in% names ( input_matrix )) ) {
+    
+    if ( names(output_vector) [ ! names ( output_vector) %in%
+                                names ( input_matrix )]  == "P3_S14")  {
+      input_matrix$P3_S14 <- 0  #case when only households are missing (type-II)
+    } 
+    
+    problem_cols <-  names(input_matrix) [ ! names ( input_matrix ) %in% names ( output_vector )]
+    
+    if ( ! length(problem_cols) == 0 ) {
+    
+    if ( "CPA_G47" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_G47 )}
+    if ( "CPA_T" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_T )}
+    if ( "CPA_U" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_U )}
+    if ( "CPA_L68A" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_L68A  )}
+    if ( "TOTAL" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -TOTAL )}
+     
+    problem_cols <-  names(input_matrix) [ ! names ( input_matrix ) %in% names ( output_vector )]
+    
+    if ( length (problem_cols) > 0 )  
+      stop ( "Some industries / products do not have input data. ")
+    }
   }
 
   input_matrix_inputed <- input_matrix
   input_matrix <- input_matrix[names(output_vector)]
-
-  #Not elegant
-  for ( j in 2:ncol(input_matrix)) {
-    if ( as.numeric(output_vector[j])==0) {
+  
+  eps_changes <- 2:ncol(input_matrix)
+  no_eps <- which ( names ( input_matrix ) %in% c("households", "P3_S14"))
+  if (length (no_eps) > 0 ) {
+    eps_changes <- eps_changes [ -(no_eps-1) ] #remove household element from loop var
+  }
+  
+  #Not elegant, should be further optimized with vapply 
+  for ( j in eps_changes ) {
+    if ( as.numeric(output_vector[j])==0 ) {
       output_vector[j] <- 0.000001  #avoid division by zero 
-      warning ("Warning: Zero output is changed to 0.000001.")
+      warning ("Warning: Zero output in ", names(output_vector)[j], " is changed to 0.000001.")
       }
     if (is.null(digits)) {
       input_matrix[,j] <- input_matrix[,j] / as.numeric(output_vector[j])  #tibble to numeric conversion
