@@ -62,3 +62,6 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 
 # iotables 0.3.1
 * Correcting a bug that did not always remove the right columns from use_table_get()
+
+# iotables 0.3.2
+* Better exception handling in equation_solve.  Removes trivial errorneous, all-zero columns.
