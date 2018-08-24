@@ -22,7 +22,7 @@
 input_indicator_create <- function ( input_matrix,
                                      output_vector,
                                      digits = NULL ) { 
-  CPA_G47 <- CPA_T <- CPA_U <- CPA_L68A <- NULL 
+  CPA_G47 <- CPA_T <- CPA_U <- CPA_L68A <- TOTAL <- NULL 
   
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
