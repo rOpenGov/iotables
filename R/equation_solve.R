@@ -28,13 +28,28 @@
 
 equation_solve <- function ( LHS = NULL, Im = NULL ) {
 
-  if ( is.null(LHS)| is.null(Im) ) stop (
+  if ( is.null(LHS) | is.null(Im) ) stop (
       "Error: matrix equation inputs are not given.")
 
   LHS <- LHS %>%
     mutate_if (is.factor, as.character) 
   Im <- Im %>%
     mutate_if (is.factor, as.character) 
+  
+  if ( ncol (Im) < ncol(LHS)) {
+   not_found <-  names(LHS)[ which (! names(LHS) %in% names ( Im )) ]
+   if ( all ( not_found %in% c("CPA_T", "CPA_U", "CPA_L68A", "TOTAL", "CPA_TOTAL"))) {
+     warning ( paste ( not_found, collapse = ','),  
+' from the input vector is removed. These are likely zero values, 
+and cannot be found in the Leontieff-inverse.'
+)
+     LHS <- dplyr::select ( LHS, -dplyr::one_of ( not_found ))
+   } else if  ( any( not_found  %in%  c("households", "P3_S14"))  )  {
+        stop ("The input vector has households but the Leontieff-inverse has not.")
+     } else {
+     stop ("Non confirming input vector and Leontieff-inverse.")
+   }
+  }
 
   joined <- tryCatch(
       full_join (LHS, Im, by = names(LHS)), 

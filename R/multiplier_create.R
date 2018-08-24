@@ -47,7 +47,8 @@ multiplier_create <- function ( input_vector = NULL,
   
  if (!is.null(digits)) if (digits < 0) digits <- NULL
   
- multipliers <- equation_solve (input_vector, Im )
+ multipliers <- equation_solve (input_vector, Im ) 
+   
 
  if ( !is.null(digits)) {
        multipliers <- round(multipliers, digits)
