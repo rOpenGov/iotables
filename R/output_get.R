@@ -69,11 +69,11 @@ output_get <- function ( labelled_io_table = NULL,
                                          unit = unit_input,
                                          labelling = labelling )     # use germany example 
       output_vector <- labelled_io_table[16,]
+      household_col <- which  (names(output_vector) == "consumption_expenditure_household")
       if ( households == TRUE ) {
-        household_col <- which  (names(output_vector) == "consumption_expenditure_government")
-        output_vector <- output_vector[1, 1:household_col] 
+          output_vector <- output_vector[1, 1:household_col] 
         } else {
-        output_vector <- output_vector [1,1:7]
+        output_vector <- output_vector [1,1:(household_col-1)]
       }
       return ( output_vector )  #return simplified example table and do not run rest of the code
     } else {
