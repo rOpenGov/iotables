@@ -29,6 +29,5 @@ test_that("correct data is returned", {
   expect_equal(as.numeric(output_get(source = "germany_1990", 
                  geo = 'DE', year = 1990, 
                  unit = "MIO_EUR", households = TRUE, 
-                 labelling = "iotables")[1,8]), 1001060)
+                 labelling = "iotables")$consumption_expenditure_household), 1001060)
   })
-
