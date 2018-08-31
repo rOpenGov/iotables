@@ -62,11 +62,14 @@ use_table_get <- function ( labelled_io_table  = NULL,
       stop("Currently only labelling = 'iotables' and labelling = 'short' is supported.")
     }
     
-    if ( source == "germany_1990") {
-      labelled_io_table <- iotable_get ( source = source, 
-                                         geo = geo, year = year, 
-                                         unit = unit, labelling = labelling )     # use germany example 
+    if ( source == "germany_1990" ) {
+      labelled_io_table <- iotable_get ( 
+        labelled_io_data = NULL,
+        source =  source, 
+        geo = geo, year = year, 
+        unit = unit, labelling = labelling )     # use germany example 
       use_table <- labelled_io_table[1:7, 1:8]
+      
       if (keep_total == FALSE ) use_table <- use_table [1:6, 1:8]
       if (households == TRUE ) {
         household_row <- labelled_io_table[11,1:8]
