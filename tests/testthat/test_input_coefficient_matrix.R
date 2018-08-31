@@ -31,6 +31,12 @@ business_agriculture_input <- input_coefficients %>%
   dplyr::select ( agriculture_group) %>%
   as.numeric(.)
 
+BSBS <- input_coefficients %>%
+  dplyr::filter ( iotables_row == "business_services_group") %>%
+  dplyr::select ( business_services_group ) %>%
+  as.numeric(.)
+
 test_that("get_input_flow correct input coefficients are returned", {
-   expect_equal(business_agriculture_input, 0.0828, tolerance = .00005)
+  expect_equal(business_agriculture_input, 0.0828, tolerance = .00005)
+  expect_equal(BSBS, 0.279, tolerance = .00005)
   })
