@@ -4,12 +4,18 @@
 \alias{primary_input_get}
 \title{Get primary inputs}
 \usage{
-primary_input_get(input = "compensation_employees",
-  source = "germany_1990", geo = "DE", year = 1990,
-  unit = "MIO_EUR", households = FALSE, stk_flow = "DOM",
-  labelling = "iotables")
+primary_input_get(labelled_io_table = NULL,
+  input = "compensation_employees", source = "germany_1990",
+  geo = "DE", year = 1990, unit = "MIO_EUR", households = FALSE,
+  stk_flow = "DOM", labelling = "iotables", keep_total = FALSE)
 }
 \arguments{
+\item{labelled_io_table}{If you have created the IO table earlier with 
+\code{\link{iotable_get}}, it is faster to work with the data
+in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
+and \code{\link{iotable_get}}.}
+
 \item{input}{A character string or a character vector containing the indicator names. 
 Any of \code{compensation_employees}, \code{wages_salaries}, \code{mixed_income_gross}, 
 \code{gva} (for gross value added), \code{surplus_mixed_gross}, \code{surplus_mixed_net},
@@ -42,6 +48,9 @@ source of the table, or if it is a product x product, industry x industry or
 product x industry table.
 The alternative is \code{short} which is the original short row or column code of 
 Eurostat or OECD.}
+
+\item{keep_total}{Logical variable. Defaults to \code{FALSE} and removes 
+the totalling row and column from the matrix.}
 }
 \description{
 This function will retrieve any primary input from the input-output table. 
