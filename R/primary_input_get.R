@@ -5,6 +5,11 @@
 #' primary input.
 #' If you work with the original Eurostat labels, you can review the codes of
 #' variables with \code{View(metadata)}.
+#' @param labelled_io_table If you have created the IO table earlier with 
+#' \code{\link{iotable_get}}, it is faster to work with the data
+#' in the memory. Defaults to \code{NULL} when  the data will be retrieved from
+#' the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
+#' and \code{\link{iotable_get}}.
 #' @param input A character string or a character vector containing the indicator names. 
 #' Any of \code{compensation_employees}, \code{wages_salaries}, \code{mixed_income_gross}, 
 #' \code{gva} (for gross value added), \code{surplus_mixed_gross}, \code{surplus_mixed_net},
@@ -30,6 +35,8 @@
 #' product x industry table.
 #' The alternative is \code{short} which is the original short row or column code of 
 #' Eurostat or OECD.
+#' @param keep_total Logical variable. Defaults to \code{FALSE} and removes 
+#' the totalling row and column from the matrix.  
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate
 #' @importFrom tidyr spread
@@ -42,49 +49,56 @@
 #'                             year = 1990, labelling = "iotables" ) 
 #' @export
 
-primary_input_get <- function ( input = "compensation_employees", 
+primary_input_get <- function ( labelled_io_table  = NULL,
+                                input = "compensation_employees", 
                                 source = "germany_1990", geo = "DE",
                                 year = 1990, unit = "MIO_EUR",
                                 households = FALSE, stk_flow = "DOM",
-                                labelling = "iotables") {
+                                labelling = "iotables",
+                                keep_total = FALSE ) {
+  
   time <- t_cols2 <- t_rows2 <- values <- .<-  NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- NULL
   unit_input <- unit; geo_input <- geo;  stk_flow_input <- stk_flow
   tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
   source_inputed <- source ; unit_input <- unit
   
-  if (source == "croatia_2010_1900") {
-    stop("The table croatia_2010_1900 is an import table and has no primary input field.")
-  }
-  if (! labelling %in% c("iotables", "short")) {
-    stop("Only iotables or original short columns can be selected.")
+  if ( is.null(labelled_io_table)) {
+    if (source == "croatia_2010_1900") {
+      stop("The table croatia_2010_1900 is an import table and has no primary input field.")
+    }
+    if (! labelling %in% c("iotables", "short")) {
+      stop("Only iotables or original short columns can be selected.")
+    }
+    
+    if ( source == "germany_1990") {
+      labelled_io_table <- iotable_get ( source = "germany_1990", 
+                                         geo = geo_input, year = year, 
+                                         unit = unit_input, labelling = labelling )     # use germany example 
+      if ( input %in% labelled_io_table[[1]] ) {
+        input_row <- which ( labelled_io_table[[1]] == input )
+      } else {
+        stop("The input is not found in this data source.")
+      }
+      input_vector <- labelled_io_table[input_row,]
+      if (households == TRUE ) {
+        input_vector <- input_vector [1,1:8]
+      } else {
+        input_vector <- input_vector [1,1:7]
+      }
+      return ( input_vector )  #return simplified example table and do not run rest of the code
+    } else {                   #end of germany case
+      if ( tmp_rds %in% list.files (path = tempdir()) ) {
+        labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
+      } else { 
+        labelled_io_table <- iotable_get ( source = source, 
+                                           geo = geo_input, year = year, 
+                                           unit = unit_input, labelling = labelling,
+                                           stk_flow = stk_flow_input) }
+    } # use eurostat files 
+    
   }
   
-  if ( source == "germany_1990") {
-    labelled_io_table <- iotable_get ( source = "germany_1990", 
-                                       geo = geo_input, year = year, 
-                                       unit = unit_input, labelling = labelling )     # use germany example 
-    if ( input %in% labelled_io_table[[1]] ) {
-      input_row <- which ( labelled_io_table[[1]] == input )
-    } else {
-      stop("The input is not found in this data source.")
-    }
-    input_vector <- labelled_io_table[input_row,]
-    if (households == TRUE ) {
-      input_vector <- input_vector [1,1:8]
-    } else {
-      input_vector <- input_vector [1,1:7]
-    }
-    return ( input_vector )  #return simplified example table and do not run rest of the code
-  } else {                   #end of germany case
-    if ( tmp_rds %in% list.files (path = tempdir()) ) {
-      labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
-    } else { 
-      labelled_io_table <- iotable_get ( source = source, 
-                                         geo = geo_input, year = year, 
-                                         unit = unit_input, labelling = labelling,
-                                         stk_flow = stk_flow_input) }
-  } # use eurostat files 
   
   labelled_io_table <- labelled_io_table %>% 
     mutate_if ( is.factor, as.character)
@@ -95,7 +109,7 @@ primary_input_get <- function ( input = "compensation_employees",
     stop("The input is not found in this data source.")
   }
   
-  if (households == TRUE) {
+  if ( households == TRUE ) {
     household_consumption_col <- which ( names (labelled_io_table ) %in% 
                                            c('final_consumption_households', 'P3_S14'))
     
@@ -110,11 +124,21 @@ primary_input_get <- function ( input = "compensation_employees",
                                           c(1:67, household_consumption_col[1]) ] 
     input_vector[1, 68] <- 0
     } else {    #no households 
-      input_vector <- labelled_io_table[input_row, c(1:67) ] 
+      if ( source == 'germany_1990') input_vector <- input_vector[1, 1:7] else {
+        input_vector <- labelled_io_table[input_row, c(1:67) ] 
+      }
+      
     if ( length( input_vector) == 0 ) {
       stop ( "No primary input data was found.")
     }
   } # end of no household case 
+  
+  total_col <- which( tolower(names ( input_vector )) %in% c("total", "cpa_total"))
+  if ( length(total_col) > 0 ) {
+    if (keep_total == FALSE )
+      input_vector <- input_vector[, 1:(total_col-1)]
+  }
+  
   input_vector[,1] <- as.character(input_vector[,1])
   
   input_vector 

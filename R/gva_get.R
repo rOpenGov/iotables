@@ -126,7 +126,7 @@ gva_get <- function ( labelled_io_table = NULL,
     }
   } else {    #no households case
     gva_row <- which (labelled_io_table[[1]] %in%  
-                           c('output_bp', 'P1', 'output') )
+                           c('gva', 'B1G') )
     if (source == "naio_cp17_r2") {
       gva_row <- which (labelled_io_table[[1]] %in%  
                              c('total', "CPA_TOTAL") )
