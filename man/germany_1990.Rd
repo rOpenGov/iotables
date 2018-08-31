@@ -16,7 +16,6 @@
   \item{geo}{ISO / Eurostat country code for Germany, i.e. DE}
   \item{geo_lab}{ISO / Eurostat country name, Germany}
   \item{time}{Date of the SIOT}     
-  \item{iotables_row}{Short, descriptive row names}.              
 }
 #' @keywords data, datasets, input-output table, Germany}
 \source{
