@@ -5,7 +5,7 @@
 #' It is a small dataset for examples, but it is also instructive to understand how Eurostat
 #' stores the highly structured SIOTs in long-form tidy datasets. 
 #' The third and fourth quadrant labelling follows the current Eurostat labels.
-#' @source   \href{http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 492
+#' @source \href{http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 492
 #' @usage data(germany_1990)
 #' @format A data frame with 228 observations and 10 variables.
 #'\describe{
