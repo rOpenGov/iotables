@@ -2,6 +2,8 @@ library (testthat)
 library (iotables)
 context ("Creating an output vector")
 
+output_get(source = "germany_1990", 
+           geo = 'DE', year = 1990, unit = "MIO_EUR")
 
 test_that("output_get errors ", {
   expect_error(output_get(source = "germany_1990", 
@@ -29,7 +31,4 @@ test_that("correct data is returned", {
                  unit = "MIO_EUR", households = TRUE, 
                  labelling = "iotables")[1,8]), 1001060)
   })
-
-
-
 

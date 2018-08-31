@@ -56,3 +56,13 @@ test_that("correct data is returned", {
 #                      data_directory = "data-raw", force_download = FALSE)
 # A01, A01 should yield 10,161
 
+germany_table <- iotable_get(source = "germany_1990", 
+            geo = 'DE', year = 1990, 
+            unit = "MIO_EUR", labelling = "iotables")
+
+hh <- germany_table$consumption_expenditure_household[which( germany_table$iotables_row == "output_bp")]
+
+test_that("correct data is returned for private consumption", {
+  expect_equal(hh, 1001060)
+})
+
