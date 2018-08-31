@@ -14,7 +14,7 @@ de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
 
 L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
 I <- leontieff_inverse_create (L)
-fw <- forward_linkages ( I )
+#fw <- forward_linkages ( I )
 
 #The Eurostat Manual uses a different rounding. There is a slight mismatch)
 
