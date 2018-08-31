@@ -42,7 +42,7 @@ output_get <- function ( labelled_io_table = NULL,
                          source = "germany_1990", geo = "DE",
                          year = 1990, unit = "MIO_EUR",
                          households = FALSE,  
-                         labelling = "iotables" , 
+                         labelling = "iotables", 
                          stk_flow = "DOM", 
                          keep_total = FALSE) {  
   ##Initialize variables ------------
@@ -69,9 +69,10 @@ output_get <- function ( labelled_io_table = NULL,
                                          unit = unit_input,
                                          labelling = labelling )     # use germany example 
       output_vector <- labelled_io_table[16,]
-      if (households == TRUE ) {
-        output_vector <- output_vector [1,1:8]
-      } else {
+      if ( households == TRUE ) {
+        household_col <- which  (names(output_vector) == "consumption_expenditure_government")
+        output_vector <- output_vector[1, 1:household_col] 
+        } else {
         output_vector <- output_vector [1,1:7]
       }
       return ( output_vector )  #return simplified example table and do not run rest of the code
