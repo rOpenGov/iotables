@@ -5,7 +5,7 @@ germany <- read.csv ( "data-raw/Beutel_15_4.csv", stringsAsFactors = F)
 germany_long <- germany %>%
   gather ( t_cols2, values, agriculture_group:output_bp) %>%
   mutate ( t_cols2_lab  = plyr::mapvalues (t_cols2, 
-                                           from = c('agriculture_group', 'manufacturing_group', 'construcion_group',
+                                           from = c('agriculture_group', 'manufacturing_group', 'construction_group',
                                                     'trade_group', 'business_services_group', 'other_services_group', 
                                                     'consumption_expenditure_household', 
                                                     'consumption_expenditure_government', 'gross_capital_formation',
@@ -16,7 +16,7 @@ germany_long <- germany %>%
                                                   "Exports", "Output at basic prices"))) %>%
   mutate ( iotables_col = t_cols2 ) %>%
   mutate ( col_order  = plyr::mapvalues (t_cols2, 
-                                          from = c('agriculture_group', 'manufacturing_group', 'construcion_group',
+                                          from = c('agriculture_group', 'manufacturing_group', 'construction_group',
                                                    'trade_group', 'business_services_group', 'other_services_group', 
                                                    'consumption_expenditure_household', 
                                                    'consumption_expenditure_government', 'gross_capital_formation',
