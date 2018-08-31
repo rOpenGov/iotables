@@ -23,7 +23,7 @@ The iotables are exactly designed for these tasks.  Currently the package downlo
 
 The aim of this introduction is not to introduce input-output economics, or SIOTs in detail.  The Eurostat manual on input-output tables and the [Eurostat tematic page](http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables) should be consulted for further information about the data and the metadata. 
 
-In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual.  The package function examples can be checked against Jörg Beutel's published results(http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). 
+In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual (page 481).  The package function examples can be checked against [Jörg Beutel's published results](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). 
 
 ## Installation
 
