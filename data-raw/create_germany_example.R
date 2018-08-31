@@ -2,8 +2,6 @@ library (dplyr) ; library(tidyr) ; library (devtools)
 
 germany <- read.csv ( "data-raw/Beutel_15_4.csv", stringsAsFactors = F)
 
-names ( germany )
-
 germany_long <- germany %>%
   gather ( t_cols2, values, agriculture_group:output_bp) %>%
   mutate ( t_cols2_lab  = plyr::mapvalues (t_cols2, 
@@ -28,7 +26,7 @@ germany_long <- germany %>%
                                                    ), 
                                           to = seq(1:19))) %>%
   mutate ( ordering_c  = plyr::mapvalues (t_cols2, 
-                                          from = c('agriculture_group', 'manufacturing_group', 'construcion_group',
+                                          from = c('agriculture_group', 'manufacturing_group', 'construction_group',
                                                    'trade_group', 'business_services_group', 'other_services_group', 
                                                    'consumption_expenditure_household', 
                                                    'consumption_expenditure_government', 'gross_capital_formation',
@@ -57,7 +55,8 @@ germany_long <- germany %>%
 
 
 germany_1990 <- germany_long %>%
-  select ( -iotables_label_c, -ordering_c, -c_quadrant, 
-           -iotables_label_r, -ordering_r, -r_quadrant )
+  dplyr::select ( -iotables_label_c, -ordering_c, -c_quadrant, 
+           -iotables_label_r, -ordering_r, -r_quadrant, 
+           -quadrant, -iotables_row, -numeric_label )
 
 devtools::use_data(germany_1990, overwrite = TRUE)
