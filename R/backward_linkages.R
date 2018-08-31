@@ -17,7 +17,7 @@
 #' 
 #' L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
 #' I <- leontieff_inverse_create (L)
-#' forward_linkages ( Im )
+#' backward_linkages ( I )
 #' 
 #' @export 
 
