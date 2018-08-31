@@ -31,3 +31,23 @@ test_that("correct data is returned", {
                  unit = "MIO_EUR", households = TRUE, 
                  labelling = "iotables")$consumption_expenditure_household), 1001060)
   })
+
+test_that("households are included or excluded", {
+  expect_equal("consumption_expenditure_household" %in% 
+                 names ( output_get(source = "germany_1990", 
+                                    geo = 'DE', year = 1990, 
+                                    unit = "MIO_EUR", households = FALSE, 
+                                    labelling = "iotables") ), FALSE)
+  expect_equal("consumption_expenditure_household" %in% 
+                 names ( output_get(source = "germany_1990", 
+                                    geo = 'DE', year = 1990, 
+                                    unit = "MIO_EUR", households = TRUE, 
+                                    labelling = "iotables") ), TRUE)
+  expect_equal("consumption_expenditure_government" %in% 
+               names ( output_get(source = "germany_1990", 
+                                  geo = 'DE', year = 1990, 
+                                  unit = "MIO_EUR", households = TRUE, 
+                                  labelling = "iotables") ), FALSE)
+})
+
+

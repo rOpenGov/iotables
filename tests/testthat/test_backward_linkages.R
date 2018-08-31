@@ -25,7 +25,8 @@ bw <-  backward_linkages ( Im = I )
 #The Eurostat Manual uses a different rounding. There is a slight mismatch)
 
 test_that("correct data is returned", {
-  expect_equal(round ( bw$agriculture_group[which ( bw$iotables_row == "total")], 4),
+  expect_equal(round (
+    bw$agriculture_group[which ( bw$iotables_row == "total")], 4),
                1.7048, tolerance=1e-3)
 })
 

@@ -10,7 +10,8 @@ de_output <- output_get ( source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           households = FALSE, labelling = "short")
 
-names (de_use)[1] <- names(de_output)[1]
+names (de_use)[1] == names(de_output)[1]
+
 de_coeff <- input_coefficient_matrix_create( input_flow = de_use, 
                                              output =  de_output, digits = 4)
 
@@ -18,17 +19,19 @@ L <- leontieff_matrix_create( technology_coefficients_matrix =
                                           de_coeff )
 I <- leontieff_inverse_create(L)
 
+
 require(dplyr)
 AAL <- L %>%
   dplyr::filter ( t_rows2 == "cpa_a") %>%
   dplyr::select (  agriculture_group ) %>%
   unlist () %>%  as.numeric(.)
 
+
 #test against 15.9 p 487
 
 TBI <- I %>%
   dplyr::filter ( t_rows2 == 'cpa_g_i') %>%
-   dplyr::select (  business_services_group ) %>%
+  dplyr::select ( business_services_group ) %>%
   unlist () %>%
   as.numeric(.)
 
@@ -39,7 +42,7 @@ test_that("Leontieff matrix values are correct", {
    })
 
 test_that("Leontieff inverse values are correct", {
-  expect_equal(TBI,expected= 0.035494905, tolerance = .0001)
+  expect_equal(TBI, expected= 0.035494905, tolerance = .0001)
   expect_equal(sum(sapply(I, function(x) sum(is.nan(x)))), expected = 0) #should not be NaNs
 })
 
