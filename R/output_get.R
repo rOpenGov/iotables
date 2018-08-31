@@ -46,16 +46,16 @@ output_get <- function ( labelled_io_table = NULL,
                          stk_flow = "DOM", 
                          keep_total = FALSE) {  
   ##Initialize variables ------------
-  time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
-  iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
+  time <- t_cols2 <- t_rows2 <- values <- . <- NULL #non-standard evaluation creates a varning in build. 
+  iotables_row <- iotables_col <- prod_na <- induse <- NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
   source_inputed <- source 
   
   tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
   
-  if ( is.null ( labelled_io_table )) { 
+  if ( is.null ( labelled_io_table ) ) { #no pre-downloaded table inserted
     ##Exception handling --------------
-    if (source == "croatia_2010_1900") {
+    if ( source == "croatia_2010_1900" ) {
       stop("The table croatia_2010_1900 is an import table and has no output field.")
     }
     if (! labelling %in% c("iotables", "short")) {
@@ -63,10 +63,10 @@ output_get <- function ( labelled_io_table = NULL,
     }
     
     ##Germany----
-    if ( source == "germany_1990") {
+    if ( source == "germany_1990" ) {
       labelled_io_table <- iotable_get ( source = "germany_1990", 
                                          geo = geo_input, year = year, 
-                                         unit = unit_input, 
+                                         unit = unit_input,
                                          labelling = labelling )     # use germany example 
       output_vector <- labelled_io_table[16,]
       if (households == TRUE ) {
