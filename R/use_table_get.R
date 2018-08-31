@@ -46,6 +46,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
                             year = 1990, unit = "MIO_EUR", stk_flow = "DOM",
                             households = FALSE, keep_total = FALSE, 
                             labelling = "iotables" ) {  
+  
   ##Initialize variables ------------
   time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
   iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
@@ -56,7 +57,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
     
     source_inputed <- source ; unit_input = unit
     
-    ##Exception handling ---------------
+ ##Exception handling ---------------
     if ( ! labelling %in% c("iotables", "short")) {
       stop("Currently only labelling = 'iotables' and labelling = 'short' is supported.")
     }
