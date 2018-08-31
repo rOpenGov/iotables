@@ -13,7 +13,7 @@
 #'                          year = 1990, unit = "MIO_EUR", 
 #'                          households = FALSE, labelling = "iotables")
 #'
-#' conforming__vector_create (de_use)
+#' conforming_vector_create (de_use)
 #' @export 
 
 conforming_vector_create <- function ( dat ) {
