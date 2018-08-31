@@ -68,20 +68,14 @@ use_table_get <- function ( labelled_io_table  = NULL,
         source =  source, 
         geo = geo, year = year, 
         unit = unit, labelling = labelling )     # use germany example 
-      use_table <- labelled_io_table[1:7, 1:8]
+      use_table <- labelled_io_table[1:6, 1:8]
       
-      if ( keep_total == FALSE ) use_table <- use_table [1:6, 1:8]
-      if ( households == TRUE ) {
+        if ( households == TRUE ) {
         household_row <- labelled_io_table[11,1:8]
         household_row[1,8] <- 0
-        use_table <- rbind ( use_table, household_row)
-        if ( keep_total == FALSE) use_table <- use_table [-7, ]
+        use_table <- rbind ( use_table, household_row )
       } else {
-        if (keep_total == TRUE) {
-          use_table <- labelled_io_table[1:7, 1:7]
-        } else {
           use_table <- labelled_io_table[1:6, 1:7]
-        }
       }
       return ( use_table )  #return simplified example table and do not run rest of the code
     } else {
