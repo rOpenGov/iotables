@@ -64,4 +64,4 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * Correcting a bug that did not always remove the right columns from use_table_get()
 
 # iotables 0.3.2
-* Better exception handling in `equation_solve()`.  Removes trivial errorneous, all-zero columns.
+* Better exception handling in `equation_solve()`.  Removes trivial errorneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New functions to create forward and backward linkages vectors. 
