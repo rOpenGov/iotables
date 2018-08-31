@@ -51,20 +51,30 @@ and cannot be found in the Leontieff-inverse.'
    }
   }
 
-  joined <- tryCatch(
+  ###Joining matrixes to find out if all data is present ---------------------   
+  
+
+    joined <- tryCatch(
       full_join (LHS, Im, by = names(LHS)), 
       error = function(e) {
         message ( "The technology columns are not matching.")
         return (NULL)
       }
     )
-    if ( is.null(joined)) stop("Error: no result is returned.")
-    lhs <- joined[1,]
-    lhs <- as.numeric(lhs[1,2:ncol(lhs)])
-    im <- joined[2:nrow(joined),]
-    im <- as.matrix(im[,2:ncol(im)])
+  
+  if ( is.null(joined)) stop("Error: no result is returned.")  #early termination if not
+  
+  ###Joining matrixes to find out if all data is present ---------------------   
+  
+  lhs <- joined[1,]
+  lhs <- as.numeric(lhs[1,2:ncol(lhs)])  #numeric left-hand side in conforming order
+  
+  im <- joined[2:nrow(joined),]
+  im <- as.matrix(im[,2:ncol(im)])  #numeric Leontieff inverse in conforming order
    
 
+  ###Try to solve the matrix equation  ---------------------   
+  
   solution <- tryCatch(
     lhs %*% im, 
     error = function(e) {
@@ -72,7 +82,7 @@ and cannot be found in the Leontieff-inverse.'
       return (NULL)}
   )
   
-  return(solution) 
+  solution
  }  #end of function  
 
 
