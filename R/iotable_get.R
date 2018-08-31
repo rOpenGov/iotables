@@ -50,14 +50,14 @@
 iotable_get <- function ( labelled_io_data = NULL, 
                           source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
-                          stk_flow = "DOM", labelling = "iotables", 
+                          stk_flow = "DOM", 
+                          labelling = "iotables", 
                           data_directory = NULL, 
                           force_download = TRUE) { 
 ##Initialize variables ------------
-  time = NULL; t_cols2 = NULL; t_rows2 = NULL; 
+  time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   stk_flow_input <- stk_flow
-  stk_flow <- NULL
-  values = NULL ; .= NULL #non-standard evaluation creates a varning in build. 
+  stk_flow <- values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
 
@@ -128,7 +128,7 @@ iotable_get <- function ( labelled_io_data = NULL,
      
     ##Creating a temporary file name for the input-output table ----
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
-    if ( source == "germany_1990") {
+    if ( source == "germany_1990" ) {
       labelled_io_data <- iotables::germany_1990    # use germany example 
       labelled_io_data$year = 1990
     } else if ( source == "croatia_2010_1700" ) { 
@@ -184,7 +184,7 @@ iotable_get <- function ( labelled_io_data = NULL,
  }
 
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
-                       "germany_1990")) {
+                       "germany_1990") ) {
     iotable <- labelled_io_data$data[[selected_table]]
   } else {
     iotable <- labelled_io_data
@@ -215,10 +215,14 @@ iotable_get <- function ( labelled_io_data = NULL,
     
   } else  {
     if ( ! source %in% croatia_files ){  # !prod_ind
+      
+      by_col <- names(iotable)[which ( names(iotable) %in% c("t_cols2", "t_cols2_lab", "iotables_col") )]
+      by_row <- names(iotable)[which ( names(iotable) %in% c("t_rows2", "t_rows2_lab", "iotables_row") )]
+      
       iotable_labelled <- iotable %>%
         dplyr::mutate_if ( is.factor, as.character ) %>%
-        dplyr::left_join (., metadata_cols, by = c("t_cols2", "t_cols2_lab"))  %>%
-        dplyr::left_join ( ., metadata_rows, by = c("t_rows2", "t_rows2_lab")) %>%
+        dplyr::left_join ( ., metadata_cols, by = by_col )  %>%
+        dplyr::left_join ( ., metadata_rows, by = by_row ) %>%
         dplyr::arrange ( row_order, col_order )
     } else {
       iotable_labelled <- iotable 
