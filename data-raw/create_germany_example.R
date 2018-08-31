@@ -2,10 +2,22 @@ library (dplyr) ; library(tidyr) ; library (devtools)
 
 germany <- read.csv ( "data-raw/Beutel_15_4.csv", stringsAsFactors = F)
 
+#write.csv (iotables:::germany_metadata_rows, "germany_metadata_rows.csv")
+#write.csv (iotables:::germany_metadata_cols, "germany_metadata_cols.csv")
+
+
+#germany_metadata_cols <- readxl::read_excel("data-raw/Germany_metadata.xlsx", 
+#                                            sheet = "germany_metadata_cols") %>%
+ # mutate_if ( is.factor, as.character )
+
+#germany_metadata_rows <- readxl::read_excel("data-raw/Germany_metadata.xlsx", 
+  #                                           sheet = "germany_metadata_rows") %>%
+ # mutate_if ( is.factor, as.character )
+
 germany_long <- germany %>%
   gather ( t_cols2, values, agriculture_group:output_bp) %>%
   mutate ( t_cols2_lab  = plyr::mapvalues (t_cols2, 
-                                           from = c('agriculture_group', 'manufacturing_group', 'construcion_group',
+                                           from = c('agriculture_group', 'manufacturing_group', 'construction_group',
                                                     'trade_group', 'business_services_group', 'other_services_group', 
                                                     'consumption_expenditure_household', 
                                                     'consumption_expenditure_government', 'gross_capital_formation',
@@ -60,3 +72,8 @@ germany_1990 <- germany_long %>%
            -quadrant, -iotables_row, -numeric_label )
 
 devtools::use_data(germany_1990, overwrite = TRUE)
+
+employment_metadata <- 
+
+devtools::use_data ( germany_metadata_rows, germany_metadata_cols, 
+                     internal = TRUE, overwrite = TRUE)
