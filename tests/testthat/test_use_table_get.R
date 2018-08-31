@@ -20,6 +20,11 @@ test_that("correct data is returned", {
   expect_equal(use_table_get(source = "germany_1990", 
                            geo = 'DE', year = 1990, 
                            unit = "MIO_EUR", labelling = "iotables")[1,2], 1131)
-  })
+  expect_equal(sum(use_table_get(source = "germany_1990", 
+               geo = 'DE', year = 1990, 
+               unit = "MIO_EUR", 
+               households = TRUE, labelling = "iotables")$consumption_expenditure_household), 
+                   813673)
+})
 
-
+#check Eurostat Manual page 461
