@@ -1,7 +1,7 @@
 t_rows2,t_rows2_lab,numeric_label,quadrant,iotables_row,agriculture_group,manufacturing_group,construction_group,trade_group,business_services_group,other_services_group,consumption_expenditure_household,consumption_expenditure_government,gross_capital_formation,inventory_change,export_goods_services,output_bp
 cpa_a,Agriculture group,1,10,agriculture_group,1131,25480,1,607,710,762,8500,16,2975,-6,3734,43910
 cpa_c,Manufacturing group,2,10,manufacturing_group,7930,304584,64167,41082,11981,30360,197792,8588,91692,7559,313711,1079400
-cpa_f,Construction group,3,10,construcion_group,426,7334,3875,5296,23457,9155,3457,742,191715,0,149,245606
+cpa_f,Construction group,3,10,construction_group,426,7334,3875,5296,23457,9155,3457,742,191715,0,149,245606
 cpa_g_i,Trade group,4,10,trade_group,3559,72717,14190,74399,10835,21008,269663,13492,14155,0,46045,540063
 cpa_business,Business services group,5,10,business_services_group,3637,96115,31027,65755,193176,34223,214757,10061,30124,0,13612,692487
 cpa_other,Other services group,6,10,other_services_group,1552,14986,1747,11225,15058,22070,119504,317251,3483,0,2042,508918
