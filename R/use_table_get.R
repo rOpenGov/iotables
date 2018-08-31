@@ -48,8 +48,8 @@ use_table_get <- function ( labelled_io_table  = NULL,
                             labelling = "iotables" ) {  
   
   ##Initialize variables ------------
-  time = NULL; t_cols2 = NULL; t_rows2 = NULL; values = NULL ;.= NULL #non-standard evaluation creates a varning in build. 
-  iotables_row =NULL; iotables_col = NULL; prod_na = NULL; induse = NULL
+  time <- t_cols2 <- t_rows2 <- values <- . <-  NULL #non-standard evaluation creates a varning in build. 
+  iotables_row <- iotables_col <- prod_na <- induse <- NULL
   unit_input <- unit ; geo_input <- geo; stk_flow_input <- stk_flow
   
   if ( is.null(labelled_io_table) ) { 
@@ -70,12 +70,12 @@ use_table_get <- function ( labelled_io_table  = NULL,
         unit = unit, labelling = labelling )     # use germany example 
       use_table <- labelled_io_table[1:7, 1:8]
       
-      if (keep_total == FALSE ) use_table <- use_table [1:6, 1:8]
-      if (households == TRUE ) {
+      if ( keep_total == FALSE ) use_table <- use_table [1:6, 1:8]
+      if ( households == TRUE ) {
         household_row <- labelled_io_table[11,1:8]
         household_row[1,8] <- 0
         use_table <- rbind ( use_table, household_row)
-        if ( keep_total == FALSE) use_table <- use_table [ -7, ]
+        if ( keep_total == FALSE) use_table <- use_table [-7, ]
       } else {
         if (keep_total == TRUE) {
           use_table <- labelled_io_table[1:7, 1:7]
