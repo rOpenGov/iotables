@@ -90,11 +90,17 @@ output_get <- function ( labelled_io_table = NULL,
   
   labelled_io_table <- labelled_io_table %>% 
     dplyr::mutate_if ( is.factor, as.character)
-  
-  total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
-  
-  
-  if (households == TRUE) {
+ 
+  total_col <- NA
+  if ( any ( tolower(names(labelled_io_table)) %in% c("total", "cpa_total") )) {
+    total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+  }
+    
+
+###Inclusion or exclusion of households------
+    
+  if ( households == TRUE ) {
+###households to be kept------    
     household_consumption_col <- which ( names (labelled_io_table ) %in% 
                                            c('final_consumption_households', 'P3_S14'))
     
@@ -111,7 +117,6 @@ output_get <- function ( labelled_io_table = NULL,
       stop ( "No output data was found.")
     }
     
-     
     if (keep_total == TRUE) {
       message ( "Households were added to the matrix.")
       output_vector <- labelled_io_table[output_row[1] , 
@@ -125,25 +130,32 @@ output_get <- function ( labelled_io_table = NULL,
                                                household_consumption_col[1]) ] 
       output_vector [1,total_col] <- 0
     }
-  } else {    #no households case
+  } else {  
+###no households case-----
     output_row <- which (labelled_io_table[[1]] %in%  
                            c('output_bp', 'P1', 'output') )
+    
     if (source == "naio_cp17_r2") {
       output_row <- which (labelled_io_table[[1]] %in%  
                              c('total', "CPA_TOTAL") )
     }
     
-    if ( length( output_row) == 0 ) {
+    if ( length(output_row) == 0 ) {
       stop ( "No output data was found.")
+    }
+    
+    if ( length(output_row) > 1 ) {
+      warning ( "Multiple output rows were found, using first.")
     }
     
     
     ##Keep total column?
-    if (keep_total == TRUE) {
+    if ( keep_total == TRUE && !is.na(total_col) ) {
       output_vector <- labelled_io_table[ output_row[1], 1:total_col   ] 
     } else {
+      if ( is.na(total_col)) { total_col <- ncol(labelled_io_table) }
       output_vector <- labelled_io_table[ output_row[1], 1:total_col-1 ]
-      message ( "Total column was removed from the matrix.")
+      message ( "Total column was not found or removed from the matrix.")
     }
     
   } # end of no household case 
