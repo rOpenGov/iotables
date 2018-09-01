@@ -54,14 +54,14 @@ Default data directory for faster programmatic use and phasing out discountinued
 Handles tables with purchasers' prices. Imports Eurostat employment data.
 
 # iotables 0.2.9
-Error corrected concerning creation of temporary files on non-Windows environments. No uses `file.path()` to create platform-independent files.
+Error corrected concerning creation of temporary files on non-Windows environments. No uses `file.path()` to create platform-independent files. Released on CRAN.
 
 # iotables 0.3.0
 * Correctly handles some countries that differ from the standard SIOT structure. The Czech Republic does not include G47 and I68 imputed rents in the table, which caused problems with the ordering of the table and the creation of coefficients.
 * Uses tidyr::nested() data structures which are far easier handled in highly structured data sets.
 
 # iotables 0.3.1
-* Correcting a bug that did not always remove the right columns from use_table_get()
+* Correcting a bug that did not always remove the right columns from `use_table_get()`. Released on CRAN.
 
 # iotables 0.3.2
-* Better exception handling in `equation_solve()`.  Removes trivial errorneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. 
+* Better exception handling in `equation_solve()`.  Removes trivial erroneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. Released on CRAN.
