@@ -71,6 +71,7 @@ gva_get <- function ( labelled_io_table = NULL,
       gva_vector <- labelled_io_table[15,]
       if (households == TRUE ) {
         gva_vector <- gva_vector [1,1:8]
+        gva_vector[8] <- 0
       } else {
         gva_vector <- gva_vector [1,1:7]
       }
@@ -114,7 +115,8 @@ gva_get <- function ( labelled_io_table = NULL,
     if (keep_total == TRUE) {
       message ( "Households were added to the matrix.")
       gva_vector <- labelled_io_table[gva_row[1] , 
-                                          c(1:total_col, household_consumption_col[1]) ] 
+                                          c(1:total_col, 
+                                            household_consumption_col[1]) ] 
       gva_vector [1,total_col+1] <- 0
     } else {
       message ( "Households were added to the matrix.")
