@@ -182,14 +182,13 @@ iotable_get <- function ( labelled_io_data = NULL,
    stop ( "There is no available table for country ", geo, " in the year ", year , 
           " with ", unit, " units.")
  }
-
+ 
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
                        "germany_1990") ) {
     iotable <- labelled_io_data$data[[selected_table]]
   } else {
     iotable <- labelled_io_data
   }
-
   
   if ( class(iotable$values) %in% c("character", "factor")) {
     iotable$values  = trimws(as.character(iotable$values), which = "both")
@@ -197,12 +196,17 @@ iotable_get <- function ( labelled_io_data = NULL,
     warning("Warning: original data was converted to numeric format.")
   }
   
+###Get and order the SIOT-------  
  if ( source %in% prod_ind ) {
      
     iotable_labelled <- iotable %>%
+      dplyr::filter (stk_flow == stk_flow_input ) %>%
       dplyr::mutate_if ( is.factor, as.character ) %>%
-      dplyr::full_join (.,  metadata_cols, by = c("induse", "induse_lab"))  %>%
-      dplyr::full_join ( ., metadata_rows, by = c("prod_na", "prod_na_lab")) %>%
+      dplyr::left_join (.,  metadata_cols, by = c("induse", "induse_lab") ) %>%
+      dplyr::select ( -quadrant, -account_group, 
+                      -digit_1, -digit_2, -variable, -group ) %>%
+      dplyr::mutate_if ( is.factor, as.character ) %>% 
+      dplyr::left_join (.,  metadata_rows )  %>%
       dplyr::mutate ( prod_na = forcats::fct_reorder(prod_na, 
                                               as.numeric(row_order))) %>%
       dplyr::mutate ( induse = forcats::fct_reorder(induse, 
@@ -210,9 +214,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::mutate ( iotables_row = forcats::fct_reorder(iotables_row ,
                                                        as.numeric(row_order))) %>%
       dplyr::mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
-                                                       as.numeric(col_order))) %>%
-      dplyr::filter (stk_flow == stk_flow_input ) 
-    
+                                                       as.numeric(col_order)))
   } else  {
     if ( ! source %in% croatia_files ){  # !prod_ind
       
@@ -227,8 +229,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     } else {
       iotable_labelled <- iotable 
     }
-    
-    iotable_labelled <- iotable_labelled %>%
+    iotable_labelled2 <- iotable_labelled %>%
       dplyr::mutate ( t_rows2 = forcats::fct_reorder(t_rows2, 
                                               as.numeric( row_order))) %>%
       dplyr::mutate ( t_cols2 = forcats::fct_reorder(t_cols2, 
@@ -246,12 +247,17 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::select ( iotables_col, iotables_row, values ) %>% 
       tidyr::spread ( iotables_col, values )
     
+    nrow (iotable_labelled_w )
+    ncol (iotable_labelled_w )    
   } else if ( labelling == "short" & source %in% prod_ind ) {
     
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::select (prod_na, induse, values ) %>%
       dplyr::filter ( !is.na(prod_na)) %>%
       tidyr::spread (induse, values )
+    
+    nrow (iotable_labelled_w )
+    ncol (iotable_labelled_w ) 
     
   } else {
     iotable_labelled_w <- iotable_labelled %>%
