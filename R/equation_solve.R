@@ -52,7 +52,6 @@ and cannot be found in the Leontieff-inverse.'
   }
 
   ###Joining matrixes to find out if all data is present ---------------------   
-  
 
   joined <- tryCatch(
       full_join (LHS, Im, by = names(LHS)), 
