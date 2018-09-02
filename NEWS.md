@@ -68,3 +68,4 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 
 # iotables 0.3.3
 * New vignette with the Eurostat Manual example tables to show the working of the data processing and analytical functions. (Currently in `not_included` as `Germany_examples.Rmd`)
+* Finding an exception in the Eurostat vocabulary that preventing correctly identifying the  "Computer programming, consultancy and related services; Information services" industry in the rows. This is a critical problem in the Eurostat bulk files that prevents the creation of symmetric matrixes. 
