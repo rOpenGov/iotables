@@ -55,17 +55,18 @@ input_coefficient_matrix_create <- function ( input_flow,
   
   remove_cols <- names (input_flow )[! non_zero_cols]
   siot_rows <- as.character ( unlist ( input_flow[,1]) )
+  siot_rows
+  #names ( input_flow) [! names ( input_flow ) %in% remove_cols ]
+  # siot_rows [! siot_rows %in% remove_cols ]
   
   ##review here
  
-  input_flow <- input_flow [which  ( ! unlist ( input_flow[,1]) %in% as.character ( remove_cols)), 
-                            as.logical (non_zero_cols)   ]
+  input_flow <- input_flow [! siot_rows %in% remove_cols , 
+                            ! names ( input_flow ) %in% remove_cols  ]
   input_flow <- dplyr::mutate_if ( input_flow, is.factor, as.character )
   
-  unlist (input_flow[,1] ) %in% names ( input_flow )
-  names ( input_flow ) %in% unlist (input_flow[,1] )
-  input_flow [41]
-  
+nrow ( input_flow )
+ncol( input_flow)  
   
   #input_flow <- input_flow [ non_zero_rows, non_zero_cols ]
   output <- dplyr::mutate_if ( output, is.factor, as.character )
