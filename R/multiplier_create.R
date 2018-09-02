@@ -43,7 +43,7 @@
 multiplier_create <- function ( input_vector = NULL, 
                                 Im = NULL,
                                 multiplier_name = "multiplier",
-                                digits = NULL) {
+                                digits = NULL ) {
   
  if (!is.null(digits)) if (digits < 0) digits <- NULL
   
