@@ -63,11 +63,13 @@ use_table_get <- function ( labelled_io_table  = NULL,
     }
     
     if ( source == "germany_1990" ) {
+      
       labelled_io_table <- iotable_get ( 
         labelled_io_data = NULL,
         source =  source, 
         geo = geo, year = year, 
         unit = unit, labelling = labelling )     # use germany example 
+      
       use_table <- labelled_io_table[1:6, 1:8]
       
         if ( households == TRUE ) {
@@ -75,7 +77,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
         household_row[1,8] <- 0
         use_table <- rbind ( use_table, household_row )
       } else {
-          use_table <- labelled_io_table[1:6, 1:7]
+          use_table <- labelled_io_table[1:6, 1:7] #remove households
       }
       return ( use_table )  #return simplified example table and do not run rest of the code
     } else {
