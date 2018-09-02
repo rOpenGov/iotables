@@ -39,6 +39,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   if ( ! isTRUE(all.equal (names (input_flow), names (output))) ) {
     stop("Non conforming inputs are given with different column labels.")
   }
+  
   input_flow <- dplyr::mutate_if (input_flow, is.factor, as.character )
   
   non_zero <- function (x) {
@@ -46,12 +47,27 @@ input_coefficient_matrix_create <- function ( input_flow,
     ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
   }
   
-  non_zero_cols <- vapply ( input_flow[, 1:ncol(input_flow)], non_zero, logical ( 1 ))
+  non_zero_cols <- vapply ( input_flow[, 1:ncol(input_flow)], 
+                            non_zero, logical (1) )
   #non_zero_rows <- which ( rowSums( input_flow[, 2:ncol(input_flow)] ) != 0 )
   #input_flow <- input_flow[non_zero_rows, non_zero_cols] #should be improved 
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
-
-  input_flow <- input_flow [non_zero_rows, non_zero_cols ]
+  
+  remove_cols <- names (input_flow )[! non_zero_cols]
+  siot_rows <- as.character ( unlist ( input_flow[,1]) )
+  
+  ##review here
+ 
+  input_flow <- input_flow [which  ( ! unlist ( input_flow[,1]) %in% as.character ( remove_cols)), 
+                            as.logical (non_zero_cols)   ]
+  input_flow <- dplyr::mutate_if ( input_flow, is.factor, as.character )
+  
+  unlist (input_flow[,1] ) %in% names ( input_flow )
+  names ( input_flow ) %in% unlist (input_flow[,1] )
+  input_flow [41]
+  
+  
+  #input_flow <- input_flow [ non_zero_rows, non_zero_cols ]
   output <- dplyr::mutate_if ( output, is.factor, as.character )
   output <- output [ names (output) %in% names (input_flow )]
   output  <- dplyr::mutate_if (output, is.factor, as.character )

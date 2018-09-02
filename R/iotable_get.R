@@ -56,6 +56,7 @@ iotable_get <- function ( labelled_io_data = NULL,
                           force_download = TRUE) { 
 ##Initialize variables ------------
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
+  account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   stk_flow_input <- stk_flow
   stk_flow <- values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
@@ -229,7 +230,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     } else {
       iotable_labelled <- iotable 
     }
-    iotable_labelled2 <- iotable_labelled %>%
+    iotable_labelled <- iotable_labelled %>%
       dplyr::mutate ( t_rows2 = forcats::fct_reorder(t_rows2, 
                                               as.numeric( row_order))) %>%
       dplyr::mutate ( t_cols2 = forcats::fct_reorder(t_cols2, 
