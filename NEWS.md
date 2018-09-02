@@ -65,3 +65,6 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 
 # iotables 0.3.2
 * Better exception handling in `equation_solve()`.  Removes trivial erroneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. Released on CRAN.
+
+# iotables 0.3.3
+* New vignette with the Eurostat Manual example tables to show the working of the data processing and analytical functions. (Currently in `not_included` as `Germany_examples.Rmd`)
