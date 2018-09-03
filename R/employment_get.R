@@ -73,9 +73,13 @@ employment_get <- function ( geo = "CZ",
   
 ##Use data_directory if it exists--------------------------------  
   if ( !is.null(data_directory) ) {
+    #pre-existing raw data file in the data directory
     emp_file_name <- file.path(data_directory, "lfsq_egan22d.rds") 
-    if ( ! force_download ) {  #no new download and exists 
+    
+    if ( ! force_download ) {  #no new download and filtered version exists 
         if ( file.exists(file.path(data_directory, save_employment_file)) ) {
+          message("Try to use pre-existing file ", save_employment_file )
+          
           tryCatch({
             emp <- readRDS(file.path(data_directory, save_employment_file))
             }, error = function(cond) {
@@ -85,29 +89,40 @@ employment_get <- function ( geo = "CZ",
               return(emp)
               })
       
-        } else {  #no new download but file does not exist
+        } else {  #no filtered version exists, work with raw file
+          
           tryCatch({
+            #Read pre-existing unfiltered raw data file 
             emp <- readRDS(emp_file_name)
           }, error = function(cond) {
             message ( 'Could not read file ', emp_file_name, '\n', cond)
             return(NULL)
           }, finally ={ 
-            return(emp)
+            message ( 'Read ', emp_file_name )
           })
         }
     }  #end case of no forced download
   }  #end case data_directory is not NULL
  
-  ##Forced download or new download--------------------------------  
-  if (is.null(emp)) {
+  ##Forced/new download--------------------------------  
+  if ( is.null(emp) ) {
+    
     message ( "Downloading employment data from the Eurostat database.")
     emp <- eurostat::get_eurostat ("lfsq_egan22d")
+    
     if ( !is.null(data_directory) ) {
       #if !is.null emp_file_name is the general file name (without filtering
       # for the statistic and was created in the previous block including the 
       # directory name)
-      message ( "Saving raw employment data to ", emp_file_name, '.')
-      saveRDS(emp, file = emp_file_name)
+
+      tryCatch({
+        #Read pre-existing unfiltered raw data file 
+        saveRDS(emp, file = emp_file_name)
+      }, error = function(cond) {
+        message ( "Failed to save ", emp_file_name, '.')
+      }, finally = { 
+        message ( 'Saving raw employment data to ', emp_file_name )
+      })
     }
   }
  
