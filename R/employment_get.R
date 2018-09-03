@@ -72,7 +72,7 @@ employment_get <- function ( geo = "CZ",
   emp <- NULL
   
 ##Use data_directory if it exists--------------------------------  
-  if ( !is.null(data_directory)) {
+  if ( !is.null(data_directory) ) {
     emp_file_name <- file.path(data_directory, "lfsq_egan22d.rds") 
     if ( ! force_download ) {  #no new download and exists 
         if ( file.exists(file.path(data_directory, save_employment_file)) ) {
@@ -102,12 +102,12 @@ employment_get <- function ( geo = "CZ",
   if (is.null(emp)) {
     message ( "Downloading employment data from the Eurostat database.")
     emp <- eurostat::get_eurostat ("lfsq_egan22d")
-    if ( !is.null(data_directory)) {
+    if ( !is.null(data_directory) ) {
       #if !is.null emp_file_name is the general file name (without filtering
       # for the statistic and was created in the previous block including the 
       # directory name)
       message ( "Saving raw employment data to ", emp_file_name, '.')
-      saveRDS(emp, emp_file_name)
+      saveRDS(emp, file = emp_file_name)
     }
   }
  
