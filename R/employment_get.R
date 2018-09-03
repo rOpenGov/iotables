@@ -75,9 +75,9 @@ employment_get <- function ( geo = "CZ",
   if ( !is.null(data_directory)) {
     emp_file_name <- file.path(data_directory, "lfsq_egan22d.rds") 
     if ( ! force_download ) {  #no new download and exists 
-        if ( file.exists(file.path(data_dir, save_employment_file)) ) {
+        if ( file.exists(file.path(data_directory, save_employment_file)) ) {
           tryCatch({
-            emp <- readRDS(file.path(data_dir, save_employment_file))
+            emp <- readRDS(file.path(data_directory, save_employment_file))
             }, error = function(cond) {
               message ( "Could not read file.", cond)
               return(NULL)
