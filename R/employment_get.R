@@ -49,9 +49,9 @@ employment_get <- function ( geo = "CZ",
     stop("Labelling must be any of 'iotables', 'prod_na' [product x product] or 'induse' [industry x industry]")
   }
   
-  save_employment_file <- paste0('employment_',
-                                 tolower(sex),
-                                 '_', geo_input, '_', year, '_avg.rds')
+  save_employment_file <- paste0('employment_', tolower (age_input), '_',
+                                 tolower(sex_input), '_', 
+                                 geo_input, '_', year, '_avg.rds')
   
   ###Changing to Eurostat in case of GB/UK and GR/EL-------
   if ( geo_input %in% c("GB", "GR")) {
