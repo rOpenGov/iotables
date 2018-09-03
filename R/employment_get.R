@@ -43,7 +43,7 @@ employment_get <- function ( geo = "CZ",
                              data_directory = NULL,
                              force_download = TRUE) {
   nace_r2 <- values <- code <- variable <- iotables_label <- NULL
-  geo_input <- geo; year_input <- year; age_input <- age
+  geo_input <- geo; year_input <- year; age_input <- age; sex_input <- sex
   
   if ( ! labelling %in% c("iotables", 'prod_na', 'induse')) {
     stop("Labelling must be any of 'iotables', 'prod_na' [product x product] or 'induse' [industry x industry]")
@@ -53,6 +53,7 @@ employment_get <- function ( geo = "CZ",
                                  tolower(sex),
                                  '_', geo_input, '_', year, '_avg.rds')
   
+  ###Changing to Eurostat in case of GB/UK and GR/EL-------
   if ( geo_input %in% c("GB", "GR")) {
     if (geo_input == "GB") {
       warning ( "Switching GB to Eurostat abbreviation UK.")
@@ -102,8 +103,11 @@ employment_get <- function ( geo = "CZ",
     message ( "Downloading employment data from the Eurostat database.")
     emp <- eurostat::get_eurostat ("lfsq_egan22d")
     if ( !is.null(data_directory)) {
+      #if !is.null emp_file_name is the general file name (without filtering
+      # for the statistic and was created in the previous block including the 
+      # directory name)
       message ( "Saving raw employment data to ", emp_file_name, '.')
-      saveRDS(emp, file.path(data_directory, emp_file_name ))
+      saveRDS(emp, emp_file_name)
     }
   }
  
