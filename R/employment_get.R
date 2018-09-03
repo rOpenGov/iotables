@@ -19,7 +19,10 @@
 #' in the \code{data_directory} or the temporary directory, if it exists.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join rename ungroup summarize
+#' @importFrom tidyr spread
 #' @importFrom eurostat get_eurostat
+#' @source Eurostat statistic \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+#' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 #' @examples
 #' \dontrun{
 #'  io_tables <- get_employment ( 
@@ -46,7 +49,7 @@ employment_get <- function ( geo = "CZ",
     stop("Labelling must be any of 'iotables', 'prod_na' [product x product] or 'induse' [industry x industry]")
   }
   
-  save_employment_file <- paste0(data_directory, '/employment_',
+  save_employment_file <- paste0('employment_',
                                  tolower(sex),
                                  '_', geo_input, '_', year, '_avg.rds')
   
@@ -67,25 +70,44 @@ employment_get <- function ( geo = "CZ",
   
   emp <- NULL
   
+##Use data_directory if it exists--------------------------------  
   if ( !is.null(data_directory)) {
-    emp_file_name <- paste0(data_directory, "/", "lfsq_egan22d.rds") 
-    if ( ! force_download ) {
-        if ( file.exists(save_employment_file)) {
-          return(readRDS(save_employment_file))
+    emp_file_name <- file.path(data_directory, "lfsq_egan22d.rds") 
+    if ( ! force_download ) {  #no new download and exists 
+        if ( file.exists(file.path(data_dir, save_employment_file)) ) {
+          tryCatch({
+            emp <- readRDS(file.path(data_dir, save_employment_file))
+            }, error = function(cond) {
+              message ( "Could not read file.", cond)
+              return(NULL)
+            }, finally ={ 
+              return(emp)
+              })
+      
+        } else {  #no new download but file does not exist
+          tryCatch({
+            emp <- readRDS(emp_file_name)
+          }, error = function(cond) {
+            message ( 'Could not read file ', emp_file_name, '\n', cond)
+            return(NULL)
+          }, finally ={ 
+            return(emp)
+          })
         }
-        try({emp <- readRDS(emp_file_name)})
-    }
-  }
+    }  #end case of no forced download
+  }  #end case data_directory is not NULL
  
+  ##Forced download or new download--------------------------------  
   if (is.null(emp)) {
     message ( "Downloading employment data from the Eurostat database.")
     emp <- eurostat::get_eurostat ("lfsq_egan22d")
     if ( !is.null(data_directory)) {
       message ( "Saving raw employment data to ", emp_file_name, '.')
-      saveRDS(emp, emp_file_name )
+      saveRDS(emp, file.path(data_directory, emp_file_name ))
     }
   }
  
+  ##Geo selection and exception handling--------------------------------  
  if ( geo_input %in% unique ( emp$geo ) ) {
     emp <- dplyr::filter ( emp, geo == geo_input )
   } else {
@@ -94,27 +116,32 @@ employment_get <- function ( geo = "CZ",
   
   emp$year <- as.numeric(substr(as.character(emp$time), start = 1, stop = 4))
   
+  ##Year selection and exception handling--------------------------------  
+  
   if ( year_input %in% unique ( emp$year ) ) {
     emp <- dplyr::filter ( emp, year == year_input )
   } else {
     stop ("No employment data found with the year parameter = ", year_input )
   }
   
+  ##Age group selection and exception handling--------------------------------  
   if ( age_input %in% unique ( emp$age ) ) {
     emp <- dplyr::filter ( emp, age == age_input )
   } else {
     stop ("No employment data found with the age parameter = ", age_input )
   }
   
-  
+  ##Sex variable selection and exception handling-------------------------------- 
   if ( sex_input %in% unique ( emp$sex ) ) {
     emp <- dplyr::filter ( emp, sex == sex_input )
   } else {
     stop ("No employment data found with sex parameter = ", sex_input )
   }
   
+  ##Missing values changed to 0-------------------------------- 
   emp$values <- ifelse ( is.na(emp$values), 0, emp$values ) 
   
+  ##Data processing for employment variables-------------------------------- 
   employment <- emp %>%
     dplyr::mutate ( nace_r2 = as.character(nace_r2) ) %>%
     dplyr::group_by ( nace_r2, year ) %>%
@@ -128,14 +155,21 @@ employment_get <- function ( geo = "CZ",
     dplyr::mutate ( year = year_input ) %>%
     dplyr::mutate ( sex = sex_input ) 
   
+  
+  ##If data_directory exists, save results-------------------------------- 
+  
   if ( ! is.null(data_directory) ) {
     message ( "Saving ", save_employment_file )
-    saveRDS(employment, file = save_employment_file)
+    saveRDS(employment, file = file.path(data_directory, 
+                                         save_employment_file)
+            )
   }
+ 
+  
+  ##If data_directory exists, save results-------------------------------- 
   
   emp_sex <- ifelse ( tolower(sex_input) == "t", "total", 
-                    ifelse (tolower(sex_input) == "f", "female", "male" ))
-
+                      ifelse (tolower(sex_input) == "f", "female", "male" ))
   
 
   if ( labelling == "iotables" ) {
@@ -144,15 +178,17 @@ employment_get <- function ( geo = "CZ",
     )
     
     primary_employment_input <- employment %>%
-      filter ( variable == "prod_na" ) #does not matter which, not used
+      dplyr::filter ( variable == "prod_na" ) #does not matter which, not used
+    
+    ##No employment for imputed rent column-------------------------------- 
     
     imputed_rent <- data.frame ( 
       real_estate_imputed_a = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
-      ungroup() %>%
-      select ( iotables_label, values ) %>%
-      spread ( iotables_label, values )    #use iotables_label in this case
+      dplyr::ungroup() %>%
+      dplyr::select ( iotables_label, values ) %>%
+      tidyr::spread ( iotables_label, values )    #use iotables_label in this case
     
   } else if ( labelling == "prod_na" ){
     prefix <- data.frame ( 
@@ -160,15 +196,15 @@ employment_get <- function ( geo = "CZ",
     )
     
     primary_employment_input <- employment %>%
-      filter ( variable == "prod_na" )
+      dplyr::filter ( variable == "prod_na" )
     
     imputed_rent <- data.frame ( 
       CPA_L68A = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
-      ungroup() %>%
-      select ( code, values ) %>%
-      spread ( code, values )     #use code for standard Eurostat library
+      dplyr::ungroup() %>%
+      dplyr::select ( code, values ) %>%
+      tidyr::spread ( code, values )     #use code for standard Eurostat library
     
   } else if (labelling == "induse" ) {
     prefix <- data.frame ( 
@@ -176,15 +212,15 @@ employment_get <- function ( geo = "CZ",
     )
     
     primary_employment_input <- employment %>%
-      filter ( variable == "induse" )
+      dplyr::filter ( variable == "induse" )
     
     imputed_rent <- data.frame ( 
       L68A = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
-      ungroup() %>%
-      select ( code, values ) %>%
-      spread ( code, values )      #use code for standard Eurostat library
+      dplyr::ungroup() %>%
+      dplyr::select ( code, values ) %>%
+      tidyr::spread ( code, values )      #use code for standard Eurostat library
     
   } else {
     warning("No L68A was added.")
