@@ -3,6 +3,10 @@
 \name{employment_get}
 \alias{employment_get}
 \title{Get employment data}
+\source{
+Eurostat statistic \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
+}
 \usage{
 employment_get(geo = "CZ", year = "2010", sex = "Total",
   age = "Y_GE15", labelling = "iotables", data_directory = NULL,
