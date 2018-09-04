@@ -6,7 +6,7 @@
 #' output vector.
 #'
 #' If there are zero values in the output vector, they will be changed to 
-#' 0.000001 and you will get a warning. Some analyitcal equations cannot be 
+#' 0.000001 and you will get a warning. Some analytical equations cannot be 
 #' solved with zero elements. You either have faulty input data, or you have 
 #' to use some sort of data modification to carry on your analysis. 
 #' 

@@ -167,7 +167,7 @@ employment_get <- function ( geo = "CZ",
     dplyr::summarize ( values = mean(values)) %>%
     dplyr::rename ( emp_code = nace_r2 ) %>%
     dplyr::ungroup ( ) %>%
-    dplyr::left_join ( employment_metadata, by = "emp_code") %>%
+    dplyr::left_join ( employment_metadata, by = "emp_code") %>%  # iotables:::employment_metadata
     dplyr::group_by ( code, variable, iotables_label ) %>%
     dplyr::summarize ( values = sum(values)) %>%
     dplyr::mutate ( geo = geo_input ) %>%

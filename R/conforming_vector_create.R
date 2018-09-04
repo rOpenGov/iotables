@@ -4,7 +4,7 @@
 #' analytical objects, such as the use table, the Leontieff-matrix, 
 #' etc. With 60x60 matrixes it is easy to make mistakes with manual 
 #' definition. The empty effects vector can be used in .csv format
-#' as a sample to import scenearios from a spreadsheet application.
+#' as a sample to import scenarios from a spreadsheet application.
 #'  
 #' @param dat A use table, Leontieff-matrix, Leontieff-inverse, a coefficient matrix 
 #' or other named matrix / vector.
