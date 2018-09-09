@@ -62,6 +62,10 @@ iotable_get <- function ( labelled_io_data = NULL,
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
 
+  if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
+                     "naio_10_pyp1620", "naio_10_pyp1630")) {
+    stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
+  }
 ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630", 
