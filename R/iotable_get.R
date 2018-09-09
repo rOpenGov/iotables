@@ -57,7 +57,7 @@ iotable_get <- function ( labelled_io_data = NULL,
 ##Initialize variables ------------
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
-  stk_flow_input <- stk_flow
+  stk_flow_input <- stk_flow; geo_input <- geo
   stk_flow <- values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
@@ -99,6 +99,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( t_cols2_lab = label ) %>%
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
+    
   } else if ( source == "germany_1990" ) {  #German simplified tables
     metadata_rows <- germany_metadata_rows  
     metadata_cols <- germany_metadata_cols 
@@ -109,7 +110,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   metadata_rows <- dplyr::mutate_if ( metadata_rows, is.factor, as.character )
   metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
   
-  
+  ###Exception handling for wrong paramters-----
   if ( is.null(labelled_io_data) ) {
     if (is.null(geo)) stop ("Error: no country selected.")
     if (! labelling %in% c("iotables", "short")) {
@@ -174,7 +175,7 @@ iotable_get <- function ( labelled_io_data = NULL,
 
 ###converting factors to characters------  
   
- selected_table <- which (
+ selected_table <- which (   ##get the number of table to be selected
     labelled_io_data$year == year & 
       as.character(labelled_io_data$geo) == geo &
       labelled_io_data$unit == unit)
@@ -184,14 +185,14 @@ iotable_get <- function ( labelled_io_data = NULL,
           " with ", unit, " units.")
  }
  
-  if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
+if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
                        "germany_1990") ) {
-    iotable <- labelled_io_data$data[[selected_table]]
+    iotable <- labelled_io_data$data[[selected_table]]  ##the relevant io table data in long form
   } else {
-    iotable <- labelled_io_data
+    iotable <- labelled_io_data 
   }
   
-  if ( class(iotable$values) %in% c("character", "factor")) {
+ if ( class(iotable$values) %in% c("character", "factor")) {
     iotable$values  = trimws(as.character(iotable$values), which = "both")
     iotable$values = as.numeric(iotable$values)
     warning("Warning: original data was converted to numeric format.")
@@ -207,7 +208,15 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::select ( -quadrant, -account_group, 
                       -digit_1, -digit_2, -variable, -group ) %>%
       dplyr::mutate_if ( is.factor, as.character ) %>% 
-      dplyr::left_join (.,  metadata_rows )  %>%
+      dplyr::left_join (.,  metadata_rows, 
+                        by = c("prod_na", "prod_na_lab"))  
+    
+    if ( nrow (iotable_labelled) == 0 ) {
+      stop ( "No rows found with geo = ", geo_input, " year = ", year, 
+             " unit = ", unit, " and stk_flow = ", stk_flow_input, "." )
+    }
+  
+    iotable_labelled <- iotable_labelled %>%
       dplyr::mutate ( prod_na = forcats::fct_reorder(prod_na, 
                                               as.numeric(row_order))) %>%
       dplyr::mutate ( induse = forcats::fct_reorder(induse, 
