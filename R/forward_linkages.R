@@ -2,7 +2,9 @@
 #' 
 #' Forwardlinkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
 #' Tables (see p506-507.)
-#' @param Im A Leontieff inverse matrix created by the \code{\link{leontieff_inverse_create}} function. 
+#' @param output_coefficient_matrix An output coefficient matrix created with the 
+#' \code{\link{output_coefficient_matrix_create}} function. 
+#' @param digits Number of decimals for rounding, defaults to \code{NULL}.
 #' @importFrom dplyr mutate_if
 #' @examples 
 #' #You need a table that has a total column and either the total 

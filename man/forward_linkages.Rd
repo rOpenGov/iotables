@@ -7,7 +7,10 @@
 forward_linkages(output_coefficient_matrix, digits = NULL)
 }
 \arguments{
-\item{Im}{A Leontieff inverse matrix created by the \code{\link{leontieff_inverse_create}} function.}
+\item{output_coefficient_matrix}{An output coefficient matrix created with the 
+\code{\link{output_coefficient_matrix_create}} function.}
+
+\item{digits}{Number of decimals for rounding, defaults to \code{NULL}.}
 }
 \description{
 Forwardlinkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
