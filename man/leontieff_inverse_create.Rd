@@ -7,7 +7,8 @@
 leontieff_inverse_create(leontieff_matrix)
 }
 \arguments{
-\item{leontieff_matrix}{A Leontieff matrix created by the \code{\link{leontieff_matrix_create}} function.}
+\item{leontieff_matrix}{A Leontieff matrix created by the
+\code{\link{leontieff_matrix_create}} function.}
 }
 \description{
 The inversion takes place after the basic properties of the Leontieff matrix.

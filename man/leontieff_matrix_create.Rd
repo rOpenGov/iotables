@@ -7,7 +7,9 @@
 leontieff_matrix_create(technology_coefficients_matrix)
 }
 \arguments{
-\item{technology_coefficients_matrix}{A technology coefficient matrix created by the \code{\link{input_coefficient_matrix_create}}.}
+\item{technology_coefficients_matrix}{A technology coefficient matrix created
+by the \code{\link{input_coefficient_matrix_create}} or 
+\code{\link{output_coefficient_matrix_create}}.}
 }
 \description{
 Create a Leontieff matrix from technology matrix after some basic error 

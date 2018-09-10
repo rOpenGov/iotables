@@ -30,7 +30,7 @@ de_out <- output_coefficient_matrix_create ( io_table = io_table,
                                     type = 'final_demand',
                                     digits = 4)
 
-forward_linkages ( outpout_coefficient_matrix = de_out, 
+forward_linkages ( output_coefficient_matrix = de_out, 
                    digits = 4 )
 
 }
