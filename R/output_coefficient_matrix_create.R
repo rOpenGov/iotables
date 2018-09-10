@@ -11,14 +11,15 @@
 #' equal to zero, i.e. merging an industry or product class that has a positive 
 #' value with another industry or product class that is zero.
 #' 
-#' @param input_flow An input flow matrix created with the 
-#' \code{\link{use_table_get}} function. In case you use
-#' \code{type="final_demand"} you need to input a full iotable, 
-#' create by the \code{\link{iotable_get}}, because you will need the final
-#' demand column.
+#' @param io_table An input flow matrix created with the 
+#' \code{\link{use_table_get}} function which contains the 'total' column 
+#' is sufficient if type=\code{products} is used. 
+#' In case you use \code{type="final_demand"} you need to input a
+#' full iotable, create by the \code{\link{iotable_get}}, because you will need
+#' the final demand column.
 #' @param type The type=\code{products} (default) returns the output coefficients
 #' for products (intermediates) while the \code{final_demand} returns output 
-#' coefficients for final demand. See Eurostat Manual, p495.
+#' coefficients for final demand. See Eurostat Manual, p495 and p507.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
 #' @importFrom dplyr mutate_if funs
