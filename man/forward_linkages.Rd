@@ -2,7 +2,7 @@
 % Please edit documentation in R/forward_linkages.R
 \name{forward_linkages}
 \alias{forward_linkages}
-\title{Forwardlinkages}
+\title{Forward linkages}
 \usage{
 forward_linkages(output_coefficient_matrix, digits = NULL)
 }
@@ -13,8 +13,8 @@ forward_linkages(output_coefficient_matrix, digits = NULL)
 \item{digits}{Number of decimals for rounding, defaults to \code{NULL}.}
 }
 \description{
-Forwardlinkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
-Tables (see p506-507.)
+Forward linkeages as defined by the Eurostat Manual of Supply, Use and
+Input-Output Tables (see p506-507.)
 }
 \examples{
 #You need a table that has a total column and either the total 
