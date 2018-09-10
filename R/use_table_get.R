@@ -67,8 +67,8 @@ use_table_get <- function ( labelled_io_table  = NULL,
       labelled_io_table <- iotable_get ( 
         labelled_io_data = NULL,
         source =  source, 
-        geo = geo, year = year, 
-        unit = unit, labelling = labelling )     # use germany example 
+        geo = "DE", year = 1990, 
+        unit = "MIO_EUR", labelling = labelling )     # use germany example 
       
       use_table <- labelled_io_table[1:6, 1:8]
       
@@ -142,11 +142,11 @@ use_table_get <- function ( labelled_io_table  = NULL,
      message ( "Total row and column removed from the matrix.")
       }
    } else {    #no households case -------------------------
-   if (keep_total == FALSE )  {
+   if ( keep_total == FALSE )  {
      use_table <- labelled_io_table [1:total_row-1,1:total_col-1]
      message ( "Total row and column removed from the matrix.")
    } else {
-     use_table <- use_table[1:total_row, 1:total_col]
+     use_table <- labelled_io_table[1:total_row, 1:total_col]
      }
    } # end of no household case 
     
