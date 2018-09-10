@@ -15,11 +15,12 @@
 #' equal to zero, i.e. merging an industry or product class that has a positive 
 #' value with another industry or product class that is zero.
 #' 
-#' @param input_flow An input flow matrix created with the \code{\link{use_table_get}} function. 
-#' @param output An output vector with a key column, created by \code{\link{output_get}}.
-#' @param digits An integer showing the precision of the technology matrix in digits. 
-#' If not given, no rounding is applied.
-#' @importFrom tidyr spread
+#' @param input_flow An input flow matrix created with the 
+#' \code{\link{use_table_get}} function. 
+#' @param output An output vector with a key column, created by
+#'  \code{\link{output_get}}.
+#' @param digits An integer showing the precision of the technology matrix in 
+#' digits. Default is \code{NULL} when no rounding is applied.
 #' @importFrom dplyr mutate mutate_if full_join funs
 #' @examples 
 #' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
