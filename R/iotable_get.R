@@ -55,15 +55,17 @@ iotable_get <- function ( labelled_io_data = NULL,
                           data_directory = NULL, 
                           force_download = TRUE) { 
 ##Initialize variables ------------
+  values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
-  stk_flow_input <- stk_flow; geo_input <- geo
-  stk_flow <- values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
+  
+  stk_flow_input <- stk_flow; geo_input <- geo
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
-                     "naio_10_pyp1620", "naio_10_pyp1630")) {
+                     "naio_10_pyp1620", "naio_10_pyp1630")
+       ) {
     stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
   }
 ##Veryfing source parameter and loading the labelling  ----
