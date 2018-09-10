@@ -2,23 +2,25 @@ library (testthat)
 library (iotables)
 context ("Creating forward linkages")
 
-de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-               year = 1990, unit = "MIO_EUR", 
-               households = FALSE, labelling = "iotables")
+io_table <- iotable_get () 
+io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-               year = 1990, unit = "MIO_EUR",
-               households = FALSE, labelling = "iotables")
+output_bp <- dplyr::select ( io_table, output_bp )
+io_table <- io_table [, 1:7] 
+io_table$total <- rowSums(io_table[, 2:7])
+io_table <- cbind (io_table, output_bp)
 
-de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
+de_out <- output_coefficient_matrix_create ( io_table = io_table, 
+                                    type = 'final_demand',
+                                    digits = 4)
 
-L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
-I <- leontieff_inverse_create (L)
-#fw <- forward_linkages ( I )
+fw <- forward_linkages ( output_coefficient_matrix = de_out, 
+                   digits = 4 )
 
 #The Eurostat Manual uses a different rounding. There is a slight mismatch)
 
-#test_that("correct data is returned", {
-#  expect_equal(round ( fw$total[which ( fw$iotables_row == "agriculture_group")], 4),
-#               2.1126, tolerance=1e-3)
-#})
+test_that("correct data is returned", {
+  expect_equal(fw$forward,
+               c(2.1126, 1.6691, 1.3558, 1.5848, 2.1037,1.2106),
+               tolerance=1e-2)
+})
