@@ -12,7 +12,6 @@
 #' @export 
 
 output_multiplier_create <- function ( input_coefficient_matrix ) { 
-  input_coefficient_matrix  <- de_coeff
   L = leontieff_matrix_create( input_coefficient_matrix )
   I = leontieff_inverse_create( L )
   output_multipliers <- I[1, ]
