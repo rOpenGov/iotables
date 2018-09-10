@@ -4,13 +4,22 @@
 \alias{output_coefficient_matrix_create}
 \title{Create an input coefficient matrix}
 \usage{
-output_coefficient_matrix_create(input_flow, digits = NULL)
+output_coefficient_matrix_create(io_table, type = "product",
+  digits = NULL)
 }
 \arguments{
-\item{input_flow}{An input flow matrix created with the \code{\link{use_table_get}} function.}
+\item{type}{The type=\code{products} (default) returns the output coefficients
+for products (intermediates) while the \code{final_demand} returns output 
+coefficients for final demand. See Eurostat Manual, p495.}
 
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
+
+\item{input_flow}{An input flow matrix created with the 
+\code{\link{use_table_get}} function. In case you use
+\code{type="final_demand"} you need to input a full iotable, 
+create by the \code{\link{iotable_get}}, because you will need the final
+demand column.}
 }
 \description{
 Create an output coefficient matrix from the input flow matrix. If there
@@ -26,9 +35,19 @@ equal to zero, i.e. merging an industry or product class that has a positive
 value with another industry or product class that is zero.
 }
 \examples{
-de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-                          year = 1990, unit = "MIO_EUR", 
-                          households = FALSE, labelling = "iotables")
-                          
-output_coefficient_matrix_create ( input_flow = de_use )
+#You need a table that has a total column and either the total 
+#intermediate use or final use
+#This is usually the case with Eurostat tables, but with the Germany data
+#file total must be added.
+
+io_table <- iotable_get () 
+io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
+output_bp <- dplyr::select ( io_table, output_bp )
+io_table <- io_table [, 1:7] 
+io_table$total <- rowSums(io_table[, 2:7])
+io_table <- cbind (io_table, output_bp)
+
+output_coefficient_matrix_create ( input_table = input_table, 
+                                    type = 'final_demand',
+                                    digits = 4 )
 }

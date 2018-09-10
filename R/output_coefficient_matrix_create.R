@@ -11,19 +11,38 @@
 #' equal to zero, i.e. merging an industry or product class that has a positive 
 #' value with another industry or product class that is zero.
 #' 
-#' @param input_flow An input flow matrix created with the \code{\link{use_table_get}} function. 
+#' @param input_flow An input flow matrix created with the 
+#' \code{\link{use_table_get}} function. In case you use
+#' \code{type="final_demand"} you need to input a full iotable, 
+#' create by the \code{\link{iotable_get}}, because you will need the final
+#' demand column.
+#' @param type The type=\code{products} (default) returns the output coefficients
+#' for products (intermediates) while the \code{final_demand} returns output 
+#' coefficients for final demand. See Eurostat Manual, p495.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
 #' @importFrom dplyr mutate_if funs
 #' @examples 
-#' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-#'                           year = 1990, unit = "MIO_EUR", 
-#'                           households = FALSE, labelling = "iotables")
-#'                           
-#' output_coefficient_matrix_create ( input_flow = de_use )
+#' #You need a table that has a total column and either the total 
+#' #intermediate use or final use
+#' #This is usually the case with Eurostat tables, but with the Germany data
+#' #file total must be added.
+#' 
+#' io_table <- iotable_get () 
+#' io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
+
+#' output_bp <- dplyr::select ( io_table, output_bp )
+#' io_table <- io_table [, 1:7] 
+#' io_table$total <- rowSums(io_table[, 2:7])
+#' io_table <- cbind (io_table, output_bp)
+#' 
+#' output_coefficient_matrix_create ( input_table = input_table, 
+#'                                     type = 'final_demand',
+#'                                     digits = 4 )
 #' @export 
 
-output_coefficient_matrix_create <- function ( input_flow, 
+output_coefficient_matrix_create <- function ( io_table,
+                                               type = "product",
                                                digits = NULL ) {
   funs <- t_rows2 <-. <- NULL  #for checking against non-standard evaluation
   
@@ -32,79 +51,98 @@ output_coefficient_matrix_create <- function ( input_flow,
       stop ("Error: rounding digits are not given as a numeric input.") }
     }
  
-  input_flow <- dplyr::mutate_if (input_flow, is.factor, as.character )
+  io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
   
   non_zero <- function (x) {
     if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
     ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
   }
   
-  non_zero_cols <- vapply ( input_flow[, 1:ncol(input_flow)], 
+  non_zero_cols <- vapply ( io_table[, 1:ncol(io_table)], 
                             non_zero, logical (1) )
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
   
-  remove_cols <- names (input_flow )[! non_zero_cols]
-  siot_rows <- as.character ( unlist ( input_flow[,1]) )
+  remove_cols <- names (io_table )[! non_zero_cols]
+  siot_rows <- as.character ( unlist ( io_table[,1]) )
   siot_rows
   
-  input_flow <- input_flow [! siot_rows %in% remove_cols , 
-                            ! names ( input_flow ) %in% remove_cols  ]
-  input_flow <- dplyr::mutate_if ( input_flow, is.factor, as.character )
+  io_table <- io_table [! siot_rows %in% remove_cols , 
+                            ! names ( io_table ) %in% remove_cols  ]
+  io_table <- dplyr::mutate_if ( io_table, is.factor, as.character )
   
+  total_row <- which ( tolower(io_table[,1 ]) %in% c("cpa_total", "total") )
   
-  keep_first_name <- names(input_flow)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
+  if ( length(total_row) == 0 ) stop ("Total row not found") else {
+    io_table <- io_table [1:(total_row-1), ]
+  }
+  
+  if ( type == "product") { 
+    demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
+    
+    if ( length(demand_col) == 0 ) { #if no total column is found, look up or create... 
+      io_table <- use_table_get(labelled_io_table = io_table, 
+                                 source  = source, 
+                                 geo = geo, year = year, 
+                                 unit = unit, labelling = labelling, 
+                                 keep_total = TRUE)
+      if (! all(tolower(names(io_table)) %in% c("cpa_total", "total")) ) {
+        io_table$total <- rowSums(io_table[, 2:ncol(io_table)]) #if no total column is present, create it
+      }
+      demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
+    } #end of finding total column if originally missing
+    
+  } else if ( type == "final_demand" ) {
+    demand_col <- which (tolower(names(io_table)) %in% c("tfu", "output_bp", "total_final_use") )
+  }  else {
+      stop ("Paramter type must be either product or final_demand.")
+    }
+  
+  demand_col 
+  demand <- io_table [, demand_col ]
+  keep_first_name <- names(io_table)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
 
-  last_col <- ncol (input_flow)
+  last_col <- which ( tolower(names(io_table)) %in% c("cpa_total", "total"))
+  if ( length(last_col) == 0 ) stop ("Did not find the total column") else {
+    last_col <- last_col-1 
+  }
   is_last_cols <- FALSE
   
   ###Households are not needed to calculate the output coefficients------
-  households_column <- which (names(input_flow) %in% c("P3_S14", "households") )
+  households_column <- which (names(io_table) %in% c("P3_S14", "households") )
   if ( length(households_column) > 0 ) {
     input_flow <- input_flow [, -households_column]
     if (last_col == households_column) last_col <- last_col-1 
   }
   
+  io_table <- io_table[, 1:last_col ]
   
-  ###If total column exists, use it, otherwise create it------
-  total_col_number <- which (tolower(names(input_flow)) %in% c("total", "cpa_total"))
-  if ( length(total_col_number) == 0 ) {
-    total <- rowSums(input_flow[,-1], na.rm=TRUE)   #total column is created and stored separately
-    total_col_number <- which (tolower(names(input_flow)) %in% c("total", "cpa_total"))
-    total_name <- "TOTAL"  #total does not exists so it gets a name 
-  } else {
-    total <- input_flow [ , total_col_number ] #store total
-    total_name <- names(input_flow)[total_col_number]  #store name
-    input_flow <- input_flow [ , -total_col_number] #remove total for futher operation
-    }
-
   ###Create the return data.frame from first column------
-  first_col <- as.data.frame( input_flow[ ,1] )
+  first_col <- as.data.frame( io_table[ ,1] )
   names (first_col) <- keep_first_name
   
   null_to_eps <- function(x) ifelse( x==0, 0.000001, x )
 
+  #forward linkeages on p507
   ##Avoid division by zero with epsilon-----
-  input_flow <- vapply ( input_flow[1:nrow(input_flow), c(2:last_col)],
-                 null_to_eps, numeric (nrow(input_flow)) )
+  io_table <- vapply ( io_table[1:nrow(io_table), c(2:last_col)],
+                 null_to_eps, numeric (nrow(io_table)) )
   
-  check <- input_flow[,1]/total
-  
-  input_flow <- apply (  input_flow, 2,
-                         function(x)x/total)
+  output_coeff <- apply (  io_table, 2,
+                         function(i)i/demand)
 
-  input_flow <- as.data.frame (input_flow)
-  input_flow <- cbind ( first_col, input_flow)
+  output_coeff <- as.data.frame (output_coeff)
+  output_coeff <- cbind ( first_col, output_coeff)
 
-  if ( is.null(digits) ) return (input_flow)
+  if ( is.null(digits) ) return (output_coeff)
   
   if ( digits >= 0 ) {
     round_eps <- function ( x, digits ) {
       ifelse ( x == 1e-06, x, round ( x, digits ))
     }
-    input_flow <- input_flow %>%
+    output_coeff<- output_coeff %>%
       dplyr::mutate_if(is.numeric, dplyr::funs(round_eps (., digits)))
   } else {
     stop ("Error: not a valid rounding parameter.\nMust be an integer representing the rounding digits.")
   }
-  input_flow
+  output_coeff
 }
