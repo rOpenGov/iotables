@@ -7,11 +7,12 @@
 backward_linkages(Im)
 }
 \arguments{
-\item{Im}{A Leontieff inverse matrix created by the \code{\link{leontieff_inverse_create}} function.}
+\item{Im}{A Leontieff inverse matrix created by the
+\code{\link{leontieff_inverse_create}} function.}
 }
 \description{
 Backward linkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
-Tables (see page 506.)
+Tables (see p506-507.)
 }
 \examples{
 de_use <- use_table_get ( source = "germany_1990", geo = "DE",
