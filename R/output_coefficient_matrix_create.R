@@ -32,7 +32,7 @@
 #' io_table$total <- rowSums(io_table[, 2:7])
 #' io_table <- cbind (io_table, output_bp)
 #' 
-#' output_coefficient_matrix_create ( io_table = input_table, 
+#' output_coefficient_matrix_create ( io_table = io_table, 
 #'                                     type = 'final_demand',
 #'                                     digits = 4 )
 #' @export 
@@ -75,16 +75,8 @@ output_coefficient_matrix_create <- function ( io_table,
   if ( type == "product") { 
     demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
     
-    if ( length(demand_col) == 0 ) { #if no total column is found, look up or create... 
-      io_table <- use_table_get(labelled_io_table = io_table, 
-                                 source  = source, 
-                                 geo = geo, year = year, 
-                                 unit = unit, labelling = labelling, 
-                                 keep_total = TRUE)
-      if (! all(tolower(names(io_table)) %in% c("cpa_total", "total")) ) {
-        io_table$total <- rowSums(io_table[, 2:ncol(io_table)]) #if no total column is present, create it
-      }
-      demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
+    if ( length(demand_col) == 0 ) { 
+      stop ("Please input a table that has a total column.")
     } #end of finding total column if originally missing
     
   } else if ( type == "final_demand" ) {

@@ -1,8 +1,9 @@
-#' Backward linkages
+#' Forward linkages
 #' 
-#' Backward linkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
+#' Forward linkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
 #' Tables (see page 506.)
-#' @param Im A Leontieff inverse matrix created by the \code{\link{leontieff_inverse_create}} function. 
+#' @param Im A Leontieff inverse matrix created by the
+#' \code{\link{leontieff_inverse_create}} function. 
 #' @importFrom dplyr mutate_if
 #' @examples 
 #' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
@@ -17,11 +18,11 @@
 #' 
 #' L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
 #' I <- leontieff_inverse_create (L)
-#' backward_linkages ( I )
+#' forward_linkages ( I )
 #' 
 #' @export 
 
-backward_linkages <- function ( Im ) {
+forward_linkages <- function ( Im ) {
   . = NULL ; funs = NULL ; vars = NULL
   
  Im <- dplyr::mutate_if (Im, is.factor, as.character )

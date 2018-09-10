@@ -42,7 +42,7 @@ io_table <- io_table [, 1:7]
 io_table$total <- rowSums(io_table[, 2:7])
 io_table <- cbind (io_table, output_bp)
 
-output_coefficient_matrix_create ( io_table = input_table, 
+output_coefficient_matrix_create ( io_table = io_table, 
                                     type = 'final_demand',
                                     digits = 4 )
 }
