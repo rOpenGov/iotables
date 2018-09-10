@@ -5,6 +5,14 @@
 #' @param input_coefficient_matrix  A Leontieff inverse matrix created by the
 #' \code{\link{input_coefficient_matrix_create}} function. 
 #' @examples 
+#' de_use    <- use_table_get ( source = "germany_1990", geo = "DE",
+#'                              year = 1990, unit = "MIO_EUR", 
+#'                              households = FALSE, labelling = "iotables")
+#' 
+#' de_output <- output_get ( source = "germany_1990", geo = "DE",
+#'                           year = 1990, unit = "MIO_EUR",
+#'                           households = FALSE, labelling = "iotables")
+#'                           
 #' de_input_coeff <- input_coefficient_matrix_create( 
 #'                            de_use, de_output, digits = 4)
 #'                            
