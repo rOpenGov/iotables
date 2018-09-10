@@ -1,7 +1,7 @@
-#' Forwardlinkages
+#' Forward linkages
 #' 
-#' Forwardlinkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
-#' Tables (see p506-507.)
+#' Forward linkeages as defined by the Eurostat Manual of Supply, Use and
+#' Input-Output Tables (see p506-507.)
 #' @param output_coefficient_matrix An output coefficient matrix created with the 
 #' \code{\link{output_coefficient_matrix_create}} function. 
 #' @param digits Number of decimals for rounding, defaults to \code{NULL}.
