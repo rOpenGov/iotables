@@ -52,7 +52,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
   iotables_row <- iotables_col <- prod_na <- induse <- NULL
   unit_input <- unit; geo_input <- geo; stk_flow_input <- stk_flow
   
-  if ( is.null(labelled_io_table) ) { 
+  if ( is.null(labelled_io_table) | source == "germany_1990" ) { 
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
     
     source_inputed <- source ; unit_input = unit
