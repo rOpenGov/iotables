@@ -2,37 +2,32 @@
 % Please edit documentation in R/output_coefficient_matrix_create.R
 \name{output_coefficient_matrix_create}
 \alias{output_coefficient_matrix_create}
-\title{Create an input coefficient matrix}
+\title{Create an output coefficient matrix}
 \usage{
 output_coefficient_matrix_create(io_table, type = "product",
   digits = NULL)
 }
 \arguments{
+\item{io_table}{An input flow matrix created with the 
+\code{\link{use_table_get}} function which contains the 'total' column 
+is sufficient if type=\code{products} is used. 
+In case you use \code{type="final_demand"} you need to input a
+full iotable, create by the \code{\link{iotable_get}}, because you will need
+the final demand column.}
+
 \item{type}{The type=\code{products} (default) returns the output coefficients
 for products (intermediates) while the \code{final_demand} returns output 
-coefficients for final demand. See Eurostat Manual, p495.}
+coefficients for final demand. See Eurostat Manual, p495 and p507.}
 
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
-
-\item{input_flow}{An input flow matrix created with the 
-\code{\link{use_table_get}} function. In case you use
-\code{type="final_demand"} you need to input a full iotable, 
-create by the \code{\link{iotable_get}}, because you will need the final
-demand column.}
 }
 \description{
-Create an output coefficient matrix from the input flow matrix. If there
-are zero values in the output vector, they will be changed to 
+Create an output coefficient matrix from the input flow matrix or a symmetric
+input-output table. If there are zero values in present, they will be changed to 
 0.000001 and you will get a warning. Some analytical equations cannot be 
 solved with zero elements. You either have faulty input data, or you have 
 to use some sort of data modification to carry on your analysis.
-}
-\details{
-An alternative that is not implemented here, because it requires analytical
-judgment, is the aggregation of elements into larger ones that are no longer
-equal to zero, i.e. merging an industry or product class that has a positive 
-value with another industry or product class that is zero.
 }
 \examples{
 #You need a table that has a total column and either the total 
@@ -47,7 +42,7 @@ io_table <- io_table [, 1:7]
 io_table$total <- rowSums(io_table[, 2:7])
 io_table <- cbind (io_table, output_bp)
 
-output_coefficient_matrix_create ( input_table = input_table, 
+output_coefficient_matrix_create ( io_table = input_table, 
                                     type = 'final_demand',
                                     digits = 4 )
 }
