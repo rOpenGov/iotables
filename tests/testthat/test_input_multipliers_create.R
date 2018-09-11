@@ -13,6 +13,14 @@ labelled_io_table <- io_table
 direct_effects_de <- direct_effects_create ( labelled_io_table = io_table ) 
 direct_effects <- direct_effects_de [, -8] 
 
+de_use <- use_table_get()
+de_output <- output_get()
+de_icoeff <- input_coefficient_matrix_create( de_use, de_output )
+
+L_de  <- leontieff_matrix_create( de_icoeff )
+I_de <- leontieff_inverse_create( L_de )
+
+
 multipliers <- input_multipliers_create(
   direct_effects = direct_effects_de [, -8],
   inverse = I_de, 
