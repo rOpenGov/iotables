@@ -3,7 +3,7 @@
 #' Download the employment data for a country and arrange it to the 64x64 SIOTS.
 #' Currently works only with product x product tables. 
 #' @param geo The country code. 
-#' @param year The year.  The averege employment will be created for the given
+#' @param year The year.  The average employment will be created for the given
 #' year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
 #' employment statistics.
 #' @param sex Defaults to \code{"Total"}. Enter \code{"Females"} or \code{"F"} for

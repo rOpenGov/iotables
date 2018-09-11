@@ -15,7 +15,7 @@ employment_get(geo = "CZ", year = "2010", sex = "Total",
 \arguments{
 \item{geo}{The country code.}
 
-\item{year}{The year.  The averege employment will be created for the given
+\item{year}{The year.  The average employment will be created for the given
 year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
 employment statistics.}
 
