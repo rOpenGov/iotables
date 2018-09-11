@@ -78,3 +78,4 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 
 # iotables 0.3.4
 * New function `direct_effects()` which calculates all input indicators that `input_indicator_create()` does individually.
+* Updated vignette for the new functions.
