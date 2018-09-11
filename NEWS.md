@@ -74,3 +74,7 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * New function `output_multiplier_create()`
 * New function `forward_linkages()`
 * New function `backward_linkages()`
+
+
+# iotables 0.3.4
+* New function `direct_effects()` which calculates all input indicators that `input_indicator_create()` does individually.
