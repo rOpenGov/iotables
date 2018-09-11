@@ -143,6 +143,24 @@ This is equal to the equation on page 495 of the Eurostat Manual.
 
 (44) $w_{ij}$ = $W_{j}$ / $x_j$  [input coefficients for value added]
 
+You can create a matrix of input indicators, or direct effects on (final) demand with `direct_effects_create()`. The function by default creates input requirements for final demand.  With the code below it re-creates the Table 15.14 of the Eurostat manual. 
+
+```{r input_indicator}
+io_table <- iotable_get () 
+#Total column should not be missing
+io_table <- io_table [, 1:7] 
+io_table$total <- rowSums(io_table[, 2:7])
+
+labelled_io_table <- io_table
+
+direct_effects_de <- direct_effects_create ( labelled_io_table = io_table ) 
+direct_effects <- direct_effects_de  
+
+print ( direct_effects[1:6,1:4])
+```
+
+>The 'total' row above is labelled as Domestic goods and services in the Eurostat Manual. The table can be found on p498.
+
 ##Multipliers
 
 ###Income multipliers
@@ -184,8 +202,30 @@ The indicator shows that manufacturing has the lowest, and other services has th
 
 > You can check these values against the Table 15.16 of the Eurostat Manual on page 501 (row 10).
 
-These multipliers are Type-I multipliers. The type-I GVA multiplier shows the total effect in the domestic economy. The initial extra demand creates new orders in the backward linking industries, offers new product to build on in the forward-linking industry and creates new corporate and employee income that can be spent. We will soon turn to the problem of Type-II multipliers.
+You can recreate the whole matrix if possible income multipliers with `input_multipliers_create()`.
 
+```{r inputmultipliers}
+#Total column should not be missing
+io_table <- io_table [, 1:7] 
+io_table$total <- rowSums(io_table[, 2:7])
+
+labelled_io_table <- io_table
+
+direct_effects_de <- direct_effects_create ( labelled_io_table = io_table ) 
+#remove the total column from direct effects to conform with the inverse
+direct_effects <- direct_effects_de [, -8] 
+
+multipliers <- input_multipliers_create(
+  direct_effects = direct_effects_de [, -8],
+  inverse = I_de, 
+  labelled = TRUE)
+
+print (multipliers[1:3, 1:3])
+```
+
+> You can check these results against the Table 15.16 on p501 of the Eurostat manual. Again, the label 'total' refers to domestic intermediaries. The ordering of the rows is different from the Manual.
+
+These multipliers are Type-I multipliers. The type-I GVA multiplier shows the total effect in the domestic economy. The initial extra demand creates new orders in the backward linking industries, offers new product to build on in the forward-linking industry and creates new corporate and employee income that can be spent. Type-II multipliers will be introduced in a forthcoming vignette [not yet available.]
 
 ###Employment multipliers
 
