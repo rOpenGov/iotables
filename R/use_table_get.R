@@ -80,6 +80,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
           use_table <- labelled_io_table[1:6, 1:7] #remove households
       }
       return ( use_table )  #return simplified example table and do not run rest of the code
+    ###end of germany_1990 case
     } else {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 

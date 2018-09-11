@@ -15,11 +15,12 @@ employment_get(geo = "CZ", year = "2010", sex = "Total",
 \arguments{
 \item{geo}{The country code.}
 
-\item{year}{The year.  The avarege employment will be created for the given year, 
-starting with \code{2008}, when the NACE Rev 2 was introduced in employment statistics.}
+\item{year}{The year.  The averege employment will be created for the given
+year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
+employment statistics.}
 
 \item{sex}{Defaults to \code{"Total"}. Enter \code{"Females"} or \code{"F"} for
-female employmnent, \code{"Males"} or \code{"M"} for male employment.}
+female employment, \code{"Males"} or \code{"M"} for male employment.}
 
 \item{age}{Defaults to \code{"Y_GE15"}, which is the Eurostat code for employment in 
 all age groups starting from 15-years-old. Any Eurostat code can be used as a 

@@ -3,10 +3,11 @@
 #' Download the employment data for a country and arrange it to the 64x64 SIOTS.
 #' Currently works only with product x product tables. 
 #' @param geo The country code. 
-#' @param year The year.  The avarege employment will be created for the given year, 
-#' starting with \code{2008}, when the NACE Rev 2 was introduced in employment statistics.
+#' @param year The year.  The averege employment will be created for the given
+#' year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
+#' employment statistics.
 #' @param sex Defaults to \code{"Total"}. Enter \code{"Females"} or \code{"F"} for
-#' female employmnent, \code{"Males"} or \code{"M"} for male employment.
+#' female employment, \code{"Males"} or \code{"M"} for male employment.
 #' @param age Defaults to \code{"Y_GE15"}, which is the Eurostat code for employment in 
 #' all age groups starting from 15-years-old. Any Eurostat code can be used as a 
 #' parameter. 

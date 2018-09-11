@@ -1,6 +1,6 @@
 #' Forward linkages
 #' 
-#' Forward linkeages as defined by the Eurostat Manual of Supply, Use and
+#' Forward linkages as defined by the Eurostat Manual of Supply, Use and
 #' Input-Output Tables (see p506-507.)
 #' @param output_coefficient_matrix An output coefficient matrix created with the 
 #' \code{\link{output_coefficient_matrix_create}} function. 

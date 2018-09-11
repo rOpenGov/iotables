@@ -13,7 +13,7 @@ forward_linkages(output_coefficient_matrix, digits = NULL)
 \item{digits}{Number of decimals for rounding, defaults to \code{NULL}.}
 }
 \description{
-Forward linkeages as defined by the Eurostat Manual of Supply, Use and
+Forward linkages as defined by the Eurostat Manual of Supply, Use and
 Input-Output Tables (see p506-507.)
 }
 \examples{

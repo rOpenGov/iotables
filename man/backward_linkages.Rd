@@ -11,7 +11,7 @@ backward_linkages(Im)
 \code{\link{leontieff_inverse_create}} function.}
 }
 \description{
-Backward linkeages as defined by the Eurostat Manual of Supply, Use and Input-Output
+Backward linkages as defined by the Eurostat Manual of Supply, Use and Input-Output
 Tables (see p506-507.)
 }
 \examples{
