@@ -42,7 +42,7 @@ forward_linkages <- function ( output_coefficient_matrix,
   L  <- leontieff_matrix_create( output_coefficient_matrix  )
   I <- leontieff_inverse_create(L)
   FLm <- I
-  FLm$forward = rowSums(I[, 2:ncol(I)])
+  FLm$forward_linkages = rowSums(I[, 2:ncol(I)])
   
   if ( !is.null(digits)) {
     FLm[, 2:ncol(FLm)] <- round ( FLm[, 2:ncol(FLm)], digits )
