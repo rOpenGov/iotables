@@ -28,7 +28,7 @@ backward_linkages <- function ( Im ) {
  Im <- dplyr::mutate_if (Im, is.factor, as.character )
   
   total_row <- data.frame ( 
-    name = "total"
+    name = "backward linkages"
     )
   
   names ( total_row )[1] <- names ( Im[1])
@@ -37,6 +37,6 @@ backward_linkages <- function ( Im ) {
                        t(colSums(Im[,2:ncol(Im)]))
                        )
   
-  rbind ( Im, total_row )
+  total_row
   
 }
