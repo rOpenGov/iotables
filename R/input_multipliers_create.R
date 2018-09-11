@@ -22,8 +22,10 @@
 #' labelled_io_table <- io_table
 #' direct_effects_create ( io_table ) 
 #' 
-#' input_multipliers_create ( direct_effects[, -8], 
-#'                            I_de )
+#' multipliers <- input_multipliers_create(
+#'       direct_effects = direct_effects_de [, -8],
+#'       inverse = I_de, 
+#'       labelled = TRUE)
 #' @export
 
 input_multipliers_create <- function ( direct_effects,
