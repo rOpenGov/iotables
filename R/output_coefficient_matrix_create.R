@@ -66,7 +66,8 @@ output_coefficient_matrix_create <- function ( io_table,
                             ! names ( io_table ) %in% remove_cols  ]
   io_table <- dplyr::mutate_if ( io_table, is.factor, as.character )
   
-  total_row <- which ( tolower(io_table[,1 ]) %in% c("cpa_total", "total") )
+  total_row <- which ( tolower(as.character(unlist(io_table[, 1])))
+                       %in% c("cpa_total", "total") )
   
   if ( length(total_row) == 0 ) stop ("Total row not found") else {
     io_table <- io_table [1:(total_row-1), ]
@@ -80,7 +81,8 @@ output_coefficient_matrix_create <- function ( io_table,
     } #end of finding total column if originally missing
     
   } else if ( type == "final_demand" ) {
-    demand_col <- which (tolower(names(io_table)) %in% c("tfu", "output_bp", "total_final_use") )
+    demand_col <- which (tolower(names(io_table)) %in% 
+                           c("tfu", "output_bp", "total_final_use") )
   }  else {
       stop ("Paramter type must be either product or final_demand.")
     }
@@ -98,7 +100,7 @@ output_coefficient_matrix_create <- function ( io_table,
   ###Households are not needed to calculate the output coefficients------
   households_column <- which (names(io_table) %in% c("P3_S14", "households") )
   if ( length(households_column) > 0 ) {
-    input_flow <- input_flow [, -households_column]
+    io_table <- io_table [, -households_column]
     if (last_col == households_column) last_col <- last_col-1 
   }
   
@@ -110,7 +112,7 @@ output_coefficient_matrix_create <- function ( io_table,
   
   null_to_eps <- function(x) ifelse( x==0, 0.000001, x )
   
-  demand <- null_to_eps(demand)
+  demand <- null_to_eps(as.numeric(unlist(demand)))
 
   #forward linkeages on p507
   ##Avoid division by zero with epsilon-----
