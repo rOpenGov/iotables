@@ -1,9 +1,12 @@
 #' Create direct effects
 #' 
-#' The function creates the input indicators from the inputs and the outputs.
+#' The function creates the direct effects on total supply (or other supply 
+#' category). See Eurostat Manual p498.
 #' @param labelled_io_table A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}
-#' @param type \code{final_demand}, \code{domestic_demand} or \code{'intermediate_demand'}. 
-#' @param digits Rounding digits, if omitted, no rounding takes place.  
+#' @param type Defaults to \code{final_demand}. Alternatives are \code{domestic_demand} or 
+#' or \code{'intermediate_demand'}.
+#' @param digits Rounding digits, defaults to \code{NULL}, in which case 
+#' no rounding takes place.  
 #' @importFrom dplyr select 
 #' @examples  
 #' 
@@ -18,7 +21,7 @@
 
 direct_effects_create <- function ( labelled_io_table,
                                     type = 'final_demand',
-                                     digits = NULL ) { 
+                                    digits = NULL ) { 
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
   }
@@ -40,7 +43,7 @@ direct_effects_create <- function ( labelled_io_table,
     stop("Type must be any of 'intermediate' or 'domestic_demand' or 'final_demand'.")
   }
   
-  if ( length (demand_row) == 0 ) {
+  if ( length (demand_row_number) == 0 ) {
     stop("Demand row was not found.")
   }
  
@@ -56,13 +59,12 @@ direct_effects_create <- function ( labelled_io_table,
                                 == ncol(lower_quadrant))
   if ( length( fully_missing_rows) >0 ) { 
     lower_quadrant <- lower_quadrant[-fully_missing_rows, ]
-    first_column <- first_column[-fully_missing_rows, ]
     warning("Fully missing rows were removed from the table.")
     }
   
   demand_row <- labelled_io_table[demand_row_number, 1:total_column_number ]
   
-  not_na_cols <- which (! is.na(as.numeric(total_row)))
+  not_na_cols <- which (! is.na(as.numeric(demand_row)))
 
   if (any(! not_na_cols)) {
     warning ( "The columns ", 
@@ -70,7 +72,7 @@ direct_effects_create <- function ( labelled_io_table,
               "were removed due to missing data.")
   }
   
-  total_row <- total_row [, not_na_cols]
+  demand_row <- demand_row [, not_na_cols]
   lower_quadrant <- lower_quadrant [, not_na_cols]
   
   zero_totals <- which ( as.numeric(demand_row) ==0 )

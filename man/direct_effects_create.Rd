@@ -10,12 +10,15 @@ direct_effects_create(labelled_io_table, type = "final_demand",
 \arguments{
 \item{labelled_io_table}{A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}}
 
-\item{type}{\code{final_demand}, \code{domestic_demand} or \code{'intermediate_demand'}.}
+\item{type}{Defaults to \code{final_demand}. Alternatives are \code{domestic_demand} or 
+or \code{'intermediate_demand'}.}
 
-\item{digits}{Rounding digits, if omitted, no rounding takes place.}
+\item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
+no rounding takes place.}
 }
 \description{
-The function creates the input indicators from the inputs and the outputs.
+The function creates the direct effects on total supply (or other supply 
+category). See Eurostat Manual p498.
 }
 \examples{
  
