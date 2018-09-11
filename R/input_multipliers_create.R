@@ -20,7 +20,7 @@
 #' io_table$total <- rowSums(io_table[, 2:7])
 #' 
 #' labelled_io_table <- io_table
-#' direct_effects_create ( io_table ) 
+#' direct_effects_de <- direct_effects_create ( io_table ) 
 #' 
 #' multipliers <- input_multipliers_create(
 #'       direct_effects = direct_effects_de [, -8],
