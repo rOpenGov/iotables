@@ -8,7 +8,7 @@ iotables_download(source = "naio_10_cp1700", data_directory = NULL,
   force_download = TRUE)
 }
 \arguments{
-\item{source}{Currently only source = \code{eurostat} works. Later OECD Stan will be added.}
+\item{source}{See the available list of sources above in the Description.}
 
 \item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 data file here with labelling.}
@@ -20,20 +20,20 @@ in the \code{data_directory} or the temporary directory, if it exists.}
 This function downloads standard input-output table files. Currently only Eurostat files are supported.
 You are not likely to use this function, because \code{\link{iotable_get}} will
 call this function if necessary and properly filter out an input-output table.
-The only parameter is the Eurostat code of the table: 
-Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)	
-Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
-Symmetric input-output table at basic prices (product by product) (previous years prices) (naio_10_pyp1700)
-Symmetric input-output table at basic prices (industry by industry) (previous years prices) (naio_10_pyp1750)
-Table of trade and transport margins at basic prices (naio_10_cp1620) and 
-at previous' years prices (naio_10_pyp1620)
-Table of taxes less subsidies on products at basic prices (naio_10_cp1630)	and
-at previous' years prices (naio_10_pyp1630)
-}
-\details{
+The only parameter is the Eurostat code of the table.
 The data is downloaded in the \code{tempdir()}under the name the statistical product as an
 rds file. (For example: \code{naio_10_cp1750.rds})
 The temporary directory is emptied at every normal R session exit.
+ \itemize{
+ \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
+ \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
+ \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
+ \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
+ \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
+ \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
+ \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
+ \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
+}
 }
 \examples{
 \dontrun{
