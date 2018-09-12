@@ -57,7 +57,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
     
     source_inputed <- source ; unit_input = unit
     
- ##Exception handling ---------------
+    ##Exception handling ---------------
     if ( ! labelling %in% c("iotables", "short")) {
       stop("Currently only labelling = 'iotables' and labelling = 'short' is supported.")
     }
@@ -72,15 +72,15 @@ use_table_get <- function ( labelled_io_table  = NULL,
       
       use_table <- labelled_io_table[1:6, 1:8]
       
-        if ( households == TRUE ) {
+      if ( households == TRUE ) {
         household_row <- labelled_io_table[11,1:8]
         household_row[1,8] <- 0
         use_table <- rbind ( use_table, household_row )
       } else {
-          use_table <- labelled_io_table[1:6, 1:7] #remove households
+        use_table <- labelled_io_table[1:6, 1:7] #remove households
       }
       return ( use_table )  #return simplified example table and do not run rest of the code
-    ###end of germany_1990 case
+      ###end of germany_1990 case
     } else {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
@@ -101,57 +101,57 @@ use_table_get <- function ( labelled_io_table  = NULL,
     
     if ( source != "germany_1990") use_table <- labelled_io_table[c(1:66), 1:67]
   } # end if is.null(labelled_io_table) 
-
+  
   ###Addding households, if requested----------------------------------------  
   if (households == TRUE) {
     household_consumption_col <- which ( names (labelled_io_table ) %in% 
-                                             c('final_consumption_households', 'P3_S14'))
-      
+                                           c('final_consumption_households', 'P3_S14'))
+    
     if (length( household_consumption_col ) > 1 ) {
-        warning ( "Beware, more household consumption items were found in the table.")
-      }
+      warning ( "Beware, more household consumption items were found in the table.")
+    }
     if ( length( household_consumption_col ) == 0 ) {
-        stop ( "No household consumption data was found.")
+      stop ( "No household consumption data was found.")
     }
     household_income_row <- which (labelled_io_table[[1]] %in%  
-                                       c('wages_salaries', 'D11') )
-      
+                                     c('wages_salaries', 'D11') )
+    
     if  (length( household_income_row) < 1 ) {
       household_income_rowl <- which ( labelled_io_table[[1]] %in% 
-                                           c('compensation_employees', 'D1'))
+                                         c('compensation_employees', 'D1'))
     }
     if ( length( household_income_row) == 0 ) {
-        stop ( "No household income data was found.")
+      stop ( "No household income data was found.")
     }
-      
+    
     message ( "Households are added to the matrix.")
   } 
-
-  ###Creating the table-----------------------------------------   
-   
- total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
- total_row <- which (labelled_io_table[,1] == "TOTAL") #find the total column, position varies if L68 or G47 is missing
   
- if ( households == TRUE ) {
-   use_table <- labelled_io_table[c(1:total_row, household_income_row[1]), 
-                                  c(1:total_col, household_consumption_col[1]) ] 
-   
-   use_table[total_row+1, total_col+1] <- 0
-
-   if (keep_total == FALSE ) {
-     use_table <- use_table[-total_row,-total_col]
-     message ( "Total row and column removed from the matrix.")
-      }
-   } else {    #no households case -------------------------
-   if ( keep_total == FALSE )  {
-     use_table <- labelled_io_table [1:total_row-1,1:total_col-1]
-     message ( "Total row and column removed from the matrix.")
-   } else {
-     use_table <- labelled_io_table[1:total_row, 1:total_col]
-     }
-   } # end of no household case 
+  ###Creating the table-----------------------------------------   
+  
+  total_col <- which (names ( labelled_io_table ) == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+  total_row <- which (labelled_io_table[,1] == "TOTAL") #find the total column, position varies if L68 or G47 is missing
+  
+  if ( households == TRUE ) {
+    use_table <- labelled_io_table[c(1:total_row, household_income_row[1]), 
+                                   c(1:total_col, household_consumption_col[1]) ] 
     
- use_table 
+    use_table[total_row+1, total_col+1] <- 0
+    
+    if (keep_total == FALSE ) {
+      use_table <- use_table[-total_row,-total_col]
+      message ( "Total row and column removed from the matrix.")
+    }
+  } else {    #no households case -------------------------
+    if ( keep_total == FALSE )  {
+      use_table <- labelled_io_table [1:total_row-1,1:total_col-1]
+      message ( "Total row and column removed from the matrix.")
+    } else {
+      use_table <- labelled_io_table[1:total_row, 1:total_col]
+    }
+  } # end of no household case 
+  
+  use_table 
 }
 
 

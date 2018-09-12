@@ -112,15 +112,15 @@ direct_effects_create <- function ( labelled_io_table,
   lower_quadrant <- lower_quadrant [, not_na_cols]
   
   zero_totals <- which ( unlist(demand_row[, c(2:length(demand_row))]) == 0  )
-
+  
   if ( length(zero_totals > 0) ) {
     for ( j in zero_totals ) {
       demand_row[, j] <- 0.0000001
       warning ( "Zero total value ", 
-      names ( demand_row )[j], " was changed to to epsilon do avoid division by zero")
+                names ( demand_row )[j], " was changed to to epsilon do avoid division by zero")
     }
   } #end of replacing zeros 
-
+  
   for ( j in 1:nrow(lower_quadrant)) {
     lower_quadrant[j, 2:ncol(lower_quadrant)] <- as.numeric(
       lower_quadrant[j,2:ncol(lower_quadrant)])/as.numeric(demand_row[,2:ncol(demand_row)])
@@ -131,6 +131,6 @@ direct_effects_create <- function ( labelled_io_table,
       stop("Digits must be a number.")
     }
     lower_quadrant <- round(lower_quadrant[, 2:ncol(lower_quadrant)], digits) #actual round
-    }
+  }
   lower_quadrant
 }
