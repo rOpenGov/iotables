@@ -46,6 +46,6 @@ The `cp` element refers to basic prices and the `pyp` to previous years' prices.
 Vignettes
 ---------
 
-The Germany 1990 vignette presentes most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the Eurostat Manual.
+The [Germany 1990](http://iotables.ceemid.eu/articles/germany_1990.html) vignette presentes most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the Eurostat Manual.
 
-The Working with Eurostat Data vignette shows how you can download, pre-process and use real data from Eurostat.
+The [Working with Eurostat Data](http://iotables.ceemid.eu/articles/working_with_eurostat.html) vignette shows how you can download, pre-process and use real data from Eurostat.
