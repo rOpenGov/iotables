@@ -8,7 +8,7 @@
 #' rds file. (For example: \code{naio_10_cp1750.rds})
 #' The temporary directory is emptied at every normal R session exit.
 #' To save the file for further use (which is necessary in analytical work because
-#' download times are long) set the  \code{download_directory} [see paramters]. 
+#' download times are long) set the  \code{download_directory} [see parameters]. 
 #' The function will make a copy of the rds file in this directory.
 #'  \itemize{
 ##'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
@@ -43,11 +43,11 @@ iotables_download <- function ( source = "naio_10_cp1700",
   t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL
   . <- downloaded <- downloaded_labelled <- NULL
   time_lab <- geo <- time <- unit <- NULL
-
+  
   possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
-                         "naio_10_pyp1700", "naio_10_pyp1750",
-                         "naio_10_cp1620", "naio_10_pyp1620", 
-                         "naio_10_cp1630", "naio_10_pyp1630" )
+                                  "naio_10_pyp1700", "naio_10_pyp1750",
+                                  "naio_10_cp1620", "naio_10_pyp1620", 
+                                  "naio_10_cp1630", "naio_10_pyp1630" )
   source <- tolower (source)
   if ( ! source %in%  possible_download_sources ) {
     supported_tables <- paste( possible_download_sources, collapse = ", ")
@@ -55,8 +55,8 @@ iotables_download <- function ( source = "naio_10_cp1700",
   }
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
-     "\\eurostat/", source, "_date_code_TF.rds" )
- 
+                                   "\\eurostat/", source, "_date_code_TF.rds" )
+  
   #downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
   #only download the Eurostat bulk file if necessary.
   
@@ -67,12 +67,12 @@ iotables_download <- function ( source = "naio_10_cp1700",
   }
   
   if (!file.exists(retrieve_from_temp_bulk) | force_download == TRUE){
-      downloaded <- tryCatch(eurostat::get_eurostat (source),
-                             error=function(e) message ("No data was found with this identifier."))
-    } else {
-      message ('The bulk Eurostat file is retrieved from the temporary directory.')
-      downloaded <- readRDS( retrieve_from_temp_bulk )
-    }
+    downloaded <- tryCatch(eurostat::get_eurostat (source),
+                           error=function(e) message ("No data was found with this identifier."))
+  } else {
+    message ('The bulk Eurostat file is retrieved from the temporary directory.')
+    downloaded <- readRDS( retrieve_from_temp_bulk )
+  }
   
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
@@ -110,7 +110,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
              "CPA_C31_32", "CPA_J59_60", 
              "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88", 
              "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D"
-    ))
+      ))
     
     downloaded$t_rows2 <- plyr::mapvalues(
       downloaded$t_rows2, 
@@ -134,7 +134,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
     save_file_name <- file.path(data_directory, paste0(source, ".rds"))
     saveRDS( downloaded, file = save_file_name )
     message ( "Saved the raw data of this table tpye in ",
-               save_file_name, "." )
+              save_file_name, "." )
   }
   
   downloaded 
