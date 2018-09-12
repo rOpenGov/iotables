@@ -25,7 +25,7 @@ The data is downloaded in the \code{tempdir()}under the name the statistical pro
 rds file. (For example: \code{naio_10_cp1750.rds})
 The temporary directory is emptied at every normal R session exit.
 To save the file for further use (which is necessary in analytical work because
-download times are long) set the  \param{download_directory} [see paramters]. 
+download times are long) set the  \code{download_directory} [see paramters]. 
 The function will make a copy of the rds file in this directory.
  \itemize{
  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
