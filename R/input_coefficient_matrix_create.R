@@ -43,36 +43,46 @@ input_coefficient_matrix_create <- function ( input_flow,
   
   input_flow <- dplyr::mutate_if (input_flow, is.factor, as.character )
   
+  ###Removing all zero columns and rows --------
+  
+  #Determine if a column is all zero
   non_zero <- function (x) {
     if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
     ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
   }
   
+  #Examine which columns are filled with zeros
   non_zero_cols <- vapply ( input_flow[, 1:ncol(input_flow)], 
                             non_zero, logical (1) )
   #non_zero_rows <- which ( rowSums( input_flow[, 2:ncol(input_flow)] ) != 0 )
   #input_flow <- input_flow[non_zero_rows, non_zero_cols] #should be improved 
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
   
+  #Remove columsn that are filled with zeros
   remove_cols <- names (input_flow )[! non_zero_cols]
+  
+  if ( length( remove_cols) > 0 ) {
+    warning ("Columns ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
+  }
+  
   siot_rows <- as.character ( unlist ( input_flow[,1]) )
   siot_rows
   #names ( input_flow) [! names ( input_flow ) %in% remove_cols ]
   # siot_rows [! siot_rows %in% remove_cols ]
   
-  ##review here
- 
+  ##Now remove all zero corresponding rows
   input_flow <- input_flow [! siot_rows %in% remove_cols , 
                             ! names ( input_flow ) %in% remove_cols  ]
   input_flow <- dplyr::mutate_if ( input_flow, is.factor, as.character )
   
-nrow ( input_flow )
-ncol( input_flow)  
-  
-  #input_flow <- input_flow [ non_zero_rows, non_zero_cols ]
+
+  #Adjust the output vector 
   output <- dplyr::mutate_if ( output, is.factor, as.character )
   output <- output [ names (output) %in% names (input_flow )]
   output  <- dplyr::mutate_if (output, is.factor, as.character )
+  
+  
+  ##Further adjustments with households 
   Im <- dplyr::full_join ( input_flow, output, by = names ( input_flow ))
   keep_first_name <- names(Im)[1]
   
@@ -106,6 +116,7 @@ ncol( input_flow)
     }
   }
   
+  ##Create the input coefficient matrix-------
   null_to_eps <- function(x) ifelse( x==0, 0.000001, x )
    
   first_col <- as.data.frame( Im[-output_row,1] )
