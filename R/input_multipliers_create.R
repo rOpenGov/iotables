@@ -9,6 +9,7 @@
 #' \code{FALSE}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
+#' @importFrom dplyr select one_of
 #' @examples  
 #' de_use <- use_table_get()
 #' L_de  <- leontieff_matrix_create( de_use )
@@ -33,8 +34,15 @@ input_multipliers_create <- function ( direct_effects,
                                        labelled = TRUE,
                                        digits = NULL ) { 
  
+  
+  names_direct <- names ( direct_effects )
+  
+  if ( all ( names (inverse) %in% names ( direct_effects ) ) ) {
+    direct_effects <- dplyr::select ( direct_effects, 
+                                      dplyr::one_of (names(inverse)))
+  }
+  
   col_n <- ncol(direct_effects)
-  #View ( inverse )
   if ( col_n != ncol(inverse)) {
     stop("The direct effects matrix and the Leontieff inverse must have the same number of columns.")
   }
