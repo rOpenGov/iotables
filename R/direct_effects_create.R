@@ -25,7 +25,7 @@ direct_effects_create <- function ( labelled_io_table,
   if (! is.null(digits)) {
     if (digits<0) digits <- NULL
   }
-
+  
   
   ###Removing all zero columns and rows --------
   
@@ -51,7 +51,7 @@ direct_effects_create <- function ( labelled_io_table,
   
   ##Now remove all zero corresponding rows
   labelled_io_table<- labelled_io_table [! siot_rows %in% remove_cols , 
-                            ! names ( labelled_io_table) %in% remove_cols  ]
+                                         ! names ( labelled_io_table) %in% remove_cols  ]
   
   labelled_io_table <- dplyr::mutate_if ( labelled_io_table, 
                                           is.factor, as.character )
@@ -60,7 +60,7 @@ direct_effects_create <- function ( labelled_io_table,
   total_row_number <- which (tolower(as.character(unlist(labelled_io_table[,1]))) %in% c("total", "cpa_total"))
   total_column_number <- which ( tolower(names(labelled_io_table)) %in% c("cpa_total", "total"))
   
- 
+  
   lq_rows <- total_row_number:nrow(labelled_io_table)
   lower_quadrant <- labelled_io_table [ lq_rows, 1:ncol(labelled_io_table) ]
   
@@ -75,15 +75,9 @@ direct_effects_create <- function ( labelled_io_table,
     lower_quadrant <- lower_quadrant[-fully_missing_rows, ]
     warning("Fully missing rows were removed from the table.")
     }
-  
-  
-  if (any(! not_na_cols)) {
-    warning ( "The columns ", 
-              paste(names(labelled_io_table)[!not_na_cols], collapse = ', '), 
-              "were removed due to missing demand data.")
-  }
-  
-  if (type == "intermediate") {
+
+   ###Which type of comparions?-------
+    if (type == "intermediate") {
     demand_row_number <- which (tolower(as.character(unlist(labelled_io_table[,1]))) %in% c("total", "cpa_total"))
   } else if (type == "domestic_demand")  {
     demand_row_number <- which ( tolower(
@@ -101,9 +95,15 @@ direct_effects_create <- function ( labelled_io_table,
     stop("Demand row was not found.")
   }
   
+  ###Select demand row-----
   demand_row <- labelled_io_table[demand_row_number, 1:total_column_number ]
   not_na_cols <- which (! is.na(as.numeric(demand_row[ 2:length(demand_row)])))
   
+  if (any(! not_na_cols)) {
+    warning ( "The columns ", 
+              paste(names(labelled_io_table)[!not_na_cols], collapse = ', '), 
+              "were removed due to missing demand data.")
+  }
   
   #remove columns where demand is not known
   demand_row <- demand_row [, not_na_cols]
