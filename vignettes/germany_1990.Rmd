@@ -147,16 +147,14 @@ You can create a matrix of input indicators, or direct effects on (final) demand
 
 ```{r input_indicator}
 io_table <- iotable_get () 
-#Total column should not be missing
+#Total column should not be missing:
 io_table <- io_table [, 1:7] 
 io_table$total <- rowSums(io_table[, 2:7])
 
 labelled_io_table <- io_table
 
 direct_effects_de <- direct_effects_create ( labelled_io_table = io_table ) 
-direct_effects <- direct_effects_de  
-
-print ( direct_effects[1:6,1:4])
+print ( direct_effects_de[1:6,1:4])
 ```
 
 >The 'total' row above is labelled as Domestic goods and services in the Eurostat Manual. The table can be found on p498.
@@ -212,8 +210,8 @@ io_table$total <- rowSums(io_table[, 2:7])
 labelled_io_table <- io_table
 
 direct_effects_de <- direct_effects_create ( labelled_io_table = io_table ) 
-#remove the total column from direct effects to conform with the inverse
-direct_effects <- direct_effects_de [, -8] 
+
+#remove the total column from direct effects to conform with the inverse [,-8]
 
 multipliers <- input_multipliers_create(
   direct_effects = direct_effects_de [, -8],
@@ -326,8 +324,7 @@ Currently `iotables` only caclulates backward linkages, but the creation of forw
 
 ```{r backward}
 de_bw <- backward_linkages(I_de)
-
-print ( filter ( de_bw, iotables_row == "total"))
+print (de_bw)
 ```
 
 >You can check the results against Table 15.19 on page 506 of the Eurostat Manual.
