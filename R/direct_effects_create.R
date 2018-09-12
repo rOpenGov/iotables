@@ -127,10 +127,10 @@ direct_effects_create <- function ( labelled_io_table,
   }
   
   if ( ! is.null(digits)) {
-    if ( class(digits) %in% c("numeric", "integer")) {
+    if (! class(digits) %in% c("numeric", "integer")) {
       stop("Digits must be a number.")
     }
-    lower_quadrant <- round(lower_quadrant[, 2:ncol(lower_quadrant)], digits) #actual round
+    lower_quadrant[, 2:ncol(lower_quadrant)] <- round(lower_quadrant[, 2:ncol(lower_quadrant)], digits) #actual round
   }
   lower_quadrant
 }
