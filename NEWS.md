@@ -75,7 +75,8 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * New function `forward_linkages()`
 * New function `backward_linkages()`
 
-
 # iotables 0.3.4
 * New function `direct_effects()` which calculates all input indicators that `input_indicator_create()` does individually.
-* Updated vignette for the new functions.
+* New vignette to work with real Eurostat data.
+* New package website.
+* ReadMe file shortened, most of the contents are moved now to the two vignettes.
