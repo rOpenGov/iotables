@@ -62,7 +62,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   remove_cols <- names (input_flow )[! non_zero_cols]
   
   if ( length( remove_cols) > 0 ) {
-    warning ("Columns ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
+    warning ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
   }
   
   siot_rows <- as.character ( unlist ( input_flow[,1]) )
