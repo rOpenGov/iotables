@@ -11,3 +11,5 @@
 ^iotables/not_included/Croatia_example\.R$
 ^/iotables/data-raw$
 ^iotables\.pdf$
+^docs$
+^/docs$
