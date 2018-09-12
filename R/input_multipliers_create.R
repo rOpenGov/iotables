@@ -68,11 +68,17 @@ input_multipliers_create <- function ( direct_effects,
  if ( labelled == TRUE ) { 
     multipliers <-  cbind (first_column, as.data.frame(multipliers))
     if ( !is.null(digits) ) {
+      if (! class(digits) %in% c("numeric", "integer")) {
+        stop("Digits must be a number.")
+      }
       multipliers[, 2:ncol(multipliers)] <- round(
         multipliers[, 2:ncol(multipliers)], digits)
     }
     } else {
    if ( !is.null(digits) ) {
+     if (! class(digits) %in% c("numeric", "integer")) {
+       stop("Digits must be a number.")
+     }
      multipliers[, 1:ncol(multipliers)] <- round(
        multipliers[, 1:ncol(multipliers)], digits)
      }
