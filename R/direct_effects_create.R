@@ -26,23 +26,6 @@ direct_effects_create <- function ( labelled_io_table,
     if (digits<0) digits <- NULL
   }
 
-  if (type == "intermediate") {
-    demand_row_number <- which (tolower(as.character(unlist(labelled_io_table[,1]))) %in% c("total", "cpa_total"))
-  } else if (type == "domestic_demand")  {
-    demand_row_number <- which ( tolower(
-      as.character(unlist(labelled_io_table[,1]))) %in% c(
-        "output", "p1","intermediate_consumption_pp"))
-  } else if (type == "final_demand")  {
-    demand_row_number <- which ( tolower(
-      as.character(unlist(labelled_io_table[,1]))) %in% c(
-        "ts_bp", "output_bp", "total_supply_bp"))
-  } else {
-    stop("Type must be any of 'intermediate' or 'domestic_demand' or 'final_demand'.")
-  }
-  
-  if ( length (demand_row_number) == 0 ) {
-    stop("Demand row was not found.")
-  }
   
   ###Removing all zero columns and rows --------
   
@@ -65,9 +48,6 @@ direct_effects_create <- function ( labelled_io_table,
   }
   
   siot_rows <- as.character ( unlist ( labelled_io_table[,1]) )
-  siot_rows
-  #names ( input_flow) [! names ( input_flow ) %in% remove_cols ]
-  # siot_rows [! siot_rows %in% remove_cols ]
   
   ##Now remove all zero corresponding rows
   labelled_io_table<- labelled_io_table [! siot_rows %in% remove_cols , 
@@ -96,17 +76,39 @@ direct_effects_create <- function ( labelled_io_table,
     warning("Fully missing rows were removed from the table.")
     }
   
-  demand_row <- labelled_io_table[demand_row_number, 1:total_column_number ]
-  not_na_cols <- which (! is.na(as.numeric(demand_row[ 2:length(demand_row)])))
-
+  
   if (any(! not_na_cols)) {
     warning ( "The columns ", 
               paste(names(labelled_io_table)[!not_na_cols], collapse = ', '), 
               "were removed due to missing demand data.")
   }
   
+  if (type == "intermediate") {
+    demand_row_number <- which (tolower(as.character(unlist(labelled_io_table[,1]))) %in% c("total", "cpa_total"))
+  } else if (type == "domestic_demand")  {
+    demand_row_number <- which ( tolower(
+      as.character(unlist(labelled_io_table[,1]))) %in% c(
+        "output", "p1","intermediate_consumption_pp"))
+  } else if (type == "final_demand")  {
+    demand_row_number <- which ( tolower(
+      as.character(unlist(labelled_io_table[,1]))) %in% c(
+        "ts_bp", "output_bp", "total_supply_bp"))
+  } else {
+    stop("Type must be any of 'intermediate' or 'domestic_demand' or 'final_demand'.")
+  }
+  
+  if ( length (demand_row_number) == 0 ) {
+    stop("Demand row was not found.")
+  }
+  
+  demand_row <- labelled_io_table[demand_row_number, 1:total_column_number ]
+  not_na_cols <- which (! is.na(as.numeric(demand_row[ 2:length(demand_row)])))
+  
+  
   #remove columns where demand is not known
   demand_row <- demand_row [, not_na_cols]
+  demand_row
+  
   lower_quadrant <- lower_quadrant [, not_na_cols]
   
   zero_totals <- which ( unlist(demand_row[, c(2:length(demand_row))]) == 0  )
