@@ -118,7 +118,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   
   ##Create the input coefficient matrix-------
   null_to_eps <- function(x) ifelse( x==0, 0.000001, x )
-   
+  
   first_col <- as.data.frame( Im[-output_row,1] )
   names (first_col ) <- keep_first_name
   Im <- vapply ( Im[1:output_row-1, c(2:last_col)],
@@ -127,10 +127,10 @@ input_coefficient_matrix_create <- function ( input_flow,
     for ( j in 1:(last_col-1)) {  
       Im[i, j ] <- as.numeric(Im [i, j ]) / as.numeric(output [j+1] )
     }
-  #Im's first col is removed, so last_col is last_col-1
+    #Im's first col is removed, so last_col is last_col-1
   }
   Im <- as.data.frame (Im)
-
+  
   Im <- cbind ( first_col, Im)
   if ( is_last_cols ) {
     keep_name <- names ( last_cols )
