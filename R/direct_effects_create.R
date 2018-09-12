@@ -44,7 +44,6 @@ direct_effects_create <- function ( labelled_io_table,
     stop("Demand row was not found.")
   }
   
-  
   ###Removing all zero columns and rows --------
   
   #Determine if a column is all zero
@@ -110,7 +109,8 @@ direct_effects_create <- function ( labelled_io_table,
   demand_row <- demand_row [, not_na_cols]
   lower_quadrant <- lower_quadrant [, not_na_cols]
   
-  zero_totals <- which ( as.numeric(demand_row[ 2:length(demand_row)]) ==0 )
+  zero_totals <- which ( unlist(demand_row[, c(2:length(demand_row))]) == 0  )
+
   if ( length(zero_totals > 0) ) {
     for ( j in zero_totals ) {
       demand_row[, j] <- 0.0000001
@@ -123,6 +123,7 @@ direct_effects_create <- function ( labelled_io_table,
     lower_quadrant[j, 2:ncol(lower_quadrant)] <- as.numeric(
       lower_quadrant[j,2:ncol(lower_quadrant)])/as.numeric(demand_row[,2:ncol(demand_row)])
   }
+  
   if ( ! is.null(digits)) {
     if ( class(digits) %in% c("numeric", "integer")) {
       stop("Digits must be a number.")
