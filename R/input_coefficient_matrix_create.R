@@ -48,7 +48,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   #Determine if a column is all zero
   non_zero <- function (x) {
     if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
-    ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
+    ifelse (  sum ( as.numeric ( unlist (x) ), na.rm=TRUE) == 0, FALSE, TRUE )
   }
   
   #Examine which columns are filled with zeros
@@ -58,7 +58,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   #input_flow <- input_flow[non_zero_rows, non_zero_cols] #should be improved 
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
   
-  #Remove columsn that are filled with zeros
+  #Remove columns that are filled with zeros
   remove_cols <- names (input_flow )[! non_zero_cols]
   
   if ( length( remove_cols) > 0 ) {
@@ -75,7 +75,7 @@ input_coefficient_matrix_create <- function ( input_flow,
                             ! names ( input_flow ) %in% remove_cols  ]
   input_flow <- dplyr::mutate_if ( input_flow, is.factor, as.character )
   
-
+  
   #Adjust the output vector 
   output <- dplyr::mutate_if ( output, is.factor, as.character )
   output <- output [ names (output) %in% names (input_flow )]
@@ -89,7 +89,7 @@ input_coefficient_matrix_create <- function ( input_flow,
   output_row <- nrow(Im)
   last_col <- ncol (Im)
   is_last_cols <- FALSE
-   
+  
   if ( names (Im)[last_col] %in% c("P3_S14", "households")) {
     last_col <- last_col -1 
     last_name <- names (Im)[last_col+1]
