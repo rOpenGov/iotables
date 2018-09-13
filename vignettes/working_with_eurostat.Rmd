@@ -43,10 +43,13 @@ if ( ! dir.exists(not_included_directory) ) dir.create (not_included_directory)
 
 naio_10_cp1700 <- iotables_download("naio_10_cp1700", #SIOT
                                     data_directory = not_included_directory ) 
-naio_10_cp1620 <- iotables_download("naio_10_cp1620", #margins
-                                    data_directory = not_included_directory) 
-naio_10_cp1630 <- iotables_download("naio_10_cp1630",  #tax
-                                    data_directory = not_included_directory )
+
+#For inclusion in the package, the files must be smaller. Reducing the size of
+#the bulk files will not affect the demonstration
+
+naio_10_cp1700 <- naio_10_cp1700 %>%
+  dplyr::filter ( geo %in% c("CZ", "SK")) %>%
+  dplyr::filter ( year %in% c(2010, 2015))
 
 #Conforming employment data both sexes from 15 years old, year 2015.
 #prod_na vocabulary for product x product conformity
@@ -61,12 +64,9 @@ emp_sk <- employment_get(geo = "SK", year = "2017", sex = "Total",
   data_directory = not_included_directory,
   force_download = TRUE)
 
-
-saveRDS(naio_10_cp1700, file.path('..', 'inst', 'extdata',
-                                       'naio_10_cp1700.rds'))
-save (naio_10_cp1700, naio_10_cp1620, naio_10_cp1630, 
-      emp_sk, emp_cz, file = file.path('..', 'inst', 'extdata',
-                                       'naio_10_product_x_product.rda'))
+save (naio_10_cp1700, emp_sk, emp_cz, 
+      file = file.path('..', 'inst', 'extdata',
+                       'naio_10_product_x_product.rda'))
 ```
 
 For a quickier building of the vignette, the data is retrieved from the *not_included* directory. The chunk above can reproduce this data file. 
@@ -106,13 +106,6 @@ sk_use <- use_table_get( labelled_io_table = sk_io,
                          year = 2010, unit = "MIO_EUR", 
                          stk_flow = "TOTAL",
                          labelling = "short")
-
-message ( "Czech tax table")
-cz_tax <-  iotable_get ( labelled_io_data = naio_10_cp1630, 
-                         source = "naio_10_cp1630", geo = "SK", 
-                         year = 2010, unit = "MIO_NAC", 
-                         stk_flow = "TOTAL",
-                         labelling = "short" )
 
 message ( "Output vectors")
 cz_output <- output_get( labelled_io_table = cz_io)
@@ -232,7 +225,7 @@ multipliers_sk <- input_multipliers_create( direct_sk, I_sk, digits = 4)
 knitr::kable (head(multipliers_cz[,1:8]))
 ```
 
-###Employment multipliers 
+###Employment indicators and multipliers 
 
 The creation of the employment indicator is fascilitated with the data processing function `employment_get`. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector. 
 
@@ -313,7 +306,7 @@ From the output coefficient matrix we can create the Leontieff-matrix for output
 cz_fw <- forward_linkages ( output_coeff_cz )
 sk_fw <- forward_linkages( output_coeff_sk )
 
-knitr::kable (head(cz_bw[,1:8]))
+knitr::kable (head(cz_fw))
 ```
 
 
@@ -331,43 +324,41 @@ cz_file_name <- file.path("..", "not_included", "CzechRep_test.xlsx")
 xlsx::write.xlsx ( cz_io, file = cz_file_name, sheetName = "io_table",
                    col.names=TRUE, row.names=TRUE, append=FALSE)
 xlsx::write.xlsx ( cz_output, file = cz_file_name, sheetName = "cz_output",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( input_coeff_matrix_cz, file = cz_file_name, 
                    sheetName = "input_coeff_matrix_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( L_cz, file = cz_file_name, sheetName = "L_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( I_cz, file = cz_file_name, sheetName = "I_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
-xlsx::write.xlsx ( cz_tax, file = cz_file_name, sheetName = "cz_tax",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( direct_cz, file = cz_file_name, 
                    sheetName = "direct_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( multipliers_cz, file = cz_file_name, 
                    sheetName = "multipliers_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( emp_cz, file = cz_file_name, 
                    sheetName = "emp_cz_2015",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( emp_indicator_cz, file = cz_file_name, 
                    sheetName = "emp_indicator_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( employment_multipliers_cz, file = cz_file_name, 
                    sheetName = "employment_multipliers_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( cz_bw, file = cz_file_name, 
                    sheetName = "cz_backward_linkages",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( output_coeff_cz, file = cz_file_name, 
                    sheetName = "output_coeff_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( cz_fw, file = cz_file_name, 
                    sheetName = "cz_forward_linkages",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( output_multipliers_cz, file = cz_file_name, 
                    sheetName = "output_multipliers_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 
 
 sk_file_name <- file.path("..", "not_included", "SlovakRep_test.xlsx")
@@ -375,39 +366,39 @@ sk_file_name <- file.path("..", "not_included", "SlovakRep_test.xlsx")
 xlsx::write.xlsx ( sk_io, file = sk_file_name, sheetName = "io_table",
                    col.names=TRUE, row.names=TRUE, append=FALSE)
 xlsx::write.xlsx ( sk_output, file = sk_file_name, sheetName = "sk_output",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( input_coeff_matrix_sk, file = sk_file_name, 
                    sheetName = "input_coeff_matrix_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( L_sk, file = sk_file_name, sheetName = "L_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( I_sk, file = sk_file_name, sheetName = "I_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( direct_sk, file = sk_file_name, 
                    sheetName = "direct_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( multipliers_sk, file = sk_file_name, 
                    sheetName = "multipliers_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( emp_sk, file = sk_file_name, 
                    sheetName = "emp_sk_2015",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( emp_indicator_sk,file = sk_file_name, 
                    sheetName = "emp_indicator_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
-xlsx::write.xlsx ( employment_multipliers_cz, file = cz_file_name, 
-                   sheetName = "employment_multipliers_cz",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
+xlsx::write.xlsx ( employment_multipliers_sk, file = sk_file_name, 
+                   sheetName = "employment_multipliers_sk",
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( sk_bw, file = sk_file_name, 
                    sheetName = "sk_backward_linkages",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( output_coeff_sk, file = sk_file_name, 
                    sheetName = "output_coeff_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( sk_fw, file = sk_file_name, 
                    sheetName = "sk_forward_linkages",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( output_multipliers_sk, file = sk_file_name, 
                    sheetName = "output_multipliers_sk",
-                   col.names=TRUE, row.names=TRUE, append=FALSE)
+                   col.names=TRUE, row.names=TRUE, append=TRUE)
 ```
