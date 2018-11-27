@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_year_get.R
 \name{iotable_year_get}
 \alias{iotable_year_get}
-\title{Get an input-output table from bulk file}
+\title{Get the available years for the input-ouptput tables.}
 \usage{
 iotable_year_get(labelled_io_data = NULL, source = "germany_1990",
   geo = "DE", year = 1990, unit = "MIO_EUR", time_unit = "year",
@@ -39,14 +39,12 @@ downloaded file in the \code{data_directory} or the temporary directory,
 if it exists. Will force download only in a new session.}
 }
 \description{
-This function is used to filter out  a single input-output table from a database, 
-for example a raw file downloaded from the Eurostat website.  It provides some 
-functionality to avoid some pitfalls.
+The function selects the available tables by year or time as a date 
+for a specific country and currency unit in the Eurostat bulk file.
 Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
 directly, rather via this function, if and when it is necessary.
 }
 \examples{
-germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
-             year = 1990,   unit = "MIO_EUR", 
-             labelling  = "iotables")
+germany_years <- iotable_year_get ( source = "germany_1990", geo = 'DE', 
+             year = 1990,   unit = "MIO_EUR")
 }
