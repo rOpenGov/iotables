@@ -61,6 +61,8 @@ iotable_get <- function ( labelled_io_data = NULL,
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   
+  
+  source_inputed <- source; unit_input <- unit
   stk_flow_input <- stk_flow; geo_input <- geo
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
@@ -117,7 +119,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
   
   ###Exception handling for wrong paramters-----
-  if ( is.null(labelled_io_data) ) {
+  if ( is.null(labelled_io_data) ) {  #if not directly inputed data 
     if (is.null(geo)) stop ("Error: no country selected.")
     if (! labelling %in% c("iotables", "short")) {
       stop("Only iotables or original short columns can be selected.")
@@ -131,21 +133,19 @@ iotable_get <- function ( labelled_io_data = NULL,
         warning ( "The parameter stk_flow was changed to TOTAL." )
       }
     }
-    source_inputed <- source
-    
-     
+
     ##Creating a temporary file name for the input-output table ----
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
-    if ( source == "germany_1990" ) {
+    if ( source_inputed == "germany_1990" ) {
       labelled_io_data <- iotables::germany_1990    # use germany example 
       labelled_io_data$year = 1990
-    } else if ( source == "croatia_2010_1700" ) { 
+    } else if ( source_inputed == "croatia_2010_1700" ) { 
       labelled_io_data <- iotables::croatia_2010_1700 %>%
         mutate ( year = lubridate::year ( time ))
-    } else if ( source == "croatia_2010_1800" )  {
+    } else if ( source_inputed == "croatia_2010_1800" )  {
       labelled_io_data <- iotables::croatia_2010_1800   %>%
         mutate ( year = lubridate::year ( time ))
-    } else if ( source == "croatia_2010_1900" )  {
+    } else if ( source_inputed == "croatia_2010_1900" )  {
       labelled_io_data <- iotables::croatia_2010_1900 %>%
         mutate ( year = lubridate::year ( time ))
     } else  {
@@ -157,20 +157,20 @@ iotable_get <- function ( labelled_io_data = NULL,
                                                 force_download = force_download ) 
       }
     } # use eurostat files 
-  } #end of possible downloads or data retrieval
+  } #end of possible downloads or data retrieval if not directly inputed
   
- ##Loading the data and veryfing parameters ----  
+ ##Veryfing parameters ----  
   
-  if ( nchar(geo) == 2 & geo == tolower(geo)) { 
-     geo <- toupper (geo)
+  if ( nchar(geo_input) == 2 & geo_input == tolower(geo_input)) { 
+     geo_input <- toupper (geo_input)
     warning("Warning: country code changed to upper case.")
   }
   
-  if ( ! unit %in% labelled_io_data$unit ) { 
+  if ( ! unit_input %in% labelled_io_data$unit ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
   
-  if ( ! geo %in% labelled_io_data$geo ) { 
+  if ( ! geo_input %in% labelled_io_data$geo ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
   
@@ -189,7 +189,13 @@ iotable_get <- function ( labelled_io_data = NULL,
  if ( length( selected_table) == 0  )  {
    stop ( "There is no available table for country ", geo, " in the year ", year , 
           " with ", unit, " units.")
- }
+ } else if (length( selected_table) == 3) { 
+   selected_table <- which (   ##get the number of table to be selected
+     labelled_io_data$year == year & 
+       as.character(labelled_io_data$geo) == geo &
+       labelled_io_data$unit == unit  &
+       labelled_io_data$stk_flow == stk_flow_input)
+   }  #in case of DOM, IMP, TOTAL stk_flow must be selected, too.
  
 if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
                        "germany_1990") ) {
