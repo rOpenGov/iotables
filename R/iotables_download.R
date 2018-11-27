@@ -41,8 +41,8 @@ iotables_download <- function ( source = "naio_10_cp1700",
                                 data_directory = NULL,
                                 force_download = TRUE ) {
   t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL
-  . <- downloaded <- downloaded_labelled <- NULL
-  time_lab <- geo <- time <- unit <- NULL
+  . <- downloaded <- downloaded_labelled <- fix_duplicated <- NULL
+  time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
   
   possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
                                   "naio_10_pyp1700", "naio_10_pyp1750",
@@ -76,7 +76,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
-    eurostat::label_eurostat (., fix_duplicated = TRUE) %>%          #add meaningful labels to raw data
+    eurostat::label_eurostat (., fix_duplicated = TRUE) %>%   #add meaningful labels to raw data
     stats::setNames( ., paste0( names (.), "_lab" ) )    %>%  
     dplyr::mutate ( rows = 1:nrow(.) ) %>%  #because long and wide formats are not symmetric
     dplyr::rename ( values = values_lab ) %>%
@@ -127,15 +127,30 @@ iotables_download <- function ( source = "naio_10_cp1700",
     )
   } #end of _r2 
   
-  downloaded <- tidyr::nest ( dplyr::group_by ( downloaded, geo, time, year, unit ) )
   
+  if ( "stk_flow" %in% names ( downloaded ) ) {
+    downloaded_nested <- tidyr::nest ( dplyr::group_by ( downloaded,
+                                                         geo, geo_lab,
+                                                         time, time_lab, year, 
+                                                         unit, unit_lab, 
+                                                         stk_flow, stk_flow_lab) )
+    
+  } else { 
+    downloaded_nested <- tidyr::nest ( dplyr::group_by ( downloaded,
+                                                         geo, geo_lab,
+                                                         time, time_lab, year, 
+                                                         unit, unit_lab ) )
+    
+    }
+  
+
   if( !is.null(data_directory) ) {
     
     save_file_name <- file.path(data_directory, paste0(source, ".rds"))
-    saveRDS( downloaded, file = save_file_name )
+    saveRDS( downloaded_nested, file = save_file_name )
     message ( "Saved the raw data of this table tpye in ",
               save_file_name, "." )
   }
   
-  downloaded 
+  downloaded_nested 
 }
