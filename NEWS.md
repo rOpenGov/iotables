@@ -80,3 +80,7 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * New vignette to [work with real Eurostat data](http://iotables.ceemid.eu/articles/working_with_eurostat.html).
 * New [package website](http://iotables.ceemid.eu/).
 * The [ReadMe](http://iotables.ceemid.eu/index.html) file shortened, most of the contents are moved now to the two vignettes.
+
+
+# iotables 0.3.5
+* New function `iotable_year_get()` which returns the available tables by year or time from the bulk database for a given country and currency unit. 
