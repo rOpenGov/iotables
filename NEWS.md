@@ -84,3 +84,4 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 
 # iotables 0.3.5
 * New function `iotable_year_get()` which returns the available tables by year or time from the bulk database for a given country and currency unit. 
+* Package now handles `Use table at basic prices` (naio_10_cp1610 and naio_10_pyp1610) after correcting a vocabulary error.
