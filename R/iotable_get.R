@@ -6,14 +6,19 @@
 #' Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
 #' directly, rather via this function, if and when it is necessary. 
 #' @param source A data source, for example \code{naio_10_cp1700}. 
-#' Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)	
-#' Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
-#' Symmetric input-output table at basic prices (product by product) (previous years prices) (naio_10_pyp1700)
-#' Symmetric input-output table at basic prices (industry by industry) (previous years prices) (naio_10_pyp1750)
-#' Table of trade and transport margins at basic prices (naio_10_cp1620) and 
-#' at previous' years prices (naio_10_pyp1620)
-#' Table of taxes less subsidies on products at basic prices (naio_10_cp1630)	and
-#' at previous' years prices (naio_10_pyp1630)
+#'  \itemize{
+##'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
+##'  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
+##'  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
+##'  \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
+##'  \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
+##'  \item{\code{naio_10_cp1610}}{ Use table at basic prices }
+##'  \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
+##'  \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
+##'  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
+##'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
+##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
+##' } 
 #' For further information consult the 
 #' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
 #' @param labelled_io_data If you have downloaded a bulk data file with 
@@ -71,7 +76,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   }
 ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
-                "naio_10_pyp1750",
+                "naio_10_pyp1750", "naio_10_cp16",
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
                 "naio_10_pyp1620", "naio_10_pyp1630" )
   trow_tcol <-  c(  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
