@@ -22,6 +22,10 @@
 #' @param geo A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.
 #' @param unit A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
 #' The alternative is \code{MIO_EUR}. 
+#' @param stk_flow Defaults to \code{DOM} as domestic output, alternative \code{IMP} for imports 
+#' and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and 
+#' trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
+#' less subsidies only \code{TOTAL} is not used.
 #' @param time_unit Defaults to \code{'year'} and years are returned as numbers. 
 #' Alternative is to return  \code{'time'} as vector of dates. 
 #' @param data_directory Defaults to \code{NULL}. Use if it you used a data_direcotry
@@ -40,9 +44,11 @@
 #' @export 
 
 iotable_year_get <- function ( labelled_io_data = NULL, 
-                          source = "germany_1990", geo = "DE",
+                          source = "germany_1990", 
+                          geo = "DE",
                           unit = "MIO_EUR",
                           time_unit = 'year',
+                          stk_flow = 'TOTAL',
                           data_directory = NULL,
                           force_download = TRUE ) { 
 ##Initialize variables ------------
@@ -53,7 +59,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
  
   source_inputed <- source; unit_input <- unit
-  geo_input <- geo
+  geo_input <- geo; stk_flow_input <- stk_flow
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
