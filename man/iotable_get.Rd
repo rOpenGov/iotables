@@ -21,6 +21,7 @@ the hard disk or from the Eurostat website invoking the same function.}
  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
  \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
+ \item{\code{naio_10_cp15}}{ Supply table at basic prices incl. transformation into purchasers' prices }
  \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
  \item{\code{naio_10_cp1610}}{ Use table at basic prices }
  \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
