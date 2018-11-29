@@ -36,7 +36,7 @@
 #' @importFrom lubridate year
 #' @examples 
 #' germany_years <- iotable_year_get ( source = "germany_1990", geo = 'DE', 
-#'              year = 1990,   unit = "MIO_EUR")
+#'                                     unit = "MIO_EUR" )
 #' @export 
 
 iotable_year_get <- function ( labelled_io_data = NULL, 
@@ -44,15 +44,14 @@ iotable_year_get <- function ( labelled_io_data = NULL,
                           unit = "MIO_EUR",
                           time_unit = 'year',
                           data_directory = NULL,
-                          force_download = TRUE) { 
+                          force_download = TRUE ) { 
 ##Initialize variables ------------
   values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
-  
-  
+ 
   source_inputed <- source; unit_input <- unit
   geo_input <- geo
 
@@ -61,6 +60,12 @@ iotable_year_get <- function ( labelled_io_data = NULL,
        ) {
     stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
   }
+  
+  if ( ! time_unit %in% c("year", "time") ) { time_unit <- "year"}
+  if ( source == "germany_1990") { time_unit <- "time"   }
+  
+
+  
 ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630", 
@@ -167,19 +172,19 @@ iotable_year_get <- function ( labelled_io_data = NULL,
 
 
 ###converting factors to characters------  
-  
+
  selected_tables <- which (   ##get the number of table to be selected
       as.character(labelled_io_data$geo) == geo &
       labelled_io_data$unit == unit)
   
  
- if ( time_unit == "year") {
+ if ( time_unit == "year" ) {
    return_values <- sort(unique ( labelled_io_data$year[selected_tables] )) 
  } else { 
    return_values <- sort(unique ( labelled_io_data$time[selected_tables] )) 
  }
   
- if ( length( return_values > 0 )) {
+ if ( length( return_values > 0 ) ) {
    message ( "The following years are available for ", geo, " in ", unit , " currency units:\n", 
              paste(return_values, collapse = '; ' ), ".")
  } else { 
