@@ -129,7 +129,6 @@ iotable_year_get <- function ( labelled_io_data = NULL,
     tmp_rds3 <- file.path(tempdir(), paste0(source, ".rds")) #if non-labelled was created earlier
     if ( source_inputed == "germany_1990" ) {
       labelled_io_data <- iotables::germany_1990    # use germany example 
-      labelled_io_data$year = 1990
     } else if ( source_inputed == "croatia_2010_1700" ) { 
       labelled_io_data <- iotables::croatia_2010_1700 %>%
         mutate ( year = lubridate::year ( time ))
@@ -165,11 +164,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   if ( ! geo_input %in% labelled_io_data$geo ) { 
     stop("This currency unit is not found in the raw data frame.")
   }
-  
-  if ( ! year %in% labelled_io_data$year ) { 
-    stop("This currency unit is not found in the raw data frame.")
-  }
-  
+
 
 ###converting factors to characters------  
   
