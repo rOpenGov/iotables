@@ -26,7 +26,9 @@ Apart from handing a vast and not always well-documented vocabulary, the user is
 
 You are most likely to work with the product x product tables. For the availability of outher data see `?iotables_download`.
 
-The analytical functions are presented at greater detail in the _Germany 1990_ vignette. The numbering of the equations refers to the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.)
+The analytical functions are presented at greater detail in the _Germany 1990_ vignette. The numbering of the equations refers to the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the ESA 95 standards. Currently Eurostat uses the ESA 2010 definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.
+
+Another very useful source of information on how to work with the tables [Input-output analytical tables: methods and application to UK National Accounts](https://www.ons.gov.uk/economy/nationalaccounts/supplyandusetables/articles/inputoutputanalyticaltables/methodsandapplicationtouknationalaccounts). Since the United Kingdom at the time of writing the article was a member of the European Union, her national accounts follow the EU ESA standards.
 
 ##Getting and processing Eurostat data
 
