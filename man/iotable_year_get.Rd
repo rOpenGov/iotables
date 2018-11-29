@@ -5,7 +5,7 @@
 \title{Get the available years for the input-ouptput tables.}
 \usage{
 iotable_year_get(labelled_io_data = NULL, source = "germany_1990",
-  geo = "DE", year = 1990, unit = "MIO_EUR", time_unit = "year",
+  geo = "DE", unit = "MIO_EUR", time_unit = "year",
   data_directory = NULL, force_download = TRUE)
 }
 \arguments{

@@ -41,7 +41,7 @@
 
 iotable_year_get <- function ( labelled_io_data = NULL, 
                           source = "germany_1990", geo = "DE",
-                          year = 1990, unit = "MIO_EUR",
+                          unit = "MIO_EUR",
                           time_unit = 'year',
                           data_directory = NULL,
                           force_download = TRUE) { 
@@ -100,8 +100,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( iotables_col = iotables_label )
     
   } else if ( source == "germany_1990" ) {  #German simplified tables
-    metadata_rows <- iotables:::germany_metadata_rows  
-    metadata_cols <- iotables:::germany_metadata_cols 
+    metadata_rows <- germany_metadata_rows  
+    metadata_cols <- germany_metadata_cols 
   } else {
     stop ("This type of input-output database is not (yet) recognized by iotables.")
   }
@@ -124,7 +124,9 @@ iotable_year_get <- function ( labelled_io_data = NULL,
     }
 
     ##Creating a temporary file name for the input-output table ----
-    tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
+    tmp_rds1 <- file.path(tempdir(), paste0(source, "_iotables.rds")) #if iotables labelled version was created earlier
+    tmp_rds2 <- file.path(tempdir(), paste0(source, "_short.rds")) #if short labelled version was created earlier
+    tmp_rds3 <- file.path(tempdir(), paste0(source, ".rds")) #if non-labelled was created earlier
     if ( source_inputed == "germany_1990" ) {
       labelled_io_data <- iotables::germany_1990    # use germany example 
       labelled_io_data$year = 1990
@@ -138,7 +140,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
       labelled_io_data <- iotables::croatia_2010_1900 %>%
         mutate ( year = lubridate::year ( time ))
     } else  {
-      if ( tmp_rds %in% list.files (path = tempdir()) ) {
+      if ( any( c(tmp_rds1, tmp_rds2, tmp_rds3 ) %in% 
+                list.files (path = tempdir()) )) {
         labelled_io_data <- readRDS( tmp_rds ) 
       } else { #getting or downloading the bulk longform data
         labelled_io_data <- iotables_download ( source,
