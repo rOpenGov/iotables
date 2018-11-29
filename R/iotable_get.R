@@ -188,8 +188,8 @@ iotable_get <- function ( labelled_io_data = NULL,
       labelled_io_data$unit == unit)
  
  if ( length( selected_table) == 0  )  {
-   stop ( "There is no available table for country ", geo, " in the year ", year , 
-          " with ", unit, " units.")
+   stop ( paste0("There is no available table for country ", geo_input, " in the year ", year, 
+          " with ", unit_input, " units.") )
  } else if (length( selected_table) == 3) { 
    selected_table <- which (   ##get the number of table to be selected
      labelled_io_data$year == year & 

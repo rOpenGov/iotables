@@ -6,7 +6,7 @@
 \usage{
 iotable_year_get(labelled_io_data = NULL, source = "germany_1990",
   geo = "DE", year = 1990, unit = "MIO_EUR", time_unit = "year",
-  force_download = TRUE)
+  data_directory = NULL, force_download = TRUE)
 }
 \arguments{
 \item{labelled_io_data}{If you have downloaded a bulk data file with 
@@ -33,6 +33,9 @@ The alternative is \code{MIO_EUR}.}
 
 \item{time_unit}{Defaults to \code{'year'} and years are returned as numbers. 
 Alternative is to return  \code{'time'} as vector of dates.}
+
+\item{data_directory}{Defaults to \code{NULL}. Use if it you used a data_direcotry
+parameter with \code{\link{iotable_get}} or \code{\link{iotables_download}}.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
 downloaded file in the \code{data_directory} or the temporary directory, 

@@ -24,6 +24,8 @@
 #' The alternative is \code{MIO_EUR}. 
 #' @param time_unit Defaults to \code{'year'} and years are returned as numbers. 
 #' Alternative is to return  \code{'time'} as vector of dates. 
+#' @param data_directory Defaults to \code{NULL}. Use if it you used a data_direcotry
+#' parameter with \code{\link{iotable_get}} or \code{\link{iotables_download}}. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
 #' downloaded file in the \code{data_directory} or the temporary directory, 
 #' if it exists. Will force download only in a new session.
@@ -41,6 +43,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
                           source = "germany_1990", geo = "DE",
                           year = 1990, unit = "MIO_EUR",
                           time_unit = 'year',
+                          data_directory = NULL,
                           force_download = TRUE) { 
 ##Initialize variables ------------
   values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
@@ -51,7 +54,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   
   
   source_inputed <- source; unit_input <- unit
-  stk_flow_input <- stk_flow; geo_input <- geo
+  geo_input <- geo
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
@@ -109,9 +112,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   ###Exception handling for wrong paramters-----
   if ( is.null(labelled_io_data) ) {  #if not directly inputed data 
     if (is.null(geo)) stop ("Error: no country selected.")
-    if (! labelling %in% c("iotables", "short")) {
-      stop("Only iotables or original short columns can be selected.")
-    }
+  
     if (! unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC")) {
       stop("Currency unit must be MIO_NAC, MIO_EUR or T_NAC")
     }

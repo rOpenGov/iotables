@@ -10,8 +10,8 @@ iotables_download(source = "naio_10_cp1700", data_directory = NULL,
 \arguments{
 \item{source}{See the available list of sources above in the Description.}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
-data file here with labelling.}
+\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will 
+try to save the pre-processed data file here with labelling.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 in the \code{data_directory} or the temporary directory, if it exists.}

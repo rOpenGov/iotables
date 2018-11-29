@@ -23,8 +23,8 @@
 ##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 ##' } 
 #' @param source See the available list of sources above in the Description. 
-#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
-#' data file here with labelling. 
+#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
+#' try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists.
 #' @importFrom magrittr %>%
@@ -42,7 +42,7 @@
 iotables_download <- function ( source = "naio_10_cp1700", 
                                 data_directory = NULL,
                                 force_download = TRUE ) {
-  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL
+  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- stk_flow_lab <- NULL
   . <- downloaded <- downloaded_labelled <- fix_duplicated <- NULL
   time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
   
