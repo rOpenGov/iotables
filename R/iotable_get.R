@@ -176,7 +176,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   }
   
   if ( ! year %in% labelled_io_data$year ) { 
-    stop("This currency unit is not found in the raw data frame.")
+    stop("This year is not found in the raw data frame.")
   }
   
 
