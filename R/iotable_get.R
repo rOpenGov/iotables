@@ -61,8 +61,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   
-  
-  source_inputed <- source; unit_input <- unit
+  source_inputed <- source;   unit_input <- unit
   stk_flow_input <- stk_flow; geo_input <- geo
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
@@ -188,7 +187,8 @@ iotable_get <- function ( labelled_io_data = NULL,
       labelled_io_data$unit == unit)
  
  if ( length( selected_table) == 0  )  {
-   stop ( paste0("There is no available table for country ", geo_input, " in the year ", year, 
+   stop ( paste0("There is no available table for country ", geo_input, 
+                 " in the year ", year, 
           " with ", unit_input, " units.") )
  } else if (length( selected_table) == 3) { 
    selected_table <- which (   ##get the number of table to be selected
