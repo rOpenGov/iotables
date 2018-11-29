@@ -53,7 +53,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
                           force_download = TRUE ) { 
 ##Initialize variables ------------
   values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
-  time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
+  time <- t_cols2  <- t_rows2 <- by_row <- by_col <- tmp_rds <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
@@ -152,6 +152,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
     } else  {
       if ( any( c(tmp_rds1, tmp_rds2, tmp_rds3 ) %in% 
                 list.files (path = tempdir()) )) {
+        tmp_rds <- c(tmp_rds1, tmp_rds2, tmp_rds3 )[which ( !is.null (c(tmp_rds1, tmp_rds2, tmp_rds3 )) )]
+        
         labelled_io_data <- readRDS( tmp_rds ) 
       } else { #getting or downloading the bulk longform data
         labelled_io_data <- iotables_download ( source,
