@@ -29,7 +29,7 @@ to receive only the total intermediate use and proportional primary inputs.}
 }
 \value{
 A data.frame that contains the matrix of  \code{siot} devided by \code{total}
-with a key column.
+with a key column. Optionally the results are rounded to given \code{digits}.
 }
 \description{
 Create a coefficient matrix from a Symmetric Input-Output Table. The
