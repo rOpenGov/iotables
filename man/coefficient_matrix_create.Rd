@@ -5,7 +5,7 @@
 \title{Create a coefficient matrix}
 \usage{
 coefficient_matrix_create(siot, total = "output", digits = NULL,
-  empy_row_remove = TRUE)
+  empty_rows_remove = TRUE, return = NULL)
 }
 \arguments{
 \item{siot}{A symmetric input-output table retrieved by the
@@ -19,10 +19,13 @@ if it exists in the matrix.}
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
 
-\item{empy_row_remove}{Defaults to \code{TRUE}, if \code{FALSE}, empty
-primary input rows are returned. Empty row/column pairs from the
-technology matrix are always removed to keep the table symmetric and to 
-avoid division by zero in analytical functions.}
+\item{empty_rows_remove}{Defaults to \code{TRUE}. If you want to keep empty 
+primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
+removed to avoid division by zero error in the analytical functions.}
+
+\item{return}{Defaults to \code{NULL}. You can chooce \code{"product"} or
+\code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
+to receive only the total intermediate use and proportional primary inputs.}
 }
 \value{
 A data.frame that contains the matrix of  \code{siot} devided by \code{total}
@@ -32,10 +35,6 @@ with a key column.
 Create a coefficient matrix from a Symmetric Input-Output Table. The
 coefficient matrix is related by default to output, but you can change this
 to total supply or other total aggregate if it exists in your table.
-}
-\details{
-The empty columns are always removed to avoid division by zero errors. The empty
-rows are removed by default, but you can optionally keep them.
 }
 \examples{
 coefficient_matrix_create ( siot = iotable_get ( source = "germany_1990"), 

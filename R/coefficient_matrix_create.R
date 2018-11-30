@@ -12,6 +12,12 @@
 #' if it exists in the matrix. 
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
+#' @param return Defaults to \code{NULL}. You can chooce \code{"product"} or
+#' \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
+#' to receive only the total intermediate use and proportional primary inputs.
+#' @param empty_rows_remove Defaults to \code{TRUE}. If you want to keep empty 
+#' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
+#' removed to avoid division by zero error in the analytical functions.
 #' @return A data.frame that contains the matrix of  \code{siot} devided by \code{total}
 #' with a key column.
 #' @importFrom dplyr mutate mutate_if full_join funs
@@ -25,7 +31,9 @@
 
 coefficient_matrix_create <- function ( siot, 
                                         total = "output", 
-                                        digits = NULL) {
+                                        digits = NULL, 
+                                        empty_rows_remove = TRUE,
+                                        return = NULL) {
   
   #Create a coefficient matrix, including primary inputs.  
   #For the Leontieff matrix, only the inputs part (first quadrant is used)
@@ -51,11 +59,10 @@ coefficient_matrix_create <- function ( siot,
   remove_cols <- names (siot )[! non_zero_cols]
   
   if ( length( remove_cols) > 0 ) {
-    warning ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
+    message ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
   }
   
   siot_rows <- as.character ( unlist ( siot[,1]) )
-  siot_rows
   #names ( input_flow) [! names ( input_flow ) %in% remove_cols ]
   # siot_rows [! siot_rows %in% remove_cols ]
   
@@ -93,6 +100,26 @@ coefficient_matrix_create <- function ( siot,
     }
   
    
+  if ( ! is.null(return)) {
+    
+    last_row <- which ( tolower(unlist(siot[,1])) %in% tolower(c("CPA_TOTAL", "TOTAL")))
+    
+    if ( return == "primary_inputs" ) {
+      siot <- siot[last_row:nrow(siot), ]
+    } else if ( return %in% c("products", "industries") ) {
+      siot <- siot[1:last_row, ]
+    }
+  } 
+  
+  if ( empty_rows_remove == TRUE ) { 
+    
+    message ( "Removed empty rows ",
+      paste ( unlist(siot[which( rowSums(is.na(siot)) >= ncol(siot)-1),1]), 
+              collapse = ', '), '.')
+    siot <- siot[which( rowSums(is.na(siot)) != ncol(siot)-1), ]
+    
+    }
+  
   
   if ( is.null(digits) ) return (siot)
   
