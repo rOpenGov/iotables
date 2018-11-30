@@ -3,7 +3,9 @@
 #' The function creates the input indicators from the inputs and the outputs.
 #' @param input_matrix A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}
 #' @param output_vector A named output vector created by \code{\link{output_get}}.  
-#' @param digits Rounding digits, if omitted, no rounding takes place.  
+#' @param digits Rounding digits, if omitted, no rounding takes place.
+#' @return A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
+#' with a key column for products or industries.
 #' @importFrom dplyr select 
 #' @examples  
 #' de_output <- output_get ( source = "germany_1990", geo = "DE",

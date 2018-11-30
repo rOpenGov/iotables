@@ -13,6 +13,10 @@ input_indicator_create(input_matrix, output_vector, digits = NULL)
 
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
 }
+\value{
+A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
+with a key column for products or industries.
+}
 \description{
 The function creates the input indicators from the inputs and the outputs.
 }
