@@ -24,10 +24,6 @@ de_output <- output_get ( source = "germany_1990", geo = "DE",
 
 nl_output <- output_get ( labelled_io_table = nl )
 
-input_flow = de_use
-output = de_output 
-digits = 5
-
 nl_coeff   <- input_coefficient_matrix_create( input_flow = nl_use,
                                                output = nl_output, 
                                                digits = 2)
