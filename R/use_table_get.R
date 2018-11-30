@@ -121,7 +121,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
       stop ( "No household consumption data was found.")
     }
     household_income_row <- which (labelled_io_table[[1]] %in%  
-                                     c('wages_salaries', 'D11') )
+                                     c('wages_salaries', 'D11', 'compensation_employees') )
     
     if  (length( household_income_row) < 1 ) {
       household_income_rowl <- which ( labelled_io_table[[1]] %in% 
