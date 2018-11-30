@@ -4,6 +4,12 @@
 #' output vector. The two input vectors must have consistent labelling, i.e
 #' the same column names must be  found in the use table (input flow) and the
 #' output vector.
+#' 
+#' The terminology follows the 
+#' \href{http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables}.
+#' \href{http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf}{Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report}
+#' this matrix is called 'technological coefficients'. The results of the function are 
+#' tested on both sources.
 #'
 #' If there are zero values in the output vector, they will be changed to 
 #' 0.000001 and you will get a warning. Some analytical equations cannot be 
@@ -14,13 +20,16 @@
 #' judgment, is the aggregation of elements into larger ones that are no longer
 #' equal to zero, i.e. merging an industry or product class that has a positive 
 #' value with another industry or product class that is zero.
-#' 
 #' @param input_flow An input flow matrix created with the 
 #' \code{\link{use_table_get}} function. 
 #' @param output An output vector with a key column, created by
 #'  \code{\link{output_get}}.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
+#' @return A data frame that contains the matrix of first quadrant of the use table as
+#' \code{input_flow} devided by \code{output} supported by a key colum of 
+#' product or industries. 
+#' with a key column. Optionally the results are rounded to given \code{digits}. 
 #' @importFrom dplyr mutate mutate_if full_join funs
 #' @examples 
 #' de_use <- use_table_get ( source = "germany_1990", geo = "DE",

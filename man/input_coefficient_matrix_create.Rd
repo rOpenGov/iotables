@@ -16,6 +16,12 @@ input_coefficient_matrix_create(input_flow, output, digits = NULL)
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
 }
+\value{
+A data frame that contains the matrix of first quadrant of the use table as
+\code{input_flow} devided by \code{output} supported by a key colum of 
+product or industries. 
+with a key column. Optionally the results are rounded to given \code{digits}.
+}
 \description{
 Create an input coefficient matrix from the input flow matrix and the
 output vector. The two input vectors must have consistent labelling, i.e
@@ -23,6 +29,12 @@ the same column names must be  found in the use table (input flow) and the
 output vector.
 }
 \details{
+The terminology follows the 
+\href{http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables}.
+\href{http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf}{Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report}
+this matrix is called 'technological coefficients'. The results of the function are 
+tested on both sources.
+
 If there are zero values in the output vector, they will be changed to 
 0.000001 and you will get a warning. Some analytical equations cannot be 
 solved with zero elements. You either have faulty input data, or you have 
