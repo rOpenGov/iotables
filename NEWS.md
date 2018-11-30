@@ -81,11 +81,11 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * New [package website](http://iotables.ceemid.eu/).
 * The [ReadMe](http://iotables.ceemid.eu/index.html) file shortened, most of the contents are moved now to the two vignettes.
 
-
 # iotables 0.3.5
 * New function `iotable_year_get()` which returns the available tables by year or time from the bulk database for a given country and currency unit. 
 * Package now handles `Use table at basic prices` (naio_10_cp1610 and naio_10_pyp1610), `Supply table at basic prices incl. transformation into purchasers' prices` (naio_10_cp15), `Use table at purchasers' prices` (naio_10_cp16) after correcting a vocabulary error.
 * This version is a release candidate for CRAN.
 
-
 # iotables 0.3.6
+* New analyitical function `coefficient_matrix_create()` which is a more general version of `input_coefficient_matrix_create()` and will eventually replace that 
+function.
