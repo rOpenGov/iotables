@@ -1,4 +1,4 @@
-#' Create direct effects
+#' Create direct effects on total supply
 #' 
 #' The function creates the direct effects on total supply (or other supply 
 #' category). See Eurostat Manual p498.
@@ -16,10 +16,10 @@
 #' io_table$total <- rowSums(io_table[, 2:7])
 #' 
 #' labelled_io_table <- io_table
-#' direct_effects_create ( io_table ) 
+#' direct_supply_effects_create ( io_table ) 
 #' @export
 
-direct_effects_create <- function ( labelled_io_table,
+direct_supply_effects_create <- function ( labelled_io_table,
                                     type = 'final_demand',
                                     digits = NULL ) { 
   if (! is.null(digits)) {

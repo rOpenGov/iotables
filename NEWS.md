@@ -94,3 +94,4 @@ use in detail.
 
 # iotables 0.3.7
 * New example `data(netherlands_2006)`, terminology and analytical improvements following  [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf)
+* For terminological clarity, earlire `direct_supply_effects_create()` function is renamed `direct_supply_effects_create()`.

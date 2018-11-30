@@ -10,7 +10,7 @@ io_table$total <- rowSums(io_table[, 2:7])
 
 labelled_io_table <- io_table
 
-direct_effects <- direct_effects_create ( labelled_io_table = io_table ) 
+direct_effects <- direct_supply_effects_create ( labelled_io_table = io_table ) 
 
 value_added_row <- direct_effects [ direct_effects[,1] == "gva_bp", ]
 
