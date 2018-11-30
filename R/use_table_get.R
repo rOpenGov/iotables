@@ -11,6 +11,8 @@
 #' "naio_17_agg_10_r2", "croatia_2010_1700", "croatia_2010_1800", 
 #' "croatia_2010_1900". For further information consult the 
 #' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
+#' The \code{source = 'custom'} allows the use of any SIOTs, however, you must make
+#' sure that the ordering is correct and that a \code{TOTAL} row/column pair exists.
 #' @param geo A country code, for example, \code{SK}.
 #' @param year A numeric variable containing the year. Defaults to \code{2010}, because this year has the most data. 
 #' @param unit A character string containing the currency unit, defaults to 
@@ -81,6 +83,11 @@ use_table_get <- function ( labelled_io_table  = NULL,
       }
       return ( use_table )  #return simplified example table and do not run rest of the code
       ###end of germany_1990 case
+    } else if ( source == "custom") {
+      if (is.null(labelled_io_data)) {
+        stop ("If you use source  = 'custom' you need to input labelled_io_data.")
+      }
+      labelled_io_table <- labelled_io_data
     } else {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_table <- readRDS( tmp_rds ) #if already downloaded and saved as rds 
@@ -99,7 +106,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
       stop("The IO table was not created.")
     }
     
-    if ( source != "germany_1990") use_table <- labelled_io_table[c(1:66), 1:67]
+    if ( ! source %in% c("germany_1990", "custom")) use_table <- labelled_io_table[c(1:66), 1:67]
   } # end if is.null(labelled_io_table) 
   
   ###Addding households, if requested----------------------------------------  
