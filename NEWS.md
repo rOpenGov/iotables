@@ -89,3 +89,8 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 # iotables 0.3.6
 * New analyitical function `coefficient_matrix_create()` which is a more general version of `input_coefficient_matrix_create()` and will eventually replace that 
 function.
+* Custom SIOTs are supported, but there is no vignette yet to describe their 
+use in detail.  
+
+# iotables 0.3.7
+* New example `data(netherlands_2006)`, terminology and analytical improvements.
