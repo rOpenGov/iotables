@@ -33,6 +33,6 @@ coefficient_matrix_create ( siot = iotable_get ( source = "germany_1990"),
                             digits = 4 )
 }
 \references{
-\href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
+See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 for explanation on the use of the Coefficient matrix.
 }
