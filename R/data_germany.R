@@ -20,6 +20,6 @@
 #'   \item{geo_lab}{ISO / Eurostat country name, Germany}
 #'   \item{time}{Date of the SIOT}     
 #' }
-#' #' @keywords data, datasets, input-output table, Germany
+#' @keywords data, datasets, input-output table, Germany
 "germany_1990"
 

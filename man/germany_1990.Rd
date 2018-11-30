@@ -16,8 +16,7 @@
   \item{geo}{ISO / Eurostat country code for Germany, i.e. DE}
   \item{geo_lab}{ISO / Eurostat country name, Germany}
   \item{time}{Date of the SIOT}     
-}
-#' @keywords data, datasets, input-output table, Germany}
+}}
 \source{
 \href{http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 492
 }
@@ -31,4 +30,8 @@ It is a small dataset for examples, but it is also instructive to understand how
 stores the highly structured SIOTs in long-form tidy datasets. 
 The third and fourth quadrant labelling follows the current Eurostat labels.
 }
-\keyword{datasets}
+\keyword{Germany}
+\keyword{data,}
+\keyword{datasets,}
+\keyword{input-output}
+\keyword{table,}
