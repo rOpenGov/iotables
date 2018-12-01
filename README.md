@@ -35,11 +35,15 @@ Currently the following Eurostat SIOTs can be used:
 
 -   product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`;
 
--   industry x industry SIOTS `naio_10_cp1750` or`naio_10_pyp1750`;
+-   industry x industry SIOTs `naio_10_cp1750` or`naio_10_pyp1750`;
 
--   trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`, only with `stk_flow = 'TOTAL'`
+-   use tables at basic prices `naio_10_cp1620` or `naio_10_pyp1610`;
 
--   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`, only with `stk_flow = 'TOTAL'`.
+-   trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`;
+
+-   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
+
+- 	Supply table at basic prices incl. transformation into purchasers' prices (naio_10_cp15) and Use table at purchasers' prices (naio_10_cp16).
 
 The `cp` element refers to basic prices and the `pyp` to previous years' prices.
 
@@ -47,5 +51,7 @@ Vignettes
 ---------
 
 The [Germany 1990](http://iotables.ceemid.eu/articles/germany_1990.html) vignette presentes most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the Eurostat Manual.
+
+
 
 The [Working with Eurostat Data](http://iotables.ceemid.eu/articles/working_with_eurostat.html) vignette shows how you can download, pre-process and use real data from Eurostat.

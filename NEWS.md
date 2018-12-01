@@ -97,3 +97,4 @@ use in detail.
 * For terminological clarity, earlier `direct_supply_effects_create()` function is renamed `direct_supply_effects_create()`.
 * The function `effects_create()` currently refers to the function returning direct effects of a change in demand.
 * The function `multipliers_create()` refers to the function returning direct and indirect effects of a change in demand.
+* The Germany 1990 vignette needs to be reviewed. Currently it may not be consistent with effects and multipliers, it will be included in the next development version.
