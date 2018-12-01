@@ -9,7 +9,7 @@ input_multipliers_create(direct_effects, inverse, labelled = TRUE,
 }
 \arguments{
 \item{direct_effects}{A direct effects matrix created by 
-\code{\link{direct_effects_create}}}
+\code{\link{direct_supply_effects_create}}}
 
 \item{inverse}{A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.}
 

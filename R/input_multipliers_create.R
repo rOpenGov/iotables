@@ -2,7 +2,7 @@
 #' 
 #' The function creates the input multipliers.  See Eurostat Manual p500-501..
 #' @param direct_effects A direct effects matrix created by 
-#' \code{\link{direct_effects_create}}
+#' \code{\link{direct_supply_effects_create}}
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
 #' @param labelled Defaults to \code{TRUE}. If you use not labelled matrixes, i.e. 
 #' both inputed matrixes are numerical only without the first key row, select 
