@@ -3,6 +3,10 @@
 #' This function is in fact a wrapper around the \code{\link{equation_solve}} function, 
 #' adding a key column with the name to the multiplier the maintain structural
 #' consistency.
+#' 
+#' As opposed to direct effects calculated by \code{\link{effects_create}}, 
+#' multipliers are expressed per input of product/industry. 
+#' 
 #' @param input_vector An input matrix or vector created by the \code{\link{input_indicator_create}} function. 
 #' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}
 #' function. 
@@ -47,9 +51,14 @@ multiplier_create <- function ( input_vector = NULL,
   
  if (!is.null(digits)) if (digits < 0) digits <- NULL
   
- multipliers <- equation_solve (LHS = input_vector, 
+ effects <- equation_solve (LHS = input_vector, 
                                 Im = Im ) 
-   
+ multipliers <- effects
+ 
+ for ( j in 1:ncol(effects)) { 
+   multipliers[,j] <- effects[,j] / as.numeric(input_vector[,-1])[j]   
+   }
+  
 
  if ( !is.null(digits)) {
        multipliers <- round(multipliers, digits)

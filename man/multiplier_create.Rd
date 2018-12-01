@@ -23,6 +23,10 @@ This function is in fact a wrapper around the \code{\link{equation_solve}} funct
 adding a key column with the name to the multiplier the maintain structural
 consistency.
 }
+\details{
+As opposed to direct effects calculated by \code{\link{effects_create}}, 
+multipliers are expressed per input of product/industry.
+}
 \examples{
 de_use <- use_table_get ( source = "germany_1990", geo = "DE",
 year = 1990, unit = "MIO_EUR", 
