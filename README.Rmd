@@ -25,6 +25,8 @@ The aim of this introduction is not to introduce input-output economics, or SIOT
 
 In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual (page 481).  The package function examples can be checked against [Jörg Beutel's published results](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). 
 
+The calculation of direct effects, and direct + indirect effects (Type-I multipliers) are following the [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf). The analytical functions are tested against this example, too.
+
 ## Installation
 
 You can install iotools from CRAN or the latest development version with github:
@@ -43,15 +45,19 @@ You can follow changes on the NEWS.md file.
 
 Eurostat's data can be downloaded in several tidy, long-form, files, and a lot of filtering is needeed to start working with it.
 
-Currently the following Eurostat SIOTs can be used: 
+Currently the following Eurostat SIOTs can be used:
 
-- product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`; 
+-   product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`;
 
-- industry x industry SIOTS  `naio_10_cp1750` or`naio_10_pyp1750`;
+-   industry x industry SIOTs `naio_10_cp1750` or`naio_10_pyp1750`;
 
-- trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`, only with  `stk_flow = 'TOTAL'`
+-   use tables at basic prices `naio_10_cp1620` or `naio_10_pyp1610`;
 
-- net taxes less subsidies  `naio_10_cp1630` or `naio_10_pyp1630`, only with  `stk_flow = 'TOTAL'`.
+-   trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`;
+
+-   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
+
+- 	Supply table at basic prices incl. transformation into purchasers' prices (naio_10_cp15) and Use table at purchasers' prices (naio_10_cp16).
 
 The `cp` element refers to basic prices and the `pyp` to previous years' prices.
 
