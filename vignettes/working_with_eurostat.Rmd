@@ -183,15 +183,15 @@ $a_{ij}$ = input coefficient
 $z_{ij}$ = input of type i in sector j (i.e. products or capital or labor)
 $x_j$ = output of sector j
 
-By default, `direct_effects_create()` will compare inputs to total final demand / supply. You can make comparisons to total product or total output, too. The code below prints a part of the Czech direct effects rounded to 4 digits.
+By default, `direct_supply_effects_create()` will compare inputs to total final demand / supply. You can make comparisons to total product or total output, too. The code below prints a part of the Czech direct effects rounded to 4 digits.
 
 ```{r direct, results='asis'}
 message ( "Czech Republic:")
-direct_cz <- direct_effects_create( labelled_io_table = cz_io, 
+direct_cz <- direct_supply_effects_create( labelled_io_table = cz_io, 
                                     digits = 4)
 
 message ( "Slovak Republic:")
-direct_sk <- direct_effects_create( labelled_io_table = sk_io )
+direct_sk <- direct_supply_effects_create( labelled_io_table = sk_io )
 
 knitr::kable (head(direct_cz[,1:8]))
 ```
