@@ -13,6 +13,8 @@
 #' @param border_right_cols, Defaults to \code{NULL}. 
 #' In this case \code{TRUE} for the first column and \code{FALSE}
 #' for the rest of the columns, i.e.\code{T, F, ..., F} 
+#' @param bolds_cols Defaults to \code{NULL}. In this case none of the 
+#' the columns are bold, i.e. identical to \code{F, F, ..., F}.
 #' @param bootstrap_options Defaults to \code{c("striped", "hover", "condensed")} and
 #' only used for \code{output_format = "html"}.
 #' @param latex_options Defaults to \code{NULL)}.

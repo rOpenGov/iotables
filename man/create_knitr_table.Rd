@@ -48,6 +48,9 @@ only used for \code{output_format = "html"}.}
 "\\usepackage[utf8]{inputenc}")}
 It can be any valid latex option setting, but if packages are used, the 
 packages must be installed on your Latex engine.}
+
+\item{bolds_cols}{Defaults to \code{NULL}. In this case none of the 
+the columns are bold, i.e. identical to \code{F, F, ..., F}.}
 }
 \description{
 Create an output-independent, well formatted kable table
