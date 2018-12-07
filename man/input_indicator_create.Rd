@@ -12,7 +12,8 @@ input_indicator_create(data_table, input_vector = c("gva_bp",
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
 
 \item{indicator_names}{The names of new indicators. Defaults to \code{NULL} when 
-the names in the key colum of \code{input_matrix} will be used.}
+the names in the key colum of \code{input_matrix} will be used to create the 
+indicator names.}
 
 \item{input_matrix}{A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}}
 
@@ -27,16 +28,7 @@ The function creates the input indicators from the inputs and the outputs.
 }
 \examples{
  
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-                         year = 1990, unit = "MIO_EUR", 
-                         households = FALSE, labelling = "iotables")
-
-de_emp <- primary_input_get ( input = "compensation_employees",
-                             source = "germany_1990", geo = "DE",
-                             year = 1990, unit = "MIO_EUR", 
-                             households = FALSE, labelling = "iotables")
-
-de_emp_indicator <- input_indicator_create ( input_matrix = de_emp, 
-                                             output_vector = de_output, 
-                                             indicator_names = "employment_indicator" )
+input_indicator_create( data_table = iotable_get(), 
+                        input_vector = "compensation_employees",
+                        digits = 4)
 }
