@@ -5,91 +5,55 @@
 #' @param output_vector A named output vector created by \code{\link{output_get}}.  
 #' @param digits Rounding digits, if omitted, no rounding takes place.
 #' @param indicator_names The names of new indicators. Defaults to \code{NULL} when 
-#' the names in the key colum of \code{input_matrix} will be used.
+#' the names in the key colum of \code{input_matrix} will be used to create the 
+#' indicator names.
 #' @return A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
 #' with a key column for products or industries.
-#' @importFrom dplyr select 
+#' @importFrom dplyr mutate_if
 #' @examples  
-#' de_output <- output_get ( source = "germany_1990", geo = "DE",
-#'                          year = 1990, unit = "MIO_EUR", 
-#'                          households = FALSE, labelling = "iotables")
-#' 
-#' de_emp <- primary_input_get ( input = "compensation_employees",
-#'                              source = "germany_1990", geo = "DE",
-#'                              year = 1990, unit = "MIO_EUR", 
-#'                              households = FALSE, labelling = "iotables")
-#'
-#' de_emp_indicator <- input_indicator_create ( input_matrix = de_emp, 
-#'                                              output_vector = de_output, 
-#'                                              indicator_names = "employment_indicator" )
-#' @export
+#' input_indicator_create( data_table = iotable_get(), 
+#'                         input_vector = "compensation_employees",
+#'                         digits = 4)
+##' @export
 
-input_indicator_create <- function ( input_matrix,
-                                     output_vector,
-                                     digits = NULL, 
+input_indicator_create <- function ( data_table,
+                                     input_vector = c('gva_bp','net_tax_production'),
+                                     digits = NULL,
+                                     households = FALSE,
                                      indicator_names = NULL) { 
-  CPA_G47 <- CPA_T <- CPA_U <- CPA_L68A <- TOTAL <- NULL 
   
-  if (! is.null(digits)) {
-    if (digits<0) digits <- NULL
+  data_table <- data_table %>% 
+    dplyr::mutate_if ( is.factor, as.character ) 
+  
+  cm <- coefficient_matrix_create( siot = data_table, 
+                                   households = households )
+  
+  inputs_present <- which( cm[,1] %in% input_vector) 
+  
+  if ( length(inputs_present) == 0 ) {
+    stop ( "The inputs were not found")
+  } else if ( length(inputs_present) < length(input_vector)) {
+    warning ( "Not all the inputs were found in the data table.")
   }
   
-  if ( ! all ( names ( output_vector) %in% names ( input_matrix )) ) {
-    
-    if ( any( names(output_vector) [ ! names ( output_vector ) %in%
-                                names ( input_matrix )]  == "P3_S14" ) )  {
-      input_matrix$P3_S14 <- 0  #case when only households are missing (type-II)
-    } 
-    
-    problem_cols <-  names(input_matrix) [ ! names ( input_matrix ) %in% names ( output_vector )]
-    problem_cols
-    if ( ! length(problem_cols) == 0 ) {
-    
-    if ( "CPA_G47" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_G47 )}
-    if ( "CPA_T" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_T )}
-    if ( "CPA_U" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_U )}
-    if ( "CPA_L68A" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -CPA_L68A  )}
-    if ( "TOTAL" %in% problem_cols ) { input_matrix <- dplyr::select ( input_matrix, -TOTAL )}
-     
-    problem_cols <-  names(input_matrix) [ ! names ( input_matrix ) %in% names ( output_vector )]
-    
-    if ( length (problem_cols) > 0 )  
-      stop ( "Some industries / products do not have input data. ")
-    }
-  }
-
-  input_matrix_inputed <- input_matrix
-  input_matrix <- input_matrix[names(output_vector)]
+  input_matrix <- cm[inputs_present,  ]
   
-  if ( is.null(indicator_names)) {
-    indicator_names <- input_matrix[,1]
-    if ( any ( names ( input_matrix ) %in% c("households", "P3_S14") ) ) {
-      indicator_names <- paste0(indicator_names, "_type2") 
-    }
-  }
-  
-  eps_changes <- 2:ncol(input_matrix)
-  no_eps <- which ( names ( input_matrix ) %in% c("households", "P3_S14"))
-  if (length (no_eps) > 0 ) {
-    eps_changes <- eps_changes [ -(no_eps-1) ] #remove household element from loop var
-  }
-  
-  #Not elegant, should be further optimized with vapply 
-  for ( j in eps_changes ) {
-    if ( as.numeric(output_vector[j])==0 ) {
-      output_vector[j] <- 0.000001  #avoid division by zero 
-      warning ("Warning: Zero output in ", names(output_vector)[j], " is changed to 0.000001.")
-      }
-    if (is.null(digits)) {
-      input_matrix[,j] <- input_matrix[,j] / as.numeric(output_vector[j])  #tibble to numeric conversion
+  final_names <- NULL
+  if (! is.null(indicator_names)) {
+    if ( length(indicator_names) == nrow ( input_matrix) ) {
+       final_names <- indicator_names
     } else {
-      input_matrix[,j] <- round(input_matrix[,j] / as.numeric(output_vector[j]), digits = digits )
+      warning ( 'The number of new indicator names is different from indicators, 
+                default names are used')
     }
-   
   }
   
-  input_matrix[,1] <- as.character (input_matrix[,1])
-  input_matrix[1,1] <- indicator_names 
+  if ( is.null(final_names))  {
+    final_names <- paste0(as.character(input_matrix[,1], "_indicator"))
+  }
   
-  input_matrix
+  input_matrix[,1] <- final_names
+  
+  if ( !is.null(digits)) matrix_round (input_matrix, digits) else  input_matrix
+ 
 }
