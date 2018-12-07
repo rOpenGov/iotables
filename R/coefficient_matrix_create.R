@@ -22,7 +22,7 @@
 #' with \code{TRUE}.
 #' @return A data.frame that contains the matrix of  \code{siot} devided by \code{total}
 #' with a key column. Optionally the results are rounded to given \code{digits}. 
-#' @importFrom dplyr mutate mutate_if full_join funs left_join
+#' @importFrom dplyr mutate mutate_if funs left_join
 #' @references See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
 #' @examples 
