@@ -4,65 +4,18 @@
 \alias{primary_input_get}
 \title{Get primary inputs}
 \usage{
-primary_input_get(labelled_io_table = NULL,
-  input = "compensation_employees", source = "germany_1990",
-  geo = "DE", year = 1990, unit = "MIO_EUR", households = FALSE,
-  stk_flow = "DOM", labelling = "iotables", keep_total = FALSE)
+primary_input_get(siot, primary_input = "compensation_employees")
 }
 \arguments{
-\item{labelled_io_table}{If you have created the IO table earlier with 
-\code{\link{iotable_get}}, it is faster to work with the data
-in the memory. Defaults to \code{NULL} when  the data will be retrieved from
-the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
-and \code{\link{iotable_get}}.}
-
-\item{input}{A character string or a character vector containing the indicator names. 
-Any of \code{compensation_employees}, \code{wages_salaries}, \code{mixed_income_gross}, 
-\code{gva} (for gross value added), \code{surplus_mixed_gross}, \code{surplus_mixed_net},
-\code{net_tax_production}, \code{import_goods_services} (and its breakup ..._MU, 
- _non_MU, ..._EU, ...non_EU). If the indicator is not found in the table, you 
- will get an error. The input parameter is case sensitive.}
-
-\item{source}{A data source, for example \code{naio_10_cp1700}. Possible codes are \code{naio_10_cp1700},
-\code{naio_10_cp1750}, \code{naio_10_pyp1700}, \code{naio_10_pyp1750}, \code{naio_cp17_r2}, \code{naio_17_agg_60_r2}, 
-\code{naio_17_agg_10_r2}, \code{croatia_2010_1700}, \code{croatia_2010_1800}, 
-\code{croatia_2010_1900}. For further information consult the 
-\href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
-
-\item{geo}{A country code or a country name, defaults to \code{SK} that 
-could be written as \code{Slovakia}, too.}
-
-\item{year}{A numeric variable containing the year.}
-
-\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
-The alternative is \code{MIO_EUR}.}
-
-\item{households}{If the household are included in your model (adds final 
-household expenditure column). Defaults to \code{FALSE}.}
-
-\item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
-
-\item{labelling}{Defaults to \code{iotables} which gives standard row and column 
-names regardless of the
-source of the table, or if it is a product x product, industry x industry or 
-product x industry table.
-The alternative is \code{short} which is the original short row or column code of 
-Eurostat or OECD.}
-
-\item{keep_total}{Logical variable. Defaults to \code{FALSE} and removes 
-the totalling row and column from the matrix.}
+\item{siot}{A symmetric input-output table created by 
+\code{\link{iotable_get}}.}
 }
 \description{
-This function will retrieve any primary input from the input-output table. 
-You can use the iotables or the original (Eurostat) short labels to select the 
-primary input.
-If you work with the original Eurostat labels, you can review the codes of
-variables with \code{View(metadata)}.
+This function will retrieve any primary input from the input-output table.
 }
 \examples{
 comp_employees_de <- primary_input_get(
-                            input = "compensation_employees", 
-                            source = "germany_1990", geo = "DE", 
-                            unit = "MIO_EUR", 
-                            year = 1990, labelling = "iotables" ) 
+                            siot = iotable_get( "germany_1990"), 
+                            primary_input = "compensation_employees")
+                            )
 }
