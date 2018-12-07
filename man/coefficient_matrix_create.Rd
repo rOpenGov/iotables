@@ -5,7 +5,7 @@
 \title{Create a coefficient matrix}
 \usage{
 coefficient_matrix_create(siot, total = "output", digits = NULL,
-  empty_rows_remove = TRUE, return = NULL)
+  empty_rows_remove = TRUE, households = FALSE, return = NULL)
 }
 \arguments{
 \item{siot}{A symmetric input-output table retrieved by the
@@ -22,6 +22,9 @@ digits. Default is \code{NULL} when no rounding is applied.}
 \item{empty_rows_remove}{Defaults to \code{TRUE}. If you want to keep empty 
 primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 removed to avoid division by zero error in the analytical functions.}
+
+\item{households}{Defaults to \code{NULL}. Household column can be added 
+with \code{TRUE}.}
 
 \item{return}{Defaults to \code{NULL}. You can chooce \code{"product"} or
 \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
