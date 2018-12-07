@@ -4,7 +4,7 @@
 \alias{quadrant_separator_find}
 \title{Determine the end of Quadrant I and III.}
 \usage{
-quadrant_separator_find(data_table)
+quadrant_separator_find(data_table, households = FALSE)
 }
 \arguments{
 \item{data_table}{A symmetric input output table, a use table or a supply 

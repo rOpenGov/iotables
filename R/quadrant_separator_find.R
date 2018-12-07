@@ -11,21 +11,32 @@
 #' quadrant_separator_find( iotable_get ( source = "germany_1990") )
 #' @export
 
-quadrant_separator_find <- function(data_table) {
+quadrant_separator_find <- function(data_table, 
+                                    households = FALSE) {
   last_column <- 2
-  if ( any(c("total", "cpa_total") %in% tolower(names(data_table))) ) {
-    last_column <- which(tolower(names(data_table))  %in% c("total", "cpa_total") )
-  } else if ( any(c("households", "p13_s14") %in% tolower(names(data_table)))) {
-    last_column <- which(tolower(names(data_table)) %in% c("total", "cpa_total")-1 )
-  } else  if ( 'cpa_u' %in% tolower ( names (data_table)) ) { 
-    last_column <- which(tolower(names(data_table)) =='cpa_u')-1
-  } else if ( 'cpa_t' %in% tolower (names(data_table))) { 
-    last_column <- which(tolower(names(data_table)) =='cpa_t')-1
-  } else if ( 'cpa_s96' %in% tolower (names(data_table))) { 
-    last_column <- which(tolower(names(data_table)) =='cpa_s96')-1
-  } else if ( 'other_services_group' %in% tolower (names(data_table))) { 
-    last_column <- which(tolower(names(data_table)) =='other_services_group')-1
-  }
+   if ( households == TRUE ) { 
+     if (  any(c("households", "p13_s14", "final_consumption_households") %in%
+               tolower(names(data_table))) ) {
+       last_column <- which(tolower(names(data_table)) %in% 
+                              c("households", "p13_s14", "final_consumption_households"))
+     } else if ( any (grepl("households", tolower(names(data_table))))) { 
+       last_column <- which(grepl("households", tolower(names(data_table))))
+       }
+   } else { 
+     if ( any(c("total", "cpa_total") %in% tolower(names(data_table))) ) {
+       last_column <- which(tolower(names(data_table))  %in% c("total", "cpa_total") )
+     } else if ( any(c("households", "p13_s14") %in% tolower(names(data_table)))) {
+       last_column <- which(tolower(names(data_table)) %in% c("households", "p13_s14")-1 )
+     } else  if ( 'cpa_u' %in% tolower ( names (data_table)) ) { 
+       last_column <- which(tolower(names(data_table)) =='cpa_u')
+     } else if ( 'cpa_t' %in% tolower (names(data_table))) { 
+       last_column <- which(tolower(names(data_table)) =='cpa_t')
+     } else if ( 'cpa_s96' %in% tolower (names(data_table))) { 
+       last_column <- which(tolower(names(data_table)) =='cpa_s96')
+     } else if ( 'other_services_group' %in% tolower (names(data_table))) { 
+       last_column <- which(tolower(names(data_table)) =='other_services_group')
+     }
+      }
   
   if ( last_column == 2) {
     warning ( "The last column was not found")
