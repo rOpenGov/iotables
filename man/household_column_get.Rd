@@ -11,7 +11,7 @@ household_column_get(data_table)
 table.}
 }
 \value{
-The column containing final househodl expenditure. If not found
+The column containing final household expenditure. If not found
 \code{NULL} is returned.
 }
 \description{
