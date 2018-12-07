@@ -37,11 +37,11 @@ create_knitr_table <- function (
                     data_table, 
                     caption = NA,
                     col.names = NULL, 
-                    col_width= c(2,6,6), 
+                    col_width= NULL, 
                     width_unit = "cm",
-                    col_align =c("l", "c", "c"),
-                    border_right_cols = c(T, F, F), 
-                    bold_cols = c(F, F, F), 
+                    col_align =NULL,
+                    border_right_cols = NULL, 
+                    bold_cols = NULL, 
                     bootstrap_options = c("striped", "hover", "condensed"), 
                     latex_options = NULL,
                     output_format = "html", 
@@ -64,7 +64,16 @@ create_knitr_table <- function (
     
     #Create default column alignment settings if necessary
     if ( is.null(border_right_cols) ) {
-      col_align = c(TRUE, rep(FALSE, ncol(data_table)-1))
+      border_right_cols = c(TRUE, rep(FALSE, ncol(data_table)-1))
+    }
+    
+    #Create default column alignment settings if necessary
+    if ( is.null(bold_cols) ) {
+      bold_cols = rep(FALSE, ncol(data_table))
+    }
+    
+    if ( is.null(col_width)){
+      col_width = c(2, 18/(ncol(data_table)-1))
     }
     
     col_width <- paste0(col_width, width_unit)   
@@ -85,7 +94,7 @@ create_knitr_table <- function (
       caption = caption,
       booktabs = TRUE, 
       col.names =  col.names, 
-      align=col_align
+      align= col_align
     ) 
     
     }
@@ -117,7 +126,7 @@ create_knitr_table <- function (
     knitr_table <-  kableExtra::column_spec(kable_input = knitr_table,
                                             column = i, 
                                             width        = col_width[i], 
-                                            bold         = bold_columns[i], 
+                                            bold         = bold_cols[i], 
                                             border_right = border_right_cols[i]
     )
     i = i + 1
