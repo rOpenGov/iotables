@@ -13,7 +13,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: dplyr,
+Imports: 
+    dplyr,
     eurostat,
     magrittr,
     tidyr,
@@ -21,9 +22,11 @@ Imports: dplyr,
     forcats,
     utils,
     plyr,
-    lubridate
-Suggests: testthat,
+    lubridate,
     knitr,
+    kableExtra
+Suggests: 
+    testthat,
     rmarkdown
 Depends: R(>= 2.10.0)
 VignetteBuilder: knitr

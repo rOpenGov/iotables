@@ -101,3 +101,4 @@ use in detail.
 
 # iotables 0.3.8
 * Function `input_indicator_create()` has a new, optional parameter for naming the new indicators in the key column.
+* New conveninece function for nicer printing of sturctured SIOT tables and related matrix results.  Not yet exported, first will be used on vigenttes only. 
