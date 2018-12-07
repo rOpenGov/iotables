@@ -89,7 +89,7 @@ input_indicator_create <- function ( input_matrix,
   }
   
   input_matrix[,1] <- as.character (input_matrix[,1])
-  input_matrix[1,1] <- paste0(as.character(input_matrix[1,1]), "_indicator")
+  input_matrix[1,1] <- indicator_names 
   
   input_matrix
 }
