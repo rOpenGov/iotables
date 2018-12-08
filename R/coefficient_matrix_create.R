@@ -76,33 +76,35 @@ coefficient_matrix_create <- function ( siot,
   
   last_column <- quadrant_separator_find( siot )
 
-  
-  if ( !is.null(households)) {
-    if ( households == TRUE) { household_column <- household_column_get( siot )
-    quadrant <- siot [, 1:last_column]
-    siot <- dplyr::left_join ( quadrant, household_column, 
-                               by = names(quadrant)[1])
+  #####removing the 2nd and 4th quadrants--- 
+  if ( !is.null(households) ) { 
+    if ( households == TRUE) { 
+      household_column <- household_column_get( siot )
+      quadrant <- siot [, 1:last_column]
+      siot <- dplyr::left_join ( quadrant, household_column, 
+                                 by = names(quadrant)[1])
     } else {
       siot <- siot [, 1:last_column]
     }
       } else {
     siot <- siot [, 1:last_column]
   }
-  
+  key_column <- tolower(as.character(unlist(siot[,1])))
  
-  if ( any( c("output", "p1", "output_bp")  %in%  tolower (siot[,1])) ) {
-    total_row <- siot[which ( tolower (unlist(tolower(siot[,1])))  %in%
+  if ( any( c("output", "p1", "output_bp")  %in%  key_column )) {
+    total_row <- siot[which ( key_column  %in%
                                 c("output", "p1", "output_bp"))[1],]
   } else {
-    total_row <- siot[which ( tolower (unlist(siot[,1]))  %in% c(total))[1],]
+    total_row <- siot[which ( key_column %in% c(total))[1],]
   }
   
     
   #Adjust the output vector 
-  null_to_na <- function(x) ifelse (x == 0, NA, x )
+  null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
   total_row <- dplyr::mutate_if ( total_row, is.factor, as.character )
-  total_row <- dplyr::mutate_if ( total_row, is.numeric, null_to_na ) #avoid division by zero
+  total_row <- dplyr::mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
 
+  #The actual creation of the coefficients
   for (j in 2:ncol(siot)) {
     siot[ ,j] <-  siot[ ,j] / unlist(total_row [, j])
     }
@@ -110,7 +112,7 @@ coefficient_matrix_create <- function ( siot,
    
   if ( ! is.null(return) )  {
     
-    last_row <- which ( tolower(unlist(siot[,1])) %in% c("cpa_total", "total"))
+    last_row <- which ( tolower(unlist(siot[,1])) %in% c("cpa_total", "total")) #not last column
     
     if ( return == "primary_inputs" ) {
       siot <- siot[last_row:nrow(siot), ]
