@@ -3,18 +3,13 @@ library (iotables)
 require (dplyr)
 context ("Creating an  output coefficient matrix")
 
-io_table <- iotable_get () 
-io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
-
-output_bp <- dplyr::select ( io_table, output_bp )
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
-io_table <- cbind (io_table, output_bp)
+io_table <- iotable_get ( )
 
 test_that("wrong paramter error", {
   expect_error(output_coefficient_matrix_create (
     io_table, type = "wrong", digits = 1))
   })
+
 
 
 output_coefficients <- output_coefficient_matrix_create (
