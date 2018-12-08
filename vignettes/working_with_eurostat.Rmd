@@ -216,7 +216,7 @@ multipliers_sk <- input_multipliers_create(
  direct_effects = direct_effects_sk,
  inverse = I_sk)
 
-multipliers_sk <- input_multipliers_create(
+multipliers_cz <- input_multipliers_create(
  direct_effects = direct_effects_cz,
  inverse = I_cz)
 
@@ -232,7 +232,7 @@ Other inputs, for example, CO2 emissions may be used, but they are likely to be 
 ```{r employmentindicator, results='asis', eval=FALSE}
 #New function is needed to add employment vector to SIOT
 emp_indicator_sk  <- input_indicator_create( 
-  data_table  = emp_sk, 
+  data_table  = sk_io, 
   output_vector = sk_output)
 
 emp_indicator_cz  <- input_indicator_create( 
