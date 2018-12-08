@@ -13,7 +13,7 @@
 #' if it exists in the matrix. 
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
-#' @param return Defaults to \code{NULL}. You can chooce \code{"product"} or
+#' @param return_part Defaults to \code{NULL}. You can chooce \code{"product"} or
 #' \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
 #' to receive only the total intermediate use and proportional primary inputs.
 #' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
@@ -37,7 +37,7 @@ coefficient_matrix_create <- function ( data_table,
                                         digits = NULL, 
                                         empty_remove = TRUE,
                                         households = FALSE,
-                                        return = NULL) {
+                                        return_part = NULL) {
   
   #Create a coefficient matrix, including primary inputs.  
   #For the Leontieff matrix, only the inputs part (first quadrant is used)
@@ -50,7 +50,7 @@ coefficient_matrix_create <- function ( data_table,
   
   #Determine if a column is all zero
   non_zero <- function (x) {
-    if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
+    if ( class ( x ) %in% c("factor", "character") ) return_part ( TRUE )
     ifelse (  sum ( as.numeric ( unlist (x) ), na.rm=TRUE) == 0, FALSE, TRUE )
   }
   
@@ -105,19 +105,29 @@ coefficient_matrix_create <- function ( data_table,
     data_table[ ,j] <-  data_table[ ,j] / unlist(total_row [, j])
     }
   
-   
-  if ( ! is.null(return) )  {
+  potential_houeshold_earning_names <- c("compensation_employees", 'd1')
+  
+  earnings_name <- potential_houeshold_earning_names [which ( potential_houeshold_earning_names  %in% key_column )]
+
+  household_earnings_row <- data_table[which( earnings_name == key_column), ]
+    
+
+  if ( ! is.null(return_part) )  {
     
     last_row <- which ( tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")) #not last column
     
-    if ( return == "primary_inputs" ) {
+    if ( return_part == "primary_inputs" ) {
       data_table <- data_table[last_row:nrow(data_table), ]
-    } else if ( return %in% c("products", "industries") ) {
+    } else if ( return_part %in% c("products", "industries") ) {
       data_table <- data_table[1:last_row, ]
     }
   } 
   
-  if ( is.null(digits) ) return (data_table)
+  if ( households ) {
+    data_table <- rbind ( data_table, household_earnings_row)
+  }
+  
+  if ( is.null(digits) ) return_part (data_table)
   
   round_table ( data_table, digits = digits  )
 }

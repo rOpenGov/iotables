@@ -5,7 +5,7 @@
 \title{Create a coefficient matrix}
 \usage{
 coefficient_matrix_create(data_table, total = "output", digits = NULL,
-  empty_remove = TRUE, households = FALSE, return = NULL)
+  empty_remove = TRUE, households = FALSE, return_part = NULL)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 
@@ -27,7 +27,7 @@ removed to avoid division by zero error in the analytical functions.}
 \item{households}{Defaults to \code{NULL}. Household column can be added 
 with \code{TRUE}.}
 
-\item{return}{Defaults to \code{NULL}. You can chooce \code{"product"} or
+\item{return_part}{Defaults to \code{NULL}. You can chooce \code{"product"} or
 \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
 to receive only the total intermediate use and proportional primary inputs.}
 }
