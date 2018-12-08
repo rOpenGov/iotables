@@ -18,19 +18,19 @@ primary_input_get <- function ( data_table,
     stop ( "No input-output table was given as an input")
     }
   
-  last_column <- quadrant_separator_find ( siot )
+  last_column <- quadrant_separator_find ( data_table )
   
-  siot <- siot %>% 
+  data_table <- data_table %>% 
     dplyr::mutate_if ( is.factor, as.character ) %>%
     dplyr::select(1:last_column)
   
-  if ( primary_input %in% siot[[1]] ) {
-    input_row <- which ( siot[[1]] == primary_input )
+  if ( primary_input %in% data_table[[1]] ) {
+    input_row <- which ( data_table[[1]] == primary_input )
   } else {
     stop("The input is not found in this data source.")
   }
 
-    siot[input_row, ]
+    data_table[input_row, ]
 }
 
 
