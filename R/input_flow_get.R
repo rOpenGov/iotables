@@ -18,7 +18,7 @@
 #' 
 #' @export 
 
-input_flow_get <- function ( data_table  = NULL,
+input_flow_get <- function ( data_table,
                              empty_remove = FALSE,
                              households = TRUE ) {  
   

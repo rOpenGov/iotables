@@ -4,8 +4,7 @@
 \alias{input_flow_get}
 \title{Create a use (input flow) matrix}
 \usage{
-input_flow_get(data_table = NULL, empty_remove = FALSE,
-  households = TRUE)
+input_flow_get(data_table, empty_remove = FALSE, households = TRUE)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table or use table retrieved by the
