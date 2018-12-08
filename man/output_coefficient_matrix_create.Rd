@@ -4,23 +4,24 @@
 \alias{output_coefficient_matrix_create}
 \title{Create an output coefficient matrix}
 \usage{
-output_coefficient_matrix_create(io_table, type = "product",
+output_coefficient_matrix_create(io_table, total = "total",
   digits = NULL)
 }
 \arguments{
-\item{io_table}{An input flow matrix created with the 
-\code{\link{use_table_get}} function which contains the 'total' column 
-is sufficient if type=\code{products} is used. 
-In case you use \code{type="final_demand"} you need to input a
-full iotable, create by the \code{\link{iotable_get}}, because you will need
-the final demand column.}
-
-\item{type}{The type=\code{products} (default) returns the output coefficients
+\item{total}{The \code{output='total'} (or CPA_TOTAL, depending on the 
+nams in your table, default) returns the output coefficients
 for products (intermediates) while the \code{final_demand} returns output 
 coefficients for final demand. See Eurostat Manual, p495 and p507.}
 
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
+
+\item{siot}{An input flow matrix created with the 
+\code{\link{use_table_get}} function which contains the 'total' column 
+is sufficient if type=\code{products} is used. 
+In case you use \code{type="final_demand"} you need to input a
+full iotable, create by the \code{\link{iotable_get}}, because you will need
+the final demand column.}
 }
 \description{
 Create an output coefficient matrix from the input flow matrix or a symmetric
@@ -42,7 +43,7 @@ io_table <- io_table [, 1:7]
 io_table$total <- rowSums(io_table[, 2:7])
 io_table <- cbind (io_table, output_bp)
 
-output_coefficient_matrix_create ( io_table = io_table, 
-                                    type = 'final_demand',
-                                    digits = 4 )
+output_coefficient_matrix_create ( siot  = io_table, 
+                                   type = 'final_demand',
+                                   digits = 4 )
 }

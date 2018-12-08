@@ -6,13 +6,14 @@
 #' solved with zero elements. You either have faulty input data, or you have 
 #' to use some sort of data modification to carry on your analysis. 
 #' 
-#' @param io_table An input flow matrix created with the 
+#' @param siot An input flow matrix created with the 
 #' \code{\link{use_table_get}} function which contains the 'total' column 
 #' is sufficient if type=\code{products} is used. 
 #' In case you use \code{type="final_demand"} you need to input a
 #' full iotable, create by the \code{\link{iotable_get}}, because you will need
 #' the final demand column.
-#' @param type The type=\code{products} (default) returns the output coefficients
+#' @param total The \code{output='total'} (or CPA_TOTAL, depending on the 
+#' nams in your table, default) returns the output coefficients
 #' for products (intermediates) while the \code{final_demand} returns output 
 #' coefficients for final demand. See Eurostat Manual, p495 and p507.
 #' @param digits An integer showing the precision of the technology matrix in 
@@ -32,33 +33,26 @@
 #' io_table$total <- rowSums(io_table[, 2:7])
 #' io_table <- cbind (io_table, output_bp)
 #' 
-#' output_coefficient_matrix_create ( io_table = io_table, 
-#'                                     type = 'final_demand',
-#'                                     digits = 4 )
+#' output_coefficient_matrix_create ( siot  = io_table, 
+#'                                    type = 'final_demand',
+#'                                    digits = 4 )
 #' @export 
 
 output_coefficient_matrix_create <- function ( io_table,
-                                               type = "product",
+                                               total = "total",
                                                digits = NULL ) {
-  funs <- t_rows2 <-. <- NULL  #for checking against non-standard evaluation
+  funs <-. <- NULL  #for checking against non-standard evaluation
+  check_digits ( digits = digits)
   
-  if (!is.null(digits)) { ##rounding digits must be numeric, if given
-    if ( class(digits) != "numeric") {
-      stop ("Error: rounding digits are not given as a numeric input.") }
-    }
- 
   io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
   
-  non_zero <- function (x) {
-    if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
-    ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
-  }
-  
+  ###Find non-zero cols and rows and remove them---- 
   non_zero_cols <- vapply ( io_table[, 1:ncol(io_table)], 
-                            non_zero, logical (1) )
+                            non_zero_columns_find, logical (1) )
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
-  
   remove_cols <- names (io_table )[! non_zero_cols]
+  
+  
   siot_rows <- as.character ( unlist ( io_table[,1]) )
   siot_rows
   
@@ -73,18 +67,18 @@ output_coefficient_matrix_create <- function ( io_table,
     io_table <- io_table [1:(total_row-1), ]
   }
   
-  if ( type == "product") { 
+  if ( total == "total") { 
     demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
     
     if ( length(demand_col) == 0 ) { 
       stop ("Please input a table that has a total column.")
     } #end of finding total column if originally missing
     
-  } else if ( type == "final_demand" ) {
+  } else if ( total == "final_demand" ) {
     demand_col <- which (tolower(names(io_table)) %in% 
                            c("tfu", "output_bp", "total_final_use") )
-  }  else {
-      stop ("Paramter type must be either product or final_demand.")
+   }  else {
+      stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
     }
   
   demand_col 
