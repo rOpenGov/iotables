@@ -22,7 +22,8 @@
 #' product or industries, with a key column. 
 #' Optionally the results are rounded to given \code{digits}. 
 #' @examples 
-#' input_coefficient_matrix_create ( iotable_get(), 
+#' input_coefficient_matrix_create ( 
+#'                            iotable_get(), 
 #'                            digits = 4 )
 #'                            
 #' #This is a wrapper function and equivalent to                           

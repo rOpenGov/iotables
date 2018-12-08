@@ -36,7 +36,8 @@ tested on both sources.
 This is a wrapper function around  \code{\link{coefficient_matrix_create }}.
 }
 \examples{
-input_coefficient_matrix_create ( iotable_get(), 
+input_coefficient_matrix_create ( 
+                           iotable_get(), 
                            digits = 4 )
                            
 #This is a wrapper function and equivalent to                           
