@@ -4,8 +4,9 @@
 #' coefficient matrix is related by default to output, but you can change this
 #' to total supply or other total aggregate if it exists in your table.
 #' 
-#' @param siot A symmetric input-output table retrieved by the  
-#' \code{\link{iotable_get}} function. 
+#' @param data_table A symmetric input-output table, a use table, 
+#' a margins or tax table retrieved by the  \code{\link{iotable_get}}
+#'  function. 
 #' @param total Usually an output vector with a key column, defaults to 
 #' \code{"output"} which equals \code{"P1"} or \code{"output_bp"}.
 #' You can use other rows for comparison, for example \code{"TS_BP"} 
@@ -15,7 +16,7 @@
 #' @param return Defaults to \code{NULL}. You can chooce \code{"product"} or
 #' \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
 #' to receive only the total intermediate use and proportional primary inputs.
-#' @param empty_rows_remove Defaults to \code{TRUE}. If you want to keep empty 
+#' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 #' removed to avoid division by zero error in the analytical functions.
 #' @param households Defaults to \code{NULL}. Household column can be added 
@@ -31,10 +32,10 @@
 #'                             digits = 4 )
 #' @export 
 
-coefficient_matrix_create <- function ( siot, 
+coefficient_matrix_create <- function ( data_table, 
                                         total = "output", 
                                         digits = NULL, 
-                                        empty_rows_remove = TRUE,
+                                        empty_remove = TRUE,
                                         households = FALSE,
                                         return = NULL) {
   
@@ -43,7 +44,7 @@ coefficient_matrix_create <- function ( siot,
   
   funs <- t_rows2 <-. <- NULL  #for checking against non-standard evaluation
 
-  siot <- dplyr::mutate_if (siot, is.factor, as.character )
+  data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
   
   ###Removing all zero columns and rows --------
   
@@ -53,28 +54,10 @@ coefficient_matrix_create <- function ( siot,
     ifelse (  sum ( as.numeric ( unlist (x) ), na.rm=TRUE) == 0, FALSE, TRUE )
   }
   
-  #Examine which columns are filled with zeros
-  non_zero_cols <- vapply ( siot[, 1:ncol(siot)], 
-                            non_zero, logical (1) )
-  non_zero_rows <- as.logical (non_zero_cols[-1] ) 
+  #Remove empty columns and rows
+  if ( empty_remove ) siot <- empty_remove ( siot )
   
-  #Remove columns that are filled with zeros
-  remove_cols <- names (siot )[! non_zero_cols]
-  
-  if ( length( remove_cols) > 0 ) {
-    message ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
-  }
-  
-  siot_rows <- as.character ( unlist ( siot[,1]) )
-  #names ( input_flow) [! names ( input_flow ) %in% remove_cols ]
-  # siot_rows [! siot_rows %in% remove_cols ]
-  
-  ##Now remove all zero corresponding rows
-  siot <- siot [! siot_rows %in% remove_cols , 
-                            ! names ( siot ) %in% remove_cols  ]
-  siot <- dplyr::mutate_if ( siot, is.factor, as.character )
-  
-  last_column <- quadrant_separator_find( siot )
+  last_column <- iotables:::quadrant_separator_find( siot )
 
   #####removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 
@@ -88,16 +71,29 @@ coefficient_matrix_create <- function ( siot,
     }
       } else {
     siot <- siot [, 1:last_column]
-  }
-  key_column <- tolower(as.character(unlist(siot[,1])))
- 
-  if ( any( c("output", "p1", "output_bp")  %in%  key_column )) {
-    total_row <- siot[which ( key_column  %in%
-                                c("output", "p1", "output_bp"))[1],]
-  } else {
-    total_row <- siot[which ( key_column %in% c(total))[1],]
-  }
+      }
   
+  key_column <- tolower(as.character(unlist(siot[,1])))
+  
+  if ( total %in%  c("output", "p1", "output_bp")  ) { 
+    if ( any( c("output", "p1", "output_bp")  %in%  key_column )) {
+      total_row <- siot[which ( key_column  %in%
+                                  c("output", "p1", "output_bp"))[1],]
+    } else {
+      stop ( "The output row was not found in the table as 'output', 
+             'p1' or 'output_bp'")
+    } } else if ( total %in%  c("total", "cpa_total")  ) { 
+    if ( any( c("total", "cpa_total") %in%  key_column )) {
+      total_row <- siot[which ( key_column  %in%
+                                  c("total", "cpa_total"))[1],]
+    } else {
+      stop ( "The total intermediate use was not found in the table as 'total', 
+             or 'CPA_TOTAL'")
+      }
+    } else {
+      total_row <- siot[which ( key_column %in% c(total))[1],]
+      if ( length(total_row) == 0) stop("The total row was not found.")
+    } 
     
   #Adjust the output vector 
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
@@ -121,32 +117,7 @@ coefficient_matrix_create <- function ( siot,
     }
   } 
   
-  if ( empty_rows_remove == TRUE ) { 
-    
-    if (length(which( rowSums(is.na(siot)) >= ncol(siot)-1)) > 0) {
-      message ( "Removed empty rows ",
-                paste ( unlist(siot[which( rowSums(is.na(siot)) >= ncol(siot)-1),1]), 
-                        collapse = ', '), '.')
-    }
-    
-    siot <- siot[which( rowSums(is.na(siot)) != ncol(siot)-1 ), ]
-    
-    }
-  
-  
   if ( is.null(digits) ) return (siot)
   
-  if ( class(digits) != "numeric") stop ("Error: rounding digits are not given as a numeric input.")
-  
-  if ( digits >= 0 ) {
-    
-    round_eps <- function ( x, digits ) {
-      ifelse ( x == 1e-06, x, round ( x, digits ))
-    }
-    siot <- siot %>%
-      dplyr::mutate_if(is.numeric, dplyr::funs(round_eps (., digits)))
-  } else {
-    stop ("Error: not a valid rounding parameter.\nMust be an integer representing the rounding digits.")
-  }
-  siot
+  round_table ( siot, digits = digits  )
 }

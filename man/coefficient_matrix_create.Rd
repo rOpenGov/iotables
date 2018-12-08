@@ -4,12 +4,13 @@
 \alias{coefficient_matrix_create}
 \title{Create a coefficient matrix}
 \usage{
-coefficient_matrix_create(siot, total = "output", digits = NULL,
-  empty_rows_remove = TRUE, households = FALSE, return = NULL)
+coefficient_matrix_create(data_table, total = "output", digits = NULL,
+  empty_remove = TRUE, households = FALSE, return = NULL)
 }
 \arguments{
-\item{siot}{A symmetric input-output table retrieved by the
-\code{\link{iotable_get}} function.}
+\item{data_table}{A symmetric input-output table, a use table, 
+a margins or tax table retrieved by the  \code{\link{iotable_get}}
+ function.}
 
 \item{total}{Usually an output vector with a key column, defaults to 
 \code{"output"} which equals \code{"P1"} or \code{"output_bp"}.
@@ -19,7 +20,7 @@ if it exists in the matrix.}
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
 
-\item{empty_rows_remove}{Defaults to \code{TRUE}. If you want to keep empty 
+\item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty 
 primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 removed to avoid division by zero error in the analytical functions.}
 
