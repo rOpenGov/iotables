@@ -41,43 +41,33 @@
 #'                           households = FALSE, labelling = "iotables")
 #' @export 
 
-input_coefficient_matrix_create <- function ( input_flow, 
+input_coefficient_matrix_create <- function ( io_table, 
                                               output, 
                                               digits = NULL) {
-  funs <- t_rows2 <-. <- NULL  #for checking against non-standard evaluation
+  funs <-. <- NULL  #for checking against non-standard evaluation
+  check_digits(digits = digits)
 
-  if ( ! isTRUE(all.equal (names (input_flow), names (output))) ) {
+  if ( ! isTRUE(all.equal (names (io_table), names (output))) ) {
     stop("Non conforming inputs are given with different column labels.")
   }
   
-  input_flow <- dplyr::mutate_if (input_flow, is.factor, as.character )
+  io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
   
-  ###Removing all zero columns and rows --------
-  
-  #Determine if a column is all zero
-  non_zero <- function (x) {
-    if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
-    ifelse (  sum ( as.numeric ( unlist (x) ), na.rm=TRUE) == 0, FALSE, TRUE )
-  }
-  
-  #Examine which columns are filled with zeros
-  non_zero_cols <- vapply ( input_flow[, 1:ncol(input_flow)], 
-                            non_zero, logical (1) )
-  #non_zero_rows <- which ( rowSums( input_flow[, 2:ncol(input_flow)] ) != 0 )
-  #input_flow <- input_flow[non_zero_rows, non_zero_cols] #should be improved 
+  ###Find non-zero cols and rows and remove them---- 
+  non_zero_cols <- vapply ( io_table[, 1:ncol(io_table)], 
+                            non_zero_columns_find, logical (1) )
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
+  remove_cols <- names (io_table)[! non_zero_cols]
   
   #Remove columns that are filled with zeros
-  remove_cols <- names (input_flow )[! non_zero_cols]
+  remove_cols <- names (io_table )[! non_zero_cols]
   
   if ( length( remove_cols) > 0 ) {
-    warning ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
+    message ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
   }
   
-  siot_rows <- as.character ( unlist ( input_flow[,1]) )
-  siot_rows
-  #names ( input_flow) [! names ( input_flow ) %in% remove_cols ]
-  # siot_rows [! siot_rows %in% remove_cols ]
+  siot_rows <- as.character ( unlist ( io_table[,1]) )
+
   
   ##Now remove all zero corresponding rows
   input_flow <- input_flow [! siot_rows %in% remove_cols , 

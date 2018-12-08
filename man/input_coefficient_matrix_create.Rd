@@ -4,17 +4,17 @@
 \alias{input_coefficient_matrix_create}
 \title{Create an input coefficient matrix}
 \usage{
-input_coefficient_matrix_create(input_flow, output, digits = NULL)
+input_coefficient_matrix_create(io_table, output, digits = NULL)
 }
 \arguments{
-\item{input_flow}{An input flow matrix created with the 
-\code{\link{use_table_get}} function.}
-
 \item{output}{An output vector with a key column, created by
 \code{\link{output_get}}.}
 
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
+
+\item{input_flow}{An input flow matrix created with the 
+\code{\link{use_table_get}} function.}
 }
 \value{
 A data frame that contains the matrix of first quadrant of the use table as
