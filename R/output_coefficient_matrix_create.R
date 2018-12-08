@@ -7,7 +7,7 @@
 #' to use some sort of data modification to carry on your analysis. 
 #' 
 #' @param siot An input flow matrix created with the 
-#' \code{\link{use_table_get}} function which contains the 'total' column 
+#' \code{\link{input_flow_get}} function which contains the 'total' column 
 #' is sufficient if type=\code{products} is used. 
 #' In case you use \code{type="final_demand"} you need to input a
 #' full iotable, create by the \code{\link{iotable_get}}, because you will need
