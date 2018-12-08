@@ -52,6 +52,7 @@ use_table_get <- function ( labelled_io_table  = NULL,
   ##Initialize variables ------------
   time <- t_cols2 <- t_rows2 <- values <- . <-  NULL #non-standard evaluation creates a varning in build. 
   iotables_row <- iotables_col <- prod_na <- induse <- NULL
+  labelled_io_data <- NULL
   unit_input <- unit; geo_input <- geo; stk_flow_input <- stk_flow
   
   if ( is.null(labelled_io_table) | source == "germany_1990" ) { 
