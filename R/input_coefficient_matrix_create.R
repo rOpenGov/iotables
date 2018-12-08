@@ -67,7 +67,6 @@ input_coefficient_matrix_create <- function ( io_table,
   }
   
   siot_rows <- as.character ( unlist ( io_table[,1]) )
-
   
   ##Now remove all zero corresponding rows
   input_flow <- input_flow [! siot_rows %in% remove_cols , 
@@ -78,7 +77,7 @@ input_coefficient_matrix_create <- function ( io_table,
   #Adjust the output vector 
   output <- dplyr::mutate_if ( output, is.factor, as.character )
   output <- output [ names (output) %in% names (input_flow )]
-  output  <- dplyr::mutate_if (output, is.factor, as.character )
+  output <- dplyr::mutate_if (output, is.factor, as.character )
   
   
   ##Further adjustments with households 
