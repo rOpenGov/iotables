@@ -4,53 +4,16 @@
 \alias{output_get}
 \title{Get an output vector}
 \usage{
-output_get(labelled_io_table = NULL, source = "germany_1990",
-  geo = "DE", year = 1990, unit = "MIO_EUR", households = FALSE,
-  labelling = "iotables", stk_flow = "DOM", keep_total = FALSE)
+output_get(data_table = NULL, labelling = "iotables")
 }
 \arguments{
-\item{labelled_io_table}{If you have created the IO table earlier with 
-\code{\link{iotable_get}}, it is faster to work with the data
-in the memory. Defaults to \code{NULL} when  the data will be retrieved from
-the hard disk or from the Eurostat website invoking \code{\link{iotables_download}} 
-and \code{\link{iotable_get}}}
-
-\item{source}{A data source, for example "naio_10_cp1700". Possible codes are "naio_10_cp1700",
-"naio_10_cp1750", "naio_10_pyp1700", "naio_10_pyp1750", "naio_10_cp1620", "naio_10_pyp1620",
-"naio_10_cp1630", "naio_10_pyp1630", "croatia_2010_1700", "croatia_2010_1800", 
-"croatia_2010_1900". For further information consult the 
-\href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
-
-\item{geo}{A country code or a country name.  For example, \code{SK} for Slovakia.}
-
-\item{year}{A numeric variable containing the year. Defaults to 2010, because this year has the most data.}
-
-\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). The alternative is \code{MIO_EUR}.}
-
-\item{households}{If you need to make household demand endogenous, or "close the households off", TRUE selects 
-wages and final household consumption. This is needed for induced-effects calculations.}
-
-\item{labelling}{Defaults to \code{iotables} which gives standard row and column names regardless of the
-source of the table, or if it is a product x product, industry x industry or product x industry table.
-The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.}
-
-\item{stk_flow}{Defaults to \code{DOM}, alternative \code{IMP}.}
-
-\item{keep_total}{Logical variable. Defaults to \code{FALSE} and removes the totaling row and column from the matrix.}
+\item{data_table}{A symmetric input-output table or use table retrieved by the
+\code{\link{iotable_get}} function.}
 }
 \description{
-Get an output vector
+This is a wrapper function around the \code{\link{primary_input_get}} 
+function.
 }
 \examples{
-output_get (  source = "germany_1990", geo = "DE",
-              year = 1990, unit = "MIO_EUR", 
-              stk_flow = "DOM", labelling = "iotables")
-\dontrun{
-output <-  iotables_download ( "naio_10_cp1700" ) \%>\%
- iotable_get (labelled_io_data = ., geo = "CZ", 
-              source = "naio_10_cp1700",
-              year = 2015, unit = "MIO_NAC", 
-              labelling = "short") \%>\% 
- output_get ()
-}                              
+output_get ( data_table = iotable_get () )
 }
