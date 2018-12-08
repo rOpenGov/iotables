@@ -105,3 +105,10 @@ use in detail.
 
 # iotables 0.3.9
 * The Germany example is converted to the ESA2010 vocabulary. 
+* The `output_get()` is now a wrapper around `primary_input_get()` and 
+`gva_get()` is completely deprecated.
+*  The `input_coefficient_matrix_create()` is now a wrapper around the more
+ general `coefficient_matrix_create()`.
+ *  The `use_table_get()` function is now named `input_flow_get()` but it 
+ is seldom used, as the analytical function will call it as needed.
+
