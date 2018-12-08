@@ -18,7 +18,7 @@ primary_input_get <- function ( data_table,
     stop ( "No input-output table was given as an input")
     }
   
-  last_column <- quadrant_separator_find ( data_table )
+  last_column <- iotables:::quadrant_separator_find ( data_table )
   
   data_table <- data_table %>% 
     dplyr::mutate_if ( is.factor, as.character ) %>%
