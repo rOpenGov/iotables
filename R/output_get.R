@@ -11,7 +11,7 @@
 output_get <- function ( data_table = NULL, 
                          labelling = "iotables" ) {  
   
-  primary_input_get ( siot = data_table,
+  primary_input_get ( data_table = data_table,
                       primary_input = "output")
 }
 
