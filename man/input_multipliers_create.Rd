@@ -21,19 +21,14 @@ The function creates the input multipliers.  See Eurostat Manual p500-501..
 }
 \examples{
  
-de_use <- use_table_get()
-L_de  <- leontieff_matrix_create( de_use )
-I_de <- leontieff_inverse_create( L_de )
+direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
+                                              total = 'output', 
+                                              return = 'primary_inputs') 
 
-io_table <- iotable_get () 
-#Total column should not be missing
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
-
-labelled_io_table <- io_table
-direct_effects_de <- direct_effects_create ( io_table ) 
+#Remove the total column from direct effects to conform with the inverse:
+direct_effects_de <- dplyr::select(direct_effects_de, -total)
 
 multipliers <- input_multipliers_create(
-      direct_effects = direct_effects_de [, -8],
-      inverse = I_de)
+ direct_effects = direct_effects_de,
+ inverse = I_de)
 }
