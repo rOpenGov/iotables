@@ -21,7 +21,7 @@
 #' removed to avoid division by zero error in the analytical functions.
 #' @param households Defaults to \code{NULL}. Household column can be added 
 #' with \code{TRUE}.
-#' @return A data.frame that contains the matrix of  \code{siot} devided by \code{total}
+#' @return A data.frame that contains the matrix of  \code{data_table} devided by \code{total}
 #' with a key column. Optionally the results are rounded to given \code{digits}. 
 #' @importFrom dplyr mutate mutate_if funs left_join
 #' @references See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
@@ -55,43 +55,43 @@ coefficient_matrix_create <- function ( data_table,
   }
   
   #Remove empty columns and rows
-  if ( empty_remove ) siot <- empty_remove ( siot )
+  if ( empty_remove ) data_table <- empty_remove ( data_table )
   
-  last_column <- iotables:::quadrant_separator_find( siot )
+  last_column <- iotables:::quadrant_separator_find( data_table )
 
   #####removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 
     if ( households == TRUE) { 
-      household_column <- household_column_get( siot )
-      quadrant <- siot [, 1:last_column]
-      siot <- dplyr::left_join ( quadrant, household_column, 
+      household_column <- household_column_get( data_table )
+      quadrant <- data_table [, 1:last_column]
+      data_table <- dplyr::left_join ( quadrant, household_column, 
                                  by = names(quadrant)[1])
     } else {
-      siot <- siot [, 1:last_column]
+      data_table <- data_table [, 1:last_column]
     }
       } else {
-    siot <- siot [, 1:last_column]
+    data_table <- data_table [, 1:last_column]
       }
   
-  key_column <- tolower(as.character(unlist(siot[,1])))
+  key_column <- tolower(as.character(unlist(data_table[,1])))
   
   if ( total %in%  c("output", "p1", "output_bp")  ) { 
     if ( any( c("output", "p1", "output_bp")  %in%  key_column )) {
-      total_row <- siot[which ( key_column  %in%
+      total_row <- data_table[which ( key_column  %in%
                                   c("output", "p1", "output_bp"))[1],]
     } else {
       stop ( "The output row was not found in the table as 'output', 
              'p1' or 'output_bp'")
     } } else if ( total %in%  c("total", "cpa_total")  ) { 
     if ( any( c("total", "cpa_total") %in%  key_column )) {
-      total_row <- siot[which ( key_column  %in%
+      total_row <- data_table[which ( key_column  %in%
                                   c("total", "cpa_total"))[1],]
     } else {
       stop ( "The total intermediate use was not found in the table as 'total', 
              or 'CPA_TOTAL'")
       }
     } else {
-      total_row <- siot[which ( key_column %in% c(total))[1],]
+      total_row <- data_table[which ( key_column %in% c(total))[1],]
       if ( length(total_row) == 0) stop("The total row was not found.")
     } 
     
@@ -101,23 +101,23 @@ coefficient_matrix_create <- function ( data_table,
   total_row <- dplyr::mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
 
   #The actual creation of the coefficients
-  for (j in 2:ncol(siot)) {
-    siot[ ,j] <-  siot[ ,j] / unlist(total_row [, j])
+  for (j in 2:ncol(data_table)) {
+    data_table[ ,j] <-  data_table[ ,j] / unlist(total_row [, j])
     }
   
    
   if ( ! is.null(return) )  {
     
-    last_row <- which ( tolower(unlist(siot[,1])) %in% c("cpa_total", "total")) #not last column
+    last_row <- which ( tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")) #not last column
     
     if ( return == "primary_inputs" ) {
-      siot <- siot[last_row:nrow(siot), ]
+      data_table <- data_table[last_row:nrow(data_table), ]
     } else if ( return %in% c("products", "industries") ) {
-      siot <- siot[1:last_row, ]
+      data_table <- data_table[1:last_row, ]
     }
   } 
   
-  if ( is.null(digits) ) return (siot)
+  if ( is.null(digits) ) return (data_table)
   
-  round_table ( siot, digits = digits  )
+  round_table ( data_table, digits = digits  )
 }
