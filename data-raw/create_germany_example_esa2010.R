@@ -17,7 +17,7 @@ germany_long <- germany_total %>%
                                                     'total', 
                                                     'final_consumption_households', 
                                                     'final_consumption_government', 'gross_capital_formation',
-                                                    'inventory_change', 'export_goods_services', 'total_final_use'), 
+                                                    'inventory_change', 'exports', 'total_final_use'), 
                                            to = c("Agriculture group", "Industry (except construction)", "Construction", "Trade group", 
                                                   "Business services group", "Other services group", "Total",
                                                   "Household consumption", 
@@ -37,9 +37,9 @@ germany_long <- germany_total %>%
   mutate ( ordering_r  = plyr::mapvalues (prod_na, 
                                           from = c('CPA_A', 'CPA_B-E', 'CPA_F',
                                                    'CPA_G-I', 'CPA_J-N', 
-                                                   'CPA_O-T', 'CPA_TOTAL', 'P7',
-                                                   'D21_M_D31', 'P2PP', 'D1',
-                                                   'D29_M_D39', 'K1', 'B2N_B3N',
+                                                   'CPA_O-T', 'TOTAL', 'P7',
+                                                   'D21X31', 'P2', 'D1',
+                                                   'D29X39', 'K1', 'B2A3N',
                                                    'B1G', 'P1', 
                                                    'EMP-WS', 'EMP-FTE', 'EMP'  
                                                    ), 
@@ -50,7 +50,7 @@ germany_long <- germany_total %>%
                                                    'total',
                                                    'final_consumption_households', 
                                                    'final_consumption_government', 'gross_capital_formation',
-                                                   'inventory_change', 'export_goods_services', 'total_final_use'), 
+                                                   'inventory_change', 'exports', 'total_final_use'), 
                                           to = seq(1:13))) %>%
   mutate ( ordering_c = as.numeric(ordering_c), 
            ordering_r = as.numeric(ordering_r)) %>%

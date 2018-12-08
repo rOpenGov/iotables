@@ -1,20 +1,20 @@
-prod_na,prod_na_lab,numeric_label,quadrant,iotables_row,agriculture_group,industry_group,construction,trade_group,business_services_group,other_services_group,final_consumption_households,final_consumption_government,gross_capital_formation,inventory_change,export_goods_services,total_final_use
+prod_na,prod_na_lab,numeric_label,quadrant,iotables_row,agriculture_group,industry_group,construction,trade_group,business_services_group,other_services_group,final_consumption_households,final_consumption_government,gross_capital_formation,inventory_change,exports,total_final_use
 CPA_A,"Products of agriculture, forestry and fishing",1,10,agriculture_group,1131,25480,1,607,710,762,8500,16,2975,-6,3734,43910
 CPA_B-E,Industrial products (except construction works),2,10,industry_group,7930,304584,64167,41082,11981,30360,197792,8588,91692,7559,313711,1079400
 CPA_F,Constructions and construction works,3,10,construction,426,7334,3875,5296,23457,9155,3457,742,191715,0,149,245606
 CPA_G-I,"Wholesale and retail trade, transport, accomodation and food service activities",4,10,trade_group,3559,72717,14190,74399,10835,21008,269663,13492,14155,0,46045,540063
 CPA_J-N,Products of business services,5,10,business_services_group,3637,96115,31027,65755,193176,34223,214757,10061,30124,0,13612,692487
 CPA_O-T,Other services group,6,10,other_services_group,1552,14986,1747,11225,15058,22070,119504,317251,3483,0,2042,508918
-CPA_TOTAL,Domestic products,7,10,total,18235,521216,115007,198364,255217,117578,813673,350150,334144,7553,379293,3110384
-P7,Imported products,8,20,import_goods_services,2927,156703,13427,21943,13371,13772,80187,2970,41436,-4233,42597,385100
-D21_M_D31,Taxes less subsidies on products,9,20,net_tax_production,1084,6505,1548,8349,8473,12551,107200,3670,28660,260,-1160,177140
-P2PP,Intermediate consumption/Final,10,20,intermediate_consumption_pp,22246,684424,129982,228656,277061,143901,1001060,356790,404240,3580,420730,3672624
+TOTAL,Total,7,10,total,18235,521216,115007,198364,255217,117578,813673,350150,334144,7553,379293,3110384
+P7,Imports of goods and services,8,20,imports,2927,156703,13427,21943,13371,13772,80187,2970,41436,-4233,42597,385100
+D21X31,Taxes less subsidies on products,9,20,net_tax_products,1084,6505,1548,8349,8473,12551,107200,3670,28660,260,-1160,177140
+P2,Intermediate consumption,10,20,intermediate_consumption,22246,684424,129982,228656,277061,143901,1001060,356790,404240,3580,420730,3672624
 D1,Compensation of employees,11,20,compensation_employees,9382,296464,78819,214450,124810,272975,,,,,,996900
-D29_M_D39,Other net taxes on production,12,20,net_tax_production_other,-2012,1457,963,2748,5946,-8602,,,,,,500
+D29X39,Other taxes less other subsidies on production,12,20,net_tax_production,-2012,1457,963,2748,5946,-8602,,,,,,500
 K1,Consumption of fixed capital,13,20,consumption_fixed_capital,7871,63769,5860,41100,98610,49260,,,,,,266470
-B2N_B3N,Net operating surplus,14,20,operating_surplus_net,6423,33332,29982,53109,186060,51384,,,,,,360290
-B1G,Value added at basic prices,15,20,gva_bp,21664,395022,115624,311407,415426,365017,,,,,,1624160
-P1,Output at basic prices,16,20,output_bp,43910,1079446,245606,540063,692487,508918,1001060,356790,404240,3580,420730,
-EMP-WS,Wage and salary earners,17,50,wage_salary_earner,483,8032,2896,7977,3653,9555,,,,,,32596
-EMP-FTE,Self-employed,18,50,self_employed,613,349,340,1274,605,651,,,,,,3832
-EMP,Employment total,19,50,employment_total,1096,8381,3236,9251,4258,10206,,,,,,36428
+B2A3N,"Operating surplus and mixed income, net",14,20,os_mixed_income_net,6423,33332,29982,53109,186060,51384,,,,,,360290
+B1G,"Value added, gross",15,20,gva,21664,395022,115624,311407,415426,365017,,,,,,1624160
+P1,Output,16,20,output,43910,1079446,245606,540063,692487,508918,1001060,356790,404240,3580,420730,
+EMP-WS,Employment on wages and salaries,17,50,employment_wage_salary,483,8032,2896,7977,3653,9555,,,,,,32596
+EMP-FTE,Self-employed,18,50,employment_self_employed,613,349,340,1274,605,651,,,,,,3832
+EMP,Total employment domestic concept,19,50,employment_domestic_total,1096,8381,3236,9251,4258,10206,,,,,,36428
