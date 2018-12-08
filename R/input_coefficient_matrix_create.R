@@ -36,7 +36,7 @@
 input_coefficient_matrix_create <- function ( data_table,
                                               digits = NULL) {
   
-  coefficient_matrix_create( iotable_get(), 
+  coefficient_matrix_create( data_table, 
                              total = "total", 
                              return = "products", 
                              digits = 4)
