@@ -28,7 +28,11 @@ input_indicator_create <- function ( data_table,
   cm <- coefficient_matrix_create( siot = data_table, 
                                    households = households )
   
-  inputs_present <- which( cm[,1] %in% input_vector) 
+  key_column <- tolower(as.character(unlist(cm[,1])))
+  key_column
+  
+  inputs_present <- which( key_column %in% tolower(input_vector) )
+  inputs_present
   
   if ( length(inputs_present) == 0 ) {
     stop ( "The inputs were not found")
@@ -49,7 +53,7 @@ input_indicator_create <- function ( data_table,
   }
   
   if ( is.null(final_names))  {
-    final_names <- paste0(as.character(input_matrix[,1], "_indicator"))
+    final_names <- paste0(as.character(unlist(input_matrix[,1])), "_indicator")
   }
   
   input_matrix[,1] <- final_names
