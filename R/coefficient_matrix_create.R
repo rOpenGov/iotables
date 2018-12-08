@@ -16,7 +16,7 @@
 #' @param return_part Defaults to \code{NULL}. You can chooce \code{"product"} or
 #' \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
 #' to receive only the total intermediate use and proportional primary inputs.
-#' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
+#' @param remove_empty Defaults to \code{TRUE}. If you want to keep empty 
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 #' removed to avoid division by zero error in the analytical functions.
 #' @param households Defaults to \code{NULL}. Household column can be added 
@@ -35,7 +35,7 @@
 coefficient_matrix_create <- function ( data_table, 
                                         total = "output", 
                                         digits = NULL, 
-                                        empty_remove = TRUE,
+                                        remove_empty = TRUE,
                                         households = FALSE,
                                         return_part = NULL) {
   
@@ -55,7 +55,7 @@ coefficient_matrix_create <- function ( data_table,
   }
   
   #Remove empty columns and rows
-  if ( empty_remove ) data_table <- empty_remove ( data_table )
+  if ( remove_empty ) data_table <- iotables:::empty_remove ( data_table )
   
   last_column <- iotables:::quadrant_separator_find( data_table )
 
@@ -127,7 +127,7 @@ coefficient_matrix_create <- function ( data_table,
     data_table <- rbind ( data_table, household_earnings_row)
   }
   
-  if ( is.null(digits) ) return_part (data_table)
+  if ( is.null(digits) ) return (data_table)
   
   round_table ( data_table, digits = digits  )
 }
