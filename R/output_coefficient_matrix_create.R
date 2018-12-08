@@ -47,7 +47,10 @@ output_coefficient_matrix_create <- function ( io_table,
   
   io_table <- io_table [! siot_rows %in% remove_cols , 
                             ! names ( io_table ) %in% remove_cols  ]
-  io_table <- dplyr::mutate_if ( io_table, is.factor, as.character )
+  last_column <- quadrant_separator_find ( io_table  )
+  
+  io_table <- dplyr::mutate_if ( io_table, is.factor, as.character ) %>%
+              dplyr::select ( 1:last_column )
   
   total_row <- which ( tolower(as.character(unlist(io_table[, 1])))
                        %in% c("cpa_total", "total") )
