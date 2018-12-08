@@ -83,7 +83,6 @@ load (system.file('extdata', 'naio_10_product_x_product.rda', package = 'iotable
 In this vignette example the Czech (2015) national currency unit and the Slovak (2010) euro tables are created.  Since the Slovak national currency is the euro, there is no difference between the Slovak national currency unit and euro tables.
 
 ```{r preprocess}
-message ( "IO tables")
 cz_io <-  iotable_get ( labelled_io_data = naio_10_cp1700, 
                          source = "naio_10_cp1700", geo = "CZ", 
                          year = 2015, unit = "MIO_NAC", 
@@ -96,22 +95,12 @@ sk_io <-  iotable_get ( labelled_io_data = naio_10_cp1700,
                         stk_flow = "TOTAL",
                         labelling = "short" )
 
-message ( "Use tables")
-cz_use <- use_table_get( labelled_io_table = cz_io, 
-                         source = "naio_10_cp1700", geo = "CZ", 
-                         year = 2015, unit = "MIO_NAC", 
-                         stk_flow = "TOTAL",
-                         labelling = "short")
+cz_use <- input_flow_get( data_table = cz_io )
 
-sk_use <- use_table_get( labelled_io_table = sk_io, 
-                         source = "naio_10_cp1700", geo = "SK", 
-                         year = 2010, unit = "MIO_EUR", 
-                         stk_flow = "TOTAL",
-                         labelling = "short")
+sk_use <- input_flow_get( data_table = sk_io)
 
-message ( "Output vectors")
-cz_output <- output_get( labelled_io_table = cz_io)
-sk_output <- output_get( labelled_io_table = sk_io)
+cz_output <- output_get( data_table = cz_io)
+sk_output <- output_get( data_table = sk_io)
 ```
 
 By default, total rows and columns are removed when creating use tables. 
@@ -129,16 +118,12 @@ The `input_coefficient_matrix_create()` function relies on the following equatio
 It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero. 
 
 ```{r inputcoeff, results='asis'}
-message ("Czech Republic")
 input_coeff_matrix_cz <- input_coefficient_matrix_create(
-  cz_use, 
-  cz_output
+  data_table = cz_io
 )
 
-message ("Slovak Republic")
 input_coeff_matrix_sk <- input_coefficient_matrix_create(
-  sk_use, 
-  sk_output
+  data_table = sk_io
 )
 
 knitr::kable(head(input_coeff_matrix_cz[,1:8]))
@@ -186,11 +171,9 @@ $x_j$ = output of sector j
 By default, `direct_supply_effects_create()` will compare inputs to total final demand / supply. You can make comparisons to total product or total output, too. The code below prints a part of the Czech direct effects rounded to 4 digits.
 
 ```{r direct, results='asis'}
-message ( "Czech Republic:")
 direct_cz <- direct_supply_effects_create( labelled_io_table = cz_io, 
                                     digits = 4)
 
-message ( "Slovak Republic:")
 direct_sk <- direct_supply_effects_create( labelled_io_table = sk_io )
 
 knitr::kable (head(direct_cz[,1:8]))
@@ -217,12 +200,25 @@ Z = direct and indirect requirements for wages (or other income)
 The code chunk below prints a part of the Czech multipliers, rounded to 4 digits. 
 
 ```{r total, results='asis' }
-message ( "Czech Republic:")
-multipliers_cz <- input_multipliers_create( direct_cz[, 1:62], I_cz)
+direct_effects_sk <- coefficient_matrix_create(data_table = sk_io, 
+                                              total = 'output', 
+                                              return = 'primary_inputs') 
 
-message ( "No messages.")
-message ( "Slovak Republic:")
-multipliers_sk <- input_multipliers_create( direct_sk, I_sk, digits = 4)
+direct_effects_cz <- coefficient_matrix_create(data_table = cz_io, 
+                                              total = 'output', 
+                                              return = 'primary_inputs') 
+
+#Remove the total column from direct effects to conform with the inverse:
+direct_effects_sk <- dplyr::select(direct_effects_sk, -TOTAL)
+direct_effects_cz <- dplyr::select(direct_effects_cz, -TOTAL)
+
+multipliers_sk <- input_multipliers_create(
+ direct_effects = direct_effects_sk,
+ inverse = I_sk)
+
+multipliers_sk <- input_multipliers_create(
+ direct_effects = direct_effects_cz,
+ inverse = I_cz)
 
 knitr::kable (head(multipliers_cz[,1:8]))
 ```
@@ -233,18 +229,16 @@ The creation of the employment indicator is fascilitated with the data processin
 
 Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation.  The helper function `conforming_vector_create` will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.
 
-```{r employmentindicator, results='asis'}
-message("Slovak Republic")
+```{r employmentindicator, results='asis', eval=FALSE}
+#New function is needed to add employment vector to SIOT
 emp_indicator_sk  <- input_indicator_create( 
-  input_matrix = emp_sk, 
+  data_table  = emp_sk, 
   output_vector = sk_output)
 
-message("\nCzech Republic")
 emp_indicator_cz  <- input_indicator_create( 
-  input_matrix = emp_cz, 
+  data_table  = emp_cz, 
   output_vector = cz_output)
 
-message("\nSlovak Republic")
 employment_multipliers_sk <- multiplier_create ( 
   input_vector    = emp_indicator_sk,
   Im              = I_sk,
@@ -252,7 +246,6 @@ employment_multipliers_sk <- multiplier_create (
   digits = 4 ) %>% 
   tidyr::gather (industry, values, !!2:ncol(.))
 
-message("\nCzech Republic")
 employment_multipliers_cz <- multiplier_create ( 
   input_vector    = emp_indicator_cz,
   Im              = I_cz,
@@ -291,7 +284,7 @@ knitr::kable (head(cz_bw[,1:8]))
 
 Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table. 
 
-```{r output_coeff, results='asis'}
+```{r output_coeff, results='asis', eval=FALSE}
 
 output_coeff_cz <- output_coefficient_matrix_create( 
   io_table = cz_io, type = "final_demand", digits = 4)
@@ -304,7 +297,7 @@ knitr::kable (head(output_coeff_cz[,1:8]))
 
 From the output coefficient matrix we can create the Leontieff-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
 
-```{r forward, results='asis'}
+```{r forward, results='asis', eval=FALSE}
 cz_fw <- forward_linkages ( output_coeff_cz )
 sk_fw <- forward_linkages( output_coeff_sk )
 

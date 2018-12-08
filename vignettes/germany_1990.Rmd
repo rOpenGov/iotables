@@ -24,16 +24,15 @@ The Germany example is used to test the code of the package. It follows the exam
 
 The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat Manual (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.
 
-The following data processing functions select and order the data from the Eurostat-type bulk file. 
+The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the `germany_1990` dataset and the Manaul should cause no misunderstandings.
 
 ```{r iotables}
-de_use    <- use_table_get ( source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR", 
-                       households = FALSE, labelling = "iotables")
+data_table <- iotable_get( labelling = "iotables" )
+input_flow <- input_flow_get ( 
+                  data_table = data_table, 
+                  households = FALSE)
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR",
-                       households = FALSE, labelling = "iotables")
+de_output <- primary_input_get ( data_table, "output" )
 print (de_output[c(1:4)])
 ```
 
@@ -54,25 +53,20 @@ It checks the correct ordering of columns, and furthermore it fills up 0 values 
 
 
 ```{r inputcoeff, echo=FALSE}
-de_input_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
+de_input_coeff <- input_coefficient_matrix_create( 
+     data_table = data_table, 
+     digits = 4)
 
 print ( de_input_coeff[1:3, 1:3])
 ```
 
 Similarly, the output coefficient matrix is 
 
-```{r outputcoeff, echo=FALSE}
+```{r outputcoeff, echo=FALSE, eval = FALSE}
 #Sample data table has not total column
-io_table <- iotable_get () 
-io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
-
-output_bp <- dplyr::select ( io_table, output_bp )
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
-io_table <- cbind (io_table, output_bp)
-
-de_out <- output_coefficient_matrix_create ( io_table = io_table, 
-                                    type = 'final_demand',
+de_out <- output_coefficient_matrix_create ( 
+                                    io_table = data_table, 
+                                    total = 'final_demand',
                                     digits = 4)
 
 #Rounding is slightly different in the manual
@@ -107,13 +101,14 @@ Technical indicators assume constant returns to scale and fixed relationship of 
 The helper function `primary_input_get()` selects a row from the SIOT and brings it to a conforming form. The `input_indicator_create()` creates the vector of technical input coefficients.
 
 ```{r employment_indicator}
-de_emp <- primary_input_get ( input = "employment_total",
-                              source = "germany_1990", geo = "DE",
-                              year = 1990,  
-                              households = FALSE, labelling = "iotables")
+de_emp <- primary_input_get ( data_table,
+                              primary_input = "employment_domestic_total" )
 
-de_emp_indicator <- input_indicator_create (de_emp, de_output)
-print ( de_emp_indicator[1:4])
+de_emp_indicator <- input_indicator_create ( 
+    data_table  = data_table,
+    input_vector = "employment_domestic_total")
+
+print ( tidyr::gather( de_emp_indicator, indicators, values, !!2:ncol(de_emp_indicator)) )
 
 ```
 
@@ -128,11 +123,12 @@ In another vignette we will show examples on how to work with these real-life da
 The `gva_get()` helper function selects the gross value added row from a SIOT.
 
 ```{r gva_indicator}
-de_gva <- gva_get ( source = "germany_1990" )
+de_gva <- primary_input_get ( data_table,
+                              primary_input = "gva")
 
 de_gva_indicator  <- input_indicator_create( 
-    input_matrix = de_gva, 
-    output_vector = de_output)
+    data_table  = data_table,
+    input_vector = "gva")
 
 print( de_gva_indicator ) 
 ```
@@ -145,7 +141,7 @@ This is equal to the equation on page 495 of the Eurostat Manual.
 
 You can create a matrix of input indicators, or direct effects on (final) demand with `direct_supply_effects_create()`. The function by default creates input requirements for final demand.  With the code below it re-creates the Table 15.14 of the Eurostat manual. 
 
-```{r input_indicator}
+```{r input_indicator, eval = FALSE}
 io_table <- iotable_get () 
 #Total column should not be missing:
 io_table <- io_table [, 1:7] 
@@ -188,7 +184,7 @@ The `multiplier_create()` function performs the matrix multiplication, after han
 Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
 
 ```{r gva_multipliers}
-
+#this is not working 
 de_gva_multiplier <- multiplier_create( 
                             Im = I_de, 
                             input_vector = de_gva_indicator, 
@@ -202,21 +198,17 @@ The indicator shows that manufacturing has the lowest, and other services has th
 
 You can recreate the whole matrix if possible income multipliers with `input_multipliers_create()`.
 
-```{r inputmultipliers}
-#Total column should not be missing
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
+```{r inputmultipliers, eval=FALSE}
+direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
+                                               total = 'output', 
+                                               return = 'primary_inputs') 
 
-labelled_io_table <- io_table
-
-direct_effects_de <- direct_supply_effects_create ( labelled_io_table = io_table ) 
-
-#remove the total column from direct effects to conform with the inverse [,-8]
+#Remove the total column from direct effects to conform with the inverse:
+direct_effects_de <- dplyr::select(direct_effects_de, -total)
 
 multipliers <- input_multipliers_create(
-  direct_effects = direct_effects_de [, -8],
-  inverse = I_de, 
-  labelled = TRUE)
+  direct_effects = direct_effects_de,
+  inverse = I_de)
 
 print (multipliers[1:3, 1:3])
 ```
@@ -232,13 +224,8 @@ The E matrix contains the input coefficients for labor (created by `input_indica
 (64) Z = E(I-A)^-1^ 
 
 ```{r employment_multiplier, warning=FALSE}
-
-de_emp <- primary_input_get ( input = "employment_total",
-                              source = "germany_1990", geo = "DE",
-                              year = 1990,  
-                              households = FALSE, labelling = "iotables")
-
-de_emp_indicator <- input_indicator_create (de_emp, de_output)
+de_emp_indicator <- input_indicator_create (data_table = data_table, 
+                              input = 'employment_domestic_total')
 
 employment_multipliers <- multiplier_create ( 
   input_vector    = de_emp_indicator,
@@ -264,8 +251,10 @@ Output multipliers and forward linkages are calculated with the help of output c
 $x_i$: output of sector i
 
 ```{r outputmult}
+#results are strange
 de_input_coeff <- input_coefficient_matrix_create( 
-                           de_use, de_output, digits = 4)
+                         data_table = data_table, 
+                         digits = 4)
                            
 output_multipliers <- output_multiplier_create ( 
                         input_coefficient_matrix = de_input_coeff )
@@ -279,7 +268,7 @@ These multipliers can be checked against the Table 15.15 on p500 of the Eurostat
 
 When working with the type-II multipliers we need to include the household consumption column and the household earnings row in the tables. The dimensions of the table are growing by 1, so all matrixes and vectors need to be re-created. Not applicable cells, such as gross value added for households is filled up with zero values. 
 
-```{r type2}
+```{r type2, eval=FALSE}
 de_use_2    <- use_table_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = TRUE, labelling = "iotables")
@@ -336,22 +325,10 @@ Manufacturing has the highest backward linkages, and other services the least. A
 
 Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.
 
-```{r forward}
-#You need a table that has a total column and either the total 
-#intermediate use or final use
-#This is usually the case with Eurostat tables, but with the Germany data
-#file total must be added.
-
-io_table <- iotable_get () 
-io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
-
-output_bp <- dplyr::select ( io_table, output_bp )
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
-io_table <- cbind (io_table, output_bp)
+```{r forward, eval = FALSE}
 
 de_out <- output_coefficient_matrix_create ( 
-  io_table, "final_demand", digits = 4
+  data_table, "final_demand", digits = 4
   )
                                     
 forward_linkages ( output_coefficient_matrix = de_out )
