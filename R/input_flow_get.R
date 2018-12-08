@@ -19,8 +19,8 @@
 #' @export 
 
 input_flow_get <- function ( data_table  = NULL,
-                            empty_remove = FALSE,
-                            households = TRUE ) {  
+                             empty_remove = FALSE,
+                             households = TRUE ) {  
   
   ##Initialize variables ------------
    . <-  NULL #non-standard evaluation creates a varning in build. 
