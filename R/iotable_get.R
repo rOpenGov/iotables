@@ -75,23 +75,23 @@ iotable_get <- function ( labelled_io_data = NULL,
        ) {
     stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
   }
-##Veryfing source parameter and loading the labelling  ----
+  ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
-                "naio_10_pyp1620", "naio_10_pyp1630" )
-  trow_tcol <-  c(  "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
-  croatia_files <- c( "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")
+                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990" )
   
+  data(metadata)
+ 
   if ( source %in% prod_ind ) { 
-    metadata_rows <- iotables::metadata %>%  #tables that follow prod_ind vocabulary
+    metadata_rows <- metadata %>%  #tables that follow prod_ind vocabulary
       dplyr::filter ( variable == "prod_na") %>%
       dplyr::rename ( prod_na = code) %>%
       dplyr::rename ( prod_na_lab = label ) %>%
       dplyr::rename ( row_order = numeric_label ) %>%
       dplyr::rename ( iotables_row = iotables_label )
     
-    metadata_cols <- iotables::metadata %>%
+    metadata_cols <- metadata %>%
       dplyr::filter ( variable == "induse") %>%
       dplyr::rename ( induse = code) %>%
       dplyr::rename ( induse_lab = label )%>%
@@ -114,7 +114,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
-  } else if ( source == "germany_1990" ) {  #German simplified tables
+  } else if ( source == "germany_1991" ) {  #German simplified tables
     metadata_rows <- germany_metadata_rows  
     metadata_cols <- germany_metadata_cols 
   } else {
@@ -130,9 +130,11 @@ iotable_get <- function ( labelled_io_data = NULL,
     if (! labelling %in% c("iotables", "short")) {
       stop("Only iotables or original short columns can be selected.")
     }
+  
     if (! unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC")) {
       stop("Currency unit must be MIO_NAC, MIO_EUR or T_NAC")
     }
+    
     if ( source %in% c("naio_10_cp1620", "naio_10_cp1630")) {
       if ( stk_flow != "TOTAL") {
         stk_flow_input <- "TOTAL"
@@ -143,7 +145,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     ##Creating a temporary file name for the input-output table ----
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
     if ( source_inputed == "germany_1990" ) {
-      labelled_io_data <- iotables::germany_1990    # use germany example 
+      labelled_io_data <- germany_1990    # use germany example 
       labelled_io_data$year = 1990
     } else if ( source_inputed == "croatia_2010_1700" ) { 
       labelled_io_data <- iotables::croatia_2010_1700 %>%
@@ -185,7 +187,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   }
   
 
-###converting factors to characters------  
+###Selecting table from nested data, if nested at all------  
   
  selected_table <- which (   ##get the number of table to be selected
     labelled_io_data$year == year & 
@@ -203,8 +205,10 @@ iotable_get <- function ( labelled_io_data = NULL,
        labelled_io_data$unit == unit  &
        labelled_io_data$stk_flow == stk_flow_input)
    }  #in case of DOM, IMP, TOTAL stk_flow must be selected, too.
- 
-if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1900" , 
+
+  ###Selecting not nested data------   
+  if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , 
+                     "croatia_2010_1900" , 
                        "germany_1990") ) {
     iotable <- labelled_io_data$data[[selected_table]]  ##the relevant io table data in long form
   } else {
@@ -214,21 +218,24 @@ if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1
  if ( class(iotable$values) %in% c("character", "factor")) {
     iotable$values  = trimws(as.character(iotable$values), which = "both")
     iotable$values = as.numeric(iotable$values)
-    warning("Warning: original data was converted to numeric format.")
-  }
+    message("Warning: original data was converted to numeric format.")
+ }
+
+  iotable_bak <- iotable
   
 ###Get and order the SIOT-------  
  if ( source %in% prod_ind ) {
-     
-    iotable_labelled <- iotable %>%
-      dplyr::filter (stk_flow == stk_flow_input ) %>%
-      dplyr::mutate_if ( is.factor, as.character ) %>%
-      dplyr::left_join (.,  metadata_cols, by = c("induse", "induse_lab") ) %>%
-      dplyr::select ( -quadrant, -account_group, 
-                      -digit_1, -digit_2, -variable, -group ) %>%
-      dplyr::mutate_if ( is.factor, as.character ) %>% 
-      dplyr::left_join (.,  metadata_rows, 
-                        by = c("prod_na", "prod_na_lab"))  
+  col_join <- names ( iotable ) [ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col") )] 
+  row_join <- names ( iotable ) [ which( names(iotable) %in% c("prod_na", "prod_na_lab", "iotables_row") )] 
+  
+  iotable_labelled <- iotable %>%
+    dplyr::filter (stk_flow == stk_flow_input )  %>%
+    dplyr::mutate_if ( is.factor, as.character ) %>%
+    dplyr::left_join (.,  metadata_cols, by = col_join  ) %>%
+    dplyr::select ( -quadrant, -account_group, 
+                    -digit_1, -digit_2, -variable, -group ) %>%  #remove repeating columns before joining rows
+    dplyr::mutate_if ( is.factor, as.character ) %>% 
+    dplyr::left_join (.,  metadata_rows, by = row_join )  
     
     if ( nrow (iotable_labelled) == 0 ) {
       stop ( "No rows found with geo = ", geo_input, " year = ", year, 
@@ -267,7 +274,7 @@ if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , "croatia_2010_1
                                                        as.numeric(row_order))) %>%
       dplyr::mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
                                                          as.numeric( col_order)))
-  }
+  } #end of not prod_na cases
 
   if ( labelling == "iotables" ) {
     
