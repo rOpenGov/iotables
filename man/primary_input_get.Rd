@@ -4,18 +4,18 @@
 \alias{primary_input_get}
 \title{Get primary inputs}
 \usage{
-primary_input_get(siot, primary_input = "compensation_employees")
+primary_input_get(data_table, primary_input = "compensation_employees")
 }
 \arguments{
-\item{siot}{A symmetric input-output table created by 
-\code{\link{iotable_get}}.}
+\item{data_table}{A symmetric input-output table, a use table, or a 
+supply table retrieved by the  \code{\link{iotable_get}} function.}
 }
 \description{
 This function will retrieve any primary input from the input-output table.
 }
 \examples{
 comp_employees_de <- primary_input_get(
-                            siot = iotable_get( "germany_1990"), 
+                            data_table = iotable_get( "germany_1990"), 
                             primary_input = "compensation_employees")
                             )
 }

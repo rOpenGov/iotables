@@ -1,17 +1,17 @@
 #' Get primary inputs
 #'
 #' This function will retrieve any primary input from the input-output table. 
-#' @param siot A symmetric input-output table created by 
-#' \code{\link{iotable_get}}. 
+#' @param data_table A symmetric input-output table, a use table, or a 
+#' supply table retrieved by the  \code{\link{iotable_get}} function. 
 #' @importFrom dplyr select mutate_if
 #' @examples
 #' comp_employees_de <- primary_input_get(
-#'                             siot = iotable_get( "germany_1990"), 
+#'                             data_table = iotable_get( "germany_1990"), 
 #'                             primary_input = "compensation_employees")
 #'                             )
 #' @export
 
-primary_input_get <- function ( siot,
+primary_input_get <- function ( data_table,
                                 primary_input = "compensation_employees") {
   
   if ( is.null(siot)) { 
