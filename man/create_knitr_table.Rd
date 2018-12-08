@@ -4,9 +4,9 @@
 \alias{create_knitr_table}
 \title{Create an output-independent, well formatted kable table}
 \usage{
-create_knitr_table(data_table, caption = NA, col.names = NULL,
-  col_width = NULL, width_unit = "cm", col_align = NULL,
-  border_right_cols = NULL, bold_cols = NULL,
+create_knitr_table(data_table, digits = NULL, caption = NA,
+  col.names = NULL, col_width = NULL, width_unit = "cm",
+  col_align = NULL, border_right_cols = NULL, bold_cols = NULL,
   bootstrap_options = c("striped", "hover", "condensed"),
   latex_options = NULL, output_format = "html", keep_pdf = FALSE,
   latex_header_includes = c("\\\\usepackage[magyar]{babel}",

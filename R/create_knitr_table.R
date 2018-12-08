@@ -36,7 +36,8 @@
 #'   )
 
 create_knitr_table <- function ( 
-                    data_table, 
+                    data_table,
+                    digits = NULL,
                     caption = NA,
                     col.names = NULL, 
                     col_width= NULL, 
@@ -78,6 +79,11 @@ create_knitr_table <- function (
       col_width = c(2, 18/(ncol(data_table)-1))
     }
     
+    #Create default digit settings----
+    if ( is.null(digits)) {
+      digits <- getOption("digits")
+    } else if ( digits < 0 ) { digits <- getOption("digits") }
+    
     col_width <- paste0(col_width, width_unit)   
     
     if ( output_format == "image" ) { 
@@ -91,6 +97,7 @@ create_knitr_table <- function (
     #Create the basic table
     knitr_table <- knitr::kable(
       data_table,
+      digits = digits,
       format = format,  
       format.args = (list(big.mark = " ", decimal.mark = ",")),
       caption = caption,
