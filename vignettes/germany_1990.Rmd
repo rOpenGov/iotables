@@ -124,7 +124,7 @@ The `gva_get()` helper function selects the gross value added row from a SIOT.
 
 ```{r gva_indicator}
 de_gva <- primary_input_get ( data_table,
-                              primary_input = "gva")
+                              primary_input = "gva") 
 
 de_gva_indicator  <- input_indicator_create( 
     data_table  = data_table,
@@ -184,11 +184,10 @@ The `multiplier_create()` function performs the matrix multiplication, after han
 Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
 
 ```{r gva_multipliers}
-#this is not working 
 de_gva_multiplier <- multiplier_create( 
-                            Im = I_de, 
-                            input_vector = de_gva_indicator, 
-                            multiplier_name = 'gva_multiplier' )
+            Im = I_de, 
+            input_vector = dplyr::select (de_gva_indicator, -total), 
+            multiplier_name = 'gva_multiplier' )
 print ( de_gva_multiplier )
 ```
 
@@ -198,10 +197,10 @@ The indicator shows that manufacturing has the lowest, and other services has th
 
 You can recreate the whole matrix if possible income multipliers with `input_multipliers_create()`.
 
-```{r inputmultipliers, eval=FALSE}
-direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
-                                               total = 'output', 
-                                               return = 'primary_inputs') 
+```{r inputmultipliers}
+direct_effects_de <- coefficient_matrix_create(data_table  = data_table, 
+                                               total       = 'output', 
+                                               return_part = 'primary_inputs') 
 
 #Remove the total column from direct effects to conform with the inverse:
 direct_effects_de <- dplyr::select(direct_effects_de, -total)
@@ -223,9 +222,10 @@ The E matrix contains the input coefficients for labor (created by `input_indica
 
 (64) Z = E(I-A)^-1^ 
 
-```{r employment_multiplier, warning=FALSE}
+```{r employment_multiplier}
 de_emp_indicator <- input_indicator_create (data_table = data_table, 
-                              input = 'employment_domestic_total')
+                              input = 'employment_domestic_total') %>%
+  dplyr::select(-total)
 
 employment_multipliers <- multiplier_create ( 
   input_vector    = de_emp_indicator,
@@ -268,24 +268,18 @@ These multipliers can be checked against the Table 15.15 on p500 of the Eurostat
 
 When working with the type-II multipliers we need to include the household consumption column and the household earnings row in the tables. The dimensions of the table are growing by 1, so all matrixes and vectors need to be re-created. Not applicable cells, such as gross value added for households is filled up with zero values. 
 
-```{r type2, eval=FALSE}
-de_use_2    <- use_table_get ( source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR", 
-                       households = TRUE, labelling = "iotables")
+```{r type2}
+de_input_flow_2    <- input_flow_get ( 
+                         data_table = data_table,
+                         households = TRUE)
 
-de_output_2 <- output_get ( source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR",
-                       households = TRUE, labelling = "iotables")
+de_input_coeff_2 <- input_coefficient_matrix_create(
+    data_table = data_table, 
+    households = TRUE)
 
-gva_de_2 <- gva_get (source = "germany_1990", geo = "DE",
-                       year = 1990, unit = "MIO_EUR",
-                       households = TRUE, labelling = "iotables")
-
-de_input_coeff_2 <- input_coefficient_matrix_create( de_use_2, de_output_2)
-
-gva_indicator_de_2  <- input_indicator_create( 
-    input_matrix = gva_de_2, 
-    output_vector = de_output_2)
+gva_indicator_de_2  <- input_indicator_create(
+   data_table = data_table, households = TRUE ) %>%
+  dplyr::select (-total) 
 
 L_de_2 <- leontieff_matrix_create( technology_coefficients_matrix =
                                 de_input_coeff_2 )
