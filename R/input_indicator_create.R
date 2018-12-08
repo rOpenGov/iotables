@@ -25,7 +25,7 @@ input_indicator_create <- function ( data_table,
   data_table <- data_table %>% 
     dplyr::mutate_if ( is.factor, as.character ) 
   
-  cm <- coefficient_matrix_create( siot = data_table, 
+  cm <- coefficient_matrix_create( data_table = data_table, 
                                    households = households )
   
   key_column <- tolower(as.character(unlist(cm[,1])))
