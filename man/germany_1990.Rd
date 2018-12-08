@@ -6,10 +6,12 @@
 \title{Simple input-output table for Germany, 1990.}
 \format{A data frame with 228 observations and 10 variables.
 \describe{
-  \item{t_rows2}{Technology codes in row names, following the Eurostat convention.}
-  \item{t_rows2_lab}{Longer labels for t_rows2}
-  \item{t_cols2}{Column labels, following the Eurostat convention with differences.}
-  \item{t_cols2_lab}{Longer labels for t_cols2}
+  \item{prod_na}{Technology codes in row names, following the Eurostat convention.}
+  \item{prod_na_lab}{Longer labels for t_rows2}
+  \item{induse}{Column labels, following the Eurostat convention with differences.}
+  \item{induse_lab}{Longer labels for t_cols2}
+  \item{iotables_row}{Row labels, i.e. to be used in key column, for iotables package abbreviations}
+  \item{iotables_col}{Column labels for iotables package abbreviations}
   \item{values}{The actual values of the table in million euros}  
   \item{unit}{MIO_EUR, the same as Eurostat}
   \item{unit_lab}{Million euros. Eurostat usually has euro and national currency unit values, too.}
@@ -28,7 +30,8 @@ For testing purposes a well documented example data set is used from the Eurosta
 The table in the Eurostat manual is brought to the format used by the Eurostat database.
 It is a small dataset for examples, but it is also instructive to understand how Eurostat
 stores the highly structured SIOTs in long-form tidy datasets. 
-The third and fourth quadrant labelling follows the current Eurostat labels.
+The labels were slightly alterred to reflect the transition from the vocabulary
+of ESA95 to ESA2010 since the publication of the Manual.
 }
 \keyword{Germany}
 \keyword{data,}
