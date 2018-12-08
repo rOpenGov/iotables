@@ -30,7 +30,7 @@ primary_input_get <- function ( data_table,
     stop("The input is not found in this data source.")
   }
 
-    data_table[input_row, ]
+  data_table[input_row, ]
 }
 
 
