@@ -11,8 +11,14 @@
 output_get <- function ( data_table = NULL, 
                          labelling = "iotables" ) {  
   
+  key_column <- as.character(unlist(data_table[,1]))
+  
+  possible_names <- c('output', 'output_bp', 'p1', 'P1')
+  
   primary_input_get ( data_table = data_table,
-                      primary_input = "output")
+                      primary_input = possible_names[
+                        possible_names %in% key_column]
+  )
 }
 
 
