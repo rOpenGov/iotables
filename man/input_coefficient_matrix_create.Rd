@@ -4,12 +4,16 @@
 \alias{input_coefficient_matrix_create}
 \title{Create an input coefficient matrix}
 \usage{
-input_coefficient_matrix_create(data_table, digits = NULL)
+input_coefficient_matrix_create(data_table, households = FALSE,
+  digits = NULL)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 
 a margins or tax table retrieved by the \code{\link{iotable_get}}
  function.}
+
+\item{households}{Defaults to \code{NULL}. Household column can be added 
+with \code{TRUE}.}
 
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}

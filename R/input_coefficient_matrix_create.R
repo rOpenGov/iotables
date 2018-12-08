@@ -15,6 +15,8 @@
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the \code{\link{iotable_get}}
 #'  function. 
+#' @param households Defaults to \code{NULL}. Household column can be added 
+#' with \code{TRUE}.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
 #' @return A data frame that contains the matrix of first quadrant of the use table as
@@ -35,12 +37,14 @@
 #' @export 
 
 input_coefficient_matrix_create <- function ( data_table,
+                                              households = FALSE,
                                               digits = NULL) {
   
   
   cm <- coefficient_matrix_create( data_table, 
                              total = "total", 
-                             return = "products", 
+                             return_part = "products", 
+                             households = households,
                              digits = 4)
   
   potential_total_names <- c("CPA_TOTAL", "TOTAL", "cpa_total", "total")
