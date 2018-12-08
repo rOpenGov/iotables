@@ -14,7 +14,7 @@
 primary_input_get <- function ( data_table,
                                 primary_input = "compensation_employees") {
   
-  if ( is.null(siot)) { 
+  if ( is.null(data_table)) { 
     stop ( "No input-output table was given as an input")
     }
   
