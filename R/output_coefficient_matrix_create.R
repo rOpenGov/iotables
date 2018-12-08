@@ -36,17 +36,8 @@ output_coefficient_matrix_create <- function ( io_table,
   io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
   
   ###Find non-zero cols and rows and remove them---- 
-  non_zero_cols <- vapply ( io_table[, 1:ncol(io_table)], 
-                            non_zero_columns_find, logical (1) )
-  non_zero_rows <- as.logical (non_zero_cols[-1] ) 
-  remove_cols <- names (io_table )[! non_zero_cols]
+  io_table <- empty_remove ( io_table )
   
-  
-  siot_rows <- as.character ( unlist ( io_table[,1]) )
-  siot_rows
-  
-  io_table <- io_table [! siot_rows %in% remove_cols , 
-                            ! names ( io_table ) %in% remove_cols  ]
   last_column <- quadrant_separator_find ( io_table  )
   
   io_table <- dplyr::mutate_if ( io_table, is.factor, as.character ) %>%
