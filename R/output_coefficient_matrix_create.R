@@ -55,7 +55,7 @@ output_coefficient_matrix_create <- function ( io_table,
   } else if ( tolower(total) %in% c("total_final_use", "tfu", "final_demand")  ) {
     demand_col <- which (tolower(names(io_table)) %in% 
                            c("tfu", "total_final_use") )
-    last_column <- quadrant_separator_find ( io_table, include_total = TRUE )
+    last_column <- iotables:::quadrant_separator_find ( io_table, include_total = TRUE )
    }  else {
       stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
     }
@@ -67,13 +67,6 @@ output_coefficient_matrix_create <- function ( io_table,
   
   keep_first_name <- names(io_table)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
 
-  ###Households are not needed to calculate the output coefficients------
-  households_column <- which (names(io_table) %in% c("P3_S14", "households") )
-  if ( length(households_column) > 0 ) {
-    io_table <- io_table [, -households_column]
-    if (last_col == households_column) last_col <- last_col-1 
-  }
-  
   io_table <- io_table[, 1:last_column ]
   
   ###Create the return data.frame from first column------
@@ -86,7 +79,7 @@ output_coefficient_matrix_create <- function ( io_table,
 
   #forward linkeages on p507
   ##Avoid division by zero with epsilon-----
-  io_table <- vapply ( io_table[1:nrow(io_table), c(2:last_col)],
+  io_table <- vapply ( io_table[1:nrow(io_table), c(2:last_column)],
                  null_to_eps, numeric (nrow(io_table)) )
   
   output_coeff <- apply (  io_table, 2,
