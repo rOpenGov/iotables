@@ -323,13 +323,11 @@ Manufacturing has the highest backward linkages, and other services the least. A
 Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.
 
 ```{r forward}
-#the returned values are not good
 de_out <- output_coefficient_matrix_create ( 
   data_table, "final_demand", digits = 4
   )
                                     
 forward_linkages ( output_coefficient_matrix = de_out )
-#'
 ```
 
 >You can check forward linkages against the Table 15.20 of Eurostat Manual on page 507.
