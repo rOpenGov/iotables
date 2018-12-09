@@ -4,11 +4,14 @@
 \alias{quadrant_separator_find}
 \title{Determine the end of Quadrant I and III.}
 \usage{
-quadrant_separator_find(data_table)
+quadrant_separator_find(data_table, include_total = FALSE)
 }
 \arguments{
 \item{data_table}{A symmetric input output table, a use table or a supply 
 table.}
+
+\item{include_total}{Should the total (intermediary) output column be
+included \code{TRUE} or excluded (\code{FALSE}, default)?}
 }
 \value{
 An integer value with the last column of Quadrant I and III. If
