@@ -104,11 +104,15 @@ use in detail.
 * New conveninece function for nicer printing of sturctured SIOT tables and related matrix results.  Not yet exported, first will be used on vigenttes only. 
 
 # iotables 0.3.9
+This is a much improved, simplified pre-release version, with highly improved
+performance, more consistent function interface and far more readable code. The last CRAN release is stable, the following version will be a stable, better release candidate.
 * The Germany example is converted to the ESA2010 vocabulary. 
 * The `output_get()` is now a wrapper around `primary_input_get()` and 
 `gva_get()` is completely deprecated.
 *  The `input_coefficient_matrix_create()` is now a wrapper around the more
  general `coefficient_matrix_create()`.
- *  The `use_table_get()` function is now named `input_flow_get()` but it 
- is seldom used, as the analytical function will call it as needed.
+*  The `use_table_get()` function is now named `input_flow_get()` but it 
+is seldom used, as the analytical function will call it as needed.
+* This is not a stable version, some vignette examples and unit test need to 
+be rewritten. 
 
