@@ -44,8 +44,8 @@
 #' 
 #' @export 
 
-multiplier_create <- function ( input_vector = NULL, 
-                                Im = NULL,
+multiplier_create <- function ( input_vector, 
+                                Im,
                                 multiplier_name = "multiplier",
                                 digits = NULL ) {
   
