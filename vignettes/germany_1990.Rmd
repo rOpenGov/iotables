@@ -70,8 +70,7 @@ print ( de_input_coeff[1:3, 1:3])
 
 Similarly, the output coefficient matrix is the following:
 
-```{r outputcoeff, echo=FALSE, eval = FALSE}
-#Sample data table has not total column
+```{r outputcoeff, echo=FALSE}
 de_out <- output_coefficient_matrix_create ( 
                                     io_table = data_table, 
                                     total = 'tfu',
@@ -94,8 +93,9 @@ The Leontieff inverse is (I-A)^-1^ and it is created with the `leontieff_inverse
 ```{r leontieff}
 L_de <- leontieff_matrix_create( technology_coefficients_matrix =
                                 de_input_coeff )
-I_de <- leontieff_inverse_create(L_de)
-print (I_de[,1:3])
+I_de <- leontieff_inverse_create(de_input_coeff)
+I_de_4 <- leontieff_inverse_create(de_input_coeff, digits = 4)
+print (I_de_4[,1:3])
 ```
 
 >You can check the Leontieff matrix against Table 15.9 on page 487 of the Euorstat manual, and the Leontieff inverse against Table 15.10 on page 488. The ordering of the industries is different in the manual.
@@ -193,9 +193,11 @@ The `multiplier_create()` function performs the matrix multiplication, after han
 Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
 
 ```{r gva_multipliers}
+
+de_gva_indicator
 de_gva_multiplier <- multiplier_create( 
             Im = I_de, 
-            input_vector = dplyr::select (de_gva_indicator, -total), 
+            input_vector = de_gva_indicator,
             multiplier_name = 'gva_multiplier' )
 print ( de_gva_multiplier )
 ```
