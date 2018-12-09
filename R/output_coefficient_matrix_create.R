@@ -45,7 +45,7 @@ output_coefficient_matrix_create <- function ( io_table,
     io_table <- io_table [1:(total_row-1), ]
   }
   
-  if ( total == "total") { 
+  if ( total == "total" ) { 
     demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
     last_column <- quadrant_separator_find ( io_table  )
     if ( length(demand_col) == 0 ) { 
@@ -55,7 +55,8 @@ output_coefficient_matrix_create <- function ( io_table,
   } else if ( tolower(total) %in% c("total_final_use", "tfu", "final_demand")  ) {
     demand_col <- which (tolower(names(io_table)) %in% 
                            c("tfu", "total_final_use") )
-    last_column <- iotables:::quadrant_separator_find ( io_table, include_total = TRUE )
+    last_column <- iotables:::quadrant_separator_find ( io_table, 
+                                                        include_total = FALSE )
    }  else {
       stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
     }

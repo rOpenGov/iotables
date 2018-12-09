@@ -3,8 +3,9 @@ library (iotables)
 context ("Creating forward linkages")
 
 de_out <- output_coefficient_matrix_create ( 
-  data_table, "final_demand", digits = 4
+  io_table = iotable_get(), "final_demand", digits = 4
 )
+
 
 fw <- forward_linkages ( output_coefficient_matrix = de_out, 
                    digits = 4 )
