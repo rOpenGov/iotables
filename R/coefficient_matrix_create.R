@@ -57,7 +57,8 @@ coefficient_matrix_create <- function ( data_table,
   #Remove empty columns and rows
   if ( remove_empty ) data_table <- iotables:::empty_remove ( data_table )
   
-  last_column <- iotables:::quadrant_separator_find( data_table )
+  last_column <- iotables:::quadrant_separator_find( data_table, 
+                                                     include_total = FALSE)
 
   #####removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 
