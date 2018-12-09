@@ -37,7 +37,7 @@ The terminology follows the
 this matrix is called 'technological coefficients'. The results of the function are 
 tested on both sources.
 
-This is a wrapper function around  \code{\link{coefficient_matrix_create }}.
+This is a wrapper function around  \code{\link{coefficient_matrix_create}}.
 }
 \examples{
 input_coefficient_matrix_create ( 

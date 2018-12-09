@@ -11,7 +11,7 @@
 #' this matrix is called 'technological coefficients'. The results of the function are 
 #' tested on both sources.
 #'
-#' This is a wrapper function around  \code{\link{coefficient_matrix_create }}.
+#' This is a wrapper function around  \code{\link{coefficient_matrix_create}}.
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the \code{\link{iotable_get}}
 #'  function. 
