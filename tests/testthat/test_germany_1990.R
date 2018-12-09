@@ -4,8 +4,8 @@ require (dplyr)
 context ("Eurostat Manual example")
 
 hh_consumption <- germany_1990 %>%
-  dplyr::filter ( t_rows2 == "p1") %>%
-  dplyr::filter  ( t_cols2 == "consumption_expenditure_household" ) %>%
+  dplyr::filter ( prod_na == "P1") %>%
+  dplyr::filter ( iotables_col  == "final_consumption_households" ) %>%
   dplyr::select ( values ) %>%
   unlist () %>% as.numeric ()
 
