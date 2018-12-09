@@ -4,15 +4,14 @@
 \alias{uk_2010_get}
 \title{Get United Kingdom Input-Output Analytical Tables, 2010}
 \source{
-\href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}
-{ukioanalyticaltablesio1062010detailedpubversion.xls}
+\href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}{ukioanalyticaltablesio1062010detailedpubversion.xls}
 }
 \usage{
 uk_2010_get(path = NULL)
 }
 \arguments{
 \item{path}{A path to the downloaded file, if already exists, given with
-\code{base::file.path()} function.}
+\code{file.path()} function.}
 }
 \description{
 This function will retrieve any primary input from the input-output table.
