@@ -4,7 +4,7 @@
 \alias{output_coefficient_matrix_create}
 \title{Create an output coefficient matrix}
 \usage{
-output_coefficient_matrix_create(io_table, total = "total",
+output_coefficient_matrix_create(io_table, total = "tfu",
   digits = NULL)
 }
 \arguments{

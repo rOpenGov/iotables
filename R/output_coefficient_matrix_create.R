@@ -28,20 +28,15 @@
 #' @export 
 
 output_coefficient_matrix_create <- function ( io_table,
-                                               total = "total",
+                                               total = "tfu",
                                                digits = NULL ) {
   funs <-. <- NULL  #for checking against non-standard evaluation
-  check_digits ( digits = digits)
+  iotables:::check_digits ( digits = digits)
   
   io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
   
   ###Find non-zero cols and rows and remove them---- 
-  io_table <- empty_remove ( io_table )
-  
-  last_column <- quadrant_separator_find ( io_table  )
-  
-  io_table <- dplyr::mutate_if ( io_table, is.factor, as.character ) %>%
-              dplyr::select ( 1:last_column )
+  io_table <- iotables:::empty_remove ( io_table )
   
   total_row <- which ( tolower(as.character(unlist(io_table[, 1])))
                        %in% c("cpa_total", "total") )
@@ -52,28 +47,26 @@ output_coefficient_matrix_create <- function ( io_table,
   
   if ( total == "total") { 
     demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
-    
+    last_column <- quadrant_separator_find ( io_table  )
     if ( length(demand_col) == 0 ) { 
       stop ("Please input a table that has a total column.")
     } #end of finding total column if originally missing
     
-  } else if ( total == "final_demand" ) {
+  } else if ( tolower(total) %in% c("total_final_use", "tfu", "final_demand")  ) {
     demand_col <- which (tolower(names(io_table)) %in% 
-                           c("tfu", "output_bp", "total_final_use") )
+                           c("tfu", "total_final_use") )
+    last_column <- quadrant_separator_find ( io_table, include_total = TRUE )
    }  else {
       stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
     }
   
-  demand_col 
   demand <- io_table [, demand_col ]
+  demand
+  io_table <- dplyr::mutate_if ( io_table, is.factor, as.character ) %>%
+    dplyr::select ( 1:last_column )
+  
   keep_first_name <- names(io_table)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
 
-  last_col <- which ( tolower(names(io_table)) %in% c("cpa_total", "total"))
-  if ( length(last_col) == 0 ) stop ("Did not find the total column") else {
-    last_col <- last_col-1 
-  }
-  is_last_cols <- FALSE
-  
   ###Households are not needed to calculate the output coefficients------
   households_column <- which (names(io_table) %in% c("P3_S14", "households") )
   if ( length(households_column) > 0 ) {
@@ -81,7 +74,7 @@ output_coefficient_matrix_create <- function ( io_table,
     if (last_col == households_column) last_col <- last_col-1 
   }
   
-  io_table <- io_table[, 1:last_col ]
+  io_table <- io_table[, 1:last_column ]
   
   ###Create the return data.frame from first column------
   first_col <- as.data.frame( io_table[ ,1] )
