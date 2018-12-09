@@ -6,7 +6,7 @@
 #'  UK Balance of Payments Pink Book 2013)							
 #' by Richard Wild.
 #' @param path A path to the downloaded file, if already exists, given with
-#' \code{\link{base::file.path}} function. 
+#' \code{base::file.path()} function. 
 #' @source \href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}
 #' {ukioanalyticaltablesio1062010detailedpubversion.xls}
 #' @importFrom dplyr select mutate_if mutate left_join mutate_at

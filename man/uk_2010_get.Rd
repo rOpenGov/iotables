@@ -12,7 +12,7 @@ uk_2010_get(path = NULL)
 }
 \arguments{
 \item{path}{A path to the downloaded file, if already exists, given with
-\code{\link{base::file.path}} function.}
+\code{base::file.path()} function.}
 }
 \description{
 This function will retrieve any primary input from the input-output table.
