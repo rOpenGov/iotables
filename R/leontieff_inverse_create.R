@@ -1,27 +1,25 @@
 #' Create the inverse of a Leontieff-matrix.
 #' 
 #' The inversion takes place after the basic properties of the Leontieff matrix. 
-#' @param leontieff_matrix A Leontieff matrix created by the
-#' \code{\link{leontieff_matrix_create}} function. 
+#' @param technology_coefficients_matrix A technology coefficient matrix created
+#' by the \code{\link{input_coefficient_matrix_create}} or 
+#' \code{\link{output_coefficient_matrix_create}}.
+#' @param digits An integer showing the precision of the technology matrix in 
+#' digits. Default is \code{NULL} when no rounding is applied.
 #' @importFrom dplyr mutate_at mutate_if
 #' @examples 
-#' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-#'                year = 1990, unit = "MIO_EUR", 
-#'                households = FALSE, labelling = "iotables")
-#' 
-#' de_output <- output_get ( source = "germany_1990", geo = "DE",
-#'                year = 1990, unit = "MIO_EUR",
-#'                households = FALSE, labelling = "iotables")
-#' 
-#' de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
-#' 
-#' L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
-#' I <- leontieff_inverse_create (L)
+#' tm <- input_flow_get ( 
+#'   data_table = iotable_get(), 
+#'   households = FALSE)
+#' I <- leontieff_inverse_create( technology_coefficients_matrix = tm )
 #' @export 
 
-leontieff_inverse_create <- function ( leontieff_matrix ) {
-  . = NULL ; funs = NULL ; vars = NULL
+leontieff_inverse_create <- function ( technology_coefficients_matrix, 
+                                       digits=NULL) {
+  . = NULL ; 
   
+  leontieff_matrix<- leontieff_matrix_create( 
+       technology_coefficients_matrix = technology_coefficients_matrix )
   Lm <- as.matrix(leontieff_matrix[,2:ncol(leontieff_matrix)])
   
   inverse <- solve( Lm )
@@ -32,9 +30,12 @@ leontieff_inverse_create <- function ( leontieff_matrix ) {
   
   named_inverse <- cbind(as.data.frame(leontieff_matrix [,1]),
                      as.data.frame(inverse)) %>%
-    mutate_if (is.factor, as.character)
+    dplyr::mutate_if (is.factor, as.character)
+  
   names ( named_inverse ) <- names (leontieff_matrix)
   row.names ( named_inverse ) <- 1:nrow(named_inverse)
   
-  return(named_inverse)
+ if ( is.null(digits) ) return (named_inverse)
+  
+  iotables:::round_table ( named_inverse, digits = digits  )
 }
