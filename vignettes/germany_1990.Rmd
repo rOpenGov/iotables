@@ -149,15 +149,10 @@ This is equal to the equation on page 495 of the Eurostat Manual. The results ab
 
 You can create a matrix of input indicators, or direct effects on (final) demand with `direct_supply_effects_create()`. The function by default creates input requirements for final demand.  With the code below it re-creates the Table 15.14 of the Eurostat manual. 
 
-```{r input_indicator, eval = FALSE}
-io_table <- iotable_get () 
-#Total column should not be missing:
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
-
-labelled_io_table <- io_table
-
-direct_effects_de <- direct_supply_effects_create ( labelled_io_table = io_table ) 
+```{r input_indicator}
+direct_effects_de <- coefficient_matrix_create(data_table  = data_table, 
+                                               total       = 'output', 
+                                             return_part = 'primary_inputs')
 print ( direct_effects_de[1:6,1:4])
 ```
 
@@ -187,19 +182,6 @@ B = vector of input coefficients for wages or GVA or taxes.
 
 Z = direct and indirect requirements for wages (or other income)
 
-The `multiplier_create()` function performs the matrix multiplication, after handling many exceptions and problems with real-life data, such as different missing columns and rows in the national variations of the standard European table. 
-
-Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
-
-```{r gva_multipliers}
-de_gva_indicator
-de_gva_multiplier <- multiplier_create( 
-            Im = I_de, 
-            input_vector = de_gva_indicator,
-            multiplier_name = 'gva_multiplier' )
-print ( de_gva_multiplier )
-```
-
 The indicator shows that manufacturing has the lowest, and other services has the highest gross value added component. This is hardly suprising, because manufacturing needs a lot of materials and imported components. When the demand for manufacturing in the domestic economy is growing by 1 unit, the gross value added is `r as.numeric(de_gva_indicator[3])`.
 
 > You can check these values against the Table 15.16 of the Eurostat Manual on page 501 (row 10).
@@ -227,6 +209,10 @@ These multipliers are Type-I multipliers. The type-I GVA multiplier shows the to
 The E matrix contains the input coefficients for labor (created by `input_indicator_create()`). The following matrix equation defines the employment multipliers.
 
 (64) Z = E(I-A)^-1^ 
+
+The `multiplier_create()` function performs the matrix multiplication, after handling many exceptions and problems with real-life data, such as different missing columns and rows in the national variations of the standard European table. 
+
+Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
 
 ```{r employment_multiplier}
 de_emp_indicator <- input_indicator_create (data_table = data_table, 
@@ -316,7 +302,6 @@ print (de_bw)
 >You can check the results against Table 15.19 on page 506 of the Eurostat Manual.
 
 Manufacturing has the highest backward linkages, and other services the least. An increased demand for manufacturing usually effects supplier industries. Service industry usually have a high labor input, and their main effect is increased spending of the wages earned in the services.
-
 
 ###Forward linkages 
 
