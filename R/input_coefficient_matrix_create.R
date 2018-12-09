@@ -52,7 +52,7 @@ input_coefficient_matrix_create <- function ( data_table,
   #TOTAL rows and columns must be removed
   key_column <- tolower(as.character(unlist(cm[,1])))
   remove_col <- which(potential_total_names %in% names(cm) )
-  remove_row <- which (  key_column %in% remove_name  )
+  remove_row <- which (  key_column %in% potential_total_names  )
   
   if ( length(remove_row) > 0 ) {
     cm <-  cm[-remove_row, ]  
