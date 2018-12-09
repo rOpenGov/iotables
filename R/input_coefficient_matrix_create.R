@@ -49,6 +49,7 @@ input_coefficient_matrix_create <- function ( data_table,
   
   potential_total_names <- c("CPA_TOTAL", "TOTAL", "cpa_total", "total")
   
+  #TOTAL rows and columns must be removed
   key_column <- as.character(unlist(cm[,1]))
   remove_name <- potential_total_names[potential_total_names %in% names(cm)]
   remove_row <- which (  key_column %in% remove_name  )
