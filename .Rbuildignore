@@ -1,3 +1,4 @@
+^RDataTmp$
 ^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
