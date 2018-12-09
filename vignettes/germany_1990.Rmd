@@ -119,7 +119,6 @@ de_emp_indicator <- input_indicator_create (
     input_vector = "employment_domestic_total")
 
 print ( tidyr::gather( de_emp_indicator, indicators, values, !!2:ncol(de_emp_indicator)) )
-
 ```
 
 Often we want to analyze the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.
@@ -193,7 +192,6 @@ The `multiplier_create()` function performs the matrix multiplication, after han
 Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
 
 ```{r gva_multipliers}
-
 de_gva_indicator
 de_gva_multiplier <- multiplier_create( 
             Im = I_de, 
@@ -211,10 +209,7 @@ You can recreate the whole matrix if possible income multipliers with `input_mul
 ```{r inputmultipliers}
 direct_effects_de <- coefficient_matrix_create(data_table  = data_table, 
                                                total       = 'output', 
-                                               return_part = 'primary_inputs') 
-
-#Remove the total column from direct effects to conform with the inverse:
-direct_effects_de <- dplyr::select(direct_effects_de, -total)
+                                             return_part = 'primary_inputs') 
 
 multipliers <- input_multipliers_create(
   direct_effects = direct_effects_de,
@@ -235,8 +230,7 @@ The E matrix contains the input coefficients for labor (created by `input_indica
 
 ```{r employment_multiplier}
 de_emp_indicator <- input_indicator_create (data_table = data_table, 
-                              input = 'employment_domestic_total') %>%
-  dplyr::select(-total)
+                              input = 'employment_domestic_total') 
 
 employment_multipliers <- multiplier_create ( 
   input_vector    = de_emp_indicator,
@@ -264,7 +258,7 @@ $x_i$: output of sector i
 ```{r outputmult}
 #results are strange
 de_input_coeff <- input_coefficient_matrix_create( 
-                         data_table = data_table, 
+                         data_table = iotable_get(), 
                          digits = 4)
                            
 output_multipliers <- output_multiplier_create ( 
@@ -289,8 +283,7 @@ de_input_coeff_2 <- input_coefficient_matrix_create(
     households = TRUE)
 
 gva_indicator_de_2  <- input_indicator_create(
-   data_table = data_table, households = TRUE ) %>%
-  dplyr::select (-total) 
+   data_table = data_table, households = TRUE ) 
 
 L_de_2 <- leontieff_matrix_create( technology_coefficients_matrix =
                                 de_input_coeff_2 )
