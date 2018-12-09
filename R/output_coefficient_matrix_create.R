@@ -13,7 +13,7 @@
 #' full iotable, create by the \code{\link{iotable_get}}, because you will need
 #' the final demand column.
 #' @param total The \code{output='total'} (or CPA_TOTAL, depending on the 
-#' nams in your table, default) returns the output coefficients
+#' names in your table, default) returns the output coefficients
 #' for products (intermediates) while the \code{final_demand} returns output 
 #' coefficients for final demand. See Eurostat Manual, p495 and p507.
 #' @param digits An integer showing the precision of the technology matrix in 

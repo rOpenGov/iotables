@@ -24,7 +24,7 @@ The Eurostat website contains the symmetric input-output data in long form.  Wor
 
 Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with ‘real-life’ data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on product x product  type SIOTs, because most member states use them. The functions work with industry x industry SIOTs, but further vocabulary exception may show up in their use. Please report these issues on github or in an email.
 
-You are most likely to work with the product x product tables. For the availability of outher data see `?iotables_download`.
+You are most likely to work with the product x product tables. For the availability of other data see `?iotables_download`.
 
 The analytical functions are presented at greater detail in the _Germany 1990_ vignette. The numbering of the equations refers to the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the ESA 95 standards. Currently Eurostat uses the ESA 2010 definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.
 
@@ -32,7 +32,7 @@ Another very useful source of information on how to work with the tables [Input-
 
 ##Getting and processing Eurostat data
 
-The following code, if specifically run (it will not run on default), will download the lastest relevant data from the Eurostat data warehouse, and save it to a directory named *../not_included* . The iotables package uses the other rOpenGov package [Eurostat](https://github.com/rOpenGov/eurostat) with additional processing of the rather complex SIOT bulk files.
+The following code, if specifically run (it will not run on default), will download the latest relevant data from the Eurostat data warehouse, and save it to a directory named *../not_included* . The iotables package uses the other rOpenGov package [Eurostat](https://github.com/rOpenGov/eurostat) with additional processing of the rather complex SIOT bulk files.
 
 The contents of the [not_included](https://github.com/rOpenGov/iotables/tree/master/not_included) directory can be found on GitHub, but they are not released and distributed with the package.
 
@@ -71,7 +71,7 @@ save (naio_10_cp1700, emp_sk, emp_cz,
                        'naio_10_product_x_product.rda'))
 ```
 
-For a quickier building of the vignette, the data is retrieved from the *not_included* directory. The chunk above can reproduce this data file. 
+For a quicker building of the vignette, the data is retrieved from the *not_included* directory. The chunk above can reproduce this data file. 
 
 ```{r load }
 #load from pre-saved file to increase running speed
@@ -179,7 +179,7 @@ direct_sk <- direct_supply_effects_create( labelled_io_table = sk_io )
 knitr::kable (head(direct_cz[,1:8]))
 ```
 
-Direct effects measure the intial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.) 
+Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.) 
 
 This is not the total effect, because some of the increased production will translate into income, which in turn will be used to create further demand in all parts of the domestic economy. The total effect is characterized by multipliers.
 

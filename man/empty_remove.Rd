@@ -11,7 +11,7 @@ empty_remove(siot)
 use table or a supply table.}
 }
 \value{
-A tibble/data.frame with a key row and a symmetric matix, 
+A tibble/data.frame with a key row and a symmetric matrix, 
 after removing all empty columns and rows at the same time.
 }
 \description{

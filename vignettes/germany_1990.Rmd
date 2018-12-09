@@ -123,7 +123,7 @@ print ( tidyr::gather( de_emp_indicator, indicators, values, !!2:ncol(de_emp_ind
 
 Often we want to analyze the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.
 
-European employment statistics have greated detail than our tables, so employment statistics must be aggregated to conform the 60 (61, 62) columns of the SIOT.  There is a difference in the columns based on how national statistics offices treat imputed real estate income and household production, and trade margins. Czech SIOTs are smaller than most SIOTS because they do not have these columns and rows.
+European employment statistics have greater detail than our tables, so employment statistics must be aggregated to conform the 60 (61, 62) columns of the SIOT.  There is a difference in the columns based on how national statistics offices treat imputed real estate income and household production, and trade margins. Czech SIOTs are smaller than most SIOTS because they do not have these columns and rows.
 
 In another vignette we will show examples on how to work with these real-life data. For the sake of following the calculations, we are continuing with the simplified 1990 German data. 
 
@@ -288,7 +288,7 @@ The backward linkages, i.e. demand side linkages, show how much incremental dema
 
 Forward linkages on the other hand show the effect of increased production, which gives either more or cheaper supplies for other industries that rely on the output of the given industry.
 
-For example, when a new concert is put on stage, orders are filled for real estate, security services, catering, etc, which show in the backward linkages. The concert attracts visitors that creates new opportunities for the hotelling industry in forward linkages. 
+For example, when a new concert is put on stage, orders are filled for real estate, security services, catering, etc, which show in the backward linkages. The concert attracts visitors that creates new opportunities for the hotel industry in forward linkages. 
 
 Currently `iotables` only caclulates backward linkages, but the creation of forward linkages on the basis of output coefficients is simple. Both output coefficients and forward linkages will be added to the package soon. 
 

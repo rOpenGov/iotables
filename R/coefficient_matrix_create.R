@@ -21,7 +21,7 @@
 #' removed to avoid division by zero error in the analytical functions.
 #' @param households Defaults to \code{NULL}. Household column can be added 
 #' with \code{TRUE}.
-#' @return A data.frame that contains the matrix of  \code{data_table} devided by \code{total}
+#' @return A data.frame that contains the matrix of  \code{data_table} divided by \code{total}
 #' with a key column. Optionally the results are rounded to given \code{digits}. 
 #' @importFrom dplyr mutate mutate_if funs left_join
 #' @references See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}

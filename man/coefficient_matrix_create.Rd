@@ -32,7 +32,7 @@ with \code{TRUE}.}
 to receive only the total intermediate use and proportional primary inputs.}
 }
 \value{
-A data.frame that contains the matrix of  \code{data_table} devided by \code{total}
+A data.frame that contains the matrix of  \code{data_table} divided by \code{total}
 with a key column. Optionally the results are rounded to given \code{digits}.
 }
 \description{

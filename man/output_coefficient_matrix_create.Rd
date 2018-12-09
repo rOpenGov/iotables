@@ -9,7 +9,7 @@ output_coefficient_matrix_create(io_table, total = "tfu",
 }
 \arguments{
 \item{total}{The \code{output='total'} (or CPA_TOTAL, depending on the 
-nams in your table, default) returns the output coefficients
+names in your table, default) returns the output coefficients
 for products (intermediates) while the \code{final_demand} returns output 
 coefficients for final demand. See Eurostat Manual, p495 and p507.}
 

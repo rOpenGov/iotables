@@ -4,7 +4,7 @@
 #' necessary.
 #' @param siot A symmetric input-output table, or a symmetric part of a
 #' use table or a supply table.
-#' @return A tibble/data.frame with a key row and a symmetric matix, 
+#' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
 #' @examples 
 #' empty_remove( iotable_get ( source = "germany_1990") )
