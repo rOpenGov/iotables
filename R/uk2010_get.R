@@ -9,7 +9,7 @@
 #' \code{\link{base::file.path}} function. 
 #' @source \href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}
 #' {ukioanalyticaltablesio1062010detailedpubversion.xls}
-#' @importFrom dplyr select mutate_if mutate left_join
+#' @importFrom dplyr select mutate_if mutate left_join mutate_at
 #' @importFrom tidyr spread gather 
 #' @importFrom tibble rownames_to_column
 #' @importFrom purrr set_names
@@ -52,7 +52,7 @@ uk_2010_get <- function ( path = NULL )  {
       cbind ( tibble ( vars = c("indicator", "unit"))) %>%
       tidyr::spread ( vars, values )
     
-    message ( "Reading ...", uk_metadata$indicator )
+    message ( "Reading ... ", uk_metadata$indicator )
     
     
     uk_column_specs <- readxl::read_excel ( path,
@@ -82,8 +82,23 @@ uk_2010_get <- function ( path = NULL )  {
     
     if (i>2) uk_data <- rbind(uk_data, uk_data_sheet) else uk_data <- uk_data_sheet
   }
-  
-  uk_data
+   
+  uk_data %>%
+    dplyr::mutate ( uk_col_lab = gsub("\n", ' ', uk_col_lab)) %>%
+    dplyr::mutate ( uk_col_lab = trimws(uk_col_lab, 'both')) %>%
+    dplyr::mutate ( uk_col = ifelse(is.na(uk_col), uk_col_lab, uk_col)) %>%
+    dplyr::mutate ( uk_row = ifelse(is.na(uk_row), uk_row_lab, uk_row)) %>%
+    dplyr::mutate_at ( vars(one_of("uk_row", "uk_col")), 
+                funs(gsub("\\.", "-", .))) %>%
+    dplyr::mutate_at ( vars(one_of("uk_row", "uk_col")), 
+                funs(gsub(" & ", "-", .))) %>%
+    dplyr::mutate ( values = ifelse (is.na(values), 0, values)) %>%
+    dplyr::mutate ( geo = 'UK') %>%
+    dplyr::mutate ( year = 2010 ) %>%
+    dplyr::mutate ( unit = 'MIO_NAC') %>%
+    dplyr::mutate ( unit_lab = "Million national currency") %>%
+    dplyr::mutate ( geo_lab = 'United Kingdom')
+    
 }
 
 

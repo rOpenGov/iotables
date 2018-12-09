@@ -23,13 +23,13 @@
 ##'  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
 ##'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
 ##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
+##'  \item{\code{uk_2010_siot}}{UK 2010 SIOT table}
 ##' } 
 #' @param source See the available list of sources above in the Description. 
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
 #' try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists.
-#' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate left_join rename group_by
 #' @importFrom tidyr nest
 #' @importFrom eurostat get_eurostat label_eurostat
@@ -53,11 +53,21 @@ iotables_download <- function ( source = "naio_10_cp1700",
                                   "naio_10_cp15", "naio_10_cp16",
                                   "naio_10_cp1610", "naio_10_pyp1610", 
                                   "naio_10_cp1620", "naio_10_pyp1620", 
-                                  "naio_10_cp1630", "naio_10_pyp1630" )
+                                  "naio_10_cp1630", "naio_10_pyp1630", 
+                                  "uk_2010_siot")
   source <- tolower (source)
   if ( ! source %in%  possible_download_sources ) {
     supported_tables <- paste( possible_download_sources, collapse = ", ")
     stop (source, " is not in supported tables [", supported_tables, "]") 
+  }
+  
+  if ( source == "uk_2010_siot") {
+    uk_siot <- uk_2010_get() %>%
+      dplyr::filter ( indicator == "Input-Output table (domestic use, basic prices, product by product)") %>%
+      dplyr::filter ( ! grepl("NPISH|on-market", uk_row_lab) ) %>%
+      dplyr::filter ( ! grepl("NPISH|on-market", uk_col_lab) )
+    
+    return(uk_siot)
   }
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
