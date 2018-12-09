@@ -5,7 +5,7 @@
 \title{Create a coefficient matrix}
 \usage{
 coefficient_matrix_create(data_table, total = "output", digits = NULL,
-  empty_remove = TRUE, households = FALSE, return_part = NULL)
+  remove_empty = TRUE, households = FALSE, return_part = NULL)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 
@@ -20,7 +20,7 @@ if it exists in the matrix.}
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
 
-\item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty 
+\item{remove_empty}{Defaults to \code{TRUE}. If you want to keep empty 
 primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 removed to avoid division by zero error in the analytical functions.}
 
