@@ -17,7 +17,7 @@ Use and Input-Output Tables on p500.
 \examples{
                            
 de_input_coeff <- input_coefficient_matrix_create( 
-                           de_use, de_output, digits = 4)
+                          iotable_get(), digits = 4)
                            
 output_multiplier_create ( de_input_coeff )
 }

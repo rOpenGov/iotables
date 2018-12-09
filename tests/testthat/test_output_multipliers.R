@@ -1,16 +1,11 @@
 library (testthat)
 library (iotables)
 context ("Creating output multipliers")
-de_use    <- use_table_get ( source = "germany_1990", geo = "DE",
-                             year = 1990, unit = "MIO_EUR", 
-                             households = FALSE, labelling = "iotables")
+de_input_coeff <- input_coefficient_matrix_create ( 
+                           data_table  = iotable_get(), 
+                           digits = 4 )
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-                          year = 1990, unit = "MIO_EUR",
-                          households = FALSE, labelling = "iotables")
-de_input_coeff <- input_coefficient_matrix_create( 
-                           de_use, de_output, digits = 4)
-                           
+
 output_multipliers <- output_multiplier_create ( de_input_coeff )
 
 test_that("correct data is returned", {
