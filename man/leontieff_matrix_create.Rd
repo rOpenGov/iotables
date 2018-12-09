@@ -20,5 +20,5 @@ function to create its inverse: \code{\link{leontieff_inverse_create}}.
 tm <- input_flow_get ( 
   data_table = iotable_get(), 
   households = FALSE)
-L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = tm )
+L <- leontieff_matrix_create( technology_coefficients_matrix = tm )
 }

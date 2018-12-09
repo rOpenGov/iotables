@@ -4,8 +4,8 @@
 \alias{multiplier_create}
 \title{Create multipliers}
 \usage{
-multiplier_create(input_vector = NULL, Im = NULL,
-  multiplier_name = "multiplier", digits = NULL)
+multiplier_create(input_vector, Im, multiplier_name = "multiplier",
+  digits = NULL)
 }
 \arguments{
 \item{input_vector}{An input matrix or vector created by the \code{\link{input_indicator_create}} function.}
