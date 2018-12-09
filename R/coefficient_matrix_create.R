@@ -42,7 +42,7 @@ coefficient_matrix_create <- function ( data_table,
   #Create a coefficient matrix, including primary inputs.  
   #For the Leontieff matrix, only the inputs part (first quadrant is used)
   
-  funs <- t_rows2 <-. <- NULL  #for checking against non-standard evaluation
+  funs <-. <- NULL  #for checking against non-standard evaluation
 
   data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
   
@@ -61,7 +61,7 @@ coefficient_matrix_create <- function ( data_table,
 
   #####removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 
-    if ( households == TRUE) { 
+    if ( households == TRUE ) { 
       household_column <- household_column_get( data_table )
       quadrant <- data_table [, 1:last_column]
       data_table <- dplyr::left_join ( quadrant, household_column, 
@@ -74,7 +74,9 @@ coefficient_matrix_create <- function ( data_table,
       }
   
   key_column <- tolower(as.character(unlist(data_table[,1])))
+  key_column
   
+  ##Getting the row for division
   if ( total %in%  c("output", "p1", "output_bp")  ) { 
     if ( any( c("output", "p1", "output_bp")  %in%  key_column )) {
       total_row <- data_table[which ( key_column  %in%
@@ -82,29 +84,30 @@ coefficient_matrix_create <- function ( data_table,
     } else {
       stop ( "The output row was not found in the table as 'output', 
              'p1' or 'output_bp'")
-    } } else if ( total %in%  c("total", "cpa_total")  ) { 
-    if ( any( c("total", "cpa_total") %in%  key_column )) {
-      total_row <- data_table[which ( key_column  %in%
-                                  c("total", "cpa_total"))[1],]
-    } else {
-      stop ( "The total intermediate use was not found in the table as 'total', 
-             or 'CPA_TOTAL'")
+      } 
+    } else if ( total %in%  c("total", "cpa_total")  ) { 
+    if ( any( c("total", "cpa_total") %in%  key_column ) ) {
+      total_row_n <- which (  key_column  %in% c("total", "cpa_total"))[1]
+      total_row <- data_table[total_row_n,]
       }
     } else {
       total_row <- data_table[which ( key_column %in% c(total))[1],]
       if ( length(total_row) == 0) stop("The total row was not found.")
-    } 
-    
-  #Adjust the output vector 
+    } #end of else
+
+  
+#Adjust the output vector 
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
   total_row <- dplyr::mutate_if ( total_row, is.factor, as.character )
   total_row <- dplyr::mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
 
-  #The actual creation of the coefficients
-  for (j in 2:ncol(data_table)) {
-    data_table[ ,j] <-  data_table[ ,j] / unlist(total_row [, j])
-    }
+  coeff_matrix <- data_table
   
+  #The actual creation of the coefficients
+  for ( i in 1:nrow(data_table)) {
+    coeff_matrix[i,2:last_column] <-  coeff_matrix[i,2:last_column] / as.numeric(total_row[2:last_column])
+  }
+ 
   potential_houeshold_earning_names <- c("compensation_employees", 'd1')
   
   earnings_name <- potential_houeshold_earning_names [which ( potential_houeshold_earning_names  %in% key_column )]
@@ -117,17 +120,17 @@ coefficient_matrix_create <- function ( data_table,
     last_row <- which ( tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")) #not last column
     
     if ( return_part == "primary_inputs" ) {
-      data_table <- data_table[last_row:nrow(data_table), ]
+      coeff_matrix <- coeff_matrix[last_row:nrow(coeff_matrix), ]
     } else if ( return_part %in% c("products", "industries") ) {
-      data_table <- data_table[1:last_row, ]
+      coeff_matrix <- coeff_matrix[1:last_row, ]
     }
   } 
   
   if ( households ) {
-    data_table <- rbind ( data_table, household_earnings_row)
+    coeff_matrix <- rbind ( coeff_matrix, household_earnings_row)
   }
   
-  if ( is.null(digits) ) return (data_table)
+  if ( is.null(digits) ) return (coeff_matrix)
   
-  round_table ( data_table, digits = digits  )
+  iotables:::round_table ( coeff_matrix, digits = digits  )
 }
