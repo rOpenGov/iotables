@@ -256,7 +256,6 @@ Output multipliers and forward linkages are calculated with the help of output c
 $x_i$: output of sector i
 
 ```{r outputmult}
-#results are strange
 de_input_coeff <- input_coefficient_matrix_create( 
                          data_table = iotable_get(), 
                          digits = 4)
@@ -325,6 +324,7 @@ Forward linkages show the strength of the new business opportunities when indust
 
 ```{r forward, eval = FALSE}
 
+#the returned values are not good
 de_out <- output_coefficient_matrix_create ( 
   data_table, "final_demand", digits = 4
   )

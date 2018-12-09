@@ -2,17 +2,9 @@ library (testthat)
 library (iotables)
 context ("Creating forward linkages")
 
-io_table <- iotable_get () 
-io_table <- io_table [1:which(tolower(io_table[,1]) =="total" ), ]
-
-output_bp <- dplyr::select ( io_table, output_bp )
-io_table <- io_table [, 1:7] 
-io_table$total <- rowSums(io_table[, 2:7])
-io_table <- cbind (io_table, output_bp)
-
-de_out <- output_coefficient_matrix_create ( io_table = io_table, 
-                                    type = 'final_demand',
-                                    digits = 4)
+de_out <- output_coefficient_matrix_create ( 
+  data_table, "final_demand", digits = 4
+)
 
 fw <- forward_linkages ( output_coefficient_matrix = de_out, 
                    digits = 4 )
