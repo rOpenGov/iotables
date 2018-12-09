@@ -19,8 +19,6 @@
 #' \dontrun{
 #' uk2010 <- uk_2010_get()
 #' }
-#' @export
-
 
 uk_2010_get <- function ( path = NULL )  {
   
