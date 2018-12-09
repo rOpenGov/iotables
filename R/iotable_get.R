@@ -69,6 +69,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   
   source_inputed <- source;   unit_input <- unit
   stk_flow_input <- stk_flow; geo_input <- geo
+  year_input <- year
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
@@ -80,7 +81,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
-                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990" )
+                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
   
   trow_tcol <- croatia_files <- 'croatia_2013'
  
@@ -115,9 +116,12 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
-  } else if ( source == "germany_1991" ) {  #German simplified tables
-    metadata_rows <- germany_metadata_rows  
-    metadata_cols <- germany_metadata_cols 
+    if ( source == "germany_1990" ) { 
+      year_input <- 1990
+      geo_input <- "DE"
+      unit_input <- "MIO_EUR"
+      }
+    
   } else if (source == "uk_2010" ) {
       labelling <-  'short'; 
       year_input <- 2010; 
