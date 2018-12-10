@@ -2,18 +2,10 @@ library (testthat)
 library (iotables)
 context ("Creating forward linkages")
 
-de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-               year = 1990, unit = "MIO_EUR", 
-               households = FALSE, labelling = "iotables")
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-               year = 1990, unit = "MIO_EUR",
-               households = FALSE, labelling = "iotables")
+de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
 
-de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
-
-L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
-I <- leontieff_inverse_create (L)
+I <- leontieff_inverse_create ( de_coeff )
 I4 <- sapply ( I[, 2:ncol(I)], function (x) round(x, 4))
 I4 <- cbind(I[,1], I4)
 I4 <- as.data.frame ( I4)
