@@ -2,6 +2,7 @@
 #' 
 #' @param data_table data.frame, tibble, named matrix or a knitr_kable object.
 #' @param caption A table caption, defaults to empty \code{NA}.
+#' @param digits Number of digits to display in the case of numeric variables.
 #' @param col.names The col.names parameter of the kable table, if \code{NULL},
 #' filled with the names of the \code{data_table}.
 #' @param width_unit Defaults to \code{"cm"}.
@@ -13,7 +14,7 @@
 #' @param border_right_cols, Defaults to \code{NULL}. 
 #' In this case \code{TRUE} for the first column and \code{FALSE}
 #' for the rest of the columns, i.e.\code{T, F, ..., F} 
-#' @param bolds_cols Defaults to \code{NULL}. In this case none of the 
+#' @param bold_cols Defaults to \code{NULL}. In this case none of the 
 #' the columns are bold, i.e. identical to \code{F, F, ..., F}.
 #' @param bootstrap_options Defaults to \code{c("striped", "hover", "condensed")} and
 #' only used for \code{output_format = "html"}.

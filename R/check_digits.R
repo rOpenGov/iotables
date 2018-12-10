@@ -1,8 +1,6 @@
 #' Check digits parameter
 #' 
 #' This is an internal function to determine if the rounding can go ahead.
-#' @param data_table A symmetric input output table, a use table or a supply 
-#' table.
 #' @param digits Digit input to check for validity.
 #' @return An error if the digits are not \code{NULL} or an integer value.
 #' @examples 

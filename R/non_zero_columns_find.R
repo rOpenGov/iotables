@@ -6,9 +6,9 @@
 #' table.
 #' @return A vector of \code{TRUE} and \code{FALSE} values for the table.
 #' @examples 
-#' non_zero_columns ( x = c(0,0,0))
+#' non_zero_columns ( data_table = c(0,0,0))
 
-non_zero_columns_find <- function(x) {
-  if ( class ( x ) %in% c("factor", "character") ) return ( TRUE )
-  ifelse (  all ( as.numeric ( unlist (x) ) == 0) , FALSE, TRUE )
+non_zero_columns_find <- function(data_table) {
+  if ( class ( data_table ) %in% c("factor", "character") ) return ( TRUE )
+  ifelse (  all ( as.numeric ( unlist (data_table) ) == 0) , FALSE, TRUE )
 }

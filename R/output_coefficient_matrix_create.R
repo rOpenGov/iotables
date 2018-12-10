@@ -6,10 +6,9 @@
 #' solved with zero elements. You either have faulty input data, or you have 
 #' to use some sort of data modification to carry on your analysis. 
 #' 
-#' @param siot An input flow matrix created with the 
-#' \code{\link{input_flow_get}} function which contains the 'total' column 
-#' is sufficient if type=\code{products} is used. 
-#' In case you use \code{type="final_demand"} you need to input a
+#' @param io_table A symmetric input-output table or use table created with the  
+#' \code{\link{iotable_get}} function which contains the 'total' column. 
+#' In case you use \code{type="tfu"} you need to input a
 #' full iotable, create by the \code{\link{iotable_get}}, because you will need
 #' the final demand column.
 #' @param total The \code{output='total'} (or CPA_TOTAL, depending on the 

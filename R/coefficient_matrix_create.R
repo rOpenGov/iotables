@@ -129,8 +129,8 @@ coefficient_matrix_create <- function ( data_table,
   } 
   
   ###If households should be added-----
-  if ( households ) {
-    coeff_matrix <- rbind ( coeff_matrix, household_earnings_row)
+  if ( households == TRUE ) {
+    coeff_matrix <- rbind ( coeff_matrix, household_earnings_row )
   }
   
   
