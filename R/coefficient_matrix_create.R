@@ -97,14 +97,14 @@ coefficient_matrix_create <- function ( data_table,
     } #end of else
 
   
-#Adjust the output vector 
+  ##Adjust the total vector---- 
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
   total_row <- dplyr::mutate_if ( total_row, is.factor, as.character )
   total_row <- dplyr::mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
 
   coeff_matrix <- data_table
   
-  #The actual creation of the coefficients
+  ###The actual creation of the coefficients-----
   for ( i in 1:nrow(data_table)) {
     coeff_matrix[i,2:last_column] <-  coeff_matrix[i,2:last_column] / as.numeric(total_row[2:last_column])
   }
@@ -116,6 +116,7 @@ coefficient_matrix_create <- function ( data_table,
   household_earnings_row <- data_table[which( earnings_name == key_column), ]
     
 
+  ###If only a part should be returned----
   if ( ! is.null(return_part) )  {
     
     last_row <- which ( tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")) #not last column
@@ -127,10 +128,13 @@ coefficient_matrix_create <- function ( data_table,
     }
   } 
   
+  ###If households should be added-----
   if ( households ) {
     coeff_matrix <- rbind ( coeff_matrix, household_earnings_row)
   }
   
+  
+  ###If rounding should happen-----
   if ( is.null(digits) ) return (coeff_matrix)
   
   iotables:::round_table ( coeff_matrix, digits = digits  )
