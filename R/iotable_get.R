@@ -72,8 +72,6 @@ iotable_get <- function ( labelled_io_data = NULL,
   stk_flow_input <- stk_flow; geo_input <- geo
   year_input <- year
 
-  data ( metadata )
-  
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
        ) {
