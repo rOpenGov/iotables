@@ -2,52 +2,41 @@ library (testthat)
 library (iotables)
 context ("Creating the Leontieff matrix and its inverse")
 
-de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-                          year = 1990, unit = "MIO_EUR", 
-                          households = FALSE, labelling = "short")
-
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-                          year = 1990, unit = "MIO_EUR", 
-                          households = FALSE, labelling = "short")
+de_use <- input_flow_get ( iotable_get (labelling = "short" ))
+nl_use <- input_flow_get  (  netherlands_2006 )
 
 
-nl_use <- use_table_get ( labelled_io_table = netherlands_2006, source  = 'custom')
-nl_output <- output_get ( labelled_io_table = netherlands_2006 )
-names (de_use)[1] == names(de_output)[1]
-
-nl_coeff_3   <- input_coefficient_matrix_create( input_flow = nl_use,
-                                               output = nl_output, 
+nl_coeff_3   <- input_coefficient_matrix_create( data_table = netherlands_2006, 
                                                digits = 3)
 
-nl_coeff   <- input_coefficient_matrix_create( input_flow = nl_use,
-                                                 output = nl_output, 
+nl_coeff   <- input_coefficient_matrix_create( data_table = netherlands_2006, 
                                                  digits = NULL)
 
-de_coeff <- input_coefficient_matrix_create( input_flow = de_use, 
-                                             output =  de_output, digits = 4)
+de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
 
 L_de <- leontieff_matrix_create( technology_coefficients_matrix =
                                           de_coeff )
-I_de <- leontieff_inverse_create(L_de)
+I_de <- leontieff_inverse_create( technology_coefficients_matrix =
+                                    de_coeff )
 
 L_nl <- leontieff_matrix_create( technology_coefficients_matrix =
                                    nl_coeff )
-I_nl <- leontieff_inverse_create(L_nl)
+I_nl <- leontieff_inverse_create(technology_coefficients_matrix =
+                                   nl_coeff)
 
 
 
 
 require(dplyr)
 AAL <- L_de %>%
-  dplyr::filter ( t_rows2 == "cpa_a") %>%
+  dplyr::filter ( iotables_row == "agriculture_group") %>%
   dplyr::select (  agriculture_group ) %>%
   unlist () %>%  as.numeric(.)
-
 
 #test against 15.9 p 487
 
 TBI <- I_de %>%
-  dplyr::filter ( t_rows2 == 'cpa_g_i') %>%
+  dplyr::filter ( iotables_row == "trade_group") %>%
   dplyr::select ( business_services_group ) %>%
   unlist () %>%
   as.numeric(.)
