@@ -84,7 +84,7 @@ iotable_get <- function ( labelled_io_data = NULL,
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
                 "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
   
-  trow_tcol <- croatia_files <- 'croatia_2013'
+  trow_tcol <- croatia_files <- c('croatia_2010_1800', 'croatia_2010_1900')
  
   if ( source %in% prod_ind ) { 
     metadata_rows <- metadata %>%  #tables that follow prod_ind vocabulary
