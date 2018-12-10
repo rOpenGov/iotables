@@ -23,7 +23,6 @@
 #' \code{input_flow} devided by \code{output} supported by a key colum of 
 #' product or industries, with a key column. 
 #' Optionally the results are rounded to given \code{digits}. 
-#' @importFrom dplyr one_of select
 #' @examples 
 #' input_coefficient_matrix_create ( 
 #'                            iotable_get(), 
@@ -41,7 +40,8 @@ input_coefficient_matrix_create <- function ( data_table,
                                               digits = NULL) {
   
   
-  cm <- coefficient_matrix_create( data_table, 
+  cm <- coefficient_matrix_create(
+                             data_table = data_table, 
                              total = "output", 
                              return_part = "products", 
                              households = households,

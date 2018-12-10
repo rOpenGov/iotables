@@ -128,18 +128,19 @@ iotable_get <- function ( labelled_io_data = NULL,
       year_input <- 2010; 
       unit_input <- 'MIO_NAC'
       geo_input <- "UK"
+      
       metadata_cols <- metadata_uk_2010  %>%
-        filter ( !is.na(uk_col)) %>%
-        select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
-        mutate ( uk_col = gsub("\\.", "-", as.character(uk_col))) %>%
-        mutate ( uk_col = gsub(" & ", "-", as.character(uk_col))) %>%
+        dplyr::filter ( !is.na(uk_col)) %>%
+        dplyr::select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
+        dplyr::mutate ( uk_col = gsub("\\.", "-", as.character(uk_col))) %>%
+        dplyr::mutate ( uk_col = gsub(" & ", "-", as.character(uk_col))) %>%
         dplyr::mutate ( uk_col = trimws(uk_col, 'both'))
       
       metadata_rows <- metadata_uk_2010  %>%
-        filter ( !is.na(uk_row)) %>%
-        select ( -uk_col, -uk_col_label, -induse, -col_order) %>%
-        mutate ( uk_row = gsub("\\.", "-", as.character(uk_row))) %>%
-        mutate ( uk_row = gsub(" & ", "-", as.character(uk_row)))
+        dplyr::filter ( !is.na(uk_row)) %>%
+        dplyr::select ( -uk_col, -uk_col_label, -induse, -col_order) %>%
+        dplyr::mutate ( uk_row = gsub("\\.", "-", as.character(uk_row))) %>%
+        dplyr::mutate ( uk_row = gsub(" & ", "-", as.character(uk_row)))
       
       prod_ind <- c(prod_ind, "uk_2010")
     }  else {
