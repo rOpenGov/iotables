@@ -16,6 +16,5 @@ This function will retrieve any primary input from the input-output table.
 \examples{
 comp_employees_de <- primary_input_get(
                             data_table = iotable_get( "germany_1990"), 
-                            primary_input = "compensation_employees")
-                            )
+                            primary_input = "compensation_employees")                             )
 }
