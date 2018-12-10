@@ -32,7 +32,6 @@ uk_2010_get <- function ( path = NULL )  {
                          mod = 'wb') 
     }
     
-  
   metadata_skip = 1
   column_spec_skip = 5
   
