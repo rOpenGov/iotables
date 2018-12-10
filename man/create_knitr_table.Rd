@@ -15,6 +15,8 @@ create_knitr_table(data_table, digits = NULL, caption = NA,
 \arguments{
 \item{data_table}{data.frame, tibble, named matrix or a knitr_kable object.}
 
+\item{digits}{Number of digits to display in the case of numeric variables.}
+
 \item{caption}{A table caption, defaults to empty \code{NA}.}
 
 \item{col.names}{The col.names parameter of the kable table, if \code{NULL},
@@ -33,6 +35,9 @@ i.e.\code{"l", "c", ..., "c"}}
 In this case \code{TRUE} for the first column and \code{FALSE}
 for the rest of the columns, i.e.\code{T, F, ..., F}}
 
+\item{bold_cols}{Defaults to \code{NULL}. In this case none of the 
+the columns are bold, i.e. identical to \code{F, F, ..., F}.}
+
 \item{bootstrap_options}{Defaults to \code{c("striped", "hover", "condensed")} and
 only used for \code{output_format = "html"}.}
 
@@ -48,9 +53,6 @@ only used for \code{output_format = "html"}.}
 "\\usepackage[utf8]{inputenc}")}
 It can be any valid latex option setting, but if packages are used, the 
 packages must be installed on your Latex engine.}
-
-\item{bolds_cols}{Defaults to \code{NULL}. In this case none of the 
-the columns are bold, i.e. identical to \code{F, F, ..., F}.}
 }
 \description{
 Create an output-independent, well formatted kable table

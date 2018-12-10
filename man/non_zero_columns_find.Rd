@@ -4,7 +4,7 @@
 \alias{non_zero_columns_find}
 \title{Find non-zero columns}
 \usage{
-non_zero_columns_find(x)
+non_zero_columns_find(data_table)
 }
 \arguments{
 \item{data_table}{A symmetric input output table, a use table or a supply 
@@ -18,5 +18,5 @@ This is an internal function to help finding empty columns and rows in
 symmetric tables.
 }
 \examples{
-non_zero_columns ( x = c(0,0,0))
+non_zero_columns ( data_table = c(0,0,0))
 }

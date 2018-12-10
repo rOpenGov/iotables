@@ -8,6 +8,12 @@ output_coefficient_matrix_create(io_table, total = "tfu",
   digits = NULL)
 }
 \arguments{
+\item{io_table}{A symmetric input-output table or use table created with the
+\code{\link{iotable_get}} function which contains the 'total' column. 
+In case you use \code{type="tfu"} you need to input a
+full iotable, create by the \code{\link{iotable_get}}, because you will need
+the final demand column.}
+
 \item{total}{The \code{output='total'} (or CPA_TOTAL, depending on the 
 names in your table, default) returns the output coefficients
 for products (intermediates) while the \code{final_demand} returns output 
@@ -15,13 +21,6 @@ coefficients for final demand. See Eurostat Manual, p495 and p507.}
 
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
-
-\item{siot}{An input flow matrix created with the 
-\code{\link{input_flow_get}} function which contains the 'total' column 
-is sufficient if type=\code{products} is used. 
-In case you use \code{type="final_demand"} you need to input a
-full iotable, create by the \code{\link{iotable_get}}, because you will need
-the final demand column.}
 }
 \description{
 Create an output coefficient matrix from the input flow matrix or a symmetric

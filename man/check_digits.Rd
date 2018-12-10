@@ -8,9 +8,6 @@ check_digits(digits)
 }
 \arguments{
 \item{digits}{Digit input to check for validity.}
-
-\item{data_table}{A symmetric input output table, a use table or a supply 
-table.}
 }
 \value{
 An error if the digits are not \code{NULL} or an integer value.
