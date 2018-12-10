@@ -10,7 +10,7 @@
 #' @source \href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}{ukioanalyticaltablesio1062010detailedpubversion.xls}
 #' @importFrom dplyr select mutate_if mutate left_join mutate_at
 #' @importFrom tidyr spread gather 
-#' @importFrom tibble rownames_to_column
+#' @importFrom tibble rownames_to_column tibble
 #' @importFrom purrr set_names
 #' @importFrom utils download.file
 #' @importFrom readxl read_excel
@@ -20,6 +20,9 @@
 #' }
 
 uk_2010_get <- function ( path = NULL )  {
+  
+  funs <- var <- value <- values <- rowname <- remove <- . <- NULL
+  geo <- geo_lab <- year <- unit <- unit_lab <- NULL
   
   if ( is.null(path)) { 
     path <- file.path(tempdir(), 
@@ -35,7 +38,7 @@ uk_2010_get <- function ( path = NULL )  {
   metadata_skip = 1
   column_spec_skip = 5
   
-  for ( i in 2:8) {
+  for ( i in 2:8 ) {
     data_skip <- column_spec_skip + 1
     
     uk_metadata <- readxl::read_excel ( path,
@@ -45,7 +48,7 @@ uk_2010_get <- function ( path = NULL )  {
                                         n_max = 2) %>%
       dplyr::select ( 1 ) %>%
       dplyr::rename ( values = X__1 ) %>%
-      cbind ( tibble ( vars = c("indicator", "unit"))) %>%
+      cbind ( tibble::tibble ( vars = c("indicator", "unit"))) %>%
       tidyr::spread ( vars, values )
     
     message ( "Reading ... ", uk_metadata$indicator )
@@ -61,7 +64,7 @@ uk_2010_get <- function ( path = NULL )  {
       tidyr::gather(var, value, -rowname) %>% 
       tidyr::spread(rowname, value)  %>%
       purrr::set_names(., c("remove", "uk_col", "uk_col_lab")) %>%
-      dplyr::select  (-remove) %>%
+      dplyr::select  ( -remove ) %>%
       dplyr::mutate_if ( is.factor, as.character ) 
     
     uk_data_sheet <- readxl::read_excel ( path,
