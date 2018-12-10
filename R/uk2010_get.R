@@ -23,7 +23,7 @@ uk_2010_get <- function ( path = NULL )  {
   
   value <- values <- rowname <- remove <- . <- NULL
   geo <- geo_lab <- year <- unit <- unit_lab <- NULL
-  uk_col <- uk_col_lab <- uk_row <- uk_row_lab <- X__1 <- NULL
+  uk_col <- uk_col_lab <- uk_row <- uk_row_lab <- X__1 <- var <- NULL
   
   if ( is.null(path)) { 
     path <- file.path(tempdir(), 
