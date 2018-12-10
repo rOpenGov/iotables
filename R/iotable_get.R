@@ -44,6 +44,7 @@
 #' if it exists. Will force download only in a new session.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
+#' @importFrom dplyr one_of
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
