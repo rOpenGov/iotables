@@ -8,8 +8,7 @@
 #' output_get ( data_table = iotable_get () )
 #' @export 
 
-output_get <- function ( data_table = NULL, 
-                         labelling = "iotables" ) {  
+output_get <- function ( data_table ) {  
   
   key_column <- as.character(unlist(data_table[,1]))
   

@@ -4,7 +4,7 @@
 \alias{output_get}
 \title{Get an output vector}
 \usage{
-output_get(data_table = NULL, labelling = "iotables")
+output_get(data_table)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table or use table retrieved by the
