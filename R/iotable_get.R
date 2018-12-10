@@ -67,11 +67,13 @@ iotable_get <- function ( labelled_io_data = NULL,
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
-  
+  uk_col <- uk_col_label <- uk_row <- uk_row_label <- NULL
   source_inputed <- source;   unit_input <- unit
   stk_flow_input <- stk_flow; geo_input <- geo
   year_input <- year
 
+  data ( metadata )
+  
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
        ) {

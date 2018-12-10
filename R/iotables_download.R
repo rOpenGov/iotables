@@ -47,6 +47,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- stk_flow_lab <- NULL
   . <- downloaded <- downloaded_labelled <- fix_duplicated <- NULL
   time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
+  indicator <- uk_row_lab <- uk_col_lab <- NULL
   
   possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
                                   "naio_10_pyp1700", "naio_10_pyp1750",

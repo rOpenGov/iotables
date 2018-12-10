@@ -24,7 +24,7 @@ input_multipliers_create <- function ( direct_effects,
                                        inverse,
                                        digits = NULL, 
                                        multiplier_names = NULL) { 
- 
+  . <- NULL
   
   names_direct <- names ( direct_effects )
   if ( is.null(multiplier_names)) {

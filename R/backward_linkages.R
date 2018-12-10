@@ -6,18 +6,9 @@
 #' \code{\link{leontieff_inverse_create}} function. 
 #' @importFrom dplyr mutate_if
 #' @examples 
-#' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-#'                year = 1990, unit = "MIO_EUR", 
-#'                households = FALSE, labelling = "iotables")
+#' de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
 #' 
-#' de_output <- output_get ( source = "germany_1990", geo = "DE",
-#'                year = 1990, unit = "MIO_EUR",
-#'                households = FALSE, labelling = "iotables")
-#' 
-#' de_coeff <- input_coefficient_matrix_create( de_use, de_output, digits = 4)
-#' 
-#' L <- iotables::leontieff_matrix_create( technology_coefficients_matrix = de_coeff )
-#' I <- leontieff_inverse_create (L)
+#' I <- leontieff_inverse_create (de_coeff)
 #' backward_linkages ( I )
 #' 
 #' @export 

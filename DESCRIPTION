@@ -26,7 +26,8 @@ Imports:
     knitr,
     kableExtra,
     tibble,
-    readxl
+    readxl,
+    purrr
 Suggests: 
     testthat,
     rmarkdown

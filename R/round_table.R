@@ -4,7 +4,7 @@
 #' the table.
 #' @param data_table A symmetric input-output table, a use table, a supply table,
 #' a margin or tax table.
-#' @param digits 
+#' @param digits Number of digitis for rounding.
 #' @return A tibble/data.frame with a key row and a symmetric matix, 
 #' after removing all empty columns and rows at the same time. 
 #' @examples 
@@ -12,6 +12,7 @@
 
 round_table <- function ( data_table, 
                           digits = NULL) {
+  . <- NULL
   
   if (!is.null(digits)) { ##rounding digits must be numeric, if given
     if ( class(digits) != "numeric") {

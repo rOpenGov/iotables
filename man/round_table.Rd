@@ -10,7 +10,7 @@ round_table(data_table, digits = NULL)
 \item{data_table}{A symmetric input-output table, a use table, a supply table,
 a margin or tax table.}
 
-\item{digits}{}
+\item{digits}{Number of digitis for rounding.}
 }
 \value{
 A tibble/data.frame with a key row and a symmetric matix, 
