@@ -12,7 +12,7 @@
 #' @param Im A Leontieff-inverse with a key column containing the industry or 
 #' product names for matching.
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter select mutate left_join mutate_if
+#' @importFrom dplyr filter select mutate left_join mutate_if full_join
 #' @importFrom tidyr spread
 #' @examples
 #' Im = data.frame (
@@ -32,9 +32,9 @@ equation_solve <- function ( LHS = NULL, Im = NULL ) {
       "Error: matrix equation inputs are not given.")
 
   LHS <- LHS %>%
-    mutate_if (is.factor, as.character) 
+    dplyr::mutate_if (is.factor, as.character) 
   Im <- Im %>%
-    mutate_if (is.factor, as.character) 
+    dplyr::mutate_if (is.factor, as.character) 
   
   if ( ncol (Im) < ncol(LHS)) {
    not_found <-  names(LHS)[ which (! names(LHS) %in% names ( Im )) ]
@@ -54,7 +54,7 @@ and cannot be found in the Leontieff-inverse.'
   ###Joining matrixes to find out if all data is present ---------------------   
 
   joined <- tryCatch(
-      full_join (LHS, Im, by = names(LHS)), 
+      dplyr::full_join (LHS, Im, by = names(LHS)), 
       error = function(e) {
         message ( "The technology columns are not matching.")
         return (NULL)
