@@ -28,13 +28,13 @@ direct_effects_create <- function ( input_requirements,
   . <- NULL
   
   names_direct <- names ( input_requirements )
-  if ( is.null(multiplier_names)) {
-    input_requirements <- input_requirements %>%
-      dplyr::mutate_at ( vars(1), funs(gsub(pattern ="_indicator",
-                                       replacement = "_multiplier", 
-                                       x =. )))
-  }
-  
+  new_key_column <- input_requirements %>%
+    dplyr::select (1:2) %>%
+    dplyr::mutate_at ( vars(1), funs(gsub(pattern ="_indicator",
+                                       replacement = "", 
+                                       x =. )) ) %>%
+    dplyr::mutate_at ( vars(1), funs(paste0(., "_effect")))
+
   if ( all ( names (inverse) %in% names ( input_requirements ) ) ) {
     input_requirements <- dplyr::select ( input_requirements, 
                                       dplyr::one_of (names(inverse)))
@@ -60,6 +60,6 @@ direct_effects_create <- function ( input_requirements,
       effects <- round ( effects, digits )
   }
   
-  cbind (key_column, effects)
+  cbind (new_key_column[,1], effects)
  
 }

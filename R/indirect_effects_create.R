@@ -28,17 +28,12 @@ indirect_effects_create <- function ( input_requirements,
   . <- NULL
   
   names_direct <- names ( input_requirements )
-  if ( is.null(multiplier_names)) {
-    input_requirements <- input_requirements %>%
-      dplyr::mutate_at ( vars(1), funs(gsub(pattern ="_indicator",
-                                       replacement = "_multiplier", 
-                                       x =. )))
-  }
-  
-  if ( all ( names (inverse) %in% names ( input_requirements ) ) ) {
-    input_requirements <- dplyr::select ( input_requirements, 
-                                      dplyr::one_of (names(inverse)))
-  }
+  new_key_column <- input_requirements %>%
+    dplyr::select (1:2) %>%
+    dplyr::mutate_at ( vars(1), funs(gsub(pattern ="_indicator",
+                                          replacement = "", 
+                                          x =. )) ) %>%
+    dplyr::mutate_at ( vars(1), funs(paste0(., "_indirect_effect")))
   
   col_n <- ncol(input_requirements)
  
@@ -67,6 +62,6 @@ indirect_effects_create <- function ( input_requirements,
       multipliers <- round ( indirect_effects, digits )
    }
   
-  cbind (key_column, indirect_effects)
+  cbind (new_key_column[,1], indirect_effects)
  
 }
