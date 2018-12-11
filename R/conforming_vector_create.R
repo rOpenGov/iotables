@@ -6,19 +6,17 @@
 #' definition. The empty effects vector can be used in .csv format
 #' as a sample to import scenarios from a spreadsheet application.
 #'  
-#' @param dat A use table, Leontieff-matrix, Leontieff-inverse, a coefficient matrix 
-#' or other named matrix / vector.
+#' @param data_table A use table, Leontieff-matrix, Leontieff-inverse,
+#' a coefficient matrix or other named matrix / vector.
 #' @examples
-#' de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-#'                          year = 1990, unit = "MIO_EUR", 
-#'                          households = FALSE, labelling = "iotables")
-#'
-#' conforming_vector_create (de_use)
+#' de_input_flow <- input_flow_get ( data_table = iotable_get())
+#' 
+#' conforming_vector_create ( data_table = de_input_flow )
 #' @export 
 
-conforming_vector_create <- function ( dat ) {
+conforming_vector_create <- function ( data_table ) {
   
-  conforming_vector <- dat[1,]
+  conforming_vector <- data_table[1,]
   
   conforming_vector [] <- apply ( conforming_vector, 1, function(x) x = 0 )
   
