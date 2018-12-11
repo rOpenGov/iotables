@@ -28,32 +28,20 @@ As opposed to direct effects calculated by \code{\link{effects_create}},
 multipliers are expressed per input of product/industry.
 }
 \examples{
-de_use <- use_table_get ( source = "germany_1990", geo = "DE",
-year = 1990, unit = "MIO_EUR", 
-households = FALSE, labelling = "iotables")
+data_table <- iotable_get()
 
-de_output <- output_get ( source = "germany_1990", geo = "DE",
-                         year = 1990, unit = "MIO_EUR",
-                         households = FALSE, labelling = "iotables")
+coeff_de <- input_coefficient_matrix_create( data_table )
 
-de_emp <- primary_input_get ( input = "employment_total",
-           source = "germany_1990", geo = "DE",
-           year = 1990,  
-           households = FALSE, labelling = "iotables")
+de_gva_indicator <- input_indicator_create (
+  data_table = data_table, 
+  input = 'gva')  #this is a correct input
 
-de_emp_indicator <- input_indicator_create (de_emp, de_output)
+I_de <- leontieff_inverse_create( coeff_de )
 
-de_coeff <- input_coefficient_matrix_create( de_use,
- de_output, digits = 4)
-
-L_de <- leontieff_matrix_create( technology_coefficients_matrix =
-                                   de_coeff )
-I_de <- leontieff_inverse_create(L_de)
-
-employment_multipliers <- multiplier_create ( 
-           input_vector    = de_emp_indicator,
-           Im              = I_de,
-           multiplier_name =  "employment_multiplier", 
-           digits = 4 )
+de_gva_multipliers <- multiplier_create ( 
+  input_vector    = de_gva_indicator,
+  Im              = I_de,
+  multiplier_name = "employment_multiplier", 
+  digits = 4 )
 
 }
