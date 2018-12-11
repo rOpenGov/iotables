@@ -17,10 +17,12 @@ Forward linkages as defined by the Eurostat Manual of Supply, Use and
 Input-Output Tables (see p506-507.)
 }
 \examples{
+data_table = iotable_get()
+
 de_out <- output_coefficient_matrix_create ( 
- data_table, "final_demand", digits = 4
+ data_table, "tfu", digits = 4
  )
 
-forward_linkages ( output_coefficient_matrix = de_out_coeff, 
+forward_linkages ( output_coefficient_matrix = de_out, 
                    digits = 4 )
 }

@@ -7,11 +7,13 @@
 #' @param digits Number of decimals for rounding, defaults to \code{NULL}.
 #' @importFrom dplyr mutate_if
 #' @examples 
+#' data_table = iotable_get()
+#' 
 #' de_out <- output_coefficient_matrix_create ( 
-#'  data_table, "final_demand", digits = 4
+#'  data_table, "tfu", digits = 4
 #'  )
 #'
-#' forward_linkages ( output_coefficient_matrix = de_out_coeff, 
+#' forward_linkages ( output_coefficient_matrix = de_out, 
 #'                    digits = 4 )
 #' @export 
 
