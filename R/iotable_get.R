@@ -68,9 +68,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- NULL
-  source_inputed <- source;   unit_input <- unit
-  stk_flow_input <- stk_flow; geo_input <- geo
-  year_input <- year
+
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
@@ -101,6 +99,11 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
+    year_input <- year
+    geo_input <- geo
+    unit_input <- unit
+    source_inputed <- source
+    
   } else if ( source %in% trow_tcol ) {   #tables that follow trow_tcol vocabulary
     
     metadata_rows <- metadata %>%
@@ -121,6 +124,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       year_input <- 1990
       geo_input <- "DE"
       unit_input <- "MIO_EUR"
+      source_inputed <- source
       }
     
   } else if (source == "uk_2010" ) {
@@ -128,6 +132,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       year_input <- 2010; 
       unit_input <- 'MIO_NAC'
       geo_input <- "UK"
+      stk_flow <- stk_flow_input <- "TOTAL"
       
       metadata_cols <- metadata_uk_2010  %>%
         dplyr::filter ( !is.na(uk_col)) %>%
@@ -192,8 +197,12 @@ iotable_get <- function ( labelled_io_data = NULL,
       }
     } # use eurostat files 
   } #end of possible downloads or data retrieval if not directly inputed
-  
+
+   
  ##Veryfing parameters ----  
+  year_input <- year
+  source_inputed <- source;   unit_input <- unit
+  stk_flow_input <- stk_flow; geo_input <- geo
   
   if ( nchar(geo_input) == 2 & geo_input == tolower(geo_input)) { 
      geo_input <- toupper (geo_input)
@@ -321,7 +330,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::select (prod_na, induse, values ) %>%
       dplyr::filter ( !is.na(prod_na)) %>%
       tidyr::spread (induse, values )
-    
+
   } else {
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::select ( t_rows2, t_cols2, values ) %>%
