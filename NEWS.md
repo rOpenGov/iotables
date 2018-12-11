@@ -113,6 +113,5 @@ performance, more consistent function interface and far more readable code. The 
  general `coefficient_matrix_create()`.
 *  The `use_table_get()` function is now named `input_flow_get()` but it 
 is seldom used, as the analytical function will call it as needed.
-* This is not a stable version, some vignette examples and unit test need to 
-be rewritten. 
+* A completely dataset, metadata and vignette was added to test the functions on the United Kingdom Input-Output Analytical Tables, 2010. article and dataset.	
 
