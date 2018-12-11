@@ -4,10 +4,10 @@
 \alias{empty_remove}
 \title{Symmetrically remove empty rows and columns}
 \usage{
-empty_remove(siot)
+empty_remove(data_table)
 }
 \arguments{
-\item{siot}{A symmetric input-output table, or a symmetric part of a
+\item{data_table}{A symmetric input-output table, or a symmetric part of a
 use table or a supply table.}
 }
 \value{
@@ -17,7 +17,4 @@ after removing all empty columns and rows at the same time.
 \description{
 This is an internal function to determine where to separate quadrants if
 necessary.
-}
-\examples{
-empty_remove( iotable_get ( source = "germany_1990") )
 }

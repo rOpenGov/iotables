@@ -2,28 +2,26 @@
 #' 
 #' This is an internal function to determine where to separate quadrants if
 #' necessary.
-#' @param siot A symmetric input-output table, or a symmetric part of a
+#' @param data_table A symmetric input-output table, or a symmetric part of a
 #' use table or a supply table.
 #' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
-#' @examples 
-#' empty_remove( iotable_get ( source = "germany_1990") )
 
-empty_remove <- function ( siot ) {
+empty_remove <- function ( data_table ) {
   
   ###Find non-zero cols and rows and remove them---- 
-  non_zero_cols <- vapply ( siot[, 1:ncol(siot)], 
+  non_zero_cols <- vapply ( data_table[, 1:ncol(data_table)], 
                             iotables:::non_zero_columns_find, logical (1) )
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
-  remove_cols <- names (siot )[! non_zero_cols]
+  remove_cols <- names (data_table )[! non_zero_cols]
   
-  siot_rows <- as.character ( unlist ( siot[,1]) )
+  siot_rows <- as.character ( unlist ( data_table[,1]) )
   
   if ( length( remove_cols) > 0 ) {
     message ("Columns and rows of ", paste(remove_cols, collapse =', '), " are all zeros and will be removed.")
   }
 
-  siot [! siot_rows %in% remove_cols , 
-            ! names ( siot ) %in% remove_cols  ]
+  data_table [! siot_rows %in% remove_cols , 
+            ! names ( data_table ) %in% remove_cols  ]
   
 }

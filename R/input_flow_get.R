@@ -30,7 +30,7 @@ input_flow_get <- function ( data_table,
   #Remove empty columns and rows
   if ( empty_remove ) siot <- empty_remove ( data_table )
   
-  last_column <- iotables:::quadrant_separator_find ( data_table )
+  last_column <- quadrant_separator_find ( data_table )
   
   ###Addding households, if requested----------------------------------------  
   if (households == TRUE) {
