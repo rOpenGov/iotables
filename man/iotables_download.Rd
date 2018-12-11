@@ -40,7 +40,7 @@ The function will make a copy of the rds file in this directory.
  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
- \item{\code{uk_2010_siot}}{UK 2010 SIOT table}
+ \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analyitcal Tables data}
 }
 }
 \examples{

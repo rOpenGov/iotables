@@ -23,7 +23,7 @@
 ##'  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
 ##'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
 ##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
-##'  \item{\code{uk_2010_siot}}{UK 2010 SIOT table}
+##'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analyitcal Tables data}
 ##' } 
 #' @param source See the available list of sources above in the Description. 
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
@@ -51,25 +51,18 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
                                   "naio_10_pyp1700", "naio_10_pyp1750",
-                                  "naio_10_cp15", "naio_10_cp16",
+                                  "naio_10_cp15",   "naio_10_cp16",
                                   "naio_10_cp1610", "naio_10_pyp1610", 
                                   "naio_10_cp1620", "naio_10_pyp1620", 
                                   "naio_10_cp1630", "naio_10_pyp1630", 
-                                  "uk_2010_siot")
+                                  "uk_2010")
   source <- tolower (source)
   if ( ! source %in%  possible_download_sources ) {
     supported_tables <- paste( possible_download_sources, collapse = ", ")
     stop (source, " is not in supported tables [", supported_tables, "]") 
   }
   
-  if ( source == "uk_2010_siot") {
-    uk_siot <- uk_2010_get() %>%
-      dplyr::filter ( indicator == "Input-Output table (domestic use, basic prices, product by product)") %>%
-      dplyr::filter ( ! grepl("NPISH|on-market", uk_row_lab) ) %>%
-      dplyr::filter ( ! grepl("NPISH|on-market", uk_col_lab) )
-    
-    return(uk_siot)
-  }
+  if ( source == "uk_2010" ) return ( iotables:::uk_2010_get() )
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
                                    "\\eurostat/", source, "_date_code_TF.rds" )
