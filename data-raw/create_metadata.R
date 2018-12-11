@@ -13,7 +13,12 @@ metadata_uk_2010 <- readxl::read_excel(path = file.path('data-raw', 'metadata_uk
   dplyr::mutate ( uk_col = trimws(uk_col, 'both')) %>%
   dplyr::select ( -digit_1, -digit_2, -digit_3_5 )
 
-load ( file.path('data-raw', 'uk_2010_data.rda'))
+load ( file.path('not_included', 'uk_2010_data.rda'))
+
+completely_reproducible <- function() {
+  uk_2010_data <- iotables_download ( source = "uk_2010" )
+  uk_test_results <- iotables:::uk_2010_results_get ()
+}
 
 uk_test_results <- iotables:::uk_2010_results_get ()
 
