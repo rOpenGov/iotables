@@ -11,13 +11,16 @@
 #' @importFrom dplyr select one_of mutate_at
 #' @examples  
 #' direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
-#'                                               total = 'output', 
-#'                                               return = 'primary_inputs') 
-#'
-#'
+#'                                                total = 'output', 
+#'                                                return = 'primary_inputs') 
+#' 
+#' coeff_de <- input_coefficient_matrix_create( data_table )
+#' 
+#' I_de <- leontieff_inverse_create( coeff_de )
+#' 
 #' multipliers <- input_multipliers_create(
-#'  direct_effects = direct_effects_de,
-#'  inverse = I_de)
+#'   direct_effects = direct_effects_de,
+#'   inverse = I_de)
 #' @export
 
 input_multipliers_create <- function ( direct_effects,
