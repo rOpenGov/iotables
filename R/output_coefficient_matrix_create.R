@@ -22,7 +22,7 @@
 #' io_table <- iotable_get () 
 #' 
 #' output_coefficient_matrix_create ( io_table  = io_table, 
-#'                                    total = 'final_demand',
+#'                                    total = 'tfu',
 #'                                    digits = 4 )
 #' @export 
 
