@@ -105,7 +105,7 @@ coefficient_matrix_create <- function ( data_table,
   coeff_matrix <- data_table
   
   ###The actual creation of the coefficients-----
-  for ( i in 1:nrow(data_table)) {
+  for ( i in 1:nrow(data_table) ) {
     coeff_matrix[i,2:last_column] <-  coeff_matrix[i,2:last_column] / as.numeric(total_row[2:last_column])
   }
  
@@ -113,7 +113,7 @@ coefficient_matrix_create <- function ( data_table,
   
   earnings_name <- potential_houeshold_earning_names [which ( potential_houeshold_earning_names  %in% key_column )]
 
-  household_earnings_row <- data_table[which( earnings_name == key_column), ]
+  household_earnings_row <- coeff_matrix[which( earnings_name == key_column), ]
     
 
   ###If only a part should be returned----
@@ -122,17 +122,14 @@ coefficient_matrix_create <- function ( data_table,
     last_row <- which ( tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")) #not last column
     
     if ( return_part == "primary_inputs" ) {
-      coeff_matrix <- coeff_matrix[last_row:nrow(coeff_matrix), ]
+      coeff_matrix <- coeff_matrix[last_row:nrow(coeff_matrix), ]  #households remain anyway
     } else if ( return_part %in% c("products", "industries") ) {
       coeff_matrix <- coeff_matrix[1:last_row, ]
+      if ( households == TRUE ) {  #households re_added if they were removed
+        coeff_matrix <- rbind ( coeff_matrix, household_earnings_row )
+      }
     }
   } 
-  
-  ###If households should be added-----
-  if ( households == TRUE ) {
-    coeff_matrix <- rbind ( coeff_matrix, household_earnings_row )
-  }
-  
   
   ###If rounding should happen-----
   if ( is.null(digits) ) return (coeff_matrix)

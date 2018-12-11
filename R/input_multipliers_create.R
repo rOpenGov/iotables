@@ -6,14 +6,14 @@
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
+#' @param multiplier_names Defaults to \code{NULL}. You can optionally add 
+#' custom names for the multipliers which will be placed in the key column.
 #' @importFrom dplyr select one_of mutate_at
 #' @examples  
 #' direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
 #'                                               total = 'output', 
 #'                                               return = 'primary_inputs') 
 #'
-#' #Remove the total column from direct effects to conform with the inverse:
-#' direct_effects_de <- dplyr::select(direct_effects_de, -total)
 #'
 #' multipliers <- input_multipliers_create(
 #'  direct_effects = direct_effects_de,
