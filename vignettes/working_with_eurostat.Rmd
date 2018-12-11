@@ -171,12 +171,15 @@ $x_j$ = output of sector j
 By default, `direct_supply_effects_create()` will compare inputs to total final demand / supply. You can make comparisons to total product or total output, too. The code below prints a part of the Czech direct effects rounded to 4 digits.
 
 ```{r direct, results='asis'}
-direct_cz <- direct_supply_effects_create( labelled_io_table = cz_io, 
-                                    digits = 4)
+direct_cz <- coefficient_matrix_create(data_table = cz_io, 
+                                              total = 'output', 
+                                              return = 'primary_inputs') 
 
-direct_sk <- direct_supply_effects_create( labelled_io_table = sk_io )
+direct_sk <- coefficient_matrix_create(data_table = sk_io, 
+                                              total = 'output', 
+                                              return = 'primary_inputs') 
 
-knitr::kable (head(direct_cz[,1:8]))
+knitr::kable (head(direct_cz[,1:8]), digits = 4)
 ```
 
 Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.) 
