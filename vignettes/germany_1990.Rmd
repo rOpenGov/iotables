@@ -118,7 +118,7 @@ de_emp_indicator <- input_indicator_create (
     data_table  = data_table,
     input_vector = "employment_domestic_total")
 
-print ( tidyr::gather( de_emp_indicator, indicators, values, !!2:ncol(de_emp_indicator)) )
+print ( tidyr::gather( de_emp_indicator, indicators, values, !!2:ncol(de_emp_indicator))[,-1] )
 ```
 
 Often we want to analyze the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.
@@ -139,7 +139,7 @@ de_gva_indicator  <- input_indicator_create(
     data_table  = data_table,
     input_vector = "gva")
 
-print( de_gva_indicator ) 
+print( tidyr::gather(de_gva_indicator, indicators, values,!!2:ncol(de_gva_indicator))[,-1]  ) 
 ```
 
 
