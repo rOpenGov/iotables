@@ -1,6 +1,6 @@
-#' Create input indicators
+#' Create direct effects
 #' 
-#' The function creates the multipliers (direct + indirect effects).
+#' The function creates the effects.
 #' @param input_requirements A matrix or vector created by 
 #' \code{\link{input_indicator_create}}
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
@@ -18,11 +18,11 @@
 #'
 #' I_nl <- leontieff_inverse_create( input_coeff_nl )
 #'
-#' input_multipliers_create(input_requirements = compensation_indicator, 
-#'                         inverse = I_nl)
+#' direct_effects_create(input_requirements = compensation_indicator, 
+#'                            inverse = I_nl)
 #' @export
 
-input_multipliers_create <- function ( input_requirements,
+direct_effects_create <- function ( input_requirements,
                                     inverse,
                                     digits = NULL) { 
   . <- NULL
@@ -54,17 +54,12 @@ input_multipliers_create <- function ( input_requirements,
   
 
   effects <- input_requirements_matrix %*% inverse 
-  multipliers <- effects
-  
-  for ( i in 1:nrow(effects)) {
-    multipliers[i, ] <- effects[i, ] /  input_requirements_matrix[i,]
-  }
-  
+
   if ( !is.null(digits)) {
     if ( digits>=0 ) 
-      multipliers <- round ( multipliers, digits )
-   }
+      effects <- round ( effects, digits )
+  }
   
-  cbind (key_column, multipliers)
+  cbind (key_column, effects)
  
 }
