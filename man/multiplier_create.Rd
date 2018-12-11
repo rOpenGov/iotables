@@ -24,8 +24,8 @@ adding a key column with the name to the multiplier the maintain structural
 consistency.
 }
 \details{
-As opposed to direct effects calculated by \code{\link{effects_create}}, 
-multipliers are expressed per input of product/industry.
+As opposed to direct effects, multipliers are expressed per input of
+product/industry.
 }
 \examples{
 data_table <- iotable_get()

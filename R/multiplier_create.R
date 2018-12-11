@@ -4,8 +4,8 @@
 #' adding a key column with the name to the multiplier the maintain structural
 #' consistency.
 #' 
-#' As opposed to direct effects calculated by \code{\link{effects_create}}, 
-#' multipliers are expressed per input of product/industry. 
+#' As opposed to direct effects, multipliers are expressed per input of
+#' product/industry. 
 #' 
 #' @param input_vector An input matrix or vector created by the \code{\link{input_indicator_create}} function. 
 #' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}

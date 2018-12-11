@@ -10,7 +10,7 @@
 #'   \item{uk_col}{The UK row identifier. Dots and '&' converted to '-'.} 
 #'   \item{uk_col_label}{The original UK column labels.}
 #'   \item{eu_prod_na}{Equivalence to the EU prod_na variable, can be used for grouping. }
-#'   \item{row_oder}{Numeric ordeirng of the rows.}
+#'   \item{row_order}{Numeric ordeirng of the rows.}
 #'   \item{col_order}{Numeric ordering of the columns.}
 #'   \item{prod_na}{Eurostat label equivalents for rows}
 #'   \item{induse}{Eurostat label equivalents for columns}
