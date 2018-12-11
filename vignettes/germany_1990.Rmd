@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(iotables)
-require(dplyr)
+require(dplyr); require(tidyr)
 ```
 
 ## Germany sample files
@@ -35,6 +35,8 @@ input_flow <- input_flow_get (
 de_output <- primary_input_get ( data_table, "output" )
 print (de_output[c(1:4)])
 ```
+
+This vignette uses `library(tidyverse)`, more particularly `dplyr` and `tidyr`, just like all analytical functions of `iotables`.  Even if you do not use `tidyverse`, this packages will be installed together with `iotables`. These functions are only used in the vignette to print the output, and they are not essential for the examples.
 
 ## Direct effects
 
@@ -91,8 +93,8 @@ The Leontieff matrix is defined as (I-A) and it is created with the `leontieff_m
 The Leontieff inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
 
 ```{r leontieff}
-L_de <- leontieff_matrix_create( technology_coefficients_matrix =
-                                de_input_coeff )
+L_de <- leontieff_matrix_create ( technology_coefficients_matrix =
+                                 de_input_coeff )
 I_de <- leontieff_inverse_create(de_input_coeff)
 I_de_4 <- leontieff_inverse_create(de_input_coeff, digits = 4)
 print (I_de_4[,1:3])
@@ -186,12 +188,13 @@ The indicator shows that manufacturing has the lowest, and other services has th
 
 > You can check these values against the Table 15.16 of the Eurostat Manual on page 501 (row 10).
 
-You can recreate the whole matrix if possible income multipliers with `input_multipliers_create()`.
+You can recreate the whole matrix, when the data data permits, with `input_multipliers_create()` as shown here. Alternatively, you can create your own custom multipliers with `multiplier_create()` as shown in the following example. 
 
 ```{r inputmultipliers}
-direct_effects_de <- coefficient_matrix_create(data_table  = data_table, 
-                                               total       = 'output', 
-                                             return_part = 'primary_inputs') 
+direct_effects_de <- coefficient_matrix_create(
+    data_table  = iotable_get (), 
+    total       = 'output', 
+    return_part = 'primary_inputs') 
 
 multipliers <- input_multipliers_create(
   direct_effects = direct_effects_de,
@@ -200,7 +203,7 @@ multipliers <- input_multipliers_create(
 print (multipliers[1:3, 1:3])
 ```
 
-> You can check these results against the Table 15.16 on p501 of the Eurostat manual. Again, the label 'total' refers to domestic intermediaries. The ordering of the rows is different from the Manual.
+> You can check these results against the Table 15.16 on p501 of the Eurostat manual. the label 'total' refers to domestic intermediaries. The ordering of the rows is different from the Manual.
 
 These multipliers are Type-I multipliers. The type-I GVA multiplier shows the total effect in the domestic economy. The initial extra demand creates new orders in the backward linking industries, offers new product to build on in the forward-linking industry and creates new corporate and employee income that can be spent. Type-II multipliers will be introduced in a forthcoming vignette [not yet available.]
 
@@ -215,8 +218,9 @@ The `multiplier_create()` function performs the matrix multiplication, after han
 Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems. 
 
 ```{r employment_multiplier}
-de_emp_indicator <- input_indicator_create (data_table = data_table, 
-                              input = 'employment_domestic_total') 
+de_emp_indicator <- input_indicator_create (
+  data_table = data_table, 
+  input = 'employment_domestic_total') 
 
 employment_multipliers <- multiplier_create ( 
   input_vector    = de_emp_indicator,
@@ -224,11 +228,11 @@ employment_multipliers <- multiplier_create (
   multiplier_name = "employment_multiplier", 
   digits = 4 )
 
-print (employment_multipliers)
-
+print (tidyr::gather(employment_multipliers,
+              multipliers, values, !!2:ncol(employment_multipliers))[-1])
 ```
 
-You can check against page 502 in the Eurostat manual that the highest employment multiplier is indeed $z_i$ = `r max ( as.numeric ( employment_multipliers), na.rm=TRUE)`, the employment multiplier of agriculture.
+You can check against page 501 that these values are correct and on page 501 that the highest employment multiplier is indeed $z_i$ = `r max ( as.numeric ( employment_multipliers), na.rm=TRUE)`, the employment multiplier of agriculture.
 
 For working with real-life, current employment data, there is a helper function to retrieve and process Eurostat employment statistics to a SIOT-conforming vector `employment_get()`. This function will be explained in a separate vignette. 
 
@@ -249,38 +253,10 @@ de_input_coeff <- input_coefficient_matrix_create(
 output_multipliers <- output_multiplier_create ( 
                         input_coefficient_matrix = de_input_coeff )
 
-print (output_multipliers)
+print (tidyr::gather(output_multipliers, multipliers, values)[-1,])
 ```
 
 These multipliers can be checked against the Table 15.15 on p500 of the Eurostat Manual.
-
-##Working with Type-II multipliers or induced effects
-
-When working with the type-II multipliers we need to include the household consumption column and the household earnings row in the tables. The dimensions of the table are growing by 1, so all matrixes and vectors need to be re-created. Not applicable cells, such as gross value added for households is filled up with zero values. 
-
-```{r type2}
-de_input_flow_2    <- input_flow_get ( 
-                         data_table = data_table,
-                         households = TRUE)
-
-de_input_coeff_2 <- input_coefficient_matrix_create(
-    data_table = data_table, 
-    households = TRUE)
-
-gva_indicator_de_2  <- input_indicator_create(
-   data_table = data_table, households = TRUE ) 
-
-L_de_2 <- leontieff_matrix_create( technology_coefficients_matrix =
-                                de_input_coeff_2 )
-I_de_2 <- leontieff_inverse_create(L_de_2)
-
-gva_multiplier_2 <- multiplier_create( Im = I_de_2,
-                                       input_vector = gva_indicator_de_2)
-
-print ( gva_multiplier_2 )
-```
-
-With the induced effects, the type-II multipliers are much larger. The Eurostat Manual does not cover type II multipliers, and this will be covered in a later vignette.
 
 ##Interindustrial linkage analysis
 
@@ -295,8 +271,11 @@ Currently `iotables` only caclulates backward linkages, but the creation of forw
 ###Backward linkages 
 
 ```{r backward}
+de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
+I_de <- leontieff_inverse_create ( de_coeff )
+
 de_bw <- backward_linkages(I_de)
-print (de_bw)
+print (tidyr::gather(de_bw, backward_linkages, values)[-1,])
 ```
 
 >You can check the results against Table 15.19 on page 506 of the Eurostat Manual.
