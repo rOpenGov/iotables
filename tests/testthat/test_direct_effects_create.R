@@ -13,14 +13,13 @@ compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation
 
 I_nl <- leontieff_inverse_create( input_coeff_nl )
 
-mult <- input_multipliers_create(input_requirements = compensation_indicator, 
+dir <- direct_effects_create(input_requirements = compensation_indicator, 
                              inverse = I_nl)
-
-published_multipliers <- c(2.466, 2.333, 1.84, 2.372, 1.953, 1.417 )
+published_effects <- c(0.263, 0.099, 0.306, 0.212, 0.465, 0.493)
 
 
 test_that("get_input_flow correct input coefficients are returned", {
-  expect_equal(as.numeric(mult[2:7]), published_multipliers, 
+  expect_equal(as.numeric(dir[2:7]), published_effects, 
                tolerance = .0005)
 })
 
