@@ -1,6 +1,6 @@
 library (testthat)
 library (iotables)
-context ("Creating forward linkages")
+context ("Creating a coefficient matrix")
 
 cm_de <-  coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
                              total = "output", 
@@ -30,13 +30,7 @@ test_that("households are treated correctly", {
                                                 total = "output",
                                                 digits = 4 )), 
                7)
-  expect_equal(ncol(coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
-                                                total = "output",
-                                                households = NULL,
-                                                digits = 4 )), 
-               7)
-  
-  })
+   })
 
 
 
