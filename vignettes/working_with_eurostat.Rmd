@@ -217,7 +217,7 @@ primary_inputs_sk <- coefficient_matrix_create(data_table = sk_io,
 multipliers_cz <- input_multipliers_create( primary_inputs_cz, I_cz )  
 multipliers_sk <- input_multipliers_create( primary_inputs_sk, I_sk ) 
 
-knitr::kable (head(multipliers_cz[,1:8]))
+knitr::kable (head(multipliers_cz[,1:8]), digits = 4)
 ```
 
 ###Employment indicators and multipliers 
@@ -247,17 +247,17 @@ emp_indicator_cz <- full_join (
 emp_effect_sk <- direct_effects_create( emp_indicator_sk, I_sk )  
 emp_effect_cz <- direct_effects_create( emp_indicator_cz, I_cz )  
 
-knitr::kable (head(emp_effect_cz))
+knitr::kable (emp_effect_cz[1:8], digits = 5)
 ```
 
 
 ```{r employmentindicator, results='asis'}
 #New function is needed to add employment vector to SIOT
 
-emp_multiplire_sk <- input_multipliers_create( emp_indicator_sk, I_sk )  
+emp_multiplier_sk <- input_multipliers_create( emp_indicator_sk, I_sk )  
 emp_multiplier_cz <- input_multipliers_create( emp_indicator_cz, I_cz )  
 
-knitr::kable (head(emp_multiplier_cz))
+knitr::kable (emp_multiplier_cz[1:8], digits=5)
 ```
 
 
@@ -268,7 +268,7 @@ knitr::kable (head(emp_multiplier_cz))
 output_multipliers_cz <- output_multiplier_create (input_coeff_matrix_cz)
 output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk)
 
-knitr::kable (head(output_multipliers_cz[,1:8]))
+knitr::kable (head(output_multipliers_cz[,1:8]), digits=4)
 ```
 
 ##Interindustrial linkage analysis
@@ -281,7 +281,7 @@ Backward linkages show the effect on industries that are suppliers to the produc
 cz_bw <- backward_linkages(I_cz)
 sk_bw <- backward_linkages(I_sk)
 
-knitr::kable (head(cz_bw[,1:8]))
+knitr::kable (head(cz_bw[,1:8]), digits=4)
 ```
 
 ##Forward linkages
@@ -304,7 +304,7 @@ From the output coefficient matrix we can create the Leontieff-matrix for output
 cz_fw <- forward_linkages ( output_coeff_cz )
 sk_fw <- forward_linkages( output_coeff_sk )
 
-knitr::kable (head(cz_fw))
+knitr::kable (head(cz_fw), digits=4)
 ```
 
 
@@ -336,14 +336,14 @@ xlsx::write.xlsx ( direct_cz, file = cz_file_name,
 xlsx::write.xlsx ( multipliers_cz, file = cz_file_name, 
                    sheetName = "multipliers_cz",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
-xlsx::write.xlsx ( emp_cz, file = cz_file_name, 
-                   sheetName = "emp_cz_2015",
+xlsx::write.xlsx ( emp_effect_cz, file = cz_file_name, 
+                   sheetName = "emp_effect_cz_2015",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( emp_indicator_cz, file = cz_file_name, 
                    sheetName = "emp_indicator_cz",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
-xlsx::write.xlsx ( employment_multipliers_cz, file = cz_file_name, 
-                   sheetName = "employment_multipliers_cz",
+xlsx::write.xlsx ( emp_multiplier_cz, file = cz_file_name, 
+                   sheetName = "emp_multiplier_cz",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( cz_bw, file = cz_file_name, 
                    sheetName = "cz_backward_linkages",
@@ -378,13 +378,13 @@ xlsx::write.xlsx ( direct_sk, file = sk_file_name,
 xlsx::write.xlsx ( multipliers_sk, file = sk_file_name, 
                    sheetName = "multipliers_sk",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
-xlsx::write.xlsx ( emp_sk, file = sk_file_name, 
-                   sheetName = "emp_sk_2015",
+xlsx::write.xlsx ( emp_effect_sk, file = sk_file_name, 
+                   sheetName = "emp_effect_sk_2015",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( emp_indicator_sk,file = sk_file_name, 
                    sheetName = "emp_indicator_sk",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
-xlsx::write.xlsx ( employment_multipliers_sk, file = sk_file_name, 
+xlsx::write.xlsx ( emp_multiplier_sk, file = sk_file_name, 
                    sheetName = "employment_multipliers_sk",
                    col.names=TRUE, row.names=TRUE, append=TRUE)
 xlsx::write.xlsx ( sk_bw, file = sk_file_name, 

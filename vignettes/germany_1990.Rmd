@@ -191,16 +191,16 @@ The indicator shows that manufacturing has the lowest, and other services has th
 You can recreate the whole matrix, when the data data permits, with `input_multipliers_create()` as shown here. Alternatively, you can create your own custom multipliers with `multiplier_create()` as shown in the following example. 
 
 ```{r inputmultipliers}
-direct_effects_de <- coefficient_matrix_create(
+input_reqr <- coefficient_matrix_create(
     data_table  = iotable_get (), 
     total       = 'output', 
     return_part = 'primary_inputs') 
 
 multipliers <- input_multipliers_create(
-  direct_effects = direct_effects_de,
+  input_requirements = input_reqr,
   inverse = I_de)
 
-print (multipliers[1:3, 1:3])
+knitr::kable(multipliers, digits= 4)
 ```
 
 > You can check these results against the Table 15.16 on p501 of the Eurostat manual. the label 'total' refers to domestic intermediaries. The ordering of the rows is different from the Manual.
