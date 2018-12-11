@@ -47,9 +47,9 @@ coefficient_matrix_create <- function ( data_table,
   data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
   
   ###Removing all zero columns and rows --------
-  if ( remove_empty ) data_table <- iotables:::empty_remove ( data_table )
+  if ( remove_empty ) data_table <- empty_remove ( data_table )
   
-  last_column <- iotables:::quadrant_separator_find( data_table, 
+  last_column <- quadrant_separator_find( data_table, 
                                                      include_total = FALSE)
 
   #####removing the 2nd and 4th quadrants--- 
@@ -126,5 +126,5 @@ coefficient_matrix_create <- function ( data_table,
   ###If rounding should happen-----
   if ( is.null(digits) ) return (coeff_matrix)
   
-  iotables:::round_table ( coeff_matrix, digits = digits  )
+  round_table ( coeff_matrix, digits = digits  )
 }
