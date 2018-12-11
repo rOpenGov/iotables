@@ -1,6 +1,6 @@
 library (testthat)
 library (iotables)
-context ("Creating forward linkages")
+context ("Creating backwards linkages")
 
 
 de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
