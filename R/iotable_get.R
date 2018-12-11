@@ -67,7 +67,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
-  uk_col <- uk_col_label <- uk_row <- uk_row_label <- NULL
+  uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
 
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
@@ -75,6 +75,8 @@ iotable_get <- function ( labelled_io_data = NULL,
        ) {
     stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
   }
+  
+  uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
   
   ##Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
@@ -121,17 +123,17 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( iotables_col = iotables_label )
     
     if ( source == "germany_1990" ) { 
-      year_input <- 1990
-      geo_input <- "DE"
-      unit_input <- "MIO_EUR"
-      source_inputed <- source
+      year <- 1990
+      geo <- "DE"
+      unit <- "MIO_EUR"
+      source <- "germany_1990"
       }
     
-  } else if (source == "uk_2010" ) {
+  } else if ( source %in% uk_tables ) {
       labelling <-  'short'; 
-      year_input <- 2010; 
-      unit_input <- 'MIO_NAC'
-      geo_input <- "UK"
+      year <- 2010; 
+      unit <- 'MIO_NAC'
+      geo <- "UK"
       stk_flow <- stk_flow_input <- "TOTAL"
       
       metadata_cols <- metadata_uk_2010  %>%
@@ -147,7 +149,7 @@ iotable_get <- function ( labelled_io_data = NULL,
         dplyr::mutate ( uk_row = gsub("\\.", "-", as.character(uk_row))) %>%
         dplyr::mutate ( uk_row = gsub(" & ", "-", as.character(uk_row)))
       
-      prod_ind <- c(prod_ind, "uk_2010")
+      prod_ind <- c(prod_ind, uk_tables)
     }  else {
     stop ("This type of input-output database is not (yet) recognized by iotables.")
   }
@@ -175,6 +177,8 @@ iotable_get <- function ( labelled_io_data = NULL,
 
     ##Creating a temporary file name for the input-output table ----
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
+    
+    ##Read from file or internal dataset ----
     if ( source_inputed == "germany_1990" ) {
       labelled_io_data <- germany_1990    # use germany example 
       labelled_io_data$year = 1990
@@ -187,6 +191,31 @@ iotable_get <- function ( labelled_io_data = NULL,
     } else if ( source_inputed == "croatia_2010_1900" )  {
       labelled_io_data <- croatia_2010_1900 %>%
         mutate ( year = lubridate::year ( time ))
+    } else if ( source %in% uk_tables ) {
+      if ( source == "uk_2010_siot") {
+        labelled_io_data <- labelled_io_data %>%
+          dplyr::filter ( indicator == 'Input-Output table (domestic use, basic prices, product by product)')
+      }
+      
+      if ( source == "uk_2010_use") {
+        labelled_io_data <- labelled_io_data %>%
+          dplyr::filter ( indicator == 'Domestic use table at basic prices (product by industry)')
+      }
+      
+      if ( source == "uk_2010_imports") {
+        labelled_io_data <- labelled_io_data %>%
+          dplyr::filter ( indicator == 'Imports use table at basic prices (product by product)')
+      }
+      
+      if ( source == "uk_2010_coeff") {
+        labelled_io_data <- labelled_io_data %>%
+          dplyr::filter ( indicator == 'Matrix of coefficients (product by product)')
+      }
+      
+      if ( source == "uk_2010_inverse") {
+        labelled_io_data <- labelled_io_data %>%
+          dplyr::filter ( indicator == 'Leontief Inverse (product by product)')
+      }
     } else  {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_data <- readRDS( tmp_rds ) 
@@ -226,7 +255,7 @@ iotable_get <- function ( labelled_io_data = NULL,
 
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , 
                        "croatia_2010_1900" , 
-                       "germany_1990", "uk_2010") ) {
+                       "germany_1990", uk_tables ) ) {
     selected_table <- which (   ##get the number of table to be selected
       labelled_io_data$year == year & 
         as.character(labelled_io_data$geo) == geo &
@@ -256,7 +285,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     message("Warning: original data was converted to numeric format.")
  }
 
-###Get and order the SIOT-------  
+  ###Get and order the SIOT-------  
  if ( source %in% prod_ind ) {
   col_join <- names ( iotable ) [ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col", "uk_col") )] 
   row_join <- names ( iotable ) [ which( names(iotable) %in% c("prod_na", "prod_na_lab", "iotables_row", "uk_row") )] 
@@ -328,7 +357,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::select (prod_na, induse, values ) %>%
-      dplyr::filter ( !is.na(prod_na)) %>%
+      dplyr::filter ( !is.na(prod_na))  %>%
       tidyr::spread (induse, values )
 
   } else {
