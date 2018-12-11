@@ -95,9 +95,9 @@ sk_io <-  iotable_get ( labelled_io_data = naio_10_cp1700,
                         stk_flow = "TOTAL",
                         labelling = "short" )
 
-cz_use <- input_flow_get( data_table = cz_io )
+cz_input_flow <- input_flow_get( data_table = cz_io )
 
-sk_use <- input_flow_get( data_table = sk_io)
+sk_input_flow <- input_flow_get( data_table = sk_io)
 
 cz_output <- output_get( data_table = cz_io)
 sk_output <- output_get( data_table = sk_io)
@@ -171,13 +171,16 @@ $x_j$ = output of sector j
 By default, `direct_supply_effects_create()` will compare inputs to total final demand / supply. You can make comparisons to total product or total output, too. The code below prints a part of the Czech direct effects rounded to 4 digits.
 
 ```{r direct, results='asis'}
-direct_cz <- coefficient_matrix_create(data_table = cz_io, 
+primary_inputs_cz <- coefficient_matrix_create(data_table = cz_io, 
                                               total = 'output', 
                                               return = 'primary_inputs') 
 
-direct_sk <- coefficient_matrix_create(data_table = sk_io, 
+primary_inputs_sk <- coefficient_matrix_create(data_table = sk_io, 
                                               total = 'output', 
-                                              return = 'primary_inputs') 
+                                              return = 'primary_inputs')
+
+direct_cz <- direct_effects_create( primary_inputs_cz, I_cz )  
+direcz_sk <- direct_effects_create( primary_inputs_sk, I_sk )  
 
 knitr::kable (head(direct_cz[,1:8]), digits = 4)
 ```
@@ -203,22 +206,16 @@ Z = direct and indirect requirements for wages (or other income)
 The code chunk below prints a part of the Czech multipliers, rounded to 4 digits. 
 
 ```{r total, results='asis' }
-direct_effects_sk <- coefficient_matrix_create(data_table = sk_io, 
+primary_inputs_cz <- coefficient_matrix_create(data_table = cz_io, 
                                               total = 'output', 
                                               return = 'primary_inputs') 
 
-direct_effects_cz <- coefficient_matrix_create(data_table = cz_io, 
+primary_inputs_sk <- coefficient_matrix_create(data_table = sk_io, 
                                               total = 'output', 
-                                              return = 'primary_inputs') 
+                                              return = 'primary_inputs')
 
-
-multipliers_sk <- input_multipliers_create(
- direct_effects = direct_effects_sk,
- inverse = I_sk)
-
-multipliers_cz <- input_multipliers_create(
- direct_effects = direct_effects_cz,
- inverse = I_cz)
+multipliers_cz <- input_multipliers_create( primary_inputs_cz, I_cz )  
+multipliers_sk <- input_multipliers_create( primary_inputs_sk, I_sk ) 
 
 knitr::kable (head(multipliers_cz[,1:8]))
 ```
@@ -229,33 +226,40 @@ The creation of the employment indicator is fascilitated with the data processin
 
 Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation.  The helper function `conforming_vector_create` will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.
 
-```{r employmentindicator, results='asis', eval=FALSE}
+```{r employmenteffect, results='asis', message=FALSE}
 #New function is needed to add employment vector to SIOT
-emp_indicator_sk  <- input_indicator_create( 
-  data_table  = sk_io, 
-  output_vector = sk_output)
+names ( emp_sk )[1] <- 'prod_na'
+names ( emp_cz )[1] <- 'prod_na'
 
-emp_indicator_cz  <- input_indicator_create( 
-  data_table  = emp_cz, 
-  output_vector = cz_output)
+emp_indicator_sk <- rbind ( 
+  sk_io[, 1:66], 
+  emp_sk) %>% coefficient_matrix_create(., 
+       return_part = 'primary_inputs') %>%
+  filter ( prod_na == "employment_total" )
 
-employment_multipliers_sk <- multiplier_create ( 
-  input_vector    = emp_indicator_sk,
-  Im              = I_sk,
-  multiplier_name = "employment_multiplier", 
-  digits = 4 ) %>% 
-  tidyr::gather (industry, values, !!2:ncol(.))
+emp_indicator_cz <- full_join ( 
+  cz_io, 
+  emp_cz) %>% coefficient_matrix_create(., 
+       return_part = 'primary_inputs') %>%
+  filter ( prod_na == "employment_total" )
 
-employment_multipliers_cz <- multiplier_create ( 
-  input_vector    = emp_indicator_cz,
-  Im              = I_cz,
-  multiplier_name = "employment_multiplier", 
-  digits = 4 ) %>% 
-  tidyr::gather (industry, values, !!2:ncol(.)) %>% 
-  dplyr::mutate ( values = values * 1000 )
 
-knitr::kable (head(employment_multipliers_cz))
+emp_effect_sk <- direct_effects_create( emp_indicator_sk, I_sk )  
+emp_effect_cz <- direct_effects_create( emp_indicator_cz, I_cz )  
+
+knitr::kable (head(emp_effect_cz))
 ```
+
+
+```{r employmentindicator, results='asis'}
+#New function is needed to add employment vector to SIOT
+
+emp_multiplire_sk <- input_multipliers_create( emp_indicator_sk, I_sk )  
+emp_multiplier_cz <- input_multipliers_create( emp_indicator_cz, I_cz )  
+
+knitr::kable (head(emp_multiplier_cz))
+```
+
 
 ###Output multipliers
 
@@ -286,10 +290,10 @@ Forward linkages show the effects on other industries that use the product (indu
 
 ```{r output_coeff, results='asis', eval=FALSE}
 output_coeff_cz <- output_coefficient_matrix_create( 
-  io_table = cz_io, total = "final_demand", digits = 4)
+  io_table = cz_io, total = "tfu", digits = 4)
 
 output_coeff_sk <- output_coefficient_matrix_create( 
-  io_table = sk_io, total = "final_demand")
+  io_table = sk_io, total = "tfu")
 
 knitr::kable (head(output_coeff_cz[,1:8]))
 ```
