@@ -47,14 +47,6 @@ coefficient_matrix_create <- function ( data_table,
   data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
   
   ###Removing all zero columns and rows --------
-  
-  #Determine if a column is all zero
-  non_zero <- function (x) {
-    if ( class ( x ) %in% c("factor", "character") ) return_part ( TRUE )
-    ifelse (  sum ( as.numeric ( unlist (x) ), na.rm=TRUE) == 0, FALSE, TRUE )
-  }
-  
-  #Remove empty columns and rows
   if ( remove_empty ) data_table <- iotables:::empty_remove ( data_table )
   
   last_column <- iotables:::quadrant_separator_find( data_table, 
