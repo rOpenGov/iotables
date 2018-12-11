@@ -9,12 +9,14 @@ primary_input_get(data_table, primary_input = "compensation_employees")
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, or a 
 supply table retrieved by the  \code{\link{iotable_get}} function.}
+
+\item{primary_input}{The primary input to be returned from the table.}
 }
 \description{
 This function will retrieve any primary input from the input-output table.
 }
 \examples{
 comp_employees_de <- primary_input_get(
-                            data_table = iotable_get( "germany_1990"), 
-                            primary_input = "compensation_employees")                             )
+  data_table = iotable_get(), 
+  primary_input = "compensation_employees")                             )
 }
