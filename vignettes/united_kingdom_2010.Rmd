@@ -1,0 +1,169 @@
+---
+title: "United Kingdom Input-Output Analyitcal Tables"
+author: "Daniel Antal, based on the work edited by Richard Wild"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{United Kingdom}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(iotables)
+require(dplyr); require(tidyr); require(testthat)
+```
+
+The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. It is unlikely that these tables will be required by other purposes than controlling the package.
+
+```{r read_control_data, eval=FALSE}
+uk_2010_data <- iotables_download ( source = "uk_2010" )
+save ( uk_2010_data, file = file.path('data-raw', 'uk_2010_data.rda'))
+uk_test_results <- iotables:::uk_2010_results_get ()
+#saved as package data
+```
+
+For the actual symmetric input-output table (see ) you can use the download function originally designed for the Eurostat bulk downloader. 
+
+```{r downloading_excel_data}
+uk_siot              <- iotable_get ( labelled_io_data = uk_2010_data, 
+                                    source = "uk_2010_siot" )
+uk_published_coeff   <- iotable_get ( labelled_io_data = uk_2010_data, 
+                                    source = "uk_2010_inverse" )
+uk_published_inverse <- iotable_get ( labelled_io_data = uk_2010_data, 
+                                    source = "uk_2010_inverse" )
+```
+
+##Matrix of Coefficients
+
+The matrix of coefficients is described on page 14-15 and the data can be found in the _Matrix of coefficients (product by product) sheet_ of the Excel file. 
+
+```{r compare_coeff}
+uk_input_coeff <- input_coefficient_matrix_create( 
+                      data_table = uk_siot)
+uk_coeff_published <- select (uk_input_coeff, 1 ) %>%
+  left_join ( ., mutate_if( iotable_get ( labelled_io_data = uk_2010_data, 
+                               source = "uk_2010_coeff" ), 
+                            is.factor, as.character), 
+              by = "prod_na")
+
+test_that("correct data is returned", {
+  expect_equal(round(uk_input_coeff[,2:8], 8),
+               round(uk_coeff_published  [,2:8], 8)) })
+```
+
+Comparing the first 7 columns of the two coefficient matrixes at 8 decimal point precision they are equal. Given the size of the matrixes, not all the matrix is compared here, but such a comparison can be made. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.
+
+##Leontieff-inverse
+
+The Leontieff-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns at 8 digit precision we see that the re-calculated inverse and the published inverse is the same.
+
+```{r compare_inverse}
+uk_calculated_inverse <- leontieff_inverse_create(uk_input_coeff)
+uk_published_inverse <- select (uk_calculated_inverse, 1 ) %>%
+  left_join ( ., mutate_if( iotable_get ( labelled_io_data = uk_2010_data, 
+                               source = "uk_2010_inverse" ), 
+                            is.factor, as.character), 
+              by = "prod_na")
+
+test_that("correct data is returned", {
+  expect_equal(round(uk_calculated_inverse[,2:8], 8),
+               round(uk_published_inverse  [,2:8], 8)) })
+```
+
+##Employment cost effects
+
+```{r compare_effects}
+employment_effect_results <- uk_test_results %>%
+  select ( uk_row_label, `Employment cost effects`)
+
+primary_inputs_uk <- coefficient_matrix_create(data_table  = uk_siot, 
+                                               total       = 'output', 
+                                               return_part = 'primary_inputs')
+
+employment_input <- filter (primary_inputs_uk , prod_na == "D1")
+
+employment_effects <- direct_effects_create( employment_input, uk_calculated_inverse ) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( employment_effect_results, by = 'uk_row_label' ) %>%
+  filter ( !is.na(uk_row_label )) %>%
+  select ( prod_na, uk_row_label, values, `Employment cost effects`)
+
+
+iotables:::create_knitr_table (
+      data_table =  employment_effects[1:10,], digits = 4,
+      caption = "Comparison of Calculated And Published Employment Cost Effects", 
+      col.names = c("industry code", "row label", "calculated", "published"), 
+      col_width = c(2,11,3,3))
+```
+
+
+The comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.
+
+##Employment cost multipliers
+
+Unfortunately, the GVA is not given in the Excel sheet, so we continue with the calculation of the Employment cost multipliers. Only ten industries are shown.
+
+```{r compare_gva_multipliers}
+empc_multiplier_results <- uk_test_results %>%
+  select ( uk_row_label, `Employment cost multiplier`)
+
+empc_indicator_uk <- coefficient_matrix_create(
+   data_table  = uk_siot, 
+   total       = 'output', 
+   return_part = 'primary_inputs') %>%
+   filter ( prod_na == 'D1')
+
+empc_multipliers <- multiplier_create(
+  input_vector = empc_indicator_uk, 
+  Im =           uk_calculated_inverse) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( empc_multiplier_results , by = 'uk_row_label' ) %>%
+  filter ( !is.na(uk_row_label )) %>%
+  select ( prod_na, uk_row_label, values, `Employment cost multiplier`)
+
+iotables:::create_knitr_table (
+      data_table =  empc_multipliers [1:10,], digits = 4,
+      caption = "Comparison of Calculated And Published Employment Cost Multipliers", 
+      col.names = c("industry code", "row label", "calculated", "published"), 
+      col_width = c(2,11,3,3))
+```
+
+
+##Output multipliers
+
+At last, the comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.
+
+```{r compare_output_multipliers}
+output_multiplier_results <- uk_test_results %>%
+  select ( uk_row_label, `Output multiplier`)
+
+uk_output_multipliers <- output_multiplier_create(uk_input_coeff) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( output_multiplier_results, by = 'uk_row_label' ) %>%
+  filter ( !is.na(uk_row_label )) %>%
+  select ( prod_na, uk_row_label, values, `Output multiplier`)
+
+iotables:::create_knitr_table (
+      data_table =  uk_output_multipliers [1:10,], digits = 4,
+      caption = "Comparison of Calculated And Published Output Multipliers", 
+      col.names = c("industry code", "row label", "calculated", "published"), 
+      col_width = c(2,11,3,3))
+```
+
