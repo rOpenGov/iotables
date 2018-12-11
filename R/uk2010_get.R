@@ -80,6 +80,20 @@ uk_2010_get <- function ( path = NULL )  {
       dplyr::mutate ( unit = uk_metadata$unit ) %>%
       dplyr::mutate_if ( is.factor, as.character ) 
     
+    uk_data_sheet <- uk_data_sheet %>%
+      mutate ( uk_col = ifelse ( grepl('on-market', uk_col_lab), 
+                                 paste0("NM_", uk_col), 
+                                 uk_col), 
+               uk_row = ifelse ( grepl('on-market', uk_row_lab), 
+                                 paste0("NM_", uk_row), 
+                                 uk_row)) %>%
+      mutate ( uk_col = ifelse ( grepl('NPISH', uk_col_lab), 
+                                 paste0("NPISH_", uk_col), 
+                                 uk_col), 
+               uk_row = ifelse ( grepl('NPISH', uk_row_lab), 
+                                 paste0("NPISH_", uk_row), 
+                                 uk_row)) 
+    
     if (i>2) uk_data <- rbind(uk_data, uk_data_sheet) else uk_data <- uk_data_sheet
   }
    
