@@ -49,7 +49,8 @@ input_indicator_create <- function ( data_table,
   input_matrix <- cm[inputs_present,  ]
   
   final_names <- NULL
-  if (! is.null(indicator_names)) {
+  
+  if (! is.null(indicator_names)) {  #adding custom names, if inputed
     if ( length(indicator_names) == nrow ( input_matrix) ) {
        final_names <- indicator_names
     } else {
@@ -58,7 +59,7 @@ input_indicator_create <- function ( data_table,
     }
   }
   
-  if ( is.null(final_names))  {
+  if ( is.null(final_names))  {  #creating default names
     final_names <- paste0(as.character(unlist(input_matrix[,1])), "_indicator")
   }
   

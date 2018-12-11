@@ -43,6 +43,7 @@ input_multipliers_create <- function ( direct_effects,
   }
   
   col_n <- ncol(direct_effects)
+  
   if ( col_n != ncol(inverse)) {
     stop("The direct effects matrix and the Leontieff inverse must have the same number of columns.")
   }
@@ -55,7 +56,7 @@ input_multipliers_create <- function ( direct_effects,
   inverse        <- inverse[, -1]
 
   inverse        <- as.matrix ( inverse )
-  direct_effects <- as.matrix (direct_effects)
+  direct_effects <- as.matrix ( direct_effects )
   
   if (ncol ( direct_effects) != nrow ( inverse ) ) {
     stop ( "The matrix is not symmetric") #review later
