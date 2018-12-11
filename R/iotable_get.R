@@ -252,8 +252,8 @@ iotable_get <- function ( labelled_io_data = NULL,
   col_join <- names ( iotable ) [ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col", "uk_col") )] 
   row_join <- names ( iotable ) [ which( names(iotable) %in% c("prod_na", "prod_na_lab", "iotables_row", "uk_row") )] 
 
-  remove_vars <- c("quadrant", "account_group", "digit_1", "digit_2",
-                   "digit_3_5", "variable", "group", "eu_prod_na")
+  remove_vars <- c("quadrant", "account_group", "variable", 
+                   "group", "eu_prod_na")
   remove_vars  <- remove_vars [remove_vars %in% names (metadata_cols)]
   
   iotable_labelled <- iotable %>%
