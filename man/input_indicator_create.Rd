@@ -9,15 +9,21 @@ input_indicator_create(data_table, input_vector = c("gva_bp",
   indicator_names = NULL)
 }
 \arguments{
+\item{data_table}{A symmetric input-output table, a use table, 
+a margins or tax table retrieved by the  \code{\link{iotable_get}}
+function.}
+
+\item{input_vector}{The name of inputs for which you want to create the 
+indicators. They must be found in the \code{data_table}.}
+
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
+
+\item{households}{If the households column should be added, 
+defaults to \code{FALSE}.}
 
 \item{indicator_names}{The names of new indicators. Defaults to \code{NULL} when 
 the names in the key colum of \code{input_matrix} will be used to create the 
 indicator names.}
-
-\item{input_matrix}{A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}}
-
-\item{output_vector}{A named output vector created by \code{\link{output_get}}.}
 }
 \value{
 A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
@@ -29,6 +35,7 @@ The function creates the input indicators from the inputs and the outputs.
 \examples{
  
 input_indicator_create( data_table = iotable_get(), 
-                        input_vector = "compensation_employees",
-                        digits = 4)
+                        input_vector = c("gva", "compensation_employees"),
+                        digits = 4, 
+                        indicator_names = c("GVA indicator", "Income indicator"))
 }

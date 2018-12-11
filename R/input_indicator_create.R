@@ -1,8 +1,13 @@
 #' Create input indicator(s)
 #' 
 #' The function creates the input indicators from the inputs and the outputs.
-#' @param input_matrix A named (primary) input(s) vector or matrix created by \code{\link{primary_input_get}}
-#' @param output_vector A named output vector created by \code{\link{output_get}}.  
+#' @param data_table A symmetric input-output table, a use table, 
+#' a margins or tax table retrieved by the  \code{\link{iotable_get}}
+#' function. 
+#' @param input_vector The name of inputs for which you want to create the 
+#' indicators. They must be found in the \code{data_table}.
+#' @param households If the households column should be added, 
+#' defaults to \code{FALSE}.
 #' @param digits Rounding digits, if omitted, no rounding takes place.
 #' @param indicator_names The names of new indicators. Defaults to \code{NULL} when 
 #' the names in the key colum of \code{input_matrix} will be used to create the 
@@ -12,8 +17,9 @@
 #' @importFrom dplyr mutate_if
 #' @examples  
 #' input_indicator_create( data_table = iotable_get(), 
-#'                         input_vector = "compensation_employees",
-#'                         digits = 4)
+#'                         input_vector = c("gva", "compensation_employees"),
+#'                         digits = 4, 
+#'                         indicator_names = c("GVA indicator", "Income indicator"))
 ##' @export
 
 input_indicator_create <- function ( data_table,
