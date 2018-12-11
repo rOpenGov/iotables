@@ -84,7 +84,7 @@ iotable_get <- function ( labelled_io_data = NULL,
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
                 "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
   
-  trow_tcol <- croatia_files <- c('croatia_2010_1800', 'croatia_2010_1900')
+  trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 'croatia_2010_1900')
  
   if ( source %in% prod_ind ) { 
     metadata_rows <- metadata %>%  #tables that follow prod_ind vocabulary
@@ -100,6 +100,13 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( induse_lab = label )%>%
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
+    
+    if ( source == "germany_1990" ) { 
+      year <- 1990
+      geo <- "DE"
+      unit <- "MIO_EUR"
+      source <- "germany_1990"
+    }
     
     year_input <- year
     geo_input <- geo
@@ -122,18 +129,18 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
-    if ( source == "germany_1990" ) { 
-      year <- 1990
-      geo <- "DE"
-      unit <- "MIO_EUR"
-      source <- "germany_1990"
-      }
+    
+    year_input <- year
+    geo_input <- geo
+    unit_input <- unit
+    source_inputed <- source
+    
     
   } else if ( source %in% uk_tables ) {
       labelling <-  'short'; 
-      year <- 2010; 
-      unit <- 'MIO_NAC'
-      geo <- "UK"
+      year <- year_input <- 2010; 
+      unit <- unit_input <- 'MIO_NAC'
+      geo <- geo_input <-"UK"
       stk_flow <- stk_flow_input <- "TOTAL"
       
       metadata_cols <- metadata_uk_2010  %>%
