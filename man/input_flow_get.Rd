@@ -24,7 +24,6 @@ Select the use table from a symmetric input-output table.
 data_table <- iotable_get()
 input_flow <- input_flow_get( data_table = data_table, 
                          empty_remove = FALSE,
-                         households = TRUE,
-                         labelling  = 'iotables')
+                         households = TRUE)
 
 }
