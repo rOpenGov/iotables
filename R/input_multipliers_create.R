@@ -2,7 +2,7 @@
 #' 
 #' The function creates the input multipliers.  See Eurostat Manual p500-501..
 #' @param direct_effects A direct effects matrix created by 
-#' \code{\link{direct_supply_effects_create}}
+#' \code{\link{input_multipliers_create}}
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
