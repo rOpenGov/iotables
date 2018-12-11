@@ -10,19 +10,6 @@ context ("Creating an IO Table")
 #              unit = "MIO_NAC", data_directory = 'data-raw')
 
 
-
-test_that("get_iotable errors ", {
-  expect_error(iotable_get(source = 'germany_1990', 
-                              geo = 'DE', year = 1990, unit = "MIO_NAC")) #currency not found
-  expect_error(iotable_get(source = 'germany_1990', 
-                              geo = 'DE', year = 1787, unit = "MIO_EUR")) #no data for this year
-  expect_error(iotable_get(source = 'germany_1990', 
-                              geo = 'BE', year = 1990, unit = "MIO_EUR")) # no data for geographical unit
-  expect_error(iotable_get(source = 'germany_1990', 
-                           geo  = 'DE', year = 1990, 
-                           unit = "MIO_EUR", labelling = "biotables")) # no such labelling
-})
-
 test_that("correct data is returned", {
   expect_equal(iotable_get(source = 'germany_1990', 
                            geo = 'DE', year = 1990, 
