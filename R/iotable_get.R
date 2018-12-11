@@ -157,7 +157,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   metadata_rows <- dplyr::mutate_if ( metadata_rows, is.factor, as.character )
   metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
   
-  ###Exception handling for wrong paramters-----
+  ###Exception handling for wrong paramters that are not directly inputed-----
   if ( is.null(labelled_io_data) ) {  #if not directly inputed data 
     if (is.null(geo)) stop ("Error: no country selected.")
     if (! labelling %in% c("iotables", "short")) {
@@ -191,32 +191,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     } else if ( source_inputed == "croatia_2010_1900" )  {
       labelled_io_data <- croatia_2010_1900 %>%
         mutate ( year = lubridate::year ( time ))
-    } else if ( source %in% uk_tables ) {
-      if ( source == "uk_2010_siot") {
-        labelled_io_data <- labelled_io_data %>%
-          dplyr::filter ( indicator == 'Input-Output table (domestic use, basic prices, product by product)')
-      }
-      
-      if ( source == "uk_2010_use") {
-        labelled_io_data <- labelled_io_data %>%
-          dplyr::filter ( indicator == 'Domestic use table at basic prices (product by industry)')
-      }
-      
-      if ( source == "uk_2010_imports") {
-        labelled_io_data <- labelled_io_data %>%
-          dplyr::filter ( indicator == 'Imports use table at basic prices (product by product)')
-      }
-      
-      if ( source == "uk_2010_coeff") {
-        labelled_io_data <- labelled_io_data %>%
-          dplyr::filter ( indicator == 'Matrix of coefficients (product by product)')
-      }
-      
-      if ( source == "uk_2010_inverse") {
-        labelled_io_data <- labelled_io_data %>%
-          dplyr::filter ( indicator == 'Leontief Inverse (product by product)')
-      }
-    } else  {
+    } else {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_data <- readRDS( tmp_rds ) 
       } else { #getting or downloading the bulk longform data
@@ -227,8 +202,35 @@ iotable_get <- function ( labelled_io_data = NULL,
     } # use eurostat files 
   } #end of possible downloads or data retrieval if not directly inputed
 
+  ###Exception handling for UK test data----
+  if ( source %in% uk_tables ) {
+    if ( source == "uk_2010_siot") {
+      labelled_io_data <- labelled_io_data %>%
+        dplyr::filter ( indicator == 'Input-Output table (domestic use, basic prices, product by product)')
+    }
+    
+    if ( source == "uk_2010_use") {
+      labelled_io_data <- labelled_io_data %>%
+        dplyr::filter ( indicator == 'Domestic use table at basic prices (product by industry)')
+    }
+    
+    if ( source == "uk_2010_imports") {
+      labelled_io_data <- labelled_io_data %>%
+        dplyr::filter ( indicator == 'Imports use table at basic prices (product by product)')
+    }
+    
+    if ( source == "uk_2010_coeff") {
+      labelled_io_data <- labelled_io_data %>%
+        dplyr::filter ( indicator == 'Matrix of coefficients (product by product)')
+    }
+    
+    if ( source == "uk_2010_inverse") {
+      labelled_io_data <- labelled_io_data %>%
+        dplyr::filter ( indicator == 'Leontief Inverse (product by product)')
+    }
+  } 
    
- ##Veryfing parameters ----  
+  ##Veryfing parameters ----  
   year_input <- year
   source_inputed <- source;   unit_input <- unit
   stk_flow_input <- stk_flow; geo_input <- geo
@@ -251,7 +253,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   }
   
 
-###Selecting table from nested data, if nested at all------  
+  ###Selecting table from nested data, if nested at all------  
 
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , 
                        "croatia_2010_1900" , 
@@ -274,7 +276,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     }  #in case of DOM, IMP, TOTAL stk_flow must be selected, too.
     
     iotable <- labelled_io_data$data[[selected_table]]  ##the relevant io table data in long form
-  } else {
+  } else {  #if data is not nested
     iotable <- labelled_io_data 
   }
 
