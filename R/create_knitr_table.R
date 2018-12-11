@@ -55,6 +55,9 @@ create_knitr_table <- function (
                       "\\usepackage[utf8]{inputenc}")
                     ) {
 
+  if ( is.null(ncol(data_table))) {
+    stop ( "Empty data table inputed")
+  }
   if ( ! "knitr_kable" %in% class(data_table) ) { 
     #If columns are not named, col heads are names of data.frame
     if ( is.null(col.names)) {
@@ -63,7 +66,7 @@ create_knitr_table <- function (
     
     #Create default column alignment settings if necessary
     if ( is.null(col_align)) {
-      col_align = c('l', rep('c', ncol(data_table)-1))
+      col_align = c('l', rep('c', (ncol(data_table)-1)))
     }
     
     #Create default column alignment settings if necessary
@@ -88,18 +91,18 @@ create_knitr_table <- function (
     col_width <- paste0(col_width, width_unit)   
     
     if ( output_format == "image" ) { 
-      format <- 'latex' 
+      table_format <- 'latex' 
     } else if ( output_format %in% c("latex", "html") ) {
-      format <- output_format 
+      table_format <- output_format 
     } else {
-      format <- "html"
+      table_format <- "html"
     }
     
     #Create the basic table
     knitr_table <- knitr::kable(
       data_table,
       digits = digits,
-      format = format,  
+      format = table_format,  
       format.args = (list(big.mark = " ", decimal.mark = ",")),
       caption = caption,
       booktabs = TRUE, 
@@ -111,19 +114,19 @@ create_knitr_table <- function (
   
   
   ## bootstrap_options for html tables and latex_options for latex
-  if ( format == "html") { 
+  if ( table_format == "html") { 
     if ( is.null(bootstrap_options)) {
-      if (format == "html")   bootstrap_options <- c("striped", "hover", "condensed")
+      if (table_format == "html")   bootstrap_options <- c("striped", "hover", "condensed")
     }
     knitr_table <-  kableExtra::kable_styling(
            kable_input = knitr_table, 
            bootstrap_options = bootstrap_options) 
     }
 
-  if ( format %in% c("latex", "image")  ) { 
+  if ( table_format %in% c("latex", "image")  ) { 
     if ( is.null(latex_options) ) {
-      if ( format == "latex") latex_options <- c("scale_down", "striped", "HOLD_position")
-      if ( format == "image") latex_options <- c("striped", "HOLD_position")
+      if ( table_format == "latex") latex_options <- c("scale_down", "striped", "HOLD_position")
+      if ( table_format == "image") latex_options <- c("striped", "HOLD_position")
     }
     
     knitr_table <-  kableExtra::kable_styling(kable_input = knitr_table, 
