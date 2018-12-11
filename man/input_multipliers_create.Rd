@@ -15,6 +15,9 @@ input_multipliers_create(direct_effects, inverse, digits = NULL,
 
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
 no rounding takes place.}
+
+\item{multiplier_names}{Defaults to \code{NULL}. You can optionally add 
+custom names for the multipliers which will be placed in the key column.}
 }
 \description{
 The function creates the input multipliers.  See Eurostat Manual p500-501..
@@ -25,8 +28,6 @@ direct_effects_de <- coefficient_matrix_create(data_table = data_table,
                                               total = 'output', 
                                               return = 'primary_inputs') 
 
-#Remove the total column from direct effects to conform with the inverse:
-direct_effects_de <- dplyr::select(direct_effects_de, -total)
 
 multipliers <- input_multipliers_create(
  direct_effects = direct_effects_de,
