@@ -24,7 +24,7 @@ The function creates the input multipliers.  See Eurostat Manual p500-501..
 }
 \examples{
  
-direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
+direct_effects_de <- coefficient_matrix_create(data_table = iotable_get(), 
                                                total = 'output', 
                                                return = 'primary_inputs') 
 

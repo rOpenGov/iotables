@@ -10,7 +10,7 @@
 #' custom names for the multipliers which will be placed in the key column.
 #' @importFrom dplyr select one_of mutate_at
 #' @examples  
-#' direct_effects_de <- coefficient_matrix_create(data_table = data_table, 
+#' direct_effects_de <- coefficient_matrix_create(data_table = iotable_get(), 
 #'                                                total = 'output', 
 #'                                                return = 'primary_inputs') 
 #' 

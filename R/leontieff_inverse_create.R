@@ -37,5 +37,5 @@ leontieff_inverse_create <- function ( technology_coefficients_matrix,
   
  if ( is.null(digits) ) return (named_inverse)
   
-  iotables:::round_table ( named_inverse, digits = digits  )
+  round_table ( named_inverse, digits = digits  )
 }
