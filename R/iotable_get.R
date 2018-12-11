@@ -103,14 +103,14 @@ iotable_get <- function ( labelled_io_data = NULL,
     
   } else if ( source %in% trow_tcol ) {   #tables that follow trow_tcol vocabulary
     
-    metadata_rows <- iotables::metadata %>%
+    metadata_rows <- metadata %>%
       dplyr::filter ( variable == "t_rows") %>%
       dplyr::rename ( t_rows2 = code) %>%
       dplyr::rename ( t_rows2_lab = label ) %>%
       dplyr::rename ( row_order = numeric_label ) %>%
       dplyr::rename ( iotables_row = iotables_label )
     
-    metadata_cols <- iotables::metadata %>%
+    metadata_cols <- metadata %>%
       dplyr::filter ( variable == "t_cols") %>%
       dplyr::rename ( t_cols2 = code) %>%
       dplyr::rename ( t_cols2_lab = label ) %>%
@@ -174,13 +174,13 @@ iotable_get <- function ( labelled_io_data = NULL,
       labelled_io_data <- germany_1990    # use germany example 
       labelled_io_data$year = 1990
     } else if ( source_inputed == "croatia_2010_1700" ) { 
-      labelled_io_data <- iotables::croatia_2010_1700 %>%
+      labelled_io_data <- croatia_2010_1700 %>%
         mutate ( year = lubridate::year ( time ))
     } else if ( source_inputed == "croatia_2010_1800" )  {
-      labelled_io_data <- iotables::croatia_2010_1800   %>%
+      labelled_io_data <- croatia_2010_1800   %>%
         mutate ( year = lubridate::year ( time ))
     } else if ( source_inputed == "croatia_2010_1900" )  {
-      labelled_io_data <- iotables::croatia_2010_1900 %>%
+      labelled_io_data <- croatia_2010_1900 %>%
         mutate ( year = lubridate::year ( time ))
     } else  {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
@@ -272,7 +272,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     iotable_labelled <- iotable_labelled %>%
       dplyr::mutate ( prod_na = forcats::fct_reorder(prod_na, 
                                               as.numeric(row_order))) %>%
-      dplyr::mutate ( induse = forcats::fct_reorder(induse, 
+      dplyr::mutate ( induse  = forcats::fct_reorder(induse, 
                                              as.numeric(col_order))) 
     
     if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
