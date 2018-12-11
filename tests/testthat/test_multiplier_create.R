@@ -4,13 +4,13 @@ context ("Eurostat Manual examples")
 coeff_de <- input_coefficient_matrix_create( iotable_get() )
 
 de_gva_indicator <- input_indicator_create (
-  data_table = data_table, 
+  data_table = iotable_get(), 
   input = 'gva')  #this is a correct input
 
 I_de <- leontieff_inverse_create( coeff_de )
 
 de_emp_indicator <- input_indicator_create (
-  data_table = data_table, 
+  data_table = iotable_get(), 
   input = 'employment_domestic_total') 
 
 
