@@ -36,6 +36,8 @@
 #'  }
 #' @export
 
+geo = "sk" 
+labelling = 'short'
 employment_get <- function ( geo = "CZ", 
                              year = "2010",
                              sex = "Total", 
@@ -163,13 +165,13 @@ employment_get <- function ( geo = "CZ",
   
   ##Data processing for employment variables-------------------------------- 
   employment <- emp %>%
-    dplyr::mutate ( nace_r2 = as.character(nace_r2) ) %>%
+    dplyr::mutate (   nace_r2 = as.character(nace_r2) ) %>%
     dplyr::group_by ( nace_r2, year ) %>%
     dplyr::summarize ( values = mean(values)) %>%
     dplyr::rename ( emp_code = nace_r2 ) %>%
     dplyr::ungroup ( ) %>%
     dplyr::left_join ( employment_metadata, by = "emp_code") %>%  # iotables:::employment_metadata
-    dplyr::group_by ( code, variable, iotables_label ) %>%
+    dplyr::group_by (  code, variable, iotables_label ) %>%
     dplyr::summarize ( values = sum(values)) %>%
     dplyr::mutate ( geo = geo_input ) %>%
     dplyr::mutate ( year = year_input ) %>%

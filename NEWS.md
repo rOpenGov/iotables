@@ -114,4 +114,7 @@ performance, more consistent function interface and far more readable code. The 
 *  The `use_table_get()` function is now named `input_flow_get()` but it 
 is seldom used, as the analytical function will call it as needed.
 * A completely dataset, metadata and vignette was added to test the functions on the United Kingdom Input-Output Analytical Tables, 2010. article and dataset.	
+* The new function `supplementary_add()` can add a supplementary account or row to the table, useful to add employment data, for example.
+* The new function `total_tax_add()` adds a summary of product and production taxes among the primary inputs.
+* Clearly divided analytical functions, `direct_effects_create()` , `indirect_effects_create()`, `input_multiplier_create()` create the direct, indirect and total effects matrix. 
 
