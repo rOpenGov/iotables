@@ -36,8 +36,6 @@
 #'  }
 #' @export
 
-geo = "sk" 
-labelling = 'short'
 employment_get <- function ( geo = "CZ", 
                              year = "2010",
                              sex = "Total", 
