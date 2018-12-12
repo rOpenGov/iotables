@@ -47,7 +47,7 @@ total_tax_add <- function ( data_table,
   
   if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names ( siot_ext)))  ) {
     household_col <- which ( tolower ( names ( siot_ext)) %in% c("final_consumption_households", "p3_s14") )
-    new_row <- which ( tolower ( as.character(siot_ext[,1])) %in% tolower(new_key) )
+    new_row <- which ( tolower ( as.character(siot_ext[,1])) %in% total_tax_name )
     
     siot_ext[new_row, household_col] <- ifelse ( test = is.na(siot_ext[new_row, household_col]), 
                                                  yes  = 0, 

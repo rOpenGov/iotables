@@ -4,20 +4,26 @@
 \alias{supplementary_add}
 \title{Add supplementary data}
 \usage{
-supplementary_add(data_table, supplementary)
+supplementary_add(data_table, supplementary_data,
+  supplementary_names = NULL)
 }
 \arguments{
 \item{data_table}{A SIOT, a use table, a supply table, or a margins table.}
 
-\item{supplementary}{A supplementary account to be added. The key column 
-should contain the indicator's name, and the column names must match with the
-data_table.}
+\item{supplementary_data}{Supplementary data to be added. It must be a data.frame
+or tibble with a key column containing the indicator's name, 
+and the column names must match with the \code{data_table}. Can be a 
+vector or a data frame of several rows.}
+
+\item{supplementary_names}{Optional names for the new supplementary rows. 
+Defaults  to \code{NULL}.}
 }
 \description{
 Download the employment data for a country and arrange it to the 64x64 SIOTS.
 Currently works only with product x product tables.
 }
 \examples{
+de_io <- iotable_get()
 CO2 <- c( 0.2379, 0.5172, 0.0456, 0.1320, 0.0127, 0.0530)  
 names ( CO2) <- c("agriculture_group", "industry_group","construction",
                   "trade_group","business_services_group","other_services_group") 

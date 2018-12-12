@@ -1,7 +1,7 @@
 library (testthat)
 library (iotables)
 context ("Adding a supplementary row")
-
+de_io <- iotable_get()
 CO2 <- c( 0.2379, 0.5172, 0.0456, 0.1320, 0.0127, 0.0530)  
 names ( CO2) <- c("agriculture_group", "industry_group","construction",
                   "trade_group","business_services_group","other_services_group") 
