@@ -18,7 +18,7 @@ library(iotables)
 require(dplyr); require(tidyr); require(testthat)
 ```
 
-The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. It is unlikely that these tables will be required by other purposes than controlling the package.
+The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. It is unlikely that these tables will be required by other purposes than controlling the package.
 
 ```{r read_control_data, eval=FALSE}
 uk_2010_data <- iotables_download ( source = "uk_2010" )

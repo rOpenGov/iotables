@@ -17,6 +17,9 @@
   \item{unit_lab}{Eurostat label equivalents, i.e. millions of national currency unit.}
   \item{values}{The numeric values of the variable}
 }}
+\source{
+\href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
+}
 \usage{
 data(uk_2010_data)
 }
