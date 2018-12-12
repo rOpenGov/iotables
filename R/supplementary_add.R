@@ -29,13 +29,14 @@ supplementary_add <- function ( data_table,
                                 supplementary_names = NULL) {
   
   if ( !is.null(supplementary_names)) {
-    if ( length(supplementary_names) == nrow(as.data.frame(supplementary))) {
+    if ( length(supplementary_names) == nrow(as.data.frame(supplementary_data))) {
       new_key <- supplementary_names
+      supplementary_data[,1] <- new_key
     } else {
       warning("New names do not match the dimensions of the supplementary data.")
     }
   } else {
-    new_key <- as.character(supplementary[,1])
+    new_key <- as.character(supplementary_data[,1])
   }
  
   
@@ -43,12 +44,13 @@ supplementary_add <- function ( data_table,
   
   key_column <- dplyr::select ( data_table, 1 ) 
   
-  names ( supplementary)[1] <- names (data_table)[1]
+  names (supplementary_data)[1] <- names (data_table)[1]
   
   siot_ext   <- dplyr::full_join ( 
     dplyr::mutate_if(data_table, is.factor, as.character), 
-    dplyr::mutate_if(supplementary, is.factor, as.character),
-    by = names (supplementary) )
+    dplyr::mutate_if(supplementary_data, is.factor, as.character),
+    by = names (supplementary_data) )
+
   
   if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names ( siot_ext)))  ) {
     household_col <- which ( tolower ( names ( siot_ext)) %in% c("final_consumption_households", "p3_s14") )
