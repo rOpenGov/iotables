@@ -122,15 +122,15 @@ empc_indicator_uk <- coefficient_matrix_create(
    return_part = 'primary_inputs') %>%
    filter ( prod_na == 'D1')
 
-empc_multipliers <- multiplier_create(
-  input_vector = empc_indicator_uk, 
-  Im =           uk_calculated_inverse) %>%
+empc_multipliers <- input_multipliers_create(
+  input_requirements = empc_indicator_uk,
+  uk_calculated_inverse) %>%
   gather ( prod, values, !!2:ncol(.)) %>%
   mutate ( prod_na = prod ) %>%
   select ( -prod ) %>%
   left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
               by = 'prod_na') %>%
-  left_join ( empc_multiplier_results , by = 'uk_row_label' ) %>%
+  left_join ( empc_multiplier_results, by = 'uk_row_label' ) %>%
   filter ( !is.na(uk_row_label )) %>%
   select ( prod_na, uk_row_label, values, `Employment cost multiplier`)
 
