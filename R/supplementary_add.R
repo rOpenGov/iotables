@@ -6,7 +6,7 @@
 #' @param supplementary A supplementary account to be added. The key column 
 #' should contain the indicator's name, and the column names must match with the
 #' data_table.
-#' @importFrom dplyr select full_join
+#' @importFrom dplyr select full_join mutate_if
 #' @examples
 #' CO2 <- c( 0.2379, 0.5172, 0.0456, 0.1320, 0.0127, 0.0530)  
 #' names ( CO2) <- c("agriculture_group", "industry_group","construction",
@@ -28,8 +28,10 @@ supplementary_add <- function ( data_table, supplementary ) {
   
   names ( supplementary)[1] <- names (data_table)[1]
   
-  siot_ext   <- dplyr::full_join ( data_table, supplementary,
-                                   by = names (supplementary) )
+  siot_ext   <- dplyr::full_join ( 
+    dplyr::mutate_if(data_table, is.factor, as.character), 
+    dplyr::mutate_if(supplementary, is.factor, as.character),
+    by = names (supplementary) )
   
   if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names ( siot_ext)))  ) {
     household_col <- which ( tolower ( names ( siot_ext)) %in% c("final_consumption_households", "p3_s14") )
