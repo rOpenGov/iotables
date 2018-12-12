@@ -6,7 +6,7 @@ CO2 <- c( 0.2379, 0.5172, 0.0456, 0.1320, 0.0127, 0.0530)
 names ( CO2) <- c("agriculture_group", "industry_group","construction",
                   "trade_group","business_services_group","other_services_group") 
 CO2 <- cbind ( 
-  tibble ( iotables_row = "CO2"),as.tibble ( t(CO2)))
+  data.frame ( iotables_row = "CO2"),as.data.frame ( t(CO2)))
 de_coeff <- input_coefficient_matrix_create ( iotable_get() )
 
 extended <- supplementary_add  ( de_io, CO2)

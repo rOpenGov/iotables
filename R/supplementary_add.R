@@ -12,7 +12,7 @@
 #' names ( CO2) <- c("agriculture_group", "industry_group","construction",
 #'                   "trade_group","business_services_group","other_services_group") 
 #' CO2 <- cbind ( 
-#'   tibble ( iotables_row = "CO2"),as.tibble ( t(CO2)))
+#'   data.frame ( iotables_row = "CO2"),as.data.frame ( t(CO2)))
 #' de_coeff <- input_coefficient_matrix_create ( iotable_get() )
 #'
 #' supplementary_add ( de_io, CO2)
