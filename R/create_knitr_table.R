@@ -142,8 +142,8 @@ create_knitr_table <- function (
 
   if ( table_format %in% c("latex", "image")  ) { 
     if ( is.null(latex_options) ) {
-      if ( table_format == "latex") latex_options <- c("scale_down", "striped", "HOLD_position")
-      if ( table_format == "image") latex_options <- c("striped", "HOLD_position")
+      if ( table_format == "latex") latex_options <- c("scale_down", "striped") #, "HOLD_position"
+      if ( table_format == "image") latex_options <- c("scale_down", "striped") #"HOLD_position"
     }
     
     knitr_table <-  kableExtra::kable_styling(kable_input = knitr_table, 
