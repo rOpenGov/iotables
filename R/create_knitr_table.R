@@ -27,7 +27,7 @@
 #' "\\usepackage[utf8]{inputenc}")}
 #' It can be any valid latex option setting, but if packages are used, the 
 #' packages must be installed on your Latex engine.
-#' @importFrom knitr kable
+#' @importFrom knitr kable is_latex_output is_html_output
 #' @importFrom kableExtra kable_as_image kable_styling column_spec
 #' @examples 
 #' foo = data.frame ( 
@@ -48,7 +48,7 @@ create_knitr_table <- function (
                     bold_cols = NULL, 
                     bootstrap_options = c("striped", "hover", "condensed"), 
                     latex_options = NULL,
-                    output_format = "html", 
+                    output_format = NULL, 
                     keep_pdf = FALSE, 
                     latex_header_includes = c(
                       "\\usepackage[magyar]{babel}",
@@ -56,8 +56,26 @@ create_knitr_table <- function (
                     ) {
 
   if ( is.null(ncol(data_table))) {
-    stop ( "Empty data table inputed")
+    stop ( "Empty data table inputed.")
   }
+  
+  if( knitr:::is_latex_output() ) {
+    output_format <- "latex"
+  } else if ( knitr:::is_html_output()) {
+    output_format <- "html"
+  }
+  
+  
+  if ( is.null(output_format)) {
+    output_format <- 'image'
+  } 
+  
+  if (! output_format %in% c("latex", 'html') ) {
+    output_format <- 'image'
+  }
+      
+  
+  
   if ( ! "knitr_kable" %in% class(data_table) ) { 
     #If columns are not named, col heads are names of data.frame
     if ( is.null(col.names)) {
@@ -111,8 +129,7 @@ create_knitr_table <- function (
     ) 
     
     }
-  
-  
+
   ## bootstrap_options for html tables and latex_options for latex
   if ( table_format == "html") { 
     if ( is.null(bootstrap_options)) {
