@@ -22,6 +22,3 @@ stopping a pipeline.
 This is an internal function to determine where to separate quadrants if
 necessary.
 }
-\examples{
-quadrant_separator_find( iotable_get ( source = "germany_1990") )
-}
