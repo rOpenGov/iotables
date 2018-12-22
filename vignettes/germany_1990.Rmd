@@ -24,7 +24,7 @@ The Germany example is used to test the code of the package. It follows the exam
 
 The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat Manual (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.
 
-The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the `germany_1990` dataset and the Manaul should cause no misunderstandings.
+The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the `germany_1990` dataset and the Manual should cause no misunderstandings.
 
 ```{r iotables}
 data_table <- iotable_get( labelling = "iotables" )
@@ -184,7 +184,7 @@ B = vector of input coefficients for wages or GVA or taxes.
 
 Z = direct and indirect requirements for wages (or other income)
 
-The indicator shows that manufacturing has the lowest, and other services has the highest gross value added component. This is hardly suprising, because manufacturing needs a lot of materials and imported components. When the demand for manufacturing in the domestic economy is growing by 1 unit, the gross value added is `r as.numeric(de_gva_indicator[3])`.
+The indicator shows that manufacturing has the lowest, and other services has the highest gross value added component. This is hardly surprising, because manufacturing needs a lot of materials and imported components. When the demand for manufacturing in the domestic economy is growing by 1 unit, the gross value added is `r as.numeric(de_gva_indicator[3])`.
 
 > You can check these values against the Table 15.16 of the Eurostat Manual on page 501 (row 10).
 
@@ -266,7 +266,7 @@ Forward linkages on the other hand show the effect of increased production, whic
 
 For example, when a new concert is put on stage, orders are filled for real estate, security services, catering, etc, which show in the backward linkages. The concert attracts visitors that creates new opportunities for the hotel industry in forward linkages. 
 
-Currently `iotables` only caclulates backward linkages, but the creation of forward linkages on the basis of output coefficients is simple. Both output coefficients and forward linkages will be added to the package soon. 
+Currently `iotables` only calculates backward linkages, but the creation of forward linkages on the basis of output coefficients is simple. Both output coefficients and forward linkages will be added to the package soon. 
 
 ###Backward linkages 
 

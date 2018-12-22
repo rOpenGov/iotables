@@ -13,9 +13,10 @@
 #' if it exists in the matrix. 
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
-#' @param return_part Defaults to \code{NULL}. You can chooce \code{"product"} or
-#' \code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
-#' to receive only the total intermediate use and proportional primary inputs.
+#' @param return_part Defaults to \code{NULL}. You can choose \code{"product"} 
+#' or \code{"industry"} to return an input coefficient matrix or
+#' \code{"primary_inputs"} to get only the total intermediate use and 
+#' proportional primary inputs.
 #' @param remove_empty Defaults to \code{TRUE}. If you want to keep empty 
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 #' removed to avoid division by zero error in the analytical functions.

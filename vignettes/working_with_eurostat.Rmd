@@ -22,7 +22,7 @@ Symmetric input-output tables and their auxiliary tables are the most complex, s
 
 The Eurostat website contains the symmetric input-output data in long form.  Working with this data requires a knowledge of the Eurostat SNA vocabulary to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle. 
 
-Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with ‘real-life’ data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on product x product  type SIOTs, because most member states use them. The functions work with industry x industry SIOTs, but further vocabulary exception may show up in their use. Please report these issues on github or in an email.
+Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with "real-life" data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on product x product  type SIOTs, because most member states use them. The functions work with industry x industry SIOTs, but further vocabulary exception may show up in their use. Please report these issues on github or in an email.
 
 You are most likely to work with the product x product tables. For the availability of other data see `?iotables_download`.
 
@@ -222,7 +222,7 @@ knitr::kable (head(multipliers_cz[,1:8]), digits = 4)
 
 ###Employment indicators and multipliers 
 
-The creation of the employment indicator is fascilitated with the data processing function `employment_get`. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector. 
+The creation of the employment indicator is facilitated with the data processing function `employment_get`. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector. 
 
 Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation.  The helper function `conforming_vector_create` will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.
 
