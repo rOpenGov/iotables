@@ -5,8 +5,6 @@
 #' @param data_table A symmetric input output table, a use table or a supply 
 #' table.
 #' @return A vector of \code{TRUE} and \code{FALSE} values for the table.
-#' @examples 
-#' non_zero_columns ( data_table = c(0,0,0))
 
 non_zero_columns_find <- function(data_table) {
   if ( class ( data_table ) %in% c("factor", "character") ) return ( TRUE )

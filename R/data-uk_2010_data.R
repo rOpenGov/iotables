@@ -15,6 +15,7 @@
 #'   \item{unit}{Eurostat label equivalents units, i.e. MIO_NAC.}
 #'   \item{unit_lab}{Eurostat label equivalents, i.e. millions of national currency unit.}
 #'   \item{values}{The numeric values of the variable}
+#'   \item{year}{Contant = 2010.}
 #' }
 #' @keywords data, datasets, input-output table, metadata, vocabulary, UK
 

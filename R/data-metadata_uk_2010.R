@@ -8,8 +8,8 @@
 #'   \item{variable}{Constant for the iotable_get function.} 
 #'   \item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.} 
 #'   \item{uk_col}{The UK row identifier. Dots and '&' converted to '-'.} 
-#'   \item{uk_row_lab}{The original UK row labels.}
-#'   \item{uk_col_lab}{The original UK column labels.}
+#'   \item{uk_row_label}{The original UK row labels.}
+#'   \item{uk_col_label}{The original UK column labels.}
 #'   \item{eu_prod_na}{The Eurostat vocabulary equivalent of uk_row}
 #'   \item{row_order}{Ordering variable for rows.}
 #'   \item{col_order}{Ordering variable for columns.}

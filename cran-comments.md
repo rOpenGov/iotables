@@ -3,7 +3,13 @@
 * Windows Server 2008 R2 SP1, R-devel, 32/64 bit (R-hub builder)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs. 
+There were no ERRORs or WARNINGs. 
+
+There is one NOTE
+
+':::' calls which should be '::':
+However, this relates to another package's internal call, i.e. 'knitr:::is_html_output' 'knitr:::is_latex_output'.
+
 
 * Ubuntu Linux 16.04 LTS, R-release, GCC (R-hub builder) had un unrelated error, 
 because a dependency of the dependency Eurostat did not install properly. This

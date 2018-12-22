@@ -17,6 +17,3 @@ A vector of \code{TRUE} and \code{FALSE} values for the table.
 This is an internal function to help finding empty columns and rows in 
 symmetric tables.
 }
-\examples{
-non_zero_columns ( data_table = c(0,0,0))
-}
