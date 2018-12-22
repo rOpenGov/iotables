@@ -7,9 +7,9 @@
 \format{A data frame with 10 variables.
 \describe{
   \item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.} 
-  \item{uk_row_label}{The original UK row labels.}
+  \item{uk_row_lab}{The original UK row labels.}
   \item{uk_col}{The UK row identifier. Dots and '&' converted to '-'.} 
-  \item{uk_col_label}{The original UK column labels.}
+  \item{uk_col_lab}{The original UK column labels.}
   \item{geo}{Eurostat-style geocode, i.e. UK }
   \item{geo_lab}{United Kingdom}
   \item{indicator}{The name of the indicator, i.e. Excel sheet.}

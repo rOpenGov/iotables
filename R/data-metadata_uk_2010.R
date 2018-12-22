@@ -5,14 +5,17 @@
 #' @usage data(uk_2010_data)
 #' @format A data frame with 10 variables.
 #'\describe{
+#'   \item{variable}{Constant for the iotable_get function.} 
 #'   \item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.} 
-#'   \item{indicator}{The name of the indicator, i.e. Excel sheet.}
-#'   \item{Output multiplier}{The imported Output multipliers}
-#'   \item{Employment cost multiplier}{The imported Employment cost multipliers.}
-#'   \item{GVA multiplier}{The imported GVA multipliers.}
-#'   \item{GVA effects}{The imported GVA effects.}
-
+#'   \item{uk_col}{The UK row identifier. Dots and '&' converted to '-'.} 
+#'   \item{uk_row_lab}{The original UK row labels.}
+#'   \item{uk_col_lab}{The original UK column labels.}
+#'   \item{eu_prod_na}{The Eurostat vocabulary equivalent of uk_row}
+#'   \item{row_order}{Ordering variable for rows.}
+#'   \item{col_order}{Ordering variable for columns.}
+#'   \item{prod_na}{The Eurostat-like key values for rows.}
+#'   \item{induse}{The Eurostat-like column names}
 #' }
-#' @keywords data, datasets, input-output table, effects, multipliers, UK
+#' @keywords datasets, input-output table, metadata, UK
 
-"uk_test_results"
+"metadata_uk_2010"
