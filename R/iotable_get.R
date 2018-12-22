@@ -48,6 +48,7 @@
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
+#' @importFrom utils data
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
 #'              year = 1990,   unit = "MIO_EUR", 
@@ -69,7 +70,16 @@ iotable_get <- function ( labelled_io_data = NULL,
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
-
+  ##Avoiding no visible binding for global variable 'data' -----
+  getdata <- function(...)
+  {
+    e <- new.env()
+    name <- utils::data(..., envir = e)[1]
+    e[[name]]
+  }
+  
+  
+  ##Exception handling ---
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
        ) {
@@ -87,14 +97,15 @@ iotable_get <- function ( labelled_io_data = NULL,
   trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 'croatia_2010_1900')
  
   if ( source %in% prod_ind ) { 
-    metadata_rows <- metadata %>%  #tables that follow prod_ind vocabulary
+    
+    metadata_rows <- getdata (metadata) %>%  #tables that follow prod_ind vocabulary
       dplyr::filter ( variable == "prod_na") %>%
       dplyr::rename ( prod_na = code) %>%
       dplyr::rename ( prod_na_lab = label ) %>%
       dplyr::rename ( row_order = numeric_label ) %>%
       dplyr::rename ( iotables_row = iotables_label )
     
-    metadata_cols <- metadata %>%
+    metadata_cols <- getdata(metadata) %>%
       dplyr::filter ( variable == "induse") %>%
       dplyr::rename ( induse = code) %>%
       dplyr::rename ( induse_lab = label )%>%
@@ -114,6 +125,8 @@ iotable_get <- function ( labelled_io_data = NULL,
     source_inputed <- source
     
   } else if ( source %in% trow_tcol ) {   #tables that follow trow_tcol vocabulary
+    
+    metadata <- getdata(metadata)
     
     metadata_rows <- metadata %>%
       dplyr::filter ( variable == "t_rows") %>%
@@ -142,6 +155,8 @@ iotable_get <- function ( labelled_io_data = NULL,
       unit <- unit_input <- 'MIO_NAC'
       geo <- geo_input <-"UK"
       stk_flow <- stk_flow_input <- "TOTAL"
+      
+      metadata_uk_2010 <- getdata(metadata_uk_2010)
       
       metadata_cols <- metadata_uk_2010  %>%
         dplyr::filter ( !is.na(uk_col)) %>%
@@ -187,17 +202,29 @@ iotable_get <- function ( labelled_io_data = NULL,
     
     ##Read from file or internal dataset ----
     if ( source_inputed == "germany_1990" ) {
+      
+      germany_1990 <- getdata(germany_1990) 
       labelled_io_data <- germany_1990    # use germany example 
       labelled_io_data$year = 1990
+      
     } else if ( source_inputed == "croatia_2010_1700" ) { 
+      
+      croatia_2010_1700 <- getdata(croatia_2010_1700)
       labelled_io_data <- croatia_2010_1700 %>%
         mutate ( year = lubridate::year ( time ))
+      
     } else if ( source_inputed == "croatia_2010_1800" )  {
+      
+      croatia_2010_1800 <- getdata(croatia_2010_1800)
       labelled_io_data <- croatia_2010_1800   %>%
         mutate ( year = lubridate::year ( time ))
+      
     } else if ( source_inputed == "croatia_2010_1900" )  {
+      
+      croatia_2010_1900 <- getdata(croatia_2010_1900)
       labelled_io_data <- croatia_2010_1900 %>%
         mutate ( year = lubridate::year ( time ))
+      
     } else {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
         labelled_io_data <- readRDS( tmp_rds ) 
