@@ -18,7 +18,9 @@ library(iotables)
 require(dplyr); require(tidyr); require(testthat)
 ```
 
-The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. It is unlikely that these tables will be required by other purposes than controlling the package.
+The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. 
+
+It is unlikely that these tables will be required by other purposes than controlling the package. The UK IO tables for other years are available these are consistent with different Blue Books and there could therefore be important methodological and classification changes. Furthermore, ONS currently publishes ESA2010 compatible SIOTs with analytical tables annually.
 
 ```{r read_control_data, eval=FALSE}
 uk_2010_data <- iotables_download ( source = "uk_2010" )
@@ -33,9 +35,9 @@ For the actual symmetric input-output table (see ) you can use the download func
 uk_siot              <- iotable_get ( labelled_io_data = uk_2010_data, 
                                     source = "uk_2010_siot" )
 uk_published_coeff   <- iotable_get ( labelled_io_data = uk_2010_data, 
-                                    source = "uk_2010_inverse" )
+                                    source = "uk_2010_siot" )
 uk_published_inverse <- iotable_get ( labelled_io_data = uk_2010_data, 
-                                    source = "uk_2010_inverse" )
+                                    source = "uk_2010_siot" )
 ```
 
 ##Matrix of Coefficients
@@ -108,11 +110,49 @@ iotables:::create_knitr_table (
 
 The comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.
 
+##GVA effects
+
+GVA is not shown in the Excel table explicitly, but can be calculated as the sum of corporate income (*Operating surplus and mixed income*), household income (*Compensation of employees*) and net taxes on proudction (not products.)
+
+```{r gva_effects}
+uk_siot2 <- uk_siot %>%
+  filter (  prod_na %in% c("B2A3G", "D1", "D29X39") )  %>%
+  summarize_if ( is.numeric, sum, na.rm = TRUE ) %>%
+  cbind ( data.frame ( prod_na = "GVA"), . ) %>%
+  rbind ( uk_siot, .)
+
+gva_effect_results <- uk_test_results %>%
+  select ( uk_row_label, `GVA effects`)
+
+gva_input <- coefficient_matrix_create(
+   data_table  = uk_siot2, 
+   total       = 'output', 
+   return_part = 'primary_inputs') %>%
+  filter ( prod_na == "GVA" )
+
+gva_effects <- direct_effects_create( gva_input,
+                                      uk_calculated_inverse ) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( gva_effect_results, by = 'uk_row_label' ) %>%
+  filter ( !is.na(uk_row_label )) %>%
+  select ( prod_na, uk_row_label, values, `GVA effects`)
+
+iotables:::create_knitr_table (
+      data_table =  gva_effects[1:10,], digits = 4,
+      caption = "Comparison of Calculated And Published GVA Effects", 
+      col.names = c("industry code", "row label", "calculated", "published"), 
+      col_width = c(2,11,3,3))
+```
+
 ##Employment cost multipliers
 
-Unfortunately, the GVA is not given in the Excel sheet, so we continue with the calculation of the Employment cost multipliers. Only ten industries are shown.
+Turning to multipliers, using the same inputs we get them back with the following code.
 
-```{r compare_gva_multipliers}
+```{r compare_emp_multipliers}
 empc_multiplier_results <- uk_test_results %>%
   select ( uk_row_label, `Employment cost multiplier`)
 
@@ -139,6 +179,36 @@ iotables:::create_knitr_table (
       caption = "Comparison of Calculated And Published Employment Cost Multipliers", 
       col.names = c("industry code", "row label", "calculated", "published"), 
       col_width = c(2,11,3,3))
+```
+
+
+##GVA multipliers
+Following from the GVA effects, after summarizing GVA and adding it to the input requirements we can calculate the GVA multipliers.
+
+```{r gva_comp, eval=FALSE}
+gva_multipliers <- input_multipliers_create(
+  input_requirements = gva_input,
+                       uk_calculated_inverse) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( gva_multiplier_results, by = 'uk_row_label' ) %>%
+  filter ( !is.na(uk_row_label )) %>%
+  select ( prod_na, uk_row_label, values, `GVA multiplier`)
+
+iotables:::create_knitr_table (
+  data_table =  gva_multipliers [1:10,], digits = 4,
+  caption = "Comparison of Calculated And Published GVA Multipliers", 
+  col.names = c("industry code", "row label", "calculated", "published"), 
+  col_width = c(2,11,3,3))
+
+iotables:::create_knitr_table (
+  data_table =  gva_multipliers [1:10,], digits = 4,
+  caption = "Comparison of Calculated And Published GVA Multipliers", 
+  col.names = c("industry code", "row label", "calculated", "published"), 
+  col_width = c(2,11,3,3))
 ```
 
 
