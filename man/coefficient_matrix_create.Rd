@@ -27,9 +27,10 @@ removed to avoid division by zero error in the analytical functions.}
 \item{households}{Defaults to \code{NULL}. Household column can be added 
 with \code{TRUE}.}
 
-\item{return_part}{Defaults to \code{NULL}. You can chooce \code{"product"} or
-\code{"industry"} to return an input coefficient matrix or \code{"primary_inputs"}
-to receive only the total intermediate use and proportional primary inputs.}
+\item{return_part}{Defaults to \code{NULL}. You can choose \code{"product"} 
+or \code{"industry"} to return an input coefficient matrix or
+\code{"primary_inputs"} to get only the total intermediate use and 
+proportional primary inputs.}
 }
 \value{
 A data.frame that contains the matrix of  \code{data_table} divided by \code{total}

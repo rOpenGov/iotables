@@ -2,7 +2,7 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 * Added Contributor Code of Conduct in `CONDUCT.md`
-* Some functions have paralell versions, and will be brought to [rOpenSci](https://github.com/ropensci/onboarding) naming conventions (`object_verb()`)
+* Some functions have paralel versions, and will be brought to [rOpenSci](https://github.com/ropensci/onboarding) naming conventions (`object_verb()`)
 * Asked to join [rOpenGov](http://ropengov.github.io/) - excited but inexperienced in this!
 
 # iotables 0.1.4
@@ -13,7 +13,7 @@ New functions are added which enable a very simple IO analysis. As an important 
 * The `README` contains examples to use this new functions. 
 * Some new tests are added to the  `testthat` functions.
 * Further example data is added from Croatia, together with the `employment_aggregate()` helper function to match SIOT data with non-conforming employment statistics.
-* There is a vignette called _Working with Crotian Symmetric Input-Output Tables_ that shows some real-life uses. 
+* There is a vignette called _Working with Croatian Symmetric Input-Output Tables_ that shows some real-life uses. 
 * Testing on Travis (ubuntu and OSX tests.)
 
 # iotables 0.2 
@@ -24,7 +24,7 @@ The forthcoming update will rewrite and generalize some of the earlier functions
 * Some earlier functions are phased out, because they are successfully generalized.
 * The standard system.rda contains the metadata necessary to re-order the bulk files. This will require a lot of patient testing, and it can be always updated with new data sources.
 
-At this point I will go with prepareing a release the table on CRAN. The current version builds without warnings or notes on Windows and Linux. 
+At this point I will go with preparing a release the table on CRAN. The current version builds without warnings or notes on Windows and Linux. 
 
 iotables 0.2 is moved to rOpenGov.
 
@@ -87,7 +87,7 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * This version is a release candidate for CRAN.
 
 # iotables 0.3.6
-* New analyitical function `coefficient_matrix_create()` which is a more general version of `input_coefficient_matrix_create()` and will eventually replace that 
+* New analytical function `coefficient_matrix_create()` which is a more general version of `input_coefficient_matrix_create()` and will eventually replace that 
 function.
 * Custom SIOTs are supported, but there is no vignette yet to describe their 
 use in detail.  
@@ -101,7 +101,7 @@ use in detail.
 
 # iotables 0.3.8
 * Function `input_indicator_create()` has a new, optional parameter for naming the new indicators in the key column.
-* New conveninece function for nicer printing of sturctured SIOT tables and related matrix results.  Not yet exported, first will be used on vigenttes only. 
+* New convenience function for nicer printing of structured SIOT tables and related matrix results.  Not yet exported, first will be used on vignettes only. 
 
 # iotables 0.3.9
 This is a much improved, simplified pre-release version, with highly improved

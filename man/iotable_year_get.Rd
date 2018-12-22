@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_year_get.R
 \name{iotable_year_get}
 \alias{iotable_year_get}
-\title{Get the available years for the input-ouptput tables.}
+\title{Get the available years for the input-output tables.}
 \usage{
 iotable_year_get(labelled_io_data = NULL, source = "germany_1990",
   geo = "DE", unit = "MIO_EUR", time_unit = "year",
@@ -39,7 +39,7 @@ and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and
 trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
 less subsidies only \code{TOTAL} is not used.}
 
-\item{data_directory}{Defaults to \code{NULL}. Use if it you used a data_direcotry
+\item{data_directory}{Defaults to \code{NULL}. Use if it you used a data_directory
 parameter with \code{\link{iotable_get}} or \code{\link{iotables_download}}.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 

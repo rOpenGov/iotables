@@ -4,8 +4,8 @@
 #' the table.
 #' @param data_table A symmetric input-output table, a use table, a supply table,
 #' a margin or tax table.
-#' @param digits Number of digitis for rounding.
-#' @return A tibble/data.frame with a key row and a symmetric matix, 
+#' @param digits Number of digits for rounding.
+#' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
 #' @examples 
 #' round_table( iotable_get ( source = "germany_1990") )

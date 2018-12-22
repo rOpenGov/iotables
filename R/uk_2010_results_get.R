@@ -1,4 +1,4 @@
-#' Get United Kingdom Multiplers and Effects, 2010
+#' Get United Kingdom Multipliers and Effects, 2010
 #'
 #' This function will retrieve the published effects and multipliers from the 
 #' United Kingdom Input-Output Analytical Tables, 2010												

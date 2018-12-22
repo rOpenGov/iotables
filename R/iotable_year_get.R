@@ -1,4 +1,4 @@
-#' Get the available years for the input-ouptput tables.
+#' Get the available years for the input-output tables.
 #' 
 #' The function selects the available tables by year or time as a date 
 #' for a specific country and currency unit in the Eurostat bulk file.
@@ -28,7 +28,7 @@
 #' less subsidies only \code{TOTAL} is not used.
 #' @param time_unit Defaults to \code{'year'} and years are returned as numbers. 
 #' Alternative is to return  \code{'time'} as vector of dates. 
-#' @param data_directory Defaults to \code{NULL}. Use if it you used a data_direcotry
+#' @param data_directory Defaults to \code{NULL}. Use if it you used a data_directory
 #' parameter with \code{\link{iotable_get}} or \code{\link{iotables_download}}. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
 #' downloaded file in the \code{data_directory} or the temporary directory, 

@@ -30,6 +30,8 @@ Imports:
     purrr
 Suggests: 
     testthat,
-    rmarkdown
+    rmarkdown,
+    spelling
 Depends: R(>= 2.10.0)
 VignetteBuilder: knitr
+Language: en-US

@@ -20,7 +20,7 @@
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
 #' @return A data frame that contains the matrix of first quadrant of the use table as
-#' \code{input_flow} devided by \code{output} supported by a key colum of 
+#' \code{input_flow} divided by \code{output} supported by a key column of 
 #' product or industries, with a key column. 
 #' Optionally the results are rounded to given \code{digits}. 
 #' @examples 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/uk_2010_results_get.R
 \name{uk_2010_results_get}
 \alias{uk_2010_results_get}
-\title{Get United Kingdom Multiplers and Effects, 2010}
+\title{Get United Kingdom Multipliers and Effects, 2010}
 \source{
 \href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}{ukioanalyticaltablesio1062010detailedpubversion.xls}
 }
