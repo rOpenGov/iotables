@@ -18,6 +18,3 @@ The matrix, with the intact key column and the numeric columns rounded.
 \description{
 Round all matrix values to required number of digits.
 }
-\examples{
-matrix_round( iotable_get ( source = 'germany_1990') )
-}
