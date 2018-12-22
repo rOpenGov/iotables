@@ -42,6 +42,12 @@ coefficient_matrix_create <- function ( data_table,
   #Create a coefficient matrix, including primary inputs.  
   #For the Leontieff matrix, only the inputs part (first quadrant is used)
   
+  if ( !is.null(return_part)) {
+    if ( ! return_part %in% c("product", "industry", "primary_inputs")) {
+      warning ( "Parameter return_part='", return_part, "' was not recognized, returned all data.")
+    }
+  }
+  
   funs <-. <- NULL  #for checking against non-standard evaluation
 
   data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
