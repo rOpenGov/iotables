@@ -7,8 +7,6 @@
 #' @param digits Number of digits for rounding.
 #' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
-#' @examples 
-#' round_table( iotable_get ( source = "germany_1990") )
 
 round_table <- function ( data_table, 
                           digits = NULL) {

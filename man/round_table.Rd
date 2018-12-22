@@ -20,6 +20,3 @@ after removing all empty columns and rows at the same time.
 This is an internal function to do the rounding on all numeric elements of
 the table.
 }
-\examples{
-round_table( iotable_get ( source = "germany_1990") )
-}
