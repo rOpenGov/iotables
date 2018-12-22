@@ -121,3 +121,5 @@ is seldom used, as the analytical function will call it as needed.
 # iotables 0.4
 
 New vignette *United Kingdom Input-Output Analyitcal Tables* to compare analytical function results with published results from the UK National Office for Statistics.
+
+This is a CRAN Release candidate, but due to the CRAN team vacation and maintenance work it will be submitted only on Jan 2nd 2019. The development version builds (to my knowledge) without errors, warnings and notes.
