@@ -18,6 +18,7 @@
 total_tax_add <- function ( data_table, 
                             tax_names = c("d21x31", "d29x39"), 
                             total_tax_name = "TOTAL_TAX") {
+  . <- NULL
   
   if(is.null(tax_names)) { 
     stop ( 'Tax names must be set.') 
