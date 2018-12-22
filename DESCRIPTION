@@ -7,7 +7,7 @@ Maintainer: Daniel Antal <daniel.antal@ceemid.eu>
 Description: Pre-processing tasks related to working with Eurostat's symmetric input-output
     tables and provide basic input-output economics calculations. The package is 
     a part of rOpenGov <http://ropengov.github.io/> to open source open government initiatives.
-URL: https://github.com/rOpenGov/iotables
+URL: https://iotables.ceeemid.eu
 BugReports: https://github.com/rOpenGov/iotables/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
