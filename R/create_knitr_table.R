@@ -59,9 +59,9 @@ create_knitr_table <- function (
     stop ( "Empty data table inputed.")
   }
   
-  if( knitr:::is_latex_output() ) {
+  if( is_latex_output() ) {
     output_format <- "latex"
-  } else if ( knitr:::is_html_output()) {
+  } else if ( is_html_output()) {
     output_format <- "html"
   }
   
