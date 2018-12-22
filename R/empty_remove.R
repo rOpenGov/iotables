@@ -11,7 +11,7 @@ empty_remove <- function ( data_table ) {
   
   ###Find non-zero cols and rows and remove them---- 
   non_zero_cols <- vapply ( data_table[, 1:ncol(data_table)], 
-                            iotables:::non_zero_columns_find, logical (1) )
+                            non_zero_columns_find, logical (1) )
   non_zero_rows <- as.logical (non_zero_cols[-1] ) 
   remove_cols <- names (data_table )[! non_zero_cols]
   

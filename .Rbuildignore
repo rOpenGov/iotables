@@ -1,3 +1,5 @@
+^pkgdown\.yml$
+^pkgdown$
 ^RDataTmp$
 ^CRAN-RELEASE$
 ^.*\.Rproj$

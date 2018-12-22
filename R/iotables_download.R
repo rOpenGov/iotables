@@ -62,7 +62,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
     stop (source, " is not in supported tables [", supported_tables, "]") 
   }
   
-  if ( source == "uk_2010" ) return ( iotables:::uk_2010_get() )
+  if ( source == "uk_2010" ) return ( uk_2010_get() )
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
                                    "\\eurostat/", source, "_date_code_TF.rds" )

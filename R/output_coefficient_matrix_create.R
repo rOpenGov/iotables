@@ -30,12 +30,13 @@ output_coefficient_matrix_create <- function ( io_table,
                                                total = "tfu",
                                                digits = NULL ) {
   funs <-. <- NULL  #for checking against non-standard evaluation
-  iotables:::check_digits ( digits = digits)
+  
+  check_digits ( digits = digits)
   
   io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
   
   ###Find non-zero cols and rows and remove them---- 
-  io_table <- iotables:::empty_remove ( io_table )
+  io_table <- empty_remove ( io_table )
   
   total_row <- which ( tolower(as.character(unlist(io_table[, 1])))
                        %in% c("cpa_total", "total") )
@@ -54,8 +55,8 @@ output_coefficient_matrix_create <- function ( io_table,
   } else if ( tolower(total) %in% c("total_final_use", "tfu", "final_demand")  ) {
     demand_col <- which (tolower(names(io_table)) %in% 
                            c("tfu", "total_final_use") )
-    last_column <- iotables:::quadrant_separator_find ( io_table, 
-                                                        include_total = FALSE )
+    last_column <- quadrant_separator_find ( io_table, 
+                                             include_total = FALSE )
    }  else {
       stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
     }

@@ -8,7 +8,8 @@
 #' @examples
 #' comp_employees_de <- primary_input_get(
 #'   data_table = iotable_get(), 
-#'   primary_input = "compensation_employees")                             )
+#'   primary_input = "compensation_employees") 
+#'   )
 #' @export
 
 primary_input_get <- function ( data_table,
@@ -18,7 +19,7 @@ primary_input_get <- function ( data_table,
     stop ( "No input-output table was given as an input")
     }
   
-  last_column <- iotables:::quadrant_separator_find ( data_table )
+  last_column <- quadrant_separator_find ( data_table )
   
   data_table <- data_table %>% 
     dplyr::mutate_if ( is.factor, as.character ) %>%
