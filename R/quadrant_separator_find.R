@@ -9,8 +9,6 @@
 #' @return An integer value with the last column of Quadrant I and III. If
 #' the last column is not found, \code{2} is returned with a warning to avoid
 #' stopping a pipeline.
-#' @examples 
-#' quadrant_separator_find( iotable_get ( source = "germany_1990") )
 
 quadrant_separator_find <- function(data_table, 
                                     include_total = FALSE) {

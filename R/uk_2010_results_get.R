@@ -64,7 +64,7 @@ uk_2010_results_get <- function ( path = NULL )  {
                     output_multiplier_rank = Rank, 
                     employment_cost_multiplier = Rank__1, 
                     gva_multiplier_rank = Rank__2, 
-                    employment_cost_effects = Rank__3,
+                    employment_cost_effects_rank = Rank__3,
                     gva_effects_rank = Rank__4 ) %>%
     dplyr::mutate ( indicator = uk_metadata$indicator[1]) %>%
     dplyr::mutate_if ( is.factor, as.character ) 

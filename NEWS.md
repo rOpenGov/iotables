@@ -118,3 +118,6 @@ is seldom used, as the analytical function will call it as needed.
 * The new function `total_tax_add()` adds a summary of product and production taxes among the primary inputs.
 * Clearly divided analytical functions, `direct_effects_create()` , `indirect_effects_create()`, `input_multiplier_create()` create the direct, indirect and total effects matrix. 
 
+# iotables 0.4
+
+New vignette *United Kingdom Input-Output Analyitcal Tables* to compare analytical function results with published results from the UK National Office for Statistics.
