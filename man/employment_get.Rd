@@ -48,6 +48,7 @@ Currently works only with product x product tables.
                sex = "Total", 
                age = "Y_GE15",
                data_directory = NULL,
-               force_download = TRUE)
+               force_download = TRUE
+               )
  }
 }
