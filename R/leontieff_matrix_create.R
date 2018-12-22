@@ -16,7 +16,7 @@
 
 
 leontieff_matrix_create <- function ( technology_coefficients_matrix ) { 
-  . = NULL ; funs = NULL ; vars = NULL
+  . <- funs <- vars <- NULL
   
   key_column <- as.character(unlist (technology_coefficients_matrix[,1]))
   key_column

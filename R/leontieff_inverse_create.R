@@ -16,7 +16,7 @@
 
 leontieff_inverse_create <- function ( technology_coefficients_matrix, 
                                        digits=NULL) {
-  . = NULL ; 
+  . <- NULL 
   
   leontieff_matrix<- leontieff_matrix_create( 
        technology_coefficients_matrix = technology_coefficients_matrix )
