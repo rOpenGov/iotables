@@ -1,7 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-iotables <img src="man/figures/logo.png" align="right" height="205 width="205"/>
+iotables
 ================================================================================
+[![DOI](https://zenodo.org/badge/108267715.svg)](https://zenodo.org/badge/latestdoi/108267715)
 
 The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure. They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository. In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form. Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
 
