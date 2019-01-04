@@ -6,9 +6,9 @@
 #' The column names were slightly altered to resemble more the current Eurostat
 #' conventions and the main example dataset \code{\link{germany_1990}}.
 #' @format A data frame with 14 observations and 13 variables.
+#' @source Source: \url{https://goo.gl/FEXBsD}{Input-Output Multipliers Specification Sheet and Supporting Material in the Spicosa Project Report}
 #' @usage data(netherlands_2006)
-#' @source Source: \href{http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf}{Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report}
-#'\describe{
+#' \describe{
 #'   \item{prod_na}{Product name, simplified, following the Eurostat conventions}
 #'   \item{agriculture_group}{Simple aggregated agricultural products}
 #'   \item{mining_group}{Simple aggregated mining products}
