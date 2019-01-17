@@ -6,7 +6,8 @@
 #' The column names were slightly altered to resemble more the current Eurostat
 #' conventions and the main example dataset \code{\link{germany_1990}}.
 #' @format A data frame with 14 observations and 13 variables.
-#' @source Source: \url{https://goo.gl/FEXBsD}{Input-Output Multipliers Specification Sheet and Supporting Material in the Spicosa Project Report}
+#' @source Source: Input-Output Multipliers Specification Sheet and Supporting
+#' Material in the Spicosa Project Report
 #' @usage data(netherlands_2006)
 #' @format A data frame of 13 observations in 14 variables. 
 #' \describe{
