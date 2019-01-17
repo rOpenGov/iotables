@@ -7,6 +7,7 @@
 
 ##Notes
 I tried to submit the package, and there were 1 NOTE that did no appear 
-on during my testing. It was created by two malformatted URLs containing space, that is valid on Windows but not on many systems.  
+on during my testing. It was created an URL in sources which is malformatted
+on Linux system. I removed the malformatted URL.
 
-I corrected to two urls in the documentation.
+I also modified a warning since 0.4.0 but it has no effect on tests.
