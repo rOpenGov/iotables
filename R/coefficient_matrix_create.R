@@ -57,7 +57,7 @@ coefficient_matrix_create <- function ( data_table,
   if ( remove_empty ) data_table <- empty_remove ( data_table )
   
   last_column <- quadrant_separator_find( data_table, 
-                                                     include_total = FALSE)
+                                          include_total = FALSE)
 
   #####removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 

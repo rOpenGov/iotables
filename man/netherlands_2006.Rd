@@ -6,7 +6,10 @@
 \title{Simple input-output table for the Netherlands, 2006.}
 \format{A data frame with 14 observations and 13 variables.}
 \source{
-Source: \href{http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf}{Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report}
+Source: \url{https://goo.gl/FEXBsD}{Input-Output Multipliers Specification Sheet and Supporting Material in the Spicosa Project Report}
+}
+\usage{
+data(netherlands_2006)
 \describe{
   \item{prod_na}{Product name, simplified, following the Eurostat conventions}
   \item{agriculture_group}{Simple aggregated agricultural products}
@@ -22,9 +25,6 @@ Source: \href{http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_
   \item{exports}{Simple aggregated exports}
   \item{total_use}{Simple aggregated total use}              
 }
-}
-\usage{
-data(netherlands_2006)
 }
 \description{
 This simplified SIOT is taken from the  Science Policy Integration for Coastal
