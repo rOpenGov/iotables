@@ -6,5 +6,7 @@
 
 
 ##Notes
-I tried to submit the package, and there were 1 NOTE that did no appear on during 
-my testing. It was created by two malformatted URLs containing space, that is valid on Windows but not on many systems.  I corrected to two urls in the documentation.
+I tried to submit the package, and there were 1 NOTE that did no appear 
+on during my testing. It was created by two malformatted URLs containing space, that is valid on Windows but not on many systems.  
+
+I corrected to two urls in the documentation.
