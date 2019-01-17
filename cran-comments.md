@@ -1,6 +1,11 @@
 ## Test environments
 * local Window 10 install, R 3.5.1
 
+with devtools::check_rhub() on https://builder.r-hub.io checked with 
+* Windows server
+* Fedora Linux
+* Ubuntu Linux
+
 ## R CMD check results
 0 errors √ | 0 warnings √ | 0 notes √
 
