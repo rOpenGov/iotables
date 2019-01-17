@@ -8,6 +8,7 @@
 #' @format A data frame with 14 observations and 13 variables.
 #' @source Source: \url{https://goo.gl/FEXBsD}{Input-Output Multipliers Specification Sheet and Supporting Material in the Spicosa Project Report}
 #' @usage data(netherlands_2006)
+#' @format A data frame of 13 observations in 14 variables. 
 #' \describe{
 #'   \item{prod_na}{Product name, simplified, following the Eurostat conventions}
 #'   \item{agriculture_group}{Simple aggregated agricultural products}
