@@ -10,9 +10,5 @@ with devtools::check_rhub() on https://builder.r-hub.io checked with
 0 errors | 0 warnings | 0 notes
 
 ##Notes
-I tried to submit the package, and there were 1 NOTE that did no appear 
-on during my testing. It was created an URL in sources which is malformatted
-on Linux system. I removed the malformatted URL, because the problem was 
-persisent on Linux systems however I tried to overcome it.
-
-I also modified a warning since 0.4.0 but it has no effect on tests.
+On CRAN the earlier submission passed early tests, but on deployment it 
+turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit). magick, which was supposed to help printing vignettes in Word (a very rare case) for kableExtra is not available on Solaris.  I removed this dependency. 

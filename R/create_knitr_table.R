@@ -19,8 +19,9 @@
 #' @param bootstrap_options Defaults to \code{c("striped", "hover", "condensed")} and
 #' only used for \code{output_format = "html"}.
 #' @param latex_options Defaults to \code{NULL)}.
-#' @param output_format Defaults to \code{'html'}. Alternatives are \code{'latex'} and
-#' \code{'image'}, recommended for Word files.
+#' @param output_format Defaults to \code{'html'}. Alternatives are \code{'latex'}. 
+#'  \code{'image'}, recommended for Word files, is removed because it depends
+#'  on magick which is not available on all R platforms.
 #' @param keep_pdf Defaults to  \code{FALSE} and only used if \code{output_format = 'image'}.
 #' @param latex_header_includes Currently defaults to \code{c(
 #' "\\usepackage[magyar]{babel}",
@@ -28,7 +29,7 @@
 #' It can be any valid latex option setting, but if packages are used, the 
 #' packages must be installed on your Latex engine.
 #' @importFrom knitr kable is_latex_output is_html_output
-#' @importFrom kableExtra kable_as_image kable_styling column_spec
+#' @importFrom kableExtra kable_styling column_spec
 #' @examples 
 #' foo = data.frame ( 
 #'   observation = c("indicator1", "indicator2", "indicator3"), 
@@ -161,14 +162,7 @@ create_knitr_table <- function (
     )
     i = i + 1
   } #end of while loop
-  
-  if ( output_format == 'image') {
-    knitr_table <- kableExtra::kable_as_image(
-         kable_input = knitr_table,
-         keep_pdf = keep_pdf,
-         latex_header_includes = latex_header_includes)
-  }
-  
+
 
   knitr_table
   

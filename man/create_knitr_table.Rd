@@ -43,8 +43,9 @@ only used for \code{output_format = "html"}.}
 
 \item{latex_options}{Defaults to \code{NULL)}.}
 
-\item{output_format}{Defaults to \code{'html'}. Alternatives are \code{'latex'} and
-\code{'image'}, recommended for Word files.}
+\item{output_format}{Defaults to \code{'html'}. Alternatives are \code{'latex'}. 
+\code{'image'}, recommended for Word files, is removed because it depends
+on magick which is not available on all R platforms.}
 
 \item{keep_pdf}{Defaults to  \code{FALSE} and only used if \code{output_format = 'image'}.}
 
