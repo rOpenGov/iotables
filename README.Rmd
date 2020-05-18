@@ -16,9 +16,16 @@ require (iotables)
 data ("germany_1990")
 ```
 
-# iotables 
-<!-- ![iotables](/man/figures/logo.png =205x205)-->
+# iotables
+
+```{r, echo = FALSE}
+version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                
+version <- gsub('-', '.', version)
+```                                                                                                                         
+
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
+[![iotables](man/figures/logo20.png)
+[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
