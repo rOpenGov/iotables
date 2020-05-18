@@ -2,8 +2,13 @@
 
 language: R
 sudo: required
-#cache: packages
-#dist: trusty
+cache: packages
+dist: trusty
+
+notifications:
+  email:
+    - daniel.antal@ceemid.eu
+
 
 r:
   - oldrel
@@ -14,16 +19,42 @@ os:
   - linux
   - osx
   
+r_packages:
+  - backports
+  - devtools
+  - dplyr
+  - tidyselect
+  - jsonlite
+  - knitr  
+  - roxygen2
+  - rvest  
+  - testthat
+  - tidyr
+  - magrittr
+  - purrr
+  - rmarkdown
+  - knitr
+  - usethis 
+  
+r_github_packages:
+  - jimhester/covr
+
 Remotes: rOpenGov/iotables
 
 env:
- global:
- - GITHUB_REPO ropengov/iotables
+  global:
+  - WARNINGS_ARE_ERRORS=1
+  - GITHUB_REPO: ropengov/iotables
 
-#before_install:
-  #- sudo apt-get -qq update
-
-  #install pacakges 
-  #- R -q -e 'install.packages("eurostat"); 
-  #-RScript -e 'install.packages("eurostat")'
+r_build_args: "--no-resave-data --no-build-vignettes"
+r_check_args: "--as-cran --no-build-vignettes"    
   
+before_install:
+  - pip install --user codecov
+
+r:
+- release
+- oldrel
+
+after_success:
+  - R -q -e 'covr::codecov(quiet = FALSE)'
