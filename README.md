@@ -37,14 +37,14 @@ or SIOTs in detail. The [Eurostat Manual of Supply, Use and Input-Output
 Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
 and the [Eurostat tematic
 page](http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables)
-\[Eurostat Manual\] in the documentation should be consulted for further
-information about the data and the metadata.
+(for futher reference: `Eurostat Manual`) in the documentation should be
+consulted for further information about the data and the metadata.
 
 In order to test the analytical functions of the package and to have a
 manageable sized example data set, we use the real-life data from the
 Eurostat manual. The `germany_1990` dataset is a simplified 6x6 sized
-SIOT taken from the Eurostat SIOT manual (page 481). The package
-function examples can be checked against [published results from Jörg
+SIOT taken from the `Eurostat Manual` (`p481`). The package function
+examples can be checked against [published results from Jörg
 Beutel](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
 These calculations can be followed in the [Germany 1990
 vignette](http://iotables.ceemid.eu/articles/germany_1990.html).
@@ -111,7 +111,7 @@ Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.P
 (Eurostat Manual, Chapter 15.) This is a good introduction to understand
 what will the functions do, and to check that they work correctly. The
 `testthat` infrastructure of the package checks the proper working of
-the functions against the published results from the Eurostat Manual.
+the functions against the published results from the `Eurostat Manual`.
 
 The [Working with Eurostat
 Data](http://iotables.ceemid.eu/articles/working_with_eurostat.html)
@@ -126,3 +126,10 @@ These calculations can be followed in the [United Kingdom Input-Output
 Analyitcal
 Tables](http://iotables.ceemid.eu/articles/united_kingdom_2010.html)
 vignette.
+
+## Code of Conduct
+
+Please note that the iotables project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
