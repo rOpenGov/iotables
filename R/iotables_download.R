@@ -3,10 +3,8 @@
 #' This function downloads standard input-output table files. Currently only Eurostat files are supported.
 #' You are not likely to use this function, because 
 #' \code{\link{iotable_get}} will
-#' call this function if necessary and properly filter
-#'  out an input-output table.
-#' 
-#' The only parameter is the Eurostat code of the table.
+#' call this function if necessary and properly filter out an 
+#' input-output table.
 #' 
 #' The data is downloaded in the \code{tempdir()}under the name the statistical product as an
 #' rds file. (For example: \code{naio_10_cp1750.rds})
@@ -39,8 +37,7 @@
 #' @return A nested data frame. Each input-output table is in a separate 
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
-#' The data is saved into the actual \code{tempdir()}, too, which is 
-#' emptied at the end of each R session.
+#' The data is saved into the actual \code{tempdir()}, too.
 #' @importFrom dplyr filter select mutate left_join rename group_by
 #' @importFrom tidyr nest
 #' @importFrom eurostat get_eurostat label_eurostat
@@ -60,19 +57,8 @@ iotables_download <- function ( source = "naio_10_cp1700",
   time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
   indicator <- uk_row_lab <- uk_col_lab <- NULL
   
-  possible_download_sources <- c( "naio_10_cp1700",  "naio_10_cp1750", 
-                                  "naio_10_pyp1700", "naio_10_pyp1750",
-                                  "naio_10_cp15",    "naio_10_cp16",
-                                  "naio_10_cp1610",  "naio_10_pyp1610", 
-                                  "naio_10_cp1620",  "naio_10_pyp1620", 
-                                  "naio_10_cp1630",  "naio_10_pyp1630", 
-                                  "uk_2010")
-  source <- tolower (source)
-  if ( ! source %in%  possible_download_sources ) {
-    supported_tables <- paste( possible_download_sources, collapse = ", ")
-    stop (source, " is not in supported tables [", supported_tables, "]") 
-  }
-  
+  validate_source(source)
+
   if ( source == "uk_2010" ) return ( uk_2010_get() )
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
