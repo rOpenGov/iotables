@@ -52,11 +52,13 @@
 iotables_download <- function ( source = "naio_10_cp1700", 
                                 data_directory = NULL,
                                 force_download = TRUE ) {
-  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- stk_flow_lab <- NULL
+  ## Non-standard evaluation variable initiatlization -----------------
+  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL 
+  stk_flow_lab <- indicator <- uk_row_lab <- uk_col_lab <- NULL
   . <- downloaded <- downloaded_labelled <- fix_duplicated <- NULL
   time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
-  indicator <- uk_row_lab <- uk_col_lab <- NULL
   
+  ## Parameter validation ---------------------------------------------
   if ( ! source %in% c("uk_2010", "germany_1990")) validate_source(source)
 
   if ( source == "uk_2010" ) return ( uk_2010_get() )
