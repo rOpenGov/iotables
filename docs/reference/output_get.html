@@ -140,11 +140,22 @@ function.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data_table</th>
-      <td><p>A symmetric input-output table or use table retrieved by the
+      <td><p>A symmetric input-output table or use table retrieved 
+by the  
 <code><a href='iotable_get.html'>iotable_get</a></code> function.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other iotables processing functions: 
+<code><a href='conforming_vector_create.html'>conforming_vector_create</a>()</code>,
+<code><a href='household_column_get.html'>household_column_get</a>()</code>,
+<code><a href='primary_input_get.html'>primary_input_get</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>output_get</span> ( <span class='kw'>data_table</span> <span class='kw'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span> () )</div><div class='output co'>#&gt;    iotables_row agriculture_group industry_group construction trade_group

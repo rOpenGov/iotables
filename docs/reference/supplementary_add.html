@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add supplementary data — supplementary_add • iotables</title>
+<title>Add Supplementary Data — supplementary_add • iotables</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Add supplementary data — supplementary_add" />
-<meta property="og:description" content="Download the employment data for a country and arrange it to the 64x64 SIOTS.
-Currently works only with product x product tables." />
+<meta property="og:title" content="Add Supplementary Data — supplementary_add" />
+<meta property="og:description" content="Download the employment data for a country and arrange it to the 
+64x64 SIOTS. Currently works only with product x product tables." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -123,14 +123,14 @@ Currently works only with product x product tables." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add supplementary data</h1>
+    <h1>Add Supplementary Data</h1>
     <small class="dont-index">Source: <a href='https://github.com/rOpenGov/iotables/blob/master/R/supplementary_add.R'><code>R/supplementary_add.R</code></a></small>
     <div class="hidden name"><code>supplementary_add.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Download the employment data for a country and arrange it to the 64x64 SIOTS.
-Currently works only with product x product tables.</p>
+    <p>Download the employment data for a country and arrange it to the 
+64x64 SIOTS. Currently works only with product x product tables.</p>
     </div>
 
     <pre class="usage"><span class='fu'>supplementary_add</span>(<span class='no'>data_table</span>, <span class='no'>supplementary_data</span>, <span class='kw'>supplementary_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -144,7 +144,8 @@ Currently works only with product x product tables.</p>
     </tr>
     <tr>
       <th>supplementary_data</th>
-      <td><p>Supplementary data to be added. It must be a data.frame
+      <td><p>Supplementary data to be added. 
+It must be a data.frame
 or tibble with a key column containing the indicator's name, 
 and the column names must match with the <code>data_table</code>. Can be a 
 vector or a data frame of several rows.</p></td>
@@ -156,6 +157,12 @@ Defaults  to <code>NULL</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A symmetric input-output table with supplementary data,  
+of data.frame class. 
+The column names are ordered, and the row names are in the 
+first, auxiliary metadata column.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>de_io</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span>()
@@ -249,8 +256,7 @@ Defaults  to <code>NULL</code>.</p></td>
 #&gt; 17                      NA      NA           32596
 #&gt; 18                      NA      NA            3832
 #&gt; 19                      NA      NA           36428
-#&gt; 20                      NA      NA              NA</div><div class='input'>
-</div></pre>
+#&gt; 20                      NA      NA              NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

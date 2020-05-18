@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Get employment data — employment_get" />
-<meta property="og:description" content="Download the employment data for a country and arrange it to the 64x64 SIOTS.
+<meta property="og:description" content="Download the employment data for a country and arrange it to the 
+64x64 SIOTS.
 Currently works only with product x product tables." />
 <meta property="og:image" content="/logo.png" />
 
@@ -129,7 +130,8 @@ Currently works only with product x product tables." />
     </div>
 
     <div class="ref-description">
-    <p>Download the employment data for a country and arrange it to the 64x64 SIOTS.
+    <p>Download the employment data for a country and arrange it to the 
+64x64 SIOTS.
 Currently works only with product x product tables.</p>
     </div>
 
@@ -187,8 +189,20 @@ in the <code>data_directory</code> or the temporary directory, if it exists.</p>
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>Eurostat statistic <a href='http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&amp;lang=en'>Employment 
+    <p>Eurostat statistic 
+<a href='http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&amp;lang=en'>Employment 
 by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000</a></p>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data.frame with auxiliary metadata to conform the symmetric
+input-output tables.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other iotables import functions: 
+<code><a href='iotable_get.html'>iotable_get</a>()</code>,
+<code><a href='iotables_download.html'>iotables_download</a>()</code>,
+<code><a href='iotables_metadata_get.html'>iotables_metadata_get</a>()</code>,
+<code><a href='iotables_read_tempdir.html'>iotables_read_tempdir</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

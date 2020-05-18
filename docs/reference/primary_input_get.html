@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Get primary inputs — primary_input_get" />
-<meta property="og:description" content="This function will retrieve any primary input from the input-output table." />
+<meta property="og:description" content="This function will retrieve any primary input from the input-output 
+table." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -128,7 +129,8 @@
     </div>
 
     <div class="ref-description">
-    <p>This function will retrieve any primary input from the input-output table.</p>
+    <p>This function will retrieve any primary input from the input-output 
+table.</p>
     </div>
 
     <pre class="usage"><span class='fu'>primary_input_get</span>(<span class='no'>data_table</span>, <span class='kw'>primary_input</span> <span class='kw'>=</span> <span class='st'>"compensation_employees"</span>)</pre>
@@ -147,6 +149,16 @@ supply table retrieved by the  <code><a href='iotable_get.html'>iotable_get</a><
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other iotables processing functions: 
+<code><a href='conforming_vector_create.html'>conforming_vector_create</a>()</code>,
+<code><a href='household_column_get.html'>household_column_get</a>()</code>,
+<code><a href='output_get.html'>output_get</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>comp_employees_de</span> <span class='kw'>&lt;-</span> <span class='fu'>primary_input_get</span>(
