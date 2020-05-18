@@ -7,3 +7,5 @@ inst/doc
 .RDataTmp
 not_included/
 pkgdown/
+doc
+Meta
