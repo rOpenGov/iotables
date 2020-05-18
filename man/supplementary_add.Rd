@@ -7,7 +7,8 @@
 supplementary_add(data_table, supplementary_data, supplementary_names = NULL)
 }
 \arguments{
-\item{data_table}{A SIOT, a use table, a supply table, or a margins table.}
+\item{data_table}{A SIOT, a use table, a supply table, or a margins 
+table.}
 
 \item{supplementary_data}{Supplementary data to be added. 
 It must be a data.frame
@@ -26,7 +27,7 @@ first, auxiliary metadata column.
 }
 \description{
 Download the employment data for a country and arrange it to the 
-64x64 SIOTS. Currently works only with product x product tables.
+64x64 SIOTs. Currently works only with product x product tables.
 }
 \examples{
 de_io <- iotable_get()

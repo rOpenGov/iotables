@@ -3,7 +3,7 @@
 \docType{package}
 \name{iotables}
 \alias{iotables}
-\title{iotables: Working Programatically With Symmetric Input-Output Tables}
+\title{iotables: Working Programmatically With Symmetric Input-Output Tables}
 \description{
 Pre-processing and basic analytical tasks related to working with 
 Eurostat's symmetric input-output tables and provide basic 

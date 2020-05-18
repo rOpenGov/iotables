@@ -49,7 +49,7 @@ input-output tables.
 }
 \description{
 Download the employment data for a country and arrange it to the 
-64x64 SIOTS.
+64x64 SIOTs.
 Currently works only with product x product tables.
 }
 \examples{
