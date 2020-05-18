@@ -6,3 +6,4 @@ CRAN-RELEASE
 inst/doc
 .RDataTmp
 not_included/
+pkgdown/
