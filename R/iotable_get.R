@@ -56,15 +56,16 @@
 #' not correctly ordered for further matrix equations.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange 
-#' @importFrom dplyr one_of mutate_if
+#' @importFrom dplyr mutate_if
+#' @importFrom tidyselect one_of
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
 #' @importFrom utils data
 #' @examples 
-#' germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
-#'              year = 1990, unit = "MIO_EUR", 
-#'              labelling  = "iotables")
+#' germany_table <- iotable_get( source = "germany_1990", 
+#'                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
+#'                  labelling  = "iotables" )
 #' @export 
 
 iotable_get <- function ( labelled_io_data = NULL, 
@@ -359,7 +360,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     dplyr::filter (stk_flow == stk_flow_input )  %>%
     dplyr::mutate_if ( is.factor, as.character ) %>%
     dplyr::left_join (.,  metadata_cols, by = col_join  ) %>%
-    dplyr::select ( -dplyr::one_of(remove_vars) ) %>%  #remove repeating columns before joining rows
+    dplyr::select ( -tidyselect::one_of(remove_vars) ) %>%  #remove repeating columns before joining rows
     dplyr::mutate_if ( is.factor, as.character ) %>% 
     dplyr::left_join (.,  metadata_rows, by = row_join ) 
     

@@ -1,4 +1,4 @@
-#' Get the available years for the input-output tables.
+#' Get Available Years For Input-Output Tables
 #' 
 #' The function selects the available tables by year or time as a date 
 #' for a specific country and currency unit in the Eurostat bulk file.
@@ -33,6 +33,7 @@
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
 #' downloaded file in the \code{data_directory} or the temporary directory, 
 #' if it exists. Will force download only in a new session.
+#' @return A vector with the years that have available input-output tables.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
 #' @importFrom tidyr spread
@@ -179,7 +180,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   }
 
 
-###converting factors to characters------  
+ ## Converting factors to characters ------  
 
  selected_tables <- which (   ##get the number of table to be selected
       as.character(labelled_io_data$geo) == geo &
@@ -196,7 +197,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
    message ( "The following years are available for ", geo, " in ", unit , " currency units:\n", 
              paste(return_values, collapse = '; ' ), ".")
  } else { 
-   warning ( "No tables are available for ", geo, " in ", unit , " currency units.")
+   warning ( "No tables are available for ", 
+             geo, " in ", unit , " currency units.")
    }
   
  return_values

@@ -17,6 +17,9 @@ removed to avoid division by zero error in the analytical functions.}
 \item{households}{Defaults to \code{FALSE}. If \code{TRUE}, the 
 final household expenditure is added to the input flow table.}
 }
+\value{
+A data flow matrix in a labelled data frame.
+}
 \description{
 Select the use table from a symmetric input-output table.
 }

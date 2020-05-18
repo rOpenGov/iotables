@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_year_get.R
 \name{iotable_year_get}
 \alias{iotable_year_get}
-\title{Get the available years for the input-output tables.}
+\title{Get Available Years For Input-Output Tables}
 \usage{
 iotable_year_get(
   labelled_io_data = NULL,
@@ -52,6 +52,9 @@ parameter with \code{\link{iotable_get}} or \code{\link{iotables_download}}.}
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
 downloaded file in the \code{data_directory} or the temporary directory, 
 if it exists. Will force download only in a new session.}
+}
+\value{
+A vector with the years that have available input-output tables.
 }
 \description{
 The function selects the available tables by year or time as a date 

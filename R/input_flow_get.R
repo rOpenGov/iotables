@@ -9,6 +9,7 @@
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 #' removed to avoid division by zero error in the analytical functions.
 #' @importFrom dplyr mutate_if left_join select
+#' @return A data flow matrix in a labelled data frame.
 #' @examples 
 #' data_table <- iotable_get()
 #' input_flow <- input_flow_get( data_table = data_table, 

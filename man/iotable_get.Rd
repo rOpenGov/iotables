@@ -85,7 +85,7 @@ you should not invoke  \code{\link{iotables_download}}
 directly, rather via this function, if and when it is necessary.
 }
 \examples{
-germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
-             year = 1990, unit = "MIO_EUR", 
-             labelling  = "iotables")
+germany_table <- iotable_get( source = "germany_1990", 
+                 geo = 'DE', year = 1990, unit = "MIO_EUR", 
+                 labelling  = "iotables" )
 }
