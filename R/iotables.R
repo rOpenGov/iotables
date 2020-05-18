@@ -1,4 +1,4 @@
-#' iotables: Working Programatically With Symmetric Input-Output Tables
+#' iotables: Working Programmatically With Symmetric Input-Output Tables
 #'
 #' Pre-processing and basic analytical tasks related to working with 
 #' Eurostat's symmetric input-output tables and provide basic 

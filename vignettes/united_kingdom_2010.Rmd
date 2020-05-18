@@ -1,5 +1,5 @@
 ---
-title: "United Kingdom Input-Output Analyitcal Tables"
+title: "United Kingdom Input-Output Analytical Tables"
 author: "Daniel Antal, based on the work edited by Richard Wild"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -120,7 +120,7 @@ The comparison of output mulitipliers show that our code gives the same results.
 
 ## GVA effects
 
-GVA is not shown in the Excel table explicitly, but can be calculated as the sum of corporate income (*Operating surplus and mixed income*), household income (*Compensation of employees*) and net taxes on proudction (not products.)
+GVA is not shown in the Excel table explicitly, but can be calculated as the sum of corporate income (*Operating surplus and mixed income*), household income (*Compensation of employees*) and net taxes on production (not products.)
 
 ```{r gva_effects}
 uk_siot2 <- uk_siot %>%

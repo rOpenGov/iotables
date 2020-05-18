@@ -1,8 +1,9 @@
 #' Add Supplementary Data
 #'
 #' Download the employment data for a country and arrange it to the 
-#' 64x64 SIOTS. Currently works only with product x product tables. 
-#' @param data_table A SIOT, a use table, a supply table, or a margins table.  
+#' 64x64 SIOTs. Currently works only with product x product tables. 
+#' @param data_table A SIOT, a use table, a supply table, or a margins 
+#' table.  
 #' @param supplementary_data Supplementary data to be added. 
 #' It must be a data.frame
 #' or tibble with a key column containing the indicator's name, 

@@ -2,7 +2,7 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 * Added Contributor Code of Conduct in `CONDUCT.md`
-* Some functions have paralel versions, and will be brought to [rOpenSci](https://github.com/ropensci/onboarding) naming conventions (`object_verb()`)
+* Some functions have parallel versions, and will be brought to [rOpenSci](https://github.com/ropensci/onboarding) naming conventions (`object_verb()`)
 * Asked to join [rOpenGov](http://ropengov.github.io/) - excited but inexperienced in this!
 
 # iotables 0.1.4
@@ -120,7 +120,7 @@ is seldom used, as the analytical function will call it as needed.
 
 # iotables 0.4
 
-New vignette *United Kingdom Input-Output Analyitcal Tables* to compare analytical function results with published results from the UK National Office for Statistics.
+New vignette *United Kingdom Input-Output Analytical Tables* to compare analytical function results with published results from the UK National Office for Statistics.
 
 # iotables 0.4.1
 A small formatting error in the documentation of `netherlands_2006` threw up a note on CRAN.

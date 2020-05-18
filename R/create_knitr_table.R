@@ -39,7 +39,6 @@
 #'   )
 #'   
 
-
 create_knitr_table <- function ( 
                     data_table,
                     digits = NULL,
