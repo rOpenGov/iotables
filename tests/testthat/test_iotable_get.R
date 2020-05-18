@@ -11,8 +11,6 @@ context ("Creating an IO Table")
 
 
 test_that("Necessary input parameters are checked", {
-  expect_error(iotable_get(year = 2015, geo = "DE",
-                           unit = "MIO_EUR", labelling = "iotables"))
   expect_error(iotable_get(source = 'naio_10_cp1700', 
                            year = 2015, geo = NULL,
                            unit = "MIO_EUR", labelling = "iotables"))
