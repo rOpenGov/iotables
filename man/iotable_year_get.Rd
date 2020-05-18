@@ -31,7 +31,7 @@ at previous' years prices (naio_10_pyp1620)
 Table of taxes less subsidies on products at basic prices (naio_10_cp1630)    and
 at previous' years prices (naio_10_pyp1630)
 For further information consult the 
-\href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
+\href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.}
 
 \item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
 

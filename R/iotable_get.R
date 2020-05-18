@@ -24,7 +24,7 @@
 ##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 ##' } 
 #' For further information consult the 
-#' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
+#' \href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.
 #' @param labelled_io_data If you have downloaded a bulk data file with 
 #' \code{\link{iotables_download}}, it is faster to work with the data
 #' in the memory. Defaults to \code{NULL} when  the data will be retrieved from
@@ -46,11 +46,11 @@
 #' product x product, industry x industry or product x industry table.
 #' The alternative is \code{short} or \code{eurostat} which is the 
 #' original short row or column code of Eurostat or OECD.
-#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
-#' data file here with labelling. 
+#' @param data_directory Defaults to \code{NULL}, if a valid directory, 
+#' it will try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
-#' downloaded file in the \code{data_directory} or the temporary directory, 
-#' if it exists. Will force download only in a new session.
+#' downloaded file in the \code{data_directory} or the temporary 
+#' directory, if it exists. Will force download only in a new session.
 #' @return A wide format data.frame with a well-ordered input-output table.
 #' The bulk data files on the Eurostat website are in a long form and they are 
 #' not correctly ordered for further matrix equations.

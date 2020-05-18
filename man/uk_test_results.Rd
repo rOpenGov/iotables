@@ -28,10 +28,11 @@ data(uk_test_results)
 \description{
 The Excel-imported UK data.
 }
-\keyword{UK}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{effects,}
-\keyword{input-output}
-\keyword{multipliers,}
-\keyword{table,}
+\seealso{
+Other Example data files: 
+\code{\link{germany_1990}},
+\code{\link{metadata_uk_2010}},
+\code{\link{netherlands_2006}}
+}
+\concept{Example data files}
+\keyword{datasets}

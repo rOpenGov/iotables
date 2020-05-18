@@ -6,7 +6,10 @@
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
-#' @importFrom dplyr select one_of mutate_at
+#' @importFrom dplyr select mutate_at
+#' @importFrom tidyselect one_of
+#' @return A data.frame containing the direct effects and the necessary
+#' metadata to sort them or join them with other matrixes.
 #' @examples  
 #' nl <- netherlands_2006
 #'
@@ -30,14 +33,14 @@ direct_effects_create <- function ( input_requirements,
   names_direct <- names ( input_requirements )
   new_key_column <- input_requirements %>%
     dplyr::select (1:2) %>%
-    dplyr::mutate_at ( vars(1), funs(gsub(pattern ="_indicator",
+    dplyr::mutate_at ( vars(1), ~gsub(pattern ="_indicator",
                                        replacement = "", 
-                                       x =. )) ) %>%
-    dplyr::mutate_at ( vars(1), funs(paste0(., "_effect")))
+                                       x =. ))  %>%
+    dplyr::mutate_at ( vars(1), ~paste0(., "_effect"))
 
   if ( all ( names (inverse) %in% names ( input_requirements ) ) ) {
     input_requirements <- dplyr::select ( input_requirements, 
-                                      dplyr::one_of (names(inverse)))
+                                      tidyselect::one_of (names(inverse)))
   }
   
   col_n <- ncol(input_requirements)

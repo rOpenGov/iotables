@@ -40,8 +40,11 @@ controlled analytical results. The column names were slightly altered
 to resemble more the current Eurostat conventions and the main example 
 dataset \code{\link{germany_1990}}.
 }
-\keyword{Netherlands}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{table,}
+\seealso{
+Other Example data files: 
+\code{\link{germany_1990}},
+\code{\link{metadata_uk_2010}},
+\code{\link{uk_test_results}}
+}
+\concept{Example data files}
+\keyword{datasets}

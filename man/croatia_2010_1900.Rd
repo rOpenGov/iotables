@@ -32,9 +32,11 @@ data(croatia_2010_1900)
 1900 - Symmetric input-output table for imports (product x product)
 In thousand kunas (T_NAC)
 }
-\keyword{Croatia,}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{import}
-\keyword{input-output}
-\keyword{table,}
+\seealso{
+Other Croatia data files: 
+\code{\link{croatia_2010_1700}},
+\code{\link{croatia_2010_1800}},
+\code{\link{primary_inputs}}
+}
+\concept{Croatia data files}
+\keyword{datasets}

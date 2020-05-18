@@ -20,6 +20,5 @@
 #'   \item{time}{Date of the SIOT}                    
 #'   \item{values}{The actual values of the table in thousand kunas}  
 #' }
-#' @keywords data, datasets, input-output table, Croatia
-
+#' @family Croatia data files
 "croatia_2010_1700"

@@ -14,7 +14,7 @@
 #' Table of taxes less subsidies on products at basic prices (naio_10_cp1630)	and
 #' at previous' years prices (naio_10_pyp1630)
 #' For further information consult the 
-#' \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.
+#' \href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.
 #' @param labelled_io_data If you have downloaded a bulk data file with 
 #' \code{\link{iotables_download}}, it is faster to work with the data
 #' in the memory. Defaults to \code{NULL} when  the data will be retrieved from

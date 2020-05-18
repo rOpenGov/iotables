@@ -32,8 +32,11 @@ data(croatia_2010_1700)
 1700 - Symmetric input-output table at basic prices (product x product)
 In thousand kunas (T_NAC)
 }
-\keyword{Croatia}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{table,}
+\seealso{
+Other Croatia data files: 
+\code{\link{croatia_2010_1800}},
+\code{\link{croatia_2010_1900}},
+\code{\link{primary_inputs}}
+}
+\concept{Croatia data files}
+\keyword{datasets}

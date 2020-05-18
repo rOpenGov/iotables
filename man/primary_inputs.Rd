@@ -19,10 +19,11 @@ data("croatia_employment_aggregation")
 \description{
 Only currently used primary inputs. Abbreviations for filtering.
 }
-\keyword{Eurostat,}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{inputs}
-\keyword{metadata,}
-\keyword{table,}
+\seealso{
+Other Croatia data files: 
+\code{\link{croatia_2010_1700}},
+\code{\link{croatia_2010_1800}},
+\code{\link{croatia_2010_1900}}
+}
+\concept{Croatia data files}
+\keyword{datasets}

@@ -38,7 +38,7 @@ the hard disk or from the Eurostat website invoking the same function.}
  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 } 
 For further information consult the 
-\href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
+\href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.}
 
 \item{geo}{A country code or a country name.
 For example, \code{SK} or as \code{Slovakia}.}
@@ -62,12 +62,12 @@ product x product, industry x industry or product x industry table.
 The alternative is \code{short} or \code{eurostat} which is the 
 original short row or column code of Eurostat or OECD.}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
-data file here with labelling.}
+\item{data_directory}{Defaults to \code{NULL}, if a valid directory, 
+it will try to save the pre-processed data file here with labelling.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
-downloaded file in the \code{data_directory} or the temporary directory, 
-if it exists. Will force download only in a new session.}
+downloaded file in the \code{data_directory} or the temporary 
+directory, if it exists. Will force download only in a new session.}
 }
 \value{
 A wide format data.frame with a well-ordered input-output table.

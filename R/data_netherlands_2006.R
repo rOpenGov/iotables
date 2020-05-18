@@ -27,6 +27,6 @@
 #'   \item{exports}{Simple aggregated exports}
 #'   \item{total_use}{Simple aggregated total use}              
 #' }
-#' @keywords data, datasets, input-output table, Netherlands
+#' @family Example data files
 "netherlands_2006"
 

@@ -29,11 +29,15 @@ A data frame with 13 variables.
 data(croatia_2010_1800)
 }
 \description{
-1800 - Symmetric input-output table for domestic production (product x product)
+1800 - Symmetric input-output table for domestic production 
+(product x product)
 In thousand kunas (T_NAC)
 }
-\keyword{Croatia}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{table,}
+\seealso{
+Other Croatia data files: 
+\code{\link{croatia_2010_1700}},
+\code{\link{croatia_2010_1900}},
+\code{\link{primary_inputs}}
+}
+\concept{Croatia data files}
+\keyword{datasets}

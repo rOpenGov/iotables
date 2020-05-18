@@ -6,6 +6,7 @@
 #' use table or a supply table.
 #' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
+#' @keywords internal
 
 empty_remove <- function ( data_table ) {
   

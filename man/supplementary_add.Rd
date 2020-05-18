@@ -2,14 +2,15 @@
 % Please edit documentation in R/supplementary_add.R
 \name{supplementary_add}
 \alias{supplementary_add}
-\title{Add supplementary data}
+\title{Add Supplementary Data}
 \usage{
 supplementary_add(data_table, supplementary_data, supplementary_names = NULL)
 }
 \arguments{
 \item{data_table}{A SIOT, a use table, a supply table, or a margins table.}
 
-\item{supplementary_data}{Supplementary data to be added. It must be a data.frame
+\item{supplementary_data}{Supplementary data to be added. 
+It must be a data.frame
 or tibble with a key column containing the indicator's name, 
 and the column names must match with the \code{data_table}. Can be a 
 vector or a data frame of several rows.}
@@ -17,9 +18,15 @@ vector or a data frame of several rows.}
 \item{supplementary_names}{Optional names for the new supplementary rows. 
 Defaults  to \code{NULL}.}
 }
+\value{
+A symmetric input-output table with supplementary data,  
+of data.frame class. 
+The column names are ordered, and the row names are in the 
+first, auxiliary metadata column.
+}
 \description{
-Download the employment data for a country and arrange it to the 64x64 SIOTS.
-Currently works only with product x product tables.
+Download the employment data for a country and arrange it to the 
+64x64 SIOTS. Currently works only with product x product tables.
 }
 \examples{
 de_io <- iotable_get()
@@ -31,5 +38,4 @@ CO2 <- cbind (
 de_coeff <- input_coefficient_matrix_create ( iotable_get() )
 
 supplementary_add ( de_io, CO2)
-
 }

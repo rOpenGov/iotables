@@ -34,11 +34,11 @@ latest statistical regulations, i.e. SIOTs starting from the year 2010.
 
 The aim of this introduction is not to introduce input-output economics,
 or SIOTs in detail. The [Eurostat Manual of Supply, Use and Input-Output
-Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
+Tables](https://ec.europa.eu/eurostat/en/web/products-manuals-and-guidelines/-/KS-RA-07-013)
 and the [Eurostat tematic
-page](http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables)
-(for futher reference: `Eurostat Manual`) in the documentation should be
-consulted for further information about the data and the metadata.
+page](https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview)
+(for further reference: `Eurostat Manual`) in the documentation should
+be consulted for further information about the data and the metadata.
 
 In order to test the analytical functions of the package and to have a
 manageable sized example data set, we use the real-life data from the

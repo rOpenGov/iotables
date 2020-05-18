@@ -15,6 +15,10 @@ direct_effects_create(input_requirements, inverse, digits = NULL)
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
 no rounding takes place.}
 }
+\value{
+A data.frame containing the direct effects and the necessary
+metadata to sort them or join them with other matrixes.
+}
 \description{
 The function creates the effects.
 }

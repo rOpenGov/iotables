@@ -34,8 +34,11 @@ stores the highly structured SIOTs in long-form tidy datasets.
 The labels were slightly alterred to reflect the transition from the vocabulary
 of ESA95 to ESA2010 since the publication of the Manual.
 }
-\keyword{Germany}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{table,}
+\seealso{
+Other Example data files: 
+\code{\link{metadata_uk_2010}},
+\code{\link{netherlands_2006}},
+\code{\link{uk_test_results}}
+}
+\concept{Example data files}
+\keyword{datasets}

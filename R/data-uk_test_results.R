@@ -18,6 +18,5 @@
 #'   \item{GVA multiplier}{The imported GVA multipliers.}
 #'   \item{indicator}{Indicator names.}
 #' }
-#' @keywords data, datasets, input-output table, effects, multipliers, UK
-
+#' @family Example data files
 "uk_test_results"

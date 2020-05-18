@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Backward linkages — backward_linkages" />
-<meta property="og:description" content="Backward linkages as defined by the Eurostat Manual of Supply, Use and Input-Output
-Tables (see p506-507.)" />
+<meta property="og:description" content="Backward linkages as defined by the Eurostat Manual of Supply, Use and
+Input-Output Tables (see p506-507.)" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -129,8 +129,8 @@ Tables (see p506-507.)" />
     </div>
 
     <div class="ref-description">
-    <p>Backward linkages as defined by the Eurostat Manual of Supply, Use and Input-Output
-Tables (see p506-507.)</p>
+    <p>Backward linkages as defined by the Eurostat Manual of Supply, Use and
+Input-Output Tables (see p506-507.)</p>
     </div>
 
     <pre class="usage"><span class='fu'>backward_linkages</span>(<span class='no'>Im</span>)</pre>
@@ -145,16 +145,20 @@ Tables (see p506-507.)</p>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The vector of industry (product) backward linkages in a wide
+data.frame class, following the column names of the Leontieff 
+inverse matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>de_coeff</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span>( <span class='fu'><a href='iotable_get.html'>iotable_get</a></span>(), <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>4</span>)
-
+    <pre class="examples"><div class='input'><span class='no'>de_coeff</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span>( <span class='fu'><a href='iotable_get.html'>iotable_get</a></span>(),
+                                             <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>4</span> )
 <span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span> (<span class='no'>de_coeff</span>)
-<span class='fu'>backward_linkages</span> ( <span class='no'>I</span> )</div><div class='output co'>#&gt;        iotables_row agriculture_group industry_group construction trade_group
+<span class='fu'>backward_linkages</span> (<span class='no'>I</span>)</div><div class='output co'>#&gt;        iotables_row agriculture_group industry_group construction trade_group
 #&gt; 1 backward linkages          1.704922       1.841421     1.813747    1.603712
 #&gt;   business_services_group other_services_group
-#&gt; 1                1.594974             1.378375</div><div class='input'>
-</div></pre>
+#&gt; 1                1.594974             1.378375</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

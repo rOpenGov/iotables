@@ -1,15 +1,20 @@
-#' Add supplementary data
+#' Add Supplementary Data
 #'
-#' Download the employment data for a country and arrange it to the 64x64 SIOTS.
-#' Currently works only with product x product tables. 
+#' Download the employment data for a country and arrange it to the 
+#' 64x64 SIOTS. Currently works only with product x product tables. 
 #' @param data_table A SIOT, a use table, a supply table, or a margins table.  
-#' @param supplementary_data Supplementary data to be added. It must be a data.frame
+#' @param supplementary_data Supplementary data to be added. 
+#' It must be a data.frame
 #' or tibble with a key column containing the indicator's name, 
 #' and the column names must match with the \code{data_table}. Can be a 
 #' vector or a data frame of several rows. 
 #' @param supplementary_names Optional names for the new supplementary rows. 
 #' Defaults  to \code{NULL}.
 #' @importFrom dplyr select full_join mutate_if
+#' @return A symmetric input-output table with supplementary data,  
+#' of data.frame class. 
+#' The column names are ordered, and the row names are in the 
+#' first, auxiliary metadata column.
 #' @examples
 #' de_io <- iotable_get()
 #' CO2 <- c( 0.2379, 0.5172, 0.0456, 0.1320, 0.0127, 0.0530)  
@@ -20,16 +25,16 @@
 #' de_coeff <- input_coefficient_matrix_create ( iotable_get() )
 #'
 #' supplementary_add ( de_io, CO2)
-#'
 #' @export
-
 
 supplementary_add <- function ( data_table, 
                                 supplementary_data, 
                                 supplementary_names = NULL) {
   
   if ( !is.null(supplementary_names)) {
-    if ( length(supplementary_names) == nrow(as.data.frame(supplementary_data))) {
+    if ( length(supplementary_names) == nrow(
+         as.data.frame(supplementary_data))
+         ) {
       new_key <- supplementary_names
       supplementary_data[,1] <- new_key
     } else {

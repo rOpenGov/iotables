@@ -1,6 +1,7 @@
 #' Input-output table for Croatia, 2010.
 #'
-#' 1800 - Symmetric input-output table for domestic production (product x product)
+#' 1800 - Symmetric input-output table for domestic production 
+#' (product x product)
 #' In thousand kunas (T_NAC)
 #' @source   \href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
 #' @usage data(croatia_2010_1800)
@@ -19,7 +20,6 @@
 #'   \item{geo}{ISO / Eurostat country code for Croatia}
 #'   \item{geo_lab}{ISO / Eurostat country name, Croatia.}
 #'   \item{time}{Date of the SIOT}  
-#'   }                  
-#' @keywords data, datasets, input-output table, Croatia
-
+#'   } 
+#' @family Croatia data files
 "croatia_2010_1800"

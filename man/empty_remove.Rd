@@ -18,3 +18,4 @@ after removing all empty columns and rows at the same time.
 This is an internal function to determine where to separate quadrants if
 necessary.
 }
+\keyword{internal}

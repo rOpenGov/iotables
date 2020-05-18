@@ -22,6 +22,6 @@
 #'   \item{geo_lab}{ISO / Eurostat country name, Germany}
 #'   \item{time}{Date of the SIOT}     
 #' }
-#' @keywords data, datasets, input-output table, Germany
+#' @family Example data files
 "germany_1990"
 
