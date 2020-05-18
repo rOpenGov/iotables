@@ -14,9 +14,8 @@ in the nested data from the current R sessions' temporary directory.}
 \item{source}{See the available list of sources above in the Description.}
 }
 \value{
-A nested data frame. Each input-output table is in a separate 
-row of the nested output, where all the metadata are in columns, and the
-actual, tidy, ordered input-output table is in the data \code{data} column.
+A data frame, which contains the metadata of all available 
+input-output tables from a specific \code{source}.
 }
 \description{
 Remove the data column and return only the metadata information of 

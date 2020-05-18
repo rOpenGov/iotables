@@ -4,8 +4,7 @@
 \alias{input_coefficient_matrix_create}
 \title{Create an input coefficient matrix}
 \usage{
-input_coefficient_matrix_create(data_table, households = FALSE,
-  digits = NULL)
+input_coefficient_matrix_create(data_table, households = FALSE, digits = NULL)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 

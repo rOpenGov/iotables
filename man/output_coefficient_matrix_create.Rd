@@ -4,8 +4,7 @@
 \alias{output_coefficient_matrix_create}
 \title{Create an output coefficient matrix}
 \usage{
-output_coefficient_matrix_create(io_table, total = "tfu",
-  digits = NULL)
+output_coefficient_matrix_create(io_table, total = "tfu", digits = NULL)
 }
 \arguments{
 \item{io_table}{A symmetric input-output table or use table created with the

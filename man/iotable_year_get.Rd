@@ -4,9 +4,16 @@
 \alias{iotable_year_get}
 \title{Get the available years for the input-output tables.}
 \usage{
-iotable_year_get(labelled_io_data = NULL, source = "germany_1990",
-  geo = "DE", unit = "MIO_EUR", time_unit = "year",
-  stk_flow = "TOTAL", data_directory = NULL, force_download = TRUE)
+iotable_year_get(
+  labelled_io_data = NULL,
+  source = "germany_1990",
+  geo = "DE",
+  unit = "MIO_EUR",
+  time_unit = "year",
+  stk_flow = "TOTAL",
+  data_directory = NULL,
+  force_download = TRUE
+)
 }
 \arguments{
 \item{labelled_io_data}{If you have downloaded a bulk data file with 

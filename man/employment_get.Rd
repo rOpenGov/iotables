@@ -8,9 +8,15 @@ Eurostat statistic \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset
 by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 }
 \usage{
-employment_get(geo = "CZ", year = "2010", sex = "Total",
-  age = "Y_GE15", labelling = "iotables", data_directory = NULL,
-  force_download = TRUE)
+employment_get(
+  geo = "CZ",
+  year = "2010",
+  sex = "Total",
+  age = "Y_GE15",
+  labelling = "iotables",
+  data_directory = NULL,
+  force_download = TRUE
+)
 }
 \arguments{
 \item{geo}{The country code.}

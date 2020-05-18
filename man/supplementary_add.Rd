@@ -4,8 +4,7 @@
 \alias{supplementary_add}
 \title{Add supplementary data}
 \usage{
-supplementary_add(data_table, supplementary_data,
-  supplementary_names = NULL)
+supplementary_add(data_table, supplementary_data, supplementary_names = NULL)
 }
 \arguments{
 \item{data_table}{A SIOT, a use table, a supply table, or a margins table.}

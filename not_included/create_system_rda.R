@@ -94,4 +94,4 @@ devtools::use_data(t_rows_data, t_cols_data,
                    t_rows_vocabulary, t_cols_vocabulary,
                    induse_vocabulary, prod_na_vocabulary,
                    employment_metadata,
-                   internal = TRUE, overwrite = TRUE)
+                   internal = TRUE, overwrite = FALSE)

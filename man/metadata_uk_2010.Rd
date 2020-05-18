@@ -5,7 +5,8 @@
 \alias{metadata_uk_2010}
 \title{Multipliers and effects (product) for testing
 from the United Kingdom Input-Output Analytical Tables, 2010}
-\format{A data frame with 10 variables.
+\format{
+A data frame with 10 variables.
 \describe{
   \item{variable}{Constant for the iotable_get function.} 
   \item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.} 
@@ -17,7 +18,8 @@ from the United Kingdom Input-Output Analytical Tables, 2010}
   \item{col_order}{Ordering variable for columns.}
   \item{prod_na}{The Eurostat-like key values for rows.}
   \item{induse}{The Eurostat-like column names}
-}}
+}
+}
 \usage{
 data(uk_2010_data)
 }

@@ -4,10 +4,11 @@
 \alias{iotables_read_tempdir}
 \title{Read input-output Tables from Temporary Directory}
 \usage{
-iotables_read_tempdir(source)
+iotables_read_tempdir(source = "naio_10_cp1700")
 }
 \arguments{
-\item{source}{See the available list of sources above in the Description.}
+\item{source}{See the available list of sources above in the Description.
+Defaults to  \code{source = "naio_10_cp1700"}.}
 }
 \value{
 A nested data frame. Each input-output table is in a separate 

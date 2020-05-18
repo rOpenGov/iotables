@@ -23,19 +23,16 @@ in the \code{data_directory} or the temporary directory, if it exists.}
 A nested data frame. Each input-output table is in a separate 
 row of the nested output, where all the metadata are in columns, and the
 actual, tidy, ordered input-output table is in the data \code{data} column.
-The data is saved into the actual \code{tempdir()}, too, which is 
-emptied at the end of each R session.
+The data is saved into the actual \code{tempdir()}, too.
 }
 \description{
 This function downloads standard input-output table files. Currently only Eurostat files are supported.
 You are not likely to use this function, because 
 \code{\link{iotable_get}} will
-call this function if necessary and properly filter
- out an input-output table.
+call this function if necessary and properly filter out an 
+input-output table.
 }
 \details{
-The only parameter is the Eurostat code of the table.
-
 The data is downloaded in the \code{tempdir()}under the name the statistical product as an
 rds file. (For example: \code{naio_10_cp1750.rds})
 

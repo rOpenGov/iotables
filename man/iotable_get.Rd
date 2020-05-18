@@ -2,12 +2,19 @@
 % Please edit documentation in R/iotable_get.R
 \name{iotable_get}
 \alias{iotable_get}
-\title{Get an input-output table from bulk file}
+\title{Get An Input-Output Table Fom Bulk File}
 \usage{
-iotable_get(labelled_io_data = NULL, source = "germany_1990",
-  geo = "DE", year = 1990, unit = "MIO_EUR", stk_flow = "DOM",
-  labelling = "iotables", data_directory = NULL,
-  force_download = TRUE)
+iotable_get(
+  labelled_io_data = NULL,
+  source = "germany_1990",
+  geo = "DE",
+  year = 1990,
+  unit = "MIO_EUR",
+  stk_flow = "DOM",
+  labelling = "iotables",
+  data_directory = NULL,
+  force_download = TRUE
+)
 }
 \arguments{
 \item{labelled_io_data}{If you have downloaded a bulk data file with 
@@ -33,14 +40,18 @@ the hard disk or from the Eurostat website invoking the same function.}
 For further information consult the 
 \href{http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables}{Eurostat Symmetric Input-Output Tables} page.}
 
-\item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
+\item{geo}{A country code or a country name.
+For example, \code{SK} or as \code{Slovakia}.}
 
-\item{year}{A numeric variable containing the year. Defaults to \code{2010}, because this year has the most data.}
+\item{year}{A numeric variable containing the year. 
+Defaults to \code{2010}, because this year has the most data.}
 
-\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
+\item{unit}{A character string containing the currency unit,
+defaults to \code{MIO_NAC} (million national currency unit). 
 The alternative is \code{MIO_EUR}.}
 
-\item{stk_flow}{Defaults to \code{DOM} as domestic output, alternative \code{IMP} for imports 
+\item{stk_flow}{Defaults to \code{DOM} as domestic output, 
+alternative \code{IMP} for imports 
 and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and 
 trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
 less subsidies only \code{TOTAL} is not used.}
@@ -56,11 +67,19 @@ data file here with labelling.}
 downloaded file in the \code{data_directory} or the temporary directory, 
 if it exists. Will force download only in a new session.}
 }
+\value{
+A wide format data.frame with a well-ordered input-output table.
+The bulk data files on the Eurostat website are in a long form and they are 
+not correctly ordered for further matrix equations.
+}
 \description{
-This function is used to filter out  a single input-output table from a database, 
-for example a raw file downloaded from the Eurostat website.  It provides some 
-functionality to avoid some pitfalls.
-Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
+This function is used to filter out  a single input-output table from
+a database, for example a raw file downloaded from the Eurostat 
+website.  It provides some functionality to avoid some pitfalls.
+}
+\details{
+Unless you want to work with bulk data files, 
+you should not invoke  \code{\link{iotables_download}} 
 directly, rather via this function, if and when it is necessary.
 }
 \examples{

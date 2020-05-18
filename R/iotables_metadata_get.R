@@ -25,9 +25,8 @@
 #' Defaults to \code{NULL} in which case an attempt is made to find and read
 #' in the nested data from the current R sessions' temporary directory. 
 #' @param source See the available list of sources above in the Description. 
-#' @return A nested data frame. Each input-output table is in a separate 
-#' row of the nested output, where all the metadata are in columns, and the
-#' actual, tidy, ordered input-output table is in the data \code{data} column.
+#' @return A data frame, which contains the metadata of all available 
+#' input-output tables from a specific \code{source}.
 #' @importFrom tidyr unnest
 #' @examples
 #' iotables_metadata_get ( source = "naio_10_cp1700" )
@@ -44,7 +43,8 @@ iotables_metadata_get <- function (dat = NULL,
     metadata <- dat[, !names(dat) %in% c("data")]
     tidyr::unnest(metadata, cols = c())
   } else {
-    message( "The temporary file for source='",source, "' is not found in\ntempdir='", 
+    message( "The temporary file for source='",source, 
+             "' is not found in\ntempdir='", 
              tempdir(), "'")
     }
 }

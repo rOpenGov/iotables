@@ -4,9 +4,13 @@
 \alias{input_indicator_create}
 \title{Create input indicator(s)}
 \usage{
-input_indicator_create(data_table, input_vector = c("gva_bp",
-  "net_tax_production"), digits = NULL, households = FALSE,
-  indicator_names = NULL)
+input_indicator_create(
+  data_table,
+  input_vector = c("gva_bp", "net_tax_production"),
+  digits = NULL,
+  households = FALSE,
+  indicator_names = NULL
+)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 

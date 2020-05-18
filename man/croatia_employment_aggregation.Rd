@@ -4,11 +4,13 @@
 \name{croatia_employment_aggregation}
 \alias{croatia_employment_aggregation}
 \title{Aggregation table for Croatian employment statistics}
-\format{A data frame with 105 rows (including empty ones) and 2 variables.
+\format{
+A data frame with 105 rows (including empty ones) and 2 variables.
 \describe{
   \item{employment_label}{Labelling in DZS English language export}
   \item{t_cols2}{Labelling of EU/DZS SIOTs.}
-}}
+}
+}
 \usage{
 data(croatia_employment_aggregation)
 }

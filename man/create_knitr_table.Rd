@@ -4,13 +4,23 @@
 \alias{create_knitr_table}
 \title{Create an output-independent, well formatted kable table}
 \usage{
-create_knitr_table(data_table, digits = NULL, caption = NA,
-  col.names = NULL, col_width = NULL, width_unit = "cm",
-  col_align = NULL, border_right_cols = NULL, bold_cols = NULL,
+create_knitr_table(
+  data_table,
+  digits = NULL,
+  caption = NA,
+  col.names = NULL,
+  col_width = NULL,
+  width_unit = "cm",
+  col_align = NULL,
+  border_right_cols = NULL,
+  bold_cols = NULL,
   bootstrap_options = c("striped", "hover", "condensed"),
-  latex_options = NULL, output_format = NULL, keep_pdf = FALSE,
+  latex_options = NULL,
+  output_format = NULL,
+  keep_pdf = FALSE,
   latex_header_includes = c("\\\\usepackage[magyar]{babel}",
-  "\\\\usepackage[utf8]{inputenc}"))
+    "\\\\usepackage[utf8]{inputenc}")
+)
 }
 \arguments{
 \item{data_table}{data.frame, tibble, named matrix or a knitr_kable object.}

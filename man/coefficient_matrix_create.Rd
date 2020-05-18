@@ -4,8 +4,14 @@
 \alias{coefficient_matrix_create}
 \title{Create a coefficient matrix}
 \usage{
-coefficient_matrix_create(data_table, total = "output", digits = NULL,
-  remove_empty = TRUE, households = FALSE, return_part = NULL)
+coefficient_matrix_create(
+  data_table,
+  total = "output",
+  digits = NULL,
+  remove_empty = TRUE,
+  households = FALSE,
+  return_part = NULL
+)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 

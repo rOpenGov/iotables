@@ -17,7 +17,8 @@
 #'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 #'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytcal Tables data}
 #' } 
-#' @param source See the available list of sources above in the Description. 
+#' @param source See the available list of sources above in the Description.
+#' Defaults to  \code{source = "naio_10_cp1700"}.
 #' @return A nested data frame. Each input-output table is in a separate 
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
@@ -25,7 +26,7 @@
 #' iotables_read_tempdir ( source = "naio_10_cp1700" )
 #' @export
 
-iotables_read_tempdir <- function(source) {
+iotables_read_tempdir <- function( source = "naio_10_cp1700" ) {
   validate_source(source)
   temporary_file <- file.path(tempdir(), paste0(source, '.rds'))
   if (file.exists(temporary_file)) {

@@ -1,10 +1,13 @@
-#' Get an input-output table from bulk file
+#' Get An Input-Output Table Fom Bulk File
 #' 
-#' This function is used to filter out  a single input-output table from a database, 
-#' for example a raw file downloaded from the Eurostat website.  It provides some 
-#' functionality to avoid some pitfalls.
-#' Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
-#' directly, rather via this function, if and when it is necessary. 
+#' This function is used to filter out  a single input-output table from
+#' a database, for example a raw file downloaded from the Eurostat 
+#' website.  It provides some functionality to avoid some pitfalls.
+#' 
+#' Unless you want to work with bulk data files, 
+#' you should not invoke  \code{\link{iotables_download}} 
+#' directly, rather via this function, if and when it is necessary.
+#'  
 #' @param source A data source, for example \code{naio_10_cp1700}. 
 #'  \itemize{
 ##'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
@@ -26,11 +29,15 @@
 #' \code{\link{iotables_download}}, it is faster to work with the data
 #' in the memory. Defaults to \code{NULL} when  the data will be retrieved from
 #' the hard disk or from the Eurostat website invoking the same function.
-#' @param geo A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.
-#' @param year A numeric variable containing the year. Defaults to \code{2010}, because this year has the most data. 
-#' @param unit A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
+#' @param geo A country code or a country name.  
+#' For example, \code{SK} or as \code{Slovakia}.
+#' @param year A numeric variable containing the year. 
+#' Defaults to \code{2010}, because this year has the most data. 
+#' @param unit A character string containing the currency unit,
+#' defaults to \code{MIO_NAC} (million national currency unit). 
 #' The alternative is \code{MIO_EUR}. 
-#' @param stk_flow Defaults to \code{DOM} as domestic output, alternative \code{IMP} for imports 
+#' @param stk_flow Defaults to \code{DOM} as domestic output, 
+#' alternative \code{IMP} for imports 
 #' and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and 
 #' trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
 #' less subsidies only \code{TOTAL} is not used.
@@ -42,6 +49,9 @@
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
 #' downloaded file in the \code{data_directory} or the temporary directory, 
 #' if it exists. Will force download only in a new session.
+#' @return A wide format data.frame with a well-ordered input-output table.
+#' The bulk data files on the Eurostat website are in a long form and they are 
+#' not correctly ordered for further matrix equations.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
 #' @importFrom dplyr one_of
@@ -56,13 +66,15 @@
 #' @export 
 
 iotable_get <- function ( labelled_io_data = NULL, 
-                          source = "germany_1990", geo = "DE",
+                          source = "germany_1990", 
+                          geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           stk_flow = "DOM", 
                           labelling = "iotables", 
                           data_directory = NULL, 
                           force_download = TRUE) { 
-##Initialize variables ------------
+  
+  ## Initialize NSE variables -----------------------------------------
   values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
@@ -70,7 +82,13 @@ iotable_get <- function ( labelled_io_data = NULL,
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
-  ##Avoiding no visible binding for global variable 'data' -----
+  ## Parameter exception handling -------------------------------------
+  if (is.null(labelled_io_data) & is.null(geo)) stop ("The 'geo' parameter must be a valid Eurostat 'geo' code")
+  if (is.null(labelled_io_data) & !source %in% c("germany_2010", "uk_2010")) {
+    validate_source(source)
+  }
+  
+  ##Avoiding no visible binding for global variable 'data' ----------
   getdata <- function(...)
   {
     e <- new.env()
@@ -79,7 +97,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   }
   
   
-  ##Exception handling ---
+  ## Exception handling for tax and margin tables -----------------------
   if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
        ) {
@@ -88,7 +106,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   
   uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
   
-  ##Veryfing source parameter and loading the labelling  ----
+  ##Veryfing source parameter and loading the labelling  -----------
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
@@ -287,12 +305,12 @@ iotable_get <- function ( labelled_io_data = NULL,
   }
   
 
-  ###Selecting table from nested data, if nested at all------  
+ ## Selecting table from nested data, if nested at all ---------------  
 
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , 
                        "croatia_2010_1900" , 
                        "germany_1990", uk_tables ) ) {
-    selected_table <- which (   ##get the number of table to be selected
+    selected_table <- which (   ## get the number of table to be selected
       labelled_io_data$year == year & 
         as.character(labelled_io_data$geo) == geo &
         labelled_io_data$unit == unit)
@@ -307,21 +325,27 @@ iotable_get <- function ( labelled_io_data = NULL,
           as.character(labelled_io_data$geo) == geo &
           labelled_io_data$unit == unit  &
           labelled_io_data$stk_flow == stk_flow_input)
-    }  #in case of DOM, IMP, TOTAL stk_flow must be selected, too.
+    }  
     
-    iotable <- labelled_io_data$data[[selected_table]]  ##the relevant io table data in long form
+    if (length(selected_table) != 1) {
+      stop ( "The parameters geo=", geo, "; unit=",  unit_input, 
+             "; stk_flow=", stk_flow_input, 
+             "\ndo not select a unique table.")
+    }
+    
+    iotable <- labelled_io_data$data[[selected_table]]  ## the relevant io table data in long form
   } else {  #if data is not nested
     iotable <- labelled_io_data 
   }
 
- ###converting factors to numbers   
+ ## Converting factors to numbers --------------------------------------
  if ( class(iotable$values) %in% c("character", "factor") ) {
     iotable$values  = trimws(as.character(iotable$values), which = "both")
     iotable$values = as.numeric(iotable$values)
     message("Warning: original data was converted to numeric format.")
  }
 
-  ###Get and order the SIOT-------  
+ ## Get and order the SIOT-------  
  if ( source %in% prod_ind ) {
   col_join <- names ( iotable ) [ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col", "uk_col") )] 
   row_join <- names ( iotable ) [ which( names(iotable) %in% c("prod_na", "prod_na_lab", "iotables_row", "uk_row") )] 

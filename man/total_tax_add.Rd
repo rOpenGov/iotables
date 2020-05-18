@@ -4,8 +4,11 @@
 \alias{total_tax_add}
 \title{Summarize and add tax data}
 \usage{
-total_tax_add(data_table, tax_names = c("d21x31", "d29x39"),
-  total_tax_name = "TOTAL_TAX")
+total_tax_add(
+  data_table,
+  tax_names = c("d21x31", "d29x39"),
+  total_tax_name = "TOTAL_TAX"
+)
 }
 \arguments{
 \item{data_table}{A SIOT, a use table, a supply table, or a margins table that 

@@ -5,7 +5,8 @@
 \alias{uk_test_results}
 \title{Multipliers and effects (product) for testing
 from the United Kingdom Input-Output Analytical Tables, 2010}
-\format{A data frame with 12 variables.
+\format{
+A data frame with 12 variables.
 \describe{
   \item{uk_row_label}{The UK row label} 
   \item{Output multiplier}{The imported Output multipliers}
@@ -19,7 +20,8 @@ from the United Kingdom Input-Output Analytical Tables, 2010}
   \item{gva_multiplier_rank}{The imported ranking GVA multipliers.}
   \item{GVA multiplier}{The imported GVA multipliers.}
   \item{indicator}{Indicator names.}
-}}
+}
+}
 \usage{
 data(uk_test_results)
 }

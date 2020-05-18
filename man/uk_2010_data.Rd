@@ -4,7 +4,8 @@
 \name{uk_2010_data}
 \alias{uk_2010_data}
 \title{United Kingdom Input-Output Analytical Tables, 2010}
-\format{A data frame with 10 variables.
+\format{
+A data frame with 10 variables.
 \describe{
   \item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.} 
   \item{uk_row_lab}{The original UK row labels.}
@@ -17,7 +18,8 @@
   \item{unit_lab}{Eurostat label equivalents, i.e. millions of national currency unit.}
   \item{values}{The numeric values of the variable}
   \item{year}{Contant = 2010.}
-}}
+}
+}
 \source{
 \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 }

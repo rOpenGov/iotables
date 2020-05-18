@@ -10,6 +10,16 @@ context ("Creating an IO Table")
 #              unit = "MIO_NAC", data_directory = 'data-raw')
 
 
+test_that("Necessary input parameters are checked", {
+  expect_error(iotable_get(source = 'naio_10_cp1700', 
+                           year = 2015, geo = NULL,
+                           unit = "MIO_EUR", labelling = "iotables"))
+  expect_error(iotable_get(source = 'naio_10_cp1701', 
+                           year = 2015, geo = "DE",
+                           unit = "MIO_EUR", labelling = "iotables"))
+})
+
+
 test_that("correct data is returned", {
   expect_equal(iotable_get(source = 'germany_1990', 
                            geo = 'DE', year = 1990, 
