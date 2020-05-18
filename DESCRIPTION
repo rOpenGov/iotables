@@ -29,7 +29,8 @@ Imports:
     kableExtra,
     tibble,
     readxl,
-    purrr
+    purrr,
+    tidyselect
 Suggests: 
     testthat,
     rmarkdown,
