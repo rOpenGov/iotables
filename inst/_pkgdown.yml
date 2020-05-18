@@ -1,0 +1,17 @@
+pandoc: 1.19.2.1
+pkgdown: 1.3.0
+pkgdown_sha: ~
+articles:
+  germany_1990: germany_1990.html
+  united_kingdom_2010: united_kingdom_2010.html
+  working_with_eurostat: working_with_eurostat.html
+  
+home:
+  links:
+  - text: iotables.ceemid.eu
+    href: http://iotables.ceemid.eu
+
+authors:
+  Daniel Antal, CFA:
+    href: "http://www.twitter.com/antaldaniel"
+
