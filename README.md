@@ -5,7 +5,7 @@
 
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
 
-\[![iotables](man/figures/logo20.png)
+![iotables](man/figures/logo20.png)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.4.3-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
