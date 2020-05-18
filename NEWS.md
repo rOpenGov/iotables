@@ -128,3 +128,7 @@ A small formatting error in the documentation of `netherlands_2006` threw up a n
 # iotables 0.4.2
 On CRAN 0.4.1 passed early tests, but on deployment it 
 turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit). This dependency is `magick`, which was supposed to help printing vignettes in Word (a very rare case) for `kableExtra` is not available on Solaris.  I removed this dependency. 
+
+# iotables 0.4.3
+* Generally improved documentation.
+* Better handling of temporary files in `tempdir()` for improved performance with very large source files, including the new exported function `iotables_read_tempdir()`.

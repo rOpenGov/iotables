@@ -22,15 +22,15 @@ Symmetric input-output tables and their auxiliary tables are the most complex, s
 
 The Eurostat website contains the symmetric input-output data in long form.  Working with this data requires a knowledge of the Eurostat SNA vocabulary to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle. 
 
-Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with "real-life" data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on product x product  type SIOTs, because most member states use them. The functions work with industry x industry SIOTs, but further vocabulary exception may show up in their use. Please report these issues on github or in an email.
+Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with "real-life" data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on `product x product`  type SIOTs, because most member states use them. The functions work with `industry x industry` SIOTs, but further vocabulary exception may show up in their use. Please report these issues on [github](https://github.com/rOpenGov/iotables/issues).
 
 You are most likely to work with the product x product tables. For the availability of other data see `?iotables_download`.
 
-The analytical functions are presented at greater detail in the _Germany 1990_ vignette. The numbering of the equations refers to the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the ESA 95 standards. Currently Eurostat uses the ESA 2010 definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.
+The analytical functions are presented at greater detail in the _Germany 1990_ vignette. The numbering of the equations refers to the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the `ESA95` standards. Currently Eurostat uses the `ESA2010` definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.
 
 Another very useful source of information on how to work with the tables [Input-output analytical tables: methods and application to UK National Accounts](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html). Since the United Kingdom at the time of writing the article was a member of the European Union, her national accounts follow the EU ESA standards.
 
-##Getting and processing Eurostat data
+## Getting and processing Eurostat data
 
 The following code, if specifically run (it will not run on default), will download the latest relevant data from the Eurostat data warehouse, and save it to a directory named *../not_included* . The iotables package uses the other rOpenGov package [Eurostat](https://github.com/rOpenGov/eurostat) with additional processing of the rather complex SIOT bulk files.
 
@@ -43,11 +43,13 @@ if ( ! dir.exists(not_included_directory) ) dir.create (not_included_directory)
 #The contents of the 'not_included' directory can be found on GitHub, 
 #but they are not released and distributed with the package.
 
-naio_10_cp1700 <- iotables_download("naio_10_cp1700", #SIOT
-                                    data_directory = not_included_directory ) 
+naio_10_cp1700 <- iotables_download(
+  "naio_10_cp1700", #SIOT
+  data_directory = not_included_directory) 
 
-#For inclusion in the package, the files must be smaller. Reducing the size of
-#the bulk files will not affect the demonstration
+# For inclusion in the package, the files must be smaller. 
+# Reducing the size of the bulk files will not affect
+# the demonstration.
 
 naio_10_cp1700 <- naio_10_cp1700 %>%
   dplyr::filter ( geo %in% c("CZ", "SK")) %>%
@@ -73,10 +75,12 @@ save (naio_10_cp1700, emp_sk, emp_cz,
 
 For a quicker building of the vignette, the data is retrieved from the *not_included* directory. The chunk above can reproduce this data file. 
 
-```{r load }
+```{r load}
 #load from pre-saved file to increase running speed
 
-load (system.file('extdata', 'naio_10_product_x_product.rda', package = 'iotables') )
+load (system.file('extdata', 
+                  'naio_10_product_x_product.rda', 
+                  package = 'iotables') )
 
 ```
 
@@ -105,7 +109,7 @@ sk_output <- output_get( data_table = sk_io)
 
 By default, total rows and columns are removed when creating use tables. 
 
-##Analytical functions
+## Analytical functions
 
 ### Input coefficients matrix
 

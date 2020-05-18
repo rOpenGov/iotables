@@ -16,7 +16,15 @@ require (iotables)
 data ("germany_1990")
 ```
 
-# iotables <img src="man/figures/logo.png" align="right" height="205 width="205"/>
+# iotables 
+<!-- ![iotables](/man/figures/logo.png =205x205)-->
+<!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
+[![license](https://img.shields.io/badge/license-MIT + file LICENSE-lightgrey.svg)](https://choosealicense.com/)
+[![Follow rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov) 
+[![Follow author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
 
 The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure.  They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository.  In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form.  Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
 
@@ -33,14 +41,17 @@ The calculation of induced effects (Type-II multipliers) are following the [Inpu
 You can install iotools from CRAN or the latest development version with github:
 
 ```{r gh-installation, eval = FALSE}
+# From CRAN:
 install.packages("iotables")
+
+# From Github (development version)
 devtools::install_github("rOpenGov/iotables")
 
 #with vignettes:
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can follow changes on the NEWS.md file. 
+You can follow changes on the [NEWS.md](https://github.com/rOpenGov/iotables/blob/master/NEWS.md) file. 
 
 ## Acquiring data
 
@@ -62,7 +73,7 @@ Currently the following Eurostat SIOTs can be used:
 
 The `cp` element refers to basic prices and the `pyp` to previous years' prices.
 
-##Vignettes 
+## Vignettes 
 
 Given the complexity of the data used by the package, probably the use of the vignettes is needed to get a start. 
 
@@ -71,5 +82,3 @@ The [Germany 1990](http://iotables.ceemid.eu/articles/germany_1990.html) vignett
 The [Working with Eurostat Data](http://iotables.ceemid.eu/articles/working_with_eurostat.html) vignette shows how you can download, pre-process and use real data from Eurostat.
 
 The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the [United Kingdom Input-Output Analyitcal Tables](http://iotables.ceemid.eu/articles/united_kingdom_2010.html) vignette.
-
-
