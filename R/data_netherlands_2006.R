@@ -1,10 +1,11 @@
 #' Simple input-output table for the Netherlands, 2006.
 #'
-#' This simplified SIOT is taken from the  Science Policy Integration for Coastal
-#' Systems Assessment project's input-output multiplier specification sheet.
-#' It is used as a simple example SIOT for controlled analytical results.
-#' The column names were slightly altered to resemble more the current Eurostat
-#' conventions and the main example dataset \code{\link{germany_1990}}.
+#' This simplified SIOT is taken from the  Science Policy Integration for
+#' Coastal Systems Assessment project's input-output multiplier 
+#' specification sheet. It is used as a simple example SIOT for 
+#' controlled analytical results. The column names were slightly altered 
+#' to resemble more the current Eurostat conventions and the main example 
+#' dataset \code{\link{germany_1990}}.
 #' @format A data frame with 14 observations and 13 variables.
 #' @source Source: Input-Output Multipliers Specification Sheet and Supporting
 #' Material in the Spicosa Project Report
@@ -15,7 +16,8 @@
 #'   \item{agriculture_group}{Simple aggregated agricultural products}
 #'   \item{mining_group}{Simple aggregated mining products}
 #'   \item{manufacturing_group}{Simple aggregated manufacturing products}
-#'   \item{construction_group}{Construction}  
+#'   \item{construction_group}{Construction}
+#'   \item{utilities_group}{Simple aggregated utilities products/services}  
 #'   \item{services_group}{Simple aggregated services products}
 #'   \item{TOTAL}{Column / row sums, simple summary, not included in the original source}
 #'   \item{final_consumption_private}{Simple aggregated final private use}
