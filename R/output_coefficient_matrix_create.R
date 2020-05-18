@@ -17,6 +17,9 @@
 #' coefficients for final demand. See Eurostat Manual, p495 and p507.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
+#' @return An output coefficient matrix of data.frame class. 
+#' The column names are ordered, and the row names are in the 
+#' first, auxiliary metadata column.
 #' @importFrom dplyr mutate_if funs
 #' @examples 
 #' io_table <- iotable_get () 

@@ -21,6 +21,11 @@ coefficients for final demand. See Eurostat Manual, p495 and p507.}
 \item{digits}{An integer showing the precision of the technology matrix in 
 digits. Default is \code{NULL} when no rounding is applied.}
 }
+\value{
+An output coefficient matrix of data.frame class. 
+The column names are ordered, and the row names are in the 
+first, auxiliary metadata column.
+}
 \description{
 Create an output coefficient matrix from the input flow matrix or a symmetric
 input-output table. If there are zero values in present, they will be changed to 

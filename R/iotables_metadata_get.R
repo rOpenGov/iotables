@@ -36,7 +36,7 @@ iotables_metadata_get <- function (dat = NULL,
                           source = "naio_10_cp1700" ) {
   if ( is.null(dat)) {
     validate_source(source)
-    dat <- iotable_read_tempdir(source)
+    dat <- iotables_read_tempdir(source)
   }
   
   if ( !is.null(dat)) {

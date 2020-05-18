@@ -7,6 +7,8 @@
 #' by the \code{\link{input_coefficient_matrix_create}} or 
 #' \code{\link{output_coefficient_matrix_create}}.
 #' @importFrom dplyr mutate_at mutate_if
+#' @return A Leontieff matrix of data.frame class. The column names are 
+#' ordered, and the row names are in the first, auxiliary metadata column.
 #' @examples 
 #' tm <- input_flow_get ( 
 #'   data_table = iotable_get(), 

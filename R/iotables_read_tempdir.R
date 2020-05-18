@@ -27,10 +27,13 @@
 #' @export
 
 iotables_read_tempdir <- function( source = "naio_10_cp1700" ) {
+  
   validate_source(source)
-  temporary_file <- file.path(tempdir(), paste0(source, '.rds'))
+  temporary_file <- file.path(tempdir(),
+                              paste0(source, '.rds'))
+  
   if (file.exists(temporary_file)) {
-    readRDS( temporary_file)
+    readRDS( temporary_file )
   }
 }
 

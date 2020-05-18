@@ -11,6 +11,10 @@ leontieff_matrix_create(technology_coefficients_matrix)
 by the \code{\link{input_coefficient_matrix_create}} or 
 \code{\link{output_coefficient_matrix_create}}.}
 }
+\value{
+A Leontieff matrix of data.frame class. The column names are 
+ordered, and the row names are in the first, auxiliary metadata column.
+}
 \description{
 Create a Leontieff matrix from technology matrix after some basic error 
 handling. Most likely you will need this function as a step to invoke the 

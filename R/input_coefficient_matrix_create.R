@@ -24,6 +24,9 @@
 #' \code{input_flow} divided by \code{output} supported by a key column of 
 #' product or industries, with a key column. 
 #' Optionally the results are rounded to given \code{digits}. 
+#' @return An input coefficient matrix of data.frame class. 
+#' The column names are ordered, and the row names are in the 
+#' first, auxiliary metadata column.
 #' @examples 
 #' input_coefficient_matrix_create ( 
 #'                            iotable_get(), 
