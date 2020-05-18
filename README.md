@@ -12,6 +12,8 @@
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
+[![Codecov test
+coverage](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://codecov.io/gh/rOpenGov/iotables?branch=master)
 [![Follow
 rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![Follow
@@ -35,7 +37,7 @@ latest statistical regulations, i.e. SIOTs starting from the year 2010.
 The aim of this introduction is not to introduce input-output economics,
 or SIOTs in detail. The [Eurostat Manual of Supply, Use and Input-Output
 Tables](https://ec.europa.eu/eurostat/en/web/products-manuals-and-guidelines/-/KS-RA-07-013)
-and the [Eurostat tematic
+and the [Eurostat thematic
 page](https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview)
 (for further reference: `Eurostat Manual`) in the documentation should
 be consulted for further information about the data and the metadata.
@@ -123,7 +125,7 @@ Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://ww
 are used for testing the `iotables` package, because they are
 well-documented and detailed, organized data is available with them.
 These calculations can be followed in the [United Kingdom Input-Output
-Analyitcal
+Analytical
 Tables](http://iotables.ceemid.eu/articles/united_kingdom_2010.html)
 vignette.
 
