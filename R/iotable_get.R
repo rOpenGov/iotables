@@ -41,9 +41,11 @@
 #' and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and 
 #' trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
 #' less subsidies only \code{TOTAL} is not used.
-#' @param labelling Defaults to \code{iotables} which gives standard row and column names regardless of the
-#' source of the table, or if it is a product x product, industry x industry or product x industry table.
-#' The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.
+#' @param labelling Defaults to \code{iotables} which gives standard row 
+#' and column names regardless of the source of the table, or if it is a 
+#' product x product, industry x industry or product x industry table.
+#' The alternative is \code{short} or \code{eurostat} which is the 
+#' original short row or column code of Eurostat or OECD.
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 #' data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
@@ -53,15 +55,15 @@
 #' The bulk data files on the Eurostat website are in a long form and they are 
 #' not correctly ordered for further matrix equations.
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
-#' @importFrom dplyr one_of
+#' @importFrom dplyr filter select mutate rename left_join arrange 
+#' @importFrom dplyr one_of mutate_if
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
 #' @importFrom utils data
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
-#'              year = 1990,   unit = "MIO_EUR", 
+#'              year = 1990, unit = "MIO_EUR", 
 #'              labelling  = "iotables")
 #' @export 
 
@@ -82,7 +84,9 @@ iotable_get <- function ( labelled_io_data = NULL,
   row_order <- col_order <- iotables_label <- code <- numeric_label <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
+  if ( labelling == 'eurostat' ) labelling <- 'short'
   ## Parameter exception handling -------------------------------------
+  if (is.null(source)){ stop ("Parameter 'source' is a mandatory input.")}
   if (is.null(labelled_io_data) & is.null(geo)) stop ("The 'geo' parameter must be a valid Eurostat 'geo' code")
   if (is.null(labelled_io_data) & !source %in% c("germany_2010", "uk_2010")) {
     validate_source(source)
@@ -96,9 +100,8 @@ iotable_get <- function ( labelled_io_data = NULL,
     e[[name]]
   }
   
-  
   ## Exception handling for tax and margin tables -----------------------
-  if ( source %in% c("naio_10_cp1620", "naio_10_cp1630", 
+  if ( source %in% c("naio_10_cp1620",  "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
        ) {
     stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
@@ -160,12 +163,10 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
-    
     year_input <- year
     geo_input <- geo
     unit_input <- unit
     source_inputed <- source
-    
     
   } else if ( source %in% uk_tables ) {
       labelling <-  'short'; 
