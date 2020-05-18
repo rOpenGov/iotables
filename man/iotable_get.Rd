@@ -56,9 +56,11 @@ and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and
 trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
 less subsidies only \code{TOTAL} is not used.}
 
-\item{labelling}{Defaults to \code{iotables} which gives standard row and column names regardless of the
-source of the table, or if it is a product x product, industry x industry or product x industry table.
-The alternative is \code{short} which is the original short row or column code of Eurostat or OECD.}
+\item{labelling}{Defaults to \code{iotables} which gives standard row 
+and column names regardless of the source of the table, or if it is a 
+product x product, industry x industry or product x industry table.
+The alternative is \code{short} or \code{eurostat} which is the 
+original short row or column code of Eurostat or OECD.}
 
 \item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 data file here with labelling.}
@@ -84,6 +86,6 @@ directly, rather via this function, if and when it is necessary.
 }
 \examples{
 germany_table <- iotable_get( source = "germany_1990", geo = 'DE', 
-             year = 1990,   unit = "MIO_EUR", 
+             year = 1990, unit = "MIO_EUR", 
              labelling  = "iotables")
 }
