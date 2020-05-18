@@ -1,4 +1,4 @@
-#' Solve a basic equation
+#' Solve A Basic (Matrix) Equation
 #' 
 #' The function matches to parts of the matrix equation, using the named
 #' formats with row names and solves the matrix equation.
@@ -13,6 +13,8 @@
 #' product names for matching.
 #' @importFrom dplyr select mutate mutate_if full_join
 #' @importFrom tidyr spread
+#' @return A data.frame with auxiliary metadata to conform the symmetric
+#' input-output tables.
 #' @examples
 #' Im = data.frame (
 #' a = c("row1", "row2"), 

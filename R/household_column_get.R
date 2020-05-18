@@ -1,10 +1,11 @@
-#' Return final household expenditure
+#' Return Final Household Expenditure
 #'  
-#' @param data_table A symmetric input output table, a use table or a supply 
-#' table.
+#' @param data_table A symmetric input output table, a use table or
+#' a supply table.
 #' @return The column containing final household expenditure. If not found
 #' \code{NULL} is returned.
 #' @importFrom dplyr mutate_at
+#' @family iotables processing functions
 #' @examples 
 #' household_column_get( iotable_get ( source = 'germany_1990') )
 #' @export

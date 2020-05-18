@@ -2,21 +2,28 @@
 % Please edit documentation in R/household_column_get.R
 \name{household_column_get}
 \alias{household_column_get}
-\title{Return final household expenditure}
+\title{Return Final Household Expenditure}
 \usage{
 household_column_get(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use table or a supply 
-table.}
+\item{data_table}{A symmetric input output table, a use table or
+a supply table.}
 }
 \value{
 The column containing final household expenditure. If not found
 \code{NULL} is returned.
 }
 \description{
-Return final household expenditure
+Return Final Household Expenditure
 }
 \examples{
 household_column_get( iotable_get ( source = 'germany_1990') )
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{output_get}()},
+\code{\link{primary_input_get}()}
+}
+\concept{iotables processing functions}

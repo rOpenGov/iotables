@@ -1,6 +1,7 @@
 #' Create input indicator(s)
 #' 
-#' The function creates the input indicators from the inputs and the outputs.
+#' The function creates the input indicators from the inputs and
+#' the outputs.
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the  \code{\link{iotable_get}}
 #' function. 
@@ -15,6 +16,7 @@
 #' @return A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
 #' with a key column for products or industries.
 #' @importFrom dplyr mutate_if
+#' @family indicator functions
 #' @examples  
 #' input_indicator_create( data_table = iotable_get(), 
 #'                         input_vector = c("gva", "compensation_employees"),

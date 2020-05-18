@@ -4,7 +4,8 @@
 \alias{employment_get}
 \title{Get employment data}
 \source{
-Eurostat statistic \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+Eurostat statistic 
+\href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
 by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 }
 \usage{
@@ -42,8 +43,13 @@ data file here with labelling.}
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 in the \code{data_directory} or the temporary directory, if it exists.}
 }
+\value{
+A data.frame with auxiliary metadata to conform the symmetric
+input-output tables.
+}
 \description{
-Download the employment data for a country and arrange it to the 64x64 SIOTS.
+Download the employment data for a country and arrange it to the 
+64x64 SIOTS.
 Currently works only with product x product tables.
 }
 \examples{
@@ -58,3 +64,11 @@ Currently works only with product x product tables.
                )
  }
 }
+\seealso{
+Other iotables import functions: 
+\code{\link{iotable_get}()},
+\code{\link{iotables_download}()},
+\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_read_tempdir}()}
+}
+\concept{iotables import functions}

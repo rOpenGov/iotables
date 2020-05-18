@@ -26,3 +26,10 @@ de_input_flow <- input_flow_get ( data_table = iotable_get())
 
 conforming_vector_create ( data_table = de_input_flow )
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{household_column_get}()},
+\code{\link{output_get}()},
+\code{\link{primary_input_get}()}
+}
+\concept{iotables processing functions}

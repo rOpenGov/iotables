@@ -15,3 +15,4 @@ An error if the digits are not \code{NULL} or an integer value.
 \description{
 This is an internal function to determine if the rounding can go ahead.
 }
+\keyword{internal}

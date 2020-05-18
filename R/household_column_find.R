@@ -1,7 +1,7 @@
 #' Return the position of final household expenditure
 #'  
-#' @param data_table A symmetric input output table, a use table or a supply 
-#' table.
+#' @param data_table A symmetric input output table, a use table or a 
+#' supply table.
 #' @return An integer value with the final household expenditure. Returns 
 #' \code{NULL} if not found.
 #' @examples 

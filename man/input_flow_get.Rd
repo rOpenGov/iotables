@@ -7,8 +7,8 @@
 input_flow_get(data_table, empty_remove = FALSE, households = TRUE)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table or use table retrieved by the
-\code{\link{iotable_get}} function.}
+\item{data_table}{A symmetric input-output table or use table 
+retrieved by the \code{\link{iotable_get}} function.}
 
 \item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty 
 primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
@@ -30,3 +30,8 @@ input_flow <- input_flow_get( data_table = data_table,
                          households = TRUE)
 
 }
+\seealso{
+Other analytical object functions: 
+\code{\link{leontieff_matrix_create}()}
+}
+\concept{analytical object functions}

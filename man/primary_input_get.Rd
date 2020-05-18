@@ -12,11 +12,23 @@ supply table retrieved by the  \code{\link{iotable_get}} function.}
 
 \item{primary_input}{The primary input to be returned from the table.}
 }
+\value{
+A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)
+}
 \description{
-This function will retrieve any primary input from the input-output table.
+This function will retrieve any primary input from the input-output 
+table.
 }
 \examples{
 comp_employees_de <- primary_input_get(
   data_table = iotable_get(), 
   primary_input = "compensation_employees") 
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{household_column_get}()},
+\code{\link{output_get}()}
+}
+\concept{iotables processing functions}

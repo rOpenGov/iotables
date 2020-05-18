@@ -2,13 +2,13 @@
 % Please edit documentation in R/round_table.R
 \name{round_table}
 \alias{round_table}
-\title{Systematically round values in a table.}
+\title{Systematically Eound Values in a Table}
 \usage{
 round_table(data_table, digits = NULL)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table, a supply table,
-a margin or tax table.}
+\item{data_table}{A symmetric input-output table, or a use table, or a 
+supply table, or a margin or a tax table.}
 
 \item{digits}{Number of digits for rounding.}
 }
@@ -17,6 +17,7 @@ A tibble/data.frame with a key row and a symmetric matrix,
 after removing all empty columns and rows at the same time.
 }
 \description{
-This is an internal function to do the rounding on all numeric elements of
-the table.
+This is an internal function to do the rounding on all numeric elements 
+of the table.
 }
+\keyword{internal}

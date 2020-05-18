@@ -2,7 +2,7 @@
 % Please edit documentation in R/non_zero_columns_find.R
 \name{non_zero_columns_find}
 \alias{non_zero_columns_find}
-\title{Find non-zero columns}
+\title{Find Non-zero Columns}
 \usage{
 non_zero_columns_find(data_table)
 }
@@ -17,3 +17,4 @@ A vector of \code{TRUE} and \code{FALSE} values for the table.
 This is an internal function to help finding empty columns and rows in 
 symmetric tables.
 }
+\keyword{internal}

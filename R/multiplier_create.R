@@ -7,12 +7,16 @@
 #' As opposed to direct effects, multipliers are expressed per input of
 #' product/industry. 
 #' 
-#' @param input_vector An input matrix or vector created by the \code{\link{input_indicator_create}} function. 
-#' @param Im The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}
-#' function. 
+#' @param input_vector An input matrix or vector created by the 
+#' \code{\link{input_indicator_create}} function. 
+#' @param Im The Leontieff inverse as a named object created by the 
+#' \code{\link{leontieff_inverse_create}} function. 
 #' @param multiplier_name A variable name to be given to the returned multipliers. 
 #' Defaults to \code{multiplier}.
 #' @param digits Rounding digits, if omitted, no rounding takes place. 
+#' @family multiplier functions
+#' @return A data frame with the vector of multipliers and the an 
+#' auxiliary metadata column (for joining with other matrixes.)
 #' @examples 
 #' data_table <- iotable_get()
 #' 

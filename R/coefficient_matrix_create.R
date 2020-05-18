@@ -1,9 +1,9 @@
 #' Create a coefficient matrix
 #' 
 #' Create a coefficient matrix from a Symmetric Input-Output Table. The
-#' coefficient matrix is related by default to output, but you can change this
-#' to total supply or other total aggregate if it exists in your table.
-#' 
+#' coefficient matrix is related by default to output, but you can change
+#' this to total supply or other total aggregate if it exists 
+#' in your table.#' 
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the  \code{\link{iotable_get}}
 #'  function. 
@@ -27,6 +27,7 @@
 #' @importFrom dplyr mutate mutate_if funs left_join
 #' @references See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
+#' @family indicator functions
 #' @examples 
 #' coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
 #'                             total = "output", 

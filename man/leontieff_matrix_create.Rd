@@ -7,8 +7,8 @@
 leontieff_matrix_create(technology_coefficients_matrix)
 }
 \arguments{
-\item{technology_coefficients_matrix}{A technology coefficient matrix created
-by the \code{\link{input_coefficient_matrix_create}} or 
+\item{technology_coefficients_matrix}{A technology coefficient 
+matrix created by the \code{\link{input_coefficient_matrix_create}} or 
 \code{\link{output_coefficient_matrix_create}}.}
 }
 \value{
@@ -17,8 +17,9 @@ ordered, and the row names are in the first, auxiliary metadata column.
 }
 \description{
 Create a Leontieff matrix from technology matrix after some basic error 
-handling. Most likely you will need this function as a step to invoke the 
-function to create its inverse: \code{\link{leontieff_inverse_create}}.
+handling. Most likely you will need this function as a step to invoke 
+the  function to create its inverse: 
+\code{\link{leontieff_inverse_create}}.
 }
 \examples{
 tm <- input_flow_get ( 
@@ -26,3 +27,8 @@ tm <- input_flow_get (
   households = FALSE)
 L <- leontieff_matrix_create( technology_coefficients_matrix = tm )
 }
+\seealso{
+Other analytical object functions: 
+\code{\link{input_flow_get}()}
+}
+\concept{analytical object functions}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/total_tax_add.R
 \name{total_tax_add}
 \alias{total_tax_add}
-\title{Summarize and add tax data}
+\title{Summarize And Add Tax Data}
 \usage{
 total_tax_add(
   data_table,
@@ -11,17 +11,23 @@ total_tax_add(
 )
 }
 \arguments{
-\item{data_table}{A SIOT, a use table, a supply table, or a margins table that 
+\item{data_table}{A SIOT, a use table, a supply table, or a margins 
+table that 
 has product and production tax rows in among the primary inputs.}
 
-\item{tax_names}{Defaults to \code{("d21x31", "d29x39")}, which are the Eurostat 
+\item{tax_names}{Defaults to \code{("d21x31", "d29x39")}, 
+which are the Eurostat 
 names for taxes. The parameter is not case sensitive.}
 
 \item{total_tax_name}{Defaults to \code{'TOTAL_TAX'}. The name of the 
 summarized row. It is case sensitive.}
 }
+\value{
+A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)
+}
 \description{
-Summarize and add tax data
+Summarize And Add Tax Data
 }
 \examples{
 de_io <- iotable_get ()

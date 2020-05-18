@@ -25,3 +25,8 @@ de_coeff <- input_coefficient_matrix_create( iotable_get(),
 I <- leontieff_inverse_create (de_coeff)
 backward_linkages (I)
 }
+\seealso{
+Other interindustrial linkage functions: 
+\code{\link{forward_linkages}()}
+}
+\concept{interindustrial linkage functions}

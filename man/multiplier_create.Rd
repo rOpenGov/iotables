@@ -12,15 +12,20 @@ multiplier_create(
 )
 }
 \arguments{
-\item{input_vector}{An input matrix or vector created by the \code{\link{input_indicator_create}} function.}
+\item{input_vector}{An input matrix or vector created by the 
+\code{\link{input_indicator_create}} function.}
 
-\item{Im}{The Leontieff inverse as a named object created by the  \code{\link{leontieff_inverse_create}}
-function.}
+\item{Im}{The Leontieff inverse as a named object created by the 
+\code{\link{leontieff_inverse_create}} function.}
 
 \item{multiplier_name}{A variable name to be given to the returned multipliers. 
 Defaults to \code{multiplier}.}
 
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
+}
+\value{
+A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)
 }
 \description{
 This function is in fact a wrapper around the \code{\link{equation_solve}} function, 
@@ -49,3 +54,8 @@ de_gva_multipliers <- multiplier_create (
   digits = 4 )
 
 }
+\seealso{
+Other multiplier functions: 
+\code{\link{input_multipliers_create}()}
+}
+\concept{multiplier functions}

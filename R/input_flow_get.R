@@ -1,8 +1,8 @@
 #' Create a use (input flow) matrix
 #' 
 #' Select the use table from a symmetric input-output table.
-#' @param data_table A symmetric input-output table or use table retrieved by the  
-#' \code{\link{iotable_get}} function. 
+#' @param data_table A symmetric input-output table or use table 
+#' retrieved by the \code{\link{iotable_get}} function. 
 #' @param households Defaults to \code{FALSE}. If \code{TRUE}, the 
 #' final household expenditure is added to the input flow table.
 #' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
@@ -10,6 +10,7 @@
 #' removed to avoid division by zero error in the analytical functions.
 #' @importFrom dplyr mutate_if left_join select
 #' @return A data flow matrix in a labelled data frame.
+#' @family analytical object functions
 #' @examples 
 #' data_table <- iotable_get()
 #' input_flow <- input_flow_get( data_table = data_table, 

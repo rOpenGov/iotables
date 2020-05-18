@@ -14,6 +14,7 @@
 #' de_input_flow <- input_flow_get ( data_table = iotable_get())
 #' 
 #' conforming_vector_create ( data_table = de_input_flow )
+#' @family iotables processing functions
 #' @export 
 
 conforming_vector_create <- function ( data_table ) {

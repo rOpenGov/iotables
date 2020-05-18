@@ -39,6 +39,7 @@ iotables_read_tempdir ( source = "naio_10_cp1700" )
 }
 \seealso{
 Other iotables import functions: 
+\code{\link{employment_get}()},
 \code{\link{iotable_get}()},
 \code{\link{iotables_download}()},
 \code{\link{iotables_metadata_get}()}

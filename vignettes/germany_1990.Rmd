@@ -209,7 +209,7 @@ knitr::kable(multipliers, digits= 4)
 
 These multipliers are Type-I multipliers. The type-I GVA multiplier shows the total effect in the domestic economy. The initial extra demand creates new orders in the backward linking industries, offers new product to build on in the forward-linking industry and creates new corporate and employee income that can be spent. Type-II multipliers will be introduced in a forthcoming vignette [not yet available.]
 
-###Employment multipliers
+### Employment multipliers
 
 The E matrix contains the input coefficients for labor (created by `input_indicator_create()`). The following matrix equation defines the employment multipliers.
 
@@ -238,7 +238,6 @@ print (tidyr::gather(employment_multipliers,
 You can check against page 501 that these values are correct and on page 501 that the highest employment multiplier is indeed $z_i$ = `r max ( as.numeric ( employment_multipliers), na.rm=TRUE)`, the employment multiplier of agriculture.
 
 For working with real-life, current employment data, there is a helper function to retrieve and process Eurostat employment statistics to a SIOT-conforming vector `employment_get()`. This function will be explained in a separate vignette. 
-
 
 ### Output multipliers
 

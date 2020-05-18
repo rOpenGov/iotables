@@ -3,13 +3,15 @@
 #' The function creates the effects.
 #' @param input_requirements A matrix or vector created by 
 #' \code{\link{input_indicator_create}}
-#' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
+#' @param inverse A Leontieff-inverse created by 
+#' \code{\link{leontieff_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
 #' @importFrom dplyr select mutate_at
 #' @importFrom tidyselect one_of
 #' @return A data.frame containing the direct effects and the necessary
 #' metadata to sort them or join them with other matrixes.
+#' @family indicator functions
 #' @examples  
 #' nl <- netherlands_2006
 #'

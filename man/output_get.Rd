@@ -7,8 +7,13 @@
 output_get(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table or use table retrieved by the
+\item{data_table}{A symmetric input-output table or use table retrieved 
+by the  
 \code{\link{iotable_get}} function.}
+}
+\value{
+A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)
 }
 \description{
 This is a wrapper function around the \code{\link{primary_input_get}} 
@@ -17,3 +22,10 @@ function.
 \examples{
 output_get ( data_table = iotable_get () )
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{household_column_get}()},
+\code{\link{primary_input_get}()}
+}
+\concept{iotables processing functions}

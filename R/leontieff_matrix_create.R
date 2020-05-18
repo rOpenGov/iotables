@@ -1,12 +1,14 @@
 #' Create a Leontieff matrix
 #' 
 #' Create a Leontieff matrix from technology matrix after some basic error 
-#' handling. Most likely you will need this function as a step to invoke the 
-#' function to create its inverse: \code{\link{leontieff_inverse_create}}.
-#' @param technology_coefficients_matrix A technology coefficient matrix created
-#' by the \code{\link{input_coefficient_matrix_create}} or 
+#' handling. Most likely you will need this function as a step to invoke 
+#' the  function to create its inverse: 
+#' \code{\link{leontieff_inverse_create}}.
+#' @param technology_coefficients_matrix A technology coefficient 
+#' matrix created by the \code{\link{input_coefficient_matrix_create}} or 
 #' \code{\link{output_coefficient_matrix_create}}.
 #' @importFrom dplyr mutate_at mutate_if
+#' @family analytical object functions
 #' @return A Leontieff matrix of data.frame class. The column names are 
 #' ordered, and the row names are in the first, auxiliary metadata column.
 #' @examples 

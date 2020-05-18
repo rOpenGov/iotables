@@ -22,3 +22,4 @@ stopping a pipeline.
 This is an internal function to determine where to separate quadrants if
 necessary.
 }
+\keyword{internal}

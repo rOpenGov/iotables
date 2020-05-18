@@ -7,8 +7,8 @@
 forward_linkages(output_coefficient_matrix, digits = NULL)
 }
 \arguments{
-\item{output_coefficient_matrix}{An output coefficient matrix created with the 
-\code{\link{output_coefficient_matrix_create}} function.}
+\item{output_coefficient_matrix}{An output coefficient matrix created 
+with the \code{\link{output_coefficient_matrix_create}} function.}
 
 \item{digits}{Number of decimals for rounding, defaults to \code{NULL}.}
 }
@@ -31,3 +31,8 @@ de_out <- output_coefficient_matrix_create (
 forward_linkages ( output_coefficient_matrix = de_out, 
                    digits = 4 )
 }
+\seealso{
+Other interindustrial linkage functions: 
+\code{\link{backward_linkages}()}
+}
+\concept{interindustrial linkage functions}

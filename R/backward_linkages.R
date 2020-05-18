@@ -8,6 +8,7 @@
 #' data.frame class, following the column names of the Leontieff 
 #' inverse matrix. 
 #' @importFrom dplyr mutate_if
+#' @family interindustrial linkage functions
 #' @examples 
 #' de_coeff <- input_coefficient_matrix_create( iotable_get(), 
 #'                                              digits = 4 )

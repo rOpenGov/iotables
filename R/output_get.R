@@ -2,8 +2,12 @@
 #' 
 #' This is a wrapper function around the \code{\link{primary_input_get}} 
 #' function. 
-#' @param data_table A symmetric input-output table or use table retrieved by the  
-#' \code{\link{iotable_get}} function. 
+#' @param data_table A symmetric input-output table or use table retrieved 
+#' by the  
+#' \code{\link{iotable_get}} function.
+#' @return A data frame with the vector of multipliers and the an 
+#' auxiliary metadata column (for joining with other matrixes.)
+#' @family iotables processing functions
 #' @examples 
 #' output_get ( data_table = iotable_get () )
 #' @export 

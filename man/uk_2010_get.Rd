@@ -25,3 +25,4 @@ by Richard Wild.
 uk2010 <- uk_2010_get()
 }
 }
+\keyword{internal}

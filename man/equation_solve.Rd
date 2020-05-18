@@ -2,7 +2,7 @@
 % Please edit documentation in R/equation_solve.R
 \name{equation_solve}
 \alias{equation_solve}
-\title{Solve a basic equation}
+\title{Solve A Basic (Matrix) Equation}
 \usage{
 equation_solve(LHS = NULL, Im = NULL)
 }
@@ -12,6 +12,10 @@ industry or product names for matching, for example the employment coefficients.
 
 \item{Im}{A Leontieff-inverse with a key column containing the industry or 
 product names for matching.}
+}
+\value{
+A data.frame with auxiliary metadata to conform the symmetric
+input-output tables.
 }
 \description{
 The function matches to parts of the matrix equation, using the named

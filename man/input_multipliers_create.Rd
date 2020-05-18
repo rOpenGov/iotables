@@ -15,6 +15,10 @@ input_multipliers_create(input_requirements, inverse, digits = NULL)
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
 no rounding takes place.}
 }
+\value{
+A data frame with the vector of multipliers and the an 
+auxiliary metadata column (for joining with other matrixes.)
+}
 \description{
 The function creates the multipliers (direct + indirect effects).
 }
@@ -33,3 +37,8 @@ I_nl <- leontieff_inverse_create( input_coeff_nl )
 input_multipliers_create(input_requirements = compensation_indicator, 
                         inverse = I_nl)
 }
+\seealso{
+Other multiplier functions: 
+\code{\link{multiplier_create}()}
+}
+\concept{multiplier functions}

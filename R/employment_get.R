@@ -1,6 +1,7 @@
 #' Get employment data
 #'
-#' Download the employment data for a country and arrange it to the 64x64 SIOTS.
+#' Download the employment data for a country and arrange it to the 
+#' 64x64 SIOTS.
 #' Currently works only with product x product tables. 
 #' @param geo The country code. 
 #' @param year The year.  The average employment will be created for the given
@@ -21,8 +22,12 @@
 #' @importFrom dplyr filter select mutate left_join rename ungroup summarize
 #' @importFrom tidyr spread
 #' @importFrom eurostat get_eurostat
-#' @source Eurostat statistic \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+#' @source Eurostat statistic 
+#' \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
 #' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
+#' @return A data.frame with auxiliary metadata to conform the symmetric
+#' input-output tables.
+#' @family iotables import functions
 #' @examples
 #' \dontrun{
 #'  io_tables <- get_employment ( 

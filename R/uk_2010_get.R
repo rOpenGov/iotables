@@ -20,6 +20,7 @@
 #' \dontrun{
 #' uk2010 <- uk_2010_get()
 #' }
+#' @keywords internal
 
 uk_2010_get <- function ( path = NULL )  {
   

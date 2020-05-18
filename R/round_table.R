@@ -1,12 +1,13 @@
-#' Systematically round values in a table.
+#' Systematically Eound Values in a Table
 #' 
-#' This is an internal function to do the rounding on all numeric elements of
-#' the table.
-#' @param data_table A symmetric input-output table, a use table, a supply table,
-#' a margin or tax table.
+#' This is an internal function to do the rounding on all numeric elements 
+#' of the table.
+#' @param data_table A symmetric input-output table, or a use table, or a 
+#' supply table, or a margin or a tax table.
 #' @param digits Number of digits for rounding.
 #' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
+#' @keywords internal
 
 round_table <- function ( data_table, 
                           digits = NULL) {

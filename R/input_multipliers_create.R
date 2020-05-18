@@ -7,6 +7,9 @@
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
 #' @importFrom dplyr select one_of mutate_at
+#' @return A data frame with the vector of multipliers and the an 
+#' auxiliary metadata column (for joining with other matrixes.)
+#' @family multiplier functions
 #' @examples  
 #' nl <- netherlands_2006
 #'
