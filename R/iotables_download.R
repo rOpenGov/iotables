@@ -1,12 +1,18 @@
 #' Download input-output tables
 #'
 #' This function downloads standard input-output table files. Currently only Eurostat files are supported.
-#' You are not likely to use this function, because \code{\link{iotable_get}} will
-#' call this function if necessary and properly filter out an input-output table.
+#' You are not likely to use this function, because 
+#' \code{\link{iotable_get}} will
+#' call this function if necessary and properly filter
+#'  out an input-output table.
+#' 
 #' The only parameter is the Eurostat code of the table.
+#' 
 #' The data is downloaded in the \code{tempdir()}under the name the statistical product as an
 #' rds file. (For example: \code{naio_10_cp1750.rds})
+#' 
 #' The temporary directory is emptied at every normal R session exit.
+#' 
 #' To save the file for further use (which is necessary in analytical work because
 #' download times are long) set the  \code{download_directory} [see parameters]. 
 #' The function will make a copy of the rds file in this directory.
@@ -30,6 +36,11 @@
 #' try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists.
+#' @return A nested data frame. Each input-output table is in a separate 
+#' row of the nested output, where all the metadata are in columns, and the
+#' actual, tidy, ordered input-output table is in the data \code{data} column.
+#' The data is saved into the actual \code{tempdir()}, too, which is 
+#' emptied at the end of each R session.
 #' @importFrom dplyr filter select mutate left_join rename group_by
 #' @importFrom tidyr nest
 #' @importFrom eurostat get_eurostat label_eurostat
@@ -49,12 +60,12 @@ iotables_download <- function ( source = "naio_10_cp1700",
   time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
   indicator <- uk_row_lab <- uk_col_lab <- NULL
   
-  possible_download_sources <- c( "naio_10_cp1700", "naio_10_cp1750", 
+  possible_download_sources <- c( "naio_10_cp1700",  "naio_10_cp1750", 
                                   "naio_10_pyp1700", "naio_10_pyp1750",
-                                  "naio_10_cp15",   "naio_10_cp16",
-                                  "naio_10_cp1610", "naio_10_pyp1610", 
-                                  "naio_10_cp1620", "naio_10_pyp1620", 
-                                  "naio_10_cp1630", "naio_10_pyp1630", 
+                                  "naio_10_cp15",    "naio_10_cp16",
+                                  "naio_10_cp1610",  "naio_10_pyp1610", 
+                                  "naio_10_cp1620",  "naio_10_pyp1620", 
+                                  "naio_10_cp1630",  "naio_10_pyp1630", 
                                   "uk_2010")
   source <- tolower (source)
   if ( ! source %in%  possible_download_sources ) {
@@ -157,8 +168,16 @@ iotables_download <- function ( source = "naio_10_cp1700",
   if( !is.null(data_directory) ) {
     
     save_file_name <- file.path(data_directory, paste0(source, ".rds"))
-    saveRDS( downloaded_nested, file = save_file_name )
-    message ( "Saved the raw data of this table tpye in ",
+    message("Saving ", nrow(downloaded_nested), " input-output tables.")
+    saveRDS( downloaded_nested, file = save_file_name, version = 2 )
+    message ( "Saved the raw data of this table type in ",
+              save_file_name, "." )
+  } else {
+    save_file_name <- file.path(tempdir(), paste0(source, ".rds"))
+    message("Saving ", nrow(downloaded_nested), " input-output tables into the temporary directory\n", 
+            tempdir())
+    saveRDS( downloaded_nested, file = save_file_name , version=2)
+    message ( "Saved the raw data of this table type in temporary directory ",
               save_file_name, "." )
   }
   
