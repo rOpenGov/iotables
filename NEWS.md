@@ -131,4 +131,4 @@ turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit).
 
 # iotables 0.4.3
 * Generally improved documentation.
-* Better handling of temporary files in `tempdir()` for improved performance with very large source files, including the new exported function `iotables_read_tempdir()`.
+* Better handling of temporary files in `tempdir()` for improved performance with very large source files, including the new exported function `iotables_read_tempdir()` and `iotables_metadata_get()`.
