@@ -18,5 +18,5 @@
 #'   \item{GVA multiplier}{The imported GVA multipliers.}
 #'   \item{indicator}{Indicator names.}
 #' }
-#' @family Example data files
+#' @family Validation datasets
 "uk_test_results"

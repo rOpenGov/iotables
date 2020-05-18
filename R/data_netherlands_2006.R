@@ -27,6 +27,6 @@
 #'   \item{exports}{Simple aggregated exports}
 #'   \item{total_use}{Simple aggregated total use}              
 #' }
-#' @family Example data files
+#' @family Validation datasets
 "netherlands_2006"
 

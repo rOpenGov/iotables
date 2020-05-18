@@ -16,5 +16,5 @@
 #'   \item{prod_na}{The Eurostat-like key values for rows.}
 #'   \item{induse}{The Eurostat-like column names}
 #' }
-#' @family Example data files
+#' @family Metadata datasets
 "metadata_uk_2010"

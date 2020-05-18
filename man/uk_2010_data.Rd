@@ -29,10 +29,11 @@ data(uk_2010_data)
 \description{
 The Excel-imported UK data.
 }
-\keyword{UK}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{metadata,}
-\keyword{table,}
-\keyword{vocabulary,}
+\seealso{
+Other Validation datasets: 
+\code{\link{germany_1990}},
+\code{\link{netherlands_2006}},
+\code{\link{uk_test_results}}
+}
+\concept{Validation datasets}
+\keyword{datasets}

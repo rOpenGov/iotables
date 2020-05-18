@@ -8,6 +8,6 @@
 #'   \item{t_cols2}{Labelling of EU/DZS SIOTs.}
 #' }
 #' @usage data(croatia_employment_aggregation)
-#' @keywords data, datasets, input-output table, Croatia, metadata, employmnet
+#' @family Croatia 2010 datasets
 
 "croatia_employment_aggregation"

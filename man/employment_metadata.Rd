@@ -22,10 +22,10 @@ data(metadata)
 An arrangement of the Eurostat national accounts vocabulary to match with 
 employment statistics data.
 }
-\keyword{data,}
-\keyword{datasets,}
-\keyword{employment}
-\keyword{input-output}
-\keyword{metadata,}
-\keyword{table,}
-\keyword{vocabulary,}
+\seealso{
+Other Metadata datasets: 
+\code{\link{metadata_uk_2010}},
+\code{\link{metadata}}
+}
+\concept{Metadata datasets}
+\keyword{datasets}

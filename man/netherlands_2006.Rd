@@ -41,10 +41,10 @@ to resemble more the current Eurostat conventions and the main example
 dataset \code{\link{germany_1990}}.
 }
 \seealso{
-Other Example data files: 
+Other Validation datasets: 
 \code{\link{germany_1990}},
-\code{\link{metadata_uk_2010}},
+\code{\link{uk_2010_data}},
 \code{\link{uk_test_results}}
 }
-\concept{Example data files}
+\concept{Validation datasets}
 \keyword{datasets}

@@ -9,6 +9,5 @@
 #'   \item{employment}{Employment in the sector in Croatia, not in thousands!}
 #' }
 #' @usage data(croatia_employment_2013)
-#' @keywords data, datasets, Croatia, employmnet
-
+#' @family Croatia 2010 datasets
 "croatia_employment_2013"

@@ -12,6 +12,6 @@
 #'   \item{group}{Different from Eurostat tables, in thousand national currency units.}
 #'   \item{iotables_label}{Custom, machine_readable snake format variable names}                     
 #' }
-#' @keywords data, datasets, input-output table, metadata, vocabulary, employment
+#' @family Metadata datasets
 
 "employment_metadata"

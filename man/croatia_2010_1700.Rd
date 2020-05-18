@@ -33,10 +33,12 @@ data(croatia_2010_1700)
 In thousand kunas (T_NAC)
 }
 \seealso{
-Other Croatia data files: 
+Other Croatia 2010 datasets: 
 \code{\link{croatia_2010_1800}},
 \code{\link{croatia_2010_1900}},
+\code{\link{croatia_employment_2013}},
+\code{\link{croatia_employment_aggregation}},
 \code{\link{primary_inputs}}
 }
-\concept{Croatia data files}
+\concept{Croatia 2010 datasets}
 \keyword{datasets}

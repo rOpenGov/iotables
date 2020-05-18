@@ -35,10 +35,10 @@ The labels were slightly alterred to reflect the transition from the vocabulary
 of ESA95 to ESA2010 since the publication of the Manual.
 }
 \seealso{
-Other Example data files: 
-\code{\link{metadata_uk_2010}},
+Other Validation datasets: 
 \code{\link{netherlands_2006}},
+\code{\link{uk_2010_data}},
 \code{\link{uk_test_results}}
 }
-\concept{Example data files}
+\concept{Validation datasets}
 \keyword{datasets}

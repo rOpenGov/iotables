@@ -17,6 +17,6 @@
 #'   \item{values}{The numeric values of the variable}
 #'   \item{year}{Contant = 2010.}
 #' }
-#' @keywords data, datasets, input-output table, metadata, vocabulary, UK
+#' @family Validation datasets
 
 "uk_2010_data"

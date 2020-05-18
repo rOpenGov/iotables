@@ -24,9 +24,10 @@ data(metadata)
 An arrangement of the Eurostat national accounts vocabulary, used to correctly
 order wide format rows and columns from bulk long-form tables.
 }
-\keyword{data,}
-\keyword{datasets,}
-\keyword{input-output}
-\keyword{metadata,}
-\keyword{table,}
-\keyword{vocabulary}
+\seealso{
+Other Metadata datasets: 
+\code{\link{employment_metadata}},
+\code{\link{metadata_uk_2010}}
+}
+\concept{Metadata datasets}
+\keyword{datasets}

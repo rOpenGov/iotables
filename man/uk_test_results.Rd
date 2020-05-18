@@ -29,10 +29,10 @@ data(uk_test_results)
 The Excel-imported UK data.
 }
 \seealso{
-Other Example data files: 
+Other Validation datasets: 
 \code{\link{germany_1990}},
-\code{\link{metadata_uk_2010}},
-\code{\link{netherlands_2006}}
+\code{\link{netherlands_2006}},
+\code{\link{uk_2010_data}}
 }
-\concept{Example data files}
+\concept{Validation datasets}
 \keyword{datasets}

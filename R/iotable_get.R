@@ -62,6 +62,7 @@
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
 #' @importFrom utils data
+#' @family iotables import functions
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1990", 
 #'                  geo = 'DE', year = 1990, unit = "MIO_EUR", 

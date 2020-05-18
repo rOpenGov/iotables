@@ -21,5 +21,5 @@
 #'   \item{geo_lab}{ISO / Eurostat country name, Croatia.}
 #'   \item{time}{Date of the SIOT}  
 #'   } 
-#' @family Croatia data files
+#' @family Croatia 2010 datasets
 "croatia_2010_1800"

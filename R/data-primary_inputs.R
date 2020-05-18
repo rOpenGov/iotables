@@ -9,5 +9,5 @@
 #'   \item{indicator}{Human readable abbreviation}
 #' }
 #' @usage data("croatia_employment_aggregation")
-#' @family Croatia data files
+#' @family Croatia 2010 datasets
 "primary_inputs"

@@ -43,6 +43,7 @@
 #' @importFrom eurostat get_eurostat label_eurostat
 #' @importFrom stats setNames
 #' @importFrom lubridate year
+#' @family iotables import functions
 #' @examples
 #' \dontrun{
 #'  io_tables <- iotables_download ( source = "naio_10_cp1700" )

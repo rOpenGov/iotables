@@ -18,10 +18,13 @@ data(croatia_employment_aggregation)
 Aggregate Croatian detailed employment statistics into the Croatian (EU standard)
 Symmetric input-output table format.
 }
-\keyword{Croatia,}
-\keyword{data,}
-\keyword{datasets,}
-\keyword{employmnet}
-\keyword{input-output}
-\keyword{metadata,}
-\keyword{table,}
+\seealso{
+Other Croatia 2010 datasets: 
+\code{\link{croatia_2010_1700}},
+\code{\link{croatia_2010_1800}},
+\code{\link{croatia_2010_1900}},
+\code{\link{croatia_employment_2013}},
+\code{\link{primary_inputs}}
+}
+\concept{Croatia 2010 datasets}
+\keyword{datasets}

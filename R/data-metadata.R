@@ -14,6 +14,6 @@
 #'   \item{numeric_label}{ ordering from quadrant, account_group, digit_1, digit_2}     
 #'   \item{iotables_label}{Custom, machine_readable snake format variable names}                     
 #' }
-#' @keywords data, datasets, input-output table, metadata, vocabulary
+#' @family Metadata datasets
 
 "metadata"

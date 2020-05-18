@@ -20,10 +20,12 @@ data("croatia_employment_aggregation")
 Only currently used primary inputs. Abbreviations for filtering.
 }
 \seealso{
-Other Croatia data files: 
+Other Croatia 2010 datasets: 
 \code{\link{croatia_2010_1700}},
 \code{\link{croatia_2010_1800}},
-\code{\link{croatia_2010_1900}}
+\code{\link{croatia_2010_1900}},
+\code{\link{croatia_employment_2013}},
+\code{\link{croatia_employment_aggregation}}
 }
-\concept{Croatia data files}
+\concept{Croatia 2010 datasets}
 \keyword{datasets}

@@ -28,6 +28,7 @@
 #' @return A data frame, which contains the metadata of all available 
 #' input-output tables from a specific \code{source}.
 #' @importFrom tidyr unnest
+#' @family iotables import functions
 #' @examples
 #' iotables_metadata_get ( source = "naio_10_cp1700" )
 #' @export

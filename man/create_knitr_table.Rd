@@ -74,4 +74,5 @@ foo = data.frame (
   indicator_1 = c(100,105,95), 
   indicator_2 = c(102,104,76)
   )
+  @keywords internal
 }

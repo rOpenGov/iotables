@@ -27,10 +27,9 @@ data(uk_2010_data)
 The Excel-imported UK data.
 }
 \seealso{
-Other Example data files: 
-\code{\link{germany_1990}},
-\code{\link{netherlands_2006}},
-\code{\link{uk_test_results}}
+Other Metadata datasets: 
+\code{\link{employment_metadata}},
+\code{\link{metadata}}
 }
-\concept{Example data files}
+\concept{Metadata datasets}
 \keyword{datasets}
