@@ -88,7 +88,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   ## Parameter exception handling -------------------------------------
   if (is.null(source)){ stop ("Parameter 'source' is a mandatory input.")}
   if (is.null(labelled_io_data) & is.null(geo)) stop ("The 'geo' parameter must be a valid Eurostat 'geo' code")
-  if (is.null(labelled_io_data) & !source %in% c("germany_2010", "uk_2010")) {
+  if (is.null(labelled_io_data) & !source %in% c("germany_1990", "uk_2010")) {
     validate_source(source)
   }
   
