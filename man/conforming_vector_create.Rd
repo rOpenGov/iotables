@@ -10,6 +10,10 @@ conforming_vector_create(data_table)
 \item{data_table}{A use table, Leontieff-matrix, Leontieff-inverse,
 a coefficient matrix or other named matrix / vector.}
 }
+\value{
+A wide-format conforming vector of data frame class, 
+with column names matching the metadata of the \code{data_table}.
+}
 \description{
 This helper function creates you a named vector that conforms your
 analytical objects, such as the use table, the Leontieff-matrix, 
