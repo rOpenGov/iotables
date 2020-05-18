@@ -5,3 +5,4 @@ CRAN-RELEASE
 .Ruserdata
 inst/doc
 .RDataTmp
+not_included/
