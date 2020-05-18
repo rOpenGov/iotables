@@ -89,3 +89,10 @@ germany_table <- iotable_get( source = "germany_1990",
                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
                  labelling  = "iotables" )
 }
+\seealso{
+Other iotables import functions: 
+\code{\link{iotables_download}()},
+\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_read_tempdir}()}
+}
+\concept{iotables import functions}

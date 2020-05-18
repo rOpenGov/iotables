@@ -62,3 +62,10 @@ The function will make a copy of the rds file in this directory.
  io_tables <- iotables_download ( source = "naio_10_cp1700" )
  }
 }
+\seealso{
+Other iotables import functions: 
+\code{\link{iotable_get}()},
+\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_read_tempdir}()}
+}
+\concept{iotables import functions}

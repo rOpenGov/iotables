@@ -6,7 +6,7 @@
 #' a part of rOpenGov <http://ropengov.github.io/> for 
 #' open source open government initiatives.
 
-#' @section iotables import functions
+#' @section iotables import functions:
 #' The iotables import function help downloading and pre-processing the
 #' Eurostat symmetric input-output tables and related tables.
 #' 
