@@ -12,6 +12,11 @@ forward_linkages(output_coefficient_matrix, digits = NULL)
 
 \item{digits}{Number of decimals for rounding, defaults to \code{NULL}.}
 }
+\value{
+The vector of industry (product) forward linkages in a 
+long-form data.frame, containing the metadata column of the the row
+names from the \code{output_coefficient_matrix}.
+}
 \description{
 Forward linkages as defined by the Eurostat Manual of Supply, Use and
 Input-Output Tables (see p506-507.)

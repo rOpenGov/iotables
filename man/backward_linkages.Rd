@@ -10,14 +10,18 @@ backward_linkages(Im)
 \item{Im}{A Leontieff inverse matrix created by the
 \code{\link{leontieff_inverse_create}} function.}
 }
+\value{
+The vector of industry (product) backward linkages in a wide
+data.frame class, following the column names of the Leontieff 
+inverse matrix.
+}
 \description{
-Backward linkages as defined by the Eurostat Manual of Supply, Use and Input-Output
-Tables (see p506-507.)
+Backward linkages as defined by the Eurostat Manual of Supply, Use and
+Input-Output Tables (see p506-507.)
 }
 \examples{
-de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
-
+de_coeff <- input_coefficient_matrix_create( iotable_get(), 
+                                             digits = 4 )
 I <- leontieff_inverse_create (de_coeff)
-backward_linkages ( I )
-
+backward_linkages (I)
 }

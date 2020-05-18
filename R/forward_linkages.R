@@ -6,6 +6,9 @@
 #' \code{\link{output_coefficient_matrix_create}} function. 
 #' @param digits Number of decimals for rounding, defaults to \code{NULL}.
 #' @importFrom dplyr mutate_if
+#' @return The vector of industry (product) forward linkages in a 
+#' long-form data.frame, containing the metadata column of the the row
+#' names from the \code{output_coefficient_matrix}.
 #' @examples 
 #' data_table = iotable_get()
 #' 
