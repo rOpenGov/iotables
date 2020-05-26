@@ -34,7 +34,22 @@ r_packages:
   - purrr
   - rmarkdown
   - knitr
-  - usethis 
+  - usethis
+  - forcats
+  - plyr
+  - readxl
+  - tibble
+  - kableExtra
+  - sp
+  - sf
+  - stringi
+  - stringr
+  - classInt
+  - readr
+  - jsonlite
+  - countrycode
+  - broom
+  - RColorBrewer
   
 r_github_packages:
   - jimhester/covr

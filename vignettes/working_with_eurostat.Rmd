@@ -20,7 +20,7 @@ require(dplyr)
 
 Symmetric input-output tables and their auxiliary tables are the most complex, structured statistical products that exit, because they contain relationships among 60x60 industry, the supply and the use of the GDP / GNP, and the income disturbing, trade and transport margins and tax receipts from these industries.
 
-The Eurostat website contains the symmetric input-output data in long form.  Working with this data requires a knowledge of the Eurostat SNA vocabulary to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle. 
+The Eurostat website contains the symmetric input-output data in long form.  Working with this data requires a knowledge of the [Eurostat SNA vocabulary](https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view) to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle. 
 
 Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with "real-life" data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on `product x product`  type SIOTs, because most member states use them. The functions work with `industry x industry` SIOTs, but further vocabulary exception may show up in their use. Please report these issues on [github](https://github.com/rOpenGov/iotables/issues).
 

@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=TRUE}
+```{r setup, include=TRUE, message=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -54,7 +54,7 @@ The `input_coefficient_matrix_create()` function relies on the following equatio
 It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero. 
 
 
-```{r inputcoeff, echo=FALSE}
+```{r inputcoeff, echo=TRUE}
 de_input_coeff <- input_coefficient_matrix_create( 
      data_table = data_table, 
      digits = 4)

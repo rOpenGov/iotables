@@ -83,7 +83,7 @@
       <h1 data-toc-skip>Germany 1990</h1>
                         <h4 class="author">Daniel Antal, based on the work of Jorg Beutel</h4>
             
-            <h4 class="date">2020-05-18</h4>
+            <h4 class="date">2020-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/germany_1990.Rmd"><code>vignettes/germany_1990.Rmd</code></a></small>
       <div class="hidden name"><code>germany_1990.Rmd</code></div>
@@ -98,23 +98,13 @@
 )
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">iotables</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">dplyr</span>); <span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">tidyr</span>)</pre></body></html></div>
-<pre><code>## Loading required package: dplyr</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre><code>## Loading required package: tidyr</code></pre>
 <div id="germany-sample-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#germany-sample-files" class="anchor"></a>Germany sample files</h2>
 <p>The Germany example is used to test the code of the package. It follows the examples in <a href="http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0">Eurostat Manual of Supply, Use and Input-Output Tables</a>. by Jörg Beutel (Eurostat Manual).</p>
 <p>The <code>germany_1990</code> dataset is a simplified 6x6 sized SIOT taken from the Eurostat Manual (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.</p>
 <p>The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the <code>germany_1990</code> dataset and the Manual should cause no misunderstandings.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">data_table</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>( <span class="kw">labelling</span> <span class="kw">=</span> <span class="st">"iotables"</span> )
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">data_table</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>( <span class="kw">labelling</span> <span class="kw">=</span> <span class="st">"iotables"</span> )
 <span class="no">input_flow</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_flow_get.html">input_flow_get</a></span> (
                   <span class="kw">data_table</span> <span class="kw">=</span> <span class="no">data_table</span>,
                   <span class="kw">households</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
@@ -139,10 +129,23 @@
 <span class="math inline">\(a_{ij}\)</span> = <span class="math inline">\(X_{ij}\)</span> / <span class="math inline">\(x_j\)</span> [recap: (43) is the same]</li>
 </ol>
 <p>It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.</p>
-<pre><code>#&gt;        iotables_row agriculture_group industry_group
-#&gt; 1 agriculture_group            0.0258         0.0236
-#&gt; 2    industry_group            0.1806         0.2822
-#&gt; 3      construction            0.0097         0.0068</code></pre>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>(
+     <span class="kw">data_table</span> <span class="kw">=</span> <span class="no">data_table</span>,
+     <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+
+<span class="co">## which is equivalent to:</span>
+
+<span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>( <span class="no">data_table</span>,
+                             <span class="kw">total</span> <span class="kw">=</span> <span class="st">"output"</span>,
+                             <span class="kw">return_part</span> <span class="kw">=</span> <span class="st">"products"</span>,
+                             <span class="kw">households</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
+                             <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> ( <span class="no">de_input_coeff</span>[<span class="fl">1</span>:<span class="fl">3</span>, <span class="fl">1</span>:<span class="fl">3</span>])
+<span class="co">#&gt;        iotables_row agriculture_group industry_group</span>
+<span class="co">#&gt; 1 agriculture_group            0.0258         0.0236</span>
+<span class="co">#&gt; 2    industry_group            0.1806         0.2822</span>
+<span class="co">#&gt; 3      construction            0.0097         0.0068</span></pre></body></html></div>
 <p>Similarly, the output coefficient matrix is the following:</p>
 <pre><code>#&gt;        iotables_row agriculture_group industry_group
 #&gt; 1 agriculture_group            0.0258         0.5803
@@ -155,7 +158,7 @@
 </ol>
 <p>The Leontieff matrix is defined as (I-A) and it is created with the <code><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create()</a></code> function.</p>
 <p>The Leontieff inverse is (I-A)<sup>-1</sup> and it is created with the <code><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create()</a></code> function from the Leontieff-matrix.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">L_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create</a></span> ( <span class="kw">technology_coefficients_matrix</span> <span class="kw">=</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">L_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create</a></span> ( <span class="kw">technology_coefficients_matrix</span> <span class="kw">=</span>
                                  <span class="no">de_input_coeff</span> )
 <span class="no">I_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span>(<span class="no">de_input_coeff</span>)
 <span class="no">I_de_4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span>(<span class="no">de_input_coeff</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
@@ -183,7 +186,7 @@
 <span class="math inline">\(a_{ij}\)</span> = <span class="math inline">\(z_{ij}\)</span> / <span class="math inline">\(x_j\)</span> [technical input coefficients]</li>
 </ol>
 <p>The helper function <code><a href="../reference/primary_input_get.html">primary_input_get()</a></code> selects a row from the SIOT and brings it to a conforming form. The <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> creates the vector of technical input coefficients.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">de_emp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>,
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">de_emp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>,
                               <span class="kw">primary_input</span> <span class="kw">=</span> <span class="st">"employment_domestic_total"</span> )
 
 <span class="no">de_emp_indicator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> (
@@ -206,7 +209,7 @@
 <h3 class="hasAnchor">
 <a href="#creating-income-indicators" class="anchor"></a>Creating income indicators</h3>
 <p>The input coefficients for value added are created with <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code>.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">de_gva</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>,
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">de_gva</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>,
                               <span class="kw">primary_input</span> <span class="kw">=</span> <span class="st">"gva"</span>)
 
 <span class="no">de_gva_indicator</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span>(
@@ -227,7 +230,7 @@
 <span class="math inline">\(w_{ij}\)</span> = <span class="math inline">\(W_{j}\)</span> / <span class="math inline">\(x_j\)</span> [input coefficients for value added]</li>
 </ol>
 <p>You can create a matrix of input indicators, or direct effects on (final) demand with <code>direct_supply_effects_create()</code>. The function by default creates input requirements for final demand. With the code below it re-creates the Table 15.14 of the Eurostat manual.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">direct_effects_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>(
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">direct_effects_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>(
   <span class="kw">data_table</span>  <span class="kw">=</span> <span class="no">data_table</span>,
   <span class="kw">total</span>       <span class="kw">=</span> <span class="st">'output'</span>,
   <span class="kw">return_part</span> <span class="kw">=</span> <span class="st">'primary_inputs'</span>)
@@ -386,7 +389,7 @@ consumption_fixed_capital
 <p>You can check these values against the Table 15.16 of the Eurostat Manual on page 501 (row 10).</p>
 </blockquote>
 <p>You can recreate the whole matrix, when the data data permits, with <code><a href="../reference/input_multipliers_create.html">input_multipliers_create()</a></code> as shown here. Alternatively, you can create your own custom multipliers with <code><a href="../reference/multiplier_create.html">multiplier_create()</a></code> as shown in the following example.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">input_reqr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>(
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">input_reqr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>(
     <span class="kw">data_table</span>  <span class="kw">=</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> (),
     <span class="kw">total</span>       <span class="kw">=</span> <span class="st">'output'</span>,
     <span class="kw">return_part</span> <span class="kw">=</span> <span class="st">'primary_inputs'</span>)
@@ -777,7 +780,7 @@ employment_domestic_total_multiplier
 </ol>
 <p>The <code><a href="../reference/multiplier_create.html">multiplier_create()</a></code> function performs the matrix multiplication, after handling many exceptions and problems with real-life data, such as different missing columns and rows in the national variations of the standard European table.</p>
 <p>Please send a bug report on <a href="https://github.com/rOpenGov/iotables/issues">Github</a> if you run into further real-life problems.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">de_emp_indicator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> (
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">de_emp_indicator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> (
   <span class="kw">data_table</span> <span class="kw">=</span> <span class="no">data_table</span>,
   <span class="kw">input</span> <span class="kw">=</span> <span class="st">'employment_domestic_total'</span>)
 
@@ -809,7 +812,7 @@ employment_domestic_total_multiplier
 <span class="math inline">\(b_{ij}\)</span> = <span class="math inline">\(X_{ij}\)</span> / <span class="math inline">\(x_i\)</span> [also (45) output coefficients for products / intermediates].</li>
 </ol>
 <p><span class="math inline">\(x_i\)</span>: output of sector i</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>(
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>(
                          <span class="kw">data_table</span> <span class="kw">=</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>(),
                          <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
 
@@ -911,7 +914,7 @@ other_services_group
 <div id="backward-linkages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#backward-linkages" class="anchor"></a>Backward linkages</h3>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">de_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>( <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>(), <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">de_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>( <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>(), <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
 <span class="no">I_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span> ( <span class="no">de_coeff</span> )
 
 <span class="no">de_bw</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/backward_linkages.html">backward_linkages</a></span>(<span class="no">I_de</span>)
@@ -932,7 +935,7 @@ other_services_group
 <h3 class="hasAnchor">
 <a href="#forward-linkages" class="anchor"></a>Forward linkages</h3>
 <p>Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">de_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span> (
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">de_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span> (
   <span class="no">data_table</span>, <span class="st">"final_demand"</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>
   )
 

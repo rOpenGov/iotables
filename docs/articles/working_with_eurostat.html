@@ -83,7 +83,7 @@
       <h1 data-toc-skip>Working With Eurostat Data</h1>
                         <h4 class="author">Daniel Antal, CFA</h4>
             
-            <h4 class="date">2020-05-18</h4>
+            <h4 class="date">2020-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/working_with_eurostat.Rmd"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
       <div class="hidden name"><code>working_with_eurostat.Rmd</code></div>
@@ -93,7 +93,7 @@
     
     
 <p>Symmetric input-output tables and their auxiliary tables are the most complex, structured statistical products that exit, because they contain relationships among 60x60 industry, the supply and the use of the GDP / GNP, and the income disturbing, trade and transport margins and tax receipts from these industries.</p>
-<p>The Eurostat website contains the symmetric input-output data in long form. Working with this data requires a knowledge of the Eurostat SNA vocabulary to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle.</p>
+<p>The Eurostat website contains the symmetric input-output data in long form. Working with this data requires a knowledge of the <a href="https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view">Eurostat SNA vocabulary</a> to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle.</p>
 <p>Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with “real-life” data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary. Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on <code>product x product</code> type SIOTs, because most member states use them. The functions work with <code>industry x industry</code> SIOTs, but further vocabulary exception may show up in their use. Please report these issues on <a href="https://github.com/rOpenGov/iotables/issues">github</a>.</p>
 <p>You are most likely to work with the product x product tables. For the availability of other data see <code><a href="../reference/iotables_download.html">?iotables_download</a></code>.</p>
 <p>The analytical functions are presented at greater detail in the <em>Germany 1990</em> vignette. The numbering of the equations refers to the <a href="http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the <code>ESA95</code> standards. Currently Eurostat uses the <code>ESA2010</code> definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.</p>
