@@ -134,3 +134,7 @@ turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit).
 * Better handling of temporary files in `tempdir()` for improved performance with very large source files, including the new exported function `iotables_read_tempdir()` and `iotables_metadata_get()`.
 * Following changes in dependencies `dplyr` and `tidyr`.
 * [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html) is added to the github repo.
+* Released on CRAN.
+
+# iotables 0.4.4
+* Very small documentation changes.
