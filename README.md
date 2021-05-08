@@ -1,12 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+    ## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+    ## logical.return = TRUE, : there is no package called 'iotables'
+
 # iotables <img src="man/figures/logo.png" align="right" />
 
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
 
 ![iotables](man/figures/logo20.png)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.4.3-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.4.4-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
@@ -84,17 +88,17 @@ a lot of filtering is needed to start working with it.
 
 Currently the following Eurostat SIOTs can be used:
 
-  - product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`;
+-   product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`;
 
-  - industry x industry SIOTs `naio_10_cp1750` or`naio_10_pyp1750`;
+-   industry x industry SIOTs `naio_10_cp1750` or`naio_10_pyp1750`;
 
-  - use tables at basic prices `naio_10_cp1620` or `naio_10_pyp1610`;
+-   use tables at basic prices `naio_10_cp1620` or `naio_10_pyp1610`;
 
-  - trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`;
+-   trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`;
 
-  - net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
+-   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
 
-  - Supply table at basic prices incl. transformation into purchasers’
+-   Supply table at basic prices incl. transformation into purchasers’
     prices (naio\_10\_cp15) and Use table at purchasers’ prices
     (naio\_10\_cp16).
 
@@ -120,8 +124,8 @@ Data](http://iotables.ceemid.eu/articles/working_with_eurostat.html)
 vignette shows how you can download, pre-process and use real data from
 Eurostat.
 
-The [United Kingdom Input-Output Analytical
-Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html)
+The [United Kingdom Input-Output Analytical Tables
+2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html)
 are used for testing the `iotables` package, because they are
 well-documented and detailed, organized data is available with them.
 These calculations can be followed in the [United Kingdom Input-Output
