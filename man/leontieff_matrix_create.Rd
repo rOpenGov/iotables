@@ -28,7 +28,8 @@ tm <- input_flow_get (
 L <- leontieff_matrix_create( technology_coefficients_matrix = tm )
 }
 \seealso{
-Other analytical object functions: 
-\code{\link{input_flow_get}()}
+Other analytic object functions: 
+\code{\link{input_flow_get}()},
+\code{\link{leontieff_inverse_create}()}
 }
-\concept{analytical object functions}
+\concept{analytic object functions}

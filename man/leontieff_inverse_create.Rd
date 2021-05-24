@@ -23,3 +23,9 @@ tm <- input_flow_get (
   households = FALSE)
 I <- leontieff_inverse_create( technology_coefficients_matrix = tm )
 }
+\seealso{
+Other analytic object functions: 
+\code{\link{input_flow_get}()},
+\code{\link{leontieff_matrix_create}()}
+}
+\concept{analytic object functions}

@@ -28,7 +28,7 @@ digits. Default is \code{NULL} when no rounding is applied.}
 
 \item{remove_empty}{Defaults to \code{TRUE}. If you want to keep empty 
 primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-removed to avoid division by zero error in the analytical functions.}
+removed to avoid division by zero error in the analytic functions.}
 
 \item{households}{Defaults to \code{NULL}. Household column can be added 
 with \code{TRUE}.}
@@ -54,7 +54,8 @@ coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"),
                             digits = 4 )
 }
 \references{
-See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
+See 
+\href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 for explanation on the use of the Coefficient matrix.
 }
 \seealso{

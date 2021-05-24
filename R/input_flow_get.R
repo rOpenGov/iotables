@@ -7,10 +7,10 @@
 #' final household expenditure is added to the input flow table.
 #' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-#' removed to avoid division by zero error in the analytical functions.
+#' removed to avoid division by zero error in the analytic functions.
 #' @importFrom dplyr mutate_if left_join select
 #' @return A data flow matrix in a labelled data frame.
-#' @family analytical object functions
+#' @family analytic object functions
 #' @examples 
 #' data_table <- iotable_get()
 #' input_flow <- input_flow_get( data_table = data_table, 
@@ -23,9 +23,6 @@ input_flow_get <- function ( data_table,
                              empty_remove = FALSE,
                              households = TRUE ) {  
   
-  ##Initialize variables ------------
-   . <-  NULL #non-standard evaluation creates a varning in build. 
-  
   data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
   
   #Remove empty columns and rows
@@ -33,12 +30,14 @@ input_flow_get <- function ( data_table,
   
   last_column <- quadrant_separator_find ( data_table )
   
-  ###Addding households, if requested----------------------------------------  
+  ## Adding households, if requested----------------------------------------  
   if (households == TRUE) {
     household_column <- household_column_get( data_table )
     quadrant <- data_table [, 1:last_column]
-    input_flow_table <- dplyr::left_join ( quadrant, household_column, 
-                               by = names(quadrant)[1])
+    input_flow_table <- left_join (
+            quadrant, household_column, 
+            by = names(quadrant)[1]
+            )
   }  else {
     input_flow_table <- dplyr::select ( data_table, 1:last_column)
   }

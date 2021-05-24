@@ -3,14 +3,13 @@
 \docType{package}
 \name{iotables}
 \alias{iotables}
-\title{iotables: Working Programmatically With Symmetric Input-Output Tables}
-\description{
-Pre-processing and basic analytical tasks related to working with 
+\title{iotables
+
+Pre-processing and basic analytic tasks related to working with 
 Eurostat's symmetric input-output tables and provide basic 
 input-output economics calculations. The package is 
 a part of rOpenGov <http://ropengov.github.io/> for 
-open source open government initiatives.
-}
+open source open government initiatives.}
 \section{iotables import functions}{
 
 The iotables import function help downloading and pre-processing the
@@ -40,12 +39,11 @@ the input-output table. \code{\link{output_get}} is a wrapper function around th
 \code{\link{total_tax_add}} adds taxes to an input-output table.
 }
 
-\section{analytical object functions}{
+\section{analytic object functions}{
  
-\code{\link{input_flow_get}} returns the use (input flow) matrix.
-
+\code{\link{input_flow_get}} returns the use (input flow) matrix; 
 \code{\link{leontieff_matrix_create}} and the 
-\code{\link{leontieff_inverse_create}} to create the respective analytical
+\code{\link{leontieff_inverse_create}} to create the respective analytic
 matrixes.
 }
 

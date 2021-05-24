@@ -33,7 +33,8 @@ AAL <- L_de %>%
   dplyr::select (  agriculture_group ) %>%
   unlist () %>%  as.numeric(.)
 
-#test against 15.9 p 487
+# Test are against the Eurostat manual
+# test against 15.9 p 487
 
 TBI <- I_de %>%
   dplyr::filter ( iotables_row == "trade_group") %>%
@@ -41,7 +42,7 @@ TBI <- I_de %>%
   unlist () %>%
   as.numeric(.)
 
-#test against 15.10 p 488
+# test against 15.10 p 488
 
 test_that("Leontieff matrix values are correct", {
   expect_equal(AAL[1],expected= 0.9742, tolerance = .0001)

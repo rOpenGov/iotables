@@ -1,6 +1,6 @@
-#' iotables: Working Programmatically With Symmetric Input-Output Tables
+#' @title iotables
 #'
-#' Pre-processing and basic analytical tasks related to working with 
+#' Pre-processing and basic analytic tasks related to working with 
 #' Eurostat's symmetric input-output tables and provide basic 
 #' input-output economics calculations. The package is 
 #' a part of rOpenGov <http://ropengov.github.io/> for 
@@ -32,11 +32,10 @@
 #' 
 #' \code{\link{total_tax_add}} adds taxes to an input-output table.
 #'
-#' @section analytical object functions: 
-#' \code{\link{input_flow_get}} returns the use (input flow) matrix.
-#' 
+#' @section analytic object functions: 
+#' \code{\link{input_flow_get}} returns the use (input flow) matrix; 
 #' \code{\link{leontieff_matrix_create}} and the 
-#' \code{\link{leontieff_inverse_create}} to create the respective analytical
+#' \code{\link{leontieff_inverse_create}} to create the respective analytic
 #' matrixes.
 #' 
 #' @section indicator functions:
