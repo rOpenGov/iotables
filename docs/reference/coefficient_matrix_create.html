@@ -83,7 +83,7 @@ in your table.#'" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@ in your table.#'" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -108,7 +108,7 @@ in your table.#'" />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rOpenGov/iotables/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -137,14 +137,14 @@ this to total supply or other total aggregate if it exists
 in your table.#'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coefficient_matrix_create</span>(
-  <span class='no'>data_table</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='st'>"output"</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>remove_empty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>households</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>return_part</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>coefficient_matrix_create</span><span class='op'>(</span>
+  <span class='va'>data_table</span>,
+  total <span class='op'>=</span> <span class='st'>"output"</span>,
+  digits <span class='op'>=</span> <span class='cn'>NULL</span>,
+  remove_empty <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  households <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  return_part <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,7 +171,7 @@ digits. Default is <code>NULL</code> when no rounding is applied.</p></td>
       <th>remove_empty</th>
       <td><p>Defaults to <code>TRUE</code>. If you want to keep empty 
 primary input rows, choose <code>FALSE</code>. Empty product/industry rows are always 
-removed to avoid division by zero error in the analytical functions.</p></td>
+removed to avoid division by zero error in the analytic functions.</p></td>
     </tr>
     <tr>
       <th>households</th>
@@ -193,7 +193,8 @@ proportional primary inputs.</p></td>
 with a key column. Optionally the results are rounded to given <code>digits</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>See <a href='https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html'>United Kingdom Input-Output Analytical Tables 2010</a>
+    <p>See 
+<a href='https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html'>United Kingdom Input-Output Analytical Tables 2010</a>
 for explanation on the use of the Coefficient matrix.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -202,9 +203,10 @@ for explanation on the use of the Coefficient matrix.</p>
 <code><a href='input_indicator_create.html'>input_indicator_create</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>coefficient_matrix_create</span> ( <span class='kw'>data_table</span> <span class='kw'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span> ( <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"germany_1990"</span>),
-                            <span class='kw'>total</span> <span class='kw'>=</span> <span class='st'>"output"</span>,
-                            <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>4</span> )</div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
+    <pre class="examples"><div class='input'><span class='fu'>coefficient_matrix_create</span> <span class='op'>(</span> data_table <span class='op'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span> <span class='op'>(</span> source <span class='op'>=</span> <span class='st'>"germany_1990"</span><span class='op'>)</span>, 
+                            total <span class='op'>=</span> <span class='st'>"output"</span>, 
+                            digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
 #&gt; 1          agriculture_group            0.0258         0.0236       0.0000
 #&gt; 2             industry_group            0.1806         0.2822       0.2613
 #&gt; 3               construction            0.0097         0.0068       0.0158
@@ -259,7 +261,7 @@ for explanation on the use of the Coefficient matrix.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

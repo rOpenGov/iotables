@@ -81,7 +81,7 @@ Input-Output Tables (see p506-507.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ Input-Output Tables (see p506-507.)" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@ Input-Output Tables (see p506-507.)" />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rOpenGov/iotables/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,7 +133,7 @@ Input-Output Tables (see p506-507.)" />
 Input-Output Tables (see p506-507.)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>backward_linkages</span>(<span class='no'>Im</span>)</pre>
+    <pre class="usage"><span class='fu'>backward_linkages</span><span class='op'>(</span><span class='va'>Im</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,10 +156,21 @@ inverse matrix.</p>
 <code><a href='forward_linkages.html'>forward_linkages</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>de_coeff</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span>( <span class='fu'><a href='iotable_get.html'>iotable_get</a></span>(),
-                                             <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>4</span> )
-<span class='no'>I</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span> (<span class='no'>de_coeff</span>)
-<span class='fu'>backward_linkages</span> (<span class='no'>I</span>)</div><div class='output co'>#&gt;        iotables_row agriculture_group industry_group construction trade_group
+    <pre class="examples"><div class='input'><span class='va'>de_coeff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span><span class='op'>(</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span>, 
+                                             digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `funs()` was deprecated in dplyr 0.8.0.</span>
+#&gt; <span class='warning'>Please use a list of either functions or lambdas: </span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Simple named list: </span>
+#&gt; <span class='warning'>  list(mean = mean, median = median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Auto named with `tibble::lst()`: </span>
+#&gt; <span class='warning'>  tibble::lst(mean, median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Using lambdas</span>
+#&gt; <span class='warning'>  list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span></div><div class='input'><span class='va'>I</span> <span class='op'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span> <span class='op'>(</span><span class='va'>de_coeff</span><span class='op'>)</span>
+<span class='fu'>backward_linkages</span> <span class='op'>(</span><span class='va'>I</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;        iotables_row agriculture_group industry_group construction trade_group
 #&gt; 1 backward linkages          1.704922       1.841421     1.813747    1.603712
 #&gt;   business_services_group other_services_group
 #&gt; 1                1.594974             1.378375</div></pre>
@@ -178,7 +189,7 @@ inverse matrix.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
