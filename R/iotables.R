@@ -69,13 +69,13 @@
 #' 
 #' @section Metadata datasets:
 #' Data files that contain descriptive metadata for a correct reproduction
-#' of the symmetric input-output tables.  The analytical functions use 
+#' of the symmetric input-output tables.  The analytic functions use 
 #' matrix equations that require a precise column and row order for each
 #' table.
 #' 
 #' @section Validation datasets:
 #' Data files that replicate published input-output tables with analysis.
-#' These files are used to validate the correct working of the analytical
+#' These files are used to validate the correct working of the analytic
 #' functions.
 #'
 #' @section Croatia data files:
