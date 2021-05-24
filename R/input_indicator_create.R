@@ -31,7 +31,7 @@ input_indicator_create <- function ( data_table,
                                      indicator_names = NULL) { 
   
   data_table <- data_table %>% 
-    dplyr::mutate_if ( is.factor, as.character ) 
+    mutate_if ( is.factor, as.character ) 
   
   cm <- coefficient_matrix_create( data_table = data_table, 
                                    households = households )

@@ -40,9 +40,6 @@ leontieff_matrix_create <- function ( technology_coefficients_matrix ) {
   
   IminusA <- diag( nrow(Tm) ) - Tm
   
-  sapply(IminusA, function(x) sum(is.nan(x)))
-  
-  
   if ( sum(vapply(IminusA, function(x) sum(is.nan(x)), numeric(1))) > 0 ) {
     warning ("Warning: There are invalid elements in the Leontieff-matrix.")
   }
