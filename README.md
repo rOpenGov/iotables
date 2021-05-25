@@ -1,9 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-    ## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
-    ## logical.return = TRUE, : there is no package called 'iotables'
-
 # iotables <img src="man/figures/logo.png" align="right" />
 
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
@@ -132,6 +129,11 @@ These calculations can be followed in the [United Kingdom Input-Output
 Analytical
 Tables](http://iotables.ceemid.eu/articles/united_kingdom_2010.html)
 vignette.
+
+## Contributors
+
+Thanks for \[@KKulma\](<https://github.com/KKulma/>) for setting up new
+and improved continuous integration.
 
 ## Code of Conduct
 

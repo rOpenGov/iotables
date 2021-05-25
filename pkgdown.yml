@@ -8,11 +8,11 @@ articles:
 
 authors:
   name: Daniel Antal, CFA
-    href: "https://danielantal.eu"
+    href: "https://reprex.nl/authors/daniel_antal/"
 
-url: http://iotables.ceemid.eu
+url: http://iotables.dataobservatory.eu
 
 home:
   links:
-  - text: iotables.ceemid.eu
-    href: http://iotables.ceemid.eu
+  - text: http://iotables.dataobservatory.eu
+    href: http://iotables.dataobservatory.eu

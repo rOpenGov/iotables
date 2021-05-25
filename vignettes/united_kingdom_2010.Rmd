@@ -4,7 +4,7 @@ author: "Daniel Antal, based on the work edited by Richard Wild"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{United Kingdom}
+  %\VignetteIndexEntry{United Kingdom Input-Output Analytical Tables}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

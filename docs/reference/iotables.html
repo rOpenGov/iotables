@@ -6,13 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>iotables
-
-Pre-processing and basic analytic tasks related to working with 
-Eurostat's symmetric input-output tables and provide basic 
-input-output economics calculations. The package is 
-a part of rOpenGov &lt;http://ropengov.github.io/&gt; for 
-open source open government initiatives. — iotables • iotables</title>
+<title>iotables — iotables • iotables</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,13 +46,12 @@ open source open government initiatives. — iotables • iotables</title>
 
 
 
-<meta property="og:title" content="iotables
-
-Pre-processing and basic analytic tasks related to working with 
+<meta property="og:title" content="iotables — iotables" />
+<meta property="og:description" content="Pre-processing and basic analytic tasks related to working with 
 Eurostat's symmetric input-output tables and provide basic 
 input-output economics calculations. The package is 
-a part of rOpenGov &lt;http://ropengov.github.io/&gt; for 
-open source open government initiatives. — iotables" />
+a part of rOpenGov &amp;lt;http://ropengov.github.io/&amp;gt; for 
+open source open government initiatives." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -106,8 +99,23 @@ open source open government initiatives. — iotables" />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/germany_1990.html">Germany 1990</a>
+    </li>
+    <li>
+      <a href="../articles/united_kingdom_2010.html">United Kingdom Input-Output Analytical Tables</a>
+    </li>
+    <li>
+      <a href="../articles/working_with_eurostat.html">Working With Eurostat Data</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -133,18 +141,17 @@ open source open government initiatives. — iotables" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>iotables
-
-Pre-processing and basic analytic tasks related to working with 
-Eurostat's symmetric input-output tables and provide basic 
-input-output economics calculations. The package is 
-a part of rOpenGov &lt;http://ropengov.github.io/&gt; for 
-open source open government initiatives.</h1>
+    <h1>iotables</h1>
     <small class="dont-index">Source: <a href='https://github.com/rOpenGov/iotables/blob/master/R/iotables.R'><code>R/iotables.R</code></a></small>
     <div class="hidden name"><code>iotables.Rd</code></div>
     </div>
 
     <div class="ref-description">
+    <p>Pre-processing and basic analytic tasks related to working with 
+Eurostat's symmetric input-output tables and provide basic 
+input-output economics calculations. The package is 
+a part of rOpenGov &lt;http://ropengov.github.io/&gt; for 
+open source open government initiatives.</p>
     </div>
 
 
@@ -217,7 +224,7 @@ names from the <code>output_coefficient_matrix</code>.</p>
     
 
 <p>Data files that contain descriptive metadata for a correct reproduction
-of the symmetric input-output tables.  The analytical functions use 
+of the symmetric input-output tables.  The analytic functions use 
 matrix equations that require a precise column and row order for each
 table.</p>
     <h2 class="hasAnchor" id="validation-datasets"><a class="anchor" href="#validation-datasets"></a>Validation datasets</h2>
@@ -225,7 +232,7 @@ table.</p>
     
 
 <p>Data files that replicate published input-output tables with analysis.
-These files are used to validate the correct working of the analytical
+These files are used to validate the correct working of the analytic
 functions.</p>
     <h2 class="hasAnchor" id="croatia-data-files"><a class="anchor" href="#croatia-data-files"></a>Croatia data files</h2>
 
