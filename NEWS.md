@@ -139,4 +139,4 @@ turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit).
 # iotables 0.4.4
 * Very small documentation changes.
 * Changing the code to dplyr 1.0+ and rlang in non-standard evaluation.
-* New website, CI on Github. 
+* New website, CI on Github. Renewed [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables)

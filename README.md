@@ -13,8 +13,7 @@
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
-[![Codecov test
-coverage](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://codecov.io/gh/rOpenGov/iotables?branch=master)
+[![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables)
 [![Follow
 rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![Follow
@@ -50,7 +49,7 @@ SIOT taken from the `Eurostat Manual` (`p481`). The package function
 examples can be checked against [published results from Jörg
 Beutel](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
 These calculations can be followed in the [Germany 1990
-vignette](http://iotables.ceemid.eu/articles/germany_1990.html).
+vignette](https://iotables.dataobservatory.eu/articles/germany_1990.html).
 
 The calculation of induced effects (Type-II multipliers) are following
 the [Input-Output Multipliers Specification Sheet and Supporting
@@ -107,7 +106,8 @@ prices.
 Given the complexity of the data used by the package, probably the use
 of the vignettes is needed to get a start.
 
-The [Germany 1990](http://iotables.ceemid.eu/articles/germany_1990.html)
+The [Germany
+1990](https://iotables.dataobservatory.eu/articles/germany_1990.html)
 vignette presents most of the examples of the [Eurostat Manual of
 Supply, Use and Input-Output
 Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
@@ -117,7 +117,7 @@ what will the functions do, and to check that they work correctly. The
 the functions against the published results from the `Eurostat Manual`.
 
 The [Working with Eurostat
-Data](http://iotables.ceemid.eu/articles/working_with_eurostat.html)
+Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html)
 vignette shows how you can download, pre-process and use real data from
 Eurostat.
 
@@ -127,13 +127,13 @@ are used for testing the `iotables` package, because they are
 well-documented and detailed, organized data is available with them.
 These calculations can be followed in the [United Kingdom Input-Output
 Analytical
-Tables](http://iotables.ceemid.eu/articles/united_kingdom_2010.html)
+Tables](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html)
 vignette.
 
 ## Contributors
 
-Thanks for \[@KKulma\](<https://github.com/KKulma/>) for setting up new
-and improved continuous integration.
+Thanks for [@KKulma](https://github.com/KKulma/) for setting up new and
+improved continuous integration.
 
 ## Code of Conduct
 
