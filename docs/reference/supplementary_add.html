@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rOpenGov/iotables/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,7 +133,7 @@
 64x64 SIOTs. Currently works only with product x product tables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>supplementary_add</span>(<span class='no'>data_table</span>, <span class='no'>supplementary_data</span>, <span class='kw'>supplementary_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>supplementary_add</span><span class='op'>(</span><span class='va'>data_table</span>, <span class='va'>supplementary_data</span>, supplementary_names <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,15 +166,16 @@ The column names are ordered, and the row names are in the
 first, auxiliary metadata column.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>de_io</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span>()
-<span class='no'>CO2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>( <span class='fl'>0.2379</span>, <span class='fl'>0.5172</span>, <span class='fl'>0.0456</span>, <span class='fl'>0.1320</span>, <span class='fl'>0.0127</span>, <span class='fl'>0.0530</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span> ( <span class='no'>CO2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"agriculture_group"</span>, <span class='st'>"industry_group"</span>,<span class='st'>"construction"</span>,
-                  <span class='st'>"trade_group"</span>,<span class='st'>"business_services_group"</span>,<span class='st'>"other_services_group"</span>)
-<span class='no'>CO2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span> (
-  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span> ( <span class='kw'>iotables_row</span> <span class='kw'>=</span> <span class='st'>"CO2"</span>),<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span> ( <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>CO2</span>)))
-<span class='no'>de_coeff</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span> ( <span class='fu'><a href='iotable_get.html'>iotable_get</a></span>() )
+    <pre class="examples"><div class='input'><span class='va'>de_io</span> <span class='op'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>CO2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span> <span class='fl'>0.2379</span>, <span class='fl'>0.5172</span>, <span class='fl'>0.0456</span>, <span class='fl'>0.1320</span>, <span class='fl'>0.0127</span>, <span class='fl'>0.0530</span><span class='op'>)</span>  
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span> <span class='op'>(</span> <span class='va'>CO2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"agriculture_group"</span>, <span class='st'>"industry_group"</span>,<span class='st'>"construction"</span>,
+                  <span class='st'>"trade_group"</span>,<span class='st'>"business_services_group"</span>,<span class='st'>"other_services_group"</span><span class='op'>)</span> 
+<span class='va'>CO2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span> <span class='op'>(</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span> <span class='op'>(</span> iotables_row <span class='op'>=</span> <span class='st'>"CO2"</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span> <span class='op'>(</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>CO2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>de_coeff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span> <span class='op'>(</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>)</span>
 
-<span class='fu'>supplementary_add</span> ( <span class='no'>de_io</span>, <span class='no'>CO2</span>)</div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
+<span class='fu'>supplementary_add</span> <span class='op'>(</span> <span class='va'>de_io</span>, <span class='va'>CO2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
 #&gt; 1          agriculture_group         1131.0000     25480.0000       1.0000
 #&gt; 2             industry_group         7930.0000    304584.0000   64167.0000
 #&gt; 3               construction          426.0000      7334.0000    3875.0000
@@ -273,7 +274,7 @@ first, auxiliary metadata column.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -12,7 +12,7 @@ retrieved by the \code{\link{iotable_get}} function.}
 
 \item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty 
 primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-removed to avoid division by zero error in the analytical functions.}
+removed to avoid division by zero error in the analytic functions.}
 
 \item{households}{Defaults to \code{FALSE}. If \code{TRUE}, the 
 final household expenditure is added to the input flow table.}
@@ -31,7 +31,8 @@ input_flow <- input_flow_get( data_table = data_table,
 
 }
 \seealso{
-Other analytical object functions: 
+Other analytic object functions: 
+\code{\link{leontieff_inverse_create}()},
 \code{\link{leontieff_matrix_create}()}
 }
-\concept{analytical object functions}
+\concept{analytic object functions}

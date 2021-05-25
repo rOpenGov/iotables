@@ -82,7 +82,7 @@ create_knitr_table <- function (
   if ( ! "knitr_kable" %in% class(data_table) ) { 
     #If columns are not named, col heads are names of data.frame
     if ( is.null(col.names)) {
-      col.names = names(data_table)
+      col.names <- names(data_table)
     }
     
     #Create default column alignment settings if necessary
@@ -136,7 +136,8 @@ create_knitr_table <- function (
   ## bootstrap_options for html tables and latex_options for latex
   if ( table_format == "html") { 
     if ( is.null(bootstrap_options)) {
-      if (table_format == "html")   bootstrap_options <- c("striped", "hover", "condensed")
+      if (table_format == "html")   
+        bootstrap_options <- c("striped", "hover", "condensed")
     }
     knitr_table <-  kableExtra::kable_styling(
            kable_input = knitr_table, 
@@ -162,7 +163,7 @@ create_knitr_table <- function (
                                             bold         = bold_cols[i], 
                                             border_right = border_right_cols[i]
     )
-    i = i + 1
+    i <- i + 1
   } #end of while loop
 
 

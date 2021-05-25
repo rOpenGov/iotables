@@ -19,13 +19,14 @@
 #' proportional primary inputs.
 #' @param remove_empty Defaults to \code{TRUE}. If you want to keep empty 
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-#' removed to avoid division by zero error in the analytical functions.
+#' removed to avoid division by zero error in the analytic functions.
 #' @param households Defaults to \code{NULL}. Household column can be added 
 #' with \code{TRUE}.
 #' @return A data.frame that contains the matrix of  \code{data_table} divided by \code{total}
 #' with a key column. Optionally the results are rounded to given \code{digits}. 
 #' @importFrom dplyr mutate mutate_if funs left_join
-#' @references See \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
+#' @references See 
+#' \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
 #' @family indicator functions
 #' @examples 
@@ -41,31 +42,31 @@ coefficient_matrix_create <- function ( data_table,
                                         households = FALSE,
                                         return_part = NULL) {
   
-  #Create a coefficient matrix, including primary inputs.  
-  #For the Leontieff matrix, only the inputs part (first quadrant is used)
+  # Create a coefficient matrix, including primary inputs.  
+  # For the Leontieff matrix, only the inputs part (first quadrant is used)
   
   if ( !is.null(return_part)) {
     if ( ! return_part %in% c("products", "industry", "primary_inputs")) {
-      warning ( "Parameter return_part='", return_part, "' was not recognized, returned all data.")
+      warning ( "Parameter return_part='", return_part, 
+                "' was not recognized, returned all data.")
     }
   }
-  
-  funs <-. <- NULL  #for checking against non-standard evaluation
-
+ 
   data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
   
-  ###Removing all zero columns and rows --------
+  ## Removing all zero columns and rows --------
   if ( remove_empty ) data_table <- empty_remove ( data_table )
   
   last_column <- quadrant_separator_find( data_table, 
                                           include_total = FALSE)
 
-  #####removing the 2nd and 4th quadrants--- 
+  ## Removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 
     if ( households == TRUE ) { 
       household_column <- household_column_get( data_table )
       quadrant <- data_table [, 1:last_column]
-      data_table <- dplyr::left_join ( quadrant, household_column, 
+      data_table <- dplyr::left_join ( quadrant, 
+                                       household_column, 
                                  by = names(quadrant)[1])
     } else {
       data_table <- data_table [, 1:last_column]
@@ -79,7 +80,7 @@ coefficient_matrix_create <- function ( data_table,
   
   ##Getting the row for division
   if ( total %in%  c("output", "p1", "output_bp")  ) { 
-    if ( any( c("output", "p1", "output_bp")  %in%  key_column )) {
+    if (any( c("output", "p1", "output_bp")  %in%  key_column )) {
       total_row <- data_table[which ( key_column  %in%
                                   c("output", "p1", "output_bp"))[1],]
     } else {
@@ -99,20 +100,23 @@ coefficient_matrix_create <- function ( data_table,
   
   ##Adjust the total vector---- 
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
-  total_row <- dplyr::mutate_if ( total_row, is.factor, as.character )
-  total_row <- dplyr::mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
+  total_row <- mutate_if ( total_row, is.factor, as.character )
+  total_row <- mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
 
   coeff_matrix <- data_table
   
   if (households == TRUE)  last_column <- last_column+1
   ###The actual creation of the coefficients-----
+  
   for ( i in 1:nrow(data_table) ) {
     coeff_matrix[i,2:last_column] <-  coeff_matrix[i,2:last_column] / as.numeric(total_row[2:last_column])
   }
  
   potential_houeshold_earning_names <- c("compensation_employees", 'd1')
   
-  earnings_name <- potential_houeshold_earning_names [which ( potential_houeshold_earning_names  %in% key_column )]
+  earnings_name <- potential_houeshold_earning_names [
+    which ( potential_houeshold_earning_names  %in% key_column )
+    ]
 
   household_earnings_row <- coeff_matrix[which( earnings_name == key_column), ]
     
@@ -120,7 +124,9 @@ coefficient_matrix_create <- function ( data_table,
   ###If only a part should be returned----
   if ( ! is.null(return_part) )  {
     
-    last_row <- which ( tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")) #not last column
+    last_row <- which ( 
+      tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")
+      ) #not last column
     
     if ( return_part == "primary_inputs" ) {
       coeff_matrix <- coeff_matrix[last_row:nrow(coeff_matrix), ]  #households remain anyway

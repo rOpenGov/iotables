@@ -3,9 +3,9 @@
 \docType{package}
 \name{iotables}
 \alias{iotables}
-\title{iotables: Working Programmatically With Symmetric Input-Output Tables}
+\title{iotables}
 \description{
-Pre-processing and basic analytical tasks related to working with 
+Pre-processing and basic analytic tasks related to working with 
 Eurostat's symmetric input-output tables and provide basic 
 input-output economics calculations. The package is 
 a part of rOpenGov <http://ropengov.github.io/> for 
@@ -40,12 +40,11 @@ the input-output table. \code{\link{output_get}} is a wrapper function around th
 \code{\link{total_tax_add}} adds taxes to an input-output table.
 }
 
-\section{analytical object functions}{
+\section{analytic object functions}{
  
-\code{\link{input_flow_get}} returns the use (input flow) matrix.
-
+\code{\link{input_flow_get}} returns the use (input flow) matrix; 
 \code{\link{leontieff_matrix_create}} and the 
-\code{\link{leontieff_inverse_create}} to create the respective analytical
+\code{\link{leontieff_inverse_create}} to create the respective analytic
 matrixes.
 }
 
@@ -87,7 +86,7 @@ names from the \code{output_coefficient_matrix}.
 \section{Metadata datasets}{
 
 Data files that contain descriptive metadata for a correct reproduction
-of the symmetric input-output tables.  The analytical functions use 
+of the symmetric input-output tables.  The analytic functions use 
 matrix equations that require a precise column and row order for each
 table.
 }
@@ -95,7 +94,7 @@ table.
 \section{Validation datasets}{
 
 Data files that replicate published input-output tables with analysis.
-These files are used to validate the correct working of the analytical
+These files are used to validate the correct working of the analytic
 functions.
 }
 

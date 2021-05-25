@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -105,7 +105,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rOpenGov/iotables/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -131,7 +131,7 @@
     <p>The function creates the effects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>indirect_effects_create</span>(<span class='no'>input_requirements</span>, <span class='no'>inverse</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>indirect_effects_create</span><span class='op'>(</span><span class='va'>input_requirements</span>, <span class='va'>inverse</span>, digits <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,19 +154,20 @@ no rounding takes place.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>nl</span> <span class='kw'>&lt;-</span> <span class='no'>netherlands_2006</span>
+    <pre class="examples"><div class='input'> 
+<span class='va'>nl</span> <span class='op'>&lt;-</span> <span class='va'>netherlands_2006</span>
 
-<span class='no'>input_coeff_nl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span>(
- <span class='kw'>data_table</span>  <span class='kw'>=</span> <span class='no'>netherlands_2006</span>,
- <span class='kw'>households</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='va'>input_coeff_nl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span><span class='op'>(</span>
+ data_table  <span class='op'>=</span> <span class='va'>netherlands_2006</span>, 
+ households <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> 
 
-<span class='no'>compensation_indicator</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='input_indicator_create.html'>input_indicator_create</a></span>(<span class='no'>netherlands_2006</span>, <span class='st'>'compensation_employees'</span>)
+<span class='va'>compensation_indicator</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_indicator_create.html'>input_indicator_create</a></span><span class='op'>(</span><span class='va'>netherlands_2006</span>, <span class='st'>'compensation_employees'</span><span class='op'>)</span>
 
-<span class='no'>I_nl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span>( <span class='no'>input_coeff_nl</span> )
+<span class='va'>I_nl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span><span class='op'>(</span> <span class='va'>input_coeff_nl</span> <span class='op'>)</span>
 
-<span class='fu'><a href='direct_effects_create.html'>direct_effects_create</a></span>(<span class='kw'>input_requirements</span> <span class='kw'>=</span> <span class='no'>compensation_indicator</span>,
-                           <span class='kw'>inverse</span> <span class='kw'>=</span> <span class='no'>I_nl</span>)</div><div class='output co'>#&gt;                                    agriculture_group   mining_group        
+<span class='fu'><a href='direct_effects_create.html'>direct_effects_create</a></span><span class='op'>(</span>input_requirements <span class='op'>=</span> <span class='va'>compensation_indicator</span>, 
+                           inverse <span class='op'>=</span> <span class='va'>I_nl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                    agriculture_group   mining_group        
 #&gt; 11 "compensation_employees_effect" "0.263460690584793" "0.0987096155950127"
 #&gt;    manufacturing_group utilities_group     construction_group 
 #&gt; 11 "0.306073391401155" "0.211754725841364" "0.464852252639343"
@@ -187,7 +188,7 @@ no rounding takes place.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

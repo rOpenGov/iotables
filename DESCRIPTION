@@ -30,7 +30,8 @@ Imports:
     tibble,
     readxl,
     purrr,
-    tidyselect
+    tidyselect,
+    rlang
 Suggests: 
     testthat,
     rmarkdown,

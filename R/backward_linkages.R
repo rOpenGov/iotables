@@ -17,8 +17,7 @@
 #' @export 
 
 backward_linkages <- function ( Im ) {
-  . = NULL ; funs = NULL ; vars = NULL
-  
+
  Im <- dplyr::mutate_if (Im, is.factor, as.character )
   
   total_row <- data.frame ( 

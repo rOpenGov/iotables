@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -63,7 +63,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rOpenGov/iotables/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -77,13 +77,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="germany_1990_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Germany 1990</h1>
                         <h4 class="author">Daniel Antal, based on the work of Jorg Beutel</h4>
             
-            <h4 class="date">2020-05-19</h4>
+            <h4 class="date">2021-05-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/germany_1990.Rmd"><code>vignettes/germany_1990.Rmd</code></a></small>
       <div class="hidden name"><code>germany_1990.Rmd</code></div>
@@ -92,28 +92,30 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span>$<span class="fu">set</span>(
-  <span class="kw">collapse</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-  <span class="kw">comment</span> <span class="kw">=</span> <span class="st">"#&gt;"</span>
-)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">iotables</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">dplyr</span>); <span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="no">tidyr</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>
+  collapse <span class="op">=</span> <span class="cn">TRUE</span>,
+  comment <span class="op">=</span> <span class="st">"#&gt;"</span>
+<span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://iotables.ceemid.eu/">iotables</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></code></pre></div>
 <div id="germany-sample-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#germany-sample-files" class="anchor"></a>Germany sample files</h2>
 <p>The Germany example is used to test the code of the package. It follows the examples in <a href="http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0">Eurostat Manual of Supply, Use and Input-Output Tables</a>. by Jörg Beutel (Eurostat Manual).</p>
 <p>The <code>germany_1990</code> dataset is a simplified 6x6 sized SIOT taken from the Eurostat Manual (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.</p>
 <p>The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the <code>germany_1990</code> dataset and the Manual should cause no misunderstandings.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">data_table</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>( <span class="kw">labelling</span> <span class="kw">=</span> <span class="st">"iotables"</span> )
-<span class="no">input_flow</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_flow_get.html">input_flow_get</a></span> (
-                  <span class="kw">data_table</span> <span class="kw">=</span> <span class="no">data_table</span>,
-                  <span class="kw">households</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span><span class="op">(</span> labelling <span class="op">=</span> <span class="st">"iotables"</span> <span class="op">)</span>
+<span class="va">input_flow</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_flow_get.html">input_flow_get</a></span> <span class="op">(</span> 
+                  data_table <span class="op">=</span> <span class="va">data_table</span>, 
+                  households <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="no">de_output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>, <span class="st">"output"</span> )
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> (<span class="no">de_output</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">4</span>)])
+<span class="va">de_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> <span class="op">(</span> <span class="va">data_table</span>, <span class="st">"output"</span> <span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="va">de_output</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;    iotables_row agriculture_group industry_group construction</span>
-<span class="co">#&gt; 15       output             43910        1079446       245606</span></pre></body></html></div>
-<p>This vignette uses <code><a href="https://tidyverse.tidyverse.org/reference">library(tidyverse)</a></code>, more particularly <code>dplyr</code> and <code>tidyr</code>, just like all analytical functions of <code>iotables</code>. Even if you do not use <code>tidyverse</code>, this packages will be installed together with <code>iotables</code>. These functions are only used in the vignette to print the output, and they are not essential for the examples.</p>
+<span class="co">#&gt; 15       output             43910        1079446       245606</span></code></pre></div>
+<p>This vignette uses <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>, more particularly <code>dplyr</code> and <code>tidyr</code>, just like all analytical functions of <code>iotables</code>. Even if you do not use <code>tidyverse</code>, this packages will be installed together with <code>iotables</code>. These functions are only used in the vignette to print the output, and they are not essential for the examples.</p>
 </div>
 <div id="direct-effects" class="section level2">
 <h2 class="hasAnchor">
@@ -129,23 +131,35 @@
 <span class="math inline">\(a_{ij}\)</span> = <span class="math inline">\(X_{ij}\)</span> / <span class="math inline">\(x_j\)</span> [recap: (43) is the same]</li>
 </ol>
 <p>It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>(
-     <span class="kw">data_table</span> <span class="kw">=</span> <span class="no">data_table</span>,
-     <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_input_coeff</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span><span class="op">(</span> 
+     data_table <span class="op">=</span> <span class="va">data_table</span>, 
+     digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `funs()` was deprecated in dplyr 0.8.0.</span>
+<span class="co">#&gt; Please use a list of either functions or lambdas: </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Simple named list: </span>
+<span class="co">#&gt;   list(mean = mean, median = median)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Auto named with `tibble::lst()`: </span>
+<span class="co">#&gt;   tibble::lst(mean, median)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   # Using lambdas</span>
+<span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
 
 <span class="co">## which is equivalent to:</span>
 
-<span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>( <span class="no">data_table</span>,
-                             <span class="kw">total</span> <span class="kw">=</span> <span class="st">"output"</span>,
-                             <span class="kw">return_part</span> <span class="kw">=</span> <span class="st">"products"</span>,
-                             <span class="kw">households</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-                             <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<span class="va">de_input_coeff</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span> <span class="va">data_table</span>, 
+                             total <span class="op">=</span> <span class="st">"output"</span>, 
+                             return_part <span class="op">=</span> <span class="st">"products"</span>, 
+                             households <span class="op">=</span> <span class="cn">FALSE</span>,
+                             digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> ( <span class="no">de_input_coeff</span>[<span class="fl">1</span>:<span class="fl">3</span>, <span class="fl">1</span>:<span class="fl">3</span>])
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span> <span class="va">de_input_coeff</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;        iotables_row agriculture_group industry_group</span>
 <span class="co">#&gt; 1 agriculture_group            0.0258         0.0236</span>
 <span class="co">#&gt; 2    industry_group            0.1806         0.2822</span>
-<span class="co">#&gt; 3      construction            0.0097         0.0068</span></pre></body></html></div>
+<span class="co">#&gt; 3      construction            0.0097         0.0068</span></code></pre></div>
 <p>Similarly, the output coefficient matrix is the following:</p>
 <pre><code>#&gt;        iotables_row agriculture_group industry_group
 #&gt; 1 agriculture_group            0.0258         0.5803
@@ -158,18 +172,19 @@
 </ol>
 <p>The Leontieff matrix is defined as (I-A) and it is created with the <code><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create()</a></code> function.</p>
 <p>The Leontieff inverse is (I-A)<sup>-1</sup> and it is created with the <code><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create()</a></code> function from the Leontieff-matrix.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">L_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create</a></span> ( <span class="kw">technology_coefficients_matrix</span> <span class="kw">=</span>
-                                 <span class="no">de_input_coeff</span> )
-<span class="no">I_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span>(<span class="no">de_input_coeff</span>)
-<span class="no">I_de_4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span>(<span class="no">de_input_coeff</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> (<span class="no">I_de_4</span>[,<span class="fl">1</span>:<span class="fl">3</span>])
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">L_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create</a></span> <span class="op">(</span> technology_coefficients_matrix <span class="op">=</span>
+                                 <span class="va">de_input_coeff</span> <span class="op">)</span>
+<span class="va">I_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">de_input_coeff</span><span class="op">)</span>
+<span class="va">I_de_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">de_input_coeff</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="va">I_de_4</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;              iotables_row agriculture_group industry_group</span>
 <span class="co">#&gt; 1          industry_group            1.4155         0.5605</span>
 <span class="co">#&gt; 2            construction            0.0441         1.0462</span>
 <span class="co">#&gt; 3             trade_group            0.2180         0.2292</span>
 <span class="co">#&gt; 4 business_services_group            0.2892         0.3237</span>
 <span class="co">#&gt; 5    other_services_group            0.1089         0.1014</span>
-<span class="co">#&gt; 6                   total            1.1152         1.3025</span></pre></body></html></div>
+<span class="co">#&gt; 6                   total            1.1152         1.3025</span></code></pre></div>
 <blockquote>
 <p>You can check the Leontieff matrix against Table 15.9 on page 487 of the Euorstat manual, and the Leontieff inverse against Table 15.10 on page 488. The ordering of the industries is different in the manual.</p>
 </blockquote>
@@ -186,21 +201,22 @@
 <span class="math inline">\(a_{ij}\)</span> = <span class="math inline">\(z_{ij}\)</span> / <span class="math inline">\(x_j\)</span> [technical input coefficients]</li>
 </ol>
 <p>The helper function <code><a href="../reference/primary_input_get.html">primary_input_get()</a></code> selects a row from the SIOT and brings it to a conforming form. The <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> creates the vector of technical input coefficients.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">de_emp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>,
-                              <span class="kw">primary_input</span> <span class="kw">=</span> <span class="st">"employment_domestic_total"</span> )
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_emp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> <span class="op">(</span> <span class="va">data_table</span>,
+                              primary_input <span class="op">=</span> <span class="st">"employment_domestic_total"</span> <span class="op">)</span>
 
-<span class="no">de_emp_indicator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> (
-    <span class="kw">data_table</span>  <span class="kw">=</span> <span class="no">data_table</span>,
-    <span class="kw">input_vector</span> <span class="kw">=</span> <span class="st">"employment_domestic_total"</span>)
+<span class="va">de_emp_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> <span class="op">(</span> 
+    data_table  <span class="op">=</span> <span class="va">data_table</span>,
+    input_vector <span class="op">=</span> <span class="st">"employment_domestic_total"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> ( <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>( <span class="no">de_emp_indicator</span>, <span class="no">indicators</span>, <span class="no">values</span>, !!<span class="fl">2</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">de_emp_indicator</span>))[,-<span class="fl">1</span>] )
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span> <span class="va">de_emp_indicator</span>, <span class="va">indicators</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">de_emp_indicator</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">)</span>
 <span class="co">#&gt;                indicators      values</span>
 <span class="co">#&gt; 1       agriculture_group 0.024960146</span>
 <span class="co">#&gt; 2          industry_group 0.007764168</span>
 <span class="co">#&gt; 3            construction 0.013175574</span>
 <span class="co">#&gt; 4             trade_group 0.017129483</span>
 <span class="co">#&gt; 5 business_services_group 0.006148852</span>
-<span class="co">#&gt; 6    other_services_group 0.020054311</span></pre></body></html></div>
+<span class="co">#&gt; 6    other_services_group 0.020054311</span></code></pre></div>
 <p>Often we want to analyze the effect of growing domestic demand on some natural units, such as employment or <span class="math inline">\(CO_2\)</span> emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.</p>
 <p>European employment statistics have greater detail than our tables, so employment statistics must be aggregated to conform the 60 (61, 62) columns of the SIOT. There is a difference in the columns based on how national statistics offices treat imputed real estate income and household production, and trade margins. Czech SIOTs are smaller than most SIOTs because they do not have these columns and rows.</p>
 <p>In another vignette we will show examples on how to work with these real-life data. For the sake of following the calculations, we are continuing with the simplified 1990 German data.</p>
@@ -209,33 +225,35 @@
 <h3 class="hasAnchor">
 <a href="#creating-income-indicators" class="anchor"></a>Creating income indicators</h3>
 <p>The input coefficients for value added are created with <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code>.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">de_gva</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> ( <span class="no">data_table</span>,
-                              <span class="kw">primary_input</span> <span class="kw">=</span> <span class="st">"gva"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_gva</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/primary_input_get.html">primary_input_get</a></span> <span class="op">(</span> <span class="va">data_table</span>,
+                              primary_input <span class="op">=</span> <span class="st">"gva"</span><span class="op">)</span> 
 
-<span class="no">de_gva_indicator</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span>(
-    <span class="kw">data_table</span>  <span class="kw">=</span> <span class="no">data_table</span>,
-    <span class="kw">input_vector</span> <span class="kw">=</span> <span class="st">"gva"</span>)
+<span class="va">de_gva_indicator</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span><span class="op">(</span> 
+    data_table  <span class="op">=</span> <span class="va">data_table</span>,
+    input_vector <span class="op">=</span> <span class="st">"gva"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>( <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">de_gva_indicator</span>, <span class="no">indicators</span>, <span class="no">values</span>,!!<span class="fl">2</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">de_gva_indicator</span>))[,-<span class="fl">1</span>]  )
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">de_gva_indicator</span>, <span class="va">indicators</span>, <span class="va">values</span>,<span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">de_gva_indicator</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>  <span class="op">)</span> 
 <span class="co">#&gt;                indicators    values</span>
 <span class="co">#&gt; 1       agriculture_group 0.4933728</span>
 <span class="co">#&gt; 2          industry_group 0.3659488</span>
 <span class="co">#&gt; 3            construction 0.4707703</span>
 <span class="co">#&gt; 4             trade_group 0.5766124</span>
 <span class="co">#&gt; 5 business_services_group 0.5999044</span>
-<span class="co">#&gt; 6    other_services_group 0.7172413</span></pre></body></html></div>
+<span class="co">#&gt; 6    other_services_group 0.7172413</span></code></pre></div>
 <p>This is equal to the equation on page 495 of the Eurostat Manual. The results above can be checked on the bottom of page 498.</p>
 <ol start="44" style="list-style-type: decimal">
 <li>
 <span class="math inline">\(w_{ij}\)</span> = <span class="math inline">\(W_{j}\)</span> / <span class="math inline">\(x_j\)</span> [input coefficients for value added]</li>
 </ol>
 <p>You can create a matrix of input indicators, or direct effects on (final) demand with <code>direct_supply_effects_create()</code>. The function by default creates input requirements for final demand. With the code below it re-creates the Table 15.14 of the Eurostat manual.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">direct_effects_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>(
-  <span class="kw">data_table</span>  <span class="kw">=</span> <span class="no">data_table</span>,
-  <span class="kw">total</span>       <span class="kw">=</span> <span class="st">'output'</span>,
-  <span class="kw">return_part</span> <span class="kw">=</span> <span class="st">'primary_inputs'</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">direct_effects_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span>
+  data_table  <span class="op">=</span> <span class="va">data_table</span>, 
+  total       <span class="op">=</span> <span class="st">'output'</span>, 
+  return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span>
 
-<span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> ( <span class="no">direct_effects_de</span>[<span class="fl">1</span>:<span class="fl">6</span>,<span class="fl">1</span>:<span class="fl">4</span>])</pre></body></html></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span> <span class="va">direct_effects_de</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -389,16 +407,17 @@ consumption_fixed_capital
 <p>You can check these values against the Table 15.16 of the Eurostat Manual on page 501 (row 10).</p>
 </blockquote>
 <p>You can recreate the whole matrix, when the data data permits, with <code><a href="../reference/input_multipliers_create.html">input_multipliers_create()</a></code> as shown here. Alternatively, you can create your own custom multipliers with <code><a href="../reference/multiplier_create.html">multiplier_create()</a></code> as shown in the following example.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">input_reqr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span>(
-    <span class="kw">data_table</span>  <span class="kw">=</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> (),
-    <span class="kw">total</span>       <span class="kw">=</span> <span class="st">'output'</span>,
-    <span class="kw">return_part</span> <span class="kw">=</span> <span class="st">'primary_inputs'</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">input_reqr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span>
+    data_table  <span class="op">=</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> <span class="op">(</span><span class="op">)</span>, 
+    total       <span class="op">=</span> <span class="st">'output'</span>, 
+    return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> 
 
-<span class="no">multipliers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span>(
-  <span class="kw">input_requirements</span> <span class="kw">=</span> <span class="no">input_reqr</span>,
-  <span class="kw">inverse</span> <span class="kw">=</span> <span class="no">I_de</span>)
+<span class="va">multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span>
+  input_requirements <span class="op">=</span> <span class="va">input_reqr</span>,
+  inverse <span class="op">=</span> <span class="va">I_de</span><span class="op">)</span>
 
-<span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="no">multipliers</span>, <span class="kw">digits</span><span class="kw">=</span> <span class="fl">4</span>)</pre></body></html></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">multipliers</span>, digits<span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -780,26 +799,27 @@ employment_domestic_total_multiplier
 </ol>
 <p>The <code><a href="../reference/multiplier_create.html">multiplier_create()</a></code> function performs the matrix multiplication, after handling many exceptions and problems with real-life data, such as different missing columns and rows in the national variations of the standard European table.</p>
 <p>Please send a bug report on <a href="https://github.com/rOpenGov/iotables/issues">Github</a> if you run into further real-life problems.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">de_emp_indicator</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> (
-  <span class="kw">data_table</span> <span class="kw">=</span> <span class="no">data_table</span>,
-  <span class="kw">input</span> <span class="kw">=</span> <span class="st">'employment_domestic_total'</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_emp_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_indicator_create.html">input_indicator_create</a></span> <span class="op">(</span>
+  data_table <span class="op">=</span> <span class="va">data_table</span>, 
+  input <span class="op">=</span> <span class="st">'employment_domestic_total'</span><span class="op">)</span> 
 
-<span class="no">employment_multipliers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/multiplier_create.html">multiplier_create</a></span> (
-  <span class="kw">input_vector</span>    <span class="kw">=</span> <span class="no">de_emp_indicator</span>,
-  <span class="kw">Im</span>              <span class="kw">=</span> <span class="no">I_de</span>,
-  <span class="kw">multiplier_name</span> <span class="kw">=</span> <span class="st">"employment_multiplier"</span>,
-  <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span> )
+<span class="va">employment_multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiplier_create.html">multiplier_create</a></span> <span class="op">(</span> 
+  input_vector    <span class="op">=</span> <span class="va">de_emp_indicator</span>,
+  Im              <span class="op">=</span> <span class="va">I_de</span>,
+  multiplier_name <span class="op">=</span> <span class="st">"employment_multiplier"</span>, 
+  digits <span class="op">=</span> <span class="fl">4</span> <span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> (<span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">employment_multipliers</span>,
-              <span class="no">multipliers</span>, <span class="no">values</span>,
-              !!<span class="fl">2</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">employment_multipliers</span>))[-<span class="fl">1</span>])
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">employment_multipliers</span>,
+              <span class="va">multipliers</span>, <span class="va">values</span>, 
+              <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">employment_multipliers</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;               multipliers values</span>
 <span class="co">#&gt; 1       agriculture_group 0.0665</span>
 <span class="co">#&gt; 2          industry_group 0.0574</span>
 <span class="co">#&gt; 3            construction 0.0625</span>
 <span class="co">#&gt; 4             trade_group 0.0548</span>
 <span class="co">#&gt; 5 business_services_group 0.0423</span>
-<span class="co">#&gt; 6    other_services_group 0.0431</span></pre></body></html></div>
+<span class="co">#&gt; 6    other_services_group 0.0431</span></code></pre></div>
 <p>You can check against page 501 that these values are correct and on page 501 that the highest employment multiplier is indeed <span class="math inline">\(z_i\)</span> = 0.0665, the employment multiplier of agriculture.</p>
 <p>For working with real-life, current employment data, there is a helper function to retrieve and process Eurostat employment statistics to a SIOT-conforming vector <code><a href="../reference/employment_get.html">employment_get()</a></code>. This function will be explained in a separate vignette.</p>
 </div>
@@ -812,16 +832,17 @@ employment_domestic_total_multiplier
 <span class="math inline">\(b_{ij}\)</span> = <span class="math inline">\(X_{ij}\)</span> / <span class="math inline">\(x_i\)</span> [also (45) output coefficients for products / intermediates].</li>
 </ol>
 <p><span class="math inline">\(x_i\)</span>: output of sector i</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">de_input_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>(
-                         <span class="kw">data_table</span> <span class="kw">=</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>(),
-                         <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_input_coeff</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span><span class="op">(</span> 
+                         data_table <span class="op">=</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span><span class="op">(</span><span class="op">)</span>, 
+                         digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+                           
+<span class="va">output_multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span> 
+                        input_coefficient_matrix <span class="op">=</span> <span class="va">de_input_coeff</span> <span class="op">)</span>
 
-<span class="no">output_multipliers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> (
-                        <span class="kw">input_coefficient_matrix</span> <span class="kw">=</span> <span class="no">de_input_coeff</span> )
-
-<span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> (
-  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">output_multipliers</span>, <span class="no">multipliers</span>, <span class="no">values</span>)[-<span class="fl">1</span>,]
-  )</pre></body></html></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span>
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">output_multipliers</span>, <span class="va">multipliers</span>, <span class="va">values</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>,<span class="op">]</span>
+  <span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -914,18 +935,19 @@ other_services_group
 <div id="backward-linkages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#backward-linkages" class="anchor"></a>Backward linkages</h3>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">de_coeff</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span>( <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span>(), <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>)
-<span class="no">I_de</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span> ( <span class="no">de_coeff</span> )
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_coeff</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span><span class="op">(</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span><span class="op">(</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="va">I_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span> <span class="op">(</span> <span class="va">de_coeff</span> <span class="op">)</span>
 
-<span class="no">de_bw</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/backward_linkages.html">backward_linkages</a></span>(<span class="no">I_de</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> (<span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="no">de_bw</span>, <span class="no">backward_linkages</span>, <span class="no">values</span>)[-<span class="fl">1</span>,])
+<span class="va">de_bw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/backward_linkages.html">backward_linkages</a></span><span class="op">(</span><span class="va">I_de</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">de_bw</span>, <span class="va">backward_linkages</span>, <span class="va">values</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt;         backward_linkages           values</span>
 <span class="co">#&gt; 2       agriculture_group 1.70492243301356</span>
 <span class="co">#&gt; 3          industry_group  1.8414208680286</span>
 <span class="co">#&gt; 4            construction 1.81374666684297</span>
 <span class="co">#&gt; 5             trade_group 1.60371174683177</span>
 <span class="co">#&gt; 6 business_services_group 1.59497385374824</span>
-<span class="co">#&gt; 7    other_services_group 1.37837464728208</span></pre></body></html></div>
+<span class="co">#&gt; 7    other_services_group 1.37837464728208</span></code></pre></div>
 <blockquote>
 <p>You can check the results against Table 15.19 on page 506 of the Eurostat Manual.</p>
 </blockquote>
@@ -935,18 +957,19 @@ other_services_group
 <h3 class="hasAnchor">
 <a href="#forward-linkages" class="anchor"></a>Forward linkages</h3>
 <p>Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">de_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span> (
-  <span class="no">data_table</span>, <span class="st">"final_demand"</span>, <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">4</span>
-  )
-
-<span class="fu"><a href="../reference/forward_linkages.html">forward_linkages</a></span> ( <span class="kw">output_coefficient_matrix</span> <span class="kw">=</span> <span class="no">de_out</span> )
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span> <span class="op">(</span> 
+  <span class="va">data_table</span>, <span class="st">"final_demand"</span>, digits <span class="op">=</span> <span class="fl">4</span>
+  <span class="op">)</span>
+                                    
+<span class="fu"><a href="../reference/forward_linkages.html">forward_linkages</a></span> <span class="op">(</span> output_coefficient_matrix <span class="op">=</span> <span class="va">de_out</span> <span class="op">)</span>
 <span class="co">#&gt;              iotables_row forward_linkages</span>
 <span class="co">#&gt; 1       agriculture_group         2.112754</span>
 <span class="co">#&gt; 2          industry_group         1.690891</span>
 <span class="co">#&gt; 3            construction         1.355896</span>
 <span class="co">#&gt; 4             trade_group         1.584989</span>
 <span class="co">#&gt; 5 business_services_group         2.104036</span>
-<span class="co">#&gt; 6    other_services_group         1.210504</span></pre></body></html></div>
+<span class="co">#&gt; 6    other_services_group         1.210504</span></code></pre></div>
 <blockquote>
 <p>You can check forward linkages against the Table 15.20 of Eurostat Manual on page 507.</p>
 </blockquote>
@@ -969,7 +992,7 @@ other_services_group
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

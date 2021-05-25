@@ -8,7 +8,7 @@
 #' matrix created by the \code{\link{input_coefficient_matrix_create}} or 
 #' \code{\link{output_coefficient_matrix_create}}.
 #' @importFrom dplyr mutate_at mutate_if
-#' @family analytical object functions
+#' @family analytic object functions
 #' @return A Leontieff matrix of data.frame class. The column names are 
 #' ordered, and the row names are in the first, auxiliary metadata column.
 #' @examples 
@@ -20,8 +20,7 @@
 
 
 leontieff_matrix_create <- function ( technology_coefficients_matrix ) { 
-  . <- funs <- vars <- NULL
-  
+
   key_column <- as.character(unlist (technology_coefficients_matrix[,1]))
   key_column
   
@@ -39,15 +38,16 @@ leontieff_matrix_create <- function ( technology_coefficients_matrix ) {
   
   if ( nrow(Tm) != ncol(Tm)) stop("Error: the input matrix is not symmetric.")
   
+  IminusA <- diag( nrow(Tm) ) - Tm
   
-   IminusA <- diag( nrow(Tm) ) - Tm
-  
-  if ( sum(sapply(IminusA, function(x) sum(is.nan(x)))) > 0) {
+  if ( sum(vapply(IminusA, function(x) sum(is.nan(x)), numeric(1))) > 0 ) {
     warning ("Warning: There are invalid elements in the Leontieff-matrix.")
   }
  
- Leontieff <- cbind(as.data.frame(technology_coefficients_matrix [,1]),
-                    as.data.frame(IminusA))
+ Leontieff <- cbind(
+   as.data.frame(technology_coefficients_matrix [,1]),
+   as.data.frame(IminusA)
+   )
 
  names ( Leontieff)[1] <- names (technology_coefficients_matrix)[1]
  Leontieff[,1] <- as.character(Leontieff[,1])
