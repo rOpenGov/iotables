@@ -92,9 +92,21 @@ The [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/wo
 
 The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the [United Kingdom Input-Output Analytical Tables](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) vignette.
 
-## Contributors
 
-Thanks for [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration. 
+### Contribute
+
+Contributions are very welcome:
+
+  * [Issue tracker](https://github.com/ropengov/iotables/issues) for feedback and bug reports.
+  * [Pull requests](https://github.com/ropengov/iotables/)
+  * [Github page](https://github.com/ropengov/iotables/)
+
+### Acknowledgements
+
+**Kindly cite this work** as follows: [Daniel Antal](https://github.com/antaldaniel). The R package iotables, version `r sessionInfo()$otherPkgs$iotables$Version`. URL: [https://ropengov.github.io/iotables/](https://ropengov.github.io/iotables/)
+
+We are grateful to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and all other [contributors](https://github.com/ropengov/iotables/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.org).
+
 
 ## Code of Conduct
 
