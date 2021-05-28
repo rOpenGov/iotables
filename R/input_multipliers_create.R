@@ -5,7 +5,8 @@
 #' \code{\link{input_indicator_create}}
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
-#' no rounding takes place.  
+#' no rounding takes place. Rounding is important if you replicate examples from the literature,
+#' rounding differences can add up to visible differences in matrix equations.
 #' @importFrom dplyr select mutate_at
 #' @importFrom rlang .data
 #' @return A data frame with the vector of multipliers and the an 
@@ -60,7 +61,10 @@ input_multipliers_create <- function ( input_requirements,
     multipliers[i, ] <- effects[i, ] /  input_requirements_matrix[i,]
   }
   
-  if ( !is.null(digits)) {
+  ## Rounding is important when you compare with peer-reviewed literature sources. 
+  ## You want the same rounding to be able to replicate the results.
+  
+  if ( !is.null(digits) ) {
     if ( digits>=0 ) 
       multipliers <- round ( multipliers, digits )
    }

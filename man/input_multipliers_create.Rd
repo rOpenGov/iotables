@@ -13,7 +13,8 @@ input_multipliers_create(input_requirements, inverse, digits = NULL)
 \item{inverse}{A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.}
 
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
-no rounding takes place.}
+no rounding takes place. Rounding is important if you replicate examples from the literature,
+rounding differences can add up to visible differences in matrix equations.}
 }
 \value{
 A data frame with the vector of multipliers and the an 
