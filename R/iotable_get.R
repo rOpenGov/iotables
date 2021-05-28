@@ -233,7 +233,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       
       germany_1990 <- getdata(germany_1990) 
       labelled_io_data <- germany_1990    # use germany example 
-      labelled_io_data$year = 1990
+      labelled_io_data$year <- 1990
       
     } else if ( source_inputed == "croatia_2010_1700" ) { 
       
@@ -353,8 +353,8 @@ iotable_get <- function ( labelled_io_data = NULL,
 
  ## Converting factors to numbers --------------------------------------
  if ( class(iotable$values) %in% c("character", "factor") ) {
-    iotable$values = trimws(as.character(iotable$values), which = "both")
-    iotable$values = as.numeric(iotable$values)
+    iotable$values <- trimws(as.character(iotable$values), which = "both")
+    iotable$values <- as.numeric(iotable$values)
     message("Warning: original data was converted to numeric format.")
  }
 

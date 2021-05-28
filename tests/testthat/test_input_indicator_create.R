@@ -2,7 +2,7 @@ library (testthat)
 library (iotables)
 context ("Input indicator create")
 
-data_table = iotable_get()
+data_table <- iotable_get()
 
 test_that("correct data is returned", {
   expect_equal(input_indicator_create( data_table = iotable_get(), 
