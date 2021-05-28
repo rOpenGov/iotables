@@ -22,6 +22,7 @@
 #' @importFrom dplyr filter select mutate left_join rename ungroup summarize
 #' @importFrom tidyr spread
 #' @importFrom eurostat get_eurostat
+#' @importFrom rlang .data
 #' @source Eurostat statistic 
 #' \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
 #' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
@@ -48,7 +49,7 @@ employment_get <- function ( geo = "CZ",
                              labelling = 'iotables', 
                              data_directory = NULL,
                              force_download = TRUE) {
-  nace_r2 <- values <- code <- variable <- iotables_label <- NULL
+
   geo_input <- geo; year_input <- year; age_input <- age; sex_input <- sex
   
   if ( ! labelling %in% c("iotables", 'prod_na', 'induse')) {
@@ -59,7 +60,7 @@ employment_get <- function ( geo = "CZ",
                                  tolower(sex_input), '_', 
                                  geo_input, '_', year, '_avg.rds')
   
-  ###Changing to Eurostat in case of GB/UK and GR/EL-------
+  ### Changing to Eurostat in case of GB/UK and GR/EL-------
   if ( geo_input %in% c("GB", "GR")) {
     if (geo_input == "GB") {
       warning ( "Switching GB to Eurostat abbreviation UK.")
@@ -77,7 +78,7 @@ employment_get <- function ( geo = "CZ",
   
   emp <- NULL
   
-##Use data_directory if it exists--------------------------------  
+## Use data_directory if it exists--------------------------------  
   if ( !is.null(data_directory) ) {
     #pre-existing raw data file in the data directory
     emp_file_name <- file.path(data_directory, "lfsq_egan22d.rds") 
@@ -110,7 +111,7 @@ employment_get <- function ( geo = "CZ",
     }  #end case of no forced download
   }  #end case data_directory is not NULL
  
-  ##Forced/new download--------------------------------  
+  ## Forced/new download--------------------------------  
   if ( is.null(emp) ) {
     
     message ( "Downloading employment data from the Eurostat database.")
@@ -132,50 +133,51 @@ employment_get <- function ( geo = "CZ",
     }
   }
  
-  ##Geo selection and exception handling--------------------------------  
+ ## Geo selection and exception handling--------------------------------  
  if ( geo_input %in% unique ( emp$geo ) ) {
-    emp <- dplyr::filter ( emp, geo == geo_input )
+    emp <- emp %>% dplyr::filter ( .data$geo == geo_input )
   } else {
     stop ("No employment data found with geo parameter = ", geo_input )
   }
   
   emp$year <- as.numeric(substr(as.character(emp$time), start = 1, stop = 4))
   
-  ##Year selection and exception handling--------------------------------  
+  ## Year selection and exception handling--------------------------------  
   
   if ( year_input %in% unique ( emp$year ) ) {
-    emp <- dplyr::filter ( emp, year == year_input )
+    emp <- emp %>% dplyr::filter ( .data$year == year_input )
   } else {
     stop ("No employment data found with the year parameter = ", year_input )
   }
   
-  ##Age group selection and exception handling--------------------------------  
+  ## Age group selection and exception handling--------------------------------  
   if ( age_input %in% unique ( emp$age ) ) {
-    emp <- dplyr::filter ( emp, age == age_input )
+    emp <- emp %>% dplyr::filter ( .data$age == age_input )
   } else {
     stop ("No employment data found with the age parameter = ", age_input )
   }
   
-  ##Sex variable selection and exception handling-------------------------------- 
+  ## Sex variable selection and exception handling-------------------------------- 
   if ( sex_input %in% unique ( emp$sex ) ) {
-    emp <- dplyr::filter ( emp, sex == sex_input )
+    emp <- emp %>% dplyr::filter ( .data$sex == sex_input )
   } else {
     stop ("No employment data found with sex parameter = ", sex_input )
   }
   
-  ##Missing values changed to 0-------------------------------- 
+  ## Missing values changed to 0-------------------------------- 
   emp$values <- ifelse ( is.na(emp$values), 0, emp$values ) 
   
-  ##Data processing for employment variables-------------------------------- 
+  ## Data processing for employment variables-------------------------------- 
   employment <- emp %>%
-    dplyr::mutate (   nace_r2 = as.character(nace_r2) ) %>%
-    dplyr::group_by ( nace_r2, year ) %>%
-    dplyr::summarize ( values = mean(values)) %>%
-    dplyr::rename ( emp_code = nace_r2 ) %>%
-    dplyr::ungroup ( ) %>%
-    dplyr::left_join ( employment_metadata, by = "emp_code") %>%  # iotables:::employment_metadata
-    dplyr::group_by (  code, variable, iotables_label ) %>%
-    dplyr::summarize ( values = sum(values)) %>%
+    mutate (   nace_r2 = as.character(.data$nace_r2) ) %>%
+    group_by ( .data$nace_r2, .data$year ) %>%
+    summarize ( values = mean(.data$values)) %>%
+    dplyr::rename ( emp_code = .data$nace_r2 ) %>%
+    ungroup ( ) %>%
+    left_join ( employment_metadata, 
+                       by = "emp_code") %>%  # iotables:::employment_metadata
+    dplyr::group_by (  .data$code, .data$variable, .data$iotables_label ) %>%
+    dplyr::summarize ( values = sum(.data$values)) %>%
     dplyr::mutate ( geo = geo_input ) %>%
     dplyr::mutate ( year = year_input ) %>%
     dplyr::mutate ( sex = sex_input ) 
@@ -191,19 +193,19 @@ employment_get <- function ( geo = "CZ",
   }
  
   
-  ##If data_directory exists, save results-------------------------------- 
+  ## If data_directory exists, save results-------------------------------- 
   
   emp_sex <- ifelse ( tolower(sex_input) == "t", "total", 
                       ifelse (tolower(sex_input) == "f", "female", "male" ))
   
 
-  if ( labelling == "iotables" ) {
+  if ( labelling == "iotables" ) { # this is the Eurostat manual-tutorial type labelling format 
     prefix <- data.frame ( 
       iotables_row = paste0("employment_", emp_sex )
     )
     
     primary_employment_input <- employment %>%
-      dplyr::filter ( variable == "prod_na" ) #does not matter which, not used
+      dplyr::filter ( .data$variable == "prod_na" ) #does not matter which, not used
     
     ##No employment for imputed rent column-------------------------------- 
     
@@ -212,40 +214,40 @@ employment_get <- function ( geo = "CZ",
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      dplyr::select ( iotables_label, values ) %>%
-      tidyr::spread ( iotables_label, values )    #use iotables_label in this case
+      dplyr::select ( .data$iotables_label, .data$values ) %>%
+      tidyr::spread ( .data$iotables_label, .data$values )    #use iotables_label in this case
     
-  } else if ( labelling == "prod_na" ){
+  } else if ( labelling == "prod_na" ){  ## this is the product x product labelling format 
     prefix <- data.frame ( 
       prod_na = paste0("employment_", emp_sex )
     )
     
     primary_employment_input <- employment %>%
-      dplyr::filter ( variable == "prod_na" )
+      dplyr::filter ( .data$variable == "prod_na" )
     
     imputed_rent <- data.frame ( 
       CPA_L68A = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      dplyr::select ( code, values ) %>%
-      tidyr::spread ( code, values )     #use code for standard Eurostat library
+      dplyr::select ( .data$code, .data$values ) %>%
+      tidyr::spread ( .data$code, .data$values )     #use code for standard Eurostat library
     
-  } else if (labelling == "induse" ) {
+  } else if (labelling == "induse" ) {  # this is the industry x industry labelling format
     prefix <- data.frame ( 
       induse = paste0("employment_", emp_sex )
     )
     
     primary_employment_input <- employment %>%
-      dplyr::filter ( variable == "induse" )
+      dplyr::filter ( .data$variable == "induse" )
     
     imputed_rent <- data.frame ( 
       L68A = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      dplyr::select ( code, values ) %>%
-      tidyr::spread ( code, values )      #use code for standard Eurostat library
+      dplyr::select ( .data$code, .data$values ) %>%
+      tidyr::spread ( .data$code, .data$values )      #use code for standard Eurostat library
     
   } else {
     warning("No L68A was added.")
