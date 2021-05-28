@@ -85,7 +85,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
-  row_order <- col_order <- code <- numeric_label <- label <- NULL
+  row_order <- col_order <- code <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
   if ( labelling == 'eurostat' ) labelling <- 'short'
