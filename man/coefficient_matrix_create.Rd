@@ -27,8 +27,8 @@ if it exists in the matrix.}
 digits. Default is \code{NULL} when no rounding is applied.}
 
 \item{remove_empty}{Defaults to \code{TRUE}. If you want to keep empty 
-primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-removed to avoid division by zero error in the analytic functions.}
+primary input rows, choose \code{FALSE}. Empty product/industry rows are
+always removed to avoid division by zero error in the analytic functions.}
 
 \item{households}{Defaults to \code{NULL}. Household column can be added 
 with \code{TRUE}.}
@@ -39,8 +39,9 @@ or \code{"industry"} to return an input coefficient matrix or
 proportional primary inputs.}
 }
 \value{
-A data.frame that contains the matrix of  \code{data_table} divided by \code{total}
-with a key column. Optionally the results are rounded to given \code{digits}.
+A data.frame that contains the matrix of  \code{data_table} divided 
+by \code{total} with a key column. Optionally the results are rounded to 
+given \code{digits}.
 }
 \description{
 Create a coefficient matrix from a Symmetric Input-Output Table. The
@@ -49,9 +50,9 @@ this to total supply or other total aggregate if it exists
 in your table.#'
 }
 \examples{
-coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
-                            total = "output", 
-                            digits = 4 )
+coefficient_matrix_create(data_table = iotable_get(source = "germany_1990"), 
+                          total = "output", 
+                          digits = 4 )
 }
 \references{
 See 

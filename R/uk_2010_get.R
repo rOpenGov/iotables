@@ -42,8 +42,8 @@ uk_2010_get <- function ( path = NULL )  {
                          mod = 'wb') 
     }
     
-  metadata_skip = 1
-  column_spec_skip = 5
+  metadata_skip <- 1
+  column_spec_skip <- 5
   
   for ( i in 2:8 ) {
     data_skip <- column_spec_skip + 1

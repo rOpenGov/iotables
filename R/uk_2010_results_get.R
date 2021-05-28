@@ -37,9 +37,9 @@ uk_2010_results_get <- function ( path = NULL )  {
                          mod = 'wb') 
     }
     
-  metadata_skip = 1
-  column_spec_skip = 5
-  i=9
+  metadata_skip <- 1
+  column_spec_skip <- 5
+  i <- 9
   data_skip <- column_spec_skip + 1
   
   uk_metadata <- readxl::read_excel ( path,

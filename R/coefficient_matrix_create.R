@@ -18,21 +18,22 @@
 #' \code{"primary_inputs"} to get only the total intermediate use and 
 #' proportional primary inputs.
 #' @param remove_empty Defaults to \code{TRUE}. If you want to keep empty 
-#' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-#' removed to avoid division by zero error in the analytic functions.
+#' primary input rows, choose \code{FALSE}. Empty product/industry rows are
+#' always removed to avoid division by zero error in the analytic functions.
 #' @param households Defaults to \code{NULL}. Household column can be added 
 #' with \code{TRUE}.
-#' @return A data.frame that contains the matrix of  \code{data_table} divided by \code{total}
-#' with a key column. Optionally the results are rounded to given \code{digits}. 
+#' @return A data.frame that contains the matrix of  \code{data_table} divided 
+#' by \code{total} with a key column. Optionally the results are rounded to 
+#' given \code{digits}. 
 #' @importFrom dplyr mutate mutate_if funs left_join
 #' @references See 
 #' \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
 #' @family indicator functions
 #' @examples 
-#' coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
-#'                             total = "output", 
-#'                             digits = 4 )
+#' coefficient_matrix_create(data_table = iotable_get(source = "germany_1990"), 
+#'                           total = "output", 
+#'                           digits = 4 )
 #' @export 
 
 coefficient_matrix_create <- function ( data_table, 

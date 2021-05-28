@@ -87,21 +87,21 @@ create_knitr_table <- function (
     
     #Create default column alignment settings if necessary
     if ( is.null(col_align)) {
-      col_align = c('l', rep('c', (ncol(data_table)-1)))
+      col_align <- c('l', rep('c', (ncol(data_table)-1)))
     }
     
     #Create default column alignment settings if necessary
     if ( is.null(border_right_cols) ) {
-      border_right_cols = c(TRUE, rep(FALSE, ncol(data_table)-1))
+      border_right_cols <- c(TRUE, rep(FALSE, ncol(data_table)-1))
     }
     
     #Create default column alignment settings if necessary
     if ( is.null(bold_cols) ) {
-      bold_cols = rep(FALSE, ncol(data_table))
+      bold_cols <- rep(FALSE, ncol(data_table))
     }
     
     if ( is.null(col_width)){
-      col_width = c(2, 18/(ncol(data_table)-1))
+      col_width <- c(2, 18/(ncol(data_table)-1))
     }
     
     #Create default digit settings----

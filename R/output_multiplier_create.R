@@ -13,7 +13,7 @@
 
 output_multiplier_create <- function ( input_coefficient_matrix ) { 
   
-  I = leontieff_inverse_create( input_coefficient_matrix )
+  I <- leontieff_inverse_create( input_coefficient_matrix )
   output_multipliers <- I[1, ]
   output_multipliers[, 2:ncol(output_multipliers)] <- colSums(I[, 2:ncol(input_coefficient_matrix)])
   output_multipliers[, 1] <- "output_multipliers"

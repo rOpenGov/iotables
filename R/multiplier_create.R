@@ -50,7 +50,7 @@ multiplier_create <- function ( input_vector,
        multipliers <- round(multipliers, digits)
   }
  names (multipliers) <- names(Im)[2:ncol(Im)]
- row_name =  as.data.frame(multiplier_name)
+ row_name <- as.data.frame(multiplier_name)
  names (row_name)[1] <- names(input_vector)[1]
  
  named_multipliers <- cbind ( row_name, multipliers )
