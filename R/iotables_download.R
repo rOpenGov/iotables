@@ -88,14 +88,14 @@ iotables_download <- function ( source = "naio_10_cp1700",
   downloaded_labelled <- downloaded  %>%
     eurostat::label_eurostat (., fix_duplicated = TRUE) %>%   #add meaningful labels to raw data
     stats::setNames( ., paste0( names (.), "_lab" ) )    %>%  
-    dplyr::mutate ( rows = 1:nrow(.) ) %>%  #because long and wide formats are not symmetric
+    dplyr::mutate ( rows = seq_len(nrow(.)) ) %>%  #because long and wide formats are not symmetric
     dplyr::rename ( values = values_lab ) %>%
     dplyr::mutate ( year = lubridate::year( time_lab ))
   
   #join the labelled and the not labelled files, so that both versions are avialable
   
   downloaded <- downloaded  %>%
-    dplyr::mutate ( rows = 1:nrow(.)) %>%
+    dplyr::mutate ( rows = seq_len(nrow(.)) ) %>%
     dplyr::left_join (., downloaded_labelled, by = c("rows", "values"))
   #message ("Joined labelled and not labelled data.")
   

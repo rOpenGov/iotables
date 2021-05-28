@@ -109,7 +109,7 @@ coefficient_matrix_create <- function ( data_table,
   if (households == TRUE)  last_column <- last_column+1
   ###The actual creation of the coefficients-----
   
-  for ( i in 1:nrow(data_table) ) {
+  for ( i in seq_len(nrow(data_table)) ) {
     coeff_matrix[i,2:last_column] <-  coeff_matrix[i,2:last_column] / as.numeric(total_row[2:last_column])
   }
  

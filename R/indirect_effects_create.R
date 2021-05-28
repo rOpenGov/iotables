@@ -52,7 +52,7 @@ indirect_effects_create <- function ( input_requirements,
   multipliers <- effects
   indirect_effects <- effects
   
-  for ( i in 1:nrow(effects)) {
+  for ( i in seq_len(nrow(effects))) {
     multipliers[i, ] <- effects[i, ] /  input_requirements_matrix[i,]
     indirect_effects[i, ] <- multipliers[i,] - effects[i,]
   }

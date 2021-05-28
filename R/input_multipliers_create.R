@@ -57,7 +57,7 @@ input_multipliers_create <- function ( input_requirements,
   effects <- input_requirements_matrix %*% inverse 
   multipliers <- effects
   
-  for ( i in 1:nrow(effects)) {
+  for ( i in seq_len(nrow(effects))) {
     multipliers[i, ] <- effects[i, ] /  input_requirements_matrix[i,]
   }
   
