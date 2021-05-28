@@ -13,6 +13,7 @@
 #' product names for matching.
 #' @importFrom dplyr select mutate mutate_if full_join
 #' @importFrom tidyr spread
+#' @importFrom tidyselect one_of
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
 #' @examples
