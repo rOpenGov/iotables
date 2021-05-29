@@ -41,7 +41,13 @@ temporary directory.
 }
 }
 \examples{
-iotables_metadata_get ( source = "naio_10_cp1700" )
+\donttest{
+# The table must be present in the sessions' temporary directory:
+iotables_download(source = "naio_10_cp1700")
+
+# Now you can get the metadata:
+iotables_metadata_get (source = "naio_10_cp1700")
+} 
 }
 \seealso{
 Other iotables import functions: 

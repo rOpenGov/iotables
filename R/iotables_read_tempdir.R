@@ -24,7 +24,12 @@
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
 #' @family iotables import functions
 #' @examples
+#' \donttest{
+#' # The table must be present in the sessions' temporary directory:
+#' iotables_download(source = "naio_10_cp1700")
+#' 
 #' iotables_read_tempdir ( source = "naio_10_cp1700" )
+#' }
 #' @export
 
 iotables_read_tempdir <- function( source = "naio_10_cp1700" ) {

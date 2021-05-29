@@ -30,7 +30,13 @@
 #' @importFrom tidyr unnest
 #' @family iotables import functions
 #' @examples
-#' iotables_metadata_get ( source = "naio_10_cp1700" )
+#' \donttest{
+#' # The table must be present in the sessions' temporary directory:
+#' iotables_download(source = "naio_10_cp1700")
+#' 
+#' # Now you can get the metadata:
+#' iotables_metadata_get (source = "naio_10_cp1700")
+#' } 
 #' @export
 
 iotables_metadata_get <- function (dat = NULL, 
