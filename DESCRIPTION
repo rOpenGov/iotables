@@ -8,6 +8,10 @@ Authors@R:
              comment = c(ORCID = "0000-0001-7513-6760")),
       person(given = "Kasia",
              family = "Kulma",
+             role = "ctb", 
+             comment = c(ORCID = "0000-0002-2952-9720")),
+      person(given = "Pyry",
+             family = "Kantanen", 
              role = "ctb"))
 Maintainer: Daniel Antal <daniel.antal@ceemid.eu>  
 Description: Pre-processing and basic analytical tasks related to working
