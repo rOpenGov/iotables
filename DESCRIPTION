@@ -2,13 +2,18 @@ Package: iotables
 Type: Package
 Title: Importing and Manipulating Symmetric Input-Output Tables
 Version: 0.4.4
-Authors@R: person("Daniel", "Antal", role = c("aut", "cre"),
-    email = "daniel.antal@ceemid.eu", 
-    comment = c(ORCID = "0000-0001-7513-6760"))
+Authors@R:
+    c(person("Daniel", "Antal", role = c("aut", "cre"),
+             email = "daniel.antal@ceemid.eu", 
+             comment = c(ORCID = "0000-0001-7513-6760")),
+      person(given = "Kasia",
+             family = "Kulma",
+             role = "ctb"))
 Maintainer: Daniel Antal <daniel.antal@ceemid.eu>  
-Description: Pre-processing and basic analytical tasks related to working with Eurostat's symmetric input-output
-    tables and provide basic input-output economics calculations. The package is 
-    a part of rOpenGov <http://ropengov.github.io/> to open source open government initiatives.
+Description: Pre-processing and basic analytical tasks related to working
+    with Eurostat's symmetric input-output tables and provide basic
+    input-output economics calculations. The package is part of rOpenGov
+    <http://ropengov.github.io/> to open source open government initiatives.
 URL: http://iotables.dataobservatory.eu/
 BugReports: https://github.com/rOpenGov/iotables/issues
 License: MIT + file LICENSE
