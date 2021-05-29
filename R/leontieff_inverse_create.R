@@ -38,7 +38,7 @@ leontieff_inverse_create <- function ( technology_coefficients_matrix,
     mutate_if (is.factor, as.character)
   
   names ( named_inverse ) <- names (leontieff_matrix)
-  row.names ( named_inverse ) <- 1:nrow(named_inverse)
+  row.names ( named_inverse ) <- seq_len(nrow(named_inverse))
   
  if ( is.null(digits) ) return (named_inverse)
   

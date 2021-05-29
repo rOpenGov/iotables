@@ -83,7 +83,7 @@ output_coefficient_matrix_create <- function ( io_table,
 
   #forward linkeages on p507
   ##Avoid division by zero with epsilon-----
-  io_table <- vapply ( io_table[1:nrow(io_table), c(2:last_column)],
+  io_table <- vapply ( io_table[seq_len(nrow(io_table)), c(2:last_column)],
                  null_to_eps, numeric (nrow(io_table)) )
   
   output_coeff <- apply (  io_table, 2,
