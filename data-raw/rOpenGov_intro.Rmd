@@ -12,9 +12,8 @@ library(eurostat)
 library(dplyr)
 ```
 
-## R Markdown
 
-We have released a new verison iotables, our package to work with European symmetric input-output tables (SIOTS).  You can calculate direct and indirect employment effects or value added effects of government grant programs to restart certain sectors, such as performing arts, after the the pandemic.  Policy-makers can make more than educated guesses on how much a million euros, pounds or korunas spent on a certain sector will impact the country’s employment or GDP.
+We have released a new verison [iotables](https://iotables.dataobservatory.eu/), a package of the [rOpenGov](http://ropengov.org/), the community of R package developers on open government data analytics and related topics.  The package, as the name suggests, work with European symmetric input-output tables (SIOTS).  You can calculate direct and indirect employment effects or value added effects of government grant programs to restart certain sectors, such as performing arts, after the the pandemic.  Policy-makers can make more than educated guesses on how much a million euros, pounds or korunas spent on a certain sector will impact the country’s employment or GDP.
 
 The SIOTs are the most complex governmental statistical products that exists.  They are estimated from various components of the GDP, tax collection, and other sources to understand how the economy’s 64 sectors are interrelated to each other.  What happens when a bank starts to make new loans and advertises it?  When the marketing agency gets paid, and pays its staff, what happens when they start to pay that money in the reopening restaurants. What is expected to fall on culture?
 
