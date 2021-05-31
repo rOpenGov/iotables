@@ -4,7 +4,7 @@ Title: Importing and Manipulating Symmetric Input-Output Tables
 Version: 0.4.4
 Authors@R:
     c(person("Daniel", "Antal", role = c("aut", "cre"),
-             email = "daniel.antal@ceemid.eu", 
+             email = "daniel.antal@dataobservatory.eu", 
              comment = c(ORCID = "0000-0001-7513-6760")),
       person(given = "Kasia",
              family = "Kulma",

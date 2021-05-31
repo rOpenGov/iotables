@@ -4,6 +4,10 @@
 * Mac OS X 10.15.7 on Github (r-version: release)
 * ubuntu 20.04 on Github (r-version: release)
 * ubuntu 20.04 on Github (r-version: devel)
+* r_hub: Ubuntu Linux 20.04.1 LTS, R-release, GCC
+* r_hub: Ubuntu Linux 20.04.1 LTS, R-release, GCC
+
+On Windows Server 2008 R2 SP1, R-devel, 32/64 bit bBuild failed during preparation, we believe that this is an r_hub setting error, as our local and github Windows tests had no issues.
 
 ## testthat results
 FAIL 0 | WARN 0 | SKIP 0 | PASS 48 
