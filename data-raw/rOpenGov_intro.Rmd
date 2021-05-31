@@ -1,7 +1,7 @@
 ---
 title: "rOpenGov Intro"
 author: "Daniel Antal, CFA"
-date: "5/31/2021"
+date: "2021-05-31"
 output: html_document
 ---
 
@@ -13,15 +13,19 @@ library(dplyr)
 ```
 
 
-We have released a new verison [iotables](https://iotables.dataobservatory.eu/), a package of the [rOpenGov](http://ropengov.org/), the community of R package developers on open government data analytics and related topics.  The package, as the name suggests, work with European symmetric input-output tables (SIOTS).  You can calculate direct and indirect employment effects or value added effects of government grant programs to restart certain sectors, such as performing arts, after the the pandemic.  Policy-makers can make more than educated guesses on how much a million euros, pounds or korunas spent on a certain sector will impact the country’s employment or GDP.
+We have released a new version of [iotables](https://iotables.dataobservatory.eu/) as part of the [rOpenGov](http://ropengov.org/) project. The package, as the name suggests, works with European symmetric input-output tables (SIOTs). SIOTs are among the most complex governmental statistical products and they are estimated from various components of the GDP, tax collection, and other sources to understand how the economy’s 64 sectors are interrelated to each other.
 
-The SIOTs are the most complex governmental statistical products that exists.  They are estimated from various components of the GDP, tax collection, and other sources to understand how the economy’s 64 sectors are interrelated to each other.  What happens when a bank starts to make new loans and advertises it?  When the marketing agency gets paid, and pays its staff, what happens when they start to pay that money in the reopening restaurants. What is expected to fall on culture?
+SIOTs offer great value to policy-makers and analysts to make more than educated guesses on how a million euros, pounds or Czech korunas spent on a certain sector will impact other sectors of the economy, employment or GDP. What happens when a bank starts to give new loans and advertise them? How is an increase in economic activity going to affect the amount of wages paid and and where will consumers most likely spend their wages?
+ 
+A topical area of interest, as the national economies begin to reopen after COVID-19 pandemic lockdowns, is to utilize SIOTs to calculate direct and indirect employment effects or value added effects of government grant programs to sectors such as cultural and creative industries or actors such as venues for performing arts, movie theaters, bars and restaurants.
 
-Making such cacluations requries a bit of matrix algebra, and understanding of input-output economics, direct, indirect effects, and multipliers.  Many economists, grant designers, policy makers have those skills, but until now, such calcualtions were either made in cumbersome Excel sheets, or proprietary software, as the key to these calculations is to keep vectors and matrixes which have at least one dimension of 64 perfectly aligned. 
+Making such calculations requires a bit of matrix algebra, and understanding of input-output economics, direct, indirect effects, and multipliers. Economists, grant designers, policy makers have those skills, but until now, such calculations were either made in cumbersome Excel sheets, or proprietary software, as the key to these calculations is to keep vectors and matrices, which have at least one dimension of 64, perfectly aligned.
 
-## Programatically access and tidy the data
+## Accessing and tidying the data programmatically
 
-The iotables package is in a way an extension to the rOpenGov pacakge eurostat, which provides a programmatic access to the Eurostat data warehouse.  The reason why we had to release a new pacakge is that while working with simple datasets, or even more complex data ‘folders’ in the data warehouse is a trivial task, working with SIOTs requires plenty of meticolous data wrangling. If you work with matrix equations, the requirements are more strict than “just working” wiht tidy data. Not only your rows and columns must match, but their ordering must strictly conform the quadrants of the a matrix system, including the connecting trade or tax matrice.
+The iotables package is in a way an extension to the [rOpenGov package eurostat]( https://CRAN.R-project.org/package=eurostat), which provides a programmatic access to the [Eurostat](https://ec.europa.eu/eurostat) data warehouse. The reason for releasing a new package is that while working with simple datasets, or even more complex data ‘folders’ in the data warehouse is a trivial task, working with SIOTs requires plenty of meticulous data wrangling. 
+
+When working with matrix equations, the requirements are more strict than “just working” with tidy data. Not only your rows and columns must match, but their ordering must strictly conform the quadrants of the a matrix system, including the connecting trade or tax matrices.
 
 When you download a country’s SIOT table, you receive a long form data.frame, a very-very long one, which contains the matrix values and their labels like this:
 
@@ -34,18 +38,19 @@ saveRDS( cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
 # should you need to retrieve the large tempfiles, they are in 
 dir (file.path(tempdir(), "eurostat"))
 ```
-```{r show-head}
-dplyr::slice_head ( cp1700, n = 5)
+```{r show-head, eval=FALSE}
+dplyr::slice_head(cp1700, n = 5)
 ```
-The metadata read like this:  the units are in millions of euros, we are analyzing domestic flows, and the national account itmems `B1-B2` for the industry `A01`. Our package not only labels this data meaningfully, but creates very tidy dataframes. 
 
-Because the tidy data frames will be used in matrix algebraic equations, they do not "only" have to be tidy, but the information of a 64x64 matrix (the SIOT) and its connecting matrixes, such as taxes, or employment, or $CO_{2}$ emissions, must be placed exactly in one correct ordering of columns and rows.  Every single data wrangling error will usually lead in an error (the matrix equation has no solution), or, what is worse, in a very difficult to trace algebraic error. 
+The metadata reads like this: the units are in millions of euros, we are analyzing domestic flows, and the national account items `B1-B2` for the industry `A01`. Our package not only labels this data meaningfully, but creates very tidy data frames. 
 
-Our package contains the vocabularies (abbreviations and human readable labels) of three statistical vocabularies: the so called COICOP product codes, the NACE industry codes, and the vocabulary of national accounts (which is the government equivalent of corporate accounting.)
+Because the tidy data frames will be used in matrix algebraic equations, they do not only have to be tidy, but the information of a 64x64 matrix (the SIOT) and its connecting matrices, such as taxes, or employment, or $CO_{2}$ emissions, must be placed exactly in one correct ordering of columns and rows. Every single data wrangling error will usually lead in an error (the matrix equation has no solution), or, what is worse, in a very difficult to trace algebraic error. 
 
-Most of the package functions are therefore metadata functions that filter out the relevant informaiton from the warehouse and put them into matrixes, where the column names refer to the SIOT or connecting matrix/vector columns, and the first (key) column provides the labelling information for the rows. Then, when the data is in the rigth format, we have simple functions that are removing the key column from the data frames, and solve the necessary matrix equations. 
+iotables package contains the vocabularies (abbreviations and human readable labels) of three statistical vocabularies: the so called COICOP product codes, the NACE industry codes, and the vocabulary of national accounts (which is the government equivalent of corporate accounting).
 
-Our package currently solves all equations for direct, indirect effects, multipliers and inter-industry linkages.  Backward linkages show what happens with the suppliers of an industry, such catering or advertising in the case of music festivals, if the festivals reopen.  The foward linkages show how much extra demand this creates for connecting services that treat festivals as a ‘supplier’, such as cultural tourism.
+Most of the package functions are therefore metadata functions that filter out the relevant information from the warehouse and put them into matrices, where the column names refer to the SIOT or connecting matrix/vector columns, and the first (key) column provides the labeling information for the rows. Then, when the data is in the right format, we have simple functions that are removing the key column from the data frames, and solve the necessary matrix equations. 
+
+Our package currently solves all equations for direct, indirect effects, multipliers and inter-industry linkages. Backward linkages show what happens with the suppliers of an industry, such as catering or advertising in the case of music festivals, if the festivals reopen. The forward linkages show how much extra demand this creates for connecting services that treat festivals as a ‘supplier’, such as cultural tourism.
 
 ## Examples 
 
@@ -53,7 +58,7 @@ The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.htm
 
 The [United Kingdom Input-Output Analytical Tables Daniel Antal, based on the work edited by Richard Wild](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) is a use case on how to correctly import data from outside Eurostat (i.e. not with `eurostat::get_eurostat()`) and join it properly to a SIOT.  We also used this example to create unit tests of our functions from a published, official government statistical release. 
 
-At last, [Working With Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) is a detailed use case of working with all the current functionalities of the package by comparing two economies, Czechia and Slovakia. 
+Finally, [Working With Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) is a detailed use case of working with all the current functionalities of the package by comparing two economies, Czechia and Slovakia. 
 
 ## Further plans
 
@@ -61,6 +66,6 @@ Our package allows the calculation of various economic policy scenarios, such as
 
 But what about the CO2, methane and other greenhouse gas effects of the reopening festivals, or the increasing meat prices?
 
-Technically our package can already calculate such effects, but to do so, you have to carefully match further statistical vocabulary items used by the European Environmental Agency about air pollutants and greenhouse gases. 
+Technically our package can already calculate such effects, but to do so, you have to carefully match further statistical vocabulary items used by the European Environmental Agency about air pollutants and greenhouse gases.
 
-In the next major release of the package we are planning to build in the necessary vocabulary into the metadata functions to increas the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.  We hope to win the [EU Datathon Challenge 3: A European Green Deal](https://greendeal.dataobservatory.eu/) with creating an open-source data-as-service application with API to such difficult to use, high-value open data.  We would be very happy to see our users as contributors to this endavor.
+In the next major release of the package we are planning to build in the necessary vocabulary into the metadata functions to increase the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.  We hope to win the [EU Datathon Challenge 3: A European Green Deal](https://greendeal.dataobservatory.eu/) with creating an open-source data-as-service application with API to such difficult to use, high-value open data.  We would be very happy to see our users as contributors to this endeavor.
