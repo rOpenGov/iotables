@@ -13,7 +13,7 @@ Authors@R:
       person(given = "Pyry",
              family = "Kantanen", 
              role = "ctb"))
-Maintainer: Daniel Antal <daniel.antal@ceemid.eu>  
+Maintainer: Daniel Antal <daniel.antal@dataobservatory.eu>  
 Description: Pre-processing and basic analytical tasks related to working
     with Eurostat's symmetric input-output tables and provide basic
     input-output economics calculations. The package is part of rOpenGov
