@@ -58,7 +58,7 @@ The function will make a copy of the rds file in this directory.
 }
 }
 \examples{
-\dontrun{
+\donttest{
  io_tables <- iotables_download ( source = "naio_10_cp1700" )
  }
 }

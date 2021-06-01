@@ -53,7 +53,7 @@ Download the employment data for a country and arrange it to the
 Currently works only with product x product tables.
 }
 \examples{
-\dontrun{
+\donttest{
  io_tables <- get_employment ( 
                geo = "CZ", 
                year = "2010",

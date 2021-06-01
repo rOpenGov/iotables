@@ -109,7 +109,7 @@ sk_output <- output_get( data_table = sk_io)
 
 By default, total rows and columns are removed when creating use tables. 
 
-## Analytical functions
+## Analytic functions {#analytic-functions}
 
 ### Input coefficients matrix
 
@@ -137,13 +137,13 @@ In the Czech SIOTs, they are removed by the statistical authority, so the Czech 
 
 Most countries do not use the *L_68A*, *CPA_U* [Services provided by extraterritorial organisations and bodies] and *CPA_T* [Services of households as employers; undifferentiated goods and services produced by households for own use]industries, instead they use *L_68B* for the income component of real estates, and they do not calculate the   In order to prevent division by zero errors, they are symmetrically removed from rows and columns.  This will not change the results. 
 
-###Creating the Leontieff-matrix and its inverse
+### Creating the Leontieff-matrix and its inverse {#leontieff-inverse}
 
 The Leontieff matrix is derived from Leontieff equation system.  
 
-(19) (I-A)x = y
+(19) $(I-A)x = y$
 
-The Leontieff matrix is defined as (I-A) and it is created with the `leontieff_matrix_create()` function.
+The Leontieff matrix is defined as $(I-A)$ and it is created with the `leontieff_matrix_create()` function.
 
 The Leontieff inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
 
@@ -162,6 +162,7 @@ knitr::kable(head(I_cz[,1:8]))
 You can create the Leontieff-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
 
 ## Direct effect indicators
+
 The direct effects can be compared to intermediate production, domestic product or total supply.  
 
 >The calculation follows the Eurostat Manaul on p497-499
@@ -193,10 +194,9 @@ Direct effects measure the initial, direct impact of the change in demand and su
 
 This is not the total effect, because some of the increased production will translate into income, which in turn will be used to create further demand in all parts of the domestic economy. The total effect is characterized by multipliers.
 
-##Total effects 
+## Total effects {#total-effects}
 
-
-###Input multipliers
+### Input multipliers
 The `input_multipliers_create` function will create the various multipliers for each product. 
 
 (63) Z = B(I-A)^-1^ 
@@ -224,7 +224,7 @@ multipliers_sk <- input_multipliers_create( primary_inputs_sk, I_sk )
 knitr::kable (head(multipliers_cz[,1:8]), digits = 4)
 ```
 
-###Employment indicators and multipliers 
+### Employment indicators and multipliers {#employment-multipliers}
 
 The creation of the employment indicator is facilitated with the data processing function `employment_get`. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector. 
 
@@ -265,7 +265,7 @@ knitr::kable (emp_multiplier_cz[1:8], digits=5)
 ```
 
 
-###Output multipliers
+### Output multipliers {#output-multipliers}
 
 ```{r output_multipliers, results='asis'}
 
@@ -275,9 +275,9 @@ output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk)
 knitr::kable (head(output_multipliers_cz[,1:8]), digits=4)
 ```
 
-##Interindustrial linkage analysis
+## Interindustrial linkage analysis {#interindustrial-linkage-analysis}
 
-##Backward linkages
+## Backward linkages {#backward-linkages}
 
 Backward linkages show the effect on industries that are suppliers to the production (industry) in question.
 
@@ -288,7 +288,7 @@ sk_bw <- backward_linkages(I_sk)
 knitr::kable (head(cz_bw[,1:8]), digits=4)
 ```
 
-##Forward linkages
+## Forward linkages {#forward-linkages}
 
 Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table. 
 
@@ -312,7 +312,7 @@ knitr::kable (head(cz_fw), digits=4)
 ```
 
 
-##Write results into Excel files
+## Write results into Excel files
 
 This code will not run, unless you run it separately. The resulting files can be used to check calculations in Excel or other application.
 

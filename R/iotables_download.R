@@ -45,7 +45,7 @@
 #' @importFrom lubridate year
 #' @family iotables import functions
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'  io_tables <- iotables_download ( source = "naio_10_cp1700" )
 #'  }
 #' @export

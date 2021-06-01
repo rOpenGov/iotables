@@ -185,8 +185,8 @@ digits. Default is <code>NULL</code> when no rounding is applied.</p></td>
     <tr>
       <th>remove_empty</th>
       <td><p>Defaults to <code>TRUE</code>. If you want to keep empty 
-primary input rows, choose <code>FALSE</code>. Empty product/industry rows are always 
-removed to avoid division by zero error in the analytic functions.</p></td>
+primary input rows, choose <code>FALSE</code>. Empty product/industry rows are
+always removed to avoid division by zero error in the analytic functions.</p></td>
     </tr>
     <tr>
       <th>households</th>
@@ -204,8 +204,9 @@ proportional primary inputs.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame that contains the matrix of  <code>data_table</code> divided by <code>total</code>
-with a key column. Optionally the results are rounded to given <code>digits</code>.</p>
+    <p>A data.frame that contains the matrix of  <code>data_table</code> divided 
+by <code>total</code> with a key column. Optionally the results are rounded to 
+given <code>digits</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>See 
@@ -218,9 +219,9 @@ for explanation on the use of the Coefficient matrix.</p>
 <code><a href='input_indicator_create.html'>input_indicator_create</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>coefficient_matrix_create</span> <span class='op'>(</span> data_table <span class='op'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span> <span class='op'>(</span> source <span class='op'>=</span> <span class='st'>"germany_1990"</span><span class='op'>)</span>, 
-                            total <span class='op'>=</span> <span class='st'>"output"</span>, 
-                            digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>coefficient_matrix_create</span><span class='op'>(</span>data_table <span class='op'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span>source <span class='op'>=</span> <span class='st'>"germany_1990"</span><span class='op'>)</span>, 
+                          total <span class='op'>=</span> <span class='st'>"output"</span>, 
+                          digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
 </div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
 #&gt; 1          agriculture_group            0.0258         0.0236       0.0000
 #&gt; 2             industry_group            0.1806         0.2822       0.2613

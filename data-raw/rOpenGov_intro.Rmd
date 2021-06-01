@@ -26,10 +26,10 @@ The iotables package is in a way an extension to the rOpenGov pacakge eurostat, 
 When you download a country’s SIOT table, you receive a long form data.frame, a very-very long one, which contains the matrix values and their labels like this:
 
 ```{r get-data, eval=FALSE}
-cp1700 <- eurostat::get_eurostat("naio_10_cp1700")
+naio_10_cp1700 <- eurostat::get_eurostat("naio_10_cp1700")
 
 # we save it for further reference here 
-saveRDS( cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
+saveRDS(naio_10_cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
 
 # should you need to retrieve the large tempfiles, they are in 
 dir (file.path(tempdir(), "eurostat"))
@@ -46,6 +46,51 @@ Our package contains the vocabularies (abbreviations and human readable labels) 
 Most of the package functions are therefore metadata functions that filter out the relevant informaiton from the warehouse and put them into matrixes, where the column names refer to the SIOT or connecting matrix/vector columns, and the first (key) column provides the labelling information for the rows. Then, when the data is in the rigth format, we have simple functions that are removing the key column from the data frames, and solve the necessary matrix equations. 
 
 Our package currently solves all equations for direct, indirect effects, multipliers and inter-industry linkages.  Backward linkages show what happens with the suppliers of an industry, such catering or advertising in the case of music festivals, if the festivals reopen.  The foward linkages show how much extra demand this creates for connecting services that treat festivals as a ‘supplier’, such as cultural tourism.
+
+## Let's seen an example
+
+```{r employment-get, message=FALSE}
+emp_sk <- employment_get(geo = "SK", year = "2019", sex = "Total",
+                         age = "Y_GE15", labelling = "prod_na",
+                         data_directory = NULL,
+                         force_download = TRUE)
+
+```
+
+and match it with the latest structural information on from the [Symmetric input-output table at basic prices (product by product)](http://appsso.eurostat.ec.europa.eu/nui/show.do?wai=true&dataset=naio_10_cp1700) Eurostat product. A quick look at the Eurostat website already shows that there is a lot of work ahead to make the data look like an actual Symmetric input-output table. Download it with `iotable_get()` which does basic labelling and preprocessing on the raw Eurostat files. Because of the size of the unfiltered dataset on Eurostat, the following code may take several minutes to run.
+
+```{r get-Slovak-table}
+sk_io <-  iotable_get ( labelled_io_data = NULL, 
+                        source = "naio_10_cp1700", geo = "SK", 
+                        year = 2015, unit = "MIO_EUR", 
+                        stk_flow = "TOTAL",
+                        labelling = "iotables" )
+```
+The `input_coefficient_matrix_create()` creates the input coefficient matrix, which is used for most of the analytical functions. It performs the following equation, as it is numbered in the Eurostat Manual.
+
+(9)  $a_{ij}$ = $X_{ij}$ / $x_j$  [recap: (43) is the same]
+
+It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero. 
+
+```{r}
+input_coeff_matrix_sk <- input_coefficient_matrix_create(
+  data_table = sk_io
+)
+```
+```{r}
+I_sk <- leontieff_inverse_create( input_coeff_matrix_sk )
+```
+```{r}
+primary_inputs_sk <- coefficient_matrix_create(
+  data_table = sk_io, 
+  total = 'output', 
+  return = 'primary_inputs')
+```
+```{r}
+multipliers_sk <- input_multipliers_create( primary_inputs_sk, I_sk ) 
+```
+
+
 
 ## Examples 
 

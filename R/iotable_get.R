@@ -80,7 +80,6 @@ iotable_get <- function ( labelled_io_data = NULL,
                           force_download = TRUE) { 
   
   ## Initialize NSE variables -----------------------------------------
-  values  <- .<-  NULL #non-standard evaluation creates a warning in build. 
   #these should be eliminated, but this is a very long code.
   t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
@@ -225,10 +224,10 @@ iotable_get <- function ( labelled_io_data = NULL,
       }
     }
 
-    ##Creating a temporary file name for the input-output table ----
+    ## Creating a temporary file name for the input-output table ----
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
     
-    ##Read from file or internal dataset ----
+    ## Read from file or internal dataset ----
     if ( source_inputed == "germany_1990" ) {
       
       germany_1990 <- getdata(germany_1990) 
@@ -264,7 +263,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     } # use eurostat files 
   } #end of possible downloads or data retrieval if not directly inputed
 
-  ###Exception handling for UK test data----
+  ### Exception handling for UK test data----
   if ( source %in% uk_tables ) {
     if ( source == "uk_2010_siot") {
       labelled_io_data <- labelled_io_data %>%

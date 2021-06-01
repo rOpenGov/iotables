@@ -98,7 +98,7 @@
       <h1 data-toc-skip>Working With Eurostat Data</h1>
                         <h4 class="author">Daniel Antal, CFA</h4>
             
-            <h4 class="date">2021-05-26</h4>
+            <h4 class="date">2021-06-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/working_with_eurostat.Rmd"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
       <div class="hidden name"><code>working_with_eurostat.Rmd</code></div>
@@ -182,9 +182,9 @@
 <span class="va">sk_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_get.html">output_get</a></span><span class="op">(</span> data_table <span class="op">=</span> <span class="va">sk_io</span><span class="op">)</span></code></pre></div>
 <p>By default, total rows and columns are removed when creating use tables.</p>
 </div>
-<div id="analytical-functions" class="section level2">
+<div id="analytic-functions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#analytical-functions" class="anchor"></a>Analytical functions</h2>
+<a href="#analytic-functions" class="anchor"></a>Analytic functions</h2>
 <div id="input-coefficients-matrix" class="section level3">
 <h3 class="hasAnchor">
 <a href="#input-coefficients-matrix" class="anchor"></a>Input coefficients matrix</h3>
@@ -394,12 +394,15 @@ CPA_C13-15
 </table>
 <p>In the Czech SIOTs, they are removed by the statistical authority, so the Czech SIOTs appear smaller.</p>
 <p>Most countries do not use the <em>L_68A</em>, <em>CPA_U</em> [Services provided by extraterritorial organisations and bodies] and <em>CPA_T</em> [Services of households as employers; undifferentiated goods and services produced by households for own use]industries, instead they use <em>L_68B</em> for the income component of real estates, and they do not calculate the In order to prevent division by zero errors, they are symmetrically removed from rows and columns. This will not change the results.</p>
-<p>###Creating the Leontieff-matrix and its inverse</p>
+</div>
+<div id="leontieff-inverse" class="section level3">
+<h3 class="hasAnchor">
+<a href="#leontieff-inverse" class="anchor"></a>Creating the Leontieff-matrix and its inverse</h3>
 <p>The Leontieff matrix is derived from Leontieff equation system.</p>
 <ol start="19" style="list-style-type: decimal">
-<li>(I-A)x = y</li>
+<li><span class="math inline">\((I-A)x = y\)</span></li>
 </ol>
-<p>The Leontieff matrix is defined as (I-A) and it is created with the <code><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create()</a></code> function.</p>
+<p>The Leontieff matrix is defined as <span class="math inline">\((I-A)\)</span> and it is created with the <code><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create()</a></code> function.</p>
 <p>The Leontieff inverse is (I-A)<sup>-1</sup> and it is created with the <code><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create()</a></code> function from the Leontieff-matrix.</p>
 <p>The code chunk below prints a small part of the Czech Leontieff-inverse.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -814,8 +817,14 @@ P51C_effect
 </table>
 <p>Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.)</p>
 <p>This is not the total effect, because some of the increased production will translate into income, which in turn will be used to create further demand in all parts of the domestic economy. The total effect is characterized by multipliers.</p>
-<p>##Total effects</p>
-<p>###Input multipliers The <code>input_multipliers_create</code> function will create the various multipliers for each product.</p>
+</div>
+<div id="total-effects" class="section level2">
+<h2 class="hasAnchor">
+<a href="#total-effects" class="anchor"></a>Total effects</h2>
+<div id="input-multipliers" class="section level3">
+<h3 class="hasAnchor">
+<a href="#input-multipliers" class="anchor"></a>Input multipliers</h3>
+<p>The <code>input_multipliers_create</code> function will create the various multipliers for each product.</p>
 <ol start="63" style="list-style-type: decimal">
 <li>Z = B(I-A)<sup>-1</sup>
 </li>
@@ -1026,7 +1035,10 @@ CPA_C16
 </tr>
 </tbody>
 </table>
-<p>###Employment indicators and multipliers</p>
+</div>
+<div id="employment-multipliers" class="section level3">
+<h3 class="hasAnchor">
+<a href="#employment-multipliers" class="anchor"></a>Employment indicators and multipliers</h3>
 <p>The creation of the employment indicator is facilitated with the data processing function <code>employment_get</code>. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector.</p>
 <p>Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation. The helper function <code>conforming_vector_create</code> will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -1166,7 +1178,10 @@ CPA_C16
 </td>
 </tr></tbody>
 </table>
-<p>###Output multipliers</p>
+</div>
+<div id="output-multipliers" class="section level3">
+<h3 class="hasAnchor">
+<a href="#output-multipliers" class="anchor"></a>Output multipliers</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">output_multipliers_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span><span class="va">input_coeff_matrix_cz</span><span class="op">)</span>
@@ -1227,8 +1242,15 @@ output_multipliers
 </td>
 </tr></tbody>
 </table>
-<p>##Interindustrial linkage analysis</p>
-<p>##Backward linkages</p>
+</div>
+</div>
+<div id="interindustrial-linkage-analysis" class="section level2">
+<h2 class="hasAnchor">
+<a href="#interindustrial-linkage-analysis" class="anchor"></a>Interindustrial linkage analysis</h2>
+</div>
+<div id="backward-linkages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#backward-linkages" class="anchor"></a>Backward linkages</h2>
 <p>Backward linkages show the effect on industries that are suppliers to the production (industry) in question.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cz_bw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/backward_linkages.html">backward_linkages</a></span><span class="op">(</span><span class="va">I_cz</span><span class="op">)</span>
@@ -1289,7 +1311,10 @@ backward linkages
 </td>
 </tr></tbody>
 </table>
-<p>##Forward linkages</p>
+</div>
+<div id="forward-linkages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#forward-linkages" class="anchor"></a>Forward linkages</h2>
 <p>Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_coeff_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span><span class="op">(</span> 
@@ -1305,7 +1330,10 @@ backward linkages
 <span class="va">sk_fw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forward_linkages.html">forward_linkages</a></span><span class="op">(</span> <span class="va">output_coeff_sk</span> <span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cz_fw</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
-<p>##Write results into Excel files</p>
+</div>
+<div id="write-results-into-excel-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#write-results-into-excel-files" class="anchor"></a>Write results into Excel files</h2>
 <p>This code will not run, unless you run it separately. The resulting files can be used to check calculations in Excel or other application.</p>
 <p>The contents of the <a href="https://github.com/rOpenGov/iotables/tree/master/not_included">not_included</a> directory can be found on GitHub, but they are not released and distributed with the package.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">

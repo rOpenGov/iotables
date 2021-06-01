@@ -18,4 +18,5 @@ FAIL 0 | WARN 0 | SKIP 0 | PASS 48
 ## Notes
 This is not a major release.  We made many good practice changes in the code, and update the tidyverse dependencies to dplyr 1.0+, and added rlang .data pronouns for stricter non-standard evaluation. We moved the continous integration from Travis to Github.
 
-We placed two function examples in \donttest{}. These functions (iotables_read_tempdir() nad iotables_metadata_get()) are helper functions for working with downloaded, real-life examples from Eurostat.  Eurostat's original raw data file (saved to tempdir() in the user session) is bigger than 15 MB and it is impractical test on CRAN, but we have tested the functions locally. 
+We placed four function examples in \donttest{}, which are essential to the package but would take often minutes to run.  Eurostat's original raw data file (saved to tempdir() in the user's session) is bigger than 15 MB, and taking out exactly what is needed for working with the package requires very large amounts of data to be download from a sometimes busy API. This would be very impractical test on CRAN, but we have tested the functions locally. 
+These functions (iotables_download(),   iotables_read_tempdir(), iotables_metadata_get(), employment_get()) are helper functions for working with downloaded, real-life examples from Eurostat. 

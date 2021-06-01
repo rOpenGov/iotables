@@ -220,7 +220,7 @@ input-output tables.</p>
 <code><a href='iotables_read_tempdir.html'>iotables_read_tempdir</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
  <span class='va'>io_tables</span> <span class='op'>&lt;-</span> <span class='fu'>get_employment</span> <span class='op'>(</span> 
                geo <span class='op'>=</span> <span class='st'>"CZ"</span>, 
                year <span class='op'>=</span> <span class='st'>"2010"</span>,
@@ -229,7 +229,7 @@ input-output tables.</p>
                data_directory <span class='op'>=</span> <span class='cn'>NULL</span>,
                force_download <span class='op'>=</span> <span class='cn'>TRUE</span>
                <span class='op'>)</span>
- <span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in get_employment(geo = "CZ", year = "2010", sex = "Total", age = "Y_GE15",     data_directory = NULL, force_download = TRUE): could not find function "get_employment"</span></div><div class='input'> <span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

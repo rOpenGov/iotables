@@ -44,11 +44,11 @@ The input coefficient matrix shows what happens in the whole domestic economy wh
 
 > The input coefficients for domestic intermediates are defined on page 486. You can check the following results against Table 15.8 of the Eurostat manual. (Only the top-right corner of the resulting input coefficient matrix is printed for readability.) 
 
-$\sum_{i=1}^n X_i$
+\deqn{sum_{i=1}^n X_i}
 
 The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.
 
-(9)  $a_{ij}$ = $X_{ij}$ / $x_j$  [recap: (43) is the same]
+(9)  \eqn{a_{ij}} = \eqn{X_{ij} / x_{j}}  [recap: (43) is the same]
 
 
 It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero. 
@@ -86,11 +86,11 @@ These results can be checked on page 468 in the Manual.
 
 The Leontieff matrix is derived from Leontieff equation system.  
 
-(19) (I-A)x = y
+(19) \eqn{(I-A)x = y}
 
-The Leontieff matrix is defined as (I-A) and it is created with the `leontieff_matrix_create()` function.
+The Leontieff matrix is defined as \eqn{(I-A)} and it is created with the `leontieff_matrix_create()` function.
 
-The Leontieff inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
+The Leontieff inverse is \eqn{(I-A)^{-1}} and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
 
 ```{r leontieff}
 L_de <- leontieff_matrix_create ( technology_coefficients_matrix =

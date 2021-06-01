@@ -98,7 +98,7 @@
       <h1 data-toc-skip>Germany 1990</h1>
                         <h4 class="author">Daniel Antal, based on the work of Jorg Beutel</h4>
             
-            <h4 class="date">2021-05-26</h4>
+            <h4 class="date">2021-06-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/germany_1990.Rmd"><code>vignettes/germany_1990.Rmd</code></a></small>
       <div class="hidden name"><code>germany_1990.Rmd</code></div>
@@ -139,11 +139,9 @@
 <blockquote>
 <p>The input coefficients for domestic intermediates are defined on page 486. You can check the following results against Table 15.8 of the Eurostat manual. (Only the top-right corner of the resulting input coefficient matrix is printed for readability.)</p>
 </blockquote>
-<p><span class="math inline">\(\sum_{i=1}^n X_i\)</span></p>
 <p>The <code><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create()</a></code> function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.</p>
 <ol start="9" style="list-style-type: decimal">
-<li>
-<span class="math inline">\(a_{ij}\)</span> = <span class="math inline">\(X_{ij}\)</span> / <span class="math inline">\(x_j\)</span> [recap: (43) is the same]</li>
+<li> =  [recap: (43) is the same]</li>
 </ol>
 <p>It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -183,10 +181,10 @@
 <p>These results can be checked on page 468 in the Manual.</p>
 <p>The Leontieff matrix is derived from Leontieff equation system.</p>
 <ol start="19" style="list-style-type: decimal">
-<li>(I-A)x = y</li>
+<li>
 </ol>
-<p>The Leontieff matrix is defined as (I-A) and it is created with the <code><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create()</a></code> function.</p>
-<p>The Leontieff inverse is (I-A)<sup>-1</sup> and it is created with the <code><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create()</a></code> function from the Leontieff-matrix.</p>
+<p>The Leontieff matrix is defined as  and it is created with the <code><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create()</a></code> function.</p>
+<p>The Leontieff inverse is  and it is created with the <code><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create()</a></code> function from the Leontieff-matrix.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">L_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create</a></span> <span class="op">(</span> technology_coefficients_matrix <span class="op">=</span>
                                  <span class="va">de_input_coeff</span> <span class="op">)</span>
