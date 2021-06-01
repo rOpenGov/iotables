@@ -2,7 +2,7 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 * Added Contributor Code of Conduct in `CONDUCT.md`
-* Some functions have parallel versions, and will be brought to [rOpenSci](https://github.com/ropensci/onboarding) naming conventions (`object_verb()`)
+* Some functions have parallel versions, and will be brought to [rOpenSci](https://github.com/ropensci/software-review) naming conventions (`object_verb()`)
 * Asked to join [rOpenGov](http://ropengov.github.io/) - excited but inexperienced in this!
 
 # iotables 0.1.4
@@ -67,7 +67,7 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * Better exception handling in `equation_solve()`.  Removes trivial erroneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. Released on CRAN.
 
 # iotables 0.3.3
-* New vignette [Germany 1990](http://iotables.ceemid.eu/articles/germany_1990.html) with the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) example tables to show the working of the data processing and analytical functions.
+* New vignette [Germany 1990](http://iotables.ceemid.eu/articles/germany_1990.html) with the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) example tables to show the working of the data processing and analytical functions.
 * Finding an exception in the Eurostat vocabulary that preventing correctly identifying the  "Computer programming, consultancy and related services; Information services" industry in the rows. This is a critical problem in the Eurostat bulk files that prevents the creation of symmetric matrixes. 
 * Minor bug fixes.
 * New function `output_coefficient_matrix_create()`

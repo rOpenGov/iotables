@@ -30,7 +30,7 @@
 #' input-output tables.
 #' @family iotables import functions
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'  io_tables <- get_employment ( 
 #'                geo = "CZ", 
 #'                year = "2010",

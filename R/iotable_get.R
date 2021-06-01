@@ -423,19 +423,19 @@ iotable_get <- function ( labelled_io_data = NULL,
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::arrange (iotables_row, iotables_col) %>%
       dplyr::select ( all_of(c("iotables_col", "iotables_row", "values")) ) %>% 
-      tidyr::spread (iotables_col, values)
+      tidyr::spread (iotables_col, .data$values)
     
   } else if ( labelling == "short" & source %in% prod_ind ) {
     
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::select (.data$prod_na, .data$induse, .data$values) %>%
       dplyr::filter ( !is.na(.data$prod_na) )  %>%
-      tidyr::spread (induse, values )
+      tidyr::spread (induse, .data$values )
 
   } else {
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::select ( all_of(c("t_rows2", "t_cols2", "values")) ) %>%
-      tidyr::spread ( t_cols2, values )
+      tidyr::spread ( t_cols2, .data$values )
   }
   
   if (!is.null(data_directory) ) {

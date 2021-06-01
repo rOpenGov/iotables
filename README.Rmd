@@ -37,19 +37,19 @@ version <- gsub('-', '.', version)
 [![Follow rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov) 
 [![Follow author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
 
-The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure.  They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository.  In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form.  Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
+The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure. They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository. In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form. Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
 
-The iotables are exactly designed for these tasks.  Currently the package downloads and processes standardized European SIOTs conforming to the latest statistical regulations, i.e. SIOTs starting from the year 2010.  
+The iotables are exactly designed for these tasks. Currently the package downloads and processes standardized European SIOTs conforming to the latest statistical regulations, i.e. SIOTs starting from the year 2010.  
 
-The aim of this introduction is not to introduce input-output economics, or SIOTs in detail.  The [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/en/web/products-manuals-and-guidelines/-/KS-RA-07-013) and the [Eurostat thematic page](https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview) (for further reference: `Eurostat Manual`) in the documentation should be consulted for further information about the data and the metadata. 
+The aim of this introduction is not to introduce input-output economics, or SIOTs in detail. The [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/en/web/products-manuals-and-guidelines/-/KS-RA-07-013) and the [Eurostat thematic page](https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview) (for further reference: `Eurostat Manual`) in the documentation should be consulted for further information about the data and the metadata. 
 
-In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the `Eurostat Manual` (`p481`).  The package function examples can be checked against [published results from Jörg Beutel](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). These calculations can be followed in the [Germany 1990 vignette](https://iotables.dataobservatory.eu/articles/germany_1990.html).
+In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual. The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the `Eurostat Manual` (`p481`).  The package function examples can be checked against [published results from Jörg Beutel](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). These calculations can be followed in the [Germany 1990 vignette](https://iotables.dataobservatory.eu/articles/germany_1990.html).
 
 The calculation of induced effects (Type-II multipliers) are following the [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](http://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf). The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotools from CRAN or the latest development version with github:
+You can install iotables from CRAN or the latest development version with github:
 
 ```{r gh-installation, eval = FALSE}
 # From CRAN:
@@ -107,7 +107,7 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: 
 
-Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo. [http://doi.org/10.5281/zenodo.3839319]([http://doi.org/10.5281/zenodo.3839319) for released version. 
+Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo. [http://doi.org/10.5281/zenodo.3839319](http://doi.org/10.5281/zenodo.3839319) for released version. 
 Development version: URL: [https://ropengov.github.io/iotables/](https://ropengov.github.io/iotables/)
 
 Thanks to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and [\@pitkant](https://github.com/pitkant) for implementing many good practices on improving the code. See [contributors](https://github.com/ropengov/iotables/graphs/contributors). This project is part of [rOpenGov](http://ropengov.org).

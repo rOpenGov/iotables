@@ -6,7 +6,7 @@
 #' output vector.
 #' 
 #' The terminology follows the 
-#' \href{http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables}.
+#' \href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables}.
 #' Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report, 
 #' which cannot be linked due to a malformatted url, but can be found with a search engine.
 #' this matrix is called 'technological coefficients'. The results of the function are 

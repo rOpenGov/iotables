@@ -1,3 +1,9 @@
+---
+output:
+  md_document:
+    variant: gfm
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # iotables <img src="man/figures/logo.png" align="right" />
@@ -7,8 +13,8 @@
 ![iotables](man/figures/logo20.png)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.4.4-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
-[![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
@@ -46,7 +52,7 @@ manageable sized example data set, we use the real-life data from the
 Eurostat manual. The `germany_1990` dataset is a simplified 6x6 sized
 SIOT taken from the `Eurostat Manual` (`p481`). The package function
 examples can be checked against [published results from Jörg
-Beutel](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
+Beutel](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
 These calculations can be followed in the [Germany 1990
 vignette](https://iotables.dataobservatory.eu/articles/germany_1990.html).
 
@@ -58,8 +64,8 @@ The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotools from CRAN or the latest development version with
-github:
+You can install iotables from CRAN or the latest development version
+with github:
 
 ``` r
 # From CRAN:
@@ -94,8 +100,8 @@ Currently the following Eurostat SIOTs can be used:
 -   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
 
 -   Supply table at basic prices incl. transformation into purchasers’
-    prices (naio\_10\_cp15) and Use table at purchasers’ prices
-    (naio\_10\_cp16).
+    prices (naio_10_cp15) and Use table at purchasers’ prices
+    (naio_10_cp16).
 
 The `cp` element refers to basic prices and the `pyp` to previous years’
 prices.
@@ -144,9 +150,8 @@ Contributions are very welcome:
 
 Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and
 Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo.
-[http://doi.org/10.5281/zenodo.3839319](%5Bhttp://doi.org/10.5281/zenodo.3839319)
-for released version. Development version: URL:
-<https://ropengov.github.io/iotables/>
+<http://doi.org/10.5281/zenodo.3839319> for released version.
+Development version: URL: <https://ropengov.github.io/iotables/>
 
 Thanks to [@KKulma](https://github.com/KKulma/) for setting up new and
 improved continuous integration, and

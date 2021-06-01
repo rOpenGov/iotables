@@ -20,7 +20,7 @@ require(dplyr); require(tidyr)
 
 ## Germany sample files
 
-The Germany example is used to test the code of the package. It follows the examples in [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). by Jörg Beutel (Eurostat Manual).
+The Germany example is used to test the code of the package. It follows the examples in [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). by Jörg Beutel (Eurostat Manual).
 
 The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat Manual (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.
 
