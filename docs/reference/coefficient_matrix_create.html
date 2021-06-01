@@ -56,6 +56,8 @@ in your table.#'" />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -67,9 +69,16 @@ in your table.#'" />
 
 
 
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,12 +99,6 @@ in your table.#'" />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -152,14 +155,14 @@ this to total supply or other total aggregate if it exists
 in your table.#'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>coefficient_matrix_create</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>coefficient_matrix_create</span><span class='op'>(</span>
   <span class='va'>data_table</span>,
   total <span class='op'>=</span> <span class='st'>"output"</span>,
   digits <span class='op'>=</span> <span class='cn'>NULL</span>,
   remove_empty <span class='op'>=</span> <span class='cn'>TRUE</span>,
   households <span class='op'>=</span> <span class='cn'>FALSE</span>,
   return_part <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -219,49 +222,50 @@ for explanation on the use of the Coefficient matrix.</p>
 <code><a href='input_indicator_create.html'>input_indicator_create</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>coefficient_matrix_create</span><span class='op'>(</span>data_table <span class='op'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span>source <span class='op'>=</span> <span class='st'>"germany_1990"</span><span class='op'>)</span>, 
-                          total <span class='op'>=</span> <span class='st'>"output"</span>, 
-                          digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
-</div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
-#&gt; 1          agriculture_group            0.0258         0.0236       0.0000
-#&gt; 2             industry_group            0.1806         0.2822       0.2613
-#&gt; 3               construction            0.0097         0.0068       0.0158
-#&gt; 4                trade_group            0.0811         0.0674       0.0578
-#&gt; 5    business_services_group            0.0828         0.0890       0.1263
-#&gt; 6       other_services_group            0.0353         0.0139       0.0071
-#&gt; 7                      total            0.4153         0.4829       0.4683
-#&gt; 8                    imports            0.0667         0.1452       0.0547
-#&gt; 9   intermediate_consumption            0.5066         0.6341       0.5292
-#&gt; 10    compensation_employees            0.2137         0.2746       0.3209
-#&gt; 11        net_tax_production           -0.0458         0.0013       0.0039
-#&gt; 12 consumption_fixed_capital            0.1793         0.0591       0.0239
-#&gt; 13       os_mixed_income_net            0.1463         0.0309       0.1221
-#&gt; 14                       gva            0.4934         0.3659       0.4708
-#&gt; 15                    output            1.0000         1.0000       1.0000
-#&gt; 16          net_tax_products            0.0247         0.0060       0.0063
-#&gt; 17    employment_wage_salary            0.0110         0.0074       0.0118
-#&gt; 18  employment_self_employed            0.0140         0.0003       0.0014
-#&gt; 19 employment_domestic_total            0.0250         0.0078       0.0132
-#&gt;    trade_group business_services_group other_services_group
-#&gt; 1       0.0011                  0.0010               0.0015
-#&gt; 2       0.0761                  0.0173               0.0597
-#&gt; 3       0.0098                  0.0339               0.0180
-#&gt; 4       0.1378                  0.0156               0.0413
-#&gt; 5       0.1218                  0.2790               0.0672
-#&gt; 6       0.0208                  0.0217               0.0434
-#&gt; 7       0.3673                  0.3686               0.2310
-#&gt; 8       0.0406                  0.0193               0.0271
-#&gt; 9       0.4234                  0.4001               0.2828
-#&gt; 10      0.3971                  0.1802               0.5364
-#&gt; 11      0.0051                  0.0086              -0.0169
-#&gt; 12      0.0761                  0.1424               0.0968
-#&gt; 13      0.0983                  0.2687               0.1010
-#&gt; 14      0.5766                  0.5999               0.7172
-#&gt; 15      1.0000                  1.0000               1.0000
-#&gt; 16      0.0155                  0.0122               0.0247
-#&gt; 17      0.0148                  0.0053               0.0188
-#&gt; 18      0.0024                  0.0009               0.0013
-#&gt; 19      0.0171                  0.0061               0.0201</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>coefficient_matrix_create</span><span class='op'>(</span>data_table <span class='op'>=</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span>source <span class='op'>=</span> <span class='st'>"germany_1990"</span><span class='op'>)</span>, </span>
+<span class='r-in'>                          total <span class='op'>=</span> <span class='st'>"output"</span>, </span>
+<span class='r-in'>                          digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                 iotables_row agriculture_group industry_group construction</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1          agriculture_group            0.0258         0.0236       0.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2             industry_group            0.1806         0.2822       0.2613</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3               construction            0.0097         0.0068       0.0158</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                trade_group            0.0811         0.0674       0.0578</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5    business_services_group            0.0828         0.0890       0.1263</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6       other_services_group            0.0353         0.0139       0.0071</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7                      total            0.4153         0.4829       0.4683</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8                    imports            0.0667         0.1452       0.0547</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   intermediate_consumption            0.5066         0.6341       0.5292</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10    compensation_employees            0.2137         0.2746       0.3209</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11        net_tax_production           -0.0458         0.0013       0.0039</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 consumption_fixed_capital            0.1793         0.0591       0.0239</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13       os_mixed_income_net            0.1463         0.0309       0.1221</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14                       gva            0.4934         0.3659       0.4708</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15                    output            1.0000         1.0000       1.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16          net_tax_products            0.0247         0.0060       0.0063</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17    employment_wage_salary            0.0110         0.0074       0.0118</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18  employment_self_employed            0.0140         0.0003       0.0014</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19 employment_domestic_total            0.0250         0.0078       0.0132</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    trade_group business_services_group other_services_group</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1       0.0011                  0.0010               0.0015</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2       0.0761                  0.0173               0.0597</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3       0.0098                  0.0339               0.0180</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4       0.1378                  0.0156               0.0413</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5       0.1218                  0.2790               0.0672</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6       0.0208                  0.0217               0.0434</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7       0.3673                  0.3686               0.2310</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8       0.0406                  0.0193               0.0271</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9       0.4234                  0.4001               0.2828</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10      0.3971                  0.1802               0.5364</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11      0.0051                  0.0086              -0.0169</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12      0.0761                  0.1424               0.0968</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13      0.0983                  0.2687               0.1010</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14      0.5766                  0.5999               0.7172</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15      1.0000                  1.0000               1.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16      0.0155                  0.0122               0.0247</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17      0.0148                  0.0053               0.0188</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18      0.0024                  0.0009               0.0013</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19      0.0171                  0.0061               0.0201</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -273,11 +277,11 @@ for explanation on the use of the Coefficient matrix.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Antal.</p>
+  <p><p>Developed by Daniel Antal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -285,6 +289,8 @@ for explanation on the use of the Coefficient matrix.</p>
 
   
 
+
+  
 
   </body>
 </html>

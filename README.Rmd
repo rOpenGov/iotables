@@ -88,7 +88,7 @@ The `cp` element refers to basic prices and the `pyp` to previous years' prices.
 
 Given the complexity of the data used by the package, probably the use of the vignettes is needed to get a start. 
 
-The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) vignette presents most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly.  The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the `Eurostat Manual`.
+The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) vignette presents most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly.  The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the `Eurostat Manual`.
 
 The [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) vignette shows how you can download, pre-process and use real data from Eurostat.
 
@@ -107,7 +107,7 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: 
 
-Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo. [http://doi.org/10.5281/zenodo.3839319](http://doi.org/10.5281/zenodo.3839319) for released version. 
+Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo. [https://doi.org/10.5281/zenodo.3839319](https://doi.org/10.5281/zenodo.3839319) for released version. 
 Development version: URL: [https://ropengov.github.io/iotables/](https://ropengov.github.io/iotables/)
 
 Thanks to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and [\@pitkant](https://github.com/pitkant) for implementing many good practices on improving the code. See [contributors](https://github.com/ropengov/iotables/graphs/contributors). This project is part of [rOpenGov](http://ropengov.org).

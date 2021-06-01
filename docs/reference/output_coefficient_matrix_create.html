@@ -57,6 +57,8 @@ to use some sort of data modification to carry on your analysis." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -68,9 +70,16 @@ to use some sort of data modification to carry on your analysis." />
 
 
 
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -91,12 +100,6 @@ to use some sort of data modification to carry on your analysis." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +157,7 @@ solved with zero elements. You either have faulty input data, or you have
 to use some sort of data modification to carry on your analysis.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>output_coefficient_matrix_create</span><span class='op'>(</span><span class='va'>io_table</span>, total <span class='op'>=</span> <span class='st'>"tfu"</span>, digits <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>output_coefficient_matrix_create</span><span class='op'>(</span><span class='va'>io_table</span>, total <span class='op'>=</span> <span class='st'>"tfu"</span>, digits <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,25 +191,26 @@ The column names are ordered, and the row names are in the
 first, auxiliary metadata column.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>io_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span> <span class='op'>(</span><span class='op'>)</span> 
-
-<span class='fu'>output_coefficient_matrix_create</span> <span class='op'>(</span> io_table  <span class='op'>=</span> <span class='va'>io_table</span>, 
-                                   total <span class='op'>=</span> <span class='st'>'tfu'</span>,
-                                   digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
-</div><div class='output co'>#&gt;              iotables_row agriculture_group industry_group construction
-#&gt; 1       agriculture_group            0.0258         0.5803       0.0000
-#&gt; 2          industry_group            0.0073         0.2822       0.0594
-#&gt; 3            construction            0.0017         0.0299       0.0158
-#&gt; 4             trade_group            0.0066         0.1346       0.0263
-#&gt; 5 business_services_group            0.0053         0.1388       0.0448
-#&gt; 6    other_services_group            0.0030         0.0294       0.0034
-#&gt;   trade_group business_services_group other_services_group
-#&gt; 1      0.0138                  0.0162               0.0174
-#&gt; 2      0.0381                  0.0111               0.0281
-#&gt; 3      0.0216                  0.0955               0.0373
-#&gt; 4      0.1378                  0.0201               0.0389
-#&gt; 5      0.0950                  0.2790               0.0494
-#&gt; 6      0.0221                  0.0296               0.0434</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>io_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span> <span class='op'>(</span><span class='op'>)</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>output_coefficient_matrix_create</span> <span class='op'>(</span> io_table  <span class='op'>=</span> <span class='va'>io_table</span>, </span>
+<span class='r-in'>                                   total <span class='op'>=</span> <span class='st'>'tfu'</span>,</span>
+<span class='r-in'>                                   digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              iotables_row agriculture_group industry_group construction</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1       agriculture_group            0.0258         0.5803       0.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2          industry_group            0.0073         0.2822       0.0594</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3            construction            0.0017         0.0299       0.0158</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4             trade_group            0.0066         0.1346       0.0263</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 business_services_group            0.0053         0.1388       0.0448</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6    other_services_group            0.0030         0.0294       0.0034</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   trade_group business_services_group other_services_group</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1      0.0138                  0.0162               0.0174</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2      0.0381                  0.0111               0.0281</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3      0.0216                  0.0955               0.0373</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4      0.1378                  0.0201               0.0389</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5      0.0950                  0.2790               0.0494</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6      0.0221                  0.0296               0.0434</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -218,11 +222,11 @@ first, auxiliary metadata column.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Daniel Antal.</p>
+  <p><p>Developed by Daniel Antal.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -230,6 +234,8 @@ first, auxiliary metadata column.</p>
 
   
 
+
+  
 
   </body>
 </html>

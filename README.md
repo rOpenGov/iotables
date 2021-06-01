@@ -115,7 +115,7 @@ The [Germany
 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html)
 vignette presents most of the examples of the [Eurostat Manual of
 Supply, Use and Input-Output
-Tables](http://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
+Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
 (Eurostat Manual, Chapter 15.) This is a good introduction to understand
 what will the functions do, and to check that they work correctly. The
 `testthat` infrastructure of the package checks the proper working of
@@ -150,7 +150,7 @@ Contributions are very welcome:
 
 Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and
 Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo.
-<http://doi.org/10.5281/zenodo.3839319> for released version.
+<https://doi.org/10.5281/zenodo.3839319> for released version.
 Development version: URL: <https://ropengov.github.io/iotables/>
 
 Thanks to [@KKulma](https://github.com/KKulma/) for setting up new and
