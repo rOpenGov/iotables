@@ -29,7 +29,8 @@ When you download a country’s SIOT table, you receive a long form data frame, 
 
 ```{r get-data, echo=FALSE}
 naio_10_cp1700 <- eurostat::get_eurostat("naio_10_cp1700")
-
+```
+```{r tempdir, eval=FALSE}
 # we save it for further reference here 
 saveRDS(naio_10_cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
 
@@ -37,7 +38,7 @@ saveRDS(naio_10_cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
 dir (file.path(tempdir(), "eurostat"))
 ```
 ```{r show-head}
-dplyr::slice_head(cp1700, n = 5)
+dplyr::slice_head(naio_10_cp1700, n = 5)
 ```
 
 The metadata reads like this: the units are in millions of euros, we are analyzing domestic flows, and the national account items `B1-B2` for the industry `A01`. The information of a 64x64 matrix (the SIOT) and its connecting matrices, such as taxes, or employment, or $CO_{2}$ emissions, must be placed exactly in one correct ordering of columns and rows. Every single data wrangling error will usually lead in an error (the matrix equation has no solution), or, what is worse, in a very difficult to trace algebraic error. Our package not only labels this data meaningfully, but creates very tidy data frames that contain each necessary matrix of vector with a key column. 
