@@ -3,8 +3,8 @@ title: "New Package Release for Reproducible Economic Impact Assessments"
 author: "Daniel Antal, CFA"
 date: "2021-06-03"
 output: 
-    html_document: default
     md_document: default
+    html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -60,7 +60,7 @@ Our package allows the calculation of various economic policy scenarios, such as
 
 Technically our package can already calculate such effects, but to do so, you have to carefully match further statistical vocabulary items used by the European Environmental Agency about air pollutants and greenhouse gases.
 
-In the next major release of the package we are planning to build in the necessary vocabulary into the metadata functions to increase the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.
+The last released version of *iotables* is Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.4). Zenodo. [https://doi.org/10.5281/zenodo.4897472](https://zenodo.org/record/4897472), but we are alread working on a new major release. In that release, we are planning to build in the necessary vocabulary into the metadata functions to increase the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.
 
 ## rOpenGov and the EU Datathon Challenges {#ropengov-datathon}
 
