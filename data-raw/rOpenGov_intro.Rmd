@@ -3,8 +3,8 @@ title: "rOpenGov Intro"
 author: "Daniel Antal, CFA"
 date: "2021-06-03"
 output: 
-   md_document: default
    html_document: default
+   md_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -24,9 +24,9 @@ Making such calculations requires a bit of matrix algebra, and understanding of 
 
 ## Accessing and tidying the data programmatically
 
-The iotables package is in a way an extension to the *eurostat* R package, which provides a programmatic access to the [Eurostat](https://ec.europa.eu/eurostat) data warehouse. The reason for releasing a new package is that working with SIOTs requires plenty of meticulous data wrangling based on various *metadata* sources, apart from actually accessing the *data* itself. When working with matrix equations, the bar is higher than with tidy data. Not only your rows and columns must match, but their ordering must strictly conform the quadrants of the a matrix system, including the connecting trade or tax matrices.
+The iotables package is in a way an extension to the *eurostat* R package, which provides a programmatic access to the [Eurostat](https://ec.europa.eu/eurostat) data warehouse. The reason for releasing a new package is that working with SIOTs requires plenty of meticulous data wrangling based on various *metadata* sources, apart from only accessing the *data* itself. When working with matrix equations, the bar is higher than with tidy data. Not only your rows and columns must match, but their ordering must strictly conform the quadrants of the a matrix system, including the connecting trade or tax matrices.
 
-When you download a country’s SIOT table, you receive a long form data frame, a very-very long one, which contains the matrix values and their labels like this:
+When you download a country's SIOT table, you receive a long form data frame, a very-very long one, which contains the matrix values and their labels like this:
 
 ```{r get-data, echo=FALSE}
 naio_10_cp1700 <- eurostat::get_eurostat("naio_10_cp1700")
@@ -49,7 +49,9 @@ iotables package contains the vocabularies (abbreviations and human readable lab
 
 Our package currently solves all equations for direct, indirect effects, multipliers and inter-industry linkages. Backward linkages show what happens with the suppliers of an industry, such as catering or advertising in the case of music festivals, if the festivals reopen. The forward linkages show how much extra demand this creates for connecting services that treat festivals as a ‘supplier’, such as cultural tourism.
 
-## Let's seen an example
+## Example
+
+Let's take Slovakia's employment data as an example and match it with the latest structural information on from the [Symmetric input-output table at basic prices (product by product)](http://appsso.eurostat.ec.europa.eu/nui/show.do?wai=true&dataset=naio_10_cp1700) Eurostat product.
 
 ```{r employment-get, echo=FALSE}
 emp_sk <- employment_get(geo = "SK", year = "2019", sex = "Total",
@@ -59,7 +61,9 @@ emp_sk <- employment_get(geo = "SK", year = "2019", sex = "Total",
 
 ```
 
-and match it with the latest structural information on from the [Symmetric input-output table at basic prices (product by product)](http://appsso.eurostat.ec.europa.eu/nui/show.do?wai=true&dataset=naio_10_cp1700) Eurostat product. A quick look at the Eurostat website already shows that there is a lot of work ahead to make the data look like an actual Symmetric input-output table. Download it with `iotable_get()` which does basic labelling and preprocessing on the raw Eurostat files. Because of the size of the unfiltered dataset on Eurostat, the following code may take several minutes to run.
+A quick look at the Eurostat website already shows that there is a lot of work ahead to make the data look like an actual Symmetric input-output table. 
+
+iotable's `iotable_get()` function downloads the data and does basic labelling and preprocessing on the raw Eurostat files. Because of the size of the unfiltered dataset on Eurostat, the following code may take several minutes to run.
 
 ```{r get-Slovak-table}
 sk_io <-  iotable_get ( labelled_io_data = NULL, 
@@ -69,11 +73,11 @@ sk_io <-  iotable_get ( labelled_io_data = NULL,
                         labelling = "iotables" )
 ```
 
-The `input_coefficient_matrix_create()` creates the input coefficient matrix, which is used for most of the analytical functions. 
+The `input_coefficient_matrix_create()` creates an input coefficient matrix, which is used for most of the analytical functions. 
 
 $a_{ij}$ = $X_{ij}$ / $x_j$
 
-It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero. 
+It checks that the columns are in correct order and additionally it fills up 0 values with 0.000001 to avoid division with zero.
 
 ```{r input-coeff-matrix}
 input_coeff_matrix_sk <- input_coefficient_matrix_create(
@@ -81,13 +85,13 @@ input_coeff_matrix_sk <- input_coefficient_matrix_create(
 )
 ```
 
-Then you can create the Leontieff-inverse, which contains all the structural information about the relationships of 64x64 sectors of the chosen country, in this case, Slovakia, ready for the main equations of input-output economics.
+Then you can create the Leontieff-inverse, which contains all the structural information about the relationships of 64x64 sectors of the chosen country (in this case, Slovakia) ready for the main equations of input-output economics:
 
 ```{r leontieff-inverse}
 I_sk <- leontieff_inverse_create(input_coeff_matrix_sk)
 ```
 
-And take out the primary inputs:
+And extract the primary inputs:
 
 ```{r}
 primary_inputs_sk <- coefficient_matrix_create(
@@ -95,8 +99,8 @@ primary_inputs_sk <- coefficient_matrix_create(
   total = 'output', 
   return = 'primary_inputs')
 ```
-Now let's see if there the government tries to stimulate the economy in three sectors, agricultulre, car manufacturing, and R&D  with a billion euros. Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.) 
 
+Now let's try to figure out what happens when the government tries to stimulate the economy in three sectors, agricultulre, car manufacturing, and R&D with 1 billion euros. Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages).
 
 ```{r}
 direct_effects_create( primary_inputs_sk, I_sk ) %>%
@@ -105,11 +109,12 @@ direct_effects_create( primary_inputs_sk, I_sk ) %>%
   filter (.data$iotables_row %in% c("gva_effect", "wages_salaries_effect", 
                                     "imports_effect", "output_effect"))
 ```
-Car manufacturing requires much imported components, so each extra demand will create a large importing activity. The R&D will create a the most local wages (and supports most jobs) because research is job-intensive. As we can see, the effect on imports, wages, gross value added (which will end up in the GDP) and output changes are very different in these three sectors.
+
+Car manufacturing requires a large number of imported components, so increased demand for cars will also create growth in importing activities. Increase in R&D activity will mostly affect local wages because research is job-intensive. As we can see, the effect on imports, wages, gross value added (which will end up in the GDP) and output changes are very different in these three sectors.
 
 This is not the total effect, because some of the increased production will translate into income, which in turn will be used to create further demand in all parts of the domestic economy. The total effect is characterized by multipliers.
 
-Then solve for the multipliers:
+The multipliers can be solved with the following function:
 
 ```{r create-multipliers}
 multipliers_sk <- input_multipliers_create( 
@@ -130,7 +135,7 @@ multipliers_sk %>%
   dplyr::sample_n(8)
 ```
 
-## Vignettes 
+## Package vignettes 
 
 The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) provides an introduction of input-output economics and re-creates the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://iotables.dataobservatory.eu/articles/germany_1990.html), by Jörg Beutel (Eurostat Manual).
 

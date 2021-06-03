@@ -38,7 +38,7 @@ package, which provides a programmatic access to the
 [Eurostat](https://ec.europa.eu/eurostat) data warehouse. The reason for
 releasing a new package is that working with SIOTs requires plenty of
 meticulous data wrangling based on various *metadata* sources, apart
-from actually accessing the *data* itself. When working with matrix
+from only accessing the *data* itself. When working with matrix
 equations, the bar is higher than with tidy data. Not only your rows and
 columns must match, but their ordering must strictly conform the
 quadrants of the a matrix system, including the connecting trade or tax
@@ -48,7 +48,7 @@ When you download a country’s SIOT table, you receive a long form data
 frame, a very-very long one, which contains the matrix values and their
 labels like this:
 
-    ## Table naio_10_cp1700 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpGQF4gr/eurostat/naio_10_cp1700_date_code_FF.rds
+    ## Table naio_10_cp1700 cached at /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//RtmpsQi0Rt/eurostat/naio_10_cp1700_date_code_FF.rds
 
     # we save it for further reference here 
     saveRDS(naio_10_cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
@@ -91,21 +91,26 @@ advertising in the case of music festivals, if the festivals reopen. The
 forward linkages show how much extra demand this creates for connecting
 services that treat festivals as a ‘supplier’, such as cultural tourism.
 
-## Let’s seen an example
+## Example
+
+Let’s take Slovakia’s employment data as an example and match it with
+the latest structural information on from the [Symmetric input-output
+table at basic prices (product by
+product)](http://appsso.eurostat.ec.europa.eu/nui/show.do?wai=true&dataset=naio_10_cp1700)
+Eurostat product.
 
     ## Downloading employment data from the Eurostat database.
 
-    ## Table lfsq_egan22d cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpGQF4gr/eurostat/lfsq_egan22d_date_code_FF.rds
+    ## Table lfsq_egan22d cached at /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//RtmpsQi0Rt/eurostat/lfsq_egan22d_date_code_FF.rds
 
-and match it with the latest structural information on from the
-[Symmetric input-output table at basic prices (product by
-product)](http://appsso.eurostat.ec.europa.eu/nui/show.do?wai=true&dataset=naio_10_cp1700)
-Eurostat product. A quick look at the Eurostat website already shows
-that there is a lot of work ahead to make the data look like an actual
-Symmetric input-output table. Download it with `iotable_get()` which
-does basic labelling and preprocessing on the raw Eurostat files.
-Because of the size of the unfiltered dataset on Eurostat, the following
-code may take several minutes to run.
+A quick look at the Eurostat website already shows that there is a lot
+of work ahead to make the data look like an actual Symmetric
+input-output table.
+
+iotable’s `iotable_get()` function downloads the data and does basic
+labelling and preprocessing on the raw Eurostat files. Because of the
+size of the unfiltered dataset on Eurostat, the following code may take
+several minutes to run.
 
     sk_io <-  iotable_get ( labelled_io_data = NULL, 
                             source = "naio_10_cp1700", geo = "SK", 
@@ -113,22 +118,22 @@ code may take several minutes to run.
                             stk_flow = "TOTAL",
                             labelling = "iotables" )
 
-    ## Reading cache file C:\Users\DANIEL~1\AppData\Local\Temp\RtmpGQF4gr/eurostat/naio_10_cp1700_date_code_FF.rds
+    ## Reading cache file /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//RtmpsQi0Rt/eurostat/naio_10_cp1700_date_code_FF.rds
 
-    ## Table  naio_10_cp1700  read from cache file:  C:\Users\DANIEL~1\AppData\Local\Temp\RtmpGQF4gr/eurostat/naio_10_cp1700_date_code_FF.rds
+    ## Table  naio_10_cp1700  read from cache file:  /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//RtmpsQi0Rt/eurostat/naio_10_cp1700_date_code_FF.rds
 
     ## Saving 808 input-output tables into the temporary directory
-    ## C:\Users\DANIEL~1\AppData\Local\Temp\RtmpGQF4gr
+    ## /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//RtmpsQi0Rt
 
-    ## Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpGQF4gr/naio_10_cp1700.rds.
+    ## Saved the raw data of this table type in temporary directory /var/folders/nb/sxk6cbzd5455n3_rhxnw2xnw0000gn/T//RtmpsQi0Rt/naio_10_cp1700.rds.
 
-The `input_coefficient_matrix_create()` creates the input coefficient
+The `input_coefficient_matrix_create()` creates an input coefficient
 matrix, which is used for most of the analytical functions.
 
 *a*<sub>*i**j*</sub> = *X*<sub>*i**j*</sub> / *x*<sub>*j*</sub>
 
-It checks the correct ordering of columns, and furthermore it fills up 0
-values with 0.000001 to avoid division with zero.
+It checks that the columns are in correct order and additionally it
+fills up 0 values with 0.000001 to avoid division with zero.
 
     input_coeff_matrix_sk <- input_coefficient_matrix_create(
       data_table = sk_io
@@ -138,12 +143,12 @@ values with 0.000001 to avoid division with zero.
 
 Then you can create the Leontieff-inverse, which contains all the
 structural information about the relationships of 64x64 sectors of the
-chosen country, in this case, Slovakia, ready for the main equations of
-input-output economics.
+chosen country (in this case, Slovakia) ready for the main equations of
+input-output economics:
 
     I_sk <- leontieff_inverse_create(input_coeff_matrix_sk)
 
-And take out the primary inputs:
+And extract the primary inputs:
 
     primary_inputs_sk <- coefficient_matrix_create(
       data_table = sk_io, 
@@ -152,13 +157,13 @@ And take out the primary inputs:
 
     ## Columns and rows of real_estate_imputed_a, extraterriorial_organizations are all zeros and will be removed.
 
-Now let’s see if there the government tries to stimulate the economy in
-three sectors, agricultulre, car manufacturing, and R&D with a billion
-euros. Direct effects measure the initial, direct impact of the change
-in demand and supply for a product. When production goes up, it will
-create demand in all supply industries (backward linkages) and create
-opportunities in the industries that use the product themselves (forward
-linkages.)
+Now let’s try to figure out what happens when the government tries to
+stimulate the economy in three sectors, agricultulre, car manufacturing,
+and R&D with 1 billion euros. Direct effects measure the initial, direct
+impact of the change in demand and supply for a product. When production
+goes up, it will create demand in all supply industries (backward
+linkages) and create opportunities in the industries that use the
+product themselves (forward linkages).
 
     direct_effects_create( primary_inputs_sk, I_sk ) %>%
       select ( all_of(c("iotables_row", "agriculture",
@@ -172,19 +177,19 @@ linkages.)
     ## 3            gva_effect   0.9669621       0.9790771            0.9669467
     ## 4         output_effect   2.2876287       3.9840251            2.2579634
 
-Car manufacturing requires much imported components, so each extra
-demand will create a large importing activity. The R&D will create a the
-most local wages (and supports most jobs) because research is
-job-intensive. As we can see, the effect on imports, wages, gross value
-added (which will end up in the GDP) and output changes are very
-different in these three sectors.
+Car manufacturing requires a large number of imported components, so
+increased demand for cars will also create growth in importing
+activities. Increase in R&D activity will mostly affect local wages
+because research is job-intensive. As we can see, the effect on imports,
+wages, gross value added (which will end up in the GDP) and output
+changes are very different in these three sectors.
 
 This is not the total effect, because some of the increased production
 will translate into income, which in turn will be used to create further
 demand in all parts of the domestic economy. The total effect is
 characterized by multipliers.
 
-Then solve for the multipliers:
+The multipliers can be solved with the following function:
 
     multipliers_sk <- input_multipliers_create( 
       primary_inputs_sk %>%
@@ -213,7 +218,7 @@ And select a few industries:
     ## 7 basic_metals                     4.16
     ## 8 real_estate_services_b           1.48
 
-## Vignettes
+## Package vignettes
 
 The [Germany
 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html)
