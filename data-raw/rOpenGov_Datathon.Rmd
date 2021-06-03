@@ -1,0 +1,68 @@
+---
+title: "New Package Release for Reproducible Economic Impact Assessments"
+author: "Daniel Antal, CFA"
+date: "2021-06-03"
+output: 
+    html_document: default
+    md_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(iotables)
+library(eurostat)
+library(dplyr)
+```
+
+
+We have released a new version of [iotables](https://iotables.dataobservatory.eu/) as part of the [rOpenGov](http://ropengov.org/) project. The package, as the name suggests, works with European symmetric input-output tables (SIOTs). SIOTs are among the most complex governmental statistical products. They show how each country's 64 agricultural, industrial, service, and sometimes household sectors relate to each other.  They are estimated from various components of the GDP, tax collection, at least every five years. 
+
+SIOTs offer great value to policy-makers and analysts to make more than educated guesses on how a million euros, pounds or Czech korunas spent on a certain sector will impact other sectors of the economy, employment or GDP. What happens when a bank starts to give new loans and advertise them? How is an increase in economic activity going to affect the amount of wages paid and and where will consumers most likely spend their wages? As the national economies begin to reopen after COVID-19 pandemic lockdowns, is to utilize SIOTs to calculate direct and indirect employment effects or value added effects of government grant programs to sectors such as cultural and creative industries or actors such as venues for performing arts, movie theaters, bars and restaurants.
+
+Making such calculations requires a bit of matrix algebra, and understanding of input-output economics, direct, indirect effects, and multipliers. Economists, grant designers, policy makers have those skills, but until now, such calculations were either made in cumbersome Excel sheets, or proprietary software, as the key to these calculations is to keep vectors and matrices, which have at least one dimension of 64, perfectly aligned. We made this process reproducible with [iotables](https://iotables.dataobservatory.eu/) and [eurostat](https://CRAN.R-project.org/package=eurostat) on [rOpenGov](http://ropengov.org/).
+
+## Accessing and tidying the data programmatically
+
+The iotables package is in a way an extension to the *eurostat* R package, which provides a programmatic access to the [Eurostat](https://ec.europa.eu/eurostat) data warehouse. The reason for releasing a new package is that working with SIOTs requires plenty of meticulous data wrangling based on various *metadata* sources, apart from actually accessing the *data* itself. When working with matrix equations, the bar is higher than with tidy data. Not only your rows and columns must match, but their ordering must strictly conform the quadrants of the a matrix system, including the connecting trade or tax matrices.
+
+When you download a country’s SIOT table, you receive a long form data frame, a very-very long one, which contains the matrix values and their labels like this:
+
+```{r get-data, echo=FALSE}
+naio_10_cp1700 <- eurostat::get_eurostat("naio_10_cp1700")
+
+# we save it for further reference here 
+saveRDS(naio_10_cp1700, "not_included/naio_10_cp1700_date_code_FF.rds")
+
+# should you need to retrieve the large tempfiles, they are in 
+dir (file.path(tempdir(), "eurostat"))
+```
+```{r show-head}
+dplyr::slice_head(cp1700, n = 5)
+```
+
+The metadata reads like this: the units are in millions of euros, we are analyzing domestic flows, and the national account items `B1-B2` for the industry `A01`. The information of a 64x64 matrix (the SIOT) and its connecting matrices, such as taxes, or employment, or $CO_{2}$ emissions, must be placed exactly in one correct ordering of columns and rows. Every single data wrangling error will usually lead in an error (the matrix equation has no solution), or, what is worse, in a very difficult to trace algebraic error. Our package not only labels this data meaningfully, but creates very tidy data frames that contain each necessary matrix of vector with a key column. 
+
+iotables package contains the vocabularies (abbreviations and human readable labels) of three statistical vocabularies: the so called `COICOP` product codes, the `NACE` industry codes, and the vocabulary of the `ESA2010` definition of national accounts (which is the government equivalent of corporate accounting).
+
+Our package currently solves all equations for direct, indirect effects, multipliers and inter-industry linkages. Backward linkages show what happens with the suppliers of an industry, such as catering or advertising in the case of music festivals, if the festivals reopen. The forward linkages show how much extra demand this creates for connecting services that treat festivals as a ‘supplier’, such as cultural tourism.
+
+The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) provides an introduction of input-output economics and re-creates the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://iotables.dataobservatory.eu/articles/germany_1990.html), by Jörg Beutel (Eurostat Manual).
+
+The [United Kingdom Input-Output Analytical Tables Daniel Antal, based on the work edited by Richard Wild](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) is a use case on how to correctly import data from outside Eurostat (i.e. not with `eurostat::get_eurostat()`) and join it properly to a SIOT.  We also used this example to create unit tests of our functions from a published, official government statistical release. 
+
+Finally, [Working With Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) is a detailed use case of working with all the current functionalities of the package by comparing two economies, Czechia and Slovakia and guides you through a lot more examples than this short blogpost.
+
+Our package was originally developed to calculate GVA and employment effects for the Slovak music industry, and similar calculations for the Hungarian film tax shelter.  We can now programatically create reproducible multipliers for all European economies in the [Digital Music Observatory](https://music.dataobservatory.eu/), and create further indicators for economic policy making in the [Economy Data Observatory](https://economy.dataobservatory.eu/).
+
+## Environmental Impact Analysis {#environmental-impact-analysis}
+
+Our package allows the calculation of various economic policy scenarios, such as changing the VAT on meat or effects of re-opening music festivals on aggregate demand, GDP, tax revenues, or employment. But what about the  $CO_{2}$, methane and other greenhouse gas effects of the reopening festivals, or the increasing meat prices?
+
+Technically our package can already calculate such effects, but to do so, you have to carefully match further statistical vocabulary items used by the European Environmental Agency about air pollutants and greenhouse gases.
+
+In the next major release of the package we are planning to build in the necessary vocabulary into the metadata functions to increase the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.
+
+## rOpenGov and the EU Datathon Challenges {#ropengov-datathon}
+
+[rOpenGov](http://ropengov.org/) is a community of open governmental data and statistics developers with many packages that make programmatic access and work with open data possible in the R language.  [Reprex](https://reprex.nl/) is a Dutch-startup that teamed up with rOpenGov and other open collaboration partners to create a technologically and financially feasible service to exploit reproducible research products for the wider business, scientific and evidence-based policy design community. Open data is a legal concept - it means that you have the rigth to reuse the data, but often the reuse requires significant programming and statistical know-how. We entered into the annual [EU Datathon](https://reprex.nl/project/eu-datathon_2021/) competition in all three challenges with our applications to not only provide open-source software, but daily updated, validated, documented, high-quality statistical indicators as open data in an open database. Our [iotables](https://iotables.dataobservatory.eu/) package is one of our many open-source building blocks to make open data more accessible to all. 
+

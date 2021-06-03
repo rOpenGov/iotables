@@ -141,7 +141,7 @@ turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit).
 * Changing the code to dplyr 1.0+ and rlang in non-standard evaluation.
 * New website, CI on Github. Renewed [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables), documentation changed to gfm flavored markdown.
 * Thanks to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and [\@pitkant](https://github.com/pitkant) for implementing many good practices on improving the code. See [contributors](https://github.com/ropengov/iotables/graphs/contributors). This project is part of [rOpenGov](http://ropengov.org).
-* Sent to CRAN as a release candidate.
+* 0.4.4 is on CRAN.
 
 # iotables 0.4.5
 

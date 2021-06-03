@@ -1,9 +1,3 @@
----
-output:
-  md_document:
-    variant: gfm
----
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # iotables <img src="man/figures/logo.png" align="right" />
@@ -11,10 +5,10 @@ output:
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
 
 ![iotables](man/figures/logo20.png)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.4.4-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.4.5-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
-[![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
@@ -100,8 +94,8 @@ Currently the following Eurostat SIOTs can be used:
 -   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
 
 -   Supply table at basic prices incl. transformation into purchasers’
-    prices (naio_10_cp15) and Use table at purchasers’ prices
-    (naio_10_cp16).
+    prices (naio\_10\_cp15) and Use table at purchasers’ prices
+    (naio\_10\_cp16).
 
 The `cp` element refers to basic prices and the `pyp` to previous years’
 prices.
@@ -148,10 +142,11 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows:
 
-Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and
-Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo.
-<https://doi.org/10.5281/zenodo.3839319> for released version.
-Development version: URL: <https://ropengov.github.io/iotables/>
+Daniel Antal. (2020, June 3). rOpenGov/iotables: Importing and
+Manipulating Symmetric Input-Output Tables (Version 0.4.4). Zenodo.
+[https://doi.org/10.5281/zenodo.4897472](https://zenodo.org/record/4897472)
+for released version. Development version URL:
+<https://ropengov.github.io/iotables/>
 
 Thanks to [@KKulma](https://github.com/KKulma/) for setting up new and
 improved continuous integration, and

@@ -107,8 +107,8 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: 
 
-Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo. [https://doi.org/10.5281/zenodo.3839319](https://doi.org/10.5281/zenodo.3839319) for released version. 
-Development version: URL: [https://ropengov.github.io/iotables/](https://ropengov.github.io/iotables/)
+Daniel Antal. (2020, June 3). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.4). Zenodo. [https://doi.org/10.5281/zenodo.4897472](https://zenodo.org/record/4897472) for released version. 
+Development version URL: [https://ropengov.github.io/iotables/](https://ropengov.github.io/iotables/)
 
 Thanks to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and [\@pitkant](https://github.com/pitkant) for implementing many good practices on improving the code. See [contributors](https://github.com/ropengov/iotables/graphs/contributors). This project is part of [rOpenGov](http://ropengov.org).
 

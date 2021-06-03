@@ -29,8 +29,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -43,12 +41,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -95,33 +99,33 @@
   <div class="contents col-md-9">
 <div id="iotables-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#iotables-" class="anchor" aria-hidden="true"></a>iotables <img src="reference/figures/logo.png" align="right">
+<a href="#iotables-" class="anchor"></a>iotables <img src="reference/figures/logo.png" align="right">
 </h1></div>
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
 
 <p>The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure. They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository. In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form. Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.</p>
 <p>The iotables are exactly designed for these tasks. Currently the package downloads and processes standardized European SIOTs conforming to the latest statistical regulations, i.e. SIOTs starting from the year 2010.</p>
-<p>The aim of this introduction is not to introduce input-output economics, or SIOTs in detail. The <a href="https://ec.europa.eu/eurostat/en/web/products-manuals-and-guidelines/-/KS-RA-07-013" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> and the <a href="https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview" class="external-link">Eurostat thematic page</a> (for further reference: <code>Eurostat Manual</code>) in the documentation should be consulted for further information about the data and the metadata.</p>
-<p>In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual. The <code>germany_1990</code> dataset is a simplified 6x6 sized SIOT taken from the <code>Eurostat Manual</code> (<code>p481</code>). The package function examples can be checked against <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">published results from Jörg Beutel</a>. These calculations can be followed in the <a href="https://iotables.dataobservatory.eu/articles/germany_1990.html" class="external-link">Germany 1990 vignette</a>.</p>
-<p>The calculation of induced effects (Type-II multipliers) are following the <a href="http://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf" class="external-link">Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report</a>. The analytical functions are tested against this example, too.</p>
+<p>The aim of this introduction is not to introduce input-output economics, or SIOTs in detail. The <a href="https://ec.europa.eu/eurostat/en/web/products-manuals-and-guidelines/-/KS-RA-07-013">Eurostat Manual of Supply, Use and Input-Output Tables</a> and the <a href="https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview">Eurostat thematic page</a> (for further reference: <code>Eurostat Manual</code>) in the documentation should be consulted for further information about the data and the metadata.</p>
+<p>In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual. The <code>germany_1990</code> dataset is a simplified 6x6 sized SIOT taken from the <code>Eurostat Manual</code> (<code>p481</code>). The package function examples can be checked against <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0">published results from Jörg Beutel</a>. These calculations can be followed in the <a href="https://iotables.dataobservatory.eu/articles/germany_1990.html">Germany 1990 vignette</a>.</p>
+<p>The calculation of induced effects (Type-II multipliers) are following the <a href="http://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf">Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report</a>. The analytical functions are tested against this example, too.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install iotables from CRAN or the latest development version with github:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># From CRAN:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"iotables"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"iotables"</span><span class="op">)</span>
 
 <span class="co"># From Github (development version)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rOpenGov/iotables"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rOpenGov/iotables"</span><span class="op">)</span>
 
 <span class="co">#with vignettes:</span>
 <span class="co">#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)</span></code></pre></div>
-<p>You can follow changes on the <a href="https://github.com/rOpenGov/iotables/blob/master/NEWS.md" class="external-link">NEWS.md</a> file.</p>
+<p>You can follow changes on the <a href="https://github.com/rOpenGov/iotables/blob/master/NEWS.md">NEWS.md</a> file.</p>
 </div>
 <div id="acquiring-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#acquiring-data" class="anchor" aria-hidden="true"></a>Acquiring data</h2>
+<a href="#acquiring-data" class="anchor"></a>Acquiring data</h2>
 <p>Eurostat’s data can be downloaded in several tidy, long-form, files, and a lot of filtering is needed to start working with it.</p>
 <p>Currently the following Eurostat SIOTs can be used:</p>
 <ul>
@@ -136,41 +140,41 @@
 </div>
 <div id="vignettes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#vignettes" class="anchor" aria-hidden="true"></a>Vignettes</h2>
+<a href="#vignettes" class="anchor"></a>Vignettes</h2>
 <p>Given the complexity of the data used by the package, probably the use of the vignettes is needed to get a start.</p>
-<p>The <a href="https://iotables.dataobservatory.eu/articles/germany_1990.html" class="external-link">Germany 1990</a> vignette presents most of the examples of the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The <code>testthat</code> infrastructure of the package checks the proper working of the functions against the published results from the <code>Eurostat Manual</code>.</p>
-<p>The <a href="https://iotables.dataobservatory.eu/articles/working_with_eurostat.html" class="external-link">Working with Eurostat Data</a> vignette shows how you can download, pre-process and use real data from Eurostat.</p>
-<p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html" class="external-link">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the <a href="https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html" class="external-link">United Kingdom Input-Output Analytical Tables</a> vignette.</p>
+<p>The <a href="https://iotables.dataobservatory.eu/articles/germany_1990.html">Germany 1990</a> vignette presents most of the examples of the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The <code>testthat</code> infrastructure of the package checks the proper working of the functions against the published results from the <code>Eurostat Manual</code>.</p>
+<p>The <a href="https://iotables.dataobservatory.eu/articles/working_with_eurostat.html">Working with Eurostat Data</a> vignette shows how you can download, pre-process and use real data from Eurostat.</p>
+<p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the <a href="https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html">United Kingdom Input-Output Analytical Tables</a> vignette.</p>
 <div id="contribute" class="section level3">
 <h3 class="hasAnchor">
-<a href="#contribute" class="anchor" aria-hidden="true"></a>Contribute</h3>
+<a href="#contribute" class="anchor"></a>Contribute</h3>
 <p>Contributions are very welcome:</p>
 <ul>
 <li>
-<a href="https://github.com/ropengov/iotables/issues" class="external-link">Issue tracker</a> for feedback and bug reports.</li>
-<li><a href="https://github.com/ropengov/iotables/" class="external-link">Pull requests</a></li>
-<li><a href="https://github.com/ropengov/iotables/" class="external-link">Github page</a></li>
+<a href="https://github.com/ropengov/iotables/issues">Issue tracker</a> for feedback and bug reports.</li>
+<li><a href="https://github.com/ropengov/iotables/">Pull requests</a></li>
+<li><a href="https://github.com/ropengov/iotables/">Github page</a></li>
 </ul>
 </div>
 <div id="acknowledgements" class="section level3">
 <h3 class="hasAnchor">
-<a href="#acknowledgements" class="anchor" aria-hidden="true"></a>Acknowledgements</h3>
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h3>
 <p><strong>Kindly cite this work</strong> as follows:</p>
-<p>Daniel Antal. (2020, May 19). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.3). Zenodo. <a href="https://doi.org/10.5281/zenodo.3839319" class="external-link uri">https://doi.org/10.5281/zenodo.3839319</a> for released version. Development version: URL: <a href="https://ropengov.github.io/iotables/" class="external-link uri">https://ropengov.github.io/iotables/</a></p>
-<p>Thanks to <a href="https://github.com/KKulma/" class="external-link">@KKulma</a> for setting up new and improved continuous integration, and <a href="https://github.com/pitkant" class="external-link">@pitkant</a> for implementing many good practices on improving the code. See <a href="https://github.com/ropengov/iotables/graphs/contributors" class="external-link">contributors</a>. This project is part of <a href="http://ropengov.org" class="external-link">rOpenGov</a>.</p>
+<p>Daniel Antal. (2020, June 3). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.4). Zenodo. <a href="https://zenodo.org/record/4897472">https://doi.org/10.5281/zenodo.4897472</a> for released version. Development version URL: <a href="https://ropengov.github.io/iotables/" class="uri">https://ropengov.github.io/iotables/</a></p>
+<p>Thanks to <a href="https://github.com/KKulma/">@KKulma</a> for setting up new and improved continuous integration, and <a href="https://github.com/pitkant">@pitkant</a> for implementing many good practices on improving the code. See <a href="https://github.com/ropengov/iotables/graphs/contributors">contributors</a>. This project is part of <a href="http://ropengov.org">rOpenGov</a>.</p>
 </div>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
-<p>Please note that the iotables project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<p>Please note that the iotables project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2 data-toc-skip>Links</h2>
+<h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=iotables">https://​cloud.r-project.org/​package=iotables</a>
 </li>
@@ -180,58 +184,52 @@
 </li>
 </ul>
 </div>
-
 <div class="license">
-<h2 data-toc-skip>License</h2>
+<h2>License</h2>
 <ul class="list-unstyled">
 <li>
 <a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
-
 <div class="community">
-<h2 data-toc-skip>Community</h2>
+<h2>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-
 <div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Daniel Antal <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7513-6760" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
+  <div class="dev-status">
+<h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.4.4-orange.svg?style=flat-square" alt="packageversion"></a></li>
-<li><a href="https://github.com/rOpenGov/iotables/actions" class="external-link"><img src="https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/version/iotables" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/ago/iotables" alt="CRAN_time_from_release"></a></li>
-<li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/iotables" alt="metacran downloads"></a></li>
-<li><a href="https://choosealicense.com/" class="external-link"><img src="https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg" alt="license"></a></li>
-<li><a href="https://codecov.io/gh/rOpenGov/iotables" class="external-link"><img src="https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E" alt="codecov"></a></li>
-<li><a href="https://twitter.com/intent/follow?screen_name=ropengov" class="external-link"><img src="https://img.shields.io/twitter/follow/ropengov.svg?style=social" alt="Follow rOpenGov"></a></li>
-<li><a href="https://twitter.com/intent/follow?screen_name=antaldaniel" class="external-link"><img src="https://img.shields.io/twitter/follow/antaldaniel.svg?style=social" alt="Follow author"></a></li>
+<li><a href="https://github.com/rOpenGov/iotables/commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.5-orange.svg?style=flat-square" alt="packageversion"></a></li>
+<li><a href="https://github.com/rOpenGov/iotables/actions"><img src="https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://cran.r-project.org/package=iotables"><img src="https://www.r-pkg.org/badges/version/iotables" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=iotables"><img src="https://www.r-pkg.org/badges/ago/iotables" alt="CRAN_time_from_release"></a></li>
+<li><a href="https://cran.r-project.org/package=iotables"><img src="https://cranlogs.r-pkg.org/badges/iotables" alt="metacran downloads"></a></li>
+<li><a href="https://choosealicense.com/"><img src="https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg" alt="license"></a></li>
+<li><a href="https://codecov.io/gh/rOpenGov/iotables"><img src="https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E" alt="codecov"></a></li>
+<li><a href="https://twitter.com/intent/follow?screen_name=ropengov"><img src="https://img.shields.io/twitter/follow/ropengov.svg?style=social" alt="Follow rOpenGov"></a></li>
+<li><a href="https://twitter.com/intent/follow?screen_name=antaldaniel"><img src="https://img.shields.io/twitter/follow/antaldaniel.svg?style=social" alt="Follow author"></a></li>
 </ul>
 </div>
-
-  </div>
+</div>
 </div>
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Daniel Antal.</p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -239,8 +237,6 @@
 
   
 
-
-  
 
   </body>
 </html>

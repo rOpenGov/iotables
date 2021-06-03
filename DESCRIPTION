@@ -1,8 +1,8 @@
 Package: iotables
 Type: Package
 Title: Importing and Manipulating Symmetric Input-Output Tables
-Date: 2021-06-01
-Version: 0.4.4
+Date: 2021-06-03
+Version: 0.4.5
 Authors@R:
     c(person("Daniel", "Antal", role = c("aut", "cre"),
              email = "daniel.antal@dataobservatory.eu", 
