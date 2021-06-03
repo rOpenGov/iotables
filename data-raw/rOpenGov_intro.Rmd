@@ -1,8 +1,10 @@
 ---
 title: "rOpenGov Intro"
 author: "Daniel Antal, CFA"
-date: "2021-05-31"
-output: html_document
+date: "2021-06-03"
+output: 
+   html_document: default
+   md_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -133,12 +135,17 @@ The [United Kingdom Input-Output Analytical Tables Daniel Antal, based on the wo
 
 Finally, [Working With Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) is a detailed use case of working with all the current functionalities of the package by comparing two economies, Czechia and Slovakia and guides you through a lot more examples than this short blogpost.
 
-## Further plans
+Our package was originally developed to calculate GVA and employment effects for the Slovak music industry, and similar calculations for the Hungarian film tax shelter.  We can now programatically create reproducible multipliers for all European economies in the [Digital Music Observatory](https://music.dataobservatory.eu/), and create further indicators for economic policy making in the [Economy Data Observatory](https://economy.dataobservatory.eu/).
 
-Our package allows the calculation of various economic policy scenarios, such as changing the VAT on meat or effects of re-opening music festivals on aggregate demand, GDP, tax revenues, or employment. 
+## Environmental Impact Analysis {#environmental-impact-analysis}
 
-But what about the  $CO_{2}$, methane and other greenhouse gas effects of the reopening festivals, or the increasing meat prices?
+Our package allows the calculation of various economic policy scenarios, such as changing the VAT on meat or effects of re-opening music festivals on aggregate demand, GDP, tax revenues, or employment. But what about the  $CO_{2}$, methane and other greenhouse gas effects of the reopening festivals, or the increasing meat prices?
 
 Technically our package can already calculate such effects, but to do so, you have to carefully match further statistical vocabulary items used by the European Environmental Agency about air pollutants and greenhouse gases.
 
-In the next major release of the package we are planning to build in the necessary vocabulary into the metadata functions to increase the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.  We hope to win the [EU Datathon Challenge 3: A European Green Deal](https://greendeal.dataobservatory.eu/) with creating an open-source data-as-service application with API to such difficult to use, high-value open data.  We would be very happy to see our users as contributors to this endeavor.
+In the next major release of the package we are planning to build in the necessary vocabulary into the metadata functions to increase the functionality of the package, and create new indicators for our [Green Deal Data Observatory](https://greendeal.dataobservatory.eu/). This experimental data observatory is creating new, high quality statistical indicators from open governmental and open science data sources that has not seen the daylight yet.
+
+## rOpenGov and the EU Datathon Challenges {#ropengov-datathon}
+
+[rOpenGov](http://ropengov.org/) is a community of open governmental data and statistics developers with many packages that make programmatic access and work with open data possible in the R language.  [Reprex](https://reprex.nl/) is a Dutch-startup that teamed up with rOpenGov and other open collaboration partners to create a technologically and financially feasible service to exploit reproducible research products for the wider business, scientific and evidence-based policy design community. Open data is a legal concept - it means that you have the rigth to reuse the data, but often the reuse requires significant programming and statistical know-how. We entered into the annual [EU Datathon](https://reprex.nl/project/eu-datathon_2021/) competition in all three challenges with our applications to not only provide open-source software, but daily updated, validated, documented, high-quality statistical indicators as open data in an open database. Our [iotables](https://iotables.dataobservatory.eu/) package is one of our many open-source building blocks to make open data more accessible to all. 
+
