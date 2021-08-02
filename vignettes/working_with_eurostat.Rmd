@@ -77,7 +77,6 @@ For a quicker building of the vignette, the data is retrieved from the *not_incl
 
 ```{r load}
 #load from pre-saved file to increase running speed
-
 load (system.file('extdata', 
                   'naio_10_product_x_product.rda', 
                   package = 'iotables') )
