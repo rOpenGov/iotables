@@ -54,8 +54,6 @@ Input-Output Tables (see p506-507.)" />
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -67,16 +65,9 @@ Input-Output Tables (see p506-507.)" />
 
 
 
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,13 +81,19 @@ Input-Output Tables (see p506-507.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -151,7 +148,7 @@ Input-Output Tables (see p506-507.)" />
 Input-Output Tables (see p506-507.)</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>backward_linkages</span><span class='op'>(</span><span class='va'>Im</span><span class='op'>)</span></code></pre></div>
+    <pre class="usage"><span class='fu'>backward_linkages</span><span class='op'>(</span><span class='va'>Im</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,28 +171,24 @@ inverse matrix.</p>
 <code><a href='forward_linkages.html'>forward_linkages</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>de_coeff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span><span class='op'>(</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span>, </span>
-<span class='r-in'>                                             digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span></span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`funs()` was deprecated in dplyr 0.8.0.</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Please use a list of either functions or lambdas: </span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span>   # Simple named list: </span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span>   list(mean = mean, median = median)</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span>   # Auto named with `tibble::lst()`: </span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span>   tibble::lst(mean, median)</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span>   # Using lambdas</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span>   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>This warning is displayed once every 8 hours.</span></span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span>
-<span class='r-in'><span class='va'>I</span> <span class='op'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span> <span class='op'>(</span><span class='va'>de_coeff</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>backward_linkages</span> <span class='op'>(</span><span class='va'>I</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>        iotables_row agriculture_group industry_group construction trade_group</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 backward linkages          1.704922       1.841421     1.813747    1.603712</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   business_services_group other_services_group</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                1.594974             1.378375</span>
-</code></pre></div>
+    <pre class="examples"><div class='input'><span class='va'>de_coeff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span><span class='op'>(</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span>, 
+                                             digits <span class='op'>=</span> <span class='fl'>4</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `funs()` was deprecated in dplyr 0.8.0.</span>
+#&gt; <span class='warning'>Please use a list of either functions or lambdas: </span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Simple named list: </span>
+#&gt; <span class='warning'>  list(mean = mean, median = median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Auto named with `tibble::lst()`: </span>
+#&gt; <span class='warning'>  tibble::lst(mean, median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Using lambdas</span>
+#&gt; <span class='warning'>  list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span></div><div class='input'><span class='va'>I</span> <span class='op'>&lt;-</span> <span class='fu'><a href='leontieff_inverse_create.html'>leontieff_inverse_create</a></span> <span class='op'>(</span><span class='va'>de_coeff</span><span class='op'>)</span>
+<span class='fu'>backward_linkages</span> <span class='op'>(</span><span class='va'>I</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;        iotables_row agriculture_group industry_group construction trade_group
+#&gt; 1 backward linkages          1.704922       1.841421     1.813747    1.603712
+#&gt;   business_services_group other_services_group
+#&gt; 1                1.594974             1.378375</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -207,11 +200,11 @@ inverse matrix.</p>
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Daniel Antal.</p></p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -219,8 +212,6 @@ inverse matrix.</p>
 
   
 
-
-  
 
   </body>
 </html>

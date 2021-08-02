@@ -53,8 +53,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -66,16 +64,9 @@
 
 
 
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -89,13 +80,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -161,29 +158,28 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='va'>summary</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       mpg             cyl             disp             hp       </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median :19.20   Median :6.000   Median :196.3   Median :123.0  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       drat             wt             qsec             vs        </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>        am              gear            carb      </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Min.   :0.0000   Min.   :3.000   Min.   :1.000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Median :0.0000   Median :4.000   Median :2.000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Mean   :0.4062   Mean   :3.688   Mean   :2.812  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  Max.   :1.0000   Max.   :5.000   Max.   :8.000  </span>
-</code></pre></div>
+    <pre class="examples"><div class='input'><span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='va'>summary</span>
+</div><div class='output co'>#&gt;       mpg             cyl             disp             hp       
+#&gt;  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+#&gt;  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+#&gt;  Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+#&gt;  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+#&gt;  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+#&gt;  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+#&gt;       drat             wt             qsec             vs        
+#&gt;  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+#&gt;  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+#&gt;  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+#&gt;  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+#&gt;  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+#&gt;  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+#&gt;        am              gear            carb      
+#&gt;  Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+#&gt;  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+#&gt;  Median :0.0000   Median :4.000   Median :2.000  
+#&gt;  Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+#&gt;  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+#&gt;  Max.   :1.0000   Max.   :5.000   Max.   :8.000  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -195,11 +191,11 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Daniel Antal.</p></p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -207,8 +203,6 @@
 
   
 
-
-  
 
   </body>
 </html>

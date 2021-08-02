@@ -54,8 +54,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -67,16 +65,9 @@
 
 
 
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,13 +81,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -151,7 +148,7 @@
 64x64 SIOTs. Currently works only with product x product tables.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>supplementary_add</span><span class='op'>(</span><span class='va'>data_table</span>, <span class='va'>supplementary_data</span>, supplementary_names <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
+    <pre class="usage"><span class='fu'>supplementary_add</span><span class='op'>(</span><span class='va'>data_table</span>, <span class='va'>supplementary_data</span>, supplementary_names <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,100 +181,99 @@ The column names are ordered, and the row names are in the
 first, auxiliary metadata column.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>de_io</span> <span class='op'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>CO2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span> <span class='fl'>0.2379</span>, <span class='fl'>0.5172</span>, <span class='fl'>0.0456</span>, <span class='fl'>0.1320</span>, <span class='fl'>0.0127</span>, <span class='fl'>0.0530</span><span class='op'>)</span>  </span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span> <span class='op'>(</span> <span class='va'>CO2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"agriculture_group"</span>, <span class='st'>"industry_group"</span>,<span class='st'>"construction"</span>,</span>
-<span class='r-in'>                  <span class='st'>"trade_group"</span>,<span class='st'>"business_services_group"</span>,<span class='st'>"other_services_group"</span><span class='op'>)</span> </span>
-<span class='r-in'><span class='va'>CO2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span> <span class='op'>(</span> </span>
-<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span> <span class='op'>(</span> iotables_row <span class='op'>=</span> <span class='st'>"CO2"</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span> <span class='op'>(</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>CO2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>de_coeff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span> <span class='op'>(</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>)</span></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='fu'>supplementary_add</span> <span class='op'>(</span> <span class='va'>de_io</span>, <span class='va'>CO2</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 iotables_row agriculture_group industry_group construction</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1          agriculture_group         1131.0000     25480.0000       1.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2             industry_group         7930.0000    304584.0000   64167.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3               construction          426.0000      7334.0000    3875.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                trade_group         3559.0000     72717.0000   14190.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5    business_services_group         3637.0000     96115.0000   31027.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6       other_services_group         1552.0000     14986.0000    1747.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7                      total        18235.0000    521216.0000  115007.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8                    imports         2927.0000    156703.0000   13427.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   intermediate_consumption        22246.0000    684424.0000  129982.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 10    compensation_employees         9382.0000    296464.0000   78819.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 11        net_tax_production        -2012.0000      1457.0000     963.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 consumption_fixed_capital         7871.0000     63769.0000    5860.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 13       os_mixed_income_net         6423.0000     33332.0000   29982.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 14                       gva        21664.0000    395022.0000  115624.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 15                    output        43910.0000   1079446.0000  245606.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 16          net_tax_products         1084.0000      6505.0000    1548.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 17    employment_wage_salary          483.0000      8032.0000    2896.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 18  employment_self_employed          613.0000       349.0000     340.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 19 employment_domestic_total         1096.0000      8381.0000    3236.0000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 20                       CO2            0.2379         0.5172       0.0456</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    trade_group business_services_group other_services_group   total</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1      607.000                710.0000              762.000   28691</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2    41082.000              11981.0000            30360.000  460104</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3     5296.000              23457.0000             9155.000   49543</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4    74399.000              10835.0000            21008.000  196708</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5    65755.000             193176.0000            34223.000  423933</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6    11225.000              15058.0000            22070.000   66638</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   198364.000             255217.0000           117578.000 1225617</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8    21943.000              13371.0000            13772.000  222143</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   228656.000             277061.0000           143901.000 1486270</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  214450.000             124810.0000           272975.000  996900</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 11    2748.000               5946.0000            -8602.000     500</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 12   41100.000              98610.0000            49260.000  266470</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 13   53109.000             186060.0000            51384.000  360290</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 14  311407.000             415426.0000           365017.000 1624160</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 15  540063.000             692487.0000           508918.000 3110430</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 16    8349.000               8473.0000            12551.000   38510</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 17    7977.000               3653.0000             9555.000   32596</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 18    1274.000                605.0000              651.000    3832</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 19    9251.000               4258.0000            10206.000   36428</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 20       0.132                  0.0127                0.053      NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    final_consumption_households final_consumption_government inventory_change</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                          8500                           16               -6</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2                        197792                         8588             7559</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3                          3457                          742                0</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                        269663                        13492                0</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5                        214757                        10061                0</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6                        119504                       317251                0</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7                        813673                       350150             7553</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8                         80187                         2970            -4233</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9                       1001060                       356790             3580</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 10                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 11                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 12                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 13                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 14                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 15                      1001060                       356790             3580</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 16                       107200                         3670              260</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 17                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 18                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 19                           NA                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 20                            0                           NA               NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    gross_capital_formation exports total_final_use</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                     2975    3734           43910</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2                    91692  313711         1079400</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3                   191715     149          245606</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                    14155   46045          540063</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5                    30124   13612          692487</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6                     3483    2042          508918</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7                   334144  379293         3110384</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8                    41436   42597          385100</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9                   404240  420730         3672624</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 10                      NA      NA          996900</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 11                      NA      NA             500</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 12                      NA      NA          266470</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 13                      NA      NA          360290</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 14                      NA      NA         1624160</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 15                  404240  420730              NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 16                   28660   -1160          177140</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 17                      NA      NA           32596</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 18                      NA      NA            3832</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 19                      NA      NA           36428</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 20                      NA      NA              NA</span>
-</code></pre></div>
+    <pre class="examples"><div class='input'><span class='va'>de_io</span> <span class='op'>&lt;-</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>CO2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span> <span class='fl'>0.2379</span>, <span class='fl'>0.5172</span>, <span class='fl'>0.0456</span>, <span class='fl'>0.1320</span>, <span class='fl'>0.0127</span>, <span class='fl'>0.0530</span><span class='op'>)</span>  
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span> <span class='op'>(</span> <span class='va'>CO2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"agriculture_group"</span>, <span class='st'>"industry_group"</span>,<span class='st'>"construction"</span>,
+                  <span class='st'>"trade_group"</span>,<span class='st'>"business_services_group"</span>,<span class='st'>"other_services_group"</span><span class='op'>)</span> 
+<span class='va'>CO2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span> <span class='op'>(</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span> <span class='op'>(</span> iotables_row <span class='op'>=</span> <span class='st'>"CO2"</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span> <span class='op'>(</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>CO2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>de_coeff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='input_coefficient_matrix_create.html'>input_coefficient_matrix_create</a></span> <span class='op'>(</span> <span class='fu'><a href='iotable_get.html'>iotable_get</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>)</span>
+
+<span class='fu'>supplementary_add</span> <span class='op'>(</span> <span class='va'>de_io</span>, <span class='va'>CO2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                 iotables_row agriculture_group industry_group construction
+#&gt; 1          agriculture_group         1131.0000     25480.0000       1.0000
+#&gt; 2             industry_group         7930.0000    304584.0000   64167.0000
+#&gt; 3               construction          426.0000      7334.0000    3875.0000
+#&gt; 4                trade_group         3559.0000     72717.0000   14190.0000
+#&gt; 5    business_services_group         3637.0000     96115.0000   31027.0000
+#&gt; 6       other_services_group         1552.0000     14986.0000    1747.0000
+#&gt; 7                      total        18235.0000    521216.0000  115007.0000
+#&gt; 8                    imports         2927.0000    156703.0000   13427.0000
+#&gt; 9   intermediate_consumption        22246.0000    684424.0000  129982.0000
+#&gt; 10    compensation_employees         9382.0000    296464.0000   78819.0000
+#&gt; 11        net_tax_production        -2012.0000      1457.0000     963.0000
+#&gt; 12 consumption_fixed_capital         7871.0000     63769.0000    5860.0000
+#&gt; 13       os_mixed_income_net         6423.0000     33332.0000   29982.0000
+#&gt; 14                       gva        21664.0000    395022.0000  115624.0000
+#&gt; 15                    output        43910.0000   1079446.0000  245606.0000
+#&gt; 16          net_tax_products         1084.0000      6505.0000    1548.0000
+#&gt; 17    employment_wage_salary          483.0000      8032.0000    2896.0000
+#&gt; 18  employment_self_employed          613.0000       349.0000     340.0000
+#&gt; 19 employment_domestic_total         1096.0000      8381.0000    3236.0000
+#&gt; 20                       CO2            0.2379         0.5172       0.0456
+#&gt;    trade_group business_services_group other_services_group   total
+#&gt; 1      607.000                710.0000              762.000   28691
+#&gt; 2    41082.000              11981.0000            30360.000  460104
+#&gt; 3     5296.000              23457.0000             9155.000   49543
+#&gt; 4    74399.000              10835.0000            21008.000  196708
+#&gt; 5    65755.000             193176.0000            34223.000  423933
+#&gt; 6    11225.000              15058.0000            22070.000   66638
+#&gt; 7   198364.000             255217.0000           117578.000 1225617
+#&gt; 8    21943.000              13371.0000            13772.000  222143
+#&gt; 9   228656.000             277061.0000           143901.000 1486270
+#&gt; 10  214450.000             124810.0000           272975.000  996900
+#&gt; 11    2748.000               5946.0000            -8602.000     500
+#&gt; 12   41100.000              98610.0000            49260.000  266470
+#&gt; 13   53109.000             186060.0000            51384.000  360290
+#&gt; 14  311407.000             415426.0000           365017.000 1624160
+#&gt; 15  540063.000             692487.0000           508918.000 3110430
+#&gt; 16    8349.000               8473.0000            12551.000   38510
+#&gt; 17    7977.000               3653.0000             9555.000   32596
+#&gt; 18    1274.000                605.0000              651.000    3832
+#&gt; 19    9251.000               4258.0000            10206.000   36428
+#&gt; 20       0.132                  0.0127                0.053      NA
+#&gt;    final_consumption_households final_consumption_government inventory_change
+#&gt; 1                          8500                           16               -6
+#&gt; 2                        197792                         8588             7559
+#&gt; 3                          3457                          742                0
+#&gt; 4                        269663                        13492                0
+#&gt; 5                        214757                        10061                0
+#&gt; 6                        119504                       317251                0
+#&gt; 7                        813673                       350150             7553
+#&gt; 8                         80187                         2970            -4233
+#&gt; 9                       1001060                       356790             3580
+#&gt; 10                           NA                           NA               NA
+#&gt; 11                           NA                           NA               NA
+#&gt; 12                           NA                           NA               NA
+#&gt; 13                           NA                           NA               NA
+#&gt; 14                           NA                           NA               NA
+#&gt; 15                      1001060                       356790             3580
+#&gt; 16                       107200                         3670              260
+#&gt; 17                           NA                           NA               NA
+#&gt; 18                           NA                           NA               NA
+#&gt; 19                           NA                           NA               NA
+#&gt; 20                            0                           NA               NA
+#&gt;    gross_capital_formation exports total_final_use
+#&gt; 1                     2975    3734           43910
+#&gt; 2                    91692  313711         1079400
+#&gt; 3                   191715     149          245606
+#&gt; 4                    14155   46045          540063
+#&gt; 5                    30124   13612          692487
+#&gt; 6                     3483    2042          508918
+#&gt; 7                   334144  379293         3110384
+#&gt; 8                    41436   42597          385100
+#&gt; 9                   404240  420730         3672624
+#&gt; 10                      NA      NA          996900
+#&gt; 11                      NA      NA             500
+#&gt; 12                      NA      NA          266470
+#&gt; 13                      NA      NA          360290
+#&gt; 14                      NA      NA         1624160
+#&gt; 15                  404240  420730              NA
+#&gt; 16                   28660   -1160          177140
+#&gt; 17                      NA      NA           32596
+#&gt; 18                      NA      NA            3832
+#&gt; 19                      NA      NA           36428
+#&gt; 20                      NA      NA              NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -289,11 +285,11 @@ first, auxiliary metadata column.</p>
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Daniel Antal.</p></p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -301,8 +297,6 @@ first, auxiliary metadata column.</p>
 
   
 
-
-  
 
   </body>
 </html>

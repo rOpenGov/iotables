@@ -26,8 +26,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,12 +38,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -73,7 +77,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rOpenGov/iotables/" class="external-link">
+  <a href="https://github.com/rOpenGov/iotables/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,15 +92,15 @@
 
       
 
-      </header><script src="working_with_eurostat_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="working_with_eurostat_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Working With Eurostat Data</h1>
-                        <h4 data-toc-skip class="author">Daniel Antal, CFA</h4>
+                        <h4 class="author">Daniel Antal, CFA</h4>
             
-            <h4 data-toc-skip class="date">2021-06-01</h4>
+            <h4 class="date">2021-08-02</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/working_with_eurostat.Rmd" class="external-link"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/working_with_eurostat.Rmd"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
       <div class="hidden name"><code>working_with_eurostat.Rmd</code></div>
 
     </div>
@@ -104,20 +108,20 @@
     
     
 <p>Symmetric input-output tables and their auxiliary tables are the most complex, structured statistical products that exit, because they contain relationships among 60x60 industry, the supply and the use of the GDP / GNP, and the income disturbing, trade and transport margins and tax receipts from these industries.</p>
-<p>The Eurostat website contains the symmetric input-output data in long form. Working with this data requires a knowledge of the <a href="https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view" class="external-link">Eurostat SNA vocabulary</a> to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle.</p>
-<p>Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with “real-life” data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary. Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on <code>product x product</code> type SIOTs, because most member states use them. The functions work with <code>industry x industry</code> SIOTs, but further vocabulary exception may show up in their use. Please report these issues on <a href="https://github.com/rOpenGov/iotables/issues" class="external-link">github</a>.</p>
+<p>The Eurostat website contains the symmetric input-output data in long form. Working with this data requires a knowledge of the <a href="https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view">Eurostat SNA vocabulary</a> to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle.</p>
+<p>Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with “real-life” data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary. Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on <code>product x product</code> type SIOTs, because most member states use them. The functions work with <code>industry x industry</code> SIOTs, but further vocabulary exception may show up in their use. Please report these issues on <a href="https://github.com/rOpenGov/iotables/issues">github</a>.</p>
 <p>You are most likely to work with the product x product tables. For the availability of other data see <code><a href="../reference/iotables_download.html">?iotables_download</a></code>.</p>
-<p>The analytical functions are presented at greater detail in the <em>Germany 1990</em> vignette. The numbering of the equations refers to the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the <code>ESA95</code> standards. Currently Eurostat uses the <code>ESA2010</code> definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.</p>
-<p>Another very useful source of information on how to work with the tables <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html" class="external-link">Input-output analytical tables: methods and application to UK National Accounts</a>. Since the United Kingdom at the time of writing the article was a member of the European Union, her national accounts follow the EU ESA standards.</p>
+<p>The analytical functions are presented at greater detail in the <em>Germany 1990</em> vignette. The numbering of the equations refers to the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the <code>ESA95</code> standards. Currently Eurostat uses the <code>ESA2010</code> definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.</p>
+<p>Another very useful source of information on how to work with the tables <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html">Input-output analytical tables: methods and application to UK National Accounts</a>. Since the United Kingdom at the time of writing the article was a member of the European Union, her national accounts follow the EU ESA standards.</p>
 <div id="getting-and-processing-eurostat-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-and-processing-eurostat-data" class="anchor" aria-hidden="true"></a>Getting and processing Eurostat data</h2>
-<p>The following code, if specifically run (it will not run on default), will download the latest relevant data from the Eurostat data warehouse, and save it to a directory named <em>../not_included</em> . The iotables package uses the other rOpenGov package <a href="https://github.com/rOpenGov/eurostat" class="external-link">Eurostat</a> with additional processing of the rather complex SIOT bulk files.</p>
-<p>The contents of the <a href="https://github.com/rOpenGov/iotables/tree/master/not_included" class="external-link">not_included</a> directory can be found on GitHub, but they are not released and distributed with the package.</p>
+<a href="#getting-and-processing-eurostat-data" class="anchor"></a>Getting and processing Eurostat data</h2>
+<p>The following code, if specifically run (it will not run on default), will download the latest relevant data from the Eurostat data warehouse, and save it to a directory named <em>../not_included</em> . The iotables package uses the other rOpenGov package <a href="https://github.com/rOpenGov/eurostat">Eurostat</a> with additional processing of the rather complex SIOT bulk files.</p>
+<p>The contents of the <a href="https://github.com/rOpenGov/iotables/tree/master/not_included">not_included</a> directory can be found on GitHub, but they are not released and distributed with the package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Not run</span>
-<span class="va">not_included_directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">'..'</span>, <span class="st">'not_included'</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span> <span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">not_included_directory</span><span class="op">)</span> <span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span> <span class="op">(</span><span class="va">not_included_directory</span><span class="op">)</span>
+<span class="va">not_included_directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">'..'</span>, <span class="st">'not_included'</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span> <span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="va">not_included_directory</span><span class="op">)</span> <span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span> <span class="op">(</span><span class="va">not_included_directory</span><span class="op">)</span>
 <span class="co">#The contents of the 'not_included' directory can be found on GitHub, </span>
 <span class="co">#but they are not released and distributed with the package.</span>
 
@@ -129,9 +133,9 @@
 <span class="co"># Reducing the size of the bulk files will not affect</span>
 <span class="co"># the demonstration.</span>
 
-<span class="va">naio_10_cp1700</span> <span class="op">&lt;-</span> <span class="va">naio_10_cp1700</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">geo</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CZ"</span>, <span class="st">"SK"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2015</span><span class="op">)</span><span class="op">)</span>
+<span class="va">naio_10_cp1700</span> <span class="op">&lt;-</span> <span class="va">naio_10_cp1700</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="va">geo</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CZ"</span>, <span class="st">"SK"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="va">year</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2010</span>, <span class="fl">2015</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">#Conforming employment data both sexes from 15 years old, year 2015.</span>
 <span class="co">#prod_na vocabulary for product x product conformity</span>
@@ -146,14 +150,13 @@
   data_directory <span class="op">=</span> <span class="va">not_included_directory</span>,
   force_download <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span> <span class="op">(</span><span class="va">naio_10_cp1700</span>, <span class="va">emp_sk</span>, <span class="va">emp_cz</span>, 
-      file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">'..'</span>, <span class="st">'inst'</span>, <span class="st">'extdata'</span>,
+<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span> <span class="op">(</span><span class="va">naio_10_cp1700</span>, <span class="va">emp_sk</span>, <span class="va">emp_cz</span>, 
+      file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">'..'</span>, <span class="st">'inst'</span>, <span class="st">'extdata'</span>,
                        <span class="st">'naio_10_product_x_product.rda'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>For a quicker building of the vignette, the data is retrieved from the <em>not_included</em> directory. The chunk above can reproduce this data file.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#load from pre-saved file to increase running speed</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, 
+<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>, 
                   <span class="st">'naio_10_product_x_product.rda'</span>, 
                   package <span class="op">=</span> <span class="st">'iotables'</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
 <p>In this vignette example the Czech (2015) national currency unit and the Slovak (2010) euro tables are created. Since the Slovak national currency is the euro, there is no difference between the Slovak national currency unit and euro tables.</p>
@@ -180,10 +183,10 @@
 </div>
 <div id="analytic-functions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#analytic-functions" class="anchor" aria-hidden="true"></a>Analytic functions</h2>
+<a href="#analytic-functions" class="anchor"></a>Analytic functions</h2>
 <div id="input-coefficients-matrix" class="section level3">
 <h3 class="hasAnchor">
-<a href="#input-coefficients-matrix" class="anchor" aria-hidden="true"></a>Input coefficients matrix</h3>
+<a href="#input-coefficients-matrix" class="anchor"></a>Input coefficients matrix</h3>
 <p>Iotables removes the columns and rows that are completely empty and creates the input coefficient matrix, which is used for most of the analytical functions.</p>
 <p>The <code><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create()</a></code> function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.</p>
 <ol start="9" style="list-style-type: decimal">
@@ -201,7 +204,7 @@
 <span class="op">)</span>
 <span class="co">#&gt; Columns and rows of NA, NA, NA, NA, NA are all zeros and will be removed.</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">input_coeff_matrix_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">input_coeff_matrix_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -393,7 +396,7 @@ CPA_C13-15
 </div>
 <div id="leontieff-inverse" class="section level3">
 <h3 class="hasAnchor">
-<a href="#leontieff-inverse" class="anchor" aria-hidden="true"></a>Creating the Leontieff-matrix and its inverse</h3>
+<a href="#leontieff-inverse" class="anchor"></a>Creating the Leontieff-matrix and its inverse</h3>
 <p>The Leontieff matrix is derived from Leontieff equation system.</p>
 <ol start="19" style="list-style-type: decimal">
 <li><span class="math inline">\((I-A)x = y\)</span></li>
@@ -408,7 +411,7 @@ CPA_C13-15
 <span class="va">L_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_matrix_create.html">leontieff_matrix_create</a></span><span class="op">(</span> <span class="va">input_coeff_matrix_sk</span>  <span class="op">)</span>
 <span class="va">I_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span> <span class="va">input_coeff_matrix_sk</span> <span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">I_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">I_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -600,7 +603,7 @@ CPA_C13-15
 </div>
 <div id="direct-effect-indicators" class="section level2">
 <h2 class="hasAnchor">
-<a href="#direct-effect-indicators" class="anchor" aria-hidden="true"></a>Direct effect indicators</h2>
+<a href="#direct-effect-indicators" class="anchor"></a>Direct effect indicators</h2>
 <p>The direct effects can be compared to intermediate production, domestic product or total supply.</p>
 <blockquote>
 <p>The calculation follows the Eurostat Manaul on p497-499</p>
@@ -622,9 +625,9 @@ CPA_C13-15
 <span class="co">#&gt; Columns and rows of NA, NA, NA, NA, NA are all zeros and will be removed.</span>
 
 <span class="va">direct_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">primary_inputs_cz</span>, <span class="va">I_cz</span> <span class="op">)</span>  
-<span class="va">direcz_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">primary_inputs_sk</span>, <span class="va">I_sk</span> <span class="op">)</span>  
+<span class="va">direct_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">primary_inputs_sk</span>, <span class="va">I_sk</span> <span class="op">)</span>  
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">direct_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">direct_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -816,10 +819,10 @@ P51C_effect
 </div>
 <div id="total-effects" class="section level2">
 <h2 class="hasAnchor">
-<a href="#total-effects" class="anchor" aria-hidden="true"></a>Total effects</h2>
+<a href="#total-effects" class="anchor"></a>Total effects</h2>
 <div id="input-multipliers" class="section level3">
 <h3 class="hasAnchor">
-<a href="#input-multipliers" class="anchor" aria-hidden="true"></a>Input multipliers</h3>
+<a href="#input-multipliers" class="anchor"></a>Input multipliers</h3>
 <p>The <code>input_multipliers_create</code> function will create the various multipliers for each product.</p>
 <ol start="63" style="list-style-type: decimal">
 <li>Z = B(I-A)<sup>-1</sup>
@@ -844,7 +847,7 @@ P51C_effect
 <span class="va">multipliers_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span> <span class="va">primary_inputs_cz</span>, <span class="va">I_cz</span> <span class="op">)</span>  
 <span class="va">multipliers_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span> <span class="va">primary_inputs_sk</span>, <span class="va">I_sk</span> <span class="op">)</span> 
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">multipliers_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">multipliers_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1034,31 +1037,31 @@ CPA_C16
 </div>
 <div id="employment-multipliers" class="section level3">
 <h3 class="hasAnchor">
-<a href="#employment-multipliers" class="anchor" aria-hidden="true"></a>Employment indicators and multipliers</h3>
+<a href="#employment-multipliers" class="anchor"></a>Employment indicators and multipliers</h3>
 <p>The creation of the employment indicator is facilitated with the data processing function <code>employment_get</code>. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector.</p>
 <p>Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation. The helper function <code>conforming_vector_create</code> will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#New function is needed to add employment vector to SIOT</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span> <span class="op">(</span> <span class="va">emp_sk</span> <span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'prod_na'</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span> <span class="op">(</span> <span class="va">emp_cz</span> <span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'prod_na'</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span> <span class="op">(</span> <span class="va">emp_sk</span> <span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'prod_na'</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span> <span class="op">(</span> <span class="va">emp_cz</span> <span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'prod_na'</span>
 
-<span class="va">emp_indicator_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span> <span class="op">(</span> 
+<span class="va">emp_indicator_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span> <span class="op">(</span> 
   <span class="va">sk_io</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">66</span><span class="op">]</span>, 
-  <span class="va">emp_sk</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span><span class="va">.</span>, 
-       return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"employment_total"</span> <span class="op">)</span>
+  <span class="va">emp_sk</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span><span class="va">.</span>, 
+       return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"employment_total"</span> <span class="op">)</span>
 
-<span class="va">emp_indicator_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span> <span class="op">(</span> 
+<span class="va">emp_indicator_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span> <span class="op">(</span> 
   <span class="va">cz_io</span>, 
-  <span class="va">emp_cz</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span><span class="va">.</span>, 
-       return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"employment_total"</span> <span class="op">)</span>
+  <span class="va">emp_cz</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span><span class="va">.</span>, 
+       return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"employment_total"</span> <span class="op">)</span>
 
 
 <span class="va">emp_effect_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">emp_indicator_sk</span>, <span class="va">I_sk</span> <span class="op">)</span>  
 <span class="va">emp_effect_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">emp_indicator_cz</span>, <span class="va">I_cz</span> <span class="op">)</span>  
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="va">emp_effect_cz</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="va">emp_effect_cz</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1119,7 +1122,7 @@ employment_total_effect
 <span class="va">emp_multiplier_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span> <span class="va">emp_indicator_sk</span>, <span class="va">I_sk</span> <span class="op">)</span>  
 <span class="va">emp_multiplier_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span> <span class="va">emp_indicator_cz</span>, <span class="va">I_cz</span> <span class="op">)</span>  
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="va">emp_multiplier_cz</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, digits<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="va">emp_multiplier_cz</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, digits<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1177,13 +1180,13 @@ CPA_C16
 </div>
 <div id="output-multipliers" class="section level3">
 <h3 class="hasAnchor">
-<a href="#output-multipliers" class="anchor" aria-hidden="true"></a>Output multipliers</h3>
+<a href="#output-multipliers" class="anchor"></a>Output multipliers</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">output_multipliers_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span><span class="va">input_coeff_matrix_cz</span><span class="op">)</span>
 <span class="va">output_multipliers_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span><span class="va">input_coeff_matrix_sk</span><span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">output_multipliers_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">output_multipliers_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1242,17 +1245,17 @@ output_multipliers
 </div>
 <div id="interindustrial-linkage-analysis" class="section level2">
 <h2 class="hasAnchor">
-<a href="#interindustrial-linkage-analysis" class="anchor" aria-hidden="true"></a>Interindustrial linkage analysis</h2>
+<a href="#interindustrial-linkage-analysis" class="anchor"></a>Interindustrial linkage analysis</h2>
 </div>
 <div id="backward-linkages" class="section level2">
 <h2 class="hasAnchor">
-<a href="#backward-linkages" class="anchor" aria-hidden="true"></a>Backward linkages</h2>
+<a href="#backward-linkages" class="anchor"></a>Backward linkages</h2>
 <p>Backward linkages show the effect on industries that are suppliers to the production (industry) in question.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cz_bw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/backward_linkages.html">backward_linkages</a></span><span class="op">(</span><span class="va">I_cz</span><span class="op">)</span>
 <span class="va">sk_bw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/backward_linkages.html">backward_linkages</a></span><span class="op">(</span><span class="va">I_sk</span><span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cz_bw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cz_bw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1310,7 +1313,7 @@ backward linkages
 </div>
 <div id="forward-linkages" class="section level2">
 <h2 class="hasAnchor">
-<a href="#forward-linkages" class="anchor" aria-hidden="true"></a>Forward linkages</h2>
+<a href="#forward-linkages" class="anchor"></a>Forward linkages</h2>
 <p>Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_coeff_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span><span class="op">(</span> 
@@ -1319,101 +1322,101 @@ backward linkages
 <span class="va">output_coeff_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span><span class="op">(</span> 
   io_table <span class="op">=</span> <span class="va">sk_io</span>, total <span class="op">=</span> <span class="st">"tfu"</span><span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">output_coeff_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">output_coeff_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>From the output coefficient matrix we can create the Leontieff-matrix for outputs, its inverse, and summarize for forward linkages. These steps are taking place in the <code>forward_linkages</code> function.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cz_fw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forward_linkages.html">forward_linkages</a></span> <span class="op">(</span> <span class="va">output_coeff_cz</span> <span class="op">)</span>
 <span class="va">sk_fw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/forward_linkages.html">forward_linkages</a></span><span class="op">(</span> <span class="va">output_coeff_sk</span> <span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cz_fw</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cz_fw</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="write-results-into-excel-files" class="section level2">
 <h2 class="hasAnchor">
-<a href="#write-results-into-excel-files" class="anchor" aria-hidden="true"></a>Write results into Excel files</h2>
+<a href="#write-results-into-excel-files" class="anchor"></a>Write results into Excel files</h2>
 <p>This code will not run, unless you run it separately. The resulting files can be used to check calculations in Excel or other application.</p>
-<p>The contents of the <a href="https://github.com/rOpenGov/iotables/tree/master/not_included" class="external-link">not_included</a> directory can be found on GitHub, but they are not released and distributed with the package.</p>
+<p>The contents of the <a href="https://github.com/rOpenGov/iotables/tree/master/not_included">not_included</a> directory can be found on GitHub, but they are not released and distributed with the package.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">xlsx</span><span class="op">)</span>
-<span class="va">cz_file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">".."</span>, <span class="st">"not_included"</span>, <span class="st">"CzechRep_test.xlsx"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span>
+<span class="va">cz_file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">".."</span>, <span class="st">"not_included"</span>, <span class="st">"CzechRep_test.xlsx"</span><span class="op">)</span>
 <span class="co">#Czech Republic data</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">cz_io</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"io_table"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">cz_io</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"io_table"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">cz_output</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"cz_output"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">cz_output</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"cz_output"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">input_coeff_matrix_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">input_coeff_matrix_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"input_coeff_matrix_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">L_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"L_cz"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">L_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"L_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">I_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"I_cz"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">I_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, sheetName <span class="op">=</span> <span class="st">"I_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">direct_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">direct_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"direct_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">multipliers_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">multipliers_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"multipliers_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">emp_effect_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">emp_effect_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"emp_effect_cz_2015"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">emp_indicator_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">emp_indicator_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"emp_indicator_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">emp_multiplier_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">emp_multiplier_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"emp_multiplier_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">cz_bw</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">cz_bw</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"cz_backward_linkages"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">output_coeff_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">output_coeff_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"output_coeff_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">cz_fw</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">cz_fw</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"cz_forward_linkages"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">output_multipliers_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">output_multipliers_cz</span>, file <span class="op">=</span> <span class="va">cz_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"output_multipliers_cz"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 
 
-<span class="va">sk_file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">".."</span>, <span class="st">"not_included"</span>, <span class="st">"SlovakRep_test.xlsx"</span><span class="op">)</span>
+<span class="va">sk_file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">".."</span>, <span class="st">"not_included"</span>, <span class="st">"SlovakRep_test.xlsx"</span><span class="op">)</span>
 <span class="co">#Czech Republic data</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">sk_io</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"io_table"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">sk_io</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"io_table"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">sk_output</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"sk_output"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">sk_output</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"sk_output"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">input_coeff_matrix_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">input_coeff_matrix_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"input_coeff_matrix_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">L_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"L_sk"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">L_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"L_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">I_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"I_sk"</span>,
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">I_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, sheetName <span class="op">=</span> <span class="st">"I_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">direct_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">direct_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"direct_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">multipliers_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">multipliers_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"multipliers_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">emp_effect_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">emp_effect_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"emp_effect_sk_2015"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">emp_indicator_sk</span>,file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">emp_indicator_sk</span>,file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"emp_indicator_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">emp_multiplier_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">emp_multiplier_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"employment_multipliers_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">sk_bw</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">sk_bw</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"sk_backward_linkages"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">output_coeff_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">output_coeff_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"output_coeff_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">sk_fw</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">sk_fw</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"sk_forward_linkages"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu">xlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span> <span class="op">(</span> <span class="va">output_multipliers_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
+<span class="fu">xlsx</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span> <span class="op">(</span> <span class="va">output_multipliers_sk</span>, file <span class="op">=</span> <span class="va">sk_file_name</span>, 
                    sheetName <span class="op">=</span> <span class="st">"output_multipliers_sk"</span>,
                    col.names<span class="op">=</span><span class="cn">TRUE</span>, row.names<span class="op">=</span><span class="cn">TRUE</span>, append<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
@@ -1430,13 +1433,11 @@ backward linkages
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Daniel Antal.</p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -1444,8 +1445,6 @@ backward linkages
 
   
 
-
-  
 
   </body>
 </html>

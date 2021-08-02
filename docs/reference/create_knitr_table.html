@@ -53,8 +53,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -66,16 +64,9 @@
 
 
 
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -89,13 +80,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -149,7 +146,7 @@
     <p>Create an output-independent, well formatted kable table</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>create_knitr_table</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>create_knitr_table</span><span class='op'>(</span>
   <span class='va'>data_table</span>,
   digits <span class='op'>=</span> <span class='cn'>NULL</span>,
   caption <span class='op'>=</span> <span class='cn'>NA</span>,
@@ -165,7 +162,7 @@
   keep_pdf <span class='op'>=</span> <span class='cn'>FALSE</span>,
   latex_header_includes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"\\usepackage[magyar]{babel}"</span>,
     <span class='st'>"\\usepackage[utf8]{inputenc}"</span><span class='op'>)</span>
-<span class='op'>)</span></code></pre></div>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,7 +212,7 @@ the columns are bold, i.e. identical to <code>F, F, ..., F</code>.</p></td>
     </tr>
     <tr>
       <th>bootstrap_options</th>
-      <td><p>Defaults to <code>c("striped", "hover", "condensed")</code> and
+      <td><p>Defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("striped", "hover", "condensed")</a></code> and
 only used for <code>output_format = "html"</code>.</p></td>
     </tr>
     <tr>
@@ -244,13 +241,13 @@ packages must be installed on your Latex engine.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>foo</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span> <span class='op'>(</span> </span>
-<span class='r-in'>  observation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"indicator1"</span>, <span class='st'>"indicator2"</span>, <span class='st'>"indicator3"</span><span class='op'>)</span>, </span>
-<span class='r-in'>  indicator_1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>,<span class='fl'>105</span>,<span class='fl'>95</span><span class='op'>)</span>, </span>
-<span class='r-in'>  indicator_2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>102</span>,<span class='fl'>104</span>,<span class='fl'>76</span><span class='op'>)</span></span>
-<span class='r-in'>  <span class='op'>)</span></span>
-<span class='r-in'>  </span>
-</code></pre></div>
+    <pre class="examples"><div class='input'><span class='va'>foo</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span> <span class='op'>(</span> 
+  observation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"indicator1"</span>, <span class='st'>"indicator2"</span>, <span class='st'>"indicator3"</span><span class='op'>)</span>, 
+  indicator_1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>,<span class='fl'>105</span>,<span class='fl'>95</span><span class='op'>)</span>, 
+  indicator_2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>102</span>,<span class='fl'>104</span>,<span class='fl'>76</span><span class='op'>)</span>
+  <span class='op'>)</span>
+  
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,11 +259,11 @@ packages must be installed on your Latex engine.</p></td>
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Daniel Antal.</p></p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -274,8 +271,6 @@ packages must be installed on your Latex engine.</p></td>
 
   
 
-
-  
 
   </body>
 </html>

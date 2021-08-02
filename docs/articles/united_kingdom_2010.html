@@ -26,8 +26,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,12 +38,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">iotables</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -73,7 +77,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/rOpenGov/iotables/" class="external-link">
+  <a href="https://github.com/rOpenGov/iotables/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,27 +92,27 @@
 
       
 
-      </header><script src="united_kingdom_2010_files/header-attrs-2.8/header-attrs.js"></script><script src="united_kingdom_2010_files/kePrint-0.0.1/kePrint.js"></script><link href="united_kingdom_2010_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="united_kingdom_2010_files/header-attrs-2.9/header-attrs.js"></script><script src="united_kingdom_2010_files/kePrint-0.0.1/kePrint.js"></script><link href="united_kingdom_2010_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>United Kingdom Input-Output Analytical Tables</h1>
-                        <h4 data-toc-skip class="author">Daniel Antal, based on the work edited by Richard Wild</h4>
+                        <h4 class="author">Daniel Antal, based on the work edited by Richard Wild</h4>
             
-            <h4 data-toc-skip class="date">2021-06-01</h4>
+            <h4 class="date">2021-08-02</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/united_kingdom_2010.Rmd" class="external-link"><code>vignettes/united_kingdom_2010.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/master/vignettes/united_kingdom_2010.Rmd"><code>vignettes/united_kingdom_2010.Rmd</code></a></small>
       <div class="hidden name"><code>united_kingdom_2010.Rmd</code></div>
 
     </div>
 
     
     
-<p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html" class="external-link">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table.</p>
+<p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table.</p>
 <p>It is unlikely that these tables will be required by other purposes than controlling the package. The UK IO tables for other years are available these are consistent with different Blue Books and there could therefore be important methodological and classification changes. Furthermore, ONS currently publishes ESA2010 compatible SIOTs with analytical tables annually.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_2010_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/iotables_download.html">iotables_download</a></span> <span class="op">(</span> source <span class="op">=</span> <span class="st">"uk_2010"</span> <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span> <span class="op">(</span> <span class="va">uk_2010_data</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">'data-raw'</span>, <span class="st">'uk_2010_data.rda'</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span> <span class="op">(</span> <span class="va">uk_2010_data</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">'data-raw'</span>, <span class="st">'uk_2010_data.rda'</span><span class="op">)</span><span class="op">)</span>
 <span class="va">uk_test_results</span> <span class="op">&lt;-</span> <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/uk_2010_results_get.html">uk_2010_results_get</a></span> <span class="op">(</span><span class="op">)</span>
 <span class="co">#saved as package data</span></code></pre></div>
 <p>For the actual symmetric input-output table (see ) you can use the download function originally designed for the Eurostat bulk downloader.</p>
@@ -124,75 +128,75 @@
                           source <span class="op">=</span> <span class="st">"uk_2010_siot"</span> <span class="op">)</span></code></pre></div>
 <div id="matrix-of-coefficients" class="section level2">
 <h2 class="hasAnchor">
-<a href="#matrix-of-coefficients" class="anchor" aria-hidden="true"></a>Matrix of Coefficients</h2>
+<a href="#matrix-of-coefficients" class="anchor"></a>Matrix of Coefficients</h2>
 <p>The matrix of coefficients is described on page 14-15 and the data can be found in the <em>Matrix of coefficients (product by product) sheet</em> of the Excel file.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_input_coeff</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span><span class="op">(</span> 
                       data_table <span class="op">=</span> <span class="va">uk_siot</span><span class="op">)</span>
 
-<span class="va">uk_coeff_published</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span><span class="va">uk_input_coeff</span>, <span class="fl">1</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">.</span>, 
-              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="external-link">mutate_if</a></span><span class="op">(</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> <span class="op">(</span> labelled_io_data <span class="op">=</span> <span class="va">uk_2010_data</span>, 
+<span class="va">uk_coeff_published</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span><span class="va">uk_input_coeff</span>, <span class="fl">1</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">.</span>, 
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> <span class="op">(</span> labelled_io_data <span class="op">=</span> <span class="va">uk_2010_data</span>, 
                                source <span class="op">=</span> <span class="st">"uk_2010_coeff"</span> <span class="op">)</span>, 
                             <span class="va">is.factor</span>, <span class="va">as.character</span><span class="op">)</span>, 
               by <span class="op">=</span> <span class="st">"prod_na"</span><span class="op">)</span>
 
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"correct data is returned"</span>, <span class="op">{</span>
-  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span>,
-               <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">uk_coeff_published</span>  <span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 😸</span></code></pre></div>
+  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span>,
+               <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">uk_coeff_published</span>  <span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed</span></code></pre></div>
 <p>Comparing the first 7 columns of the two coefficient matrixes at 8 decimal point precision they are equal. Given the size of the matrixes, not all the matrix is compared here, but such a comparison can be made. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.</p>
 </div>
 <div id="leontieff-inverse" class="section level2">
 <h2 class="hasAnchor">
-<a href="#leontieff-inverse" class="anchor" aria-hidden="true"></a>Leontieff-inverse</h2>
+<a href="#leontieff-inverse" class="anchor"></a>Leontieff-inverse</h2>
 <p>The Leontieff-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns at 8 digit precision we see that the re-calculated inverse and the published inverse is the same.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uk_calculated_inverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">)</span>
-<span class="va">uk_published_inverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span><span class="va">uk_calculated_inverse</span>, <span class="fl">1</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="external-link">mutate_if</a></span><span class="op">(</span> 
+<span class="va">uk_published_inverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span><span class="va">uk_calculated_inverse</span>, <span class="fl">1</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span> 
     <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> <span class="op">(</span> labelled_io_data <span class="op">=</span> <span class="va">uk_2010_data</span>, 
                                source <span class="op">=</span> <span class="st">"uk_2010_inverse"</span> <span class="op">)</span>,
                   <span class="va">is.factor</span>, <span class="va">as.character</span><span class="op">)</span>, 
               by <span class="op">=</span> <span class="st">"prod_na"</span><span class="op">)</span>
 
 <span class="fu">test_that</span><span class="op">(</span><span class="st">"correct data is returned"</span>, <span class="op">{</span>
-  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">uk_calculated_inverse</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span>,
-               <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">uk_published_inverse</span>  <span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
-<span class="co">#&gt; Test passed 😸</span></code></pre></div>
+  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">uk_calculated_inverse</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span>,
+               <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">uk_published_inverse</span>  <span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed</span></code></pre></div>
 </div>
 <div id="employment-cost-effects" class="section level2">
 <h2 class="hasAnchor">
-<a href="#employment-cost-effects" class="anchor" aria-hidden="true"></a>Employment cost effects</h2>
+<a href="#employment-cost-effects" class="anchor"></a>Employment cost effects</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">employment_effect_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`Employment cost effects`</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">employment_effect_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`Employment cost effects`</span><span class="op">)</span>
 
 <span class="va">primary_inputs_uk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span>
     data_table  <span class="op">=</span> <span class="va">uk_siot</span>, 
     total       <span class="op">=</span> <span class="st">'output'</span>, 
     return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span>
 
-<span class="va">employment_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span><span class="va">primary_inputs_uk</span> , <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"D1"</span><span class="op">)</span>
+<span class="va">employment_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span><span class="va">primary_inputs_uk</span> , <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"D1"</span><span class="op">)</span>
 
-<span class="va">employment_effects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">employment_input</span>, <span class="va">uk_calculated_inverse</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
-              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">employment_effect_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`Employment cost effects`</span><span class="op">)</span>
+<span class="va">employment_effects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">employment_input</span>, <span class="va">uk_calculated_inverse</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
+              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">employment_effect_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`Employment cost effects`</span><span class="op">)</span>
 
 
 <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_knitr_table.html">create_knitr_table</a></span> <span class="op">(</span>
       data_table <span class="op">=</span>  <span class="va">employment_effects</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>, 
       digits <span class="op">=</span> <span class="fl">4</span>,
       caption <span class="op">=</span> <span class="st">"Comparison of Calculated And Published Employment Cost Effects"</span>, 
-      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
-      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<table class="table table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
+      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table table table-striped table-hover table-condensed">
 <caption>
 Comparison of Calculated And Published Employment Cost Effects
 </caption>
@@ -357,42 +361,42 @@ Vegetable and animal oils and fats
 </div>
 <div id="gva-effects" class="section level2">
 <h2 class="hasAnchor">
-<a href="#gva-effects" class="anchor" aria-hidden="true"></a>GVA effects</h2>
+<a href="#gva-effects" class="anchor"></a>GVA effects</h2>
 <p>GVA is not shown in the Excel table explicitly, but can be calculated as the sum of corporate income (<em>Operating surplus and mixed income</em>), household income (<em>Compensation of employees</em>) and net taxes on production (not products.)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">uk_siot2</span> <span class="op">&lt;-</span> <span class="va">uk_siot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span>  <span class="va">prod_na</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"B2A3G"</span>, <span class="st">"D1"</span>, <span class="st">"D29X39"</span><span class="op">)</span> <span class="op">)</span>  <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarize_if</a></span> <span class="op">(</span> <span class="va">is.numeric</span>, <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="st">"GVA"</span><span class="op">)</span>, <span class="va">.</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span> <span class="op">(</span> <span class="va">uk_siot</span>, <span class="va">.</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">uk_siot2</span> <span class="op">&lt;-</span> <span class="va">uk_siot</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span>  <span class="va">prod_na</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B2A3G"</span>, <span class="st">"D1"</span>, <span class="st">"D29X39"</span><span class="op">)</span> <span class="op">)</span>  <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_if</a></span> <span class="op">(</span> <span class="va">is.numeric</span>, <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="st">"GVA"</span><span class="op">)</span>, <span class="va">.</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span> <span class="op">(</span> <span class="va">uk_siot</span>, <span class="va">.</span><span class="op">)</span>
 
-<span class="va">gva_effect_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`GVA effects`</span><span class="op">)</span>
+<span class="va">gva_effect_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`GVA effects`</span><span class="op">)</span>
 
 <span class="va">gva_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span>
    data_table  <span class="op">=</span> <span class="va">uk_siot2</span>, 
    total       <span class="op">=</span> <span class="st">'output'</span>, 
-   return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"GVA"</span> <span class="op">)</span>
+   return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"GVA"</span> <span class="op">)</span>
 
 <span class="va">gva_effects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span> <span class="va">gva_input</span>,
-                                      <span class="va">uk_calculated_inverse</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
-              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">gva_effect_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`GVA effects`</span><span class="op">)</span>
+                                      <span class="va">uk_calculated_inverse</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
+              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">gva_effect_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`GVA effects`</span><span class="op">)</span>
 
 <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_knitr_table.html">create_knitr_table</a></span> <span class="op">(</span>
       data_table <span class="op">=</span>  <span class="va">gva_effects</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>, 
       digits <span class="op">=</span> <span class="fl">4</span>,
       caption <span class="op">=</span> <span class="st">"Comparison of Calculated And Published GVA Effects"</span>, 
-      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
-      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<table class="table table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
+      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table table table-striped table-hover table-condensed">
 <caption>
 Comparison of Calculated And Published GVA Effects
 </caption>
@@ -556,36 +560,36 @@ Vegetable and animal oils and fats
 </div>
 <div id="employment-cost-multipliers" class="section level2">
 <h2 class="hasAnchor">
-<a href="#employment-cost-multipliers" class="anchor" aria-hidden="true"></a>Employment cost multipliers</h2>
+<a href="#employment-cost-multipliers" class="anchor"></a>Employment cost multipliers</h2>
 <p>Turning to multipliers, using the same inputs we get them back with the following code.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">empc_multiplier_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`Employment cost multiplier`</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">empc_multiplier_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`Employment cost multiplier`</span><span class="op">)</span>
 
 <span class="va">empc_indicator_uk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span>
    data_table  <span class="op">=</span> <span class="va">uk_siot</span>, 
    total       <span class="op">=</span> <span class="st">'output'</span>, 
-   return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">'D1'</span><span class="op">)</span>
+   return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">'D1'</span><span class="op">)</span>
 
 <span class="va">empc_multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span>
   input_requirements <span class="op">=</span> <span class="va">empc_indicator_uk</span>,
-  <span class="va">uk_calculated_inverse</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span> <span class="op">)</span>, 
-              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">empc_multiplier_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`Employment cost multiplier`</span><span class="op">)</span>
+  <span class="va">uk_calculated_inverse</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span> <span class="op">)</span>, 
+              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">empc_multiplier_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`Employment cost multiplier`</span><span class="op">)</span>
 
 <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_knitr_table.html">create_knitr_table</a></span> <span class="op">(</span>
       data_table <span class="op">=</span>  <span class="va">empc_multipliers</span> <span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>, digits <span class="op">=</span> <span class="fl">4</span>,
       caption <span class="op">=</span> <span class="st">"Comparison of Calculated And Published Employment Cost Multipliers"</span>, 
-      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
-      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<table class="table table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
+      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table table table-striped table-hover table-condensed">
 <caption>
 Comparison of Calculated And Published Employment Cost Multipliers
 </caption>
@@ -749,59 +753,59 @@ Vegetable and animal oils and fats
 </div>
 <div id="gva-multipliers" class="section level2">
 <h2 class="hasAnchor">
-<a href="#gva-multipliers" class="anchor" aria-hidden="true"></a>GVA multipliers</h2>
+<a href="#gva-multipliers" class="anchor"></a>GVA multipliers</h2>
 <p>Following from the GVA effects, after summarizing GVA and adding it to the input requirements we can calculate the <code>GVA multipliers</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gva_multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span>
   input_requirements <span class="op">=</span> <span class="va">gva_input</span>,
-                       <span class="va">uk_calculated_inverse</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
-              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">gva_multiplier_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`GVA multiplier`</span><span class="op">)</span>
+                       <span class="va">uk_calculated_inverse</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
+              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">gva_multiplier_results</span>, by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span> <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`GVA multiplier`</span><span class="op">)</span>
 
 <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_knitr_table.html">create_knitr_table</a></span> <span class="op">(</span>
   data_table <span class="op">=</span>  <span class="va">gva_multipliers</span> <span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>, digits <span class="op">=</span> <span class="fl">4</span>,
   caption <span class="op">=</span> <span class="st">"Comparison of Calculated And Published GVA Multipliers"</span>, 
-  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
-  col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
+  col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_knitr_table.html">create_knitr_table</a></span> <span class="op">(</span>
   data_table <span class="op">=</span>  <span class="va">gva_multipliers</span> <span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>, 
   digits <span class="op">=</span> <span class="fl">4</span>,
   caption <span class="op">=</span> <span class="st">"Comparison of Calculated And Published GVA Multipliers"</span>, 
-  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, 
+  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>, 
                 <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
-  col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>##Output multipliers</p>
 <p>At last, the comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">output_multiplier_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`Output multiplier`</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">output_multiplier_results</span> <span class="op">&lt;-</span> <span class="va">uk_test_results</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">uk_row_label</span>, <span class="va">`Output multiplier`</span><span class="op">)</span>
 
-<span class="va">uk_output_multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
-              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="va">output_multiplier_results</span>, 
-              by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span><span class="op">)</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`Output multiplier`</span><span class="op">)</span>
+<span class="va">uk_output_multipliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span> <span class="op">(</span> <span class="va">prod</span>, <span class="va">values</span>, <span class="op">!</span><span class="op">!</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span> <span class="op">(</span> prod_na <span class="op">=</span> <span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">prod</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">metadata_uk_2010</span>, <span class="va">prod_na</span>, <span class="va">uk_row_label</span>  <span class="op">)</span>, 
+              by <span class="op">=</span> <span class="st">'prod_na'</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span> <span class="op">(</span> <span class="va">output_multiplier_results</span>, 
+              by <span class="op">=</span> <span class="st">'uk_row_label'</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span> <span class="op">(</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">uk_row_label</span><span class="op">)</span> <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span> <span class="op">(</span> <span class="va">prod_na</span>, <span class="va">uk_row_label</span>, <span class="va">values</span>, <span class="va">`Output multiplier`</span><span class="op">)</span>
 
 <span class="fu">iotables</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_knitr_table.html">create_knitr_table</a></span> <span class="op">(</span>
       data_table <span class="op">=</span>  <span class="va">uk_output_multipliers</span> <span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>, 
       digits <span class="op">=</span> <span class="fl">4</span>,
       caption <span class="op">=</span> <span class="st">"Comparison of Calculated And Published Output Multipliers"</span>, 
-      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>,
+      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"industry code"</span>, <span class="st">"row label"</span>,
                     <span class="st">"calculated"</span>, <span class="st">"published"</span><span class="op">)</span>, 
-      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<table class="table table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+      col_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">11</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table table table-striped table-hover table-condensed">
 <caption>
 Comparison of Calculated And Published Output Multipliers
 </caption>
@@ -976,13 +980,11 @@ Vegetable and animal oils and fats
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Daniel Antal.</p>
+  <p>Developed by Daniel Antal.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -990,8 +992,6 @@ Vegetable and animal oils and fats
 
   
 
-
-  
 
   </body>
 </html>
