@@ -50,8 +50,7 @@ uk_2010_results_get <- function ( path = NULL )  {
     dplyr::select ( 1 ) %>%
     purrr::set_names( "values" ) %>%
     cbind ( tibble::tibble ( vars = c("indicator", "unit"))) %>%
-    tidyr::spread ( vars, values ) %>%
-    convert_to_ascii()
+    tidyr::spread ( vars, values )
   
   message ( "Reading ... ", uk_metadata$indicator )
   
@@ -68,8 +67,7 @@ uk_2010_results_get <- function ( path = NULL )  {
                     employment_cost_effects_rank = .data$Rank...10,
                     gva_effects_rank = .data$Rank...12 ) %>%
     dplyr::mutate ( indicator = uk_metadata$indicator[1]) %>%
-    dplyr::mutate_if ( is.factor, as.character ) %>%
-    convert_to_ascii()
+    dplyr::mutate_if ( is.factor, as.character ) 
   
   uk_published_multipliers
     

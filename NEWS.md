@@ -146,3 +146,4 @@ turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit).
 # iotables 0.4.5
 
 * Documentation improvement and preparing for Rbloggers.
+* Removing UTF-8 characters from datasets.

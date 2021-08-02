@@ -1,4 +1,4 @@
-#' Validate source Parameter
+#' Validate examples
 #' @importFrom  stringi stri_enc_toascii 
 #' @imoprtFrom dplyr mutate_if
 #' @param dat Possible data sources. 
