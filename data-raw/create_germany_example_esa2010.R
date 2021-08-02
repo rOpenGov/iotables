@@ -85,3 +85,7 @@ usethis::use_data(germany_1990, overwrite = TRUE)
 
 #usethis::use_data ( germany_metadata_rows, germany_metadata_cols, 
 #                     internal = TRUE, overwrite = TRUE)
+
+germany_1990
+
+

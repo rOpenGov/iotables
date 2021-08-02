@@ -1,7 +1,11 @@
 library ( dplyr) ; library (tidyr) ; library (readxl)
 options("scipen"=999)
 
-metadata <- readxl::read_excel("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/metadata.xlsx", 
+library(here)
+source( here("data-raw", "convert_to_ascii.R"))
+
+
+metadata <- readxl::read_excel(here("data-raw", "metadata.xlsx"), 
                                sheet = "all")%>%
   dplyr::arrange( numeric_label )
 #1800 - Symmetric input-output table for domestic production (product x product)
@@ -242,8 +246,12 @@ croatia_2010_1900 <- croatia_2010_1900 %>%
   dplyr::mutate ( geo = "HR") %>%
   dplyr::mutate ( geo_lab = "Croatia") %>%
   dplyr::mutate ( time  = as.Date('2010-01-01')) %>%
-  dplyr::rename ( row_order = numeric_label )
+  dplyr::rename ( row_order = numeric_label ) 
 
-devtools::use_data(croatia_2010_1700, overwrite = TRUE)
-devtools::use_data(croatia_2010_1800, overwrite = TRUE)
-devtools::use_data(croatia_2010_1900, overwrite = TRUE)
+croatia_2010_1700 <- convert_to_ascii(croatia_2010_1700)
+croatia_2010_1800 <- convert_to_ascii(croatia_2010_1800)
+croatia_2010_1900 <- convert_to_ascii(croatia_2010_1900)
+
+usethis::use_data(croatia_2010_1700, overwrite = TRUE)
+usethis::use_data(croatia_2010_1800, overwrite = TRUE)
+usethis::use_data(croatia_2010_1900, overwrite = TRUE)
