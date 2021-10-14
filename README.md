@@ -13,7 +13,7 @@
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
-[![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables)
+[![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://app.codecov.io/gh/rOpenGov/iotables)
 [![Follow
 rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![Follow
