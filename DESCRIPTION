@@ -1,52 +1,55 @@
-Package: iotables
 Type: Package
+Package: iotables
 Title: Importing and Manipulating Symmetric Input-Output Tables
-Date: 2021-08-02
 Version: 0.4.5
-Authors@R:
-    c(person("Daniel", "Antal", role = c("aut", "cre"),
-             email = "daniel.antal@dataobservatory.eu", 
-             comment = c(ORCID = "0000-0001-7513-6760")),
-      person(given = "Kasia",
-             family = "Kulma",
-             role = "ctb", 
-             comment = c(ORCID = "0000-0002-2952-9720")),
-      person(given = "Pyry",
-             family = "Kantanen", 
-             role = "ctb"))
-Maintainer: Daniel Antal <daniel.antal@dataobservatory.eu>  
+Date: 2021-08-02
+Authors@R: c(
+    person("Daniel", "Antal", , "daniel.antal@dataobservatory.eu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7513-6760")),
+    person("Kasia", "Kulma", role = "ctb",
+           comment = c(ORCID = "0000-0002-2952-9720")),
+    person("Pyry", "Kantanen", role = "ctb")
+  )
+Maintainer: Daniel Antal <daniel.antal@dataobservatory.eu>
 Description: Pre-processing and basic analytical tasks related to working
     with Eurostat's symmetric input-output tables and provide basic
     input-output economics calculations. The package is part of rOpenGov
-    <http://ropengov.github.io/> to open source open government initiatives.
-URL: https://iotables.dataobservatory.eu/
-BugReports: https://github.com/rOpenGov/iotables/issues
+    <http://ropengov.github.io/> to open source open government
+    initiatives.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
+URL: https://iotables.dataobservatory.eu/,
+    https://ropengov.github.io/iotables/,
+    https://github.com/rOpenGov/iotables
+BugReports: https://github.com/rOpenGov/iotables/issues
+Depends: 
+    R (>= 3.5.0)
 Imports: 
     dplyr,
     eurostat,
-    magrittr,
-    tidyr,
-    stats,
     forcats,
-    utils,
-    plyr,
-    lubridate,
-    knitr,
     kableExtra,
-    tibble,
-    readxl,
+    knitr,
+    lubridate,
+    magrittr,
+    plyr,
     purrr,
+    readxl,
+    rlang,
+    stats,
+    tibble,
+    tidyr,
     tidyselect,
-    rlang
+    utils
 Suggests: 
-    testthat,
+    covr,
     rmarkdown,
     spelling,
-    covr
-Depends: R(>= 3.5.0)
-VignetteBuilder: knitr
+    testthat
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
 Language: en-US
+LazyData: true
+RoxygenNote: 7.1.2
+X-schema.org-isPartOf: http://ropengov.org/
+X-schema.org-keywords: ropengov

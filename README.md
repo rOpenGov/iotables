@@ -1,14 +1,15 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# iotables <img src="man/figures/logo.png" align="right" />
+# iotables <a href='https://ropengov.github.io/iotables/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
-<!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
+<!-- badges: start -->
 
 ![iotables](man/figures/logo20.png)
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.4.5-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
-[![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
+[![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
@@ -17,6 +18,7 @@ downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.o
 rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![Follow
 author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
+<!-- badges: end -->
 
 The symmetric input-output tables (SIOTs) are complex statistical
 products that present inter-related statistics in a predefined
@@ -94,8 +96,8 @@ Currently the following Eurostat SIOTs can be used:
 -   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
 
 -   Supply table at basic prices incl. transformation into purchasers’
-    prices (naio\_10\_cp15) and Use table at purchasers’ prices
-    (naio\_10\_cp16).
+    prices (naio_10_cp15) and Use table at purchasers’ prices
+    (naio_10_cp16).
 
 The `cp` element refers to basic prices and the `pyp` to previous years’
 prices.

@@ -13,23 +13,23 @@ iotables_download(
 \arguments{
 \item{source}{See the available list of sources above in the Description.}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will 
+\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will
 try to save the pre-processed data file here with labelling.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 in the \code{data_directory} or the temporary directory, if it exists.}
 }
 \value{
-A nested data frame. Each input-output table is in a separate 
+A nested data frame. Each input-output table is in a separate
 row of the nested output, where all the metadata are in columns, and the
 actual, tidy, ordered input-output table is in the data \code{data} column.
 The data is saved into the actual \code{tempdir()}, too.
 }
 \description{
 This function downloads standard input-output table files. Currently only Eurostat files are supported.
-You are not likely to use this function, because 
+You are not likely to use this function, because
 \code{\link{iotable_get}} will
-call this function if necessary and properly filter out an 
+call this function if necessary and properly filter out an
 input-output table.
 }
 \details{
@@ -39,7 +39,7 @@ rds file. (For example: \code{naio_10_cp1750.rds})
 The temporary directory is emptied at every normal R session exit.
 
 To save the file for further use (which is necessary in analytical work because
-download times are long) set the  \code{download_directory} [see parameters]. 
+download times are long) set the  \code{download_directory} [see parameters].
 The function will make a copy of the rds file in this directory.
  \itemize{
  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
@@ -59,8 +59,8 @@ The function will make a copy of the rds file in this directory.
 }
 \examples{
 \donttest{
- io_tables <- iotables_download ( source = "naio_10_cp1700" )
- }
+io_tables <- iotables_download(source = "naio_10_cp1700")
+}
 }
 \seealso{
 Other iotables import functions: 

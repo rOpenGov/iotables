@@ -1,9 +1,0 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
-pkgdown_sha: ~
-articles:
-  germany_1990: germany_1990.html
-  united_kingdom_2010: united_kingdom_2010.html
-  working_with_eurostat: working_with_eurostat.html
-last_built: 2021-08-02T08:49Z
-

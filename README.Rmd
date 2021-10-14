@@ -16,17 +16,17 @@ knitr::opts_chunk$set(
 require (dplyr)
 require (iotables)
 data ("germany_1990")
-```
 
-# iotables <img src="man/figures/logo.png" align="right" />
-
-```{r, echo = FALSE}
 version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                
 version <- gsub('-', '.', version)
-```                                                                                                                         
 
-<!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
+```
+
+# iotables <a href='https://ropengov.github.io/iotables/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+
+<!-- badges: start -->
 ![iotables](man/figures/logo20.png)
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
@@ -36,6 +36,8 @@ version <- gsub('-', '.', version)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables)
 [![Follow rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov) 
 [![Follow author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
+<!-- badges: end -->
+
 
 The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure. They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository. In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form. Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
 
