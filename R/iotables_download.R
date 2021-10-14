@@ -1,18 +1,18 @@
 #' Download input-output tables
 #'
 #' This function downloads standard input-output table files. Currently only Eurostat files are supported.
-#' You are not likely to use this function, because
+#' You are not likely to use this function, because 
 #' \code{\link{iotable_get}} will
-#' call this function if necessary and properly filter out an
+#' call this function if necessary and properly filter out an 
 #' input-output table.
-#'
+#' 
 #' The data is downloaded in the \code{tempdir()}under the name the statistical product as an
 #' rds file. (For example: \code{naio_10_cp1750.rds})
-#'
+#' 
 #' The temporary directory is emptied at every normal R session exit.
-#'
+#' 
 #' To save the file for further use (which is necessary in analytical work because
-#' download times are long) set the  \code{download_directory} [see parameters].
+#' download times are long) set the  \code{download_directory} [see parameters]. 
 #' The function will make a copy of the rds file in this directory.
 #'  \itemize{
 ##'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
@@ -28,13 +28,13 @@
 ##'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
 ##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 ##'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytical Tables data}
-##' }
-#' @param source See the available list of sources above in the Description.
-#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will
-#' try to save the pre-processed data file here with labelling.
+##' } 
+#' @param source See the available list of sources above in the Description. 
+#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
+#' try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists.
-#' @return A nested data frame. Each input-output table is in a separate
+#' @return A nested data frame. Each input-output table is in a separate 
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
 #' The data is saved into the actual \code{tempdir()}, too.
@@ -46,149 +46,129 @@
 #' @family iotables import functions
 #' @examples
 #' \donttest{
-#' io_tables <- iotables_download(source = "naio_10_cp1700")
-#' }
+#'  io_tables <- iotables_download ( source = "naio_10_cp1700" )
+#'  }
 #' @export
 
-iotables_download <- function(source = "naio_10_cp1700",
-                              data_directory = NULL,
-                              force_download = TRUE) {
+iotables_download <- function ( source = "naio_10_cp1700", 
+                                data_directory = NULL,
+                                force_download = TRUE ) {
   ## Non-standard evaluation variable initiatlization -----------------
-  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL
+  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL 
   stk_flow_lab <- indicator <- uk_row_lab <- uk_col_lab <- NULL
   . <- downloaded <- downloaded_labelled <- fix_duplicated <- NULL
   time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
-
+  
   ## Parameter validation ---------------------------------------------
-  if (!source %in% c("uk_2010", "germany_1990")) validate_source(source)
-
-  if (source == "uk_2010") {
-    return(uk_2010_get())
-  }
-
-  retrieve_from_temp_bulk <- paste0(
-    tempdir(),
-    "\\eurostat/", source, "_date_code_TF.rds"
-  )
-
-  # downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
-  # only download the Eurostat bulk file if necessary.
-
-  if (!is.null(data_directory)) {
+  if ( ! source %in% c("uk_2010", "germany_1990")) validate_source(source)
+  
+  if ( source == "uk_2010" ) return ( uk_2010_get() )
+  
+  retrieve_from_temp_bulk <-paste0(tempdir(),
+                                   "\\eurostat/", source, "_date_code_TF.rds" )
+  
+  #downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
+  #only download the Eurostat bulk file if necessary.
+  
+  if ( !is.null (data_directory)   ) {
     save_file_name <- paste0(data_directory, "/", source, ".rds")
-    if (!force_download && file.exists(save_file_name)) {
+    if ( ! force_download && file.exists(save_file_name) )
       return(readRDS(save_file_name))
-    }
   }
-
-  if (!file.exists(retrieve_from_temp_bulk) | force_download == TRUE) {
-    downloaded <- tryCatch(eurostat::get_eurostat(source),
-      error = function(e) message("No data was found with this identifier.")
-    )
+  
+  if (!file.exists(retrieve_from_temp_bulk) | force_download == TRUE){
+    downloaded <- tryCatch(eurostat::get_eurostat (source),
+                           error=function(e) message ("No data was found with this identifier."))
   } else {
-    message("The bulk Eurostat file is retrieved from the temporary directory.")
-    downloaded <- readRDS(retrieve_from_temp_bulk)
+    message ('The bulk Eurostat file is retrieved from the temporary directory.')
+    downloaded <- readRDS( retrieve_from_temp_bulk )
   }
-
-  # label the raw Eurostat file, add rename variables with _lab suffix
-  downloaded_labelled <- downloaded %>%
-    eurostat::label_eurostat(., fix_duplicated = TRUE) %>% # add meaningful labels to raw data
-    stats::setNames(., paste0(names(.), "_lab")) %>%
-    dplyr::mutate(rows = seq_len(nrow(.))) %>% # because long and wide formats are not symmetric
-    dplyr::rename(values = values_lab) %>%
-    dplyr::mutate(year = lubridate::year(time_lab))
-
-  # join the labelled and the not labelled files, so that both versions are avialable
-
-  downloaded <- downloaded %>%
-    dplyr::mutate(rows = seq_len(nrow(.))) %>%
-    dplyr::left_join(., downloaded_labelled, by = c("rows", "values"))
-  # message ("Joined labelled and not labelled data.")
-
-  # if ( "stk_flow" %in% names ( downloaded )) {
+  
+  #label the raw Eurostat file, add rename variables with _lab suffix
+  downloaded_labelled <- downloaded  %>%
+    eurostat::label_eurostat (., fix_duplicated = TRUE) %>%   #add meaningful labels to raw data
+    stats::setNames( ., paste0( names (.), "_lab" ) )    %>%  
+    dplyr::mutate ( rows = seq_len(nrow(.)) ) %>%  #because long and wide formats are not symmetric
+    dplyr::rename ( values = values_lab ) %>%
+    dplyr::mutate ( year = lubridate::year( time_lab ))
+  
+  #join the labelled and the not labelled files, so that both versions are avialable
+  
+  downloaded <- downloaded  %>%
+    dplyr::mutate ( rows = seq_len(nrow(.)) ) %>%
+    dplyr::left_join (., downloaded_labelled, by = c("rows", "values"))
+  #message ("Joined labelled and not labelled data.")
+  
+  #if ( "stk_flow" %in% names ( downloaded )) {
   #  downloaded <- downloaded %>%
   #    dplyr::filter ( stk_flow == stk_flow )
-  # message ("Type " , stk_flow, " is returned.")
-  # }
-
-  if (source == "naio_cp17_r2") {
+  #message ("Type " , stk_flow, " is returned.")
+  #}
+  
+  if ( source == "naio_cp17_r2" ){
+    
     downloaded$t_cols2 <- plyr::mapvalues(
-      downloaded$t_cols2,
-      from = c(
-        "CPA_N80-N82", "CPA_R90-R92", "CPA_E37-E39",
-        "CPA_C10-C12", "CPA_C13-C15",
-        "CPA_C31_C32", "CPA_J59_J60",
-        "CPA_J62_J63", "CPA_M69_M70", "CPA_Q87_Q88",
-        "CPA_M74_M75", "CPA_O84", "CPA_P85",
-        "CPA_D35"
-      ),
-      to = c(
-        "CPA_N80-82", "CPA_R90-92", "CPA_E37-39",
-        "CPA_C10-12", "CPA_C13-15",
-        "CPA_C31_32", "CPA_J59_60",
-        "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88",
-        "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D"
-      )
-    )
-
+      downloaded$t_cols2, 
+      from = c("CPA_N80-N82", "CPA_R90-R92",  "CPA_E37-E39",
+               "CPA_C10-C12", "CPA_C13-C15", 
+               "CPA_C31_C32", "CPA_J59_J60", 
+               "CPA_J62_J63", "CPA_M69_M70", "CPA_Q87_Q88", 
+               "CPA_M74_M75" , "CPA_O84", "CPA_P85", 
+               "CPA_D35" ), 
+      to = c("CPA_N80-82", "CPA_R90-92", "CPA_E37-39", 
+             "CPA_C10-12", "CPA_C13-15", 
+             "CPA_C31_32", "CPA_J59_60", 
+             "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88", 
+             "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D"
+      ))
+    
     downloaded$t_rows2 <- plyr::mapvalues(
-      downloaded$t_rows2,
-      from = c(
-        "CPA_N80-N82", "CPA_R90-R92", "CPA_E37-E39",
-        "CPA_C10-C12", "CPA_C13-C15",
-        "CPA_C31_C32", "CPA_J59_J60",
-        "CPA_J62_J63", "CPA_M69_M70", "CPA_Q87_Q88",
-        "CPA_M74_M75", "CPA_O84", "CPA_P85", "CPA_D35"
-      ),
-      to = c(
-        "CPA_N80-82", "CPA_R90-92", "CPA_E37-39",
-        "CPA_C10-12", "CPA_C13-15",
-        "CPA_C31_32", "CPA_J59_60",
-        "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88",
-        "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D"
-      )
+      downloaded$t_rows2, 
+      from = c("CPA_N80-N82", "CPA_R90-R92",  "CPA_E37-E39", 
+               "CPA_C10-C12", "CPA_C13-C15", 
+               "CPA_C31_C32", "CPA_J59_J60", 
+               "CPA_J62_J63", "CPA_M69_M70", "CPA_Q87_Q88", 
+               "CPA_M74_M75", "CPA_O84", "CPA_P85", "CPA_D35"), 
+      to = c("CPA_N80-82", "CPA_R90-92", "CPA_E37-39", 
+             "CPA_C10-12", "CPA_C13-15", 
+             "CPA_C31_32", "CPA_J59_60", 
+             "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88", 
+             "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D")
     )
-  } # end of _r2
-
-
-  if ("stk_flow" %in% names(downloaded)) {
-    downloaded_nested <- tidyr::nest(dplyr::group_by(
-      downloaded,
-      geo, geo_lab,
-      time, time_lab, year,
-      unit, unit_lab,
-      stk_flow, stk_flow_lab
-    ))
-  } else {
-    downloaded_nested <- tidyr::nest(dplyr::group_by(
-      downloaded,
-      geo, geo_lab,
-      time, time_lab, year,
-      unit, unit_lab
-    ))
+  } #end of _r2 
+  
+  
+  if ( "stk_flow" %in% names ( downloaded ) ) {
+    downloaded_nested <- tidyr::nest ( dplyr::group_by ( downloaded,
+                                                         geo, geo_lab,
+                                                         time, time_lab, year, 
+                                                         unit, unit_lab, 
+                                                         stk_flow, stk_flow_lab) )
+    
+  } else { 
+    downloaded_nested <- tidyr::nest ( dplyr::group_by ( downloaded,
+                                                         geo, geo_lab,
+                                                         time, time_lab, year, 
+                                                         unit, unit_lab ) )
+    
   }
-
-
-  if (!is.null(data_directory)) {
+  
+  
+  if( !is.null(data_directory) ) {
+    
     save_file_name <- file.path(data_directory, paste0(source, ".rds"))
     message("Saving ", nrow(downloaded_nested), " input-output tables.")
-    saveRDS(downloaded_nested, file = save_file_name, version = 2)
-    message(
-      "Saved the raw data of this table type in ",
-      save_file_name, "."
-    )
+    saveRDS( downloaded_nested, file = save_file_name, version = 2 )
+    message ( "Saved the raw data of this table type in ",
+              save_file_name, "." )
   } else {
     save_file_name <- file.path(tempdir(), paste0(source, ".rds"))
-    message(
-      "Saving ", nrow(downloaded_nested), " input-output tables into the temporary directory\n",
-      tempdir()
-    )
-    saveRDS(downloaded_nested, file = save_file_name, version = 2)
-    message(
-      "Saved the raw data of this table type in temporary directory ",
-      save_file_name, "."
-    )
+    message("Saving ", nrow(downloaded_nested), " input-output tables into the temporary directory\n", 
+            tempdir())
+    saveRDS( downloaded_nested, file = save_file_name , version=2)
+    message ( "Saved the raw data of this table type in temporary directory ",
+              save_file_name, "." )
   }
-
-  downloaded_nested
+  
+  downloaded_nested 
 }
