@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 
 test_that("Necessary input parameters are checked", {
   expect_error(iotables_download(source = 'naio_10_cp1701', 

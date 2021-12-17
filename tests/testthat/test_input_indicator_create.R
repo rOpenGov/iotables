@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 context ("Input indicator create")
 
 data_table <- iotable_get()

@@ -7,7 +7,7 @@
 #' \code{\link{output_coefficient_matrix_create}}.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
-#' @importFrom dplyr mutate_at mutate_if
+#' @importFrom dplyr mutate across
 #' @family analytic object functions
 #' @examples 
 #' tm <- input_flow_get ( 
@@ -35,10 +35,10 @@ leontieff_inverse_create <- function ( technology_coefficients_matrix,
         as.data.frame(leontieff_matrix [,1]),
         as.data.frame(inverse)
         ) %>%
-    mutate_if (is.factor, as.character)
+    mutate(across(where(is.factor), as.character))
   
-  names ( named_inverse ) <- names (leontieff_matrix)
-  row.names ( named_inverse ) <- seq_len(nrow(named_inverse))
+  names (named_inverse)     <- names (leontieff_matrix)
+  row.names (named_inverse) <- seq_len(nrow(named_inverse))
   
  if ( is.null(digits) ) return (named_inverse)
   

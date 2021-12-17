@@ -39,9 +39,7 @@ The terminology follows the
 Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report, 
 which cannot be linked due to a malformatted url, but can be found with a search engine.
 this matrix is called 'technological coefficients'. The results of the function are 
-tested on both sources.
-
-This is a wrapper function around  \code{\link{coefficient_matrix_create}}.
+tested on both sources.This is a wrapper function around  \code{\link{coefficient_matrix_create}}.
 }
 \examples{
 input_coefficient_matrix_create ( 

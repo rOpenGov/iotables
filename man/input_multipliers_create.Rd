@@ -2,7 +2,9 @@
 % Please edit documentation in R/input_multipliers_create.R
 \name{input_multipliers_create}
 \alias{input_multipliers_create}
-\title{Create input indicators}
+\title{Create input multipliers
+
+The function creates the multipliers (direct + indirect effects).}
 \usage{
 input_multipliers_create(input_requirements, inverse, digits = NULL)
 }
@@ -21,6 +23,8 @@ A data frame with the vector of multipliers and the an
 auxiliary metadata column (for joining with other matrixes.)
 }
 \description{
+Create input multipliers
+
 The function creates the multipliers (direct + indirect effects).
 }
 \examples{

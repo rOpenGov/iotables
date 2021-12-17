@@ -34,25 +34,23 @@ input-output table.
 }
 \details{
 The data is downloaded in the \code{tempdir()}under the name the statistical product as an
-rds file. (For example: \code{naio_10_cp1750.rds})
-
-The temporary directory is emptied at every normal R session exit.
+rds file. (For example: \code{naio_10_cp1750.rds}) The temporary directory is emptied at every normal R session exit.
 
 To save the file for further use (which is necessary in analytical work because
 download times are long) set the  \code{download_directory} [see parameters]. 
 The function will make a copy of the rds file in this directory.
  \itemize{
- \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
- \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
- \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
- \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
- \item{\code{naio_10_cp15}}{ Supply table at basic prices incl. transformation into purchasers' prices }
- \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
- \item{\code{naio_10_cp1610}}{ Use table at basic prices }
- \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
- \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
- \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
- \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
+ \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
+ \item{\code{naio_10_pyp1700}}{Symmetric input-output table at basic prices (product by product) (previous years prices)}
+ \item{\code{naio_10_cp1750}}{Symmetric input-output table at basic prices (industry by industry)}
+ \item{\code{naio_10_pyp1750}}{Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
+ \item{\code{naio_10_cp15}}{Supply table at basic prices incl. transformation into purchasers' prices }
+ \item{\code{naio_10_cp16}}{Use table at purchasers' prices}
+ \item{\code{naio_10_cp1610}}{Use table at basic prices}
+ \item{\code{naio_10_pyp1610}}{Use table at basic prices (previous years prices) (naio_10_pyp1610)}
+ \item{\code{naio_10_cp1620}}{Table of trade and transport margins at basic prices}
+ \item{\code{naio_10_pyp1620}}{Table of trade and transport margins at previous years' prices}
+ \item{\code{naio_10_cp1630}}{Table of taxes less subsidies on products at basic prices}
  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytical Tables data}
 }
@@ -66,7 +64,6 @@ The function will make a copy of the rds file in this directory.
 Other iotables import functions: 
 \code{\link{employment_get}()},
 \code{\link{iotable_get}()},
-\code{\link{iotables_metadata_get}()},
-\code{\link{iotables_read_tempdir}()}
+\code{\link{iotables_metadata_get}()}
 }
 \concept{iotables import functions}

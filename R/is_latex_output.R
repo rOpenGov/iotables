@@ -2,5 +2,4 @@
 #'
 #' @importFrom knitr is_latex_output
 #' @name is_latex_output
-
 NULL

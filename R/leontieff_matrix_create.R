@@ -7,7 +7,7 @@
 #' @param technology_coefficients_matrix A technology coefficient 
 #' matrix created by the \code{\link{input_coefficient_matrix_create}} or 
 #' \code{\link{output_coefficient_matrix_create}}.
-#' @importFrom dplyr mutate_at mutate_if
+#' @importFrom dplyr mutate across
 #' @family analytic object functions
 #' @return A Leontieff matrix of data.frame class. The column names are 
 #' ordered, and the row names are in the first, auxiliary metadata column.
@@ -31,7 +31,7 @@ leontieff_matrix_create <- function ( technology_coefficients_matrix ) {
   }
   
   if ( length(total_col) > 0 ) {
-    technology_coefficients_matrix <-  technology_coefficients_matrix[,-total_col]
+    technology_coefficients_matrix <- technology_coefficients_matrix[,-total_col]
   }
   
   Tm <- as.matrix (technology_coefficients_matrix[,2:ncol(technology_coefficients_matrix )])

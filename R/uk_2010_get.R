@@ -8,12 +8,11 @@
 #' @param path A path to the downloaded file, if already exists, given with
 #' \code{file.path()} function. 
 #' @source \href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}{ukioanalyticaltablesio1062010detailedpubversion.xls}
-#' @importFrom dplyr select mutate_if mutate left_join mutate_at 
-#' @importFrom dplyr vars bind_cols
-#' @importFrom tidyselect one_of
-#' @importFrom tidyr spread gather 
+#' @importFrom dplyr select mutate across left_join
+#' @importFrom dplyr bind_cols
+#' @importFrom tidyr pivot_longer pivot_wider
 #' @importFrom tibble rownames_to_column tibble
-#' @importFrom purrr set_names
+#' @importFrom rlang set_names
 #' @importFrom utils download.file
 #' @importFrom readxl read_excel
 #' @examples
@@ -25,10 +24,6 @@
 uk_2010_get <- function ( path = NULL )  {
   
   ## Non-standard evaluation variable initiatlization -----------------
-  
-  value <- values <- rowname <- remove <- . <- NULL
-  geo <- geo_lab <- year <- unit <- unit_lab <- NULL
-  uk_col <- uk_col_lab <- uk_row <- uk_row_lab <- X__1 <- var <- NULL
   
   if ( is.null(path)) { 
     path <- file.path(tempdir(), 
@@ -53,9 +48,10 @@ uk_2010_get <- function ( path = NULL )  {
                                         skip = metadata_skip,
                                         col_names = FALSE, 
                                         n_max = 2) %>%
-      purrr::set_names ( "values") %>%
+      rlang::set_names ( "values") %>%
       bind_cols ( tibble::tibble ( vars = c("indicator", "unit"))) %>%
-      tidyr::spread ( vars, values )
+      pivot_wider ( names_from = .data$vars, values_from = .data$values)
+      #tidyr::spread ( vars, values )
     
     message ( "Reading ... ", uk_metadata$indicator )
     
@@ -66,25 +62,26 @@ uk_2010_get <- function ( path = NULL )  {
                                             col_names = FALSE, 
                                             n_max = 2) %>%
       dplyr::select ( - 1 ) %>% 
-      tibble::rownames_to_column (.) %>% 
-      tidyr::gather(var, value, -rowname) %>% 
-      tidyr::spread(rowname, value)  %>%
-      purrr::set_names(., c("remove", "uk_col", "uk_col_lab")) %>%
-      dplyr::select  ( -remove ) %>%
-      dplyr::mutate_if ( is.factor, as.character ) 
+      tibble::rownames_to_column () %>% 
+      pivot_longer( -all_of("rowname"), names_to = "var", values_to="value") %>%
+      tidyr::pivot_wider(names_from = .data$rowname, values_from = .data$value)  %>%
+      rlang::set_names(c("remove", "uk_col", "uk_col_lab")) %>%
+      dplyr::select  ( -.data$remove ) %>%
+      mutate(across(where(is.factor), as.character)) 
     
     uk_data_sheet <- readxl::read_excel ( path,
                                     sheet = i,
                                     skip = data_skip,
                                     col_names = TRUE) %>%
-      tidyr::gather( uk_col_lab, values, !!3:ncol(.)) %>%
-      purrr::set_names(., "uk_row", "uk_row_lab", 'uk_col_lab', 'values') %>%
-      dplyr::mutate(values = as.numeric(as.character(values))) %>%
-      dplyr::left_join (.,  uk_column_specs, 
+      pivot_longer ( cols = 3:ncol(.), names_to = "uk_col_lab", values_to = "values") %>%
+      #tidyr::gather( uk_col_lab, values, !!3:ncol(.)) %>%
+      rlang::set_names(c("uk_row", "uk_row_lab", 'uk_col_lab', 'values')) %>%
+      mutate(values = as.numeric(as.character(values))) %>%
+      dplyr::left_join (uk_column_specs, 
                         by = "uk_col_lab") %>%
-      dplyr::mutate (indicator = uk_metadata$indicator ) %>%
-      dplyr::mutate ( unit = uk_metadata$unit ) %>%
-      dplyr::mutate_if ( is.factor, as.character ) 
+      mutate (indicator = uk_metadata$indicator ) %>%
+      mutate (unit = uk_metadata$unit ) %>%
+      mutate (across(where(is.factor), as.character) ) 
     
     uk_data_sheet <- uk_data_sheet %>%
       mutate ( uk_col = ifelse ( grepl('on-market', uk_col_lab), 
@@ -103,21 +100,20 @@ uk_2010_get <- function ( path = NULL )  {
     if (i>2) uk_data <- rbind(uk_data, uk_data_sheet) else uk_data <- uk_data_sheet
   }
    
+  remove_dot <- function(x) gsub("\\.", "-", x)
+  
   uk_data %>%
-    dplyr::mutate ( uk_col_lab = gsub("\n", ' ', uk_col_lab)) %>%
-    dplyr::mutate ( uk_col_lab = trimws(uk_col_lab, 'both')) %>%
-    dplyr::mutate ( uk_col = ifelse(is.na(uk_col), uk_col_lab, uk_col)) %>%
-    dplyr::mutate ( uk_row = ifelse(is.na(uk_row), uk_row_lab, uk_row)) %>%
-    dplyr::mutate_at ( dplyr::vars(tidyselect::one_of("uk_row", "uk_col")),
-                       ~ gsub("\\.", "-", .)) %>%
-    dplyr::mutate_at ( dplyr::vars(tidyselect::one_of("uk_row", "uk_col")), 
-                       ~ gsub(" & ", "-", .)) %>%
-    dplyr::mutate ( values = ifelse (is.na(values), 0, values)) %>%
-    dplyr::mutate ( geo = 'UK') %>%
-    dplyr::mutate ( year = 2010 ) %>%
-    dplyr::mutate ( unit = 'MIO_NAC') %>%
-    dplyr::mutate ( unit_lab = "Million national currency") %>%
-    dplyr::mutate ( geo_lab = 'United Kingdom')
+    mutate ( uk_col_lab = gsub("\n", ' ', uk_col_lab)) %>%
+    mutate ( uk_col_lab = trimws(uk_col_lab, 'both')) %>%
+    mutate ( uk_col = ifelse(is.na(uk_col), uk_col_lab, uk_col)) %>%
+    mutate ( uk_row = ifelse(is.na(uk_row), uk_row_lab, uk_row)) %>%
+    mutate ( across(all_of(c("uk_row", "uk_col")), remove_dot)) %>%
+    mutate ( values = ifelse (is.na(values), 0, values)) %>%
+    mutate ( geo = 'UK') %>%
+    mutate ( year = 2010 ) %>%
+    mutate ( unit = 'MIO_NAC') %>%
+    mutate ( unit_lab = "Million national currency") %>%
+    mutate ( geo_lab = 'United Kingdom')
     
 }
 

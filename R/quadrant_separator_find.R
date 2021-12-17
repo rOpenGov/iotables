@@ -1,6 +1,6 @@
-#' Determine the end of Quadrant I and III.
+#' @title Determine the end of Quadrant I and III.
 #' 
-#' This is an internal function to determine where to separate quadrants if
+#' @description This is an internal function to determine where to separate quadrants if
 #' necessary.
 #' @param data_table A symmetric input output table, a use table or a supply 
 #' table.

@@ -1,8 +1,9 @@
-#' Get employment data
+#' @title Get employment data
 #'
-#' Download the employment data for a country and arrange it to the 
+#' @description Download the employment data for a country and arrange it to the 
 #' 64x64 SIOTs.
-#' Currently works only with product x product tables. 
+#' 
+#' @details Currently works only with product x product tables. 
 #' @param geo The country code. 
 #' @param year The year.  The average employment will be created for the given
 #' year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
@@ -152,14 +153,14 @@ employment_get <- function ( geo = "CZ",
   
   ## Age group selection and exception handling--------------------------------  
   if ( age_input %in% unique ( emp$age ) ) {
-    emp <- emp %>% dplyr::filter ( .data$age == age_input )
+    emp <- emp %>% filter (.data$age == age_input)
   } else {
     stop ("No employment data found with the age parameter = ", age_input )
   }
   
   ## Sex variable selection and exception handling-------------------------------- 
-  if ( sex_input %in% unique ( emp$sex ) ) {
-    emp <- emp %>% dplyr::filter ( .data$sex == sex_input )
+  if ( sex_input %in% unique (emp$sex) ) {
+    emp <- emp %>% dplyr::filter (.data$sex == sex_input)
   } else {
     stop ("No employment data found with sex parameter = ", sex_input )
   }
@@ -205,7 +206,7 @@ employment_get <- function ( geo = "CZ",
     )
     
     primary_employment_input <- employment %>%
-      dplyr::filter ( .data$variable == "prod_na" ) #does not matter which, not used
+      filter ( .data$variable == "prod_na" ) #does not matter which, not used
     
     ##No employment for imputed rent column-------------------------------- 
     
@@ -214,7 +215,7 @@ employment_get <- function ( geo = "CZ",
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      dplyr::select ( .data$iotables_label, .data$values ) %>%
+      select ( .data$iotables_label, .data$values ) %>%
       tidyr::spread ( .data$iotables_label, .data$values )    #use iotables_label in this case
     
   } else if ( labelling == "prod_na" ){  ## this is the product x product labelling format 

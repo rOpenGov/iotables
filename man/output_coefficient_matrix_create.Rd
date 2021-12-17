@@ -28,15 +28,18 @@ first, auxiliary metadata column.
 }
 \description{
 Create an output coefficient matrix from the input flow matrix or a symmetric
-input-output table. If there are zero values in present, they will be changed to 
+input-output table.
+}
+\details{
+If there are zero values in present, they will be changed to 
 0.000001 and you will get a warning. Some analytical equations cannot be 
 solved with zero elements. You either have faulty input data, or you have 
 to use some sort of data modification to carry on your analysis.
 }
 \examples{
-io_table <- iotable_get () 
+io_table <- iotable_get() 
 
-output_coefficient_matrix_create ( io_table  = io_table, 
-                                   total = 'tfu',
-                                   digits = 4 )
+output_coefficient_matrix_create (io_table  = io_table, 
+                                  total = 'tfu',
+                                  digits = 4)
 }

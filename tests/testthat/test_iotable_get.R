@@ -1,14 +1,4 @@
-library (testthat)
-library (iotables)
-context ("Creating an IO Table")
-#iotable_get ( source = "naio_10_cp1620", geo = "CZ", 
-#              stk_flow = "TOTAL", year = 2010, 
-#              unit = "MIO_NAC", data_directory = 'data-raw')
-
-#test <- iotable_get ( source = "naio_10_pyp1620", geo = "CZ", 
-#              stk_flow = "TOTAL", year = 2010, 
-#              unit = "MIO_NAC", data_directory = 'data-raw')
-
+context ("iotable_get()")
 
 test_that("Necessary input parameters are checked", {
   expect_error(iotable_get(source = 'naio_10_cp1700', 
@@ -20,7 +10,7 @@ test_that("Necessary input parameters are checked", {
 })
 
 
-test_that("correct data is returned", {
+test_that("Correct data is returned by iotable_get()", {
   expect_equal(iotable_get(source = 'germany_1990', 
                            geo = 'DE', year = 1990, 
                            unit = "MIO_EUR", labelling = "iotables")[1,2], 1131)
@@ -56,7 +46,7 @@ germany_table <- iotable_get(source = 'germany_1990',
 
 hh <- germany_table$final_consumption_households[which( germany_table$iotables_row == "output")]
 
-test_that("correct data is returned for private consumption", {
+test_that("Correct data is returned for private consumption by iotable_get()", {
   expect_equal(hh, 1001060)
 })
 

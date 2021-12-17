@@ -2,7 +2,9 @@
 % Please edit documentation in R/check_digits.R
 \name{check_digits}
 \alias{check_digits}
-\title{Check digits parameter}
+\title{Check digits parameter
+
+This is an internal function to determine if the rounding can go ahead.}
 \usage{
 check_digits(digits)
 }
@@ -13,6 +15,8 @@ check_digits(digits)
 An error if the digits are not \code{NULL} or an integer value.
 }
 \description{
+Check digits parameter
+
 This is an internal function to determine if the rounding can go ahead.
 }
 \keyword{internal}

@@ -16,6 +16,10 @@ data.frame class, following the column names of the Leontieff
 inverse matrix.
 }
 \description{
+Indicate the interconnection of a particular sector to other sectors
+from which it purchases inputs (demand side).
+}
+\details{
 Backward linkages as defined by the Eurostat Manual of Supply, Use and
 Input-Output Tables (see p506-507.)
 }
@@ -26,7 +30,7 @@ I <- leontieff_inverse_create (de_coeff)
 backward_linkages (I)
 }
 \seealso{
-Other interindustrial linkage functions: 
+Other linkage functions: 
 \code{\link{forward_linkages}()}
 }
-\concept{interindustrial linkage functions}
+\concept{linkage functions}

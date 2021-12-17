@@ -35,8 +35,7 @@
 #' if it exists. Will force download only in a new session.
 #' @return A vector with the years that have available input-output tables.
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter select mutate rename left_join arrange mutate_if
-#' @importFrom tidyr spread
+#' @importFrom dplyr filter select mutate rename left_join arrange across
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
 #' @examples 
@@ -118,8 +117,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
     stop ("This type of input-output database is not (yet) recognized by iotables.")
   }
   
-  metadata_rows <- dplyr::mutate_if ( metadata_rows, is.factor, as.character )
-  metadata_cols <- dplyr::mutate_if ( metadata_cols, is.factor, as.character )
+  metadata_rows <- mutate ( metadata_rows, across(where(is.factor), as.character) )
+  metadata_cols <- mutate ( metadata_cols, across(where(is.factor), as.character) )
   
   ###Exception handling for wrong paramters-----
   if ( is.null(labelled_io_data) ) {  #if not directly inputed data 

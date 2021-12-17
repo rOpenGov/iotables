@@ -22,9 +22,9 @@ definition. The empty effects vector can be used in .csv format
 as a sample to import scenarios from a spreadsheet application.
 }
 \examples{
-de_input_flow <- input_flow_get ( data_table = iotable_get())
+de_input_flow <- input_flow_get(data_table = iotable_get())
 
-conforming_vector_create ( data_table = de_input_flow )
+conforming_vector_create (data_table = de_input_flow)
 }
 \seealso{
 Other iotables processing functions: 

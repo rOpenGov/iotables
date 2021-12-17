@@ -1,4 +1,4 @@
-#' Create input indicators
+#' @title Create input multipliers
 #' 
 #' The function creates the multipliers (direct + indirect effects).
 #' @param input_requirements A matrix or vector created by 

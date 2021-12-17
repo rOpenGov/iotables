@@ -16,6 +16,9 @@ FAIL 0 | WARN 0 | SKIP 0 | PASS 48
 0 errors √ | 0 warnings √ | 0 notes √
 
 ## Notes
-I received a notification from CRAN that the package contains non-ASCII characters, and will be removed by 2 August 2021 if not fixed.  I work on a Windows system, adn my devtools::check() indicates that there are no non-ASCII characters in the R code or data files, and I also checked the vignettes, where I have found one.  I wrote a conversion function for all saved data files that explicitly changes factor variables and column headings to ASCII.
+This version is eliminates deprecated functions from tidyverse, particularly
+* dplyr mutate_if 
+* tidyselect one_of
+* tidyr spread
 
-My tests continue to show no UTF8 characters, but if there are any, I will re-create the data files on a Linux system. I believe that they were creeping in from the data sources of the example data SIOTs.
+The empty_remove function was earlier an internal function but it has siginificant user value and is now exported (with new unit tests.)

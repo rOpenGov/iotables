@@ -1,18 +1,15 @@
-library (testthat)
-library (iotables)
 context ("Creating a coefficient matrix")
 
-cm_de <-  coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
-                             total = "output", 
-                             digits = 4 )
+cm_de <-  coefficient_matrix_create ( 
+  data_table = iotable_get ( source = "germany_1990"), 
+  total = "output", 
+  digits = 4 )
 
 ncol(coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
                             total = "output", 
                             digits = 4 ))
 
-
-
-#The Eurostat Manual uses a different rounding. There is a slight mismatch)
+# The Eurostat Manual uses a different rounding. There is a slight mismatch.
 
 test_that("correct data is returned", {
   expect_equal(as.numeric(unlist (cm_de[1, 2] )), 

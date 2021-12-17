@@ -1,4 +1,4 @@
-#' Create an output-independent, well formatted kable table
+#' @title Create an output-independent, well formatted kable table
 #' 
 #' @param data_table data.frame, tibble, named matrix or a knitr_kable object.
 #' @param caption A table caption, defaults to empty \code{NA}.
@@ -154,7 +154,7 @@ create_knitr_table <- function (
                                               latex_options = latex_options) 
   }
   
-  ###Add formatting elements from vectors col by col
+  ### Add formatting elements from vectors col by col
   i <- 1
   while (i <= ncol(data_table)) {
     knitr_table <-  kableExtra::column_spec(kable_input = knitr_table,

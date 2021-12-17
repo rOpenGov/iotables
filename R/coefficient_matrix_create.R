@@ -25,7 +25,7 @@
 #' @return A data.frame that contains the matrix of  \code{data_table} divided 
 #' by \code{total} with a key column. Optionally the results are rounded to 
 #' given \code{digits}. 
-#' @importFrom dplyr mutate mutate_if funs left_join
+#' @importFrom dplyr mutate across left_join
 #' @references See 
 #' \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
@@ -52,15 +52,16 @@ coefficient_matrix_create <- function ( data_table,
                 "' was not recognized, returned all data.")
     }
   }
- 
-  data_table <- dplyr::mutate_if (data_table, is.factor, as.character )
+  
+  data_table <- data_table %>% 
+    mutate ( across(where(is.factor), as.character) )
   
   ## Removing all zero columns and rows --------
   if ( remove_empty ) data_table <- empty_remove ( data_table )
   
   last_column <- quadrant_separator_find( data_table, 
                                           include_total = FALSE)
-
+  
   ## Removing the 2nd and 4th quadrants--- 
   if ( !is.null(households) ) { 
     if ( households == TRUE ) { 
@@ -68,13 +69,13 @@ coefficient_matrix_create <- function ( data_table,
       quadrant <- data_table [, 1:last_column]
       data_table <- dplyr::left_join ( quadrant, 
                                        household_column, 
-                                 by = names(quadrant)[1])
+                                       by = names(quadrant)[1])
     } else {
       data_table <- data_table [, 1:last_column]
     }
-      } else {
+  } else {
     data_table <- data_table [, 1:last_column]
-      }
+  }
   
   key_column <- tolower(as.character(unlist(data_table[,1])))
   key_column
@@ -83,27 +84,27 @@ coefficient_matrix_create <- function ( data_table,
   if ( total %in%  c("output", "p1", "output_bp")  ) { 
     if (any( c("output", "p1", "output_bp")  %in%  key_column )) {
       total_row <- data_table[which ( key_column  %in%
-                                  c("output", "p1", "output_bp"))[1],]
+                                        c("output", "p1", "output_bp"))[1],]
     } else {
       stop ( "The output row was not found in the table as 'output', 
              'p1' or 'output_bp'")
-      } 
-    } else if ( total %in%  c("total", "cpa_total")  ) { 
+    } 
+  } else if ( total %in%  c("total", "cpa_total")  ) { 
     if ( any( c("total", "cpa_total") %in%  key_column ) ) {
       total_row_n <- which (  key_column  %in% c("total", "cpa_total"))[1]
       total_row <- data_table[total_row_n,]
-      }
-    } else {
-      total_row <- data_table[which ( key_column %in% c(total))[1],]
-      if ( length(total_row) == 0) stop("The total row was not found.")
-    } #end of else
-
+    }
+  } else {
+    total_row <- data_table[which ( key_column %in% c(total))[1],]
+    if ( length(total_row) == 0) stop("The total row was not found.")
+  } #end of else
+  
   
   ##Adjust the total vector---- 
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
-  total_row <- mutate_if ( total_row, is.factor, as.character )
-  total_row <- mutate_if ( total_row, is.numeric, null_to_eps ) #avoid division by zero
-
+  total_row <-  total_row %>% mutate(across(where(is.factor), as.character))
+  total_row <-  total_row %>% mutate ( across(where(is.factor), null_to_eps) ) # avoid division by zero
+  
   coeff_matrix <- data_table
   
   if (households == TRUE)  last_column <- last_column+1
@@ -112,22 +113,22 @@ coefficient_matrix_create <- function ( data_table,
   for ( i in seq_len(nrow(data_table)) ) {
     coeff_matrix[i,2:last_column] <-  coeff_matrix[i,2:last_column] / as.numeric(total_row[2:last_column])
   }
- 
+  
   potential_houeshold_earning_names <- c("compensation_employees", 'd1')
   
   earnings_name <- potential_houeshold_earning_names [
     which ( potential_houeshold_earning_names  %in% key_column )
-    ]
-
+  ]
+  
   household_earnings_row <- coeff_matrix[which( earnings_name == key_column), ]
-    
-
+  
+  
   ###If only a part should be returned----
   if ( ! is.null(return_part) )  {
     
     last_row <- which ( 
       tolower(unlist(data_table[,1])) %in% c("cpa_total", "total")
-      ) #not last column
+    ) #not last column
     
     if ( return_part == "primary_inputs" ) {
       coeff_matrix <- coeff_matrix[last_row:nrow(coeff_matrix), ]  #households remain anyway

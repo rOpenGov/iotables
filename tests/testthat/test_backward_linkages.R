@@ -1,5 +1,3 @@
-library (testthat)
-library (iotables)
 context ("Creating backwards linkages")
 
 
@@ -15,8 +13,7 @@ bw4 <- backward_linkages ( Im = I4 )
 bw <-  backward_linkages ( Im = I )
 
 
-#The Eurostat Manual uses a different rounding. There is a slight mismatch)
-
+# The Eurostat Manual uses a different rounding. There is a slight mismatch) -----------------
 test_that("correct data is returned", {
   expect_equal(as.numeric(unlist ( bw[, 2:7] )), 
                c(1.7048,1.8413,1.8136,1.6035,1.5951,1.3782), tolerance=1e-3)

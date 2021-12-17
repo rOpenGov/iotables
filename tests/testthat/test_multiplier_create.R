@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 context ("Eurostat Manual examples")
 coeff_de <- input_coefficient_matrix_create( iotable_get() )
 

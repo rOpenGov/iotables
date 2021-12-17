@@ -8,11 +8,11 @@
 #' @param path A path to the downloaded file, if already exists, given with
 #' \code{file.path()} function.
 #' @source \href{https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/supplyandusetables/datasets/ukinputoutputanalyticaltablesdetailed/2010detailed/ukioanalyticaltablesio1062010detailedpubversion.xls}{ukioanalyticaltablesio1062010detailedpubversion.xls}
-#' @importFrom dplyr select mutate_if mutate rename
-#' @importFrom tidyr spread gather 
+#' @importFrom dplyr select across mutate rename
 #' @importFrom tibble tibble
-#' @importFrom purrr set_names
+#' @importFrom rlang set_names
 #' @importFrom utils download.file
+#' @importFrom tidyr pivot_wider
 #' @importFrom readxl read_excel
 #' @examples
 #' \dontrun{
@@ -21,11 +21,7 @@
 
 uk_2010_results_get <- function ( path = NULL )  {
   
-  value <- values <- rowname <- remove <- . <- NULL
-  geo <- geo_lab <- year <- unit <- unit_lab <- NULL
-  uk_col <- uk_col_lab <- uk_row <- uk_row_lab <- X__1 <- var <- NULL
-  Product <- Rank  <- Rank__1 <- Rank__2 <- Rank__3 <- Rank__4 <- NULL
-  
+
   if ( is.null(path)) { 
     path <- file.path(tempdir(), 
                       'ukioanalyticaltablesio1062010detailedpubversion.xls')
@@ -42,16 +38,16 @@ uk_2010_results_get <- function ( path = NULL )  {
   i <- 9
   data_skip <- column_spec_skip + 1
   
-  uk_metadata <- readxl::read_excel ( path,
-                                      sheet = i, 
-                                      skip = metadata_skip,
-                                      col_names = FALSE, 
-                                      n_max = 2) %>%
-    dplyr::select ( 1 ) %>%
-    purrr::set_names( "values" ) %>%
+  uk_metadata <- readxl::read_excel (path,
+                                     sheet = i, 
+                                     skip = metadata_skip,
+                                     col_names = FALSE, 
+                                     n_max = 2) %>%
+    select (1) %>%
+    set_names( "values" ) %>%
     cbind ( tibble::tibble ( vars = c("indicator", "unit"))) %>%
-    tidyr::spread ( vars, values )
-  
+    pivot_wider ( names_from = .data$vars, values_from = .data$values)
+    
   message ( "Reading ... ", uk_metadata$indicator )
   
   
@@ -59,15 +55,15 @@ uk_2010_results_get <- function ( path = NULL )  {
                                           sheet = i, 
                                           skip = 4,
                                           col_names = TRUE) %>%
-    dplyr::select ( - 1 ) %>% 
-    dplyr::rename ( uk_row_label = Product, 
+    select ( - 1 ) %>% 
+    dplyr::rename ( uk_row_label = .data$Product, 
                     output_multiplier_rank = .data$Rank...4, 
                     employment_cost_multiplier = .data$Rank...6, 
                     gva_multiplier_rank = .data$Rank...8, 
                     employment_cost_effects_rank = .data$Rank...10,
                     gva_effects_rank = .data$Rank...12 ) %>%
-    dplyr::mutate ( indicator = uk_metadata$indicator[1]) %>%
-    dplyr::mutate_if ( is.factor, as.character ) 
+    mutate ( indicator = uk_metadata$indicator[1]) %>%
+    mutate(across(where(is.factor), as.character))
   
   uk_published_multipliers
     

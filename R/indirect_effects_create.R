@@ -1,4 +1,4 @@
-#' Create indirect effects
+#' @title Create indirect effects
 #' 
 #' The function creates the effects.
 #' @param input_requirements A matrix or vector created by 
@@ -16,10 +16,10 @@
 #'
 #' compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation_employees')
 #'
-#' I_nl <- leontieff_inverse_create( input_coeff_nl )
+#' I_nl <- leontieff_inverse_create(input_coeff_nl)
 #'
 #' direct_effects_create(input_requirements = compensation_indicator, 
-#'                            inverse = I_nl)
+#'                       inverse = I_nl)
 #' @export
 
 indirect_effects_create <- function ( input_requirements,

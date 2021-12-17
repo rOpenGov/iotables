@@ -2,7 +2,9 @@
 % Please edit documentation in R/indirect_effects_create.R
 \name{indirect_effects_create}
 \alias{indirect_effects_create}
-\title{Create indirect effects}
+\title{Create indirect effects
+
+The function creates the effects.}
 \usage{
 indirect_effects_create(input_requirements, inverse, digits = NULL)
 }
@@ -16,6 +18,8 @@ indirect_effects_create(input_requirements, inverse, digits = NULL)
 no rounding takes place.}
 }
 \description{
+Create indirect effects
+
 The function creates the effects.
 }
 \examples{
@@ -28,8 +32,8 @@ input_coeff_nl <- input_coefficient_matrix_create(
 
 compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation_employees')
 
-I_nl <- leontieff_inverse_create( input_coeff_nl )
+I_nl <- leontieff_inverse_create(input_coeff_nl)
 
 direct_effects_create(input_requirements = compensation_indicator, 
-                           inverse = I_nl)
+                      inverse = I_nl)
 }

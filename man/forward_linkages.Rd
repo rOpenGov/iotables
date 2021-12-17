@@ -18,6 +18,11 @@ long-form data.frame, containing the metadata column of the the row
 names from the \code{output_coefficient_matrix}.
 }
 \description{
+The increased output of a sector indicates that additional
+amounts of products are available to be used as inputs by other sectors which can increase their 
+production, which is captured in this indicator vector.
+}
+\details{
 Forward linkages as defined by the Eurostat Manual of Supply, Use and
 Input-Output Tables (see p506-507.)
 }
@@ -28,11 +33,11 @@ de_out <- output_coefficient_matrix_create (
  data_table, "tfu", digits = 4
  )
 
-forward_linkages ( output_coefficient_matrix = de_out, 
-                   digits = 4 )
+forward_linkages(output_coefficient_matrix = de_out, 
+                 digits = 4 )
 }
 \seealso{
-Other interindustrial linkage functions: 
+Other linkage functions: 
 \code{\link{backward_linkages}()}
 }
-\concept{interindustrial linkage functions}
+\concept{linkage functions}

@@ -11,7 +11,7 @@
 #' vector or a data frame of several rows. 
 #' @param supplementary_names Optional names for the new supplementary rows. 
 #' Defaults  to \code{NULL}.
-#' @importFrom dplyr select full_join mutate_if
+#' @importFrom dplyr select full_join mutate across
 #' @return A symmetric input-output table with supplementary data,  
 #' of data.frame class. 
 #' The column names are ordered, and the row names are in the 
@@ -48,13 +48,13 @@ supplementary_add <- function ( data_table,
   
   if ( length(new_key) == 0) new_key <- 'supplementary_row'
   
-  key_column <- dplyr::select ( data_table, 1 ) 
+  key_column <- select ( data_table, 1 ) 
   
   names (supplementary_data)[1] <- names (data_table)[1]
   
-  siot_ext   <- dplyr::full_join ( 
-    dplyr::mutate_if(data_table, is.factor, as.character), 
-    dplyr::mutate_if(supplementary_data, is.factor, as.character),
+  siot_ext   <- full_join ( 
+    data_table %>% mutate(across(where(is.factor), as.character)),
+    supplementary_data %>% mutate(across(where(is.factor), as.character)),
     by = names (supplementary_data) )
 
   

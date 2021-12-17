@@ -11,13 +11,13 @@ input-output economics calculations. The package is
 a part of rOpenGov <http://ropengov.github.io/> for 
 open source open government initiatives.
 }
-\section{iotables import functions}{
+\section{import functions}{
 
 The iotables import function help downloading and pre-processing the
 Eurostat symmetric input-output tables and related tables.
 
 \code{\link{iotable_get}} returns a single table.
-
+\code{\link{iotable_read_tempdir}} reads data from the temporary directory of a session.
 \code{\link{employment_get}} downloads the employment data and processes
 it to a conforming form.
 }
@@ -29,15 +29,14 @@ input-output tables and joining them correctly.
 \code{\link{conforming_vector_create}} is a helper function taht creates
 a named vector that conforms with the analytical objects, such as the 
 use table, the Leontieff-matrix, etc.
-
 \code{\link{household_column_get}} returns the final household 
 expenditure.
-
 \code{\link{primary_input_get}} will retrieve any primary input from 
 the input-output table. \code{\link{output_get}} is a wrapper function around the 
 \code{\link{primary_input_get}} function.
-
 \code{\link{total_tax_add}} adds taxes to an input-output table.
+\code{\link{empty_remove}} symmetrically removes columns and rows if they contain missing values, 
+or each and every value is zero.
 }
 
 \section{analytic object functions}{
@@ -51,10 +50,8 @@ matrixes.
 \section{indicator functions}{
 
 \code{\link{input_indicator_create}} The function creates the input indicators from the inputs and
-the outputs.
-
+the outputs. 
 \code{\link{direct_effects_create}} for direct effects.
-
 \code{\link{coefficient_matrix_create}} The coefficient matrix is
 related by default to output, but you can change this to total supply 
 or other total aggregate if it exists in the data table.
@@ -70,7 +67,7 @@ various multipliers.
 multipliers (for direct and indirect economic effects.)
 }
 
-\section{interindustrial linkage functions}{
+\section{linkage functions}{
 
 \code{\link{backward_linkages}} creates the vector of industry 
 (product) backward linkages in a wide

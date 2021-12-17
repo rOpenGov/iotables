@@ -1,11 +1,11 @@
-#' Get primary inputs
+#' @title Get primary inputs
 #'
 #' This function will retrieve any primary input from the input-output 
 #' table. 
 #' @param data_table A symmetric input-output table, a use table, or a 
 #' supply table retrieved by the  \code{\link{iotable_get}} function. 
 #' @param primary_input The primary input to be returned from the table.
-#' @importFrom dplyr select mutate_if
+#' @importFrom dplyr select mutate across
 #' @return A data frame with the vector of multipliers and the an 
 #' auxiliary metadata column (for joining with other matrixes.)
 #' @family iotables processing functions
@@ -25,8 +25,8 @@ primary_input_get <- function ( data_table,
   last_column <- quadrant_separator_find ( data_table )
   
   data_table <- data_table %>% 
-    dplyr::mutate_if ( is.factor, as.character ) %>%
-    dplyr::select(1:last_column)
+    mutate(across(where(is.factor), as.character)) %>%
+    select(1:last_column)
   
   if ( primary_input %in% data_table[[1]] ) {
     input_row <- which ( data_table[[1]] == primary_input )

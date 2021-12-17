@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 context ("Retreieving a primary input vector")
 
 siot <- iotable_get ( source = "germany_1990", 

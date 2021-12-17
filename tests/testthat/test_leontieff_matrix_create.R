@@ -1,9 +1,7 @@
-library (testthat)
-library (iotables)
 context ("Creating the Leontieff matrix and its inverse")
 
-de_use <- input_flow_get ( iotable_get (labelling = "short" ))
-nl_use <- input_flow_get  (  netherlands_2006 )
+de_use <- input_flow_get( iotable_get (labelling = "short" ))
+nl_use <- input_flow_get(netherlands_2006)
 
 
 nl_coeff_3   <- input_coefficient_matrix_create( data_table = netherlands_2006, 
@@ -40,7 +38,7 @@ TBI <- I_de %>%
   dplyr::filter ( iotables_row == "trade_group") %>%
   dplyr::select ( business_services_group ) %>%
   unlist () %>%
-  as.numeric(.)
+  as.numeric()
 
 # test against 15.10 p 488
 

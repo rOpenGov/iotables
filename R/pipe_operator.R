@@ -1,4 +1,4 @@
-#' Pipe operator
+#' @title Pipe operator
 #'
 #' @importFrom magrittr %>%
 #' @name %>%

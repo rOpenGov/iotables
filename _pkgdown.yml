@@ -1,0 +1,131 @@
+home:
+  links:
+  - text: http://iotables.dataobservatory.eu
+    href: http://iotables.dataobservatory.eu
+
+
+authors:
+  Daniel Antal:
+    href: https://reprex.nl/authors/daniel_antal/
+  Reprex:
+    href: https://reprex.nl/
+    html: <img src="https://reprex.nl/authors/admin/avatar_hud66277e7f64fbf44513e7a4881e2a94f_35557_270x270_fill_lanczos_center_2.png"
+      height="24" />
+      
+
+template:
+  bootstrap: 5
+pkgdown_sha: ~
+
+intro:
+  - title: "Get Started"
+
+articles:
+  united_kingdom_2010: united_kingdom_2010.html
+  working_with_eurostat: working_with_eurostat.html
+
+reference:
+  - title: "Importing"
+    desc: >
+      Download the data from the Eurostat warehouse, or, in special cases, from the package's in-built
+      library.
+    contents:
+      - iotables_download
+      - iotables_read_tempdir
+      - employment_get
+      - uk_2010_get
+  - title: "Matrix functions"
+    desc: >
+     These data wrangling functions take out from the longform raw data files the inportant matrixes of 
+     of input-output economics. The coefficient matrixes are strictly labelled, ordered, and they are successfully
+     symmetric (apart from the auxiliary key column.)
+    contents:
+      - validate_source
+      - iotable_get
+      - coefficient_matrix_create
+      - input_coefficient_matrix_create
+      - output_coefficient_matrix_create
+  - title: "SIOT processing functions"
+    desc: >
+     These data wrangling functions create vectors that conform the matrix, i.e. their elements are 
+     stricly labelled and ordered.
+    contents:
+      - iotables_metadata_get
+      - iotable_year_get
+      - primary_input_get
+      - household_column_get
+      - total_tax_add
+      - household_column_find
+      - matrix_round
+      - supplementary_add
+  - title: "Analytic objects"
+    desc: >
+     Create the Leontieff matrix, the Leontieff inverse, and its inputs. To avoid division by zero, 
+     systematically remove zero or missing rows and columns.
+    contents:
+      - input_flow_get
+      - leontieff_inverse_create
+      - leontieff_matrix_create
+      - empty_remove
+  - title: "Indicators"
+    desc: >
+     After importing data with some **descriptive metadata** such as **numerical coding** and **labelling**, 
+     we need to create a map of the information that is in our R session to prepare a harmonization
+     plan. We must find information related to sufficiently similar concepts that can be 
+     harmonized to be successfully joined into a single variable, and eventually a table of similar 
+     variables must be joined. 
+    contents:
+      - direct_effects_create
+      - indirect_effects_create
+  - title: "Multipliers"
+    desc: >
+     The *multiplier_create* is a wrapper function around *equation_solve* to create multipliers. 
+     The *input_multipliers_create* and *output_multipliers_create* create the most frequently used 
+     multipliers.
+    contents:
+      - equation_solve
+      - multiplier_create
+      - input_multipliers_create
+      - output_multiplier_create 
+  - title: "Linkages"
+    desc: >
+     In the framework of input-output analysis, production by a particular sector has two kinds of effects
+     on other sectors in the economy. If a sector increases its output, more inputs (purchases) are required
+     from other sectors (**backward linkage**). The increased output of this sector indicates that additional
+     amounts of products are available to be used as inputs by other sectors which can increase their 
+     production (**forward linkage**). See the *Eurostat Manual of Supply, Use and Input-Output Tables* p506-507.
+    contents:
+      - backward_linkages
+      - forward_linkages
+  - title: "Conforming data"
+    desc: >
+     For further analysis get data which conforms the structure of the SIOTs. 
+    contents:
+      - conforming_vector_create
+  - title: "Data"
+    desc: >
+     Validation datasets for crosschecking with published results.
+    contents:
+      - germany_1990
+      - metadata
+      - employment_metadata
+      - netherlands_2006
+  - title: "Validation Data - United Kingdom"
+    desc: >
+     Validation datasets for crosschecking with published results, and special datasets for Croatia and
+     the United Kingdom.
+    contents:
+      - uk_2010_data
+      - uk_2010_results_get
+      - uk_test_results
+      - metadata_uk_2010
+  - title: "Validation Data - Croatia Pre-Accession SIOTs"
+    desc: >
+     Datasets for working with Croatia's pre-accession data. 
+    contents:
+      - croatia_2010_1700
+      - croatia_2010_1800
+      - croatia_2010_1900
+      - croatia_employment_2013
+      - croatia_employment_aggregation
+

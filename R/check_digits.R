@@ -1,4 +1,4 @@
-#' Check digits parameter
+#' @title Check digits parameter
 #' 
 #' This is an internal function to determine if the rounding can go ahead.
 #' @param digits Digit input to check for validity.

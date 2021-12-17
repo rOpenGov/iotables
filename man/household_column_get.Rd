@@ -18,7 +18,7 @@ The column containing final household expenditure. If not found
 Return Final Household Expenditure
 }
 \examples{
-household_column_get( iotable_get ( source = 'germany_1990') )
+household_column_get(iotable_get (source = 'germany_1990'))
 }
 \seealso{
 Other iotables processing functions: 

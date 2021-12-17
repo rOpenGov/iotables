@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 require (dplyr)
 context ("Eurostat Manual example")
 

@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 context ("Creating output multipliers")
 de_input_coeff <- input_coefficient_matrix_create ( 
                            data_table  = iotable_get(), 

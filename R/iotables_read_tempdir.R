@@ -1,4 +1,4 @@
-#' Read input-output Tables from Temporary Directory
+#' @title Read input-output Tables from Temporary Directory
 #'
 #' Validate the \code{source} input parameter and try to load the table
 #' from the current sessions' temporary directory.
@@ -22,13 +22,13 @@
 #' @return A nested data frame. Each input-output table is in a separate 
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
-#' @family iotables import functions
+#' @family import functions
 #' @examples
 #' \donttest{
 #' # The table must be present in the sessions' temporary directory:
 #' iotables_download(source = "naio_10_cp1700")
 #' 
-#' iotables_read_tempdir ( source = "naio_10_cp1700" )
+#' iotables_read_tempdir (source = "naio_10_cp1700")
 #' }
 #' @export
 

@@ -50,6 +50,8 @@ input-output tables.
 \description{
 Download the employment data for a country and arrange it to the 
 64x64 SIOTs.
+}
+\details{
 Currently works only with product x product tables.
 }
 \examples{
@@ -68,7 +70,6 @@ Currently works only with product x product tables.
 Other iotables import functions: 
 \code{\link{iotable_get}()},
 \code{\link{iotables_download}()},
-\code{\link{iotables_metadata_get}()},
-\code{\link{iotables_read_tempdir}()}
+\code{\link{iotables_metadata_get}()}
 }
 \concept{iotables import functions}

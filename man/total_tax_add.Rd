@@ -2,7 +2,7 @@
 % Please edit documentation in R/total_tax_add.R
 \name{total_tax_add}
 \alias{total_tax_add}
-\title{Summarize And Add Tax Data}
+\title{Summarize and add tax data}
 \usage{
 total_tax_add(
   data_table,
@@ -27,12 +27,12 @@ A data frame with the vector of multipliers and the an
 auxiliary metadata column (for joining with other matrixes.)
 }
 \description{
-Summarize And Add Tax Data
+Summarize and add tax data
 }
 \examples{
-de_io <- iotable_get ()
+de_io <- iotable_get()
 
-total_tax_add ( de_io, 
-                tax_names = c("net_tax_products",  "net_tax_production"),
-                total_tax_name = "total_tax")
+total_tax_add (de_io, 
+               tax_names = c("net_tax_products",  "net_tax_production"),
+               total_tax_name = "total_tax")
 }

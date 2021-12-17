@@ -1,4 +1,4 @@
-#' Solve A Basic (Matrix) Equation
+#' @title Solve a basic (matrix) equation
 #' 
 #' The function matches to parts of the matrix equation, using the named
 #' formats with row names and solves the matrix equation.
@@ -11,7 +11,7 @@
 #' industry or product names for matching, for example the employment coefficients. 
 #' @param Im A Leontieff-inverse with a key column containing the industry or 
 #' product names for matching.
-#' @importFrom dplyr select mutate mutate_if full_join
+#' @importFrom dplyr select mutate mutate across full_join
 #' @importFrom tidyr spread
 #' @importFrom tidyselect one_of
 #' @return A data.frame with auxiliary metadata to conform the symmetric
@@ -28,17 +28,17 @@
 #' equation_solve (Im = Im, LHS = LHS)
 #' @export 
 
-equation_solve <- function ( LHS = NULL, Im = NULL ) {
+equation_solve <- function (LHS = NULL, Im = NULL) {
 
-  if ( is.null(LHS) | is.null(Im) ) stop (
+  if (is.null(LHS) | is.null(Im)) stop (
       "Error: matrix equation inputs are not given.")
 
   LHS <- LHS %>%
-    dplyr::mutate_if (is.factor, as.character) 
+    mutate(across(where(is.factor), as.character)) 
   Im <- Im %>%
-    dplyr::mutate_if (is.factor, as.character) 
+    mutate(across(where(is.factor), as.character)) 
   
-  if ( ncol (Im) < ncol(LHS)) {
+  if (ncol (Im) < ncol(LHS)) {
     
    not_found <-  names(LHS)[ which (! names(LHS) %in% names ( Im )) ]
    
@@ -59,7 +59,7 @@ equation_solve <- function ( LHS = NULL, Im = NULL ) {
   ###Joining matrixes to find out if all data is present ---------------------   
 
   joined <- tryCatch(
-      dplyr::full_join (LHS, Im, by = names(LHS)), 
+      full_join (LHS, Im, by = names(LHS)), 
       error = function(e) {
         message ( "The technology columns are not matching.")
         return (NULL)

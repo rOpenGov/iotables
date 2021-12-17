@@ -1,31 +1,29 @@
-#' Download input-output tables
+#' @title Download input-output tables
 #'
-#' This function downloads standard input-output table files. Currently only Eurostat files are supported.
+#' @description This function downloads standard input-output table files. Currently only Eurostat files are supported.
 #' You are not likely to use this function, because 
 #' \code{\link{iotable_get}} will
 #' call this function if necessary and properly filter out an 
 #' input-output table.
 #' 
-#' The data is downloaded in the \code{tempdir()}under the name the statistical product as an
-#' rds file. (For example: \code{naio_10_cp1750.rds})
-#' 
-#' The temporary directory is emptied at every normal R session exit.
+#' @details The data is downloaded in the \code{tempdir()}under the name the statistical product as an
+#' rds file. (For example: \code{naio_10_cp1750.rds}) The temporary directory is emptied at every normal R session exit.
 #' 
 #' To save the file for further use (which is necessary in analytical work because
 #' download times are long) set the  \code{download_directory} [see parameters]. 
 #' The function will make a copy of the rds file in this directory.
 #'  \itemize{
-##'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
-##'  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
-##'  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
-##'  \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
-##'  \item{\code{naio_10_cp15}}{ Supply table at basic prices incl. transformation into purchasers' prices }
-##'  \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
-##'  \item{\code{naio_10_cp1610}}{ Use table at basic prices }
-##'  \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
-##'  \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
-##'  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
-##'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
+##'  \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
+##'  \item{\code{naio_10_pyp1700}}{Symmetric input-output table at basic prices (product by product) (previous years prices)}
+##'  \item{\code{naio_10_cp1750}}{Symmetric input-output table at basic prices (industry by industry)}
+##'  \item{\code{naio_10_pyp1750}}{Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
+##'  \item{\code{naio_10_cp15}}{Supply table at basic prices incl. transformation into purchasers' prices }
+##'  \item{\code{naio_10_cp16}}{Use table at purchasers' prices}
+##'  \item{\code{naio_10_cp1610}}{Use table at basic prices}
+##'  \item{\code{naio_10_pyp1610}}{Use table at basic prices (previous years prices) (naio_10_pyp1610)}
+##'  \item{\code{naio_10_cp1620}}{Table of trade and transport margins at basic prices}
+##'  \item{\code{naio_10_pyp1620}}{Table of trade and transport margins at previous years' prices}
+##'  \item{\code{naio_10_cp1630}}{Table of taxes less subsidies on products at basic prices}
 ##'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 ##'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytical Tables data}
 ##' } 
@@ -41,8 +39,8 @@
 #' @importFrom dplyr filter select mutate left_join rename group_by
 #' @importFrom tidyr nest
 #' @importFrom eurostat get_eurostat label_eurostat
-#' @importFrom stats setNames
 #' @importFrom lubridate year
+#' @importFrom rlang set_names
 #' @family iotables import functions
 #' @examples
 #' \donttest{
@@ -53,12 +51,7 @@
 iotables_download <- function ( source = "naio_10_cp1700", 
                                 data_directory = NULL,
                                 force_download = TRUE ) {
-  ## Non-standard evaluation variable initiatlization -----------------
-  t_cols2_lab <- t_rows2_lab <- values_lab <- stk_flow <- NULL 
-  stk_flow_lab <- indicator <- uk_row_lab <- uk_col_lab <- NULL
-  . <- downloaded <- downloaded_labelled <- fix_duplicated <- NULL
-  time_lab <- geo <- geo_lab <- time <- unit <- unit_lab <- NULL
-  
+
   ## Parameter validation ---------------------------------------------
   if ( ! source %in% c("uk_2010", "germany_1990")) validate_source(source)
 
@@ -84,19 +77,21 @@ iotables_download <- function ( source = "naio_10_cp1700",
     downloaded <- readRDS( retrieve_from_temp_bulk )
   }
   
+  lab_names <- paste0(names(downloaded), "_lab")
+  
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
-    eurostat::label_eurostat (., fix_duplicated = TRUE) %>%   #add meaningful labels to raw data
-    stats::setNames( ., paste0( names (.), "_lab" ) )    %>%  
-    dplyr::mutate ( rows = seq_len(nrow(.)) ) %>%  #because long and wide formats are not symmetric
-    dplyr::rename ( values = values_lab ) %>%
-    dplyr::mutate ( year = lubridate::year( time_lab ))
+    eurostat::label_eurostat (fix_duplicated = TRUE) %>%   # add meaningful labels to raw data
+    rlang::set_names( lab_names )    %>%  
+    mutate ( rows = seq_len(nrow(downloaded)) ) %>%  # because long and wide formats are not symmetric
+    rename ( values = values_lab ) %>%
+    mutate ( year = lubridate::year( time_lab ))
   
-  #join the labelled and the not labelled files, so that both versions are avialable
+  # Join the labelled and the not labelled files, so that both versions are avialable
   
   downloaded <- downloaded  %>%
-    dplyr::mutate ( rows = seq_len(nrow(.)) ) %>%
-    dplyr::left_join (., downloaded_labelled, by = c("rows", "values"))
+    mutate ( rows = seq_len(nrow(downloaded)) ) %>%
+    left_join ( downloaded_labelled, by = c("rows", "values"))
   #message ("Joined labelled and not labelled data.")
   
   #if ( "stk_flow" %in% names ( downloaded )) {
@@ -139,17 +134,17 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   
   if ( "stk_flow" %in% names ( downloaded ) ) {
-    downloaded_nested <- tidyr::nest ( dplyr::group_by ( downloaded,
-                                                         geo, geo_lab,
-                                                         time, time_lab, year, 
-                                                         unit, unit_lab, 
-                                                         stk_flow, stk_flow_lab) )
+    downloaded_nested <- tidyr::nest ( group_by ( .data$downloaded,
+                                                  .data$geo, .data$geo_lab,
+                                                  .data$time, .data$time_lab, .data$year, 
+                                                  .data$unit, .data$unit_lab, 
+                                                  .data$stk_flow, .data$stk_flow_lab) )
     
   } else { 
-    downloaded_nested <- tidyr::nest ( dplyr::group_by ( downloaded,
-                                                         geo, geo_lab,
-                                                         time, time_lab, year, 
-                                                         unit, unit_lab ) )
+    downloaded_nested <- tidyr::nest ( group_by ( .data$downloaded,
+                                                  .data$geo, .data$geo_lab,
+                                                  .data$time, .data$time_lab, .data$year, 
+                                                  .data$unit, .data$unit_lab ) )
     
     }
   

@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 context ("Creating forward linkages")
 
 de_out <- output_coefficient_matrix_create ( 

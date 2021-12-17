@@ -1,6 +1,3 @@
-library (testthat)
-library (iotables)
-require (dplyr)
 context ("Creating an  input coefficient matrix")
 
 de_input_flow <- input_flow_get ( iotable_get() )

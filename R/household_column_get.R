@@ -7,14 +7,14 @@
 #' @importFrom dplyr mutate_at
 #' @family iotables processing functions
 #' @examples 
-#' household_column_get( iotable_get ( source = 'germany_1990') )
+#' household_column_get(iotable_get (source = 'germany_1990'))
 #' @export
 
 household_column_get <- function(data_table) {
  
  household_column <- household_column_find(data_table)
 
- fn_na_to_null <- function(x) ifelse (is.na(x), 0,x)
+ fn_na_to_null <- function(x) ifelse (is.na(x),0,x)
  if ( ! is.null( household_column) ) {
    data_table[, c(1, household_column)] %>%
      dplyr::mutate_at (vars(2), fn_na_to_null)

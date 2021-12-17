@@ -55,9 +55,7 @@
 #' The bulk data files on the Eurostat website are in a long form and they are 
 #' not correctly ordered for further matrix equations.
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter select mutate rename left_join arrange 
-#' @importFrom dplyr mutate_if
-#' @importFrom tidyselect one_of all_of
+#' @importFrom dplyr filter select mutate rename left_join arrange all_of
 #' @importFrom tidyr spread
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
@@ -84,7 +82,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
-  row_order <- col_order <- code <- label <- NULL
+  code <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
   if ( labelling == 'eurostat' ) labelling <- 'short'
@@ -187,7 +185,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       
       metadata_cols <- metadata_uk_2010  %>%
         dplyr::filter ( !is.na(.data$uk_col)) %>%
-        dplyr::select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
+        dplyr::select ( -uk_row, -uk_row_label, -prod_na, -.data$row_order) %>%
         mutate ( uk_col = gsub("\\.", "-", as.character(.data$uk_col))) %>%
         mutate ( uk_col = gsub(" & ", "-", as.character(.data$uk_col))) %>%
         mutate ( uk_col = trimws(.data$uk_col, 'both'))
@@ -203,8 +201,8 @@ iotable_get <- function ( labelled_io_data = NULL,
     stop ("This type of input-output database is not (yet) recognized by iotables.")
   }
   
-  metadata_rows <- mutate_if ( metadata_rows, is.factor, as.character )
-  metadata_cols <- mutate_if ( metadata_cols, is.factor, as.character )
+  metadata_rows <- metadata_rows %>% mutate ( across(where(is.factor), as.character) )
+  metadata_cols <- metadata_cols %>% mutate ( across(where(is.factor), as.character) )
   
   ###Exception handling for wrong paramters that are not directly inputed-----
   if ( is.null(labelled_io_data) ) {  #if not directly inputed data 
@@ -368,10 +366,10 @@ iotable_get <- function ( labelled_io_data = NULL,
   
   iotable_labelled <- iotable %>%
     dplyr::filter (stk_flow == stk_flow_input )  %>%
-    dplyr::mutate_if ( is.factor, as.character ) %>%
+    mutate ( across(where(is.factor), as.character) ) %>%
     dplyr::left_join ( metadata_cols, by = col_join  ) %>%
-    dplyr::select ( -one_of(remove_vars) ) %>%  #remove repeating columns before joining rows
-    dplyr::mutate_if ( is.factor, as.character ) %>% 
+    dplyr::select ( -all_of(remove_vars) ) %>%  #remove repeating columns before joining rows
+    dplyr::mutate ( across(where(is.factor), as.character) ) %>% 
     dplyr::left_join ( metadata_rows, by = row_join ) 
     
     if ( nrow (iotable_labelled) == 0 ) {
@@ -381,16 +379,16 @@ iotable_get <- function ( labelled_io_data = NULL,
   
     iotable_labelled <- iotable_labelled %>%
       dplyr::mutate ( prod_na = forcats::fct_reorder(prod_na, 
-                                              as.numeric(row_order))) %>%
+                                              as.numeric(.data$row_order))) %>%
       dplyr::mutate ( induse  = forcats::fct_reorder(induse, 
-                                             as.numeric(col_order))) 
+                                             as.numeric(.data$col_order))) 
     
     if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <-  iotable_labelled %>%
         dplyr::mutate ( iotables_row = forcats::fct_reorder(iotables_row ,
                                                             as.numeric(row_order))) %>%
         dplyr::mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
-                                                            as.numeric(col_order)))
+                                                            as.numeric(.data$col_order)))
     }
    
   } else  {
@@ -400,22 +398,22 @@ iotable_get <- function ( labelled_io_data = NULL,
       by_row <- names(iotable)[which ( names(iotable) %in% c("t_rows2", "t_rows2_lab", "iotables_row") )]
       
       iotable_labelled <- iotable %>%
-        mutate_if ( is.factor, as.character ) %>%
+        mutate ( across(where(is.factor), as.character) ) %>%
         left_join ( metadata_cols, by = by_col )  %>%
         left_join ( metadata_rows, by = by_row ) %>%
-        arrange ( row_order, col_order )
+        arrange ( .data$row_order, .data$col_order )
     } else {
       iotable_labelled <- iotable 
     }
     iotable_labelled <- iotable_labelled %>%
       dplyr::mutate ( t_rows2 = forcats::fct_reorder(t_rows2, 
-                                              as.numeric( row_order))) %>%
+                                              as.numeric(.data$row_order))) %>%
       dplyr::mutate ( t_cols2 = forcats::fct_reorder(t_cols2, 
-                                              as.numeric( col_order ))) %>%
-      dplyr::mutate ( iotables_row = forcats::fct_reorder(iotables_row , 
-                                                       as.numeric(row_order))) %>%
+                                              as.numeric( .data$col_order ))) %>%
+      dplyr::mutate ( iotables_row = forcats::fct_reorder(iotables_row, 
+                                                       as.numeric(.data$row_order))) %>%
       dplyr::mutate ( iotables_col = forcats::fct_reorder(iotables_col, 
-                                                         as.numeric( col_order)))
+                                                         as.numeric(.data$col_order)))
   } #end of not prod_na cases
 
   if ( labelling == "iotables" ) {

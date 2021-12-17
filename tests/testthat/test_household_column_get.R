@@ -1,5 +1,3 @@
-library (testthat)
-library (iotables)
 context ("Returning the household final expenditure column")
 
 household_column_find( iotable_get ( source = 'germany_1990') )

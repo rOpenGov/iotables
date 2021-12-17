@@ -1,6 +1,6 @@
-#' Create direct effects
+#' @title Create direct effects
 #' 
-#' The function creates the effects.
+#' @description The function creates the effects.
 #' @param input_requirements A matrix or vector created by 
 #' \code{\link{input_indicator_create}}
 #' @param inverse A Leontieff-inverse created by 
@@ -34,11 +34,11 @@ direct_effects_create <- function ( input_requirements,
   
   names_direct <- names ( input_requirements )
   new_key_column <- input_requirements %>%
-    dplyr::select (1:2) %>%
-    dplyr::mutate_at ( vars(1), ~gsub(pattern ="_indicator",
+    select (1:2) %>%
+    mutate_at ( vars(1), ~gsub(pattern ="_indicator",
                                        replacement = "", 
                                        x =. ))  %>%
-    dplyr::mutate_at ( vars(1), ~paste0(., "_effect"))
+    mutate_at ( vars(1), ~paste0(., "_effect"))
 
   if ( all ( names (inverse) %in% names ( input_requirements ) ) ) {
     input_requirements <- dplyr::select ( input_requirements, 

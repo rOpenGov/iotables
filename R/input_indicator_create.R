@@ -15,7 +15,7 @@
 #' indicator names.
 #' @return A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
 #' with a key column for products or industries.
-#' @importFrom dplyr mutate_if
+#' @importFrom dplyr mutate across
 #' @family indicator functions
 #' @examples  
 #' input_indicator_create( data_table = iotable_get(), 
@@ -31,7 +31,7 @@ input_indicator_create <- function ( data_table,
                                      indicator_names = NULL) { 
   
   data_table <- data_table %>% 
-    mutate_if ( is.factor, as.character ) 
+    mutate(across(where(is.factor), as.character))
   
   cm <- coefficient_matrix_create( data_table = data_table, 
                                    households = households )

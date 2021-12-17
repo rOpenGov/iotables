@@ -1,5 +1,5 @@
 library (testthat)
-library (iotables)
+
 context ("Creating an output vector")
 
 output_vector <- output_get(iotable_get())

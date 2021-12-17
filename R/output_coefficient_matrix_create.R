@@ -1,7 +1,9 @@
-#' Create an output coefficient matrix
+#' @title Create an output coefficient matrix
 #' 
-#' Create an output coefficient matrix from the input flow matrix or a symmetric
-#' input-output table. If there are zero values in present, they will be changed to 
+#' @description Create an output coefficient matrix from the input flow matrix or a symmetric
+#' input-output table. 
+#' 
+#' @details If there are zero values in present, they will be changed to 
 #' 0.000001 and you will get a warning. Some analytical equations cannot be 
 #' solved with zero elements. You either have faulty input data, or you have 
 #' to use some sort of data modification to carry on your analysis. 
@@ -20,23 +22,21 @@
 #' @return An output coefficient matrix of data.frame class. 
 #' The column names are ordered, and the row names are in the 
 #' first, auxiliary metadata column.
-#' @importFrom dplyr mutate_if funs
+#' @importFrom dplyr mutate across funs
 #' @examples 
-#' io_table <- iotable_get () 
+#' io_table <- iotable_get() 
 #' 
-#' output_coefficient_matrix_create ( io_table  = io_table, 
-#'                                    total = 'tfu',
-#'                                    digits = 4 )
+#' output_coefficient_matrix_create (io_table  = io_table, 
+#'                                   total = 'tfu',
+#'                                   digits = 4)
 #' @export 
 
-output_coefficient_matrix_create <- function ( io_table,
-                                               total = "tfu",
-                                               digits = NULL ) {
-  funs <-. <- NULL  #for checking against non-standard evaluation
-  
+output_coefficient_matrix_create <- function (io_table,
+                                              total = "tfu",
+                                              digits = NULL) {
   check_digits ( digits = digits)
   
-  io_table <- dplyr::mutate_if (io_table, is.factor, as.character )
+  io_table <- io_table %>% mutate(across(where(is.factor), as.character))
   
   ###Find non-zero cols and rows and remove them---- 
   io_table <- empty_remove ( io_table )
@@ -66,8 +66,10 @@ output_coefficient_matrix_create <- function ( io_table,
   
   demand <- io_table [, demand_col ]
   demand
-  io_table <- dplyr::mutate_if ( io_table, is.factor, as.character ) %>%
-    dplyr::select ( 1:last_column )
+  
+  io_table <- io_table %>% 
+    mutate(across(where(is.factor), as.character)) %>%
+    select( 1:last_column )
   
   keep_first_name <- names(io_table)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
 
@@ -86,7 +88,7 @@ output_coefficient_matrix_create <- function ( io_table,
   io_table <- vapply ( io_table[seq_len(nrow(io_table)), c(2:last_column)],
                  null_to_eps, numeric (nrow(io_table)) )
   
-  output_coeff <- apply (  io_table, 2,
+  output_coeff <- apply (io_table, 2,
                          function(i)i/demand)
 
   output_coeff <- as.data.frame (output_coeff)
@@ -99,7 +101,7 @@ output_coefficient_matrix_create <- function ( io_table,
       ifelse ( x == 1e-06, x, round ( x, digits ))
     }
     output_coeff<- output_coeff %>%
-      dplyr::mutate_if(is.numeric, dplyr::funs(round_eps (., digits)))
+      mutate(across(where(is.numeric), round_eps, digits))
   } else {
     stop ("Error: not a valid rounding parameter.\nMust be an integer representing the rounding digits.")
   }
