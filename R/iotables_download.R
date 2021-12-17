@@ -37,7 +37,7 @@
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
 #' The data is saved into the actual \code{tempdir()}, too.
-#' @importFrom dplyr filter select mutate left_join rename group_by
+#' @importFrom dplyr filter select mutate left_join rename any_of
 #' @importFrom tidyr nest
 #' @importFrom eurostat get_eurostat label_eurostat
 #' @importFrom lubridate year
@@ -83,7 +83,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
     eurostat::label_eurostat (fix_duplicated = TRUE) %>%   # add meaningful labels to raw data
-    rlang::set_names(lab_names)    %>%  
+    rlang::set_names(lab_names) %>%  
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%  # because long and wide formats are not symmetric
     rename ( values = .data$values_lab ) %>%
     mutate ( year = lubridate::year( .data$time_lab ))
@@ -135,18 +135,14 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   
   if ( "stk_flow" %in% names ( downloaded ) ) {
-    downloaded_nested <- tidyr::nest ( group_by ( .data$downloaded,
-                                                  .data$geo, .data$geo_lab,
-                                                  .data$time, .data$time_lab, .data$year, 
-                                                  .data$unit, .data$unit_lab, 
-                                                  .data$stk_flow, .data$stk_flow_lab) )
-    
+    downloaded_nested <- nest (downloaded, 
+                               data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
+                                                 "year", "unit", "unit_lab", "stk_flow", "stk_flow_lab"))) 
+
   } else { 
-    downloaded_nested <- tidyr::nest ( group_by ( .data$downloaded,
-                                                  .data$geo, .data$geo_lab,
-                                                  .data$time, .data$time_lab, .data$year, 
-                                                  .data$unit, .data$unit_lab ) )
-    
+    downloaded_nested <- nest (downloaded, 
+                               data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
+                                                 "year", "unit", "unit_lab"))) 
     }
   
 

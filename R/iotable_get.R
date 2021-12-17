@@ -1,10 +1,10 @@
-#' Get An Input-Output Table Fom Bulk File
+#' @title Get an input-output table fom bulk file
 #' 
-#' This function is used to filter out  a single input-output table from
+#' @description This function is used to filter out  a single input-output table from
 #' a database, for example a raw file downloaded from the Eurostat 
 #' website.  It provides some functionality to avoid some pitfalls.
 #' 
-#' Unless you want to work with bulk data files, 
+#' @details Unless you want to work with bulk data files, 
 #' you should not invoke  \code{\link{iotables_download}} 
 #' directly, rather via this function, if and when it is necessary.
 #'  

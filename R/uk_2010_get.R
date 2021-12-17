@@ -89,8 +89,8 @@ uk_2010_get <- function ( path = NULL )  {
       mutate ( uk_col = ifelse ( grepl('on-market', .data$uk_col_lab), 
                                  paste0("NM_", .data$uk_col), 
                                  .data$uk_col), 
-               uk_row = ifelse ( grepl('on-market', uk_row_lab), 
-                                 paste0("NM_", uk_row), 
+               uk_row = ifelse ( grepl('on-market', .data$uk_row_lab), 
+                                 paste0("NM_", .data$uk_row), 
                                  .data$uk_row)) %>%
       mutate ( uk_col = ifelse ( grepl('NPISH', .data$uk_col_lab), 
                                  paste0("NPISH_", .data$uk_col), 

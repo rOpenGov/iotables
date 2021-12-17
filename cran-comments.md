@@ -5,7 +5,8 @@
 * ubuntu 20.04 on Github (r-version: release)
 * ubuntu 20.04 on Github (r-version: devel)
 * r_hub: Ubuntu Linux 20.04.1 LTS, R-release, GCC
-* r_hub: Ubuntu Linux 20.04.1 LTS, R-release, GCC
+* r_hub: Fedora Linux, R-devel, clang, gfortran
+* r_hub: Windows Server 2022, R-devel, 64 bit
 
 On Windows Server 2008 R2 SP1, R-devel, 32/64 bit bBuild failed during preparation, we believe that this is an r_hub setting error, as our local and github Windows tests had no issues.
 
@@ -17,8 +18,8 @@ FAIL 0 | WARN 0 | SKIP 0 | PASS 48
 
 ## Notes
 This version is eliminates deprecated functions from tidyverse, particularly
-* dplyr mutate_if, mutate_at funs
+* dplyr mutate_if, mutate_at funs, group_by
 * tidyselect one_of
 * tidyr gather, and most instances of spread.
 
-The empty_remove function was earlier an internal function but it has siginificant user value and is now exported (with new unit tests.)
+The empty_remove() function was earlier an internal function but it has siginificant user value and is now exported (with new unit tests.)

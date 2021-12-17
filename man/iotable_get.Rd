@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_get.R
 \name{iotable_get}
 \alias{iotable_get}
-\title{Get An Input-Output Table Fom Bulk File}
+\title{Get an input-output table fom bulk file}
 \usage{
 iotable_get(
   labelled_io_data = NULL,
