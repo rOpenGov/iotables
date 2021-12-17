@@ -2,14 +2,7 @@
 % Please edit documentation in R/equation_solve.R
 \name{equation_solve}
 \alias{equation_solve}
-\title{Solve a basic (matrix) equation
-
-The function matches to parts of the matrix equation, using the named
-formats with row names and solves the matrix equation.
-This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
-to solve particular problems, but it can be used directly, too.
-The function only performs the lhs %*% im matrix equation, but after 
-pairing industries and checking for exceptions.}
+\title{Solve a basic (matrix) equation}
 \usage{
 equation_solve(LHS = NULL, Im = NULL)
 }
@@ -25,10 +18,10 @@ A data.frame with auxiliary metadata to conform the symmetric
 input-output tables.
 }
 \description{
-Solve a basic (matrix) equation
-
 The function matches to parts of the matrix equation, using the named
 formats with row names and solves the matrix equation.
+}
+\details{
 This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
 to solve particular problems, but it can be used directly, too.
 The function only performs the lhs %*% im matrix equation, but after 

@@ -2,9 +2,7 @@
 % Please edit documentation in R/indirect_effects_create.R
 \name{indirect_effects_create}
 \alias{indirect_effects_create}
-\title{Create indirect effects
-
-The function creates the effects.}
+\title{Create indirect effects}
 \usage{
 indirect_effects_create(input_requirements, inverse, digits = NULL)
 }
@@ -17,10 +15,12 @@ indirect_effects_create(input_requirements, inverse, digits = NULL)
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
 no rounding takes place.}
 }
+\value{
+A data.frame containing the indirect effects and the necessary
+metadata to sort them or join them with other matrixes.
+}
 \description{
-Create indirect effects
-
-The function creates the effects.
+The function creates the indirect effects vector.
 }
 \examples{
  

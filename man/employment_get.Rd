@@ -67,9 +67,10 @@ Currently works only with product x product tables.
  }
 }
 \seealso{
-Other iotables import functions: 
+Other import functions: 
 \code{\link{iotable_get}()},
 \code{\link{iotables_download}()},
-\code{\link{iotables_metadata_get}()}
+\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_read_tempdir}()}
 }
-\concept{iotables import functions}
+\concept{import functions}

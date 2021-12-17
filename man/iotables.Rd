@@ -17,7 +17,7 @@ The iotables import function help downloading and pre-processing the
 Eurostat symmetric input-output tables and related tables.
 
 \code{\link{iotable_get}} returns a single table.
-\code{\link{iotable_read_tempdir}} reads data from the temporary directory of a session.
+\code{\link{iotables_read_tempdir}} reads data from the temporary directory of a session.
 \code{\link{employment_get}} downloads the employment data and processes
 it to a conforming form.
 }

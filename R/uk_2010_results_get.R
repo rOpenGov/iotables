@@ -55,7 +55,7 @@ uk_2010_results_get <- function ( path = NULL )  {
                                           sheet = i, 
                                           skip = 4,
                                           col_names = TRUE) %>%
-    select ( - 1 ) %>% 
+    select (-1) %>% 
     dplyr::rename ( uk_row_label = .data$Product, 
                     output_multiplier_rank = .data$Rank...4, 
                     employment_cost_multiplier = .data$Rank...6, 

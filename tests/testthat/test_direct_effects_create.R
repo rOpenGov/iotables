@@ -1,6 +1,3 @@
-library (testthat)
-
-require (dplyr)
 context ("Creating an  input coefficient matrix")
 
 nl <- netherlands_2006
@@ -13,8 +10,9 @@ compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation
 
 I_nl <- leontieff_inverse_create( input_coeff_nl )
 
-dir <- direct_effects_create(input_requirements = compensation_indicator, 
-                             inverse = I_nl)
+dir <- direct_effects_create(
+  input_requirements = compensation_indicator, 
+  inverse = I_nl)
 published_effects <- c(0.263, 0.099, 0.306, 0.212, 0.465, 0.493)
 
 

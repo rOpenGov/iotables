@@ -15,8 +15,8 @@ test_that("Correct data is returned by iotable_get()", {
                            geo = 'DE', year = 1990, 
                            unit = "MIO_EUR", labelling = "iotables")[1,2], 1131)
   expect_equal(as.character(iotable_get(source = 'germany_1990', 
-                           geo = 'DE', year = 1990, 
-                           unit = "MIO_EUR", labelling = 'short')[4,1]), "CPA_G-I")
+                                        geo = 'DE', year = 1990, 
+                                        unit = "MIO_EUR", labelling = 'short')[4,1]), "CPA_G-I")
   expect_equal(as.numeric(iotable_get ( source = "croatia_2010_1800", geo = "HR",
                                         year = 2010, unit = "T_NAC")[1,3]), 
                expected = 164159,  tolerance = 0.6)
@@ -31,7 +31,7 @@ test_that("Correct data is returned by iotable_get()", {
                                           year = 2010, unit = "T_NAC", 
                                           labelling = "iotables")[[1]][2]), 
                expected = "forestry")
-  })
+})
 
 #Slovakia A01, A01 shoud be 497.37
 
@@ -41,8 +41,8 @@ test_that("Correct data is returned by iotable_get()", {
 # A01, A01 should yield 10,161
 
 germany_table <- iotable_get(source = 'germany_1990', 
-            geo = 'DE', year = 1990, 
-            unit = "MIO_EUR", labelling = "iotables")
+                             geo = 'DE', year = 1990, 
+                             unit = "MIO_EUR", labelling = "iotables")
 
 hh <- germany_table$final_consumption_households[which( germany_table$iotables_row == "output")]
 

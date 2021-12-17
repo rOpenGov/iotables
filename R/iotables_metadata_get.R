@@ -28,7 +28,7 @@
 #' @return A data frame, which contains the metadata of all available 
 #' input-output tables from a specific \code{source}.
 #' @importFrom tidyr unnest
-#' @family iotables import functions
+#' @family import functions
 #' @examples
 #' \donttest{
 #' # The table must be present in the sessions' temporary directory:

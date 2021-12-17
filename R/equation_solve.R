@@ -1,8 +1,9 @@
 #' @title Solve a basic (matrix) equation
 #' 
-#' The function matches to parts of the matrix equation, using the named
+#' @description The function matches to parts of the matrix equation, using the named
 #' formats with row names and solves the matrix equation.
-#' This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
+#' 
+#' @details This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
 #' to solve particular problems, but it can be used directly, too.
 #' The function only performs the lhs %*% im matrix equation, but after 
 #' pairing industries and checking for exceptions.
@@ -11,9 +12,7 @@
 #' industry or product names for matching, for example the employment coefficients. 
 #' @param Im A Leontieff-inverse with a key column containing the industry or 
 #' product names for matching.
-#' @importFrom dplyr select mutate mutate across full_join
-#' @importFrom tidyr spread
-#' @importFrom tidyselect one_of
+#' @importFrom dplyr select mutate mutate across full_join any_of
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
 #' @examples
@@ -35,6 +34,7 @@ equation_solve <- function (LHS = NULL, Im = NULL) {
 
   LHS <- LHS %>%
     mutate(across(where(is.factor), as.character)) 
+  
   Im <- Im %>%
     mutate(across(where(is.factor), as.character)) 
   
@@ -48,7 +48,7 @@ equation_solve <- function (LHS = NULL, Im = NULL) {
                 ' from the input vector is removed. These are likely zero values, 
                and cannot be found in the Leontieff-inverse.'
               )
-     LHS <- dplyr::select ( LHS, -dplyr::one_of ( not_found ) )   
+     LHS <- dplyr::select ( LHS, -dplyr::any_of ( not_found ) )   
      } else if  ( any( not_found  %in%  c("households", "P3_S14"))  )  {
        stop ("The input vector has households but the Leontieff-inverse has not.")
      } else {

@@ -10,7 +10,7 @@
 #' summarized row. It is case sensitive.
 #' @return A data frame with the vector of multipliers and the an 
 #' auxiliary metadata column (for joining with other matrixes.)
-#' @importFrom dplyr select full_join summarise_if mutate across
+#' @importFrom dplyr select full_join summarise mutate across
 #' @examples
 #' de_io <- iotable_get()
 #' 
@@ -38,16 +38,16 @@ total_tax_add <- function ( data_table,
   
   tax <- data_table [which (key_column %in% tax_names), ]
   
-  tax <- dplyr::summarise_if (tax, is.numeric, sum ) %>%
+  tax <- summarise (tax, across(where(is.numeric), sum) ) %>%
     cbind ( data_table[1,1], .) %>%
     dplyr::mutate(across(where(is.factor), as.character))
   
   tax [ 1,1 ] <- total_tax_name
   
-  names ( tax)[1] <- names (data_table)[1]
+  names (tax)[1] <- names (data_table)[1]
   
-  siot_ext   <- dplyr::full_join ( 
-    dplyr::mutate(data_table, across(where(is.factor), as.character)), tax,
+  siot_ext   <- full_join ( 
+    mutate(data_table, across(where(is.factor), as.character)), tax,
     by = names (tax) )
   
   if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names ( siot_ext)))  ) {

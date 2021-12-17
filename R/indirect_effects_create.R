@@ -1,12 +1,14 @@
 #' @title Create indirect effects
 #' 
-#' The function creates the effects.
+#' @description The function creates the indirect effects vector.
 #' @param input_requirements A matrix or vector created by 
 #' \code{\link{input_indicator_create}}
 #' @param inverse A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place.  
-#' @importFrom dplyr select one_of mutate_at
+#' @importFrom dplyr select mutate across
+#' @return A data.frame containing the indirect effects and the necessary
+#' metadata to sort them or join them with other matrixes.
 #' @examples  
 #' nl <- netherlands_2006
 #'
@@ -29,11 +31,11 @@ indirect_effects_create <- function ( input_requirements,
   
   names_direct <- names ( input_requirements )
   new_key_column <- input_requirements %>%
-    dplyr::select (1:2) %>%
-    dplyr::mutate_at ( vars(1), funs(gsub(pattern ="_indicator",
+    select (1:2) %>%
+    mutate( across(1, gsub(pattern ="_indicator",
                                           replacement = "", 
                                           x =. )) ) %>%
-    dplyr::mutate_at ( vars(1), funs(paste0(., "_indirect_effect")))
+    mutate( across(1, paste0(., "_indirect_effect")))
   
   col_n <- ncol(input_requirements)
  

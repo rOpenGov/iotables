@@ -18,7 +18,7 @@ with column names matching the metadata of the \code{data_table}.
 This helper function creates you a named vector that conforms your
 analytical objects, such as the use table, the Leontieff-matrix, 
 etc. With 60x60 matrixes it is easy to make mistakes with manual 
-definition. The empty effects vector can be used in .csv format
+definition. The empty effects vector can be used in \code{.csv} format
 as a sample to import scenarios from a spreadsheet application.
 }
 \examples{

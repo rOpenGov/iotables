@@ -90,9 +90,10 @@ germany_table <- iotable_get( source = "germany_1990",
                  labelling  = "iotables" )
 }
 \seealso{
-Other iotables import functions: 
+Other import functions: 
 \code{\link{employment_get}()},
 \code{\link{iotables_download}()},
-\code{\link{iotables_metadata_get}()}
+\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_read_tempdir}()}
 }
-\concept{iotables import functions}
+\concept{import functions}

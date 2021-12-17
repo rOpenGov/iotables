@@ -34,7 +34,8 @@ input-output table.
 }
 \details{
 The data is downloaded in the \code{tempdir()}under the name the statistical product as an
-rds file. (For example: \code{naio_10_cp1750.rds}) The temporary directory is emptied at every normal R session exit.
+rds file. (For example: \code{naio_10_cp1750.rds}) The temporary directory is emptied at every
+normal R session exit.
 
 To save the file for further use (which is necessary in analytical work because
 download times are long) set the  \code{download_directory} [see parameters]. 
@@ -57,13 +58,14 @@ The function will make a copy of the rds file in this directory.
 }
 \examples{
 \donttest{
- io_tables <- iotables_download ( source = "naio_10_cp1700" )
+ io_tables <- iotables_download (source = "naio_10_cp1700")
  }
 }
 \seealso{
-Other iotables import functions: 
+Other import functions: 
 \code{\link{employment_get}()},
 \code{\link{iotable_get}()},
-\code{\link{iotables_metadata_get}()}
+\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_read_tempdir}()}
 }
-\concept{iotables import functions}
+\concept{import functions}

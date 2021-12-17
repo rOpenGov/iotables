@@ -22,7 +22,7 @@
 #' @return An output coefficient matrix of data.frame class. 
 #' The column names are ordered, and the row names are in the 
 #' first, auxiliary metadata column.
-#' @importFrom dplyr mutate across funs
+#' @importFrom dplyr mutate across
 #' @examples 
 #' io_table <- iotable_get() 
 #' 
@@ -92,7 +92,7 @@ output_coefficient_matrix_create <- function (io_table,
                          function(i)i/demand)
 
   output_coeff <- as.data.frame (output_coeff)
-  output_coeff <- cbind ( first_col, output_coeff)
+  output_coeff <- cbind (first_col, output_coeff)
 
   if ( is.null(digits) ) return (output_coeff)
   

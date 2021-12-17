@@ -43,11 +43,11 @@ uk_2010_get <- function ( path = NULL )  {
   for ( i in 2:8 ) {
     data_skip <- column_spec_skip + 1
     
-    uk_metadata <- readxl::read_excel ( path,
-                                        sheet = i, 
-                                        skip = metadata_skip,
-                                        col_names = FALSE, 
-                                        n_max = 2) %>%
+    uk_metadata <- readxl::read_excel (path,
+                                       sheet = i, 
+                                       skip = metadata_skip,
+                                       col_names = FALSE, 
+                                       n_max = 2) %>%
       rlang::set_names ( "values") %>%
       bind_cols ( tibble::tibble ( vars = c("indicator", "unit"))) %>%
       pivot_wider ( names_from = .data$vars, values_from = .data$values)
@@ -56,12 +56,12 @@ uk_2010_get <- function ( path = NULL )  {
     message ( "Reading ... ", uk_metadata$indicator )
     
     
-    uk_column_specs <- readxl::read_excel ( path,
-                                            sheet = i, 
-                                            skip = column_spec_skip,
-                                            col_names = FALSE, 
-                                            n_max = 2) %>%
-      dplyr::select ( - 1 ) %>% 
+    uk_column_specs <- readxl::read_excel (path,
+                                           sheet = i, 
+                                           skip = column_spec_skip,
+                                           col_names = FALSE, 
+                                           n_max = 2) %>%
+      select (- 1) %>% 
       tibble::rownames_to_column () %>% 
       pivot_longer( -all_of("rowname"), names_to = "var", values_to="value") %>%
       tidyr::pivot_wider(names_from = .data$rowname, values_from = .data$value)  %>%
@@ -70,10 +70,12 @@ uk_2010_get <- function ( path = NULL )  {
       mutate(across(where(is.factor), as.character)) 
     
     uk_data_sheet <- readxl::read_excel ( path,
-                                    sheet = i,
-                                    skip = data_skip,
-                                    col_names = TRUE) %>%
-      pivot_longer ( cols = 3:ncol(.), names_to = "uk_col_lab", values_to = "values") %>%
+                                          sheet = i,
+                                          skip = data_skip,
+                                          col_names = TRUE) %>%
+      pivot_longer ( cols = 3:ncol(.), 
+                     names_to = "uk_col_lab", 
+                     values_to = "values") %>%
       #tidyr::gather( uk_col_lab, values, !!3:ncol(.)) %>%
       rlang::set_names(c("uk_row", "uk_row_lab", 'uk_col_lab', 'values')) %>%
       mutate(values = as.numeric(as.character(values))) %>%

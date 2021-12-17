@@ -10,8 +10,11 @@ output_multiplier_create(input_coefficient_matrix)
 \item{input_coefficient_matrix}{A Leontieff inverse matrix created by the
 \code{\link{input_coefficient_matrix_create}} function.}
 }
+\value{
+A data frame with a key column and the output multipliers of the industries.
+}
 \description{
-Create output multipliers
+Create a data frame of output multipliers.
 }
 \details{
 Output multipliers as defined by the Eurostat Manual of Supply, 

@@ -29,7 +29,7 @@
 #' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
-#' @family iotables import functions
+#' @family import functions
 #' @examples
 #' \dontrun{
 #'  io_tables <- get_employment ( 

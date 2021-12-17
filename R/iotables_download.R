@@ -7,7 +7,8 @@
 #' input-output table.
 #' 
 #' @details The data is downloaded in the \code{tempdir()}under the name the statistical product as an
-#' rds file. (For example: \code{naio_10_cp1750.rds}) The temporary directory is emptied at every normal R session exit.
+#' rds file. (For example: \code{naio_10_cp1750.rds}) The temporary directory is emptied at every
+#' normal R session exit.
 #' 
 #' To save the file for further use (which is necessary in analytical work because
 #' download times are long) set the  \code{download_directory} [see parameters]. 
@@ -41,10 +42,10 @@
 #' @importFrom eurostat get_eurostat label_eurostat
 #' @importFrom lubridate year
 #' @importFrom rlang set_names
-#' @family iotables import functions
+#' @family import functions
 #' @examples
 #' \donttest{
-#'  io_tables <- iotables_download ( source = "naio_10_cp1700" )
+#'  io_tables <- iotables_download (source = "naio_10_cp1700")
 #'  }
 #' @export
 
@@ -55,7 +56,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   ## Parameter validation ---------------------------------------------
   if ( ! source %in% c("uk_2010", "germany_1990")) validate_source(source)
 
-  if ( source == "uk_2010" ) return ( uk_2010_get() )
+  if ( source == "uk_2010" ) return (uk_2010_get())
   
   retrieve_from_temp_bulk <-paste0(tempdir(),
                                    "\\eurostat/", source, "_date_code_TF.rds" )
@@ -82,10 +83,10 @@ iotables_download <- function ( source = "naio_10_cp1700",
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
     eurostat::label_eurostat (fix_duplicated = TRUE) %>%   # add meaningful labels to raw data
-    rlang::set_names( lab_names )    %>%  
+    rlang::set_names(lab_names)    %>%  
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%  # because long and wide formats are not symmetric
-    rename ( values = values_lab ) %>%
-    mutate ( year = lubridate::year( time_lab ))
+    rename ( values = .data$values_lab ) %>%
+    mutate ( year = lubridate::year( .data$time_lab ))
   
   # Join the labelled and the not labelled files, so that both versions are avialable
   

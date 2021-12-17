@@ -101,9 +101,9 @@ coefficient_matrix_create <- function ( data_table,
   
   
   ##Adjust the total vector---- 
-  null_to_eps <- function(x) ifelse (x == 0, 0.000001, x )
+  null_to_eps <- function(x) ifelse (x == 0, 0.000001, x)
   total_row <-  total_row %>% mutate(across(where(is.factor), as.character))
-  total_row <-  total_row %>% mutate ( across(where(is.factor), null_to_eps) ) # avoid division by zero
+  total_row <-  total_row %>% mutate (across(where(is.factor), null_to_eps)) # avoid division by zero
   
   coeff_matrix <- data_table
   

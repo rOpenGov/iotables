@@ -1,5 +1,3 @@
-library (testthat)
-
 context ("Creating an empty conforming vector")
 
 de_input_flow <- input_flow_get ( data_table = iotable_get())

@@ -50,9 +50,10 @@ iotables_metadata_get (source = "naio_10_cp1700")
 } 
 }
 \seealso{
-Other iotables import functions: 
+Other import functions: 
 \code{\link{employment_get}()},
 \code{\link{iotable_get}()},
-\code{\link{iotables_download}()}
+\code{\link{iotables_download}()},
+\code{\link{iotables_read_tempdir}()}
 }
-\concept{iotables import functions}
+\concept{import functions}

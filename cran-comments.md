@@ -17,8 +17,8 @@ FAIL 0 | WARN 0 | SKIP 0 | PASS 48
 
 ## Notes
 This version is eliminates deprecated functions from tidyverse, particularly
-* dplyr mutate_if 
+* dplyr mutate_if, mutate_at funs
 * tidyselect one_of
-* tidyr spread
+* tidyr gather, and most instances of spread.
 
 The empty_remove function was earlier an internal function but it has siginificant user value and is now exported (with new unit tests.)

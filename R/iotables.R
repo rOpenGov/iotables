@@ -10,7 +10,7 @@
 #' Eurostat symmetric input-output tables and related tables.
 #' 
 #' \code{\link{iotable_get}} returns a single table.
-#' \code{\link{iotable_read_tempdir}} reads data from the temporary directory of a session.
+#' \code{\link{iotables_read_tempdir}} reads data from the temporary directory of a session.
 #' \code{\link{employment_get}} downloads the employment data and processes
 #' it to a conforming form.
 #' 
@@ -78,5 +78,15 @@
 #' the country was not yet an EU member state.
 #' 
 #' @docType package
+#' @importFrom utils globalVariables 
 #' @name iotables
 NULL
+
+## quiets concerns of R CMD check re: the .'s that appear in pipelines
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(".")
+  
+  # Fix for tidyselect::where()
+  # See https://github.com/r-lib/tidyselect/issues/201
+  utils::globalVariables("where")
+}

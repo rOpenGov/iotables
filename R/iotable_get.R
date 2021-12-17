@@ -61,7 +61,8 @@
 #' @importFrom lubridate year
 #' @importFrom utils data
 #' @importFrom rlang .data
-#' @family iotables import functions
+#' @importFrom utils globalVariables
+#' @family import functions
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1990", 
 #'                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
@@ -77,13 +78,13 @@ iotable_get <- function ( labelled_io_data = NULL,
                           data_directory = NULL, 
                           force_download = TRUE) { 
   
+ 
   ## Initialize NSE variables -----------------------------------------
   #these should be eliminated, but this is a very long code.
   t_cols2  <- t_rows2 <- by_row <- by_col <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   code <- label <- NULL
-  uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
 
   if ( labelling == 'eurostat' ) labelling <- 'short'
   ## Parameter exception handling -------------------------------------
@@ -185,7 +186,7 @@ iotable_get <- function ( labelled_io_data = NULL,
       
       metadata_cols <- metadata_uk_2010  %>%
         dplyr::filter ( !is.na(.data$uk_col)) %>%
-        dplyr::select ( -uk_row, -uk_row_label, -prod_na, -.data$row_order) %>%
+        dplyr::select ( -.data$uk_row, -.data$uk_row_label, -.data$prod_na, -.data$row_order) %>%
         mutate ( uk_col = gsub("\\.", "-", as.character(.data$uk_col))) %>%
         mutate ( uk_col = gsub(" & ", "-", as.character(.data$uk_col))) %>%
         mutate ( uk_col = trimws(.data$uk_col, 'both'))
