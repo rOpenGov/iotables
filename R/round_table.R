@@ -1,11 +1,11 @@
-#' Systematically Eound Values in a Table
+#' @title Systematically round values in a table
 #' 
-#' This is an internal function to do the rounding on all numeric elements 
-#' of the table.
+#' @describe This is an internal function to do the rounding on all numeric elements 
+#' of the table for comparability with external sources that use rounding.
 #' @param data_table A symmetric input-output table, or a use table, or a 
 #' supply table, or a margin or a tax table.
 #' @param digits Number of digits for rounding.
-#' @return A tibble/data.frame with a key row and a symmetric matrix, 
+#' @return A tibble with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
 #' @importFrom dplyr mutate across
 #' @keywords internal

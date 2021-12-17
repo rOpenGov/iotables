@@ -1,17 +1,15 @@
 ## Test environments
-* local Window 10 install, r-version 4.10
+* local Window 10 install, r-version 4.1.2
 * Microsoft Windows Server 2019 10.0.17763 on Github (r-version: release)
-* Mac OS X 10.15.7 on Github (r-version: release)
-* ubuntu 20.04 on Github (r-version: release)
-* ubuntu 20.04 on Github (r-version: devel)
+* Mac OS X 11.6.1 on Github (r-version: release)
+* ubuntu 20.04.3 on Github (r-version: release)
+* ubuntu 20.04.3 on Github (r-version: devel)
 * r_hub: Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * r_hub: Fedora Linux, R-devel, clang, gfortran
 * r_hub: Windows Server 2022, R-devel, 64 bit
 
-On Windows Server 2008 R2 SP1, R-devel, 32/64 bit bBuild failed during preparation, we believe that this is an r_hub setting error, as our local and github Windows tests had no issues.
-
 ## testthat results
-FAIL 0 | WARN 0 | SKIP 0 | PASS 48 
+FAIL 0 | WARN 0 | SKIP 0 | PASS 50 
 
 ## R CMD check results
 0 errors √ | 0 warnings √ | 0 notes √

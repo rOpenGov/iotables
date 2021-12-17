@@ -66,21 +66,21 @@
           
           <code><a href="iotables_read_tempdir.html">iotables_read_tempdir()</a></code> 
         </dt>
-        <dd>Read input-output Tables from Temporary Directory
+        <dd>Read input-output tables from temporary directory
 
 Validate the <code>source</code> input parameter and try to load the table
 from the current sessions' temporary directory.
- <ul><li><p><code>naio_10_cp1700</code> Symmetric input-output table at basic prices (product by product)</p></li>
-<li><p><code>naio_10_pyp1700</code> Symmetric input-output table at basic prices (product by product) (previous years prices)</p></li>
-<li><p><code>naio_10_cp1750</code> Symmetric input-output table at basic prices (industry by industry)</p></li>
-<li><p><code>naio_10_pyp1750</code> Symmetric input-output table at basic prices (industry by industry) (previous years prices)</p></li>
-<li><p><code>naio_10_cp15</code> Supply table at basic prices incl. transformation into purchasers' prices</p></li>
-<li><p><code>naio_10_cp16</code> Use table at purchasers' prices</p></li>
-<li><p><code>naio_10_cp1610</code> Use table at basic prices</p></li>
-<li><p><code>naio_10_pyp1610</code> Use table at basic prices (previous years prices) (naio_10_pyp1610)</p></li>
-<li><p><code>naio_10_cp1620</code> Table of trade and transport margins at basic prices</p></li>
-<li><p><code>naio_10_pyp1620</code> Table of trade and transport margins at previous years' prices</p></li>
-<li><p><code>naio_10_cp1630</code> Table of taxes less subsidies on products at basic prices</p></li>
+ <ul><li><p><code>naio_10_cp1700</code>Symmetric input-output table at basic prices (product by product)</p></li>
+<li><p><code>naio_10_pyp1700</code>Symmetric input-output table at basic prices (product by product) (previous years prices)</p></li>
+<li><p><code>naio_10_cp1750</code>Symmetric input-output table at basic prices (industry by industry)</p></li>
+<li><p><code>naio_10_pyp1750</code>Symmetric input-output table at basic prices (industry by industry) (previous years prices)</p></li>
+<li><p><code>naio_10_cp15</code>Supply table at basic prices incl. transformation into purchasers' prices</p></li>
+<li><p><code>naio_10_cp16</code>Use table at purchasers' prices</p></li>
+<li><p><code>naio_10_cp1610</code>Use table at basic prices</p></li>
+<li><p><code>naio_10_pyp1610</code>Use table at basic prices (previous years prices) (naio_10_pyp1610)</p></li>
+<li><p><code>naio_10_cp1620</code>Table of trade and transport margins at basic prices</p></li>
+<li><p><code>naio_10_pyp1620</code>Table of trade and transport margins at previous years' prices</p></li>
+<li><p><code>naio_10_cp1630</code>Table of taxes less subsidies on products at basic prices</p></li>
 <li><p><code>naio_10_pyp1630</code>Table of taxes less subsidies on products at previous years' prices</p></li>
 <li><p><code>uk_2010_siot</code>United Kingdom Input-Output Analytical Tables data</p></li>
 </ul></dd>
@@ -114,7 +114,7 @@ from the current sessions' temporary directory.
           
           <code><a href="iotable_get.html">iotable_get()</a></code> 
         </dt>
-        <dd>Get An Input-Output Table Fom Bulk File</dd>
+        <dd>Get an input-output table fom bulk file</dd>
       </dl><dl><dt>
           
           <code><a href="coefficient_matrix_create.html">coefficient_matrix_create()</a></code> 
@@ -235,9 +235,7 @@ table.</dd>
           
           <code><a href="indirect_effects_create.html">indirect_effects_create()</a></code> 
         </dt>
-        <dd>Create indirect effects
-
-The function creates the effects.</dd>
+        <dd>Create indirect effects</dd>
       </dl></div><div class="section level2">
       <h2 id="multipliers">Multipliers<a class="anchor" aria-label="anchor" href="#multipliers"></a></h2>
       
@@ -253,14 +251,7 @@ The function creates the effects.</dd>
           
           <code><a href="equation_solve.html">equation_solve()</a></code> 
         </dt>
-        <dd>Solve a basic (matrix) equation
-
-The function matches to parts of the matrix equation, using the named
-formats with row names and solves the matrix equation.
-This function is used in wrapper functions, such as <code>multiplier_create</code>.
-to solve particular problems, but it can be used directly, too.
-The function only performs the lhs <!-- %*% im matrix equation, but after  -->
-pairing industries and checking for exceptions.</dd>
+        <dd>Solve a basic (matrix) equation</dd>
       </dl><dl><dt>
           
           <code><a href="multiplier_create.html">multiplier_create()</a></code> 

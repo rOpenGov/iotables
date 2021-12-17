@@ -50,14 +50,15 @@ reference:
      These data wrangling functions create vectors that conform the matrix, i.e. their elements are 
      stricly labelled and ordered.
     contents:
+      - household_column_get
       - iotables_metadata_get
       - iotable_year_get
       - primary_input_get
-      - household_column_get
+      - output_get
       - total_tax_add
+      - supplementary_add
       - household_column_find
       - matrix_round
-      - supplementary_add
   - title: "Analytic objects"
     desc: >
      Create the Leontieff matrix, the Leontieff inverse, and its inputs. To avoid division by zero, 
@@ -75,6 +76,7 @@ reference:
      harmonized to be successfully joined into a single variable, and eventually a table of similar 
      variables must be joined. 
     contents:
+      - input_indicator_create
       - direct_effects_create
       - indirect_effects_create
   - title: "Multipliers"
@@ -108,6 +110,7 @@ reference:
     contents:
       - germany_1990
       - metadata
+      - primary_inputs
       - employment_metadata
       - netherlands_2006
   - title: "Validation Data - United Kingdom"

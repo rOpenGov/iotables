@@ -60,7 +60,7 @@ as a sample to import scenarios from a spreadsheet application."><meta property=
     <p>This helper function creates you a named vector that conforms your
 analytical objects, such as the use table, the Leontieff-matrix, 
 etc. With 60x60 matrixes it is easy to make mistakes with manual 
-definition. The empty effects vector can be used in .csv format
+definition. The empty effects vector can be used in <code>.csv</code> format
 as a sample to import scenarios from a spreadsheet application.</p>
     </div>
 
@@ -91,10 +91,12 @@ with column names matching the metadata of the <code>data_table</code>.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">de_input_flow</span> <span class="op">&lt;-</span> <span class="fu"><a href="input_flow_get.html">input_flow_get</a></span><span class="op">(</span>data_table <span class="op">=</span> <span class="fu"><a href="iotable_get.html">iotable_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vars(2):</span> could not find function "vars"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">conforming_vector_create</span> <span class="op">(</span>data_table <span class="op">=</span> <span class="va">de_input_flow</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in conforming_vector_create(data_table = de_input_flow):</span> object 'de_input_flow' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   iotables_row agriculture_group industry_group construction trade_group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1            0                 0              0            0           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   business_services_group other_services_group final_consumption_households</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       0                    0                            0</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

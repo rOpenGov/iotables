@@ -17,7 +17,7 @@
 #' @section iotables processing functions:
 #' These are various helper functions for accessing parts of the symmetric
 #' input-output tables and joining them correctly.
-#' \code{\link{conforming_vector_create}} is a helper function taht creates
+#' \code{\link{conforming_vector_create}} is a helper function that creates
 #' a named vector that conforms with the analytical objects, such as the 
 #' use table, the Leontieff-matrix, etc.
 #' \code{\link{household_column_get}} returns the final household 

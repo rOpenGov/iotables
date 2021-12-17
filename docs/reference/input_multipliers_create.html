@@ -100,11 +100,14 @@ auxiliary metadata column (for joining with other matrixes.)</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">compensation_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="input_indicator_create.html">input_indicator_create</a></span><span class="op">(</span><span class="va">netherlands_2006</span>, <span class="st">'compensation_employees'</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span> <span class="va">input_coeff_nl</span> <span class="op">)</span></span>
+<span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">input_coeff_nl</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">input_multipliers_create</span><span class="op">(</span>input_requirements <span class="op">=</span> <span class="va">compensation_indicator</span>, </span>
 <span class="r-in">                        inverse <span class="op">=</span> <span class="va">I_nl</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vars(1):</span> could not find function "vars"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               agriculture_group  mining_group      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 "&lt;environment&gt;_multiplier" "2.46577100952711" "2.33334345171903"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    manufacturing_group utilities_group    construction_group services_group    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 "1.8399475029645"   "2.37219889004239" "1.95303431954841" "1.41713191732829"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

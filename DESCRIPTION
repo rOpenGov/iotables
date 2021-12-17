@@ -30,7 +30,6 @@ Imports:
     eurostat,
     magrittr,
     tidyr,
-    stats,
     forcats,
     utils,
     plyr,
@@ -39,8 +38,6 @@ Imports:
     kableExtra,
     tibble,
     readxl,
-    purrr,
-    tidyselect,
     rlang
 Suggests: 
     testthat,

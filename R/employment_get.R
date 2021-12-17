@@ -20,7 +20,7 @@
 #' data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists.
-#' @importFrom dplyr filter select mutate left_join rename ungroup summarize
+#' @importFrom dplyr filter select mutate left_join rename ungroup summarize group_by
 #' @importFrom tidyr spread
 #' @importFrom eurostat get_eurostat
 #' @importFrom rlang .data

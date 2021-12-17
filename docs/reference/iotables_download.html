@@ -94,7 +94,8 @@ The data is saved into the actual <code><a href="https://rdrr.io/r/base/tempfile
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The data is downloaded in the <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>under the name the statistical product as an
-rds file. (For example: <code>naio_10_cp1750.rds</code>) The temporary directory is emptied at every normal R session exit.</p>
+rds file. (For example: <code>naio_10_cp1750.rds</code>) The temporary directory is emptied at every
+normal R session exit.</p>
 <p>To save the file for further use (which is necessary in analytical work because
 download times are long) set the  <code>download_directory</code> [see parameters]. 
 The function will make a copy of the rds file in this directory.</p><ul><li><p><code>naio_10_cp1700</code>Symmetric input-output table at basic prices (product by product)</p></li>
@@ -113,18 +114,21 @@ The function will make a copy of the rds file in this directory.</p><ul><li><p><
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other iotables import functions: 
+    <div class="dont-index"><p>Other import functions: 
 <code><a href="employment_get.html">employment_get</a>()</code>,
 <code><a href="iotable_get.html">iotable_get</a>()</code>,
-<code><a href="iotables_metadata_get.html">iotables_metadata_get</a>()</code></p></div>
+<code><a href="iotables_metadata_get.html">iotables_metadata_get</a>()</code>,
+<code><a href="iotables_read_tempdir.html">iotables_read_tempdir</a>()</code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"> <span class="va">io_tables</span> <span class="op">&lt;-</span> <span class="fu">iotables_download</span> <span class="op">(</span> source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span> <span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_cp1700 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMdaNUd/eurostat/naio_10_cp1700_date_code_FF.rds</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "NULL"</span>
+<span class="r-in"> <span class="va">io_tables</span> <span class="op">&lt;-</span> <span class="fu">iotables_download</span> <span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_cp1700 cached at C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/eurostat/naio_10_cp1700_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 844 input-output tables into the temporary directory</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/naio_10_cp1700.rds.</span>
 <span class="r-in"> <span class="co"># }</span></span>
 </code></pre></div>
     </div>

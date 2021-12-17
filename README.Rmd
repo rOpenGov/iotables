@@ -27,11 +27,13 @@ version <- gsub('-', '.', version)
 
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
 ![iotables](man/figures/logo20.png)
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5790209.svg)](https://doi.org/10.5281/zenodo.5790209)
 [![license](https://img.shields.io/badge/license-MIT + file LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables)
 [![Follow rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov) 
@@ -62,7 +64,15 @@ devtools::install_github("rOpenGov/iotables")
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can follow changes on the [NEWS.md](https://github.com/rOpenGov/iotables/blob/master/NEWS.md) file. 
+You can download the manual in PDF for the  [0.4.6 development release](https://retroharmonize.dataobservatory.eu/iotables_0.4.6.pdf). and follow the changes on the [NEWS.md](https://github.com/rOpenGov/iotables/blob/master/NEWS.md) file. 
+
+## Vignettes 
+
+The [Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html) vignette presents most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly.  The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the `Eurostat Manual`.
+
+The [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) vignette shows how you can download, pre-process and use real data from Eurostat.
+
+The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the [United Kingdom Input-Output Analytical Tables](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) vignette.
 
 ## Acquiring data
 
@@ -84,17 +94,6 @@ Currently the following Eurostat SIOTs can be used:
 
 The `cp` element refers to basic prices and the `pyp` to previous years' prices.
 
-## Vignettes 
-
-Given the complexity of the data used by the package, probably the use of the vignettes is needed to get a start. 
-
-The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) vignette presents most of the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly.  The `testthat` infrastructure of the package checks the proper working of the functions against the published results from the `Eurostat Manual`.
-
-The [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html) vignette shows how you can download, pre-process and use real data from Eurostat.
-
-The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the [United Kingdom Input-Output Analytical Tables](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) vignette.
-
-
 ### Contribute
 
 Contributions are very welcome:
@@ -107,7 +106,7 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: 
 
-Daniel Antal. (2020, August 2). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.5). Zenodo. [https://doi.org/10.5281/zenodo.5153006](https://zenodo.org/record/5153006/) for released version. 
+Daniel Antal. (2020, December 17). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.6). Zenodo. [https://doi.org/10.5281/zenodo.5790209](https://zenodo.org/record/5153006/) for released version. 
 Development version URL: [https://ropengov.github.io/iotables/](https://ropengov.github.io/iotables/)
 
 Thanks to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and [\@pitkant](https://github.com/pitkant) for implementing many good practices on improving the code. See [contributors](https://github.com/ropengov/iotables/graphs/contributors). This project is part of [rOpenGov](http://ropengov.org).

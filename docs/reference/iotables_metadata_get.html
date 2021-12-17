@@ -130,10 +130,11 @@ input-output tables from a specific <code>source</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other iotables import functions: 
+    <div class="dont-index"><p>Other import functions: 
 <code><a href="employment_get.html">employment_get</a>()</code>,
 <code><a href="iotable_get.html">iotable_get</a>()</code>,
-<code><a href="iotables_download.html">iotables_download</a>()</code></p></div>
+<code><a href="iotables_download.html">iotables_download</a>()</code>,
+<code><a href="iotables_read_tempdir.html">iotables_read_tempdir</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -141,14 +142,42 @@ input-output tables from a specific <code>source</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># The table must be present in the sessions' temporary directory:</span></span>
 <span class="r-in"><span class="fu"><a href="iotables_download.html">iotables_download</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cache file C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMdaNUd/eurostat/naio_10_cp1700_date_code_FF.rds</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Table  naio_10_cp1700  read from cache file:  C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMdaNUd/eurostat/naio_10_cp1700_date_code_FF.rds</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("group_by"):</span> no applicable method for 'group_by' applied to an object of class "NULL"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cache file C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/eurostat/naio_10_cp1700_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Table  naio_10_cp1700  read from cache file:  C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/eurostat/naio_10_cp1700_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 844 input-output tables into the temporary directory</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/naio_10_cp1700.rds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 844 x 10</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    unit    stk_flow geo    time       unit_lab stk_flow_lab geo_lab   time_lab  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> MIO_EUR DOM      EA19   2019-01-01 Million~ Domestic     Euro are~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> MIO_EUR DOM      EU27_~ 2019-01-01 Million~ Domestic     European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MIO_EUR DOM      EU28   2019-01-01 Million~ Domestic     European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> MIO_EUR DOM      SE     2019-01-01 Million~ Domestic     Sweden    2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MIO_EUR IMP      EA19   2019-01-01 Million~ Imports      Euro are~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> MIO_EUR IMP      EU27_~ 2019-01-01 Million~ Imports      European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MIO_EUR IMP      EU28   2019-01-01 Million~ Imports      European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MIO_EUR IMP      SE     2019-01-01 Million~ Imports      Sweden    2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MIO_EUR TOTAL    EA19   2019-01-01 Million~ Total        Euro are~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MIO_EUR TOTAL    EU27_~ 2019-01-01 Million~ Total        European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ... with 834 more rows, and 2 more variables: year &lt;dbl&gt;, data &lt;list&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Now you can get the metadata:</span></span>
 <span class="r-in"><span class="fu">iotables_metadata_get</span> <span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The temporary file for source='naio_10_cp1700' is not found in</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> tempdir='C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMdaNUd'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 844 x 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    unit    stk_flow geo    time       unit_lab stk_flow_lab geo_lab   time_lab  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> MIO_EUR DOM      EA19   2019-01-01 Million~ Domestic     Euro are~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> MIO_EUR DOM      EU27_~ 2019-01-01 Million~ Domestic     European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MIO_EUR DOM      EU28   2019-01-01 Million~ Domestic     European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> MIO_EUR DOM      SE     2019-01-01 Million~ Domestic     Sweden    2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MIO_EUR IMP      EA19   2019-01-01 Million~ Imports      Euro are~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> MIO_EUR IMP      EU27_~ 2019-01-01 Million~ Imports      European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MIO_EUR IMP      EU28   2019-01-01 Million~ Imports      European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MIO_EUR IMP      SE     2019-01-01 Million~ Imports      Sweden    2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MIO_EUR TOTAL    EA19   2019-01-01 Million~ Total        Euro are~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MIO_EUR TOTAL    EU27_~ 2019-01-01 Million~ Total        European~ 2019-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ... with 834 more rows, and 1 more variable: year &lt;dbl&gt;</span></span>
 <span class="r-in"><span class="co"># } </span></span>
 </code></pre></div>
     </div>
