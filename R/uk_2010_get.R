@@ -78,7 +78,7 @@ uk_2010_get <- function ( path = NULL )  {
                      values_to = "values") %>%
       #tidyr::gather( uk_col_lab, values, !!3:ncol(.)) %>%
       rlang::set_names(c("uk_row", "uk_row_lab", 'uk_col_lab', 'values')) %>%
-      mutate(values = as.numeric(as.character(values))) %>%
+      mutate(values = as.numeric(as.character(.data$values))) %>%
       dplyr::left_join (uk_column_specs, 
                         by = "uk_col_lab") %>%
       mutate (indicator = uk_metadata$indicator ) %>%
@@ -86,18 +86,18 @@ uk_2010_get <- function ( path = NULL )  {
       mutate (across(where(is.factor), as.character) ) 
     
     uk_data_sheet <- uk_data_sheet %>%
-      mutate ( uk_col = ifelse ( grepl('on-market', uk_col_lab), 
-                                 paste0("NM_", uk_col), 
-                                 uk_col), 
+      mutate ( uk_col = ifelse ( grepl('on-market', .data$uk_col_lab), 
+                                 paste0("NM_", .data$uk_col), 
+                                 .data$uk_col), 
                uk_row = ifelse ( grepl('on-market', uk_row_lab), 
                                  paste0("NM_", uk_row), 
-                                 uk_row)) %>%
-      mutate ( uk_col = ifelse ( grepl('NPISH', uk_col_lab), 
-                                 paste0("NPISH_", uk_col), 
-                                 uk_col), 
-               uk_row = ifelse ( grepl('NPISH', uk_row_lab), 
-                                 paste0("NPISH_", uk_row), 
-                                 uk_row)) 
+                                 .data$uk_row)) %>%
+      mutate ( uk_col = ifelse ( grepl('NPISH', .data$uk_col_lab), 
+                                 paste0("NPISH_", .data$uk_col), 
+                                 .data$uk_col), 
+               uk_row = ifelse ( grepl('NPISH', .data$uk_row_lab), 
+                                 paste0("NPISH_", .data$uk_row), 
+                                 .data$uk_row)) 
     
     if (i>2) uk_data <- rbind(uk_data, uk_data_sheet) else uk_data <- uk_data_sheet
   }
@@ -105,12 +105,12 @@ uk_2010_get <- function ( path = NULL )  {
   remove_dot <- function(x) gsub("\\.", "-", x)
   
   uk_data %>%
-    mutate ( uk_col_lab = gsub("\n", ' ', uk_col_lab)) %>%
-    mutate ( uk_col_lab = trimws(uk_col_lab, 'both')) %>%
-    mutate ( uk_col = ifelse(is.na(uk_col), uk_col_lab, uk_col)) %>%
-    mutate ( uk_row = ifelse(is.na(uk_row), uk_row_lab, uk_row)) %>%
+    mutate ( uk_col_lab = gsub("\n", ' ', .data$uk_col_lab)) %>%
+    mutate ( uk_col_lab = trimws(.data$uk_col_lab, 'both')) %>%
+    mutate ( uk_col = ifelse(is.na(.data$uk_col), .data$uk_col_lab, .data$uk_col)) %>%
+    mutate ( uk_row = ifelse(is.na(.data$uk_row), .data$uk_row_lab, .data$uk_row)) %>%
     mutate ( across(all_of(c("uk_row", "uk_col")), remove_dot)) %>%
-    mutate ( values = ifelse (is.na(values), 0, values)) %>%
+    mutate ( values = ifelse (is.na(.data$values), 0, .data$values)) %>%
     mutate ( geo = 'UK') %>%
     mutate ( year = 2010 ) %>%
     mutate ( unit = 'MIO_NAC') %>%
