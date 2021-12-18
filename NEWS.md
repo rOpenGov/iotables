@@ -67,7 +67,7 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 * Better exception handling in `equation_solve()`.  Removes trivial erroneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. Released on CRAN.
 
 # iotables 0.3.3
-* New vignette [Germany 1990](https://iotables.ceemid.eu/articles/germany_1990.html) with the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) example tables to show the working of the data processing and analytical functions.
+* New vignette [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) with the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) example tables to show the working of the data processing and analytical functions.
 * Finding an exception in the Eurostat vocabulary that preventing correctly identifying the  "Computer programming, consultancy and related services; Information services" industry in the rows. This is a critical problem in the Eurostat bulk files that prevents the creation of symmetric matrixes. 
 * Minor bug fixes.
 * New function `output_coefficient_matrix_create()`
@@ -77,9 +77,9 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 
 # iotables 0.3.4
 * New function `direct_effects()` which calculates all input indicators that `input_indicator_create()` does individually.
-* New vignette to [work with real Eurostat data](https://iotables.ceemid.eu/articles/working_with_eurostat.html).
-* New [package website](https://iotables.ceemid.eu/).
-* The [ReadMe](https://iotables.ceemid.eu/index.html) file shortened, most of the contents are moved now to the two vignettes.
+* New vignette to [work with real Eurostat data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html).
+* New [package website](https://iotables.dataobservatory.eu/).
+* The [ReadMe](https://iotables.dataobservatory.eu/index.html) file shortened, most of the contents are moved now to the two vignettes.
 
 # iotables 0.3.5
 * New function `iotable_year_get()` which returns the available tables by year or time from the bulk database for a given country and currency unit. 
@@ -139,7 +139,7 @@ turned out that a dependency is not available for  i386-pc-solaris2.10 (32-bit).
 # iotables 0.4.4
 * Very small documentation changes.
 * Changing the code to dplyr 1.0+ and rlang in non-standard evaluation.
-* New website, CI on Github. Renewed [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables), documentation changed to gfm flavored markdown.
+* New website, CI on Github. Renewed [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables), documentation changed to gfm flavored markdown.
 * Thanks to [\@KKulma](https://github.com/KKulma/) for setting up new and improved continuous integration, and [\@pitkant](https://github.com/pitkant) for implementing many good practices on improving the code. See [contributors](https://github.com/ropengov/iotables/graphs/contributors). This project is part of [rOpenGov](http://ropengov.org).
 * 0.4.4 is on CRAN.
 

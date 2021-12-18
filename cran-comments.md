@@ -1,7 +1,6 @@
 ## Test environments
 * local Window 10 install, r-version 4.1.2
 * Microsoft Windows Server 2019 10.0.17763 on Github (r-version: release)
-* Mac OS X 11.6.1 on Github (r-version: release)
 * ubuntu 20.04.3 on Github (r-version: release)
 * ubuntu 20.04.3 on Github (r-version: devel)
 * r_hub: Ubuntu Linux 20.04.1 LTS, R-release, GCC
@@ -15,8 +14,8 @@ FAIL 0 | WARN 0 | SKIP 0 | PASS 50
 0 errors √ | 0 warnings √ | 0 notes √
 
 ## Notes
-This version is eliminates deprecated functions from tidyverse, particularly
-* dplyr mutate_if, mutate_at funs, group_by
+This version of iotables has no new functionality It eliminates deprecated functions from tidyverse, particularly
+* dplyr mutate_if, mutate_at, funs, group_by
 * tidyselect one_of
 * tidyr gather, and most instances of spread.
 

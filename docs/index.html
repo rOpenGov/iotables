@@ -101,7 +101,14 @@
 
 <span class="co">#with vignettes:</span>
 <span class="co">#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)</span></code></pre></div>
-<p>You can follow changes on the <a href="https://github.com/rOpenGov/iotables/blob/master/NEWS.md" class="external-link">NEWS.md</a> file.</p>
+<p>You can download the manual in PDF for the <a href="https://retroharmonize.dataobservatory.eu/iotables_0.4.6.pdf" class="external-link">0.4.6 development release</a>. and follow the changes on the <a href="https://github.com/rOpenGov/iotables/blob/master/NEWS.md" class="external-link">NEWS.md</a> file.</p>
+</div>
+<div class="section level2">
+<h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h2>
+<p>The <a href="https://iotables.dataobservatory.eu/articles/intro.html" class="external-link">Introduction to iotables</a> vignette presents most of the examples of the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The <code>testthat</code> infrastructure of the package checks the proper working of the functions against the published results from the <code>Eurostat Manual</code>.</p>
+<p>The <a href="https://iotables.dataobservatory.eu/articles/working_with_eurostat.html" class="external-link">Working with Eurostat Data</a> vignette shows how you can download, pre-process and use real data from Eurostat.</p>
+<p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html" class="external-link">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the <a href="https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html" class="external-link">United Kingdom Input-Output Analytical Tables</a> vignette.</p>
 </div>
 <div class="section level2">
 <h2 id="acquiring-data">Acquiring data<a class="anchor" aria-label="anchor" href="#acquiring-data"></a>
@@ -117,14 +124,6 @@
 <li><p>Supply table at basic prices incl. transformation into purchasers’ prices (naio_10_cp15) and Use table at purchasers’ prices (naio_10_cp16).</p></li>
 </ul>
 <p>The <code>cp</code> element refers to basic prices and the <code>pyp</code> to previous years’ prices.</p>
-</div>
-<div class="section level2">
-<h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
-</h2>
-<p>Given the complexity of the data used by the package, probably the use of the vignettes is needed to get a start.</p>
-<p>The <a href="https://iotables.dataobservatory.eu/articles/germany_1990.html" class="external-link">Germany 1990</a> vignette presents most of the examples of the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> (Eurostat Manual, Chapter 15.) This is a good introduction to understand what will the functions do, and to check that they work correctly. The <code>testthat</code> infrastructure of the package checks the proper working of the functions against the published results from the <code>Eurostat Manual</code>.</p>
-<p>The <a href="https://iotables.dataobservatory.eu/articles/working_with_eurostat.html" class="external-link">Working with Eurostat Data</a> vignette shows how you can download, pre-process and use real data from Eurostat.</p>
-<p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html" class="external-link">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the <a href="https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html" class="external-link">United Kingdom Input-Output Analytical Tables</a> vignette.</p>
 <div class="section level3">
 <h3 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>
 </h3>
@@ -140,7 +139,7 @@
 <h3 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h3>
 <p><strong>Kindly cite this work</strong> as follows:</p>
-<p>Daniel Antal. (2020, August 2). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.5). Zenodo. <a href="https://zenodo.org/record/5153006/" class="external-link">https://doi.org/10.5281/zenodo.5153006</a> for released version. Development version URL: <a href="https://ropengov.github.io/iotables/" class="external-link uri">https://ropengov.github.io/iotables/</a></p>
+<p>Daniel Antal. (2020, December 17). rOpenGov/iotables: Importing and Manipulating Symmetric Input-Output Tables (Version 0.4.6). Zenodo. <a href="https://zenodo.org/record/5153006/" class="external-link">https://doi.org/10.5281/zenodo.5790209</a> for released version. Development version URL: <a href="https://ropengov.github.io/iotables/" class="external-link uri">https://ropengov.github.io/iotables/</a></p>
 <p>Thanks to <a href="https://github.com/KKulma/" class="external-link">@KKulma</a> for setting up new and improved continuous integration, and <a href="https://github.com/pitkant" class="external-link">@pitkant</a> for implementing many good practices on improving the code. See <a href="https://github.com/ropengov/iotables/graphs/contributors" class="external-link">contributors</a>. This project is part of <a href="http://ropengov.org" class="external-link">rOpenGov</a>.</p>
 </div>
 </div>
@@ -195,11 +194,13 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.4.5-orange.svg?style=flat-square" alt="packageversion"></a></li>
+<li><a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg" alt="rOG-badge"></a></li>
+<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.4.6-orange.svg?style=flat-square" alt="packageversion"></a></li>
 <li><a href="https://github.com/rOpenGov/iotables/actions" class="external-link"><img src="https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/version/iotables" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/ago/iotables" alt="CRAN_time_from_release"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/iotables" alt="metacran downloads"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.5790209" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5790209.svg" alt="DOI"></a></li>
 <li><a href="https://choosealicense.com/" class="external-link"><img src="https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg" alt="license"></a></li>
 <li><a href="https://codecov.io/gh/rOpenGov/iotables" class="external-link"><img src="https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E" alt="codecov"></a></li>
 <li><a href="https://twitter.com/intent/follow?screen_name=ropengov" class="external-link"><img src="https://img.shields.io/twitter/follow/ropengov.svg?style=social" alt="Follow rOpenGov"></a></li>

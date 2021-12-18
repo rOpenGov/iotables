@@ -14,7 +14,7 @@
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5790209.svg)](https://doi.org/10.5281/zenodo.5790209)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
-[![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E)](https://codecov.io/gh/rOpenGov/iotables)
+[![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
 [![Follow
 rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![Follow
@@ -75,8 +75,8 @@ devtools::install_github("rOpenGov/iotables")
 ```
 
 You can download the manual in PDF for the [0.4.6 development
-release](https://retroharmonize.dataobservatory.eu/iotables_0.4.6.pdf).
-and follow the changes on the
+release](https://iotables.dataobservatory.eu/iotables_0.4.6.pdf). and
+follow the changes on the
 [NEWS.md](https://github.com/rOpenGov/iotables/blob/master/NEWS.md)
 file.
 
