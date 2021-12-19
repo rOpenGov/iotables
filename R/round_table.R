@@ -1,6 +1,6 @@
 #' @title Systematically round values in a table
 #' 
-#' @describe This is an internal function to do the rounding on all numeric elements 
+#' @description This is an internal function to do the rounding on all numeric elements 
 #' of the table for comparability with external sources that use rounding.
 #' @param data_table A symmetric input-output table, or a use table, or a 
 #' supply table, or a margin or a tax table.
@@ -21,7 +21,7 @@ round_table <- function ( data_table,
   }
    
   round_eps <- function ( x, digits ) {
-    ifelse ( x == 1e-06, x, round ( x, digits ))
+    ifelse (x == 1e-06, x, round (x, digits))
   }
-  data_table %>%  mutate (across(where(is.numeric), round_eps, digits ))
+  data_table %>%  mutate (across(where(is.numeric), round_eps, digits))
 }

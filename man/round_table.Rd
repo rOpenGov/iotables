@@ -17,6 +17,7 @@ A tibble with a key row and a symmetric matrix,
 after removing all empty columns and rows at the same time.
 }
 \description{
-Systematically round values in a table
+This is an internal function to do the rounding on all numeric elements 
+of the table for comparability with external sources that use rounding.
 }
 \keyword{internal}

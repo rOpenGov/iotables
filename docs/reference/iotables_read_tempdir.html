@@ -80,7 +80,7 @@ uk_2010_siotUnited Kingdom Input-Output Analytical Tables data
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -173,6 +173,7 @@ actual, tidy, ordered input-output table is in the data <code>data</code> column
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other import functions: 
+<code><a href="airpol_get.html">airpol_get</a>()</code>,
 <code><a href="employment_get.html">employment_get</a>()</code>,
 <code><a href="iotable_get.html">iotable_get</a>()</code>,
 <code><a href="iotables_download.html">iotables_download</a>()</code>,
@@ -184,11 +185,11 @@ actual, tidy, ordered input-output table is in the data <code>data</code> column
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># The table must be present in the sessions' temporary directory:</span></span>
 <span class="r-in"><span class="fu"><a href="iotables_download.html">iotables_download</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cache file C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/eurostat/naio_10_cp1700_date_code_FF.rds</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Table  naio_10_cp1700  read from cache file:  C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/eurostat/naio_10_cp1700_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading cache file C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMZDLGC/eurostat/naio_10_cp1700_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Table  naio_10_cp1700  read from cache file:  C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMZDLGC/eurostat/naio_10_cp1700_date_code_FF.rds</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 844 input-output tables into the temporary directory</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\Rtmp4A2d9b/naio_10_cp1700.rds.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMZDLGC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpMZDLGC/naio_10_cp1700.rds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 844 x 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    unit    stk_flow geo    time       unit_lab stk_flow_lab geo_lab   time_lab  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>

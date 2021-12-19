@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Working With Eurostat Data</h1>
                         <h4 data-toc-skip class="author">Daniel Antal, CFA</h4>
             
-            <h4 data-toc-skip class="date">2021-12-17</h4>
+            <h4 data-toc-skip class="date">2021-12-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/HEAD/vignettes/working_with_eurostat.Rmd" class="external-link"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
       <div class="d-none name"><code>working_with_eurostat.Rmd</code></div>
@@ -170,7 +170,7 @@
 
 <span class="va">cz_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_get.html">output_get</a></span><span class="op">(</span> data_table <span class="op">=</span> <span class="va">cz_io</span><span class="op">)</span>
 <span class="va">sk_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_get.html">output_get</a></span><span class="op">(</span> data_table <span class="op">=</span> <span class="va">sk_io</span><span class="op">)</span> </code></pre></div>
-<p>By default, total rows and columns are removed when creating use tables. You need to remove the columns and rows that are completely empty, or any row our column that has missing (<code>NA</code> or <code>NaN</code>) values. For example, when a country like Slovakia leaves teh <code>CPA_L68A</code> technical roww/column pair empty, you must remove it consistently from all vectors and matrixes, also from data that you are joining for further economic or environmental impact analysis. The helper function <code><a href="../reference/empty_remove.html">empty_remove()</a></code> removes systematically such rows and columns from symmetric matrixes. Beware not to use it on tables that contain missing values by definition, or tables that are not necessarily symmetric. The function is intended to be used in the first quadrant of the system of input-output tables and for conforming matrices or vectors.</p>
+<p>By default, total rows and columns are removed when creating use tables. You need to remove the columns and rows that are completely empty, or any row our column that has missing (<code>NA</code> or <code>NaN</code>) values. For example, when a country like Slovakia leaves the <code>CPA_L68A</code> technical roww/column pair empty, you must remove it consistently from all vectors and matrixes, also from data that you are joining for further economic or environmental impact analysis. The helper function <code><a href="../reference/empty_remove.html">empty_remove()</a></code> removes systematically such rows and columns from symmetric matrixes. Beware not to use it on tables that contain missing values by definition, or tables that are not necessarily symmetric. The function is intended to be used in the first quadrant of the system of input-output tables and for conforming matrices or vectors.</p>
 </div>
 <div class="section level2">
 <h2 id="analytic-functions">Analytic functions<a class="anchor" aria-label="anchor" href="#analytic-functions"></a>

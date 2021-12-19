@@ -80,7 +80,7 @@ coefficient_matrix_create <- function ( data_table,
   key_column <- tolower(as.character(unlist(data_table[,1])))
   key_column
   
-  ##Getting the row for division
+  ## Getting the row for division
   if ( total %in%  c("output", "p1", "output_bp")  ) { 
     if (any( c("output", "p1", "output_bp")  %in%  key_column )) {
       total_row <- data_table[which ( key_column  %in%
@@ -100,7 +100,7 @@ coefficient_matrix_create <- function ( data_table,
   } #end of else
   
   
-  ##Adjust the total vector---- 
+  ##Adjust the total vector -------------------------------------------------------------- 
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x)
   total_row <-  total_row %>% mutate(across(where(is.factor), as.character))
   total_row <-  total_row %>% mutate (across(where(is.factor), null_to_eps)) # avoid division by zero
@@ -122,7 +122,6 @@ coefficient_matrix_create <- function ( data_table,
   
   household_earnings_row <- coeff_matrix[which( earnings_name == key_column), ]
   
-  
   ###If only a part should be returned----
   if ( ! is.null(return_part) )  {
     
@@ -140,8 +139,10 @@ coefficient_matrix_create <- function ( data_table,
     }
   } 
   
-  ###If rounding should happen-----
-  if ( is.null(digits) ) return (coeff_matrix)
-  
-  round_table ( coeff_matrix, digits = digits  )
+  ### Make rounding if required  --------------------------------------------------------
+  if ( is.null(digits) ) {
+    coeff_matrix
+  } else {
+    round_table (coeff_matrix, digits = digits)
+  }
 }

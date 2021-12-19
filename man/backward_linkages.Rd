@@ -17,7 +17,9 @@ inverse matrix.
 }
 \description{
 Indicate the interconnection of a particular sector to other sectors
-from which it purchases inputs (demand side).
+from which it purchases inputs (demand side). When a sector increases its output, 
+it will increase the total (intermediate) demand on all other sectors, which is measured
+by backward linkages.
 }
 \details{
 Backward linkages as defined by the Eurostat Manual of Supply, Use and

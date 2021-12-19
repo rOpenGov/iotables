@@ -19,10 +19,30 @@ pkgdown_sha: ~
 
 intro:
   - title: "Get Started"
+    contents:
+       - intro
 
 articles:
-  united_kingdom_2010: united_kingdom_2010.html
-  working_with_eurostat: working_with_eurostat.html
+  - title: "Get Started"
+    desc: >
+     An overview of the reproducible workflow of **importing data**, preparing important analytical
+       objects for input-output equations, and solving matrix equations. A re-creation of the examples of the
+       Eurostat Manual of Supply, Use and Input-Output Tables by Joerg Beutel.
+    contents:
+      - intro
+  - title: "Use Case"
+    desc: >
+      Working with real-life Eurostat data - practical tips from downloading till analyzing input-output
+      tables.
+    contents:
+       - working_with_eurostat
+       - environmental_impact
+  - title: "Validation"
+    desc: >
+      Replication of known good input-output analysis for package testing and tutorials.
+      See also Get Started.
+    contents:
+       - united_kingdom_2010
 
 reference:
   - title: "Importing"
@@ -33,6 +53,7 @@ reference:
       - iotables_download
       - iotables_read_tempdir
       - employment_get
+      - airpol_get
       - uk_2010_get
   - title: "Matrix functions"
     desc: >
@@ -59,6 +80,7 @@ reference:
       - supplementary_add
       - household_column_find
       - matrix_round
+      - vector_transpose
   - title: "Analytic objects"
     desc: >
      Create the Leontieff matrix, the Leontieff inverse, and its inputs. To avoid division by zero, 
@@ -70,11 +92,7 @@ reference:
       - empty_remove
   - title: "Indicators"
     desc: >
-     After importing data with some **descriptive metadata** such as **numerical coding** and **labelling**, 
-     we need to create a map of the information that is in our R session to prepare a harmonization
-     plan. We must find information related to sufficiently similar concepts that can be 
-     harmonized to be successfully joined into a single variable, and eventually a table of similar 
-     variables must be joined. 
+     Create direct and indirect effect indicators.
     contents:
       - input_indicator_create
       - direct_effects_create
@@ -131,4 +149,9 @@ reference:
       - croatia_2010_1900
       - croatia_employment_2013
       - croatia_employment_aggregation
+  - title: "Knitting articles (imported from knitr)"
+    contents: 
+       - is_html_output
+       - is_latex_output
+    
 

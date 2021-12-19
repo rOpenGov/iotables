@@ -86,14 +86,14 @@ load (system.file('extdata',
       )
 ```
 
-In this vignette example the Czech (2015) national currency unit and the Slovak (2010) euro tables are created.  Since the Slovak national currency is the euro, there is no difference between the Slovak national currency unit and euro tables.
+In this vignette example the Czech (2015) and the Slovak (2010) euro tables are created.  Since the Slovak national currency is the euro, there is no difference between the Slovak national currency unit and euro tables, but you could create Czech koruna tables for Czechia.
 
 The Slovak SIOT table contains empty columns and rows.  They must be removed to avoid division by zero errors.
 
 ```{r preprocess}
 cz_io <- iotable_get( labelled_io_data = naio_10_cp1700, 
                        source = "naio_10_cp1700", geo = "CZ", 
-                       year = 2015, unit = "MIO_NAC", 
+                       year = 2015, unit = "MIO_EUR", 
                        stk_flow = "TOTAL",
                        labelling = "short" )
 
@@ -236,6 +236,8 @@ The creation of the employment indicator is facilitated with the data processing
 
 Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation.  The helper function `conforming_vector_create()` will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.
 
+Whilst in the previous comparisons the currency units and other differences between Czechia and Slovakia had little effect, they are important in employment effects.  One million euro increase in demand will create more jobs where workers are paid significantly less (the increased turnover buys more input.) And of course, one million korunas have a very different demand effect than one million euros --- this is why we chose to use the Czech euro tables.
+
 ```{r employmenteffect, results='asis', message=FALSE}
 #New function is needed to add employment vector to SIOT
 names ( emp_sk )[1] <- 'prod_na'
@@ -257,18 +259,35 @@ emp_indicator_cz <- full_join (
 emp_effect_sk <- direct_effects_create( emp_indicator_sk, I_sk )  
 emp_effect_cz <- direct_effects_create( emp_indicator_cz, I_cz )  
 
-knitr::kable (emp_effect_cz[1:8], digits = 5)
+
+vector_transpose (emp_effect_cz, values_to ="employment_effect_cz") %>%
+  left_join ( vector_transpose(emp_effect_sk, values_to = "employment_effect_sk"), by = 'nace_r2' ) %>%
+  mutate ( across(starts_with("employmnet"), function(x) x*1000)) %>%
+  arrange ( -.data$employment_effect_sk) %>%
+  top_n(8)
 ```
 
+The sector `Q87_88`, which stands for *Residential care services; social work services without accommodation* creates the highest employment with a million euro of increase in output. In Slovakia, the employment effect is always higher, which may reflect the the lower wage level of the Slovak economy. The class `I`, *accommodation services* has the highest employment effect in Slovakia, which is not suprising, these services require plenty of human labor and cannot be automated. The `H53` refers to postal services.
+
+After the direct effects, we turn our attention to multiplied effects, which take into consideration the extra employment among suppliers, and possible forward linkages where the each sector is a supplier itself.
 
 ```{r employmentindicator, results='asis'}
 
 emp_multiplier_sk <- input_multipliers_create( emp_indicator_sk[not_removed_cols], I_sk )  
 emp_multiplier_cz <- input_multipliers_create( emp_indicator_cz[,names(emp_indicator_cz) %in% names(I_cz)], I_cz )  
 
-knitr::kable (emp_multiplier_cz[1:8], digits=5)
+vector_transpose (emp_multiplier_cz, values_to ="employment_multiplier_cz") %>%
+  left_join ( vector_transpose(emp_multiplier_cz, 
+                               values_to = "employment_multiplier_sk"), by = 'nace_r2' ) %>%
+  mutate ( across(starts_with("employmnet"), function(x) x*1000)) %>%
+  arrange ( -.data$employment_multiplier_sk) %>%
+  top_n(8)
 ```
 
+
+From the previous list, only postal services remain. Postal workers are underpaid, and they deliver many letters for an extra million euros, but postal services have little suppliers, and they represent a small value in the value chain of more complex services. 
+
+`CPA_C19`	 *Manufacture of coke and refined petroleum products* is on the top of multiplied effects.
 
 ### Output multipliers {#output-multipliers}
 

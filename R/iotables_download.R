@@ -65,7 +65,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   #only download the Eurostat bulk file if necessary.
   
   if ( !is.null (data_directory)   ) {
-    save_file_name <- paste0(data_directory, "/", source, ".rds")
+    save_file_name <- file.path(data_directory, paste0(source, ".rds"))
     if ( ! force_download && file.exists(save_file_name) )
       return(readRDS(save_file_name))
   }

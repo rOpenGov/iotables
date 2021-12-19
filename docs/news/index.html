@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,75 +48,84 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.3" id="iotables-013">iotables 0.1.3<a class="anchor" aria-label="anchor" href="#iotables-013"></a></h2>
-<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Added Contributor Code of Conduct in <code>CONDUCT.md</code>
-</li>
-<li>Some functions have parallel versions, and will be brought to <a href="https://github.com/ropensci/software-review" class="external-link">rOpenSci</a> naming conventions (<code>object_verb()</code>)</li>
-<li>Asked to join <a href="http://ropengov.github.io/" class="external-link">rOpenGov</a> - excited but inexperienced in this!</li>
+<h2 class="pkg-version" data-toc-text="0.4.6" id="iotables-046">iotables 0.4.6<a class="anchor" aria-label="anchor" href="#iotables-046"></a></h2><p class="text-muted">CRAN release: 2021-12-18</p>
+<ul><li>Eliminating deprecated tidyverse functions.</li>
+<li>New website.</li>
+<li>Released on CRAN (2021.12.18.)</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.4" id="iotables-014">iotables 0.1.4<a class="anchor" aria-label="anchor" href="#iotables-014"></a></h2>
-<p>New functions are added which enable a very simple IO analysis. As an important milestone, an analytical solution comparable to the Eurostat manual, the German employment indicators are correctly calculated (see <code>README</code>) * The <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> creates the indicators. * The <code><a href="../reference/equation_solve.html">equation_solve()</a></code> solves the basic input-output equations on real-life data, i.e. correctly prepared the two sides of the equation product- or industrywise. * The <code><a href="../reference/multiplier_create.html">multiplier_create()</a></code> is a wrapper around the more general <code><a href="../reference/equation_solve.html">equation_solve()</a></code> * The <code>README</code> contains examples to use this new functions. * Some new tests are added to the <code>testthat</code> functions. * Further example data is added from Croatia, together with the <code>employment_aggregate()</code> helper function to match SIOT data with non-conforming employment statistics. * There is a vignette called <em>Working with Croatian Symmetric Input-Output Tables</em> that shows some real-life uses. * Testing on Travis (ubuntu and OSX tests.)</p>
+<h2 class="pkg-version" data-toc-text="0.4.5" id="iotables-045">iotables 0.4.5<a class="anchor" aria-label="anchor" href="#iotables-045"></a></h2><p class="text-muted">CRAN release: 2021-08-02</p>
+<ul><li>Documentation improvement and preparing for Rbloggers.</li>
+<li>Removing UTF-8 characters from datasets.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.4" id="iotables-044">iotables 0.4.4<a class="anchor" aria-label="anchor" href="#iotables-044"></a></h2><p class="text-muted">CRAN release: 2021-06-03</p>
+<ul><li>Very small documentation changes.</li>
+<li>Changing the code to dplyr 1.0+ and rlang in non-standard evaluation.</li>
+<li>New website, CI on Github. Renewed <a href="https://app.codecov.io/gh/rOpenGov/iotables" class="external-link"><img src="https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg" alt="codecov"></a>, documentation changed to gfm flavored markdown.</li>
+<li>Thanks to <a href="https://github.com/KKulma/" class="external-link">@KKulma</a> for setting up new and improved continuous integration, and <a href="https://github.com/pitkant" class="external-link">@pitkant</a> for implementing many good practices on improving the code. See <a href="https://github.com/ropengov/iotables/graphs/contributors" class="external-link">contributors</a>. This project is part of <a href="http://ropengov.org" class="external-link">rOpenGov</a>.</li>
+<li>0.4.4 is released on CRAN.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.3" id="iotables-043">iotables 0.4.3<a class="anchor" aria-label="anchor" href="#iotables-043"></a></h2><p class="text-muted">CRAN release: 2020-05-19</p>
+<ul><li>Generally improved documentation. Improving source code readabilty and vignette readability.</li>
+<li>Better handling of temporary files in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for improved performance with very large source files, including the new exported function <code><a href="../reference/iotables_read_tempdir.html">iotables_read_tempdir()</a></code> and <code><a href="../reference/iotables_metadata_get.html">iotables_metadata_get()</a></code>.</li>
+<li>Following changes in dependencies <code>dplyr</code> and <code>tidyr</code>.</li>
+<li>
+<a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a> is added to the github repo.</li>
+<li>Released on CRAN.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.2" id="iotables-042">iotables 0.4.2<a class="anchor" aria-label="anchor" href="#iotables-042"></a></h2><p class="text-muted">CRAN release: 2019-01-18</p>
+<p>On CRAN 0.4.1 passed early tests, but on deployment it turned out that a dependency is not available for i386-pc-solaris2.10 (32-bit). This dependency is <code>magick</code>, which was supposed to help printing vignettes in Word (a very rare case) for <code>kableExtra</code> is not available on Solaris. I removed this dependency.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2" id="iotables-02">iotables 0.2<a class="anchor" aria-label="anchor" href="#iotables-02"></a></h2>
-<p>The forthcoming update will rewrite and generalize some of the earlier functions. In particular, the following features will be available: * Handling 7 types of Eurostat tables, not only the current price table. * Closing off households, i.e. including endogenous demand for induced effects. * Guidelines to work with OECD mass downloader. * Some earlier functions are phased out, because they are successfully generalized. * The standard system.rda contains the metadata necessary to re-order the bulk files. This will require a lot of patient testing, and it can be always updated with new data sources.</p>
-<p>At this point I will go with preparing a release the table on CRAN. The current version builds without warnings or notes on Windows and Linux.</p>
-<p>iotables 0.2 is moved to rOpenGov.</p>
+<h2 class="pkg-version" data-toc-text="0.4.1" id="iotables-041">iotables 0.4.1<a class="anchor" aria-label="anchor" href="#iotables-041"></a></h2><p class="text-muted">CRAN release: 2019-01-17</p>
+<p>A small formatting error in the documentation of <code>netherlands_2006</code> threw up a note on CRAN.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.1" id="iotables-021">iotables 0.2.1<a class="anchor" aria-label="anchor" href="#iotables-021"></a></h2>
-<ul><li>Correctly handles the total Eurostat national accounts vocabulary, and adds all Croatian (not fully conforming) tables to the package.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.2" id="iotables-022">iotables 0.2.2<a class="anchor" aria-label="anchor" href="#iotables-022"></a></h2>
-<ul><li>Updated README file and new Croatia vignette.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.3" id="iotables-023">iotables 0.2.3<a class="anchor" aria-label="anchor" href="#iotables-023"></a></h2>
-<ul><li>Eurostat withdrew naio_cp17_r2, and there is a temporary fix to work with archived versions. Some metadata errors and documentation errors were corrected.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.4" id="iotables-024">iotables 0.2.4<a class="anchor" aria-label="anchor" href="#iotables-024"></a></h2><p class="text-muted">CRAN release: 2018-01-30</p>
-<ul><li>Some documentation improvements. This version was submitted for CRAN for release.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.5" id="iotables-025">iotables 0.2.5<a class="anchor" aria-label="anchor" href="#iotables-025"></a></h2>
-<ul><li>Some documentation improvements.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.6" id="iotables-026">iotables 0.2.6<a class="anchor" aria-label="anchor" href="#iotables-026"></a></h2>
-<ul><li>Download <code>naio_10_cp1620</code> (trade and transport margins) or <code>naio_10_cp1630</code> (net taxes) with the parameter <code>stk_flow="TOTAL"</code>. Correctly builds on Windows and Mac OS (old and release version) but problem with the dependency <code>eurostat</code> in Linux on Travis.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.7" id="iotables-027">iotables 0.2.7<a class="anchor" aria-label="anchor" href="#iotables-027"></a></h2>
-<p>Default data directory for faster programmatic use and phasing out discountinued Eurostat statistics. A bit improved messages and documentation.</p>
+<h2 class="pkg-version" data-toc-text="0.4" id="iotables-04">iotables 0.4<a class="anchor" aria-label="anchor" href="#iotables-04"></a></h2>
+<p>New vignette <a href="https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html" class="external-link">United Kingdom Input-Output Analytical Tables</a> to compare analytical function results with published results from the UK National Office for Statistics.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.8" id="iotables-028">iotables 0.2.8<a class="anchor" aria-label="anchor" href="#iotables-028"></a></h2>
-<p>Handles tables with purchasers’ prices. Imports Eurostat employment data.</p>
+<h2 class="pkg-version" data-toc-text="0.3.9" id="iotables-039">iotables 0.3.9<a class="anchor" aria-label="anchor" href="#iotables-039"></a></h2>
+<p>This is a much improved, simplified pre-release version, with highly improved performance, more consistent function interface and far more readable code. The last CRAN release is stable, the following version will be a stable, better release candidate. * The Germany example is converted to the ESA2010 vocabulary. * The <code><a href="../reference/output_get.html">output_get()</a></code> is now a wrapper around <code><a href="../reference/primary_input_get.html">primary_input_get()</a></code> and <code>gva_get()</code> is completely deprecated. * The <code><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create()</a></code> is now a wrapper around the more general <code><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create()</a></code>. * The <code>use_table_get()</code> function is now named <code><a href="../reference/input_flow_get.html">input_flow_get()</a></code> but it is seldom used, as the analytical function will call it as needed. * A completely dataset, metadata and vignette was added to test the functions on the United Kingdom Input-Output Analytical Tables, 2010. article and dataset.<br>
+* The new function <code><a href="../reference/supplementary_add.html">supplementary_add()</a></code> can add a supplementary account or row to the table, useful to add employment data, for example. * The new function <code><a href="../reference/total_tax_add.html">total_tax_add()</a></code> adds a summary of product and production taxes among the primary inputs. * Clearly divided analytical functions, <code><a href="../reference/direct_effects_create.html">direct_effects_create()</a></code> , <code><a href="../reference/indirect_effects_create.html">indirect_effects_create()</a></code>, <code>input_multiplier_create()</code> create the direct, indirect and total effects matrix.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.9" id="iotables-029">iotables 0.2.9<a class="anchor" aria-label="anchor" href="#iotables-029"></a></h2><p class="text-muted">CRAN release: 2018-08-05</p>
-<p>Error corrected concerning creation of temporary files on non-Windows environments. No uses <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> to create platform-independent files. Released on CRAN.</p>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.0" id="iotables-030">iotables 0.3.0<a class="anchor" aria-label="anchor" href="#iotables-030"></a></h2>
-<ul><li>Correctly handles some countries that differ from the standard SIOT structure. The Czech Republic does not include G47 and I68 imputed rents in the table, which caused problems with the ordering of the table and the creation of coefficients.</li>
-<li>Uses tidyr::nested() data structures which are far easier handled in highly structured data sets.</li>
+<h2 class="pkg-version" data-toc-text="0.3.8" id="iotables-038">iotables 0.3.8<a class="anchor" aria-label="anchor" href="#iotables-038"></a></h2>
+<ul><li>Function <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> has a new, optional parameter for naming the new indicators in the key column.</li>
+<li>New convenience function for nicer printing of structured SIOT tables and related matrix results. Not yet exported, first will be used on vignettes only.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.1" id="iotables-031">iotables 0.3.1<a class="anchor" aria-label="anchor" href="#iotables-031"></a></h2><p class="text-muted">CRAN release: 2018-08-24</p>
-<ul><li>Correcting a bug that did not always remove the right columns from <code>use_table_get()</code>. Released on CRAN.</li>
+<h2 class="pkg-version" data-toc-text="0.3.7" id="iotables-037">iotables 0.3.7<a class="anchor" aria-label="anchor" href="#iotables-037"></a></h2>
+<ul><li>New example <code>data(netherlands_2006)</code>, terminology and analytical improvements following <a href="http://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf" class="external-link">Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report</a>. Results are checked against the publication.</li>
+<li>For terminological clarity, earlier <code>direct_supply_effects_create()</code> function is renamed <code>direct_supply_effects_create()</code>.</li>
+<li>The function <code>effects_create()</code> currently refers to the function returning direct effects of a change in demand.</li>
+<li>The function <code>multipliers_create()</code> refers to the function returning direct and indirect effects of a change in demand.</li>
+<li>The Germany 1990 vignette needs to be reviewed. Currently it may not be consistent with effects and multipliers, it will be included in the next development version.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.2" id="iotables-032">iotables 0.3.2<a class="anchor" aria-label="anchor" href="#iotables-032"></a></h2><p class="text-muted">CRAN release: 2018-09-01</p>
-<ul><li>Better exception handling in <code><a href="../reference/equation_solve.html">equation_solve()</a></code>. Removes trivial erroneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. Released on CRAN.</li>
+<h2 class="pkg-version" data-toc-text="0.3.6" id="iotables-036">iotables 0.3.6<a class="anchor" aria-label="anchor" href="#iotables-036"></a></h2>
+<ul><li>New analytical function <code><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create()</a></code> which is a more general version of <code><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create()</a></code> and will eventually replace that function.</li>
+<li>Custom SIOTs are supported, but there is no vignette yet to describe their use in detail.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.5" id="iotables-035">iotables 0.3.5<a class="anchor" aria-label="anchor" href="#iotables-035"></a></h2><p class="text-muted">CRAN release: 2018-11-29</p>
+<ul><li>New function <code><a href="../reference/iotable_year_get.html">iotable_year_get()</a></code> which returns the available tables by year or time from the bulk database for a given country and currency unit.</li>
+<li>Package now handles <code>Use table at basic prices</code> (naio_10_cp1610 and naio_10_pyp1610), <code>Supply table at basic prices incl. transformation into purchasers' prices</code> (naio_10_cp15), <code>Use table at purchasers' prices</code> (naio_10_cp16) after correcting a vocabulary error.</li>
+<li>This version is a release candidate for CRAN.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.4" id="iotables-034">iotables 0.3.4<a class="anchor" aria-label="anchor" href="#iotables-034"></a></h2><p class="text-muted">CRAN release: 2018-09-14</p>
+<ul><li>New function <code>direct_effects()</code> which calculates all input indicators that <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> does individually.</li>
+<li>New vignette to <a href="https://iotables.dataobservatory.eu/articles/working_with_eurostat.html" class="external-link">work with real Eurostat data</a>.</li>
+<li>New <a href="https://iotables.dataobservatory.eu/" class="external-link">package website</a>.</li>
+<li>The <a href="https://iotables.dataobservatory.eu/index.html" class="external-link">ReadMe</a> file shortened, most of the contents are moved now to the two vignettes.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.3" id="iotables-033">iotables 0.3.3<a class="anchor" aria-label="anchor" href="#iotables-033"></a></h2><p class="text-muted">CRAN release: 2018-09-10</p>
-<ul><li>New vignette <a href="https://iotables.ceemid.eu/articles/germany_1990.html" class="external-link">Germany 1990</a> with the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> example tables to show the working of the data processing and analytical functions.</li>
+<ul><li>New vignette <em>Germany 1990</em>, renamed in 0.4.6 <a href="https://iotables.dataobservatory.eu/articles/intro.html" class="external-link">Introduction to iotables</a> with the <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a> example tables to show the working of the data processing and analytical functions.</li>
 <li>Finding an exception in the Eurostat vocabulary that preventing correctly identifying the “Computer programming, consultancy and related services; Information services” industry in the rows. This is a critical problem in the Eurostat bulk files that prevents the creation of symmetric matrixes.</li>
 <li>Minor bug fixes.</li>
 <li>New function <code><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create()</a></code>
@@ -129,79 +138,67 @@
 </li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.4" id="iotables-034">iotables 0.3.4<a class="anchor" aria-label="anchor" href="#iotables-034"></a></h2><p class="text-muted">CRAN release: 2018-09-14</p>
-<ul><li>New function <code>direct_effects()</code> which calculates all input indicators that <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> does individually.</li>
-<li>New vignette to <a href="https://iotables.ceemid.eu/articles/working_with_eurostat.html" class="external-link">work with real Eurostat data</a>.</li>
-<li>New <a href="https://iotables.ceemid.eu/" class="external-link">package website</a>.</li>
-<li>The <a href="https://iotables.ceemid.eu/index.html" class="external-link">ReadMe</a> file shortened, most of the contents are moved now to the two vignettes.</li>
+<h2 class="pkg-version" data-toc-text="0.3.1" id="iotables-031">iotables 0.3.1<a class="anchor" aria-label="anchor" href="#iotables-031"></a></h2><p class="text-muted">CRAN release: 2018-08-24</p>
+<ul><li>Correcting a bug that did not always remove the right columns from <code>use_table_get()</code>. Released on CRAN.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.5" id="iotables-035">iotables 0.3.5<a class="anchor" aria-label="anchor" href="#iotables-035"></a></h2><p class="text-muted">CRAN release: 2018-11-29</p>
-<ul><li>New function <code><a href="../reference/iotable_year_get.html">iotable_year_get()</a></code> which returns the available tables by year or time from the bulk database for a given country and currency unit.</li>
-<li>Package now handles <code>Use table at basic prices</code> (naio_10_cp1610 and naio_10_pyp1610), <code>Supply table at basic prices incl. transformation into purchasers' prices</code> (naio_10_cp15), <code>Use table at purchasers' prices</code> (naio_10_cp16) after correcting a vocabulary error.</li>
-<li>This version is a release candidate for CRAN.</li>
+<h2 class="pkg-version" data-toc-text="0.3.2" id="iotables-032">iotables 0.3.2<a class="anchor" aria-label="anchor" href="#iotables-032"></a></h2><p class="text-muted">CRAN release: 2018-09-01</p>
+<ul><li>Better exception handling in <code><a href="../reference/equation_solve.html">equation_solve()</a></code>. Removes trivial erroneous, all-zero columns. Efficiency gains in indicator and multiplier creation. New function to create backward linkages. Released on CRAN.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.6" id="iotables-036">iotables 0.3.6<a class="anchor" aria-label="anchor" href="#iotables-036"></a></h2>
-<ul><li>New analytical function <code><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create()</a></code> which is a more general version of <code><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create()</a></code> and will eventually replace that function.</li>
-<li>Custom SIOTs are supported, but there is no vignette yet to describe their use in detail.</li>
+<h2 class="pkg-version" data-toc-text="0.3.0" id="iotables-030">iotables 0.3.0<a class="anchor" aria-label="anchor" href="#iotables-030"></a></h2>
+<ul><li>Correctly handles some countries that differ from the standard SIOT structure. The Czech Republic does not include G47 and I68 imputed rents in the table, which caused problems with the ordering of the table and the creation of coefficients.</li>
+<li>Uses tidyr::nested() data structures which are far easier handled in highly structured data sets.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.7" id="iotables-037">iotables 0.3.7<a class="anchor" aria-label="anchor" href="#iotables-037"></a></h2>
-<ul><li>New example <code>data(netherlands_2006)</code>, terminology and analytical improvements following <a href="http://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf" class="external-link">Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report</a>. Results are checked against the publication.</li>
-<li>For terminological clarity, earlier <code>direct_supply_effects_create()</code> function is renamed <code>direct_supply_effects_create()</code>.</li>
-<li>The function <code>effects_create()</code> currently refers to the function returning direct effects of a change in demand.</li>
-<li>The function <code>multipliers_create()</code> refers to the function returning direct and indirect effects of a change in demand.</li>
-<li>The Germany 1990 vignette needs to be reviewed. Currently it may not be consistent with effects and multipliers, it will be included in the next development version.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.8" id="iotables-038">iotables 0.3.8<a class="anchor" aria-label="anchor" href="#iotables-038"></a></h2>
-<ul><li>Function <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> has a new, optional parameter for naming the new indicators in the key column.</li>
-<li>New convenience function for nicer printing of structured SIOT tables and related matrix results. Not yet exported, first will be used on vignettes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.9" id="iotables-039">iotables 0.3.9<a class="anchor" aria-label="anchor" href="#iotables-039"></a></h2>
-<p>This is a much improved, simplified pre-release version, with highly improved performance, more consistent function interface and far more readable code. The last CRAN release is stable, the following version will be a stable, better release candidate. * The Germany example is converted to the ESA2010 vocabulary. * The <code><a href="../reference/output_get.html">output_get()</a></code> is now a wrapper around <code><a href="../reference/primary_input_get.html">primary_input_get()</a></code> and <code>gva_get()</code> is completely deprecated. * The <code><a href="../reference/input_coefficient_matrix_create.html">input_coefficient_matrix_create()</a></code> is now a wrapper around the more general <code><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create()</a></code>. * The <code>use_table_get()</code> function is now named <code><a href="../reference/input_flow_get.html">input_flow_get()</a></code> but it is seldom used, as the analytical function will call it as needed. * A completely dataset, metadata and vignette was added to test the functions on the United Kingdom Input-Output Analytical Tables, 2010. article and dataset.<br>
-* The new function <code><a href="../reference/supplementary_add.html">supplementary_add()</a></code> can add a supplementary account or row to the table, useful to add employment data, for example. * The new function <code><a href="../reference/total_tax_add.html">total_tax_add()</a></code> adds a summary of product and production taxes among the primary inputs. * Clearly divided analytical functions, <code><a href="../reference/direct_effects_create.html">direct_effects_create()</a></code> , <code><a href="../reference/indirect_effects_create.html">indirect_effects_create()</a></code>, <code>input_multiplier_create()</code> create the direct, indirect and total effects matrix.</p>
+<h2 class="pkg-version" data-toc-text="0.2.9" id="iotables-029">iotables 0.2.9<a class="anchor" aria-label="anchor" href="#iotables-029"></a></h2><p class="text-muted">CRAN release: 2018-08-05</p>
+<p>Error corrected concerning creation of temporary files on non-Windows environments. No uses <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> to create platform-independent files. Released on CRAN.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4" id="iotables-04">iotables 0.4<a class="anchor" aria-label="anchor" href="#iotables-04"></a></h2>
-<p>New vignette <em>United Kingdom Input-Output Analytical Tables</em> to compare analytical function results with published results from the UK National Office for Statistics.</p>
+<h2 class="pkg-version" data-toc-text="0.2.8" id="iotables-028">iotables 0.2.8<a class="anchor" aria-label="anchor" href="#iotables-028"></a></h2>
+<p>Handles tables with purchasers’ prices. Imports Eurostat employment data.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.1" id="iotables-041">iotables 0.4.1<a class="anchor" aria-label="anchor" href="#iotables-041"></a></h2><p class="text-muted">CRAN release: 2019-01-17</p>
-<p>A small formatting error in the documentation of <code>netherlands_2006</code> threw up a note on CRAN.</p>
+<h2 class="pkg-version" data-toc-text="0.2.7" id="iotables-027">iotables 0.2.7<a class="anchor" aria-label="anchor" href="#iotables-027"></a></h2>
+<p>Default data directory for faster programmatic use and phasing out discountinued Eurostat statistics. A bit improved messages and documentation.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.2" id="iotables-042">iotables 0.4.2<a class="anchor" aria-label="anchor" href="#iotables-042"></a></h2><p class="text-muted">CRAN release: 2019-01-18</p>
-<p>On CRAN 0.4.1 passed early tests, but on deployment it turned out that a dependency is not available for i386-pc-solaris2.10 (32-bit). This dependency is <code>magick</code>, which was supposed to help printing vignettes in Word (a very rare case) for <code>kableExtra</code> is not available on Solaris. I removed this dependency.</p>
+<h2 class="pkg-version" data-toc-text="0.2.6" id="iotables-026">iotables 0.2.6<a class="anchor" aria-label="anchor" href="#iotables-026"></a></h2>
+<ul><li>Download <code>naio_10_cp1620</code> (trade and transport margins) or <code>naio_10_cp1630</code> (net taxes) with the parameter <code>stk_flow="TOTAL"</code>. Correctly builds on Windows and Mac OS (old and release version) but problem with the dependency <code>eurostat</code> in Linux on Travis.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.4-0.2.5" id="iotables-024-025">iotables 0.2.4-0.2.5<a class="anchor" aria-label="anchor" href="#iotables-024-025"></a></h2>
+<ul><li>Some documentation improvements.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.3" id="iotables-023">iotables 0.2.3<a class="anchor" aria-label="anchor" href="#iotables-023"></a></h2>
+<ul><li>Eurostat withdrew naio_cp17_r2, and there is a temporary fix to work with archived versions. Some metadata errors and documentation errors were corrected.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.2" id="iotables-022">iotables 0.2.2<a class="anchor" aria-label="anchor" href="#iotables-022"></a></h2>
+<ul><li>Updated README file and new Croatia vignette.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.1" id="iotables-021">iotables 0.2.1<a class="anchor" aria-label="anchor" href="#iotables-021"></a></h2>
+<ul><li>Correctly handles the total Eurostat national accounts vocabulary, and adds all Croatian (not fully conforming) tables to the package.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2" id="iotables-02">iotables 0.2<a class="anchor" aria-label="anchor" href="#iotables-02"></a></h2>
+<p>The forthcoming update will rewrite and generalize some of the earlier functions. In particular, the following features will be available: * Handling 7 types of Eurostat tables, not only the current price table. * Closing off households, i.e. including endogenous demand for induced effects. * Guidelines to work with OECD mass downloader. * Some earlier functions are phased out, because they are successfully generalized. * The standard system.rda contains the metadata necessary to re-order the bulk files. This will require a lot of patient testing, and it can be always updated with new data sources.</p>
+<p>At this point I will go with preparing a release the table on CRAN. The current version builds without warnings or notes on Windows and Linux.</p>
+<p>iotables 0.2 is moved to rOpenGov.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.3" id="iotables-043">iotables 0.4.3<a class="anchor" aria-label="anchor" href="#iotables-043"></a></h2><p class="text-muted">CRAN release: 2020-05-19</p>
-<ul><li>Generally improved documentation. Improving source code readabilty and vignette readability.</li>
-<li>Better handling of temporary files in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for improved performance with very large source files, including the new exported function <code><a href="../reference/iotables_read_tempdir.html">iotables_read_tempdir()</a></code> and <code><a href="../reference/iotables_metadata_get.html">iotables_metadata_get()</a></code>.</li>
-<li>Following changes in dependencies <code>dplyr</code> and <code>tidyr</code>.</li>
-<li>
-<a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a> is added to the github repo.</li>
-<li>Released on CRAN.</li>
-</ul></div>
+<h2 class="pkg-version" data-toc-text="0.1.4" id="iotables-014">iotables 0.1.4<a class="anchor" aria-label="anchor" href="#iotables-014"></a></h2>
+<p>New functions are added which enable a very simple IO analysis. As an important milestone, an analytical solution comparable to the Eurostat manual, the German employment indicators are correctly calculated (see <code>README</code>) * The <code><a href="../reference/input_indicator_create.html">input_indicator_create()</a></code> creates the indicators. * The <code><a href="../reference/equation_solve.html">equation_solve()</a></code> solves the basic input-output equations on real-life data, i.e. correctly prepared the two sides of the equation product- or industrywise. * The <code><a href="../reference/multiplier_create.html">multiplier_create()</a></code> is a wrapper around the more general <code><a href="../reference/equation_solve.html">equation_solve()</a></code> * The <code>README</code> contains examples to use this new functions. * Some new tests are added to the <code>testthat</code> functions. * Further example data is added from Croatia, together with the <code>employment_aggregate()</code> helper function to match SIOT data with non-conforming employment statistics. * There is a vignette called <em>Working with Croatian Symmetric Input-Output Tables</em> that shows some real-life uses. * Testing on Travis (ubuntu and OSX tests.)</p>
+</div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.4" id="iotables-044">iotables 0.4.4<a class="anchor" aria-label="anchor" href="#iotables-044"></a></h2><p class="text-muted">CRAN release: 2021-06-03</p>
-<ul><li>Very small documentation changes.</li>
-<li>Changing the code to dplyr 1.0+ and rlang in non-standard evaluation.</li>
-<li>New website, CI on Github. Renewed <a href="https://codecov.io/gh/rOpenGov/iotables" class="external-link"><img src="https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg?token=cnYWtcC81E" alt="codecov"></a>, documentation changed to gfm flavored markdown.</li>
-<li>Thanks to <a href="https://github.com/KKulma/" class="external-link">@KKulma</a> for setting up new and improved continuous integration, and <a href="https://github.com/pitkant" class="external-link">@pitkant</a> for implementing many good practices on improving the code. See <a href="https://github.com/ropengov/iotables/graphs/contributors" class="external-link">contributors</a>. This project is part of <a href="http://ropengov.org" class="external-link">rOpenGov</a>.</li>
-<li>0.4.4 is on CRAN.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.5" id="iotables-045">iotables 0.4.5<a class="anchor" aria-label="anchor" href="#iotables-045"></a></h2><p class="text-muted">CRAN release: 2021-08-02</p>
-<ul><li>Documentation improvement and preparing for Rbloggers.</li>
-<li>Removing UTF-8 characters from datasets.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.6" id="iotables-046">iotables 0.4.6<a class="anchor" aria-label="anchor" href="#iotables-046"></a></h2>
-<ul><li>Eliminating deprecated tidyverse functions.</li>
-<li>New website.</li>
+<h2 class="pkg-version" data-toc-text="0.1.3" id="iotables-013">iotables 0.1.3<a class="anchor" aria-label="anchor" href="#iotables-013"></a></h2>
+<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Added Contributor Code of Conduct in <code>CONDUCT.md</code>
+</li>
+<li>Some functions have parallel versions, and will be brought to <a href="https://github.com/ropensci/software-review" class="external-link">rOpenSci</a> naming conventions (<code>object_verb()</code>)</li>
+<li>Asked to join <a href="http://ropengov.github.io/" class="external-link">rOpenGov</a> - excited but inexperienced in this!</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

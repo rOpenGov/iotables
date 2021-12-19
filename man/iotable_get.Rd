@@ -91,6 +91,7 @@ germany_table <- iotable_get( source = "germany_1990",
 }
 \seealso{
 Other import functions: 
+\code{\link{airpol_get}()},
 \code{\link{employment_get}()},
 \code{\link{iotables_download}()},
 \code{\link{iotables_metadata_get}()},
