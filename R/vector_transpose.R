@@ -17,7 +17,6 @@
 #' )
 #' @export  
 
-
 vector_transpose <- function( data_table, 
                               names_to = "nace_r2", 
                               values_to = "value", 
@@ -28,7 +27,7 @@ vector_transpose <- function( data_table,
   
   return_df <- data_table %>% tidyr::pivot_longer(
      -any_of(key_column), 
-     names_to = names_to, 
+     names_to  = names_to, 
      values_to = values_to
    )
 

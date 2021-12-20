@@ -5,17 +5,13 @@ output:
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE, message=FALSE}
+```{r setupknitr, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/"
   #fig.path = "README-"
 )
-
-require (dplyr)
-require (iotables)
-data ("germany_1990")
 ```
 
 # iotables <img src="man/figures/logo.png" align="right" />
@@ -75,7 +71,6 @@ The [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/wo
 The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. These calculations can be followed in the [United Kingdom Input-Output Analytical Tables](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) vignette.
 
 ## Acquiring data
-
 Eurostat's data can be downloaded in several tidy, long-form, files, and a lot of filtering is needed to start working with it.
 
 Currently the following Eurostat SIOTs can be used:

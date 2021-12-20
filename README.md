@@ -6,7 +6,7 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.4.6-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.4.7-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
@@ -60,8 +60,8 @@ The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotables from CRAN or the latest development version
-with github:
+You can install iotables 0.4.6 from CRAN or the latest 0.4.7 development
+version with github:
 
 ``` r
 # From CRAN:
@@ -77,8 +77,7 @@ devtools::install_github("rOpenGov/iotables")
 You can download the manual in PDF for the [0.4.6 development
 release](https://iotables.dataobservatory.eu/iotables_0.4.6.pdf). and
 follow the changes on the
-[NEWS.md](https://github.com/rOpenGov/iotables/blob/master/NEWS.md)
-file.
+[Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html).
 
 ## Vignettes
 
