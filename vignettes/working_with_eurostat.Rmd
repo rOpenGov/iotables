@@ -283,7 +283,7 @@ emp_multiplier_cz <- input_multipliers_create(
   I_cz )  
 ```
 
-```{r employmentindicator}
+```{r printemploymentindicator}
 vector_transpose (emp_multiplier_cz, values_to ="employment_multiplier_cz") %>%
   left_join ( vector_transpose(emp_multiplier_cz, 
                                values_to = "employment_multiplier_sk"), by = 'nace_r2' ) %>%
