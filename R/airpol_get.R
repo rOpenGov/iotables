@@ -65,7 +65,7 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
   }
   
   if (!is.null(data_directory)) {
-    if ( dir.exists(data_directory)) saveRDS( tmp, file = file.path(data_directory, paste0(id, ".rds")))
+    if ( dir.exists(data_directory)) saveRDS(tmp, file = file.path(data_directory, "env_ac_ainah_r2.rds"))
   }
   
   assertthat::assert_that(
@@ -137,12 +137,11 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
     values = c(0,0)
   )
   
-  
   group_match <- country_ghg %>%
     rename ( nace  = .data$nace_r2) %>%
     mutate ( nace_r2 = substr(.data$nace, 1,5)) %>%
     group_by ( .data$airpol, .data$unit, .data$geo, .data$time, .data$nace_r2 ) %>%
-    summarise ( values = sum(values), .groups="keep") %>%
+    summarise ( values = sum(.data$values), .groups="keep") %>%
     inner_join ( ghg, by = "nace_r2" )
   
   

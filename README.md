@@ -112,19 +112,15 @@ a lot of filtering is needed to start working with it.
 
 Currently the following Eurostat SIOTs can be used:
 
--   product x product SIOTs `naio_10_cp1700` or `naio_10_pyp1700`;
-
--   industry x industry SIOTs `naio_10_cp1750` or`naio_10_pyp1750`;
-
--   use tables at basic prices `naio_10_cp1620` or `naio_10_pyp1610`;
-
--   trade and transport margins `naio_10_cp1620` or `naio_10_pyp1620`;
-
--   net taxes less subsidies `naio_10_cp1630` or `naio_10_pyp1630`;
-
--   Supply table at basic prices incl. transformation into purchasers’
-    prices (naio\_10\_cp15) and Use table at purchasers’ prices
-    (naio\_10\_cp16).
+| Table type                     |              source code              |
+|:-------------------------------|:-------------------------------------:|
+| product x product SIOTs        | `naio_10_cp1700` or `naio_10_pyp1700` |
+| industry x industry SIOTs      | `naio_10_cp1750` or`naio_10_pyp1750`  |
+| use tables at basic prices     | `naio_10_cp1620` or `naio_10_pyp1610` |
+| trade and transport margins    | `naio_10_cp1620` or `naio_10_pyp1620` |
+| net taxes less subsidies       | `naio_10_cp1630` or `naio_10_pyp1630` |
+| Supply table at basic prices   |            `naio_10_cp15`             |
+| Use table at purchasers’ price |            `naio_10_cp16`             |
 
 The `cp` element refers to basic prices and the `pyp` to previous years’
 prices.
