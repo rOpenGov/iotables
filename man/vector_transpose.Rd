@@ -18,14 +18,19 @@ vector_transpose(
 
 \item{values_to}{Defaults to \code{'value'}.}
 
-\item{.keep}{Keep key column? Defaults to \code{FALSE}.}
+\item{.keep}{Keep the indicator identifier column? Defaults to \code{FALSE}.}
 }
 \value{
-A logical variable of length 1, \code{TRUE} or \code{FALSE}.
+A long form vector with a key column, and optionally the identifier of the indicator in
+the first column.
 }
 \description{
 Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
 analytical functions.  For printing it is more useful to have them in long form.
+}
+\details{
+This is a wrapper around \code{\link[tidyr]{pivot_longer}} so you do not necessarily need to
+import or load the entire \emph{tidyr} package.
 }
 \examples{
 vector_transpose (

@@ -10,7 +10,7 @@
 #' Nitroux oxide (N2O), Methane (CH4), Perfluorocarbons (PFCs), Hydrofluorocarbons (HFCs), 
 #' Sulphur hexafluoride (SF6) including nitrogen trifluoride (NF3), Nitrogen oxides (NOx), 
 #' Non-methane volatile organic compounds, (NMVOC), Carbon monoxide (CO), 
-#' Particulate matter < 10μm (PM10), Particulate matter < 2,5μm (PM2,5), 
+#' Particulate matter smaller than 10 micrometre (PM10), Particulate matter smaller than 2,5 micrometre (PM2,5), 
 #' Sulphur dioxide (SO2), Ammonia (NH3).
 #' 
 #' See \href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_esms.htm}{Reference Metadata in Euro SDMX Metadata Structure (ESMS)}

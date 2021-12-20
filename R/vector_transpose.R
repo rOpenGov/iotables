@@ -1,11 +1,14 @@
 #' @title Transpose a vector
 #' @description Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
 #' analytical functions.  For printing it is more useful to have them in long form. 
+#' @details This is a wrapper around \code{\link[tidyr]{pivot_longer}} so you do not necessarily need to
+#' import or load the entire \emph{tidyr} package.
 #' @param data_table A matrix or vector that should have a key column.
 #' @param names_to Defaults to \code{'nace_r2'}. 
 #' @param values_to Defaults to \code{'value'}.
-#' @param .keep Keep key column? Defaults to \code{FALSE}. 
-#' @return A logical variable of length 1, \code{TRUE} or \code{FALSE}.
+#' @param .keep Keep the indicator identifier column? Defaults to \code{FALSE}. 
+#' @return A long form vector with a key column, and optionally the identifier of the indicator in
+#' the first column.
 #' @importFrom tidyr pivot_longer 
 #' @importFrom dplyr any_of
 #' @examples 
