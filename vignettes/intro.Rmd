@@ -54,8 +54,7 @@ The `input_coefficient_matrix_create()` function relies on the following equatio
 (9)  \eqn{a_{ij}} = \eqn{X_{ij} / x_{j}}  [recap: (43) is the same]
 
 
-It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero. 
-
+It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.
 
 ```{r inputcoeff, echo=TRUE}
 de_input_coeff <- input_coefficient_matrix_create( 
@@ -63,7 +62,6 @@ de_input_coeff <- input_coefficient_matrix_create(
      digits = 4)
 
 ## which is equivalent to:
-
 de_input_coeff <- coefficient_matrix_create( 
   data_table = germany_io, 
   total = "output", 
@@ -71,7 +69,7 @@ de_input_coeff <- coefficient_matrix_create(
   households = FALSE,
   digits = 4)
 
-print ( de_input_coeff[1:3, 1:3])
+print (de_input_coeff[1:3, 1:3])
 ```
 
 Similarly, the output coefficient matrix is the following:
@@ -83,9 +81,8 @@ de_out <- output_coefficient_matrix_create (
                                     digits = 4)
 
 # Rounding is slightly different in the Eurostat manual:
-print ( de_out[1:3, 1:3] )
+print(de_out[1:3, 1:3])
 ```
-
 These results can be checked on page 468 in the Manual.
 
 The Leontieff matrix is derived from Leontieff equation system.  
@@ -100,7 +97,7 @@ The Leontieff inverse is \eqn{(I-A)^{-1}} and it is created with the `leontieff_
 L_de <- leontieff_matrix_create ( 
   technology_coefficients_matrix = de_input_coeff 
   )
-I_de <- leontieff_inverse_create(de_input_coeff)
+I_de   <- leontieff_inverse_create(de_input_coeff)
 I_de_4 <- leontieff_inverse_create(de_input_coeff, digits = 4)
 print (I_de_4[,1:3])
 ```
@@ -118,14 +115,14 @@ Technical indicators assume constant returns to scale and fixed relationship of 
 The helper function `primary_input_get()` selects a row from the SIOT and brings it to a conforming form. The `input_indicator_create()` creates the vector of technical input coefficients.
 
 ```{r employment_indicator}
-de_emp <- primary_input_get ( germany_io,
-                              primary_input = "employment_domestic_total" )
+de_emp <- primary_input_get(germany_io,
+                            primary_input = "employment_domestic_total" )
 
 de_emp_indicator <- input_indicator_create ( 
-    data_table  = germany_io,
+    data_table   = germany_io,
     input_vector = "employment_domestic_total")
 
-print ( tidyr::gather( de_emp_indicator, indicators, values, !!2:ncol(de_emp_indicator))[,-1] )
+vector_transpose(de_emp_indicator)
 ```
 
 Often we want to analyze the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.
@@ -146,7 +143,7 @@ de_gva_indicator  <- input_indicator_create(
     data_table  = germany_io,
     input_vector = "gva")
 
-print( tidyr::gather(de_gva_indicator, indicators, values,!!2:ncol(de_gva_indicator))[,-1]  ) 
+vector_transpose(de_gva_indicator)
 ```
 
 
@@ -162,7 +159,7 @@ direct_effects_de <- coefficient_matrix_create(
   total       = 'output', 
   return_part = 'primary_inputs')
 
-knitr::kable ( direct_effects_de[1:6,1:4])
+direct_effects_de[1:6,1:4]
 ```
 
 >The 'total' row above is labelled as Domestic goods and services in the Eurostat Manual. The table can be found on p498.
@@ -207,7 +204,7 @@ multipliers <- input_multipliers_create(
   input_requirements = input_reqr,
   inverse = I_de)
 
-knitr::kable(multipliers, digits= 4)
+multipliers
 ```
 
 > You can check these results against the Table 15.16 on p501 of the Eurostat manual. the label 'total' refers to domestic intermediaries. The ordering of the rows is different from the Manual.
@@ -260,9 +257,7 @@ de_input_coeff <- input_coefficient_matrix_create(
 output_multipliers <- output_multiplier_create ( 
                         input_coefficient_matrix = de_input_coeff )
 
-knitr::kable (
-  tidyr::gather(output_multipliers, multipliers, values)[-1,]
-  )
+vector_transpose(output_multipliers)
 ```
 
 These multipliers can be checked against the Table 15.15 on p500 of the Eurostat Manual.
@@ -278,11 +273,10 @@ For example, when a new concert is put on stage, orders are filled for real esta
 ### Backward linkages 
 
 ```{r backward}
-de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
-I_de <- leontieff_inverse_create ( de_coeff )
+de_coeff <- input_coefficient_matrix_create(iotable_get(), digits = 4)
+I_de <- leontieff_inverse_create (de_coeff)
 
-de_bw <- backward_linkages(I_de)
-print (tidyr::gather(de_bw, backward_linkages, values)[-1,])
+vector_transpose(backward_linkages(I_de))
 ```
 
 > You can check the results against Table 15.19 on page 506 of the Eurostat Manual.
@@ -294,11 +288,11 @@ Manufacturing has the highest backward linkages, and other services the least. A
 Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.
 
 ```{r forward}
-de_out <- output_coefficient_matrix_create ( 
-  germany_io, "final_demand", digits = 4
+de_out <- output_coefficient_matrix_create (
+  io_table = germany_io, total = "final_demand", digits = 4
   )
                                     
-forward_linkages ( output_coefficient_matrix = de_out )
+forward_linkages (output_coefficient_matrix = de_out)
 ```
 
 > You can check forward linkages against the Table 15.20 of Eurostat Manual on page 507.

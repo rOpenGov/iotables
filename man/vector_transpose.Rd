@@ -17,6 +17,8 @@ vector_transpose(
 \item{names_to}{Defaults to \code{'nace_r2'}.}
 
 \item{values_to}{Defaults to \code{'value'}.}
+
+\item{.keep}{Keep key column? Defaults to \code{FALSE}.}
 }
 \value{
 A logical variable of length 1, \code{TRUE} or \code{FALSE}.
@@ -26,9 +28,10 @@ Many vectors (indicators, multipliers) are create in the wide form to confom mat
 analytical functions.  For printing it is more useful to have them in long form.
 }
 \examples{
-vector_transpose ( data.frame (indicator = "my_inidcator", 
-                               agriculture = 0.0123,
-                               manufacturing = 0.1436,
-                               trade = 0.0921
-                                ))
+vector_transpose (
+  data.frame(indicator = "my_inidcator", 
+             agriculture = 0.0123,
+             manufacturing = 0.1436,
+             trade = 0.0921)
+)
 }

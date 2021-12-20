@@ -7,7 +7,7 @@
 iotables_download(
   source = "naio_10_cp1700",
   data_directory = NULL,
-  force_download = TRUE
+  force_download = FALSE
 )
 }
 \arguments{
@@ -16,8 +16,9 @@ iotables_download(
 \item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will 
 try to save the pre-processed data file here with labelling.}
 
-\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
-in the \code{data_directory} or the temporary directory, if it exists.}
+\item{force_download}{Defaults to \code{FALSE} which will use the existing downloaded file
+in the \code{data_directory} or the temporary directory, if it exists. \code{TRUE} will
+try to download the file from the Eurostat warehouse.}
 }
 \value{
 A nested data frame. Each input-output table is in a separate 
@@ -58,7 +59,7 @@ The function will make a copy of the rds file in this directory.
 }
 \examples{
 \donttest{
- io_tables <- iotables_download (source = "naio_10_cp1700")
+ io_tables <- iotables_download(source = "naio_10_pyp1750")
  }
 }
 \seealso{

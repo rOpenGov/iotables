@@ -4,12 +4,18 @@
 \alias{tempdir_data}
 \title{Download to and retrieve from the temporary directory a Eurostat dataset}
 \usage{
-tempdir_data(id)
+tempdir_data(id, force_download)
 }
 \arguments{
 \item{id}{The id of a Eurostat product.}
+
+\item{force_download}{Defaults to \code{FALSE} which will use the existing downloaded file
+in the \code{data_directory} or the temporary directory, if it exists. \code{TRUE} will
+try to download the file from the Eurostat warehouse.}
 }
 \description{
-Download to and retrieve from the temporary directory a Eurostat dataset
+To save time of downloading and processing during a session, the download functions
+rely on the use of saving copies in the tempdir(). The downloads are always placed there and 
+each import looks for them first in the tempdir().
 }
 \keyword{internal}

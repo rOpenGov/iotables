@@ -4,15 +4,17 @@
 #' @param data_table A matrix or vector that should have a key column.
 #' @param names_to Defaults to \code{'nace_r2'}. 
 #' @param values_to Defaults to \code{'value'}.
+#' @param .keep Keep key column? Defaults to \code{FALSE}. 
 #' @return A logical variable of length 1, \code{TRUE} or \code{FALSE}.
 #' @importFrom tidyr pivot_longer 
 #' @importFrom dplyr any_of
 #' @examples 
-#' vector_transpose ( data.frame (indicator = "my_inidcator", 
-#'                                agriculture = 0.0123,
-#'                                manufacturing = 0.1436,
-#'                                trade = 0.0921
-#'                                 ))
+#' vector_transpose (
+#'   data.frame(indicator = "my_inidcator", 
+#'              agriculture = 0.0123,
+#'              manufacturing = 0.1436,
+#'              trade = 0.0921)
+#' )
 #' @export  
 
 
