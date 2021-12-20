@@ -12,9 +12,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+load(system.file(file.path("extdata", "environmental_impact_vignette.rda"), package = 'iotables'))
 ```
 
-```{r setup}
+```{r setup, echo=FALSE, message=FALSE}
 library(iotables)
 library(dplyr, quietly=TRUE)
 library(tidyr, quietly=TRUE)
@@ -26,7 +27,7 @@ In this example we will show which economic activities contribute the most the g
 
 The following expression will import the symmetric input-output table for Belgium.  The `stk_flow = "TOTAL"`` makes clear that we are not only considering effects in the domestic (Belgian) economy, but imports, too. More about importing and working with matrixes can be found in the articles ([Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html), [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html).)
 
-```{r getiotable, message=FALSE}
+```{r getiotable, eval=FALSE}
 BE <- iotable_get(source = "naio_10_cp1700", geo = "BE",
                   year =2015, 
                   labelling = "short", unit = "MIO_EUR", 
@@ -34,8 +35,8 @@ BE <- iotable_get(source = "naio_10_cp1700", geo = "BE",
 ```
 The following expression gets the the greenhouse gas emissions in $CO_2$-equivalent thousand tons for Belgium in 2020.
 
-```{r getairpol, message=FALSE}
-ghg <- airpol_get (airpol = "GHG", geo="BE", year = 2020, unit = "THS_T")
+```{r getairpol, eval=FALSE}
+ghg <- airpol_get(airpol="GHG", geo="BE", year=2020, unit="THS_T")
 ```
 See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO2-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
 
@@ -63,7 +64,7 @@ ghg_indicator %>%
 
 In Belgium (based on the last known, 2015 structure of the economy, but considering 2020 emission levels) the most green-house gas intensive sectors are the usual suspects, but with a bit surprising top emitter.
 
-| NACE code   | Industry    | 
+| NACE code   | Industry                                                              | 
 | :---        |    :----:   | 
 | A03         | Fishing and aquaculture   |
 | A01         | Crop and animal production, hunting and related service activities    |
@@ -77,8 +78,10 @@ The *Manufacture of other non-metallic mineral products* requires a bit of expla
 
 Let's make a reality check, and calculate only with CO2:
 
+```{r getco2indicators, eval=FALSE}
+co2 <- airpol_get(airpol="CO2", geo="BE", year=2020, unit = "THS_T")
+```
 ```{r co2indicators}
-co2 <- airpol_get (airpol = "CO2", geo="BE", year = 2020, unit = "THS_T")
 be_io_c <- BE %>%
   bind_rows( co2 %>% rename (prod_na = .data$indicator) )
 
@@ -98,9 +101,10 @@ co2_indicator %>%
 
 Let's check methane, which is a far more potent green house gas than CO2.
 
-```{r methaneindicators}
+```{r getmethaneindicators}
 methane <- airpol_get (airpol = "CH4", geo="BE", year = 2020, unit = "THS_T")
-
+```
+```{r methaneindicators}
 be_io_m <- BE %>%
   bind_rows( methane %>% rename (prod_na = .data$indicator) )
 
@@ -154,5 +158,8 @@ ghg_multipliers %>%
   rename ( GHG_multiplier = .data$value ) %>%
   arrange ( -.data$GHG_multiplier ) %>%
   top_n(5)
+```
+```{r savevignettedata, eval=FALSE}
+save(methane, co2, ghg, BE, file = file.path(".." , "inst", "extdata", "environmental_impact_vignette.rda") )
 ```
 

@@ -31,8 +31,9 @@
 #' @param source See the available list of sources above in the Description. 
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
 #' try to save the pre-processed data file here with labelling. 
-#' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
-#' in the \code{data_directory} or the temporary directory, if it exists.
+#' @param force_download Defaults to \code{FALSE} which will use the existing downloaded file
+#' in the \code{data_directory} or the temporary directory, if it exists. \code{TRUE} will
+#' try to download the file from the Eurostat warehouse.
 #' @return A nested data frame. Each input-output table is in a separate 
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
@@ -42,67 +43,61 @@
 #' @importFrom eurostat get_eurostat label_eurostat
 #' @importFrom lubridate year
 #' @importFrom rlang set_names
+#' @importFrom glue glue
 #' @family import functions
 #' @examples
 #' \donttest{
-#'  io_tables <- iotables_download (source = "naio_10_cp1700")
+#'  io_tables <- iotables_download(source = "naio_10_pyp1750")
 #'  }
 #' @export
 
 iotables_download <- function ( source = "naio_10_cp1700", 
                                 data_directory = NULL,
-                                force_download = TRUE ) {
+                                force_download = FALSE ) {
 
   ## Parameter validation ---------------------------------------------
-  if ( ! source %in% c("uk_2010", "germany_1990")) validate_source(source)
-
-  if ( source == "uk_2010" ) return (uk_2010_get())
+  if ( ! source %in% c("uk_2010", "germany_1990")) {
+    validate_source(source) 
+    downloaded <- tempdir_data(source, force_download)
+    } else if ( source == "uk_2010" ) return (uk_2010_get())
   
-  retrieve_from_temp_bulk <-paste0(tempdir(),
-                                   "\\eurostat/", source, "_date_code_TF.rds" )
-  
-  #downloaded <- readRDS("C:/Users/Daniel Antal/OneDrive - Visegrad Investments/2017 Projektek/iotables/data-raw/naio_cp17_r2.rds")
-  #only download the Eurostat bulk file if necessary.
-  
-  if ( !is.null (data_directory)   ) {
-    save_file_name <- file.path(data_directory, paste0(source, ".rds"))
-    if ( ! force_download && file.exists(save_file_name) )
-      return(readRDS(save_file_name))
+  if ( all(c("year", "data") %in% names(downloaded)) ) {
+    # This is already processed
+    message("Returning the processed SIOTs from tempdir. You can override this with force_download=TRUE.")
+    return(downloaded)
   }
   
-  if (!file.exists(retrieve_from_temp_bulk) | force_download == TRUE){
-    downloaded <- tryCatch(eurostat::get_eurostat (source),
-                           error=function(e) message ("No data was found with this identifier."))
-  } else {
-    message ('The bulk Eurostat file is retrieved from the temporary directory.')
-    downloaded <- readRDS( retrieve_from_temp_bulk )
-  }
+  assertthat::assert_that(
+    'data.frame' %in% class(downloaded) & ncol(downloaded)>6 & nrow(downloaded)>1, 
+    msg = glue::glue("The download of {source} was not successful.")
+  )
   
   lab_names <- paste0(names(downloaded), "_lab")
   
   #label the raw Eurostat file, add rename variables with _lab suffix
   downloaded_labelled <- downloaded  %>%
-    eurostat::label_eurostat (fix_duplicated = TRUE) %>%   # add meaningful labels to raw data
+    eurostat::label_eurostat (fix_duplicated = TRUE) 
+  
+  assertthat::assert_that(
+    length(names(downloaded_labelled)) == length(lab_names), 
+    msg = "in iotables_download() ncol(downloaded_labelled) != ncol(downloaded)"
+    )
+  
+  downloaded_labelled <- downloaded_labelled %>%   # add meaningful labels to raw data
     rlang::set_names(lab_names) %>%  
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%  # because long and wide formats are not symmetric
     rename ( values = .data$values_lab ) %>%
-    mutate ( year = lubridate::year( .data$time_lab ))
+    mutate ( year = lubridate::year(.data$time_lab))
   
   # Join the labelled and the not labelled files, so that both versions are avialable
   
   downloaded <- downloaded  %>%
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%
     left_join ( downloaded_labelled, by = c("rows", "values"))
-  #message ("Joined labelled and not labelled data.")
   
-  #if ( "stk_flow" %in% names ( downloaded )) {
-  #  downloaded <- downloaded %>%
-  #    dplyr::filter ( stk_flow == stk_flow )
-    #message ("Type " , stk_flow, " is returned.")
-  #}
+  names(downloaded)
   
   if ( source == "naio_cp17_r2" ){
-    
     downloaded$t_cols2 <- plyr::mapvalues(
       downloaded$t_cols2, 
       from = c("CPA_N80-N82", "CPA_R90-R92",  "CPA_E37-E39",
@@ -135,32 +130,35 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   
   if ( "stk_flow" %in% names ( downloaded ) ) {
-    downloaded_nested <- nest (downloaded, 
-                               data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
-                                                 "year", "unit", "unit_lab", "stk_flow", "stk_flow_lab"))) 
-
+    downloaded_nested <- nest (
+      downloaded, 
+      data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
+                        "year", "unit", "unit_lab", "stk_flow", "stk_flow_lab"))
+      ) 
   } else { 
-    downloaded_nested <- nest (downloaded, 
-                               data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
-                                                 "year", "unit", "unit_lab"))) 
-    }
-  
+    downloaded_nested <- nest (
+      downloaded, 
+      data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
+                        "year", "unit", "unit_lab"))
+      ) 
+  }
 
   if( !is.null(data_directory) ) {
+    assert_that(dir.exists(data_directory), 
+                msg = glue::glue("The data_directory={data_directory} does not exist."))
     
-    save_file_name <- file.path(data_directory, paste0(source, ".rds"))
+    save_file_name <- file.path(data_directory, paste0(source, "_processed.rds"))  # shoud have different name for processed
     message("Saving ", nrow(downloaded_nested), " input-output tables.")
-    saveRDS( downloaded_nested, file = save_file_name, version = 2 )
+    saveRDS(downloaded_nested, file = save_file_name, version = 2)
     message ( "Saved the raw data of this table type in ",
               save_file_name, "." )
   } else {
-    save_file_name <- file.path(tempdir(), paste0(source, ".rds"))
-    message("Saving ", nrow(downloaded_nested), " input-output tables into the temporary directory\n", 
-            tempdir())
-    saveRDS( downloaded_nested, file = save_file_name , version=2)
-    message ( "Saved the raw data of this table type in temporary directory ",
+    save_file_name <- file.path(tempdir(), paste0(source, "_processed.rds"))
+    message("Saving ", nrow(downloaded_nested), " input-output tables into the temporary directory.")
+    saveRDS(downloaded_nested, file = save_file_name , version=2)
+    message ("Saved the raw data of this table type in temporary directory ",
               save_file_name, "." )
   }
   
-  downloaded_nested 
+  downloaded_nested
 }

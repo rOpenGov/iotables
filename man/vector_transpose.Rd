@@ -22,7 +22,8 @@ vector_transpose(
 A logical variable of length 1, \code{TRUE} or \code{FALSE}.
 }
 \description{
-Transpose a vector
+Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
+analytical functions.  For printing it is more useful to have them in long form.
 }
 \examples{
 vector_transpose ( data.frame (indicator = "my_inidcator", 

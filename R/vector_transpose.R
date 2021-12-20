@@ -1,5 +1,5 @@
 #' @title Transpose a vector
-#' @describe Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
+#' @description Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
 #' analytical functions.  For printing it is more useful to have them in long form. 
 #' @param data_table A matrix or vector that should have a key column.
 #' @param names_to Defaults to \code{'nace_r2'}. 
