@@ -23,8 +23,8 @@ Apologies for the quick succession of submissions – I received an email from P
 - Several assertions were made that the download actually took place. In the unlikely event that this problem arrises again, it will be easier to pinpoint to a yet unknown problem. [This function had caused no problems in the previous CRAN releases for years and there is no reason to assume that it will.]
 - This problem example had been used other examples, where the smaller source data is placed now. This will certainly improve runtime on CRAN. 
 
-4. r_hub: Windows Server 2022, R-devel, 64 bit: left a NOTE but it is related to some detritus that MiKTeX left behind in the temp. Similarly to examples, I tried to improve the efficiency of vignettes. They have now some pre-saved data to server interactions, and remove from memory large but no longer uses matrixes. Vignettes build faster.
+3. r_hub: Windows Server 2022, R-devel, 64 bit: left a NOTE but it is related to some detritus that MiKTeX left behind in the temp. Similarly to examples, I tried to improve the efficiency of vignettes. They have now some pre-saved data to server interactions, and remove from memory large but no longer uses matrixes. Vignettes build faster.
 
-3. The current release canidate is not only a fix for this unexpected issue on CRAN, it has new functionality. While all functions of 0.4.6. are unchanged, the vector_transpose() and airpol_get() functions, and the Environmental impact vignette are new additions (See NEWS.)
+4. The current release canidate is not only a fix for this unexpected issue on CRAN, it has new functionality. While all functions of 0.4.6. are unchanged, the vector_transpose() and airpol_get() functions, and the Environmental impact vignette are new additions (See NEWS.)
 
 
