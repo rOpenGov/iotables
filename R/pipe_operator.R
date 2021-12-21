@@ -1,10 +1,11 @@
-#' @title Pipe operator
+#' Pipe operator
 #'
-#' @importFrom magrittr %>%
+#' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
+#'
 #' @name %>%
 #' @rdname pipe
+#' @keywords internal
 #' @export
-#' @param lhs,rhs A visualisation and a function to apply to it
-#' @examples
-#' mtcars %>% summary
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
 NULL

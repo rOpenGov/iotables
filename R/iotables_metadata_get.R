@@ -18,8 +18,8 @@
 #'  \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
 #'  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
 #'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
-#'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
-#'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytical Tables data}
+#'  \item{\code{naio_10_pyp1630}}{ Table of taxes less subsidies on products at previous years' prices}
+#'  \item{\code{uk_2010_siot}}{ United Kingdom Input-Output Analytical Tables data}
 #' } 
 #' @param dat A nested data file created by \code{\link{iotables_download}}.
 #' Defaults to \code{NULL} in which case an attempt is made to find and read
@@ -32,15 +32,15 @@
 #' @examples
 #' \donttest{
 #' # The table must be present in the sessions' temporary directory:
-#' iotables_download(source = "naio_10_cp1700")
+#' iotables_download(source = "naio_10_pyp1750")
 #' 
 #' # Now you can get the metadata:
-#' iotables_metadata_get (source = "naio_10_cp1700")
+#' iotables_metadata_get(source = "naio_10_pyp1750")
 #' } 
 #' @export
 
 iotables_metadata_get <- function (dat = NULL, 
-                          source = "naio_10_cp1700" ) {
+                                   source = "naio_10_cp1700" ) {
   if ( is.null(dat)) {
     validate_source(source)
     dat <- iotables_read_tempdir(source)

@@ -69,7 +69,7 @@ input-output table.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">iotables_download</span><span class="op">(</span>
   source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span>,
   data_directory <span class="op">=</span> <span class="cn">NULL</span>,
-  force_download <span class="op">=</span> <span class="cn">TRUE</span>
+  force_download <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -81,8 +81,9 @@ input-output table.</p>
 <dd><p>Defaults to <code>NULL</code>, if a valid directory, it will 
 try to save the pre-processed data file here with labelling.</p></dd>
 <dt>force_download</dt>
-<dd><p>Defaults to <code>TRUE</code>. If <code>FALSE</code> it will use the existing downloaded file
-in the <code>data_directory</code> or the temporary directory, if it exists.</p></dd>
+<dd><p>Defaults to <code>FALSE</code> which will use the existing downloaded file
+in the <code>data_directory</code> or the temporary directory, if it exists. <code>TRUE</code> will
+try to download the file from the Eurostat warehouse.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -125,10 +126,10 @@ The function will make a copy of the rds file in this directory.</p><ul><li><p><
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"> <span class="va">io_tables</span> <span class="op">&lt;-</span> <span class="fu">iotables_download</span> <span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_cp1700 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpCOyAIF/eurostat/naio_10_cp1700_date_code_FF.rds</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 844 input-output tables into the temporary directory.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpCOyAIF/naio_10_cp1700_processed.rds.</span>
+<span class="r-in"> <span class="va">io_tables</span> <span class="op">&lt;-</span> <span class="fu">iotables_download</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_pyp1750"</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_pyp1750 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpuyXeYN/eurostat/naio_10_pyp1750_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 96 input-output tables into the temporary directory.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpuyXeYN/naio_10_pyp1750_processed.rds.</span>
 <span class="r-in"> <span class="co"># }</span></span>
 </code></pre></div>
     </div>

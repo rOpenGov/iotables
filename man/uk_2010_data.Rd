@@ -17,7 +17,7 @@ A data frame with 10 variables.
   \item{unit}{Eurostat label equivalents units, i.e. MIO_NAC.}
   \item{unit_lab}{Eurostat label equivalents, i.e. millions of national currency unit.}
   \item{values}{The numeric values of the variable}
-  \item{year}{Contant = 2010.}
+  \item{year}{Constant = 2010.}
 }
 }
 \source{

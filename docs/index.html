@@ -91,7 +91,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install iotables from CRAN or the latest development version with github:</p>
+<p>You can install iotables 0.4.6 from CRAN or the latest 0.4.7 development version with github:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># From CRAN:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"iotables"</span><span class="op">)</span>
@@ -101,7 +101,7 @@
 
 <span class="co">#with vignettes:</span>
 <span class="co">#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)</span></code></pre></div>
-<p>You can download the manual in PDF for the <a href="https://iotables.dataobservatory.eu/iotables_0.4.6.pdf" class="external-link">0.4.6 development release</a>. and follow the changes on the <a href="https://github.com/rOpenGov/iotables/blob/master/NEWS.md" class="external-link">NEWS.md</a> file.</p>
+<p>You can download the manual in PDF for the <a href="https://iotables.dataobservatory.eu/iotables_0.4.6.pdf" class="external-link">0.4.6 development release</a>. and follow the changes on the <a href="https://iotables.dataobservatory.eu/news/index.html" class="external-link">Changelog/NEWS</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
@@ -115,14 +115,52 @@
 </h2>
 <p>Eurostat’s data can be downloaded in several tidy, long-form, files, and a lot of filtering is needed to start working with it.</p>
 <p>Currently the following Eurostat SIOTs can be used:</p>
-<ul>
-<li><p>product x product SIOTs <code>naio_10_cp1700</code> or <code>naio_10_pyp1700</code>;</p></li>
-<li><p>industry x industry SIOTs <code>naio_10_cp1750</code> or<code>naio_10_pyp1750</code>;</p></li>
-<li><p>use tables at basic prices <code>naio_10_cp1620</code> or <code>naio_10_pyp1610</code>;</p></li>
-<li><p>trade and transport margins <code>naio_10_cp1620</code> or <code>naio_10_pyp1620</code>;</p></li>
-<li><p>net taxes less subsidies <code>naio_10_cp1630</code> or <code>naio_10_pyp1630</code>;</p></li>
-<li><p>Supply table at basic prices incl. transformation into purchasers’ prices (naio_10_cp15) and Use table at purchasers’ prices (naio_10_cp16).</p></li>
-</ul>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Table type</th>
+<th align="center">source code</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">product x product SIOTs</td>
+<td align="center">
+<code>naio_10_cp1700</code> or <code>naio_10_pyp1700</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">industry x industry SIOTs</td>
+<td align="center">
+<code>naio_10_cp1750</code> or<code>naio_10_pyp1750</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">use tables at basic prices</td>
+<td align="center">
+<code>naio_10_cp1620</code> or <code>naio_10_pyp1610</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">trade and transport margins</td>
+<td align="center">
+<code>naio_10_cp1620</code> or <code>naio_10_pyp1620</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">net taxes less subsidies</td>
+<td align="center">
+<code>naio_10_cp1630</code> or <code>naio_10_pyp1630</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">Supply table at basic prices</td>
+<td align="center"><code>naio_10_cp15</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Use table at purchasers’ price</td>
+<td align="center"><code>naio_10_cp16</code></td>
+</tr>
+</tbody>
+</table>
 <p>The <code>cp</code> element refers to basic prices and the <code>pyp</code> to previous years’ prices.</p>
 <div class="section level3">
 <h3 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>
@@ -195,7 +233,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg" alt="rOG-badge"></a></li>
-<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.4.6-orange.svg?style=flat-square" alt="packageversion"></a></li>
+<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.4.7-orange.svg?style=flat-square" alt="packageversion"></a></li>
 <li><a href="https://github.com/rOpenGov/iotables/actions" class="external-link"><img src="https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/version/iotables" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/ago/iotables" alt="CRAN_time_from_release"></a></li>

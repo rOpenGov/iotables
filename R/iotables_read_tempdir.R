@@ -26,20 +26,20 @@
 #' @examples
 #' \donttest{
 #' # The table must be present in the sessions' temporary directory:
-#' iotables_download(source = "naio_10_cp1700")
+#' iotables_download(source = "naio_10_pyp1750")
 #' 
-#' iotables_read_tempdir (source = "naio_10_cp1700")
+#' iotables_read_tempdir (source = "naio_10_pyp1750")
 #' }
 #' @export
 
 iotables_read_tempdir <- function( source = "naio_10_cp1700" ) {
   
   validate_source(source)
-  temporary_file <- file.path(tempdir(), paste0(source, '.rds'))
+  temporary_file <- file.path(tempdir(), paste0(source, '_processed.rds'))
   
   if (file.exists(temporary_file)) {
     readRDS(temporary_file)
-  }
+  } 
 }
 
                    

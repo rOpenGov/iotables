@@ -26,11 +26,11 @@ indicators. They must be found in the \code{data_table}.}
 defaults to \code{FALSE}.}
 
 \item{indicator_names}{The names of new indicators. Defaults to \code{NULL} when 
-the names in the key colum of \code{input_matrix} will be used to create the 
+the names in the key column of \code{input_matrix} will be used to create the 
 indicator names.}
 }
 \value{
-A tibble (data frame) containing  \code{input_matrix} devided by the \code{output_vector}
+A tibble (data frame) containing  \code{input_matrix} divided by the \code{output_vector}
 with a key column for products or industries.
 }
 \description{

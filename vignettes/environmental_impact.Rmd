@@ -131,7 +131,7 @@ methane_indicator %>%
 | CPA_A02     | Forestry and logging |
 
 
-The apperance of *Mining and quarrying* is important, because it is the main input for the *Manufacture of other non-metallic mineral products*. Their effect may or may not be combined *in Belgium*, becuase the Belgian manufacturers can import mined or quarried products, too. 
+The appearance of *Mining and quarrying* is important, because it is the main input for the *Manufacture of other non-metallic mineral products*. Their effect may or may not be combined *in Belgium*, because the Belgian manufacturers can import mined or quarried products, too. 
 
 ## Total effects
 

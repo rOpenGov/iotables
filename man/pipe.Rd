@@ -3,12 +3,10 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{Pipe operator}
-\arguments{
-\item{lhs, rhs}{A visualisation and a function to apply to it}
+\usage{
+lhs \%>\% rhs
 }
 \description{
-Pipe operator
+See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
 }
-\examples{
-mtcars \%>\% summary
-}
+\keyword{internal}

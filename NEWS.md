@@ -1,5 +1,6 @@
 # iotablles 0.4.7
 * A new function, 'airpol_get()' creates a conforming vector of various air pollutants for European input-output tables.
+* A new vignette, [Environmental Impacts](https://iotables.dataobservatory.eu/articles/environmental_impact.html) shows its use.
 
 # iotables 0.4.6
 * Eliminating deprecated tidyverse functions. 
@@ -107,7 +108,7 @@ Handles tables with purchasers' prices. Imports Eurostat employment data.
 
 
 # iotables 0.2.7 
-Default data directory for faster programmatic use and phasing out discountinued Eurostat statistics. A bit improved messages and documentation.
+Default data directory for faster programmatic use and phasing out discontinued Eurostat statistics. A bit improved messages and documentation.
 
 # iotables 0.2.6
 * Download `naio_10_cp1620` (trade and transport margins) or `naio_10_cp1630` (net taxes) with the parameter `stk_flow="TOTAL"`.  Correctly builds on Windows and Mac OS (old and release version) but problem with the dependency `eurostat` in Linux on Travis.
