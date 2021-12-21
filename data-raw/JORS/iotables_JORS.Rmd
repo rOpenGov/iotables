@@ -1,0 +1,166 @@
+---
+title: "iotables JORS"
+author: "Daniel Antal, CFA"
+date: "12/21/2021"
+output: html_document
+---
+
+> This is an Rmd version of the partially filled out .docx template (in the same data-raw/JORS/ subfolder).  It is easier to work with this, the .docx should only be used for the final submission.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Software paper for submission to the Journal of Open Research Software
+
+To complete this template, please replace the blue text with your own. The paper has three main sections: (1) Overview; (2) Availability; (3) Reuse potential.
+
+Please submit the completed paper to: editor.jors@ubiquitypress.com
+
+
+# Overview
+
+## Title
+The title of the software paper should focus on the software, e.g. “Text mining software from the X project”. If the software is closely linked to a specific research paper, then “Software from Paper Title” is appropriate. The title should be factual, relating to the functionality of the software and the area it relates to rather than making claims about the software, e.g. “Easy-to-use”.
+
+## Paper Authors
+1. Antal, Dániel; (Lead/corresponding author first)
+2. Last name, first name; etc.
+
+## Paper Author Roles and Affiliations
+1. First author role and affiliation
+2. Second author role and affiliation etc.
+
+## Abstract
+A short (ca. 100 word) summary of the software being described: what problem the software addresses, how it was implemented and architected, where it is stored, and its reuse potential.
+
+Survey data harmonization refers to procedures that improve the data comparability or the inferential capacity of multiple surveys conducted in different periods of time, or in different geographical locations, potentially using different languages.  The retroharmonize package support various data processing, documentation, file/type conversion aspects of various survey harmonization workflows.
+
+## Keywords
+keyword 1; keyword 2; etc.
+Keywords should make it easy to identify who and what the software will be useful for.
+
+## Introduction
+
+> An overview of the software, how it was produced, and the research for which it has been used, including references to relevant research articles. A short comparison with software which implements similar functionality should be included in this section. 
+
+The iotables R software package is adding functionality to the eurostat R package, which in turn gives a reproducible access to more than 20,000 statistical products of Europe’s statistical system. Among the statistical products of Eurostat and the EU (and OECD) member states, the symmetric input-output tables are the most complex ones.  They systematically show the interlinkages among various national accounts concepts, such as the components of the GDP in a standardized matrix format. The four interconnecting matrixes and auxiliary tables have a dimension of 60x60 or similar.  They must be processed with very strict labelling and ordering because they are designed to be used in matrix algebraic equations. The iotables package builds on eurostat to access and process the contents of these tables from the data warehouse of Eurostat, and to prepare them for economic and environmental impact analysis.
+The package is accompanied by four vignette articles.  
+
+The Introduction to iotables replicates much of the practical input-output analysis examples of the *Eurostat Manual of Supply, Use and Input-Output Tables* by Jörg Beutel. The aim of this article is twofold: to review the steps of the manual for the R user in a way that she can replicate the basic analytical tasks for which Eurostat is releasing these complex products.  The secondary aim is validation: the published analytical solutions by the *Eurostat Manual* are built into the unit tests of the package to make sure that they produce correct records from known inputs.
+
+The *Working With Eurostat Data* vignette article is designed to show some practical problems with Eurostat's data---for example, handing incomplete SIOTs. It contains various economic impact assessment tasks for the data of the Czech and Slovak national economies.
+
+The *Environmental Impacts* vignette introduces new functionality available from version 0.4.7. that allows the user to download and process air pollution data from Eurostat and analyze them in the system of input-output tables. In this example we show with the data of the Belgian economy which industries' growth contributes most to the emissions of the CO2-equivalent of many greenhouse gases, and compare the results with CO2 and methane emissions. We show the direct emissions of 60 industries together with the indirect emissions created in the upstream supplier chain, and in the downstream (where the industry in question is a supplier itself.) 
+
+The *United Kingdom Input-Output Analytical Tables* vignette serves purely as validation point. Building on the work of Richard Wild, we compare the Office for National Statistics published calculations with the calculations created by iotables on the same data and conclude that our analytical functions in question are sound.
+
+On CRAN, there are similar package with less ambition for reproducible and global use.
+
+- ioanalysis, which has some similar functionality. The package has a shorter history and less frequent releases than our iotables, and it does not aim to programmatically retrieve and process SIOTs from official statistical agencies. [I contacted the maintainer for potential collaboration - A.D.]
+
+- leontief has exactly the same functionality as iotables regarding the analytical functions, but has no workflow to receive the data from source and process them to the correct format. It is also a younger package and has large overlap with iotables.
+
+Outside of R libraries, there are similar software products available in bespoke form or as Python libraries. Input-output economics has 70 years of history, and it is very much computing intensive. The novelty of our approach is that we give a full support to data access and metadata handling, which supports the actual data processing steps that I required *prior* to the analysis, and which usually require far more work input from the researcher than the analysis itself.
+
+
+
+## Implementation and architecture
+How the software was implemented, with details of the architecture where relevant. Use of relevant diagrams is appropriate. Please also describe any variants and associated implementation differences.
+
+The iotables table depends on several tidyverse packages. 
+
+## Quality control 
+Detail the level of testing that has been carried out on the code (e.g. unit, functional, load etc.), and in which environments. If not already included in the software documentation, provide details of how a user could quickly understand if the software is working (e.g. providing examples of running the software with sample input and output data). 
+
+The package comes with a testthat architecture that runs 56 unit tests.  These unit tests, whenever possible, are designed to include tests with known inputs and independently published results. In other words, they are not only checking the internal consistency of the packages, but they are checking results against independetly published data.
+
+
+# Availability 
+
+## Operating system
+Please include minimum version compatibility.
+
+## Programming language
+Please include minimum version compatibility.
+
+## Additional system requirements
+E.g. memory, disk space, processor, input devices, output devices.
+
+As earlier mentioned, we included some basic resource planning, and the important functions work either in memory or with sequentially used temporary files, and they offer a trade-off between memory and disk space use. 
+
+
+
+## Dependencies
+E.g. libraries, frameworks, incl. minimum version compatibility.
+
+The retroharmonize R package is practically a very thorough extension of the R tidyverse packages: it depends on haven (and labelled) for working with coded survey files. It uses dplyr, tidyr (and their common, deep level rlang, vctrs) dependencies for variable manipulation within a single survey (preparation for harmonization) and purrr for functional programming task with several surveys. 
+
+## List of contributors
+Please list anyone who helped to create the software (who may also not be an author of this paper), including their roles and affiliations.
+
+
+## Software location:
+Archive (e.g. institutional repository, general repository) (required – please see instructions on journal website for depositing archive copy of software in a suitable repository) 
+Name: The name of the archive
+Persistent identifier: e.g. DOI, handle, PURL, etc.
+Licence: Open license under which the software is licensed
+Publisher: Name of the person who deposited the software
+Version published: The version number of the software archived
+Date published: dd/mm/yy
+Code repository (e.g. SourceForge, GitHub etc.) (required) 
+Name: The name of the code repository
+Identifier: The identifier (or URI) used by the repository 
+Licence: Open license under which the software is licensed
+Date published: dd/mm/yy
+Emulation environment (if appropriate)
+Name: The name of the emulation environment
+Identifier: The identifier (or URI) used by the emulator
+Licence: Open license under which the software is licensed here
+Date published: dd/mm/yy
+
+## Language
+Language of repository, software and supporting files
+
+English
+
+# Reuse potential 
+Please describe in as much detail as possible the ways in which the software could be reused by other researchers both within and outside of your field. This should include the use cases for the software, and also details of how the software might be modified or extended (including how contributors should contact you) if appropriate. Also you must include details of what support mechanisms are in place for this software (even if there is no support).
+
+The retroharmonize R package aims to provide a versatile support for various survey harmonization workflows. Because surveys are so fundamental to quantitative social science research and play an important role in many natural science fields, not to mention commercial applications of market research or pharmaceutical research, the package’s main reuse potential is to be a foundation of further reproducible research software aimed to automate research and harmonization aspects of specific survey programs.
+
+The authors of this package started the development work to be able to harmonize surveys from harmonized data collections of the European Union: namely the Eurobarometer and AES surveys programs.  After working with various surveys (also outside these programs) it became clear that retroharmoinze should aim to be a common demoninator to a family of similar software that solves more specific problems.  The world’s largest and oldest international public policy survey series, Eurobarometer.  This program alone has conducted already thousands of surveys in more than 20 natural languages over more than 40 years, following various documentation, data management, coding practices that were not independent of the software tools available over this long period of time.  The first verion of retroharmonize was separated to the retroharmonize and the eurobarometer R packages – retroharmonize providing a more general framework that has been able to serve Eurobarometer’s, Afrobarometer’s and the Arab Barometer’s different needs. 
+
+In our view, the retroharmonize package has the potential to become a general supporting software for more specific codes aimed at harmonizing surveys based first on questionnaires, later on different data inputs, such as price scanning, laboratory tests, and other standardized, discrete inputs that are carried out in different locations, with different recording tools, and with different coding (for example, because of natural languages differences, as it is the case in the social science surveys used for the testing of our software.)
+
+
+
+## Acknowledgements
+Please add any relevant acknowledgements to anyone else who supported the project in which the software was created, but did not work directly on the software itself.
+
+## Funding statement 
+
+There was no funding available for the development of this software. 
+
+## Competing interests 
+If any of the authors have any competing interests then these must be declared. The authors’ initials should be used to denote differing competing interests. For example: “BH has minority shares in [company name], which part funded the research grant for this project. All other authors have no competing interests."
+If there are no competing interests, please add the statement:
+“The authors declare that they have no competing interests.” 
+
+## References 
+Please enter references in the Harvard style and include a DOI where available, citing them in the text with a number in square brackets, e.g.
+
+[1] 	Piwowar, H A 2011 Who Shares? Who Doesn't? Factors Associated with Openly Archiving Raw Research Data. PLoS ONE 6(7): e18657. DOI: http://dx.doi.org/10.1371/journal.pone.0018657.
+
+
+
+
+## Copyright Notice
+Authors who publish with this journal agree to the following terms:
+
+Authors retain copyright and grant the journal right of first publication with the work simultaneously licensed under a Creative Commons Attribution License that allows others to share the work with an acknowledgement of the work's authorship and initial publication in this journal.
+
+Authors are able to enter into separate, additional contractual arrangements for the non-exclusive distribution of the journal's published version of the work (e.g., post it to an institutional repository or publish it in a book), with an acknowledgement of its initial publication in this journal.
+
+By submitting this paper you agree to the terms of this Copyright Notice, which will apply to this submission if and when it is published by this journal.
