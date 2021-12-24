@@ -1,5 +1,3 @@
-library (testthat)
-
 context ("Creating an input flow table")
 
 input_flow_table <- input_flow_get(iotable_get(labelling = "iotables"),

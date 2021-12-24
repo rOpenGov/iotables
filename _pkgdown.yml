@@ -78,9 +78,12 @@ reference:
       - output_get
       - total_tax_add
       - supplementary_add
+      - key_column_add
+      - rows_add
       - household_column_find
       - matrix_round
-      - vector_transpose
+      - vector_transpose_longer
+      - vector_transpose_wider
   - title: "Analytic objects"
     desc: >
      Create the Leontieff matrix, the Leontieff inverse, and its inputs. To avoid division by zero, 
@@ -153,5 +156,3 @@ reference:
     contents: 
        - is_html_output
        - is_latex_output
-    
-

@@ -18,14 +18,13 @@ removed to avoid division by zero error in the analytic functions.}
 final household expenditure is added to the input flow table.}
 }
 \value{
-A data flow matrix in a labelled data frame.
+A data flow matrix (a symmetric use table) with a key column.
 }
 \description{
 Select the use table from a symmetric input-output table.
 }
 \examples{
-data_table <- iotable_get()
-input_flow <- input_flow_get(data_table = data_table, 
+input_flow <- input_flow_get(data_table = iotable_get(), 
                              empty_remove = FALSE,
                              households = TRUE)
 

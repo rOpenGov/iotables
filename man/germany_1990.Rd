@@ -3,7 +3,14 @@
 \docType{data}
 \name{germany_1990}
 \alias{germany_1990}
-\title{Simple input-output table for Germany, 1990.}
+\title{Simple input-output table for Germany, 1990.
+
+For testing purposes a well documented example data set is used from the Eurostat manual.
+The table in the Eurostat manual is brought to the format used by the Eurostat database.
+It is a small dataset for examples, but it is also instructive to understand how Eurostat
+stores the highly structured SIOTs in long-form tidy datasets. 
+The labels were slightly alterred to reflect the transition from the vocabulary
+of ESA95 to ESA2010 since the publication of the Manual.}
 \format{
 A data frame with 228 observations and 10 variables.
 \describe{
@@ -21,12 +28,14 @@ A data frame with 228 observations and 10 variables.
 }
 }
 \source{
-\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 492
+\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 482
 }
 \usage{
 data(germany_1990)
 }
 \description{
+Simple input-output table for Germany, 1990.
+
 For testing purposes a well documented example data set is used from the Eurostat manual.
 The table in the Eurostat manual is brought to the format used by the Eurostat database.
 It is a small dataset for examples, but it is also instructive to understand how Eurostat
@@ -36,6 +45,7 @@ of ESA95 to ESA2010 since the publication of the Manual.
 }
 \seealso{
 Other Validation datasets: 
+\code{\link{germany_airpol}},
 \code{\link{netherlands_2006}},
 \code{\link{uk_2010_data}},
 \code{\link{uk_test_results}}

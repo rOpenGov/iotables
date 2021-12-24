@@ -26,6 +26,14 @@ output_get ( data_table = iotable_get () )
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
 \code{\link{household_column_get}()},
-\code{\link{primary_input_get}()}
+\code{\link{iotable_year_get}()},
+\code{\link{key_column_create}()},
+\code{\link{matrix_round}()},
+\code{\link{primary_input_get}()},
+\code{\link{rows_add}()},
+\code{\link{supplementary_add}()},
+\code{\link{total_tax_add}()},
+\code{\link{vector_transpose_longer}()},
+\code{\link{vector_transpose_wider}()}
 }
 \concept{iotables processing functions}

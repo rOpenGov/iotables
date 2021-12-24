@@ -1,6 +1,4 @@
-library (testthat)
-
-context ("Creating an IO Table")
+context ("Getting the year from a SIOT")
 germany_years <- iotable_year_get ( source = "germany_1990", geo = 'DE', 
                                      unit = "MIO_EUR")
 

@@ -1,7 +1,7 @@
-#' Add Supplementary Data
+#' @title Add Supplementary Data
 #'
-#' Download the employment data for a country and arrange it to the 
-#' 64x64 SIOTs. Currently works only with product x product tables. 
+#' @description Add supplementary data to a SIOT, a use, supply or margins table.
+#' @details This function is a wrapper around the more general \code{\link{rows_add}} function.
 #' @param data_table A SIOT, a use table, a supply table, or a margins 
 #' table.  
 #' @param supplementary_data Supplementary data to be added. 
@@ -11,21 +11,39 @@
 #' vector or a data frame of several rows. 
 #' @param supplementary_names Optional names for the new supplementary rows. 
 #' Defaults  to \code{NULL}.
-#' @importFrom dplyr select full_join mutate across
+#' @param empty_to_fill What should happen with missing column values? Defaults to \code{0}. If you want
+#' to avoid division by zero, you may consider a very small value such as 0.000001.
+#' @return An extended \code{data_table} with the new row(s) binded.
+#' @importFrom dplyr bind_cols
+#' @family iotables processing functions
 #' @return A symmetric input-output table with supplementary data,  
 #' of data.frame class. 
 #' The column names are ordered, and the row names are in the 
 #' first, auxiliary metadata column.
 #' @examples
 #' de_io <- iotable_get()
-#' CO2 <- c( 0.2379, 0.5172, 0.0456, 0.1320, 0.0127, 0.0530)  
-#' names ( CO2) <- c("agriculture_group", "industry_group","construction",
-#'                   "trade_group","business_services_group","other_services_group") 
-#' CO2 <- cbind ( 
-#'   data.frame ( iotables_row = "CO2"),as.data.frame ( t(CO2)))
+#' CO2_coefficients <- data.frame(agriculture_group = 0.2379,
+#'                                industry_group    = 0.5172, 
+#'                                construction = 0.0456,
+#'                                trade_group = 0.1320, 
+#'                                business_services_group = 0.0127,
+#'                                other_services_group = 0.0530)
+#' CH4_coefficients <- data.frame(agriculture_group = 0.0349,
+#'                                industry_group    = 0.0011, 
+#'                                construction = 0,
+#'                                trade_group = 0, 
+#'                                business_services_group = 0,
+#'                                other_services_group = 0.0021)
+#' CO2 <- cbind (data.frame(iotables_row = "CO2"), 
+#'               CO2_coefficients)
+#' CH4 <- cbind(data.frame (iotables_row = "CH4_coefficients"),
+#'              CH4_coefficients)
+       
 #' de_coeff <- input_coefficient_matrix_create ( iotable_get() )
-#'
-#' supplementary_add ( de_io, CO2)
+#' emissions <- rbind (CO2, CH4)
+#' 
+#' # Check with the Eurostat Manual page 494:
+#' supplementary_add(de_io, emissions)
 #' @export
 
 supplementary_add <- function ( data_table, 
@@ -33,35 +51,33 @@ supplementary_add <- function ( data_table,
                                 supplementary_names = NULL) {
   
   if ( !is.null(supplementary_names)) {
-    if ( length(supplementary_names) == nrow(
-         as.data.frame(supplementary_data))
-         ) {
-      new_key <- supplementary_names
-      supplementary_data[,1] <- new_key
-    } else {
-      warning("New names do not match the dimensions of the supplementary data.")
+    if ( length(supplementary_names) != 
+           nrow(as.data.frame(supplementary_data))) {
+      stop("New names do not match the dimensions of the supplementary data.")
     }
-  } else {
-    new_key <- as.character(supplementary_data[,1])
   }
- 
+    
+  if ( ! is_key_column_present(supplementary_data)) {
+    key_column <- key_column_create(names(data_table)[1], 
+                                    ifelse (is.null(supplementary_names), 
+                                            yes =  paste0("supplementary_row_", 1:nrow(supplementary_data)), 
+                                            no = supplementary_names)
+    )
+    
+    supplementary_data <- bind_cols(
+      key_column, supplementary_data
+    )
+  } else {
+    key_column <- supplementary_data[,1]
+    names(key_column) <- names (data_table)[1]
+    }
   
-  if ( length(new_key) == 0) new_key <- 'supplementary_row'
+  siot_ext <- add_rows(data_table, supplementary_data)
   
-  key_column <- select ( data_table, 1 ) 
-  
-  names (supplementary_data)[1] <- names (data_table)[1]
-  
-  siot_ext   <- full_join ( 
-    data_table %>% mutate(across(where(is.factor), as.character)),
-    supplementary_data %>% mutate(across(where(is.factor), as.character)),
-    by = names (supplementary_data) )
-
-  
-  if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names ( siot_ext)))  ) {
+  if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names (siot_ext)))  ) {
     household_col <- which ( tolower ( names ( siot_ext)) %in% c("final_consumption_households", "p3_s14") )
-    new_row <- which ( tolower ( as.character(siot_ext[,1])) %in% tolower(new_key) )
-    siot_ext[new_row, household_col] <- ifelse ( is.na(siot_ext[new_row, household_col]), 0, siot_ext[new_row, household_col])
+    new_rows <- which ( tolower ( as.character(siot_ext[,1])) %in% key_column )
+    siot_ext[new_rows, household_col] <- ifelse ( is.na(siot_ext[new_rows, household_col]), 0, siot_ext[new_row, household_col])
   }
   
  siot_ext

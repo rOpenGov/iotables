@@ -1,6 +1,12 @@
+# iotablles 0.4.8
+* A new function, 'output_coefficients_create()' creates a conforming vector of various air pollutants for European input-output tables.
+* A new vignette, [Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html) shows comparable results with the Eurostat Manual.
+* The [Environmental Impacts](https://iotables.dataobservatory.eu/articles/environmental_impact.html) is not comparable, it will need to be reworked to be comparable with the Eurostat Manual.
+
 # iotablles 0.4.7
 * A new function, 'airpol_get()' creates a conforming vector of various air pollutants for European input-output tables.
 * A new vignette, [Environmental Impacts](https://iotables.dataobservatory.eu/articles/environmental_impact.html) shows its use.
+* Released on CRAN.
 
 # iotables 0.4.6
 * Eliminating deprecated tidyverse functions. 

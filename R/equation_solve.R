@@ -58,6 +58,12 @@ equation_solve <- function (LHS = NULL, Im = NULL) {
 
   ###Joining matrixes to find out if all data is present ---------------------   
 
+  names_lhs <- names(LHS)
+  names_Im <- names(Im)
+
+  names_lhs
+  names_Im
+    
   joined <- tryCatch(
       full_join (LHS, Im, by = names(LHS)), 
       error = function(e) {
@@ -73,8 +79,13 @@ equation_solve <- function (LHS = NULL, Im = NULL) {
   lhs <- joined[1,]
   lhs <- as.numeric(lhs[1,2:ncol(lhs)])  #numeric left-hand side in conforming order
   
+  #lhs <- LHS[ ,which ( vapply(LHS,is.numeric,  logical(1)))]
+  #lhs <- lhs %>% select ( any_of(names(Im))) %>% as.matrix()
+  
   im <- joined[2:nrow(joined),]
   im <- as.matrix(im[,2:ncol(im)])  #numeric Leontieff inverse in conforming order
+  
+  #im <- Im[, which ( vapply(LHS,is.numeric,  logical(1)))]
    
 
   ###Try to solve the matrix equation  ---------------------   

@@ -6,7 +6,7 @@
 \usage{
 input_indicator_create(
   data_table,
-  input_vector = c("gva_bp", "net_tax_production"),
+  input_row = c("gva_bp", "net_tax_production"),
   digits = NULL,
   households = FALSE,
   indicator_names = NULL
@@ -17,8 +17,9 @@ input_indicator_create(
 a margins or tax table retrieved by the  \code{\link{iotable_get}}
 function.}
 
-\item{input_vector}{The name of inputs for which you want to create the 
-indicators. They must be found in the \code{data_table}.}
+\item{input_row}{The name of input(s) for which you want to create the 
+indicator(s). Must be present in the \code{data_table}. Use this if the input rows are not
+given in a separate variable, therefore \code{input_vector=NULL}.}
 
 \item{digits}{Rounding digits, if omitted, no rounding takes place.}
 
@@ -28,6 +29,9 @@ defaults to \code{FALSE}.}
 \item{indicator_names}{The names of new indicators. Defaults to \code{NULL} when 
 the names in the key column of \code{input_matrix} will be used to create the 
 indicator names.}
+
+\item{input_vector}{Input vector(s) in a conforming format with the \code{data_table}. 
+Defaults to \code{NULL}.}
 }
 \value{
 A tibble (data frame) containing  \code{input_matrix} divided by the \code{output_vector}
@@ -40,7 +44,8 @@ the outputs.
 \examples{
  
 input_indicator_create( data_table = iotable_get(), 
-                        input_vector = c("gva", "compensation_employees"),
+                        input_row = c("gva", "compensation_employees"),
+                        input_vector = NULL,
                         digits = 4, 
                         indicator_names = c("GVA indicator", "Income indicator"))
 }

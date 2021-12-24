@@ -43,3 +43,15 @@ is_key_column_present <- function (data_table, potential_keywords=NULL) {
     )
   }
 }
+
+#' @title Enumerate character values
+#' @description A conditional wrapper around \code{basee::paste}.
+#' @param x A character vector
+#' @param collapse A separator to collapse the \code{x} vector.
+#' @return A character vector of length=1 collapsing the character vector with \code{collapse} if
+#' the original length is more than 1.
+#' @keywords internal 
+msg_enumerate <- function (x, sep = ", ") {
+  if (length(not_found)>1) x <- paste(x, collapse = ", ")
+  x
+}

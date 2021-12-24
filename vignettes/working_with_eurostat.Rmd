@@ -265,8 +265,10 @@ emp_effect_sk <- direct_effects_create(emp_indicator_sk, I_sk)
 emp_effect_cz <- direct_effects_create(emp_indicator_cz, I_cz)  
 ```
 ```{r printemploymenteffect}
-vector_transpose (emp_effect_cz, values_to ="employment_effect_cz") %>%
-  left_join ( vector_transpose(emp_effect_sk, values_to = "employment_effect_sk"), by = 'nace_r2' ) %>%
+vector_transpose_longer (emp_effect_cz, values_to ="employment_effect_cz") %>%
+  left_join ( vector_transpose_longer(emp_effect_sk, 
+                                      values_to = "employment_effect_sk"), 
+              by = 'nace_r2' ) %>%
   mutate ( across(starts_with("employmnet"), function(x) x*1000)) %>%
   arrange ( -.data$employment_effect_sk) %>%
   top_n(8)
@@ -284,9 +286,10 @@ emp_multiplier_cz <- input_multipliers_create(
 ```
 
 ```{r printemploymentindicator}
-vector_transpose (emp_multiplier_cz, values_to ="employment_multiplier_cz") %>%
-  left_join ( vector_transpose(emp_multiplier_cz, 
-                               values_to = "employment_multiplier_sk"), by = 'nace_r2' ) %>%
+vector_transpose_longer (emp_multiplier_cz, values_to ="employment_multiplier_cz") %>%
+  left_join ( vector_transpose_longer(emp_multiplier_cz, 
+                                      values_to = "employment_multiplier_sk"),
+              by = 'nace_r2' ) %>%
   mutate ( across(starts_with("employmnet"), function(x) x*1000)) %>%
   arrange ( -.data$employment_multiplier_sk) %>%
   top_n(8)
@@ -304,7 +307,7 @@ output_multipliers_cz <- output_multiplier_create (input_coeff_matrix_cz)
 output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk %>% empty_remove())
 ```
 ```{r printoutputmultiplierscz}
-vector_transpose (emp_multiplier_cz, 
+vector_transpose_longer (emp_multiplier_cz, 
                   values_to ="employment_multiplier_cz") %>%
   arrange( -.data$employment_multiplier_cz ) %>%
   top_n(5)
@@ -323,8 +326,8 @@ sk_bw <- backward_linkages(I_sk)
 ```{r printbackwardlinkages}
 #random sample
 set.seed(123)
-vector_transpose (cz_bw, 
-                  values_to ="backward_linkages") %>%
+vector_transpose_longer (cz_bw, 
+                         values_to ="backward_linkages") %>%
   arrange( -.data$backward_linkages) %>%
   sample_n(5)
 ```

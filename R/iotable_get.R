@@ -143,7 +143,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     if ( source == "germany_1990" ) { 
       year <- 1990
       geo <- "DE"
-      unit <- "MIO_EUR"
+      if ( is.null(unit)) unit <- "MIO_EUR"
       source <- "germany_1990"
     }
     

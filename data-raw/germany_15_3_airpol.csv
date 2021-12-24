@@ -1,0 +1,13 @@
+airpol, agriculture_group,industry_group,construction,trade_group,business_services_group,other_services_group, final_consumption_households,output_bp
+CO2, 10448, 558327, 11194, 71269, 8792, 26990, 217137, 904158
+CH4, 1534, 1160, 1, 4, 1, 1058, 136, 3894
+N2O, 77, 100, 0, 3, 0, 11, 17, 209
+SO2, 12, 1705, 18, 50, 4, 24, 180, 1994
+NOx, 62, 722, 64, 452, 23, 58, 585, 1967
+CO, 43, 1616, 86, 434, 103, 188, 4198, 6667
+NMVOC, 20, 1209, 17, 101, 15, 143, 520, 2024
+Dust, 57, 165, 7, 34, 1, 7, 58, 329
+Total, 12252, 565005, 11388, 72347, 8939, 28479, 222831, 921241
+
+
+

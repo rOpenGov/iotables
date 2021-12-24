@@ -1,12 +1,15 @@
-#' Create input indicator(s)
+#' @title Create input indicator(s)
 #' 
-#' The function creates the input indicators from the inputs and
+#' @description The function creates the input indicators from the inputs and
 #' the outputs.
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the  \code{\link{iotable_get}}
 #' function. 
-#' @param input_vector The name of inputs for which you want to create the 
-#' indicators. They must be found in the \code{data_table}.
+#' @param input_row The name of input(s) for which you want to create the 
+#' indicator(s). Must be present in the \code{data_table}. Use this if the input rows are not
+#' given in a separate variable, therefore \code{input_vector=NULL}.
+#' @param input_vector Input vector(s) in a conforming format with the \code{data_table}. 
+#' Defaults to \code{NULL}.
 #' @param households If the households column should be added, 
 #' defaults to \code{FALSE}.
 #' @param digits Rounding digits, if omitted, no rounding takes place.
@@ -19,13 +22,14 @@
 #' @family indicator functions
 #' @examples  
 #' input_indicator_create( data_table = iotable_get(), 
-#'                         input_vector = c("gva", "compensation_employees"),
+#'                         input_row = c("gva", "compensation_employees"),
+#'                         input_vector = NULL,
 #'                         digits = 4, 
 #'                         indicator_names = c("GVA indicator", "Income indicator"))
 ##' @export
 
 input_indicator_create <- function ( data_table,
-                                     input_vector = c('gva_bp','net_tax_production'),
+                                     input_row = c('gva_bp','net_tax_production'),
                                      digits = NULL,
                                      households = FALSE,
                                      indicator_names = NULL) { 
@@ -39,13 +43,16 @@ input_indicator_create <- function ( data_table,
   key_column <- tolower(as.character(unlist(cm[,1])))
   key_column
   
-  inputs_present <- which( key_column %in% tolower(input_vector) )
+  inputs_present <- which( key_column %in% tolower(input_row) )
   inputs_present
   
   if ( length(inputs_present) == 0 ) {
     stop ( "The inputs were not found")
-  } else if ( length(inputs_present) < length(input_vector)) {
-    warning ( "Not all the inputs were found in the data table.")
+  } else if ( length(inputs_present) < length(input_row)) {
+    
+    not_found <- msg_enumerate(input_row [! input_row %in% key_column[inputs_present]]) 
+    input_msg <- msg_enumerate(input_row)
+    warning ( glue::glue("In input_indicator_create(data_table, input_row = {input_msg}) the rows {not_found} were not found in the data_table."))
   }
   
   input_matrix <- cm[inputs_present,  ]

@@ -7,8 +7,7 @@
 matrix_round(data_table, digits = 0)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use table or a supply 
-table.}
+\item{data_table}{A symmetric input output table, a use, supply, tax or margins table.}
 
 \item{digits}{An integer number, defaults to \code{0}.}
 }
@@ -16,5 +15,21 @@ table.}
 The matrix, with the intact key column and the numeric columns rounded.
 }
 \description{
-Round all matrix values to required number of digits.
+For comparison with results created with other software or published with rounding,
+systematically round the values of an input-output table, a use, supply, tax or margins table.
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{household_column_get}()},
+\code{\link{iotable_year_get}()},
+\code{\link{key_column_create}()},
+\code{\link{output_get}()},
+\code{\link{primary_input_get}()},
+\code{\link{rows_add}()},
+\code{\link{supplementary_add}()},
+\code{\link{total_tax_add}()},
+\code{\link{vector_transpose_longer}()},
+\code{\link{vector_transpose_wider}()}
+}
+\concept{iotables processing functions}

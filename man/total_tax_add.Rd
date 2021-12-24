@@ -12,8 +12,7 @@ total_tax_add(
 }
 \arguments{
 \item{data_table}{A SIOT, a use table, a supply table, or a margins 
-table that 
-has product and production tax rows in among the primary inputs.}
+table that has product and production tax rows in among the primary inputs.}
 
 \item{tax_names}{Defaults to \code{("d21x31", "d29x39")}, 
 which are the Eurostat 
@@ -27,7 +26,8 @@ A data frame with the vector of multipliers and the an
 auxiliary metadata column (for joining with other matrixes.)
 }
 \description{
-Summarize and add tax data
+Create and add a total tax row, if there are multiple tax rows
+present in the \code{data_table}.
 }
 \examples{
 de_io <- iotable_get()
@@ -36,3 +36,18 @@ total_tax_add (de_io,
                tax_names = c("net_tax_products",  "net_tax_production"),
                total_tax_name = "total_tax")
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{household_column_get}()},
+\code{\link{iotable_year_get}()},
+\code{\link{key_column_create}()},
+\code{\link{matrix_round}()},
+\code{\link{output_get}()},
+\code{\link{primary_input_get}()},
+\code{\link{rows_add}()},
+\code{\link{supplementary_add}()},
+\code{\link{vector_transpose_longer}()},
+\code{\link{vector_transpose_wider}()}
+}
+\concept{iotables processing functions}

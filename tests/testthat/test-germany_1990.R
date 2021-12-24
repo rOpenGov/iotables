@@ -1,7 +1,4 @@
-library (testthat)
-
-require (dplyr)
-context ("Eurostat Manual example")
+context ("Check against the Eurostat Manual example the example dataset.")
 
 hh_consumption <- germany_1990 %>%
   dplyr::filter ( prod_na == "P1") %>%

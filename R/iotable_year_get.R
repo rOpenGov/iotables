@@ -38,19 +38,20 @@
 #' @importFrom dplyr filter select mutate rename left_join arrange across
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
+#' @family iotables processing functions
 #' @examples 
 #' germany_years <- iotable_year_get ( source = "germany_1990", geo = 'DE', 
 #'                                     unit = "MIO_EUR" )
 #' @export 
 
 iotable_year_get <- function ( labelled_io_data = NULL, 
-                          source = "germany_1990", 
-                          geo = "DE",
-                          unit = "MIO_EUR",
-                          time_unit = 'year',
-                          stk_flow = 'TOTAL',
-                          data_directory = NULL,
-                          force_download = TRUE ) { 
+                               source = "germany_1990", 
+                               geo = "DE",
+                               unit = "MIO_EUR",
+                               time_unit = 'year',
+                               stk_flow = 'TOTAL',
+                               data_directory = NULL,
+                               force_download = TRUE ) { 
 ##Initialize variables ------------
   values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- tmp_rds <- NULL

@@ -47,7 +47,7 @@ The calculation of induced effects (Type-II multipliers) are following the [Inpu
 
 ## Installation
 
-You can install iotables 0.4.6 from CRAN or the latest 0.4.7 development version with github:
+You can install iotables 0.4.7 from CRAN or the latest 0.4.8 development version with github:
 
 ```{r gh-installation, eval = FALSE}
 # From CRAN:
@@ -60,7 +60,7 @@ devtools::install_github("rOpenGov/iotables")
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can download the manual in PDF for the  [0.4.7 development release](https://iotables.dataobservatory.eu/iotables_0.4.7.pdf). and follow the changes on the [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html). 
+You can download the manual in PDF for the  [0.4.8 development release](https://iotables.dataobservatory.eu/iotables_0.4.8.pdf). and follow the changes on the [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html). 
 
 ## Vignettes 
 

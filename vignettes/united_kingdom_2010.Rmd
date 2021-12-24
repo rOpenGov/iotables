@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, include=TRUE}
+```{r setup, include=TRUE, message=FALSE}
 library(iotables)
 library(dplyr, quietly = TRUE) 
 library(tidyr, quietly = TRUE)

@@ -50,13 +50,13 @@ be_io <- BE %>%
 
 ghg_indicator <- input_indicator_create ( 
   data_table  = be_io,
-  input_vector = "GHG_emission")
+  input_row   = "GHG_emission")
 ```
 
 ```{r ghgindicator}
 # Only the top 5 is printed: 
 ghg_indicator %>%
-  vector_transpose( .keep = TRUE ) %>%
+  vector_transpose_longer( .keep = TRUE ) %>%
   rename ( GHG_emission_indicator = .data$value ) %>%
   arrange ( -.data$GHG_emission_indicator ) %>%
   top_n(5)
@@ -87,11 +87,11 @@ be_io_c <- BE %>%
 
 co2_indicator <- input_indicator_create ( 
   data_table  = be_io_c,
-  input_vector = "CO2_emission")
+  input_row   = "CO2_emission")
 
 # Only the top 5 is printed: 
 co2_indicator %>% 
-  vector_transpose( .keep = TRUE ) %>%
+  vector_transpose_longer( .keep = TRUE ) %>%
   rename ( CO2_emission_indicator = .data$value ) %>%
   arrange ( -.data$CO2_emission_indicator ) %>%
   top_n(5)
@@ -110,11 +110,11 @@ be_io_m <- BE %>%
 
 methane_indicator <- input_indicator_create ( 
   data_table  = be_io_m,
-  input_vector = "CH4_emission")
+  input_row   = "CH4_emission")
 
 # Only the top 5 is printed: 
 methane_indicator %>% 
-  vector_transpose( .keep = TRUE ) %>%
+  vector_transpose_longer( .keep = TRUE ) %>%
   rename ( CH4_emission_indicator = .data$value ) %>%
   arrange ( -.data$CH4_emission_indicator ) %>%
   top_n(5)
@@ -154,7 +154,7 @@ ghg_multipliers <- multiplier_create (
 
 # Only the top 5 is printed: 
 ghg_multipliers %>%
-  vector_transpose( .keep = TRUE ) %>%
+  vector_transpose_longer(.keep = TRUE) %>%
   rename ( GHG_multiplier = .data$value ) %>%
   arrange ( -.data$GHG_multiplier ) %>%
   top_n(5)

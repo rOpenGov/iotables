@@ -1,9 +1,10 @@
-#' Create a coefficient matrix
+#' @title Create a coefficient matrix
 #' 
-#' Create a coefficient matrix from a Symmetric Input-Output Table. The
-#' coefficient matrix is related by default to output, but you can change
+#' @description Create a coefficient matrix from a Symmetric Input-Output Table. 
+#' 
+#' @details The coefficient matrix is related by default to output, but you can change
 #' this to total supply or other total aggregate if it exists 
-#' in your table.#' 
+#' in your table.
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the  \code{\link{iotable_get}}
 #'  function. 
@@ -95,7 +96,7 @@ coefficient_matrix_create <- function ( data_table,
       total_row <- data_table[total_row_n,]
     }
   } else {
-    total_row <- data_table[which ( key_column %in% c(total))[1],]
+    total_row <- data_table[which ( tolower(key_column) %in% tolower(total)[1]), ]
     if ( length(total_row) == 0) stop("The total row was not found.")
   } #end of else
   
@@ -104,6 +105,7 @@ coefficient_matrix_create <- function ( data_table,
   null_to_eps <- function(x) ifelse (x == 0, 0.000001, x)
   total_row <-  total_row %>% mutate(across(where(is.factor), as.character))
   total_row <-  total_row %>% mutate (across(where(is.factor), null_to_eps)) # avoid division by zero
+  total_row
   
   coeff_matrix <- data_table
   
@@ -122,7 +124,7 @@ coefficient_matrix_create <- function ( data_table,
   
   household_earnings_row <- coeff_matrix[which( earnings_name == key_column), ]
   
-  ###If only a part should be returned----
+  # If only a part should be returned-----------------------------
   if ( ! is.null(return_part) )  {
     
     last_row <- which ( 
@@ -146,3 +148,4 @@ coefficient_matrix_create <- function ( data_table,
     round_table (coeff_matrix, digits = digits)
   }
 }
+

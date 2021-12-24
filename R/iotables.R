@@ -28,7 +28,8 @@
 #' \code{\link{total_tax_add}} adds taxes to an input-output table.
 #' \code{\link{empty_remove}} symmetrically removes columns and rows if they contain missing values, 
 #' or each and every value is zero. 
-#'
+#' \code{\link{rows_add}} Add conforming row(s) to a matrix. 
+#' 
 #' @section analytic object functions: 
 #' \code{\link{input_flow_get}} returns the use (input flow) matrix; 
 #' \code{\link{leontieff_matrix_create}} and the 

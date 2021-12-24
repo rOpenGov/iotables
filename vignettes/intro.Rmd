@@ -296,3 +296,46 @@ forward_linkages (output_coefficient_matrix = de_out)
 ```
 
 > You can check forward linkages against the Table 15.20 of Eurostat Manual on page 507.
+
+## Environmental Impacts
+
+At last, let's extend the input-output system with emissions data. For getting Eurostat's air pollution data, use `airpol_get()`. We have included in the package the German emissions data from the Eurostat Manual.
+
+```{r emissions}
+data("germany_airpol")
+emissions_de <- germany_airpol[, -3] %>%
+  vector_transpose_wider(names_from = "iotables_col", 
+                         values_from = "value")
+```
+```{r emissionsprint}
+emissions_de
+```
+The output coefficients are create from the emission matrix with 
+
+\eqn{B_{ij}} = \eqn{Em_{ij} / output_{j}} 
+
+```{r emmissioncoeffs}
+emmission_coeffs <- output_coefficients_create(data_table = emissions_de, 
+                                               output = output_bp)
+```
+```{r emmissioncoeffsprint}
+round_table(emmission_coeffs,4)
+```
+
+And the multipliers (which include both the direct and indirect emissions of the industries) are created with 
+
+\eqn{B(I-A)^{-1}}
+
+```{r emissionmultipliers}
+emission_multipliers <- cbind (
+  key_column_create(names(coeffs)[1], 
+                    gsub("_coefficient", "_multiplier", unlist(coeffs[,1]))), 
+  do.call( rbind, 
+           lapply ( 1:nrow(coeffs), function(x) equation_solve (coeffs[x, ], I_de) )
+           ) %>% as.data.frame()
+  )
+
+round_table(emission_multipliers, 4)
+```
+
+> You can check the results against the Table 15.13 of Eurostat Manual on page 494.
