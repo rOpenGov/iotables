@@ -255,9 +255,8 @@ emp_indicator_sk <- rbind (
   coefficient_matrix_create( return_part = 'primary_inputs') %>%
   filter ( prod_na == "employment_total" )
 
-emp_indicator_cz <- full_join ( 
-  cz_io, 
-  emp_cz) %>% 
+emp_indicator_cz <- full_join (cz_io, 
+                               emp_cz) %>% 
   coefficient_matrix_create( return_part = 'primary_inputs') %>%
   filter ( prod_na == "employment_total" )
 
@@ -266,9 +265,9 @@ emp_effect_cz <- direct_effects_create(emp_indicator_cz, I_cz)
 ```
 ```{r printemploymenteffect}
 vector_transpose_longer (emp_effect_cz, values_to ="employment_effect_cz") %>%
-  left_join ( vector_transpose_longer(emp_effect_sk, 
-                                      values_to = "employment_effect_sk"), 
-              by = 'nace_r2' ) %>%
+  left_join (vector_transpose_longer(emp_effect_sk, 
+                                     values_to = "employment_effect_sk"), 
+             by = 'nace_r2' ) %>%
   mutate ( across(starts_with("employmnet"), function(x) x*1000)) %>%
   arrange ( -.data$employment_effect_sk) %>%
   top_n(8)
@@ -287,11 +286,11 @@ emp_multiplier_cz <- input_multipliers_create(
 
 ```{r printemploymentindicator}
 vector_transpose_longer (emp_multiplier_cz, values_to ="employment_multiplier_cz") %>%
-  left_join ( vector_transpose_longer(emp_multiplier_cz, 
-                                      values_to = "employment_multiplier_sk"),
-              by = 'nace_r2' ) %>%
-  mutate ( across(starts_with("employmnet"), function(x) x*1000)) %>%
-  arrange ( -.data$employment_multiplier_sk) %>%
+  left_join(vector_transpose_longer(emp_multiplier_cz, 
+                                    values_to = "employment_multiplier_sk"),
+            by = 'nace_r2' ) %>%
+  mutate(across(starts_with("employmnet"), function(x) x*1000)) %>%
+  arrange (-.data$employment_multiplier_sk) %>%
   top_n(8)
 ```
 
@@ -310,7 +309,7 @@ output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk %>%
 ```{r printoutputmultiplierscz}
 vector_transpose_longer (emp_multiplier_cz, 
                          values_to ="employment_multiplier_cz") %>%
-  arrange( -.data$employment_multiplier_cz ) %>%
+  arrange(-.data$employment_multiplier_cz) %>%
   top_n(5)
 ```
 
@@ -327,9 +326,9 @@ sk_bw <- backward_linkages(I_sk)
 ```{r printbackwardlinkages}
 #random sample
 set.seed(123)
-vector_transpose_longer (cz_bw, 
-                         values_to ="backward_linkages") %>%
-  arrange( -.data$backward_linkages) %>%
+vector_transpose_longer(cz_bw, 
+                        values_to ="backward_linkages") %>%
+  arrange(-.data$backward_linkages) %>%
   sample_n(5)
 ```
 
@@ -340,7 +339,8 @@ Forward linkages show the effects on other industries that use the product (indu
 ```{r outputcoeff}
 output_coeff_cz <- output_coefficient_matrix_create( 
   io_table = cz_io, 
-  total = "tfu", digits = 4)
+  total = "tfu", 
+  digits = 4)
 
 output_coeff_sk <- output_coefficient_matrix_create( 
   io_table = sk_io, 
