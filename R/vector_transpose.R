@@ -110,5 +110,5 @@ key_column_create <- function(key_column_name,
                               key_column_values = NULL ) {
   
   tibble ( names = as.character(key_column_values) ) %>%
-    set_names (key_column_name)
+    rlang::set_names (key_column_name)
 }

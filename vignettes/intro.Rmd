@@ -310,16 +310,22 @@ emissions_de <- germany_airpol[, -3] %>%
 ```{r emissionsprint}
 emissions_de
 ```
+
+```{r outputbp}
+output_bp <- output_get(germany_io)
+```
+
+
 The output coefficients are create from the emission matrix with 
 
 \eqn{B_{ij}} = \eqn{Em_{ij} / output_{j}} 
 
 ```{r emmissioncoeffs}
-emmission_coeffs <- output_coefficients_create(data_table = emissions_de, 
+emission_coeffs <- output_coefficients_create(data_table = emissions_de, 
                                                output = output_bp)
 ```
 ```{r emmissioncoeffsprint}
-round_table(emmission_coeffs,4)
+emission_coeffs
 ```
 
 And the multipliers (which include both the direct and indirect emissions of the industries) are created with 
@@ -327,15 +333,16 @@ And the multipliers (which include both the direct and indirect emissions of the
 \eqn{B(I-A)^{-1}}
 
 ```{r emissionmultipliers}
+names(emission_coeffs)[1] <- names(I_de)[1]
 emission_multipliers <- cbind (
-  key_column_create(names(coeffs)[1], 
-                    gsub("_coefficient", "_multiplier", unlist(coeffs[,1]))), 
+  key_column_create(names(emission_coeffs)[1], 
+                    gsub("_coefficient", "_multiplier", unlist(emission_coeffs[,1]))), 
   do.call( rbind, 
-           lapply ( 1:nrow(coeffs), function(x) equation_solve (coeffs[x, ], I_de) )
+           lapply ( 1:nrow(emission_coeffs), function(x) equation_solve (emission_coeffs[x, ], I_de) )
            ) %>% as.data.frame()
   )
 
-round_table(emission_multipliers, 4)
+emission_multipliers
 ```
 
 > You can check the results against the Table 15.13 of Eurostat Manual on page 494.
