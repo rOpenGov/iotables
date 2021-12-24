@@ -66,6 +66,7 @@ reference:
       - coefficient_matrix_create
       - input_coefficient_matrix_create
       - output_coefficient_matrix_create
+      - output_coefficients_create
   - title: "SIOT processing functions"
     desc: >
      These data wrangling functions create vectors that conform the matrix, i.e. their elements are 

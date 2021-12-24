@@ -6,13 +6,13 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.4.7-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.4.8-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5795251.svg)](https://doi.org/10.5281/zenodo.5795251)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5802515.svg)](https://doi.org/10.5281/zenodo.5802515)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
 [![Follow
@@ -60,7 +60,7 @@ The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotables 0.4.6 from CRAN or the latest 0.4.7 development
+You can install iotables 0.4.7 from CRAN or the latest 0.4.8 development
 version with github:
 
 ``` r
@@ -74,8 +74,8 @@ devtools::install_github("rOpenGov/iotables")
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can download the manual in PDF for the [0.4.7 development
-release](https://iotables.dataobservatory.eu/iotables_0.4.7.pdf). and
+You can download the manual in PDF for the [0.4.8 development
+release](https://iotables.dataobservatory.eu/iotables_0.4.8.pdf). and
 follow the changes on the
 [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html).
 
@@ -138,9 +138,9 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows:
 
-Daniel Antal. (2020, December 21). rOpenGov/iotables: Importing and
-Manipulating Symmetric Input-Output Tables (Version 0.4.7). Zenodo.
-[https://doi.org/10.5281/zenodo.5795251](https://zenodo.org/record/5153006/)
+Daniel Antal. (2020, December 23). rOpenGov/iotables: Importing and
+Manipulating Symmetric Input-Output Tables (Version 0.4.8). Zenodo.
+[https://doi.org/10.5281/zenodo.5802515](https://zenodo.org/record/5153006/)
 for released version. Development version URL:
 <https://ropengov.github.io/iotables/>
 

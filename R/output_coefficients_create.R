@@ -12,6 +12,7 @@
 #' emissions_de <- vector_transpose_wider( names_from = "iotables_col", values_from = "value")
 #' output_bp <- output_get (iotable_get())
 #' output_coefficients_create (emissions_de, output_bp)
+#' @export
 
 output_coefficients_create <- function ( data_table, output ) {
   

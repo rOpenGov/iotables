@@ -120,9 +120,9 @@ de_emp <- primary_input_get(germany_io,
 
 de_emp_indicator <- input_indicator_create ( 
     data_table   = germany_io,
-    input_vector = "employment_domestic_total")
+    input_row    = "employment_domestic_total")
 
-vector_transpose(de_emp_indicator)
+vector_transpose_longer(de_emp_indicator)
 ```
 
 Often we want to analyze the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.
@@ -141,9 +141,9 @@ de_gva <- primary_input_get ( germany_io,
 
 de_gva_indicator  <- input_indicator_create( 
     data_table  = germany_io,
-    input_vector = "gva")
+    input_row   = "gva")
 
-vector_transpose(de_gva_indicator)
+vector_transpose_longer(de_gva_indicator)
 ```
 
 
@@ -196,13 +196,13 @@ You can recreate the whole matrix, when the data data permits, with `input_multi
 
 ```{r inputmultipliers}
 input_reqr <- coefficient_matrix_create(
-    data_table  = iotable_get (), 
+    data_table  = iotable_get(), 
     total       = 'output', 
     return_part = 'primary_inputs') 
 
 multipliers <- input_multipliers_create(
   input_requirements = input_reqr,
-  inverse = I_de)
+  Im = I_de)
 
 multipliers
 ```
@@ -257,7 +257,7 @@ de_input_coeff <- input_coefficient_matrix_create(
 output_multipliers <- output_multiplier_create ( 
                         input_coefficient_matrix = de_input_coeff )
 
-vector_transpose(output_multipliers)
+vector_transpose_longer(output_multipliers)
 ```
 
 These multipliers can be checked against the Table 15.15 on p500 of the Eurostat Manual.
@@ -276,7 +276,7 @@ For example, when a new concert is put on stage, orders are filled for real esta
 de_coeff <- input_coefficient_matrix_create(iotable_get(), digits = 4)
 I_de <- leontieff_inverse_create (de_coeff)
 
-vector_transpose(backward_linkages(I_de))
+vector_transpose_longer(backward_linkages(I_de))
 ```
 
 > You can check the results against Table 15.19 on page 506 of the Eurostat Manual.
@@ -292,7 +292,7 @@ de_out <- output_coefficient_matrix_create (
   io_table = germany_io, total = "final_demand", digits = 4
   )
                                     
-forward_linkages (output_coefficient_matrix = de_out)
+forward_linkages(output_coefficient_matrix = de_out)
 ```
 
 > You can check forward linkages against the Table 15.20 of Eurostat Manual on page 507.

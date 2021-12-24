@@ -304,11 +304,12 @@ From the previous list, only postal services remain. Postal workers are underpai
 
 ```{r outputmultipliers}
 output_multipliers_cz <- output_multiplier_create (input_coeff_matrix_cz)
-output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk %>% empty_remove())
+output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk %>%
+                                                     empty_remove())
 ```
 ```{r printoutputmultiplierscz}
 vector_transpose_longer (emp_multiplier_cz, 
-                  values_to ="employment_multiplier_cz") %>%
+                         values_to ="employment_multiplier_cz") %>%
   arrange( -.data$employment_multiplier_cz ) %>%
   top_n(5)
 ```
@@ -338,10 +339,12 @@ Forward linkages show the effects on other industries that use the product (indu
 
 ```{r outputcoeff}
 output_coeff_cz <- output_coefficient_matrix_create( 
-  io_table = cz_io, total = "tfu", digits = 4)
+  io_table = cz_io, 
+  total = "tfu", digits = 4)
 
 output_coeff_sk <- output_coefficient_matrix_create( 
-  io_table = sk_io, total = "tfu")
+  io_table = sk_io, 
+  total = "tfu")
 ```
 ```{r printoutputcoeff}
 output_coeff_cz[,1:6]
