@@ -116,7 +116,6 @@ Error corrected concerning creation of temporary files on non-Windows environmen
 # iotables 0.2.8
 Handles tables with purchasers' prices. Imports Eurostat employment data.
 
-
 # iotables 0.2.7 
 Default data directory for faster programmatic use and phasing out discontinued Eurostat statistics. A bit improved messages and documentation.
 
@@ -147,7 +146,7 @@ The forthcoming update will rewrite and generalize some of the earlier functions
 
 At this point I will go with preparing a release the table on CRAN. The current version builds without warnings or notes on Windows and Linux. 
 
-iotables 0.2 is moved to rOpenGov.
+iotables 0.2 is moved to [rOpenGov](http://ropengov.org/).
  
  
 # iotables 0.1.4
@@ -160,7 +159,6 @@ New functions are added which enable a very simple IO analysis. As an important 
 * Further example data is added from Croatia, together with the `employment_aggregate()` helper function to match SIOT data with non-conforming employment statistics.
 * There is a vignette called _Working with Croatian Symmetric Input-Output Tables_ that shows some real-life uses. 
 * Testing on Travis (ubuntu and OSX tests.)
-
 
 # iotables 0.1.3
 

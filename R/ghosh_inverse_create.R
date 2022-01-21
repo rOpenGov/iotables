@@ -1,6 +1,6 @@
 #' @title Create the inverse of a Ghosh-matrix.
 #' 
-#' The inversion takes place after the basic properties of the Leontieff matrix. 
+#' Create the Ghosh-inverse from the output coefficients.
 #' 
 #' @param output_coefficients_matrix A technology coefficient matrix created
 #' by the \code{\link{output_coefficient_matrix_create}}.
@@ -28,7 +28,7 @@ ghosh_inverse_create <- function ( output_coefficients_matrix,
   inverse <- solve(Gm)
   
   if ( sum(vapply(inverse,  function(x) sum(is.nan(x)), numeric(1))) > 0) {
-    stop ("Error: Could not invert the Leontieff-matrix.")
+    stop ("Error: Could not invert the Ghosh-matrix.")
   }
   
   named_inverse <- cbind(

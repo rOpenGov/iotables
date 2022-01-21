@@ -35,6 +35,7 @@
 #' \code{\link{leontieff_matrix_create}} and the 
 #' \code{\link{leontieff_inverse_create}} to create the respective analytic
 #' matrixes.
+#' \code{\link{ghosh_inverse_create}} will create the Gosh-inverse.
 #' 
 #' @section indicator functions:
 #' \code{\link{input_indicator_create}} The function creates the input indicators from the inputs and
