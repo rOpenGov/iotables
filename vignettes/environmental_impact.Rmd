@@ -33,11 +33,13 @@ BE <- iotable_get(source = "naio_10_cp1700", geo = "BE",
                   labelling = "short", unit = "MIO_EUR", 
                   stk_flow = "TOTAL")
 ```
+
 The following expression gets the the greenhouse gas emissions in $CO_2$-equivalent thousand tons for Belgium in 2020.
 
 ```{r getairpol, eval=FALSE}
 ghg <- airpol_get(airpol="GHG", geo="BE", year=2020, unit="THS_T")
 ```
+
 See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO2-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
 
 ## Direct and multiplied effects
@@ -81,6 +83,7 @@ Let's make a reality check, and calculate only with CO2:
 ```{r getco2indicators, eval=FALSE}
 co2 <- airpol_get(airpol="CO2", geo="BE", year=2020, unit = "THS_T")
 ```
+
 ```{r co2indicators}
 be_io_c <- BE %>%
   bind_rows( co2 %>% rename (prod_na = .data$indicator) )

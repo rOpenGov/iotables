@@ -92,6 +92,7 @@ reference:
     contents:
       - input_flow_get
       - leontieff_inverse_create
+      - gosh_inverse_create
       - leontieff_matrix_create
       - empty_remove
   - title: "Indicators"

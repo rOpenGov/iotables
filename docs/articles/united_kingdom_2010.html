@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>United Kingdom Input-Output Analytical Tables</h1>
                         <h4 data-toc-skip class="author">Daniel Antal, based on the work edited by Richard Wild</h4>
             
-            <h4 data-toc-skip class="date">2021-12-21</h4>
+            <h4 data-toc-skip class="date">2021-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/HEAD/vignettes/united_kingdom_2010.Rmd" class="external-link"><code>vignettes/united_kingdom_2010.Rmd</code></a></small>
       <div class="d-none name"><code>united_kingdom_2010.Rmd</code></div>
@@ -86,24 +86,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://iotables.dataobservatory.eu/" class="external-link">iotables</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://testthat.r-lib.org" class="external-link">testthat</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'testthat'</span>
-<span class="co">#&gt; The following object is masked from 'package:tidyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     matches</span>
-<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     matches</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://testthat.r-lib.org" class="external-link">testthat</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>The <a href="https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html" class="external-link">United Kingdom Input-Output Analytical Tables 2010</a> are used for testing the <code>iotables</code> package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table.</p>
 <p>It is unlikely that these tables will be required by other purposes than controlling the package. The UK IO tables for other years are available these are consistent with different Blue Books and there could therefore be important methodological and classification changes. Furthermore, ONS currently publishes ESA2010 compatible SIOTs with analytical tables annually.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">

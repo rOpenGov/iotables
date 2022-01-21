@@ -6,10 +6,10 @@
 #' @details Currently works only with product x product tables. 
 #' The dataset air emissions accounts by NACE Rev. 2 activity [env_ac_ainah_r2] has five dimensions:
 #' The Air pollutant \code{airpol} variables are collected on the emissions of the following pollutants: 
-#' Carbon dioxide without emissions from biomass (CO2), Carbon dioxide from biomass (Biomass CO2), 
-#' Nitroux oxide (N2O), Methane (CH4), Perfluorocarbons (PFCs), Hydrofluorocarbons (HFCs), 
-#' Sulphur hexafluoride (SF6) including nitrogen trifluoride (NF3), Nitrogen oxides (NOx), 
-#' Non-methane volatile organic compounds, (NMVOC), Carbon monoxide (CO), 
+#' carbon dioxide without emissions from biomass (CO2), carbon dioxide from biomass (Biomass CO2), 
+#' nitroux oxide (N2O), methane (CH4), perfluorocarbons (PFCs), Hydrofluorocarbons (HFCs), 
+#' sulphur hexafluoride (SF6) including nitrogen trifluoride (NF3), nitrogen oxides (NOx), 
+#' Non-methane volatile organic compounds, (NMVOC), carbon monoxide (CO), 
 #' Particulate matter smaller than 10 micrometre (PM10), Particulate matter smaller than 2,5 micrometre (PM2,5), 
 #' Sulphur dioxide (SO2), Ammonia (NH3).
 #' 
@@ -65,7 +65,10 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
   }
   
   if (!is.null(data_directory)) {
-    if ( dir.exists(data_directory)) saveRDS(tmp, file = file.path(data_directory, "env_ac_ainah_r2.rds"))
+    if ( dir.exists(data_directory) ) {
+      # If there is a temporary saving location given, save the data there.
+      saveRDS(tmp, file = file.path(data_directory, "env_ac_ainah_r2.rds")) 
+      }
   }
   
   assertthat::assert_that(

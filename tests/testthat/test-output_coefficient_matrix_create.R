@@ -13,7 +13,7 @@ test_that("wrong paramter error", {
 
 
 output_coefficients <- output_coefficient_matrix_create (
-                           io_table, "final_demand", digits = 4)
+                           data_table = io_table, "final_demand", digits = 4)
 
 business_agriculture_input <- output_coefficients %>%
   dplyr::filter ( iotables_row == "business_services_group") %>%

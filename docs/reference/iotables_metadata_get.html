@@ -16,8 +16,8 @@ naio_10_pyp1610 Use table at basic prices (previous years prices) (naio_10_pyp16
 naio_10_cp1620 Table of trade and transport margins at basic prices
 naio_10_pyp1620 Table of trade and transport margins at previous years' prices
 naio_10_cp1630 Table of taxes less subsidies on products at basic prices
-naio_10_pyp1630Table of taxes less subsidies on products at previous years' prices
-uk_2010_siotUnited Kingdom Input-Output Analytical Tables data
+naio_10_pyp1630 Table of taxes less subsidies on products at previous years' prices
+uk_2010_siot United Kingdom Input-Output Analytical Tables data
 
 "><title>Get Metadata from Nested iotables File — iotables_metadata_get • iotables</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get Metadata from Nested iotables File — iotables_metadata_get"><meta property="og:description" content="Remove the data column and return only the metadata information of 
 input-output (or related tables) from a source.
@@ -36,8 +36,8 @@ naio_10_pyp1610 Use table at basic prices (previous years prices) (naio_10_pyp16
 naio_10_cp1620 Table of trade and transport margins at basic prices
 naio_10_pyp1620 Table of trade and transport margins at previous years' prices
 naio_10_cp1630 Table of taxes less subsidies on products at basic prices
-naio_10_pyp1630Table of taxes less subsidies on products at previous years' prices
-uk_2010_siotUnited Kingdom Input-Output Analytical Tables data
+naio_10_pyp1630 Table of taxes less subsidies on products at previous years' prices
+uk_2010_siot United Kingdom Input-Output Analytical Tables data
 
 "><meta property="og:image" content="/logo.png"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -50,7 +50,7 @@ uk_2010_siotUnited Kingdom Input-Output Analytical Tables data
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,8 +105,8 @@ temporary directory.</p><ul><li><p><code>naio_10_cp1700</code> Symmetric input-o
 <li><p><code>naio_10_cp1620</code> Table of trade and transport margins at basic prices</p></li>
 <li><p><code>naio_10_pyp1620</code> Table of trade and transport margins at previous years' prices</p></li>
 <li><p><code>naio_10_cp1630</code> Table of taxes less subsidies on products at basic prices</p></li>
-<li><p><code>naio_10_pyp1630</code>Table of taxes less subsidies on products at previous years' prices</p></li>
-<li><p><code>uk_2010_siot</code>United Kingdom Input-Output Analytical Tables data</p></li>
+<li><p><code>naio_10_pyp1630</code> Table of taxes less subsidies on products at previous years' prices</p></li>
+<li><p><code>uk_2010_siot</code> United Kingdom Input-Output Analytical Tables data</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -142,29 +142,40 @@ input-output tables from a specific <code>source</code>.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># The table must be present in the sessions' temporary directory:</span></span>
-<span class="r-in"><span class="fu"><a href="iotables_download.html">iotables_download</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_cp1700 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpuyXeYN/eurostat/naio_10_cp1700_date_code_FF.rds</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 844 input-output tables into the temporary directory.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpuyXeYN/naio_10_cp1700_processed.rds.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 844 x 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    unit    stk_flow geo    time       unit_lab stk_flow_lab geo_lab   time_lab  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> MIO_EUR DOM      EA19   2019-01-01 Million~ Domestic     Euro are~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> MIO_EUR DOM      EU27_~ 2019-01-01 Million~ Domestic     European~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MIO_EUR DOM      EU28   2019-01-01 Million~ Domestic     European~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> MIO_EUR DOM      SE     2019-01-01 Million~ Domestic     Sweden    2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MIO_EUR IMP      EA19   2019-01-01 Million~ Imports      Euro are~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> MIO_EUR IMP      EU27_~ 2019-01-01 Million~ Imports      European~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MIO_EUR IMP      EU28   2019-01-01 Million~ Imports      European~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MIO_EUR IMP      SE     2019-01-01 Million~ Imports      Sweden    2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MIO_EUR TOTAL    EA19   2019-01-01 Million~ Total        Euro are~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MIO_EUR TOTAL    EU27_~ 2019-01-01 Million~ Total        European~ 2019-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ... with 834 more rows, and 2 more variables: year &lt;dbl&gt;, data &lt;list&gt;</span></span>
+<span class="r-in"><span class="fu"><a href="iotables_download.html">iotables_download</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_pyp1750"</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The naio_10_pyp1750_processed.rds is retrieved from the temporary directory.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Returning the processed SIOTs from tempdir. You can override this with force_download=TRUE.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 96 x 10</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    unit    stk_flow geo   time       unit_lab    stk_flow_lab geo_lab time_lab  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> MIO_EUR DOM      DK    2018-01-01 Million eu~ Domestic     Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> MIO_EUR IMP      DK    2018-01-01 Million eu~ Imports      Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MIO_EUR TOTAL    DK    2018-01-01 Million eu~ Total        Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> MIO_NAC DOM      DK    2018-01-01 Million un~ Domestic     Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MIO_NAC IMP      DK    2018-01-01 Million un~ Imports      Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> MIO_NAC TOTAL    DK    2018-01-01 Million un~ Total        Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MIO_EUR DOM      DK    2017-01-01 Million eu~ Domestic     Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MIO_EUR IMP      DK    2017-01-01 Million eu~ Imports      Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MIO_EUR TOTAL    DK    2017-01-01 Million eu~ Total        Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MIO_NAC DOM      DK    2017-01-01 Million un~ Domestic     Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ... with 86 more rows, and 2 more variables: year &lt;dbl&gt;, data &lt;list&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Now you can get the metadata:</span></span>
-<span class="r-in"><span class="fu">iotables_metadata_get</span> <span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_cp1700"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The temporary file for source='naio_10_cp1700' is not found in</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> tempdir='C:\Users\DANIEL~1\AppData\Local\Temp\RtmpuyXeYN'</span>
+<span class="r-in"><span class="fu">iotables_metadata_get</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_pyp1750"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 96 x 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    unit    stk_flow geo   time       unit_lab    stk_flow_lab geo_lab time_lab  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> MIO_EUR DOM      DK    2018-01-01 Million eu~ Domestic     Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> MIO_EUR IMP      DK    2018-01-01 Million eu~ Imports      Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MIO_EUR TOTAL    DK    2018-01-01 Million eu~ Total        Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> MIO_NAC DOM      DK    2018-01-01 Million un~ Domestic     Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MIO_NAC IMP      DK    2018-01-01 Million un~ Imports      Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> MIO_NAC TOTAL    DK    2018-01-01 Million un~ Total        Denmark 2018-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MIO_EUR DOM      DK    2017-01-01 Million eu~ Domestic     Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MIO_EUR IMP      DK    2017-01-01 Million eu~ Imports      Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MIO_EUR TOTAL    DK    2017-01-01 Million eu~ Total        Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MIO_NAC DOM      DK    2017-01-01 Million un~ Domestic     Denmark 2017-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ... with 86 more rows, and 1 more variable: year &lt;dbl&gt;</span></span>
 <span class="r-in"><span class="co"># } </span></span>
 </code></pre></div>
     </div>

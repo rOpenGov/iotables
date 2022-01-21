@@ -62,6 +62,7 @@
 #' @importFrom utils data
 #' @importFrom rlang .data
 #' @importFrom utils globalVariables
+#' @importFrom glue glue
 #' @family import functions
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1990", 
@@ -205,7 +206,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   metadata_rows <- metadata_rows %>% mutate ( across(where(is.factor), as.character) )
   metadata_cols <- metadata_cols %>% mutate ( across(where(is.factor), as.character) )
   
-  ###Exception handling for wrong paramters that are not directly inputed-----
+  ## Exception handling for wrong paramters that are not directly inputed-----
   if ( is.null(labelled_io_data) ) {  #if not directly inputed data 
     if (is.null(geo)) stop ("Error: no country selected.")
     if (! labelling %in% c("iotables", "short")) {
@@ -302,18 +303,18 @@ iotable_get <- function ( labelled_io_data = NULL,
     warning("Warning: country code changed to upper case.")
   }
   
-  if ( ! unit_input %in% labelled_io_data$unit ) { 
-    stop("This currency unit is not found in the raw data frame.")
-  }
+  assert_that( unit %in% labelled_io_data$unit, 
+               msg = glue::glue("The unit='{unit}' is not found in the raw data frame for geo={geo}, year={year} and stk_flow={stk_flow}.")) 
   
-  if ( ! geo_input %in% labelled_io_data$geo ) { 
-    stop("This currency unit is not found in the raw data frame.")
-  }
   
-  if ( ! year_input %in% labelled_io_data$year ) { 
-    stop("This year is not found in the raw data frame.")
-  }
+  assert_that( geo %in% labelled_io_data$geo, 
+               msg = glue::glue("The geo='{geo}' is not found in the raw data frame  for year={year}, unit={unit} and stk_flow={stk_flow}.")) 
+
   
+  assert_that( year_input %in% labelled_io_data$year, 
+               msg = glue::glue("The year={year} is not found in the raw data frame for geo={geo}, unit={unit} and stk_flow={stk_flow}.")) 
+  
+
 
  ## Selecting table from nested data, if nested at all ---------------  
 

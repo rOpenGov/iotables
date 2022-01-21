@@ -29,6 +29,7 @@ L <- leontieff_matrix_create( technology_coefficients_matrix = tm )
 }
 \seealso{
 Other analytic object functions: 
+\code{\link{ghosh_inverse_create}()},
 \code{\link{input_flow_get}()},
 \code{\link{leontieff_inverse_create}()}
 }

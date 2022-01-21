@@ -1,3 +1,7 @@
+# iotablles 0.4.9
+* Replication of results from the Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications published by the United Nations.
+* A new function, 'gosh_inverse_create()' for the creation of forward linkages.
+
 # iotablles 0.4.8
 * A new function, 'output_coefficients_create()' creates a conforming vector of various air pollutants for European input-output tables.
 * A new vignette, [Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html) shows comparable results with the Eurostat Manual.

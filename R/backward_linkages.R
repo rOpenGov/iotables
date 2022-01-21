@@ -5,8 +5,11 @@
 #' it will increase the total (intermediate) demand on all other sectors, which is measured
 #' by backward linkages. 
 #' 
-#' @details Backward linkages as defined by the Eurostat Manual of Supply, Use and
-#' Input-Output Tables (see p506-507.)
+#' @details Backward linkages are defined as the column sum of the Leontief inverse, in line with 
+#' the Eurostat Manual of Supply, Use and
+#' Input-Output Tables (see p506-507.) and the 
+#' Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications of 
+#' the United Nations (see p636,)
 #' @param Im A Leontieff inverse matrix created by the
 #' \code{\link{leontieff_inverse_create}} function. 
 #' @return The vector of industry (product) backward linkages in a wide

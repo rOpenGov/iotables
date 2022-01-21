@@ -4,7 +4,6 @@
 #' @param digits Digit input to check for validity.
 #' @return An error if the digits are not \code{NULL} or an integer value.
 #' @keywords internal
-
 check_digits <- function(digits) {
   
   if (!is.null(digits)) { ##rounding digits must be numeric, if given

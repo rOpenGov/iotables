@@ -22,8 +22,11 @@ it will increase the total (intermediate) demand on all other sectors, which is 
 by backward linkages.
 }
 \details{
-Backward linkages as defined by the Eurostat Manual of Supply, Use and
-Input-Output Tables (see p506-507.)
+Backward linkages are defined as the column sum of the Leontief inverse, in line with 
+the Eurostat Manual of Supply, Use and
+Input-Output Tables (see p506-507.) and the 
+Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications of 
+the United Nations (see p636,)
 }
 \examples{
 de_coeff <- input_coefficient_matrix_create( iotable_get(), 

@@ -314,11 +314,11 @@ select_iotable <- function(labelled_io_data, geo, year, unit, stk_flow) {
         labelled_io_data$stk_flow == stk_flow
     )
     
-    assertthat::assert_that(length(selected_table)>0, 
+   assert_that(length(selected_table)>0, 
                             msg = glue::glue("In source='{source}' there is no available table for geo='{geo_input}' in year='{year}' with unit='{unit}' and stk_flow='{stk_flow}'.")
     )
     
-    assertthat::assert_that(length(selected_table)==1, 
+    assert_that(length(selected_table)==1, 
                             msg = glue::glue("In source='{source}' geo='{geo}' in year='{year}' with unit='{unit}' and stk_flow='{stk_flow}' do not select a unique table.")
     )
     

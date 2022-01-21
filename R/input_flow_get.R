@@ -1,6 +1,9 @@
-#' @title Create a use (input flow) matrix
+#' @title Create an inter-industry or input flow matrix
 #' 
-#' @description Select the use table from a symmetric input-output table.
+#' @description Select the first quadrant of the symmetric input-output table.
+#' 
+#' @details The first quadrant is called the input flow matrix, or the input requirements matrix, 
+#' or the inter-industry matrix in different contexts.
 #' @param data_table A symmetric input-output table or use table 
 #' retrieved by the \code{\link{iotable_get}} function. 
 #' @param households Defaults to \code{FALSE}. If \code{TRUE}, the 

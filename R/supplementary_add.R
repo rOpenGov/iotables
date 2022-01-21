@@ -72,7 +72,7 @@ supplementary_add <- function ( data_table,
     names(key_column) <- names (data_table)[1]
     }
   
-  siot_ext <- add_rows(data_table, supplementary_data)
+  siot_ext <- rows_add(data_table, supplementary_data)
   
   if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names (siot_ext)))  ) {
     household_col <- which ( tolower ( names ( siot_ext)) %in% c("final_consumption_households", "p3_s14") )

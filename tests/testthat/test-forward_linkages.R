@@ -1,19 +1,14 @@
-library (testthat)
-
-context ("Creating forward linkages")
-
 de_out <- output_coefficient_matrix_create ( 
-  io_table = iotable_get(), "final_demand", digits = 4
+  data_table = iotable_get(), "final_demand", digits = 4
 )
-
 
 fw <- forward_linkages ( output_coefficient_matrix = de_out, 
                    digits = 4 )
 
 #The Eurostat Manual uses a different rounding. There is a slight mismatch)
 
-test_that("correct data is returned", {
+test_that("Correct forward linkages", {
   expect_equal(fw$forward,
-               c(2.1126, 1.6691, 1.3558, 1.5848, 2.1037,1.2106),
+               c(2.1126, 1.6691, 1.3558, 1.5848, 2.1037, 1.2106),
                tolerance=1e-2)
 })

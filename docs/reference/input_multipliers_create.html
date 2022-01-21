@@ -16,7 +16,7 @@ The function creates the multipliers (direct + indirect effects)."><meta propert
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,12 @@ The function creates the multipliers (direct + indirect effects).</h1>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">input_multipliers_create</span><span class="op">(</span><span class="va">input_requirements</span>, <span class="va">inverse</span>, digits <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">input_multipliers_create</span><span class="op">(</span>
+  <span class="va">input_requirements</span>,
+  <span class="va">Im</span>,
+  multiplier_name <span class="op">=</span> <span class="cn">NULL</span>,
+  digits <span class="op">=</span> <span class="cn">NULL</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,7 +76,7 @@ The function creates the multipliers (direct + indirect effects).</h1>
     <dl><dt>input_requirements</dt>
 <dd><p>A matrix or vector created by 
 <code><a href="input_indicator_create.html">input_indicator_create</a></code></p></dd>
-<dt>inverse</dt>
+<dt>Im</dt>
 <dd><p>A Leontieff-inverse created by <code><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></code>.</p></dd>
 <dt>digits</dt>
 <dd><p>Rounding digits, defaults to <code>NULL</code>, in which case 
@@ -103,11 +108,11 @@ auxiliary metadata column (for joining with other matrixes.)</p>
 <span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">input_coeff_nl</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">input_multipliers_create</span><span class="op">(</span>input_requirements <span class="op">=</span> <span class="va">compensation_indicator</span>, </span>
-<span class="r-in">                        inverse <span class="op">=</span> <span class="va">I_nl</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               agriculture_group  mining_group      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 "&lt;environment&gt;_multiplier" "2.46577100952711" "2.33334345171903"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    manufacturing_group utilities_group    construction_group services_group    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 "1.8399475029645"   "2.37219889004239" "1.95303431954841" "1.41713191732829"</span>
+<span class="r-in">                        Im <span class="op">=</span> <span class="va">I_nl</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             prod_na agriculture_group mining_group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 compensation_employees_indicator          2.465771     2.333343</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    manufacturing_group utilities_group construction_group services_group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11            1.839948        2.372199           1.953034       1.417132</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

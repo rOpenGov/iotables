@@ -2,7 +2,7 @@
 % Please edit documentation in R/input_flow_get.R
 \name{input_flow_get}
 \alias{input_flow_get}
-\title{Create a use (input flow) matrix}
+\title{Create an inter-industry or input flow matrix}
 \usage{
 input_flow_get(data_table, empty_remove = FALSE, households = TRUE)
 }
@@ -21,7 +21,11 @@ final household expenditure is added to the input flow table.}
 A data flow matrix (a symmetric use table) with a key column.
 }
 \description{
-Select the use table from a symmetric input-output table.
+Select the first quadrant of the symmetric input-output table.
+}
+\details{
+The first quadrant is called the input flow matrix, or the input requirements matrix, 
+or the inter-industry matrix in different contexts.
 }
 \examples{
 input_flow <- input_flow_get(data_table = iotable_get(), 
@@ -31,6 +35,7 @@ input_flow <- input_flow_get(data_table = iotable_get(),
 }
 \seealso{
 Other analytic object functions: 
+\code{\link{ghosh_inverse_create}()},
 \code{\link{leontieff_inverse_create}()},
 \code{\link{leontieff_matrix_create}()}
 }

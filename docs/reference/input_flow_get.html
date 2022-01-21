@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@ final household expenditure is added to the input flow table.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data flow matrix in a labelled data frame.</p>
+    <p>A data flow matrix (a symmetric use table) with a key column.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -83,8 +83,7 @@ final household expenditure is added to the input flow table.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">data_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="iotable_get.html">iotable_get</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">input_flow</span> <span class="op">&lt;-</span> <span class="fu">input_flow_get</span><span class="op">(</span>data_table <span class="op">=</span> <span class="va">data_table</span>, </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">input_flow</span> <span class="op">&lt;-</span> <span class="fu">input_flow_get</span><span class="op">(</span>data_table <span class="op">=</span> <span class="fu"><a href="iotable_get.html">iotable_get</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span class="r-in">                             empty_remove <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span class="r-in">                             households <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>

@@ -4,7 +4,8 @@
 #' amounts of products are available to be used as inputs by other sectors which can increase their 
 #' production, which is captured in this indicator vector.
 #' @details Forward linkages as defined by the Eurostat Manual of Supply, Use and
-#' Input-Output Tables (see p506-507.)
+#' Input-Output Tables (pp. 506--507) and the United Nations 
+#' Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications p637.
 #' @param output_coefficient_matrix An output coefficient matrix created 
 #' with the \code{\link{output_coefficient_matrix_create}} function. 
 #' @param digits Number of decimals for rounding, defaults to \code{NULL}.
@@ -24,19 +25,15 @@
 #'                  digits = 4 )
 #' @export 
 
-
 forward_linkages <- function ( output_coefficient_matrix, 
                                digits  = NULL) {
 
   output_coefficient_matrix <- mutate (output_coefficient_matrix, 
                                        across(where(is.factor), as.character) )
-  
   first_col <- output_coefficient_matrix [, 1]
-  Ocm <- as.matrix(output_coefficient_matrix [, -1])
-
-  I <- leontieff_inverse_create( output_coefficient_matrix )
-  FLm <- I
-  FLm$forward_linkages <- rowSums(I[, 2:ncol(I)])
+  G <- ghosh_inverse_create( output_coefficient_matrix )
+  FLm <- G
+  FLm$forward_linkages <- rowSums(G[, -1])
   
   if ( !is.null(digits)) {
     FLm[, 2:ncol(FLm)] <- round ( FLm[, 2:ncol(FLm)], digits )

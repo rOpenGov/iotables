@@ -8,8 +8,7 @@ input_coefficient_matrix_create(data_table, households = FALSE, digits = NULL)
 }
 \arguments{
 \item{data_table}{A symmetric input-output table, a use table, 
-a margins or tax table retrieved by the \code{\link{iotable_get}}
- function.}
+a margins or tax table retrieved by the \code{\link{iotable_get}} function.}
 
 \item{households}{Defaults to \code{NULL}. Household column can be added 
 with \code{TRUE}.}
@@ -34,12 +33,13 @@ the same column names must be  found in the use table (input flow) and the
 output vector.
 }
 \details{
-The terminology follows the 
+The input coefficients of production activities may be interpreted as the corresponding 
+cost shares for products and primary inputs in total output. Our terminology follows the 
 \href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables}.
 Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report, 
 which cannot be linked due to a malformatted url, but can be found with a search engine.
 this matrix is called 'technological coefficients'. The results of the function are 
-tested on both sources.This is a wrapper function around  \code{\link{coefficient_matrix_create}}.
+tested on both sources. This is a wrapper function around  \code{\link{coefficient_matrix_create}}.
 }
 \examples{
 input_coefficient_matrix_create ( 

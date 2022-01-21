@@ -1,4 +1,4 @@
-context ("Creating an  input coefficient matrix")
+# Creating an  input coefficient matrix
 
 nl <- netherlands_2006
 
@@ -13,10 +13,10 @@ I_nl <- leontieff_inverse_create( input_coeff_nl )
 dir <- direct_effects_create(
   input_requirements = compensation_indicator, 
   inverse = I_nl)
+
 published_effects <- c(0.263, 0.099, 0.306, 0.212, 0.465, 0.493)
 
-
-test_that("get_input_flow correct input coefficients are returned", {
+test_that("Correct direct effects are returned", {
   expect_equal(as.numeric(dir[2:7]), published_effects, 
                tolerance = .0005)
 })

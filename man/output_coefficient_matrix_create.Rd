@@ -4,11 +4,11 @@
 \alias{output_coefficient_matrix_create}
 \title{Create an output coefficient matrix}
 \usage{
-output_coefficient_matrix_create(io_table, total = "tfu", digits = NULL)
+output_coefficient_matrix_create(data_table, total = "tfu", digits = NULL)
 }
 \arguments{
-\item{io_table}{A symmetric input-output table or use table created with the
-\code{\link{iotable_get}} function which contains the 'total' column. 
+\item{data_table}{A symmetric input-output table, a use table, 
+a margins or tax table retrieved by the \code{\link{iotable_get}}. 
 In case you use \code{type="tfu"} you need to input a
 full iotable, create by the \code{\link{iotable_get}}, because you will need
 the final demand column.}
@@ -31,15 +31,16 @@ Create an output coefficient matrix from the input flow matrix or a symmetric
 input-output table.
 }
 \details{
-If there are zero values in present, they will be changed to 
+The output coefficients may be interpreted as the market shares of products
+in total output. If there are zero values in present, they will be changed to 
 0.000001 and you will get a warning. Some analytical equations cannot be 
 solved with zero elements. You either have faulty input data, or you have 
 to use some sort of data modification to carry on your analysis.
 }
 \examples{
-io_table <- iotable_get() 
+data_table <- iotable_get() 
 
-output_coefficient_matrix_create (io_table  = io_table, 
+output_coefficient_matrix_create (data_table = data_table, 
                                   total = 'tfu',
                                   digits = 4)
 }

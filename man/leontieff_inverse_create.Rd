@@ -2,7 +2,9 @@
 % Please edit documentation in R/leontieff_inverse_create.R
 \name{leontieff_inverse_create}
 \alias{leontieff_inverse_create}
-\title{Create the inverse of a Leontieff-matrix.}
+\title{Create the inverse of a Leontieff-matrix.
+
+The inversion takes place after the basic properties of the Leontieff matrix.}
 \usage{
 leontieff_inverse_create(technology_coefficients_matrix, digits = NULL)
 }
@@ -15,6 +17,8 @@ by the \code{\link{input_coefficient_matrix_create}} or
 digits. Default is \code{NULL} when no rounding is applied.}
 }
 \description{
+Create the inverse of a Leontieff-matrix.
+
 The inversion takes place after the basic properties of the Leontieff matrix.
 }
 \examples{
@@ -25,6 +29,7 @@ I <- leontieff_inverse_create( technology_coefficients_matrix = tm )
 }
 \seealso{
 Other analytic object functions: 
+\code{\link{ghosh_inverse_create}()},
 \code{\link{input_flow_get}()},
 \code{\link{leontieff_matrix_create}()}
 }

@@ -3,13 +3,13 @@
 #' @description Create an output coefficient matrix from the input flow matrix or a symmetric
 #' input-output table. 
 #' 
-#' @details If there are zero values in present, they will be changed to 
+#' @details The output coefficients may be interpreted as the market shares of products
+#' in total output. If there are zero values in present, they will be changed to 
 #' 0.000001 and you will get a warning. Some analytical equations cannot be 
 #' solved with zero elements. You either have faulty input data, or you have 
 #' to use some sort of data modification to carry on your analysis. 
-#' 
-#' @param io_table A symmetric input-output table or use table created with the  
-#' \code{\link{iotable_get}} function which contains the 'total' column. 
+#' @param data_table A symmetric input-output table, a use table, 
+#' a margins or tax table retrieved by the \code{\link{iotable_get}}. 
 #' In case you use \code{type="tfu"} you need to input a
 #' full iotable, create by the \code{\link{iotable_get}}, because you will need
 #' the final demand column.
@@ -24,59 +24,61 @@
 #' first, auxiliary metadata column.
 #' @importFrom dplyr mutate across
 #' @examples 
-#' io_table <- iotable_get() 
+#' data_table <- iotable_get() 
 #' 
-#' output_coefficient_matrix_create (io_table  = io_table, 
+#' output_coefficient_matrix_create (data_table = data_table, 
 #'                                   total = 'tfu',
 #'                                   digits = 4)
 #' @export 
 
-output_coefficient_matrix_create <- function (io_table,
+output_coefficient_matrix_create <- function (data_table,
                                               total = "tfu",
                                               digits = NULL) {
   check_digits ( digits = digits)
   
-  io_table <- io_table %>% mutate(across(where(is.factor), as.character))
+  data_table <- data_table %>% mutate(across(where(is.factor), as.character))
   
   ###Find non-zero cols and rows and remove them---- 
-  io_table <- empty_remove ( io_table )
+  data_table <- empty_remove ( data_table )
   
-  total_row <- which ( tolower(as.character(unlist(io_table[, 1])))
+  total_row <- which ( tolower(as.character(unlist(data_table[, 1])))
                        %in% c("cpa_total", "total") )
   
   if ( length(total_row) == 0 ) stop ("Total row not found") else {
-    io_table <- io_table [1:(total_row-1), ]
+    data_table <- data_table [1:(total_row-1), ]
   }
   
   if ( total == "total" ) { 
-    demand_col <- which (tolower(names(io_table)) %in% c("cpa_total", "total") )
-    last_column <- quadrant_separator_find ( io_table  )
+    demand_col <- which (tolower(names(data_table)) %in% c("cpa_total", "total") )
+    last_column <- quadrant_separator_find ( data_table  )
     if ( length(demand_col) == 0 ) { 
       stop ("Please input a table that has a total column.")
     } #end of finding total column if originally missing
     
   } else if ( tolower(total) %in% c("total_final_use", "tfu", "final_demand")  ) {
-    demand_col <- which (tolower(names(io_table)) %in% 
+    demand_col <- which (tolower(names(data_table)) %in% 
                            c("tfu", "total_final_use") )
-    last_column <- quadrant_separator_find ( io_table, 
+    last_column <- quadrant_separator_find ( data_table, 
                                              include_total = FALSE )
    }  else {
       stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
     }
   
-  demand <- io_table [, demand_col ]
+  demand <- data_table [, demand_col ]
   demand
   
-  io_table <- io_table %>% 
+  data_table <- data_table %>% 
     mutate(across(where(is.factor), as.character)) %>%
-    select( 1:last_column )
+    select( 1:last_column ) # selection should be explicit?
+  # The solution suggested by tidyselect 
+  # all_of(last_column)` instead of `last_column` is not a good solution 
   
-  keep_first_name <- names(io_table)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
+  keep_first_name <- names(data_table)[1]  #keep the first name of the table for further use, i.e. prod_na, t_rows, induse
 
-  io_table <- io_table[, 1:last_column ]
+  data_table <- data_table[, 1:last_column ]
   
   ###Create the return data.frame from first column------
-  first_col <- as.data.frame( io_table[ ,1] )
+  first_col <- as.data.frame( data_table[ ,1] )
   names (first_col) <- keep_first_name
   
   null_to_eps <- function(x) ifelse( x==0, 0.000001, x )
@@ -85,10 +87,10 @@ output_coefficient_matrix_create <- function (io_table,
 
   #forward linkeages on p507
   ##Avoid division by zero with epsilon-----
-  io_table <- vapply ( io_table[seq_len(nrow(io_table)), c(2:last_column)],
-                 null_to_eps, numeric (nrow(io_table)) )
+  data_table <- vapply ( data_table[seq_len(nrow(data_table)), c(2:last_column)],
+                 null_to_eps, numeric (nrow(data_table)) )
   
-  output_coeff <- apply (io_table, 2,
+  output_coeff <- apply (data_table, 2,
                          function(i)i/demand)
 
   output_coeff <- as.data.frame (output_coeff)

@@ -1,7 +1,6 @@
 #' Validate source Parameter
 #' @param source Possible data sources.
-#' @keywords internal 
-
+#' @keywords internal
 validate_source <- function(source) {
   possible_download_sources <- c("naio_10_cp1700", "naio_10_cp1750", 
                                  "naio_10_pyp1700", "naio_10_pyp1750",
@@ -24,8 +23,7 @@ validate_source <- function(source) {
 #' @return A logical variable of length 1, \code{TRUE} or \code{FALSE}.
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
-#' @keywords internal 
-
+#' @keywords internal
 is_key_column_present <- function (data_table, potential_keywords=NULL) {
   assertthat::assert_that( "data.frame" %in% class(data_table), 
                            msg = "The 'data_table', vector or matrix is not a data.frame." )

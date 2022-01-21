@@ -158,7 +158,7 @@ L_cz <- leontieff_matrix_create(input_coeff_matrix_cz)
 I_cz <- leontieff_inverse_create(input_coeff_matrix_cz)
 
 L_sk <- leontieff_matrix_create(input_coeff_matrix_sk)
-I_sk <- leontieff_inverse_create(input_coeff_matrix_sk )
+I_sk <- leontieff_inverse_create(input_coeff_matrix_sk)
 ```
 ```{r printpartleontieff}
 head(I_cz[,1:8])

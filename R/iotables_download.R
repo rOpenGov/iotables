@@ -56,7 +56,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
                                 force_download = FALSE ) {
 
   ## Parameter validation ---------------------------------------------
-  if ( ! source %in% c("uk_2010", "germany_1990")) {
+  if ( ! source %in% c("uk_2010", "germany_1990") ) {
     validate_source(source) 
     downloaded <- tempdir_data(source, force_download)
     } else if ( source == "uk_2010" ) return (uk_2010_get())

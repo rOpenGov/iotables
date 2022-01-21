@@ -33,7 +33,7 @@ supplementary_data <- emissions
 extended <- supplementary_add  ( data_table = de_io, 
                                  supplementary_data =   emissions)
 
-#The Eurostat Manual page 494
+# Check against The Eurostat Manual page 494
 
 test_that("correct data is returned", {
   expect_equal(extended$construction [ which ( extended[,1] == "CO2_coefficients") ], 

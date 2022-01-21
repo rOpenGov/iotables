@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,6 +135,11 @@ from the current sessions' temporary directory.
           <code><a href="output_coefficient_matrix_create.html">output_coefficient_matrix_create()</a></code> 
         </dt>
         <dd>Create an output coefficient matrix</dd>
+      </dl><dl><dt>
+          
+          <code><a href="output_coefficients_create.html">output_coefficients_create()</a></code> 
+        </dt>
+        <dd>Create output coefficients</dd>
       </dl></div><div class="section level2">
       <h2 id="siot-processing-functions">SIOT processing functions<a class="anchor" aria-label="anchor" href="#siot-processing-functions"></a></h2>
       
@@ -186,6 +191,11 @@ table.</dd>
         <dd>Add Supplementary Data</dd>
       </dl><dl><dt>
           
+          <code><a href="rows_add.html">rows_add()</a></code> 
+        </dt>
+        <dd>Add conforming row(s)</dd>
+      </dl><dl><dt>
+          
           <code><a href="household_column_find.html">household_column_find()</a></code> 
         </dt>
         <dd>Return the position of final household expenditure</dd>
@@ -196,9 +206,14 @@ table.</dd>
         <dd>Round all matrix values to required number of digits.</dd>
       </dl><dl><dt>
           
-          <code><a href="vector_transpose.html">vector_transpose()</a></code> 
+          <code><a href="vector_transpose_longer.html">vector_transpose_longer()</a></code> <code><a href="vector_transpose_longer.html">vector_transpose()</a></code> 
         </dt>
-        <dd>Transpose a vector</dd>
+        <dd>Transpose a vector to a long form</dd>
+      </dl><dl><dt>
+          
+          <code><a href="vector_transpose_wider.html">vector_transpose_wider()</a></code> 
+        </dt>
+        <dd>Transpose a vector to wider format</dd>
       </dl></div><div class="section level2">
       <h2 id="analytic-objects">Analytic objects<a class="anchor" aria-label="anchor" href="#analytic-objects"></a></h2>
       
@@ -341,7 +356,14 @@ The function creates the multipliers (direct + indirect effects).</dd>
           
           <code><a href="germany_1990.html">germany_1990</a></code> 
         </dt>
-        <dd>Simple input-output table for Germany, 1990.</dd>
+        <dd>Simple input-output table for Germany, 1990.
+
+For testing purposes a well documented example data set is used from the Eurostat manual.
+The table in the Eurostat manual is brought to the format used by the Eurostat database.
+It is a small dataset for examples, but it is also instructive to understand how Eurostat
+stores the highly structured SIOTs in long-form tidy datasets. 
+The labels were slightly alterred to reflect the transition from the vocabulary
+of ESA95 to ESA2010 since the publication of the Manual.</dd>
       </dl><dl><dt>
           
           <code><a href="metadata.html">metadata</a></code> 

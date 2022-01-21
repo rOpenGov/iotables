@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Working With Eurostat Data</h1>
                         <h4 data-toc-skip class="author">Daniel Antal, CFA</h4>
             
-            <h4 data-toc-skip class="date">2021-12-21</h4>
+            <h4 data-toc-skip class="date">2021-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/HEAD/vignettes/working_with_eurostat.Rmd" class="external-link"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
       <div class="d-none name"><code>working_with_eurostat.Rmd</code></div>
@@ -317,20 +317,20 @@
 <span class="va">multipliers_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/input_multipliers_create.html">input_multipliers_create</a></span><span class="op">(</span> <span class="va">primary_inputs_sk</span><span class="op">[</span><span class="va">not_removed_cols</span><span class="op">]</span>, <span class="va">I_sk</span> <span class="op">)</span> </code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">multipliers_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt;                    prod_na  CPA_A01  CPA_A02  CPA_A03    CPA_B  CPA_C10-12</span>
-<span class="co">#&gt; 1 &lt;environment&gt;_multiplier 2.734894 2.481801 2.659809 2.677425    2.675645</span>
-<span class="co">#&gt; 2 &lt;environment&gt;_multiplier 4.381010 5.310385 2.335304 1.287826    2.490763</span>
-<span class="co">#&gt; 3 &lt;environment&gt;_multiplier 2.580705 2.726267 2.064126 1.686937    3.826019</span>
-<span class="co">#&gt; 4 &lt;environment&gt;_multiplier 2.556156 2.699112 2.048389 1.722373    3.849046</span>
-<span class="co">#&gt; 5 &lt;environment&gt;_multiplier 1.222226 1.452504 1.053472 1.160912 1708.913018</span>
-<span class="co">#&gt; 6 &lt;environment&gt;_multiplier 2.418444 2.434447 2.223010 1.825428    4.703837</span>
-<span class="co">#&gt;   CPA_C13-15   CPA_C16</span>
-<span class="co">#&gt; 1   2.672010  2.517172</span>
-<span class="co">#&gt; 2   1.891608  4.446161</span>
-<span class="co">#&gt; 3   2.530682  3.316057</span>
-<span class="co">#&gt; 4   2.544464  3.316171</span>
-<span class="co">#&gt; 5   7.173591 -6.958898</span>
-<span class="co">#&gt; 6   2.967467  3.851769</span></code></pre></div>
+<span class="co">#&gt;                                                                                                       prod_na</span>
+<span class="co">#&gt; 1 c("TOTAL", "P7", "D1", "D11", "D29X39", "P51C", "B2A3G", "B2A3N", "B1G", "P1", "P2_ADJ", "D21X31", "TS_BP")</span>
+<span class="co">#&gt; 2 c("TOTAL", "P7", "D1", "D11", "D29X39", "P51C", "B2A3G", "B2A3N", "B1G", "P1", "P2_ADJ", "D21X31", "TS_BP")</span>
+<span class="co">#&gt; 3 c("TOTAL", "P7", "D1", "D11", "D29X39", "P51C", "B2A3G", "B2A3N", "B1G", "P1", "P2_ADJ", "D21X31", "TS_BP")</span>
+<span class="co">#&gt; 4 c("TOTAL", "P7", "D1", "D11", "D29X39", "P51C", "B2A3G", "B2A3N", "B1G", "P1", "P2_ADJ", "D21X31", "TS_BP")</span>
+<span class="co">#&gt; 5 c("TOTAL", "P7", "D1", "D11", "D29X39", "P51C", "B2A3G", "B2A3N", "B1G", "P1", "P2_ADJ", "D21X31", "TS_BP")</span>
+<span class="co">#&gt; 6 c("TOTAL", "P7", "D1", "D11", "D29X39", "P51C", "B2A3G", "B2A3N", "B1G", "P1", "P2_ADJ", "D21X31", "TS_BP")</span>
+<span class="co">#&gt;    CPA_A01  CPA_A02  CPA_A03    CPA_B  CPA_C10-12 CPA_C13-15   CPA_C16</span>
+<span class="co">#&gt; 1 2.734894 2.481801 2.659809 2.677425    2.675645   2.672010  2.517172</span>
+<span class="co">#&gt; 2 4.381010 5.310385 2.335304 1.287826    2.490763   1.891608  4.446161</span>
+<span class="co">#&gt; 3 2.580705 2.726267 2.064126 1.686937    3.826019   2.530682  3.316057</span>
+<span class="co">#&gt; 4 2.556156 2.699112 2.048389 1.722373    3.849046   2.544464  3.316171</span>
+<span class="co">#&gt; 5 1.222226 1.452504 1.053472 1.160912 1708.913018   7.173591 -6.958898</span>
+<span class="co">#&gt; 6 2.418444 2.434447 2.223010 1.825428    4.703837   2.967467  3.851769</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="employment-multipliers">Employment indicators and multipliers<a class="anchor" aria-label="anchor" href="#employment-multipliers"></a>
@@ -349,17 +349,18 @@
   <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span> return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"employment_total"</span> <span class="op">)</span>
 
-<span class="va">emp_indicator_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span> <span class="op">(</span> 
-  <span class="va">cz_io</span>, 
-  <span class="va">emp_cz</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<span class="va">emp_indicator_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span> <span class="op">(</span><span class="va">cz_io</span>, 
+                               <span class="va">emp_cz</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/coefficient_matrix_create.html">coefficient_matrix_create</a></span><span class="op">(</span> return_part <span class="op">=</span> <span class="st">'primary_inputs'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span> <span class="op">(</span> <span class="va">prod_na</span> <span class="op">==</span> <span class="st">"employment_total"</span> <span class="op">)</span>
 
 <span class="va">emp_effect_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span><span class="va">emp_indicator_sk</span>, <span class="va">I_sk</span><span class="op">)</span>  
 <span class="va">emp_effect_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span><span class="va">emp_indicator_cz</span>, <span class="va">I_cz</span><span class="op">)</span>  </code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/vector_transpose.html">vector_transpose</a></span> <span class="op">(</span><span class="va">emp_effect_cz</span>, values_to <span class="op">=</span><span class="st">"employment_effect_cz"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="../reference/vector_transpose.html">vector_transpose</a></span><span class="op">(</span><span class="va">emp_effect_sk</span>, values_to <span class="op">=</span> <span class="st">"employment_effect_sk"</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'nace_r2'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/vector_transpose_longer.html">vector_transpose_longer</a></span> <span class="op">(</span><span class="va">emp_effect_cz</span>, values_to <span class="op">=</span><span class="st">"employment_effect_cz"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span><span class="fu"><a href="../reference/vector_transpose_longer.html">vector_transpose_longer</a></span><span class="op">(</span><span class="va">emp_effect_sk</span>, 
+                                     values_to <span class="op">=</span> <span class="st">"employment_effect_sk"</span><span class="op">)</span>, 
+             by <span class="op">=</span> <span class="st">'nace_r2'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"employmnet"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">*</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">employment_effect_sk</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>
@@ -383,11 +384,12 @@
   <span class="va">emp_indicator_cz</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">emp_indicator_cz</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">I_cz</span><span class="op">)</span><span class="op">]</span>, 
   <span class="va">I_cz</span> <span class="op">)</span>  </code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/vector_transpose.html">vector_transpose</a></span> <span class="op">(</span><span class="va">emp_multiplier_cz</span>, values_to <span class="op">=</span><span class="st">"employment_multiplier_cz"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="../reference/vector_transpose.html">vector_transpose</a></span><span class="op">(</span><span class="va">emp_multiplier_cz</span>, 
-                               values_to <span class="op">=</span> <span class="st">"employment_multiplier_sk"</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'nace_r2'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span> <span class="op">(</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"employmnet"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">*</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span> <span class="op">(</span> <span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">employment_multiplier_sk</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/vector_transpose_longer.html">vector_transpose_longer</a></span> <span class="op">(</span><span class="va">emp_multiplier_cz</span>, values_to <span class="op">=</span><span class="st">"employment_multiplier_cz"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/vector_transpose_longer.html">vector_transpose_longer</a></span><span class="op">(</span><span class="va">emp_multiplier_cz</span>, 
+                                    values_to <span class="op">=</span> <span class="st">"employment_multiplier_sk"</span><span class="op">)</span>,
+            by <span class="op">=</span> <span class="st">'nace_r2'</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"employmnet"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">*</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span> <span class="op">(</span><span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">employment_multiplier_sk</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>
 <span class="co">#&gt; Selecting by employment_multiplier_sk</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 x 3</span></span>
@@ -409,11 +411,12 @@
 </h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_multipliers_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span><span class="va">input_coeff_matrix_cz</span><span class="op">)</span>
-<span class="va">output_multipliers_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span><span class="va">input_coeff_matrix_sk</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/empty_remove.html">empty_remove</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">output_multipliers_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_multiplier_create.html">output_multiplier_create</a></span> <span class="op">(</span><span class="va">input_coeff_matrix_sk</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+                                                     <span class="fu"><a href="../reference/empty_remove.html">empty_remove</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/vector_transpose.html">vector_transpose</a></span> <span class="op">(</span><span class="va">emp_multiplier_cz</span>, 
-                  values_to <span class="op">=</span><span class="st">"employment_multiplier_cz"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span> <span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">employment_multiplier_cz</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/vector_transpose_longer.html">vector_transpose_longer</a></span> <span class="op">(</span><span class="va">emp_multiplier_cz</span>, 
+                         values_to <span class="op">=</span><span class="st">"employment_multiplier_cz"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">employment_multiplier_cz</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; Selecting by employment_multiplier_cz</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 x 2</span></span>
@@ -440,9 +443,9 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#random sample</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="fu"><a href="../reference/vector_transpose.html">vector_transpose</a></span> <span class="op">(</span><span class="va">cz_bw</span>, 
-                  values_to <span class="op">=</span><span class="st">"backward_linkages"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span> <span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">backward_linkages</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+<span class="fu"><a href="../reference/vector_transpose_longer.html">vector_transpose_longer</a></span><span class="op">(</span><span class="va">cz_bw</span>, 
+                        values_to <span class="op">=</span><span class="st">"backward_linkages"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">.data</span><span class="op">$</span><span class="va">backward_linkages</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 x 2</span></span>
 <span class="co">#&gt;   nace_r2 backward_linkages</span>
@@ -459,10 +462,13 @@
 <p>Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_coeff_cz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span><span class="op">(</span> 
-  io_table <span class="op">=</span> <span class="va">cz_io</span>, total <span class="op">=</span> <span class="st">"tfu"</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+  io_table <span class="op">=</span> <span class="va">cz_io</span>, 
+  total <span class="op">=</span> <span class="st">"tfu"</span>, 
+  digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 
 <span class="va">output_coeff_sk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_coefficient_matrix_create.html">output_coefficient_matrix_create</a></span><span class="op">(</span> 
-  io_table <span class="op">=</span> <span class="va">sk_io</span>, total <span class="op">=</span> <span class="st">"tfu"</span><span class="op">)</span>
+  io_table <span class="op">=</span> <span class="va">sk_io</span>, 
+  total <span class="op">=</span> <span class="st">"tfu"</span><span class="op">)</span>
 <span class="co">#&gt; Columns and rows of CPA_L68A, CPA_T, CPA_U, P6_U2, P6_U3 are all zeros and will be removed.</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">output_coeff_cz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>

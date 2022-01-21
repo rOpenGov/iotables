@@ -24,7 +24,8 @@ production, which is captured in this indicator vector.
 }
 \details{
 Forward linkages as defined by the Eurostat Manual of Supply, Use and
-Input-Output Tables (see p506-507.)
+Input-Output Tables (pp. 506--507) and the United Nations 
+Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications p637.
 }
 \examples{
 data_table = iotable_get()
