@@ -15,7 +15,7 @@ key_column_create(key_column_name, key_column_values = NULL)
 A tibble with one column, named \code{key_column_name} and with values \code{key_column_values}.
 }
 \description{
-Create a key column for matching dimensions of matrixes.
+Create a key column for matching the dimensions of matrixes.
 }
 \details{
 This function will likely be used with the creation of coefficients that need to be matched with

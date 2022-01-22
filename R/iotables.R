@@ -29,6 +29,8 @@
 #' \code{\link{empty_remove}} symmetrically removes columns and rows if they contain missing values, 
 #' or each and every value is zero. 
 #' \code{\link{rows_add}} Add conforming row(s) to a matrix. 
+#' \code{\link{key_column_create}} This function will likely be used with the creation of coefficients that need to be matched with
+#' a matrix that has a key column.
 #' 
 #' @section analytic object functions: 
 #' \code{\link{input_flow_get}} returns the use (input flow) matrix; 

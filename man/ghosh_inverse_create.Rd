@@ -4,7 +4,7 @@
 \alias{ghosh_inverse_create}
 \title{Create the inverse of a Ghosh-matrix.
 
-The inversion takes place after the basic properties of the Leontieff matrix.}
+Create the Ghosh-inverse from the output coefficients.}
 \usage{
 ghosh_inverse_create(output_coefficients_matrix, digits = NULL)
 }
@@ -18,7 +18,7 @@ digits. Default is \code{NULL} when no rounding is applied.}
 \description{
 Create the inverse of a Ghosh-matrix.
 
-The inversion takes place after the basic properties of the Leontieff matrix.
+Create the Ghosh-inverse from the output coefficients.
 }
 \examples{
 om <- output_coefficient_matrix_create( 

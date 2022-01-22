@@ -92,7 +92,7 @@ reference:
     contents:
       - input_flow_get
       - leontieff_inverse_create
-      - gosh_inverse_create
+      - ghosh_inverse_create
       - leontieff_matrix_create
       - empty_remove
   - title: "Indicators"
@@ -132,6 +132,7 @@ reference:
      Validation datasets for crosschecking with published results.
     contents:
       - germany_1990
+      - germany_airpol
       - metadata
       - primary_inputs
       - employment_metadata

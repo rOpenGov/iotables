@@ -28,15 +28,18 @@ In this example we will show which economic activities contribute the most the g
 The following expression will import the symmetric input-output table for Belgium.  The `stk_flow = "TOTAL"`` makes clear that we are not only considering effects in the domestic (Belgian) economy, but imports, too. More about importing and working with matrixes can be found in the articles ([Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html), [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html).)
 
 ```{r getiotable, eval=FALSE}
+# For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
 BE <- iotable_get(source = "naio_10_cp1700", geo = "BE",
                   year =2015, 
                   labelling = "short", unit = "MIO_EUR", 
                   stk_flow = "TOTAL")
 ```
 
-The following expression gets the the greenhouse gas emissions in $CO_2$-equivalent thousand tons for Belgium in 2020.
+The following expression gets the the greenhouse gas emissions in $CO_2$-equivalent thousand tons for Belgium in 2020. Under the hood, we download the air emissions accounts from the Eurostat data warehouse. AEA present data on air emissions in a way that is fully compatible with the concepts,
+principles and data of the national accounts, but needs further adjustment to input-output tables, which is accomplished by `airpol_get()`
 
 ```{r getairpol, eval=FALSE}
+# For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
 ghg <- airpol_get(airpol="GHG", geo="BE", year=2020, unit="THS_T")
 ```
 
@@ -44,11 +47,11 @@ See `?airpol_get` for the type of air pollutants that you can add to a European 
 
 ## Direct and multiplied effects
 
-The direct effects will show how many thousand tons of extra greenhouse gases will be produced with each millions of euros of extra output from Belgium's industries.  We will only print the top five emitters. 
+The direct effects will show how many thousand tons of extra greenhouse gases will be produced with each millions of euros of extra output from Belgium's industries. We are adding with `rows_add()` the greenhouse gas vector in a conforming form to inter-industry matrix of Belgium. We will only print the top five emitters. 
 
 ```{r ghgindicators}
 be_io <- BE %>%
-  bind_rows( ghg %>% rename (prod_na = .data$indicator) )
+  rows_add( ghg %>% rename (prod_na = .data$indicator) )
 
 ghg_indicator <- input_indicator_create ( 
   data_table  = be_io,
@@ -56,7 +59,7 @@ ghg_indicator <- input_indicator_create (
 ```
 
 ```{r ghgindicator}
-# Only the top 5 is printed: 
+# Only the top 5 is printed, rename, arrange and top_n are tidyverse functions: 
 ghg_indicator %>%
   vector_transpose_longer( .keep = TRUE ) %>%
   rename ( GHG_emission_indicator = .data$value ) %>%
@@ -74,9 +77,9 @@ In Belgium (based on the last known, 2015 structure of the economy, but consider
 | C23         | Manufacture of other non-metallic mineral products |
 | D           | Electricity, gas, steam and air conditioning supply |
 
-This is not the full picture, because it only considers the direct green-house gas emissions (carbon dioxide, methane, and others) of the primary economic activities, but does not consider the supply chain (backward linkages) and the economic activities in the downstream (opportunities created by these activities, forward linkages.)
+This is not the full picture, because the indicator only considers the direct green-house gas emissions (carbon dioxide, methane, and others) of the primary economic activities, but not the emissions of the upstream, supplier part of the value chain (backward linkages) and the economic activities in the downstream, buyer part of the value chain (forward linkages.)
 
-The *Manufacture of other non-metallic mineral products* requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried nonmetallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
+The category of *Manufacture of other non-metallic mineral products* in itself requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried nonmetallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
 
 Let's make a reality check, and calculate only with CO2:
 
@@ -86,7 +89,7 @@ co2 <- airpol_get(airpol="CO2", geo="BE", year=2020, unit = "THS_T")
 
 ```{r co2indicators}
 be_io_c <- BE %>%
-  bind_rows( co2 %>% rename (prod_na = .data$indicator) )
+  rows_add(co2)
 
 co2_indicator <- input_indicator_create ( 
   data_table  = be_io_c,
@@ -100,26 +103,26 @@ co2_indicator %>%
   top_n(5)
 ```
 
-*Crop and animal production, hunting and related service activities* falls out, and *CPA_H50 Water transport* comes back. Are those barges really so clean? But what happened with the agriculture?
+*Crop and animal production, hunting and related service activities* falls out, and *CPA_H50 Water transport* comes back. Are those barges really so clean? And what happened with the agriculture?
 
 Let's check methane, which is a far more potent green house gas than CO2.
 
-```{r getmethaneindicators}
+```{r getmethaneindicators, eval=FALSE}
 methane <- airpol_get (airpol = "CH4", geo="BE", year = 2020, unit = "THS_T")
 ```
 ```{r methaneindicators}
 be_io_m <- BE %>%
-  bind_rows( methane %>% rename (prod_na = .data$indicator) )
+  rows_add(methane)
 
 methane_indicator <- input_indicator_create ( 
-  data_table  = be_io_m,
-  input_row   = "CH4_emission")
+  data_table = be_io_m,
+  input_row  = "CH4_emission")
 
 # Only the top 5 is printed: 
 methane_indicator %>% 
   vector_transpose_longer( .keep = TRUE ) %>%
-  rename ( CH4_emission_indicator = .data$value ) %>%
-  arrange ( -.data$CH4_emission_indicator ) %>%
+  rename(CH4_emission_indicator = .data$value) %>%
+  arrange(-.data$CH4_emission_indicator) %>%
   top_n(5)
 ```
 
@@ -127,7 +130,7 @@ methane_indicator %>%
 
 | NACE code   | Industry    | 
 | :---        |    :----:   | 
-| A01         | Crop and animal production, hunting and related service activities    |
+| A01         | Crop and animal production, hunting and related service activities |
 | CPA_E37-39  | Sewerage, waste management, remediation activities |
 | D           | Electricity, gas, steam and air conditioning supply |
 | CPA_B       | Mining and quarrying |
@@ -138,7 +141,7 @@ The appearance of *Mining and quarrying* is important, because it is the main in
 
 ## Total effects
 
-The multiplier considers these indirect effects, too. The top five polluters remain the same, but their ordering changes. *Crop and animal production, hunting and related service activities* goes ahead of *Fishing and aquaculture* - because methane is a more potent green house gas than CO2. Cattle and sheep emit plenty of methane, and there are plenty of cattle and sheep in Belgium.  The reason why it is important to consider these effects for each and every country, or, when possible, for regions, is that different countries produce different crops and animals. Producing poultry is far less problematic from a green house emission point of view than producing beef products. 
+The multiplier considers these indirect effects, too. The top five polluters remain the same, but their ordering changes. *Crop and animal production, hunting and related service activities* goes ahead of *Fishing and aquaculture*---because methane is a more potent green house gas than CO2. Cattle and sheep emit plenty of methane, and there are plenty of cattle and sheep in Belgium.  The reason why it is important to consider these effects for each and every country, or, when possible, for regions, is that different countries produce different crops and animals. Producing poultry is far less problematic from a green house emission point of view than producing beef products. 
 
 As expected, the *Manufacture of other non-metallic mineral products* gets ahead of *Air transport* as it is highly interrelated with *Mining and quarrying*. Making building more sustainable would be a great achievement, but there is no really clear path: as we can see, *Forestry and logging* come with their problems, too.
 
@@ -147,7 +150,6 @@ I_be <- input_coefficient_matrix_create(
      data_table = BE, 
      digits = 4) %>%
   leontieff_inverse_create()
-
 
 ghg_multipliers <- multiplier_create ( 
   input_vector    = ghg_indicator,
@@ -162,6 +164,7 @@ ghg_multipliers %>%
   arrange ( -.data$GHG_multiplier ) %>%
   top_n(5)
 ```
+
 ```{r savevignettedata, eval=FALSE}
 save(methane, co2, ghg, BE, file = file.path(".." , "inst", "extdata", "environmental_impact_vignette.rda") )
 ```

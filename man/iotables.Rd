@@ -37,7 +37,9 @@ the input-output table. \code{\link{output_get}} is a wrapper function around th
 \code{\link{total_tax_add}} adds taxes to an input-output table.
 \code{\link{empty_remove}} symmetrically removes columns and rows if they contain missing values, 
 or each and every value is zero. 
-\code{\link{rows_add}} Add conforming row(s) to a matrix.
+\code{\link{rows_add}} Add conforming row(s) to a matrix. 
+\code{\link{key_column_create}} This function will likely be used with the creation of coefficients that need to be matched with
+a matrix that has a key column.
 }
 
 \section{analytic object functions}{
@@ -46,6 +48,7 @@ or each and every value is zero.
 \code{\link{leontieff_matrix_create}} and the 
 \code{\link{leontieff_inverse_create}} to create the respective analytic
 matrixes.
+\code{\link{ghosh_inverse_create}} will create the Gosh-inverse.
 }
 
 \section{indicator functions}{

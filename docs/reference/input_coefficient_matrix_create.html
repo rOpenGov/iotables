@@ -16,14 +16,14 @@ output vector."><meta property="og:image" content="/logo.png"><!-- mathjax --><s
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -70,8 +70,7 @@ output vector.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data_table</dt>
 <dd><p>A symmetric input-output table, a use table, 
-a margins or tax table retrieved by the <code><a href="iotable_get.html">iotable_get</a></code>
- function.</p></dd>
+a margins or tax table retrieved by the <code><a href="iotable_get.html">iotable_get</a></code> function.</p></dd>
 <dt>households</dt>
 <dd><p>Defaults to <code>NULL</code>. Household column can be added 
 with <code>TRUE</code>.</p></dd>
@@ -91,12 +90,13 @@ first, auxiliary metadata column.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The terminology follows the 
+    <p>The input coefficients of production activities may be interpreted as the corresponding 
+cost shares for products and primary inputs in total output. Our terminology follows the 
 <a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a>.
 Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report, 
 which cannot be linked due to a malformatted url, but can be found with a search engine.
 this matrix is called 'technological coefficients'. The results of the function are 
-tested on both sources.This is a wrapper function around  <code><a href="coefficient_matrix_create.html">coefficient_matrix_create</a></code>.</p>
+tested on both sources. This is a wrapper function around  <code><a href="coefficient_matrix_create.html">coefficient_matrix_create</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -151,7 +151,7 @@ tested on both sources.This is a wrapper function around  <code><a href="coeffic
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>

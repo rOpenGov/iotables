@@ -71,7 +71,6 @@ vector_transpose <- function( data_table,
 #'                         values_from = 'value', 
 #'                         key_column_values = "CO2_emission" )
 #' @export 
-
 vector_transpose_wider <- function ( data_table, 
                                      names_from, 
                                      values_from,
@@ -93,7 +92,7 @@ vector_transpose_wider <- function ( data_table,
 }
 
 #' @title Create a key columnn
-#' @description Create a key column for matching dimensions of matrixes.
+#' @description Create a key column for matching the dimensions of matrixes.
 #' @details This function will likely be used with the creation of coefficients that need to be matched with
 #' a matrix that has a key column.
 #' @param key_column_name The name of the key column.
