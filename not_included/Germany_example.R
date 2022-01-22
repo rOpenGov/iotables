@@ -14,8 +14,8 @@ de_output <- output_get ( source = "germany_1990", geo = "DE",
             year = 1990, unit = "MIO_EUR",
             households = FALSE, labelling = "iotables")
 
-L_de <- leontieff_matrix_create(de_coeff)
-I_de <- leontieff_inverse_create(L_de)
+L_de <- leontief_matrix_create(de_coeff)
+I_de <- leontief_inverse_create(L_de)
 
 de_emp <- primary_input_get ( input = "employment_total",
                               source = "germany_1990", geo = "DE",

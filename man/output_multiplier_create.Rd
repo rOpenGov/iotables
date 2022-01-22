@@ -7,7 +7,7 @@
 output_multiplier_create(input_coefficient_matrix)
 }
 \arguments{
-\item{input_coefficient_matrix}{A Leontieff inverse matrix created by the
+\item{input_coefficient_matrix}{A Leontief inverse matrix created by the
 \code{\link{input_coefficient_matrix_create}} function.}
 }
 \value{

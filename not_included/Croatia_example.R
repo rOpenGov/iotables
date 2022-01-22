@@ -42,10 +42,10 @@ employment_indicator_hr <- iotables::input_indicator_create (
 input_coefficients <- iotables::input_coefficient_matrix_create(
   input_flow_hr, output_vector_hr, digits = 4)
 
-L_hr <- iotables::leontieff_matrix_create( technology_coefficients_matrix =
+L_hr <- iotables::leontief_matrix_create( technology_coefficients_matrix =
                                           input_coefficients)
 
-I_hr <- iotables::leontieff_inverse_create(L_hr)
+I_hr <- iotables::leontief_inverse_create(L_hr)
 
 input_vector = hr_emp
 Im = I_hr

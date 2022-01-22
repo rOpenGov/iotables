@@ -85,10 +85,10 @@ input_coeff_matrix_sk <- input_coefficient_matrix_create(
 )
 ```
 
-Then you can create the Leontieff-inverse, which contains all the structural information about the relationships of 64x64 sectors of the chosen country (in this case, Slovakia) ready for the main equations of input-output economics:
+Then you can create the Leontief-inverse, which contains all the structural information about the relationships of 64x64 sectors of the chosen country (in this case, Slovakia) ready for the main equations of input-output economics:
 
-```{r leontieff-inverse}
-I_sk <- leontieff_inverse_create(input_coeff_matrix_sk)
+```{r leontief-inverse}
+I_sk <- leontief_inverse_create(input_coeff_matrix_sk)
 ```
 
 And extract the primary inputs:

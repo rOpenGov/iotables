@@ -12,14 +12,17 @@
 #' om <- output_coefficient_matrix_create( 
 #'   data_table = iotable_get(), 
 #'   households = FALSE)
+#'   
 #' ghosh_inverse_create( output_coefficients_matrix = om )
 #' @export 
 
 ghosh_inverse_create <- function ( output_coefficients_matrix, 
                                   digits=NULL ) {
 
-  ghosh_matrix <- leontieff_matrix_create( 
-    # The ghosh matrix contains output_coefficients, not input coefficients
+  # The Ghosh-model is a dual pair of the Leontief-model, so we can use the same 
+  # functions, but with different inputs (output coefficients instead of input coefficients.)
+  
+  ghosh_matrix <- leontief_matrix_create( 
        technology_coefficients_matrix = output_coefficients_matrix 
        )
   

@@ -9,8 +9,8 @@
 #' 
 #' @param input_vector An input matrix or vector created by the 
 #' \code{\link{input_indicator_create}} function. 
-#' @param Im The Leontieff inverse as a named object created by the 
-#' \code{\link{leontieff_inverse_create}} function. 
+#' @param Im The Leontief inverse as a named object created by the 
+#' \code{\link{leontief_inverse_create}} function. 
 #' @param multiplier_name A variable name to be given to the returned multipliers. 
 #' Defaults to \code{multiplier}.
 #' @param digits Rounding digits, if omitted, no rounding takes place. 
@@ -26,7 +26,7 @@
 #'   data_table = data_table, 
 #'   input = 'gva')  #this is a correct input
 #' 
-#' I_de <- leontieff_inverse_create( coeff_de )
+#' I_de <- leontief_inverse_create( coeff_de )
 #' 
 #' de_gva_multipliers <- multiplier_create ( 
 #'   input_vector    = de_gva_indicator,

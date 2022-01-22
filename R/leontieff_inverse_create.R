@@ -1,6 +1,6 @@
-#' @title Create the inverse of a Leontieff-matrix.
+#' @title Create the inverse of a Leontief-matrix.
 #' 
-#' The inversion takes place after the basic properties of the Leontieff matrix. 
+#' The inversion takes place after the basic properties of the Leontief matrix. 
 #' 
 #' @param technology_coefficients_matrix A technology coefficient matrix created
 #' by the \code{\link{input_coefficient_matrix_create}} or 
@@ -13,31 +13,31 @@
 #' tm <- input_flow_get ( 
 #'   data_table = iotable_get(), 
 #'   households = FALSE)
-#' I <- leontieff_inverse_create( technology_coefficients_matrix = tm )
+#' I <- leontief_inverse_create( technology_coefficients_matrix = tm )
 #' @export 
 
-leontieff_inverse_create <- function ( technology_coefficients_matrix, 
+leontief_inverse_create <- function ( technology_coefficients_matrix, 
                                        digits=NULL) {
 
-  leontieff_matrix<- leontieff_matrix_create( 
+  leontief_matrix<- leontief_matrix_create( 
        technology_coefficients_matrix = technology_coefficients_matrix 
        )
   
-  Lm <- as.matrix(leontieff_matrix[,2:ncol(leontieff_matrix)])
+  Lm <- as.matrix(leontief_matrix[,2:ncol(leontief_matrix)])
   
   inverse <- solve( Lm )
   
   if ( sum(vapply(inverse,  function(x) sum(is.nan(x)), numeric(1))) > 0) {
-    stop ("Error: Could not invert the Leontieff-matrix.")
+    stop ("Error: Could not invert the Leontief-matrix.")
   }
   
   named_inverse <- cbind(
-        as.data.frame(leontieff_matrix [,1]),
+        as.data.frame(leontief_matrix [,1]),
         as.data.frame(inverse)
         ) %>%
     mutate(across(where(is.factor), as.character))
   
-  names (named_inverse)     <- names (leontieff_matrix)
+  names (named_inverse)     <- names (leontief_matrix)
   row.names (named_inverse) <- seq_len(nrow(named_inverse))
   
  if ( is.null(digits) ) return (named_inverse)

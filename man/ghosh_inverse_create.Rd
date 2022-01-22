@@ -24,12 +24,13 @@ Create the Ghosh-inverse from the output coefficients.
 om <- output_coefficient_matrix_create( 
   data_table = iotable_get(), 
   households = FALSE)
+  
 ghosh_inverse_create( output_coefficients_matrix = om )
 }
 \seealso{
 Other analytic object functions: 
 \code{\link{input_flow_get}()},
-\code{\link{leontieff_inverse_create}()},
-\code{\link{leontieff_matrix_create}()}
+\code{\link{leontief_inverse_create}()},
+\code{\link{leontief_matrix_create}()}
 }
 \concept{analytic object functions}

@@ -141,30 +141,30 @@ In the Czech SIOTs, they are removed by the statistical authority, so the Czech 
 
 Most countries do not use the *L_68A*, *CPA_U* [Services provided by extraterritorial organisations and bodies] and *CPA_T* [Services of households as employers; undifferentiated goods and services produced by households for own use]industries, instead they use *L_68B* for the income component of real estates, and they do not calculate the   In order to prevent division by zero errors, they are symmetrically removed from rows and columns.  This will not change the results. 
 
-### Creating the Leontieff-matrix and its inverse {#leontieff-inverse}
+### Creating the Leontief-matrix and its inverse {#leontief-inverse}
 
-The Leontieff matrix is derived from Leontieff equation system.  
+The Leontief matrix is derived from Leontief equation system.  
 
 (19) $(I-A)x = y$
 
-The Leontieff matrix is defined as $(I-A)$ and it is created with the `leontieff_matrix_create()` function.
+The Leontief matrix is defined as $(I-A)$ and it is created with the `leontief_matrix_create()` function.
 
-The Leontieff inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
+The Leontief inverse is (I-A)^-1^ and it is created with the `leontief_inverse_create()` function from the Leontief-matrix.
 
-The code chunk below prints a small part of the Czech Leontieff-inverse.
+The code chunk below prints a small part of the Czech Leontief-inverse.
 
-```{r leontieff}
-L_cz <- leontieff_matrix_create(input_coeff_matrix_cz)
-I_cz <- leontieff_inverse_create(input_coeff_matrix_cz)
+```{r leontief}
+L_cz <- leontief_matrix_create(input_coeff_matrix_cz)
+I_cz <- leontief_inverse_create(input_coeff_matrix_cz)
 
-L_sk <- leontieff_matrix_create(input_coeff_matrix_sk)
-I_sk <- leontieff_inverse_create(input_coeff_matrix_sk)
+L_sk <- leontief_matrix_create(input_coeff_matrix_sk)
+I_sk <- leontief_inverse_create(input_coeff_matrix_sk)
 ```
-```{r printpartleontieff}
+```{r printpartleontief}
 head(I_cz[,1:8])
 ```
 
-You can create the Leontieff-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
+You can create the Leontief-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
 
 ## Direct effect indicators
 
@@ -350,7 +350,7 @@ output_coeff_sk <- output_coefficient_matrix_create(
 output_coeff_cz[,1:6]
 ```
 
-From the output coefficient matrix we can create the Leontieff-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
+From the output coefficient matrix we can create the Leontief-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
 
 ```{r forwardlinkages}
 cz_fw <- forward_linkages(output_coeff_cz)

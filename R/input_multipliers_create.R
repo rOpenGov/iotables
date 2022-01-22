@@ -3,7 +3,7 @@
 #' The function creates the multipliers (direct + indirect effects).
 #' @param input_requirements A matrix or vector created by 
 #' \code{\link{input_indicator_create}}
-#' @param Im A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.
+#' @param Im A Leontief-inverse created by \code{\link{leontief_inverse_create}}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place. Rounding is important if you replicate examples from the literature,
 #' rounding differences can add up to visible differences in matrix equations.
@@ -21,7 +21,7 @@
 #'
 #' compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation_employees')
 #'
-#' I_nl <- leontieff_inverse_create(input_coeff_nl)
+#' I_nl <- leontief_inverse_create(input_coeff_nl)
 #'
 #' input_multipliers_create(input_requirements = compensation_indicator, 
 #'                         Im = I_nl)

@@ -65,12 +65,12 @@ test_that("correct data is returned", {
 
 Comparing the first 7 columns of the two coefficient matrixes at 8 decimal point precision they are equal. Given the size of the matrixes, not all the matrix is compared here, but such a comparison can be made. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.
 
-## Leontieff-inverse
+## Leontief-inverse
 
-The Leontieff-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns with 8-digits precision we see that the re-calculated inverse and the published inverse is the same.
+The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns with 8-digits precision we see that the re-calculated inverse and the published inverse is the same.
 
 ```{r compare_inverse}
-uk_calculated_inverse <- leontieff_inverse_create(uk_input_coeff)
+uk_calculated_inverse <- leontief_inverse_create(uk_input_coeff)
 uk_published_inverse <- select (uk_calculated_inverse, 1 ) %>%
   left_join ( iotable_get ( labelled_io_data = uk_2010_data, 
                         source = "uk_2010_inverse" ) %>%

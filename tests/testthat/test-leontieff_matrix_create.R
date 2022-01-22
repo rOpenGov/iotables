@@ -1,4 +1,4 @@
-context ("Creating the Leontieff matrix and its inverse")
+context ("Creating the Leontief matrix and its inverse")
 
 de_use <- input_flow_get( iotable_get (labelling = "short" ))
 nl_use <- input_flow_get(netherlands_2006)
@@ -12,14 +12,14 @@ nl_coeff   <- input_coefficient_matrix_create( data_table = netherlands_2006,
 
 de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
 
-L_de <- leontieff_matrix_create( technology_coefficients_matrix =
+L_de <- leontief_matrix_create( technology_coefficients_matrix =
                                           de_coeff )
-I_de <- leontieff_inverse_create( technology_coefficients_matrix =
+I_de <- leontief_inverse_create( technology_coefficients_matrix =
                                     de_coeff )
 
-L_nl <- leontieff_matrix_create( technology_coefficients_matrix =
+L_nl <- leontief_matrix_create( technology_coefficients_matrix =
                                    nl_coeff )
-I_nl <- leontieff_inverse_create(technology_coefficients_matrix =
+I_nl <- leontief_inverse_create(technology_coefficients_matrix =
                                    nl_coeff)
 
 
@@ -42,7 +42,7 @@ TBI <- I_de %>%
 
 # test against 15.10 p 488
 
-test_that("Leontieff matrix values are correct", {
+test_that("Leontief matrix values are correct", {
   expect_equal(AAL[1],expected= 0.9742, tolerance = .0001)
   expect_equal(as.numeric(L_nl[1, 2:7]), 
                expected = c(0.875, 0.000, -0.039, -0.002, -0.001, -0.001), 
@@ -52,7 +52,7 @@ test_that("Leontieff matrix values are correct", {
                tolerance = 0.0005)
    })
 
-test_that("Leontieff inverse values are correct", {
+test_that("Leontief inverse values are correct", {
   expect_equal(TBI, expected= 0.035494905, tolerance = .0001)
   expect_equal(sum(sapply(I_de, function(x) sum(is.nan(x)))), expected = 0) #should not be NaNs
 })

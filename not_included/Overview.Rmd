@@ -208,9 +208,9 @@ In this case the employment indicator can be found on p499 in the Table 15.14. T
 ##Analytical functions
 The most frequently used input-output equations are programmed into convenient R functions.   In almost all statistics and data scientific context, data pre-processing is usually the most time consuming effort, and this is probably even more true in the case of SIOT's, because of their complexity. If all elements are in place, working with the elements is easy with R's matrix algebraic operators such as `%*%`. (Needless to say that in the othervise userful vectorization nature of R's main operators and functions is avoidable.)  However, because of the high complexity of the data, any violation of matrix algebraic rules causes a very hard-to-detect problem. If a 63x63 matrix has a single faulty element, the mathematical error message of the matrix operation is not very helpful on localizing and the correcting the element in question. For this reason we create a few helper functions that cover the most used scenarios. 
 
-The `leontieff_matrix_create()` function creates the Leontieff-matrix from the appropriate SIOT fields.  The `leontieff_inverse_create(L)` creates the inverse of the Leontieff-matrix which is used in all basic equations.  
+The `leontief_matrix_create()` function creates the Leontief-matrix from the appropriate SIOT fields.  The `leontief_inverse_create(L)` creates the inverse of the Leontief-matrix which is used in all basic equations.  
 
-```{r example_leontieff, message = FALSE}
+```{r example_leontief, message = FALSE}
 de_use <- iotables::use_table_get ( source = "germany_1990", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = FALSE, labelling = "iotables")
@@ -221,20 +221,20 @@ de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
 
 de_coeff <- iotables::input_coefficient_matrix_create( de_use, de_output, digits = 4)
 
-L <- iotables::leontieff_matrix_create( technology_coefficients_matrix =
+L <- iotables::leontief_matrix_create( technology_coefficients_matrix =
                                 de_coeff )
 
 print (L)
 ```
 
-The Leontieff matrix shown here can be checked against the Eurostat manuals table 15.9 on page 487. (Beware, the ordering of the industries is different.)
+The Leontief matrix shown here can be checked against the Eurostat manuals table 15.9 on page 487. (Beware, the ordering of the industries is different.)
 
-```{r example_leontieff_inverse, message = FALSE}
-I <- iotables::leontieff_inverse_create(L)
+```{r example_leontief_inverse, message = FALSE}
+I <- iotables::leontief_inverse_create(L)
 print (I)
 ```
 
-The Leontieff inverse can be checked against the Eurostat manual's table 15.10 on page 488.  (Beware, the ordering of the industries is different.)
+The Leontief inverse can be checked against the Eurostat manual's table 15.10 on page 488.  (Beware, the ordering of the industries is different.)
 
 Finding an error in a 63x63 matrix can be a painstaking excersize. Basic violations of matrix algebra throw meaningful errors, however, processing errors often lead to credible, but wrong results. Because the matrix equations result in large solutions that are highly abstract in nature, spotting an error in an otherwise numerically credible result matrix is rather difficult. This is why the wrappers try to avoid mismatching of products or industry, and to provide more meaningful error handling. An important future development is to make these warning and error notes better. Adding further meaningful warnings would require testing from practitioners in real-life scenarios. 
 

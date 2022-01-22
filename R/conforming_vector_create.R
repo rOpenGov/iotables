@@ -1,12 +1,12 @@
 #' @title Create an empty conforming vector
 #' 
 #' @description This helper function creates you a named vector that conforms your
-#' analytical objects, such as the use table, the Leontieff-matrix, 
+#' analytical objects, such as the use table, the Leontief-matrix, 
 #' etc. With 60x60 matrixes it is easy to make mistakes with manual 
 #' definition. The empty effects vector can be used in \code{.csv} format
 #' as a sample to import scenarios from a spreadsheet application.
 #'  
-#' @param data_table A use table, Leontieff-matrix, Leontieff-inverse,
+#' @param data_table A use table, Leontief-matrix, Leontief-inverse,
 #' a coefficient matrix or other named matrix / vector.
 #' @return A wide-format conforming vector of data frame class, 
 #' with column names matching the metadata of the \code{data_table}.

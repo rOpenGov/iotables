@@ -7,12 +7,12 @@
 backward_linkages(Im)
 }
 \arguments{
-\item{Im}{A Leontieff inverse matrix created by the
-\code{\link{leontieff_inverse_create}} function.}
+\item{Im}{A Leontief inverse matrix created by the
+\code{\link{leontief_inverse_create}} function.}
 }
 \value{
 The vector of industry (product) backward linkages in a wide
-data.frame class, following the column names of the Leontieff 
+data.frame class, following the column names of the Leontief 
 inverse matrix.
 }
 \description{
@@ -31,7 +31,7 @@ the United Nations (see p636,)
 \examples{
 de_coeff <- input_coefficient_matrix_create( iotable_get(), 
                                              digits = 4 )
-I <- leontieff_inverse_create (de_coeff)
+I <- leontief_inverse_create (de_coeff)
 backward_linkages (I)
 }
 \seealso{

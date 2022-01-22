@@ -55,7 +55,6 @@ The `input_coefficient_matrix_create()` function relies on the following equatio
 
 (9)  \eqn{a_{ij}} = \eqn{X_{ij} / x_{j}}  [recap: (43) is the same, and the same equation is (2) on page 484 with comparative results]
 
-
 It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.
 
 ```{r inputcoeff, echo=TRUE}
@@ -95,24 +94,24 @@ print(de_out[1:3, 1:3])
 ```
 These results are identical after similar rounding to the Table 15.7 of the Manual (on page 485.) The diagonal values are the same in the input coefficient matrix and the output coefficient matrix. 
 
-The Leontieff matrix is derived from Leontieff equation system.  
+The Leontief matrix is derived from Leontief equation system.  
 
 (19) \eqn{(I-A)x = y}
 
-The Leontieff matrix is defined as \eqn{(I-A)} and it is created with the `leontieff_matrix_create()` function.
+The Leontief matrix is defined as \eqn{(I-A)} and it is created with the `leontief_matrix_create()` function.
 
-The Leontieff inverse is \eqn{(I-A)^{-1}} and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
+The Leontief inverse is \eqn{(I-A)^{-1}} and it is created with the `leontief_inverse_create()` function from the Leontief-matrix.
 
-```{r leontieff}
-L_de <- leontieff_matrix_create ( 
+```{r leontief}
+L_de <- leontief_matrix_create ( 
   technology_coefficients_matrix = de_input_coeff 
   )
-I_de   <- leontieff_inverse_create(de_input_coeff)
-I_de_4 <- leontieff_inverse_create(de_input_coeff, digits = 4)
+I_de   <- leontief_inverse_create(de_input_coeff)
+I_de_4 <- leontief_inverse_create(de_input_coeff, digits = 4)
 print (I_de_4[,1:3])
 ```
 
-> You can check the Leontieff matrix against Table 15.9 on page 487 of the Eurostat manual, and the Leontieff inverse against Table 15.10 on page 488. The ordering of the industries is different in the manual.
+> You can check the Leontief matrix against Table 15.9 on page 487 of the Eurostat manual, and the Leontief inverse against Table 15.10 on page 488. The ordering of the industries is different in the manual.
 
 ## Creating indicators 
 
@@ -284,7 +283,7 @@ For example, when a new concert is put on stage, orders are filled for real esta
 
 ```{r backward}
 de_coeff <- input_coefficient_matrix_create(iotable_get(), digits = 4)
-I_de <- leontieff_inverse_create (de_coeff)
+I_de <- leontief_inverse_create (de_coeff)
 
 vector_transpose_longer(backward_linkages(I_de))
 ```

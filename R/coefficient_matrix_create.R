@@ -45,7 +45,7 @@ coefficient_matrix_create <- function ( data_table,
                                         return_part = NULL) {
   
   # Create a coefficient matrix, including primary inputs.  
-  # For the Leontieff matrix, only the inputs part (first quadrant is used)
+  # For the Leontief matrix, only the inputs part (first quadrant is used)
   
   if ( !is.null(return_part)) {
     if ( ! return_part %in% c("products", "industry", "primary_inputs")) {

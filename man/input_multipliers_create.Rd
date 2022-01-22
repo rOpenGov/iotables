@@ -17,7 +17,7 @@ input_multipliers_create(
 \item{input_requirements}{A matrix or vector created by 
 \code{\link{input_indicator_create}}}
 
-\item{Im}{A Leontieff-inverse created by \code{\link{leontieff_inverse_create}}.}
+\item{Im}{A Leontief-inverse created by \code{\link{leontief_inverse_create}}.}
 
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
 no rounding takes place. Rounding is important if you replicate examples from the literature,
@@ -42,7 +42,7 @@ input_coeff_nl <- input_coefficient_matrix_create(
 
 compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation_employees')
 
-I_nl <- leontieff_inverse_create(input_coeff_nl)
+I_nl <- leontief_inverse_create(input_coeff_nl)
 
 input_multipliers_create(input_requirements = compensation_indicator, 
                         Im = I_nl)

@@ -10,7 +10,7 @@ equation_solve(LHS = NULL, Im = NULL)
 \item{LHS}{A left-hand side vector with a key column containing the 
 industry or product names for matching, for example the employment coefficients.}
 
-\item{Im}{A Leontieff-inverse with a key column containing the industry or 
+\item{Im}{A Leontief-inverse with a key column containing the industry or 
 product names for matching.}
 }
 \value{

@@ -2,8 +2,9 @@ de_out <- output_coefficient_matrix_create (
   data_table = iotable_get(), "final_demand", digits = 4
 )
 
-fw <- forward_linkages ( output_coefficient_matrix = de_out, 
-                   digits = 4 )
+fw <- forward_linkages ( 
+  output_coefficient_matrix = de_out, 
+  digits = 4 )
 
 #The Eurostat Manual uses a different rounding. There is a slight mismatch)
 

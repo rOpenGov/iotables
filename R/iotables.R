@@ -19,7 +19,7 @@
 #' input-output tables and joining them correctly.
 #' \code{\link{conforming_vector_create}} is a helper function that creates
 #' a named vector that conforms with the analytical objects, such as the 
-#' use table, the Leontieff-matrix, etc.
+#' use table, the Leontief-matrix, etc.
 #' \code{\link{household_column_get}} returns the final household 
 #' expenditure.
 #' \code{\link{primary_input_get}} will retrieve any primary input from 
@@ -34,8 +34,8 @@
 #' 
 #' @section analytic object functions: 
 #' \code{\link{input_flow_get}} returns the use (input flow) matrix; 
-#' \code{\link{leontieff_matrix_create}} and the 
-#' \code{\link{leontieff_inverse_create}} to create the respective analytic
+#' \code{\link{leontief_matrix_create}} and the 
+#' \code{\link{leontief_inverse_create}} to create the respective analytic
 #' matrixes.
 #' \code{\link{ghosh_inverse_create}} will create the Gosh-inverse.
 #' 
@@ -58,7 +58,7 @@
 #' @section linkage functions:
 #' \code{\link{backward_linkages}} creates the vector of industry 
 #' (product) backward linkages in a wide
-#' data.frame class, following the column names of the Leontieff 
+#' data.frame class, following the column names of the Leontief 
 #' inverse matrix. 
 #' 
 #' \code{\link{forward_linkages}} creates the vector of industry 

@@ -28,9 +28,9 @@ sk_coeff <- input_coefficient_matrix_create(
   input_flow = sk_use_1700_2,
   output = output_vector_sk, 
   digits = 4)
-L <- leontieff_matrix_create( technology_coefficients_matrix =
+L <- leontief_matrix_create( technology_coefficients_matrix =
                                 sk_coeff )
-I <- leontieff_inverse_create(L)
+I <- leontief_inverse_create(L)
 
 sk_emp <- employment_get ()
 
@@ -80,10 +80,10 @@ output_vector_sk <- output_get(labelled_io_data = iocp, technology = tech_sk,
 input_coefficients <- input_coefficient_matrix_create(
   input_flow_sk, output_vector_sk, digits = 4)
 
-L <- iotables::leontieff_matrix_create( technology_coefficients_matrix =
+L <- iotables::leontief_matrix_create( technology_coefficients_matrix =
                                           input_coefficients)
 
-I <- iotables::leontieff_inverse_create(L)
+I <- iotables::leontief_inverse_create(L)
 
 value_added_sk <- input_value_added_get( labelled_io_data = iocp, 
                                          technology = tech_sk, geo = "SK", 

@@ -56,7 +56,7 @@ output_vector_hr <- output_get(source = "croatia_2010_1800", geo = "HR",
 knitr::kable(head(hr_use_1800, 3))
 ```
 
-As a first analytical step we create the input coefficient matrix which is the input of the Leontieff-matrix and the Leontieff-inverse. In this case the original table created by DZS contains an empty column / row pair for "extraterriorial_organizations" which causes an error in the inversion of the Leontieff-matrix. We carefully remove both the column and the row to maintain the symmetry of the matrix and create a meaningful Leontieff-inverse. **Keep in mind that for any further additional data you must remove "extraterriorial_organizations" organizations.**
+As a first analytical step we create the input coefficient matrix which is the input of the Leontief-matrix and the Leontief-inverse. In this case the original table created by DZS contains an empty column / row pair for "extraterriorial_organizations" which causes an error in the inversion of the Leontief-matrix. We carefully remove both the column and the row to maintain the symmetry of the matrix and create a meaningful Leontief-inverse. **Keep in mind that for any further additional data you must remove "extraterriorial_organizations" organizations.**
 
 ```{r croatiaiotable3, echoe=TRUE, results='asis', message = FALSE}
 require(iotables); require (knitr)
@@ -75,9 +75,9 @@ hr_coeff <- hr_coeff %>%
   select ( -extraterriorial_organizations ) %>%
   filter ( iotables_row != "extraterriorial_organizations")
 
-L_hr <- leontieff_matrix_create( technology_coefficients_matrix =
+L_hr <- leontief_matrix_create( technology_coefficients_matrix =
                                 hr_coeff )
-I_hr <- leontieff_inverse_create(L_hr)
+I_hr <- leontief_inverse_create(L_hr)
 knitr::kable(head(hr_coeff, 3))
 ```
 

@@ -10,17 +10,17 @@
 #' Input-Output Tables (see p506-507.) and the 
 #' Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications of 
 #' the United Nations (see p636,)
-#' @param Im A Leontieff inverse matrix created by the
-#' \code{\link{leontieff_inverse_create}} function. 
+#' @param Im A Leontief inverse matrix created by the
+#' \code{\link{leontief_inverse_create}} function. 
 #' @return The vector of industry (product) backward linkages in a wide
-#' data.frame class, following the column names of the Leontieff 
+#' data.frame class, following the column names of the Leontief 
 #' inverse matrix. 
 #' @importFrom dplyr mutate across
 #' @family linkage functions
 #' @examples 
 #' de_coeff <- input_coefficient_matrix_create( iotable_get(), 
 #'                                              digits = 4 )
-#' I <- leontieff_inverse_create (de_coeff)
+#' I <- leontief_inverse_create (de_coeff)
 #' backward_linkages (I)
 #' @export 
 

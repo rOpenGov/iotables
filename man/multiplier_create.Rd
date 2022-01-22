@@ -15,8 +15,8 @@ multiplier_create(
 \item{input_vector}{An input matrix or vector created by the 
 \code{\link{input_indicator_create}} function.}
 
-\item{Im}{The Leontieff inverse as a named object created by the 
-\code{\link{leontieff_inverse_create}} function.}
+\item{Im}{The Leontief inverse as a named object created by the 
+\code{\link{leontief_inverse_create}} function.}
 
 \item{multiplier_name}{A variable name to be given to the returned multipliers. 
 Defaults to \code{multiplier}.}
@@ -45,7 +45,7 @@ de_gva_indicator <- input_indicator_create (
   data_table = data_table, 
   input = 'gva')  #this is a correct input
 
-I_de <- leontieff_inverse_create( coeff_de )
+I_de <- leontief_inverse_create( coeff_de )
 
 de_gva_multipliers <- multiplier_create ( 
   input_vector    = de_gva_indicator,

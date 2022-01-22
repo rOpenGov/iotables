@@ -34,7 +34,7 @@ input_multipliers_create(input_requirements = emission_coeff, inverse = I_de)
 names(emission_coeff)
 names ( output_de)
 
-I_de   <- leontieff_inverse_create(de_input_coeff)
+I_de   <- leontief_inverse_create(de_input_coeff)
 
 emissions_de <- germany_airpol %>%
   select ( -.data$induse ) %>%

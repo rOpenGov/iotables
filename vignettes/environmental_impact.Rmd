@@ -149,7 +149,7 @@ As expected, the *Manufacture of other non-metallic mineral products* gets ahead
 I_be <- input_coefficient_matrix_create( 
      data_table = BE, 
      digits = 4) %>%
-  leontieff_inverse_create()
+  leontief_inverse_create()
 
 ghg_multipliers <- multiplier_create ( 
   input_vector    = ghg_indicator,

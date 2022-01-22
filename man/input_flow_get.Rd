@@ -36,7 +36,7 @@ input_flow <- input_flow_get(data_table = iotable_get(),
 \seealso{
 Other analytic object functions: 
 \code{\link{ghosh_inverse_create}()},
-\code{\link{leontieff_inverse_create}()},
-\code{\link{leontieff_matrix_create}()}
+\code{\link{leontief_inverse_create}()},
+\code{\link{leontief_matrix_create}()}
 }
 \concept{analytic object functions}

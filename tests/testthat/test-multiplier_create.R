@@ -7,7 +7,7 @@ de_gva_indicator <- input_indicator_create (
   data_table = iotable_get(), 
   input = 'gva')  #this is a correct input
 
-I_de <- leontieff_inverse_create( coeff_de )
+I_de <- leontief_inverse_create( coeff_de )
 
 de_emp_indicator <- input_indicator_create (
   data_table = iotable_get(), 
@@ -53,9 +53,9 @@ later <- function() {
   nl_coeff_2$final_consumption_households <- c(0, 0, 0.08, 0.03, 0, 0.59, 0) #for the time being
   
   
-  L_nl_2 <- leontieff_matrix_create( technology_coefficients_matrix =
+  L_nl_2 <- leontief_matrix_create( technology_coefficients_matrix =
                                        nl_coeff_2 )
-  I_nl_2 <- leontieff_inverse_create(technology_coefficients_matrix =
+  I_nl_2 <- leontief_inverse_create(technology_coefficients_matrix =
                                        nl_coeff_2)
   
   
