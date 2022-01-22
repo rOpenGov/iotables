@@ -33,14 +33,14 @@
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -69,13 +69,16 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="united_kingdom_2010_files/kePrint-0.0.1/kePrint.js"></script><link href="united_kingdom_2010_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>United Kingdom Input-Output Analytical Tables</h1>
                         <h4 data-toc-skip class="author">Daniel Antal, based on the work edited by Richard Wild</h4>
             
-            <h4 data-toc-skip class="date">2021-12-24</h4>
+            <h4 data-toc-skip class="date">2022-01-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/HEAD/vignettes/united_kingdom_2010.Rmd" class="external-link"><code>vignettes/united_kingdom_2010.Rmd</code></a></small>
       <div class="d-none name"><code>united_kingdom_2010.Rmd</code></div>
@@ -123,11 +126,11 @@
 <p>Comparing the first 7 columns of the two coefficient matrixes at 8 decimal point precision they are equal. Given the size of the matrixes, not all the matrix is compared here, but such a comparison can be made. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.</p>
 </div>
 <div class="section level2">
-<h2 id="leontieff-inverse">Leontieff-inverse<a class="anchor" aria-label="anchor" href="#leontieff-inverse"></a>
+<h2 id="leontief-inverse">Leontief-inverse<a class="anchor" aria-label="anchor" href="#leontief-inverse"></a>
 </h2>
-<p>The Leontieff-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns with 8-digits precision we see that the re-calculated inverse and the published inverse is the same.</p>
+<p>The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns with 8-digits precision we see that the re-calculated inverse and the published inverse is the same.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">uk_calculated_inverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">uk_calculated_inverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/leontief_inverse_create.html">leontief_inverse_create</a></span><span class="op">(</span><span class="va">uk_input_coeff</span><span class="op">)</span>
 <span class="va">uk_published_inverse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span> <span class="op">(</span><span class="va">uk_calculated_inverse</span>, <span class="fl">1</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span> <span class="op">(</span> <span class="fu"><a href="../reference/iotable_get.html">iotable_get</a></span> <span class="op">(</span> labelled_io_data <span class="op">=</span> <span class="va">uk_2010_data</span>, 
                         source <span class="op">=</span> <span class="st">"uk_2010_inverse"</span> <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -1284,7 +1287,7 @@ Vegetable and animal oils and fats
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>

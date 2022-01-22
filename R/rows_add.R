@@ -16,18 +16,18 @@
 #' @family iotables processing functions
 #' @importFrom dplyr bind_rows bind_cols
 #' @examples 
-#' rows_to_add <- data.frame ( iotables_row      = "CO2_emission", 
-#'                             agriculture_group =  10448, 
-#'                             industry_group    =  558327, #construction is omitted
-#'                              trade_group      =  11194)
+#' rows_to_add <- data.frame(iotables_row      = "CO2_emission", 
+#'                           agriculture_group =  10448, 
+#'                           industry_group    =  558327, # -> construction is omitted
+#'                           trade_group       =  11194)
 #' 
 #' rows_add (iotable_get(), rows_to_add = rows_to_add)
 #' 
 #' rows_add (iotable_get(), 
 #'           rows_to_add = c(industry_group    =  1534, 
 #'                           trade_group       =  4),
-#'            row_names  = "CH4_emission" )
-#' 
+#'          row_names    = "CH4_emission" )
+#' @export
  
 rows_add <- function(data_table, rows_to_add, row_names = NULL, empty_fill = 0 ) {
   
@@ -80,5 +80,3 @@ rows_add <- function(data_table, rows_to_add, row_names = NULL, empty_fill = 0 )
     bind_rows(bind_cols(completed, to_complete_rows ) )
   
 }
-
-

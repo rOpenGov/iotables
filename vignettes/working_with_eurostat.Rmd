@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-```{r setup, include = TRUE}
+```{r setup, include=TRUE, echo=FALSE}
 library(iotables, quietly = TRUE)
 library(dplyr, quietly = TRUE)
 ```
@@ -107,8 +107,8 @@ sk_io <- iotable_get( labelled_io_data = naio_10_cp1700,
 cz_input_flow <- input_flow_get(data_table = cz_io)
 sk_input_flow <- input_flow_get(data_table = sk_io)
 
-cz_output <- output_get( data_table = cz_io)
-sk_output <- output_get( data_table = sk_io) 
+cz_output <- output_get(data_table = cz_io)
+sk_output <- output_get(data_table = sk_io) 
 ```
 
 By default, total rows and columns are removed when creating use tables. You need to remove the columns and rows that are completely empty, or any row our column that has missing (`NA` or `NaN`) values. For example, when a country like Slovakia leaves the `CPA_L68A` technical roww/column pair empty, you must remove it consistently from all vectors and matrixes, also from data that you are joining for further economic or environmental impact analysis. The helper function `empty_remove()` removes systematically such rows and columns from symmetric matrixes. Beware not to use it on tables that contain missing values by definition, or tables that are not necessarily symmetric. The function is intended to be used in the first quadrant of the system of input-output tables and for conforming matrices or vectors.
@@ -338,12 +338,12 @@ Forward linkages show the effects on other industries that use the product (indu
 
 ```{r outputcoeff}
 output_coeff_cz <- output_coefficient_matrix_create( 
-  io_table = cz_io, 
+  data_table = cz_io, 
   total = "tfu", 
   digits = 4)
 
 output_coeff_sk <- output_coefficient_matrix_create( 
-  io_table = sk_io, 
+  data_table = sk_io, 
   total = "tfu")
 ```
 ```{r printoutputcoeff}

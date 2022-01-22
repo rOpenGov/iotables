@@ -85,9 +85,9 @@ Similarly, the output coefficient matrix is defined in the following way:
 
 ```{r outputcoeff, echo=FALSE}
 de_out <- output_coefficient_matrix_create ( 
-                                    io_table = germany_io, 
-                                    total = 'tfu',
-                                    digits = 4)
+ data_table = germany_io, 
+ total = 'tfu',
+ digits = 4)
 
 # Rounding is slightly different in the Eurostat manual:
 print(de_out[1:3, 1:3])
@@ -125,11 +125,11 @@ The helper function `primary_input_get()` selects a row from the SIOT and brings
 
 ```{r employment_indicator}
 de_emp <- primary_input_get(germany_io,
-                            primary_input = "employment_domestic_total" )
+                            primary_input = "employment_domestic_total")
 
-de_emp_indicator <- input_indicator_create ( 
-    data_table   = germany_io,
-    input_row    = "employment_domestic_total")
+de_emp_indicator <- input_indicator_create( 
+    data_table = germany_io,
+    input_row  = "employment_domestic_total")
 
 vector_transpose_longer(de_emp_indicator)
 ```
@@ -263,8 +263,7 @@ de_input_coeff <- input_coefficient_matrix_create(
                          data_table = iotable_get(), 
                          digits = 4)
                            
-output_multipliers <- output_multiplier_create ( 
-                        input_coefficient_matrix = de_input_coeff )
+output_multipliers <- output_multiplier_create (input_coefficient_matrix = de_input_coeff)
 
 vector_transpose_longer(output_multipliers)
 ```
@@ -297,7 +296,7 @@ Manufacturing has the highest backward linkages, and other services the least. A
 Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.
 
 ```{r forwardlinkages}
-de_out <- output_coefficient_matrix_create (
+de_out <- output_coefficient_matrix_create(
   data_table = germany_io, 
   total = "final_demand", 
   digits = 4
@@ -326,14 +325,12 @@ emissions_de
 output_bp <- output_get(germany_io)
 ```
 
-
 The output coefficients are create from the emission matrix with 
-
 \eqn{B_{ij}} = \eqn{Em_{ij} / output_{j}} 
 
 ```{r emmissioncoeffs}
 emission_coeffs <- output_coefficients_create(data_table = emissions_de, 
-                                               output = output_bp)
+                                              output = output_bp)
 ```
 ```{r emmissioncoeffsprint}
 emission_coeffs
