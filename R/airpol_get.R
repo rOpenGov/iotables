@@ -50,8 +50,7 @@
 #' @family import functions
 #' @examples 
 #' \donttest{
-#' airpol_get( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T")
-#' 
+#' airpol_get( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T") 
 #' }
 #' @export
 

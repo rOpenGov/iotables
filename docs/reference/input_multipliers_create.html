@@ -77,7 +77,7 @@ The function creates the multipliers (direct + indirect effects).</h1>
 <dd><p>A matrix or vector created by 
 <code><a href="input_indicator_create.html">input_indicator_create</a></code></p></dd>
 <dt>Im</dt>
-<dd><p>A Leontieff-inverse created by <code><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></code>.</p></dd>
+<dd><p>A Leontief-inverse created by <code><a href="leontief_inverse_create.html">leontief_inverse_create</a></code>.</p></dd>
 <dt>digits</dt>
 <dd><p>Rounding digits, defaults to <code>NULL</code>, in which case 
 no rounding takes place. Rounding is important if you replicate examples from the literature,
@@ -105,7 +105,7 @@ auxiliary metadata column (for joining with other matrixes.)</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">compensation_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="input_indicator_create.html">input_indicator_create</a></span><span class="op">(</span><span class="va">netherlands_2006</span>, <span class="st">'compensation_employees'</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">input_coeff_nl</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontief_inverse_create.html">leontief_inverse_create</a></span><span class="op">(</span><span class="va">input_coeff_nl</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">input_multipliers_create</span><span class="op">(</span>input_requirements <span class="op">=</span> <span class="va">compensation_indicator</span>, </span>
 <span class="r-in">                        Im <span class="op">=</span> <span class="va">I_nl</span><span class="op">)</span></span>

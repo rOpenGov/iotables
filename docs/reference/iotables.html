@@ -84,7 +84,7 @@ it to a conforming form.</p>
 input-output tables and joining them correctly.
 <code><a href="conforming_vector_create.html">conforming_vector_create</a></code> is a helper function that creates
 a named vector that conforms with the analytical objects, such as the 
-use table, the Leontieff-matrix, etc.
+use table, the Leontief-matrix, etc.
 <code><a href="household_column_get.html">household_column_get</a></code> returns the final household 
 expenditure.
 <code><a href="primary_input_get.html">primary_input_get</a></code> will retrieve any primary input from 
@@ -93,15 +93,17 @@ the input-output table. <code><a href="output_get.html">output_get</a></code> is
 <code><a href="total_tax_add.html">total_tax_add</a></code> adds taxes to an input-output table.
 <code><a href="empty_remove.html">empty_remove</a></code> symmetrically removes columns and rows if they contain missing values, 
 or each and every value is zero. 
-<code><a href="rows_add.html">rows_add</a></code> Add conforming row(s) to a matrix.</p>
+<code><a href="rows_add.html">rows_add</a></code> Add conforming row(s) to a matrix. 
+<code><a href="key_column_create.html">key_column_create</a></code> This function will likely be used with the creation of coefficients that need to be matched with
+a matrix that has a key column.</p>
     </div>
     <div class="section level2">
     <h2 id="analytic-object-functions">analytic object functions<a class="anchor" aria-label="anchor" href="#analytic-object-functions"></a></h2>
     
  
 <p><code><a href="input_flow_get.html">input_flow_get</a></code> returns the use (input flow) matrix; 
-<code><a href="leontieff_matrix_create.html">leontieff_matrix_create</a></code> and the 
-<code><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></code> to create the respective analytic
+<code><a href="leontief_matrix_create.html">leontief_matrix_create</a></code> and the 
+<code><a href="leontief_inverse_create.html">leontief_inverse_create</a></code> to create the respective analytic
 matrixes.
 <code><a href="ghosh_inverse_create.html">ghosh_inverse_create</a></code> will create the Gosh-inverse.</p>
     </div>
@@ -132,7 +134,7 @@ multipliers (for direct and indirect economic effects.)</p>
 
 <p><code><a href="backward_linkages.html">backward_linkages</a></code> creates the vector of industry 
 (product) backward linkages in a wide
-data.frame class, following the column names of the Leontieff 
+data.frame class, following the column names of the Leontief 
 inverse matrix.</p>
 <p><code><a href="forward_linkages.html">forward_linkages</a></code> creates the vector of industry 
 (product) forward linkages in a 

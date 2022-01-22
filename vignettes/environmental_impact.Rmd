@@ -51,11 +51,11 @@ The direct effects will show how many thousand tons of extra greenhouse gases wi
 
 ```{r ghgindicators}
 be_io <- BE %>%
-  rows_add( ghg %>% rename (prod_na = .data$indicator) )
+  rows_add(ghg)
 
-ghg_indicator <- input_indicator_create ( 
-  data_table  = be_io,
-  input_row   = "GHG_emission")
+ghg_indicator <- input_indicator_create( 
+  data_table = be_io,
+  input_row  = "GHG_emission")
 ```
 
 ```{r ghgindicator}
@@ -151,7 +151,7 @@ I_be <- input_coefficient_matrix_create(
      digits = 4) %>%
   leontief_inverse_create()
 
-ghg_multipliers <- multiplier_create ( 
+ghg_multipliers <- multiplier_create( 
   input_vector    = ghg_indicator,
   Im              = I_be,
   multiplier_name = "GHG_multiplier", 

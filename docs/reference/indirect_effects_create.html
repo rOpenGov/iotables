@@ -63,7 +63,7 @@
 <dd><p>A matrix or vector created by 
 <code><a href="input_indicator_create.html">input_indicator_create</a></code></p></dd>
 <dt>inverse</dt>
-<dd><p>A Leontieff-inverse created by <code><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></code>.</p></dd>
+<dd><p>A Leontief-inverse created by <code><a href="leontief_inverse_create.html">leontief_inverse_create</a></code>.</p></dd>
 <dt>digits</dt>
 <dd><p>Rounding digits, defaults to <code>NULL</code>, in which case 
 no rounding takes place.</p></dd>
@@ -85,7 +85,7 @@ metadata to sort them or join them with other matrixes.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">compensation_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="input_indicator_create.html">input_indicator_create</a></span><span class="op">(</span><span class="va">netherlands_2006</span>, <span class="st">'compensation_employees'</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span><span class="va">input_coeff_nl</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">I_nl</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontief_inverse_create.html">leontief_inverse_create</a></span><span class="op">(</span><span class="va">input_coeff_nl</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="direct_effects_create.html">direct_effects_create</a></span><span class="op">(</span>input_requirements <span class="op">=</span> <span class="va">compensation_indicator</span>, </span>
 <span class="r-in">                      inverse <span class="op">=</span> <span class="va">I_nl</span><span class="op">)</span></span>

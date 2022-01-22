@@ -74,8 +74,8 @@ consistency.</p>
 <dd><p>An input matrix or vector created by the 
 <code><a href="input_indicator_create.html">input_indicator_create</a></code> function.</p></dd>
 <dt>Im</dt>
-<dd><p>The Leontieff inverse as a named object created by the 
-<code><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></code> function.</p></dd>
+<dd><p>The Leontief inverse as a named object created by the 
+<code><a href="leontief_inverse_create.html">leontief_inverse_create</a></code> function.</p></dd>
 <dt>multiplier_name</dt>
 <dd><p>A variable name to be given to the returned multipliers. 
 Defaults to <code>multiplier</code>.</p></dd>
@@ -108,7 +108,7 @@ product/industry.</p>
 <span class="r-in">  data_table <span class="op">=</span> <span class="va">data_table</span>, </span>
 <span class="r-in">  input <span class="op">=</span> <span class="st">'gva'</span><span class="op">)</span>  <span class="co">#this is a correct input</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">I_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span><span class="op">(</span> <span class="va">coeff_de</span> <span class="op">)</span></span>
+<span class="r-in"><span class="va">I_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontief_inverse_create.html">leontief_inverse_create</a></span><span class="op">(</span> <span class="va">coeff_de</span> <span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">de_gva_multipliers</span> <span class="op">&lt;-</span> <span class="fu">multiplier_create</span> <span class="op">(</span> </span>
 <span class="r-in">  input_vector    <span class="op">=</span> <span class="va">de_gva_indicator</span>,</span>

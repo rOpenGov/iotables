@@ -79,7 +79,7 @@ reference:
       - output_get
       - total_tax_add
       - supplementary_add
-      - key_column_add
+      - key_column_create
       - rows_add
       - household_column_find
       - matrix_round
@@ -87,13 +87,13 @@ reference:
       - vector_transpose_wider
   - title: "Analytic objects"
     desc: >
-     Create the Leontieff matrix, the Leontieff inverse, and its inputs. To avoid division by zero, 
+     Create the Leontief matrix, the Leontief inverse, and its inputs. To avoid division by zero, 
      systematically remove zero or missing rows and columns.
     contents:
       - input_flow_get
-      - leontieff_inverse_create
+      - leontief_inverse_create
       - ghosh_inverse_create
-      - leontieff_matrix_create
+      - leontief_matrix_create
       - empty_remove
   - title: "Indicators"
     desc: >

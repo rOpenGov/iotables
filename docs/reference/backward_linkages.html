@@ -69,13 +69,13 @@ by backward linkages.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>Im</dt>
-<dd><p>A Leontieff inverse matrix created by the
-<code><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></code> function.</p></dd>
+<dd><p>A Leontief inverse matrix created by the
+<code><a href="leontief_inverse_create.html">leontief_inverse_create</a></code> function.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The vector of industry (product) backward linkages in a wide
-data.frame class, following the column names of the Leontieff 
+data.frame class, following the column names of the Leontief 
 inverse matrix.</p>
     </div>
     <div class="section level2">
@@ -96,7 +96,7 @@ the United Nations (see p636,)</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">de_coeff</span> <span class="op">&lt;-</span> <span class="fu"><a href="input_coefficient_matrix_create.html">input_coefficient_matrix_create</a></span><span class="op">(</span> <span class="fu"><a href="iotable_get.html">iotable_get</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span class="r-in">                                             digits <span class="op">=</span> <span class="fl">4</span> <span class="op">)</span></span>
-<span class="r-in"><span class="va">I</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontieff_inverse_create.html">leontieff_inverse_create</a></span> <span class="op">(</span><span class="va">de_coeff</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">I</span> <span class="op">&lt;-</span> <span class="fu"><a href="leontief_inverse_create.html">leontief_inverse_create</a></span> <span class="op">(</span><span class="va">de_coeff</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">backward_linkages</span> <span class="op">(</span><span class="va">I</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        iotables_row agriculture_group industry_group construction trade_group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 backward linkages          1.704922       1.841421     1.813747    1.603712</span>

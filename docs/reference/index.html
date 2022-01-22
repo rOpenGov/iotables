@@ -217,7 +217,7 @@ table.</dd>
       </dl></div><div class="section level2">
       <h2 id="analytic-objects">Analytic objects<a class="anchor" aria-label="anchor" href="#analytic-objects"></a></h2>
       
-      <p class="section-desc"></p><p>Create the Leontieff matrix, the Leontieff inverse, and its inputs. To avoid division by zero, systematically remove zero or missing rows and columns.</p>
+      <p class="section-desc"></p><p>Create the Leontief matrix, the Leontief inverse, and its inputs. To avoid division by zero, systematically remove zero or missing rows and columns.</p>
 
       
     </div><div id="" class="section level2">
@@ -232,16 +232,23 @@ table.</dd>
         <dd>Create an inter-industry or input flow matrix</dd>
       </dl><dl><dt>
           
-          <code><a href="leontieff_inverse_create.html">leontieff_inverse_create()</a></code> 
+          <code><a href="leontief_inverse_create.html">leontief_inverse_create()</a></code> 
         </dt>
-        <dd>Create the inverse of a Leontieff-matrix.
+        <dd>Create the inverse of a Leontief-matrix.
 
-The inversion takes place after the basic properties of the Leontieff matrix.</dd>
+The inversion takes place after the basic properties of the Leontief matrix.</dd>
       </dl><dl><dt>
           
-          <code><a href="leontieff_matrix_create.html">leontieff_matrix_create()</a></code> 
+          <code><a href="ghosh_inverse_create.html">ghosh_inverse_create()</a></code> 
         </dt>
-        <dd>Create a Leontieff matrix</dd>
+        <dd>Create the inverse of a Ghosh-matrix.
+
+Create the Ghosh-inverse from the output coefficients.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="leontief_matrix_create.html">leontief_matrix_create()</a></code> 
+        </dt>
+        <dd>Create a Leontief matrix</dd>
       </dl><dl><dt>
           
           <code><a href="empty_remove.html">empty_remove()</a></code> 
@@ -366,6 +373,11 @@ It is a small dataset for examples, but it is also instructive to understand how
 stores the highly structured SIOTs in long-form tidy datasets. 
 The labels were slightly alterred to reflect the transition from the vocabulary
 of ESA95 to ESA2010 since the publication of the Manual.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="germany_airpol.html">germany_airpol</a></code> 
+        </dt>
+        <dd>Air Pollution Table for Germany, 1995.</dd>
       </dl><dl><dt>
           
           <code><a href="metadata.html">metadata</a></code> 
