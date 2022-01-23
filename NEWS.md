@@ -1,4 +1,4 @@
-# iotablles 0.4.9
+# iotables 0.4.9
 * Replication of results from the Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications published by the United Nations.
 * A new function, 'gosh_inverse_create()' for the creation of forward linkages.
 

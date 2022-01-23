@@ -1,0 +1,23 @@
+prod_na,prod_na_lab,numeric_label,quadrant,iotables_row,Agriculture,Manufacturing,Construction,Trade_transport_comm,Finance_and_business_services,Other_services,TOTAL,final_consumption_households,final_consumption_government,gross_capital_formation,inventory_change,exports,total_output_bp
+CPA_A,"Products of agriculture, forestry and fishing",1,10,agriculture_group,3,20,0,0,0,1,24,9,0,0,3,5,42
+CPA_B-E,Industrial products (except construction works),2,10,industry_group,7,394,48,56,11,30,546,250,7,95,-58,611,1451
+CPA_F,Constructions and construction works,3,10,construction,1,11,18,8,28,10,76,5,0,153,0,1,234
+CPA_G-I,"Wholesale and retail trade, transport, accomodation and food service activities",4,10,trade_group,4,139,17,181,38,40,419,317,15,39,6,111,907
+CPA_J-N,Products of business services,5,10,business_services_group,6,131,30,124,261,51,603,313,3,25,0,66,1010
+CPA_O-T,Other services group,6,10,other_services_group,0,18,3,12,17,47,97,147,472,2,0,2,721
+TOTAL,Total,7,10,total,21,713,116,382,355,179,1766,1041,497,314,-49,795,4365
+P7,Imports of goods and services,8,20,imports,5,283,17,58,31,21,415,128,9,61,31,189,833
+D21X31,Taxes less subsidies on products,9,20,net_tax_products,2,10,2,12,17,24,67,151,6,34,0,0,257
+P2PP,Total intermediate consumption at purchasers' price,10,20,intermediate_consumption_at_pp,27,1007,135,452,402,224,2247,1319,513,409,-18,984,5455
+D1,Compensation of employees,11,20,compensation_employees,6,308,69,294,191,364,,,,,,,1232
+D29X39,Other taxes less other subsidies on production,12,20,net_tax_production,-6,-2,0,-1,5,-7,,,,,,,-12
+K1,Consumption of fixed capital,13,20,consumption_fixed_capital,8,79,5,60,160,63,,,,,,,375
+B2A3N,"Operating surplus and mixed income, net",14,20,os_mixed_income_net,7,60,25,101,252,77,,,,,,,523
+B1G,"Value added, gross",15,20,gva,15,445,99,454,608,497,,,,,,,2117
+P1,Output,16,20,output,42,1451,234,907,1010,721,4365,1319,513,409,-18,984,0
+EMP-WS,Employment on wages and salaries,17,50,employment_wage_salary,12921,10491,14242,16472,9560,19257,82943,,,,,,
+EMP-FTE,Self-employed,18,50,employment_self_employed,9875,1004,2791,2214,1634,1922,19440,,,,,,
+EMP,Total employment domestic concept,19,50,employment_domestic_total,22796,11494,17034,18686,11194,21180,102384,,,,,,
+CO2,Carbon dioxide,20,50,CO2,9260,550893,9162,80990,12077,24173,686555,222268,0,0,0,0,908823
+CH4,Methane,21,50,CH4,1247,925,1,49,3,10,2234,79,0,0,0,0,2313
+N2O,Nitrous oxide,22,50,N2O,137,62,0,2,0,0,202,4,0,0,0,0,206
