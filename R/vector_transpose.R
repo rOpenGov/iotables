@@ -130,13 +130,12 @@ vector_transpose_wider <- function ( data_table,
 #' @param key_column_name The name of the key column.
 #' @param key_column_values The value(s) of the key column
 #' @return A tibble with one column, named \code{key_column_name} and with values \code{key_column_values}.
-#' @examples 
-#' key_column_create ("iotables_row", c("CO2_multiplier", "CH4_multiplier"))
 #' @importFrom tibble tibble 
 #' @importFrom rlang set_names
 #' @family iotables processing functions
+#' @examples 
+#' key_column_create ("iotables_row", c("CO2_multiplier", "CH4_multiplier"))
 #' @export
-
 key_column_create <- function(key_column_name, 
                               key_column_values = NULL ) {
   
