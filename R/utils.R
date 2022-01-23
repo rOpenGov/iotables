@@ -42,14 +42,14 @@ is_key_column_present <- function (data_table, potential_keywords=NULL) {
   }
 }
 
-#' @title Enumerate character values
-#' @description A conditional wrapper around \code{basee::paste}.
+#' @title Collapse character vectors
+#' @description A conditional wrapper around \code{\link[base]{paste}}.
 #' @param x A character vector
 #' @param collapse A separator to collapse the \code{x} vector.
 #' @return A character vector of length=1 collapsing the character vector with \code{collapse} if
-#' the original length is more than 1.
+#' the original length is more than 1. Used to create more legible error messages.
 #' @keywords internal 
-msg_enumerate <- function (x, sep = ", ") {
-  if (length(not_found)>1) x <- paste(x, collapse = ", ")
+chars_collapse <- function (x, sep = ", ") {
+  if (length(x)>1) x <- paste(x, collapse = ", ")
   x
 }

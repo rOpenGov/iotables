@@ -1,6 +1,17 @@
-#' @title Create the inverse of a Ghosh-matrix.
+#' @title Create the inverse of a Ghosh-matrix
 #' 
-#' Create the Ghosh-inverse from the output coefficients.
+#' @description Create the Ghosh-inverse from the output coefficients.
+#' @details  The Ghosh-inverse is \deqn{G = (I-B)^-1}
+#' where B is the output coefficient matrix
+#' created by \code{\link{output_coefficient_matrix_create}}.
+#' See 
+#' the United Nations
+#' \href{https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf}{Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications}
+#' pp 622--639.
+#' 
+#' For the similar inverse 
+#' created from input coefficients, see the 
+#' \code{\link{leontief_inverse_create}} function. 
 #' 
 #' @param output_coefficients_matrix A technology coefficient matrix created
 #' by the \code{\link{output_coefficient_matrix_create}}.
@@ -17,7 +28,7 @@
 #' @export 
 
 ghosh_inverse_create <- function ( output_coefficients_matrix, 
-                                  digits=NULL ) {
+                                   digits=NULL ) {
 
   # The Ghosh-model is a dual pair of the Leontief-model, so we can use the same 
   # functions, but with different inputs (output coefficients instead of input coefficients.)

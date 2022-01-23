@@ -1,10 +1,14 @@
-#' @title Create the inverse of a Leontief-matrix.
+#' @title Create the inverse of a Leontief-matrix
 #' 
-#' The inversion takes place after the basic properties of the Leontief matrix. 
+#' @description Create the Leontief inverse from the technology coefficient matrix.
+#' @details  The Leontief-inverse is \deqn{L = (I-A)^-1}
+#' where B is the input coefficient matrix
+#' created by \code{\link{input_coefficient_matrix_create}}. For the similar inverse 
+#' created from output coefficients, see the 
+#' \code{\link{ghosh_inverse_create}} function. 
 #' 
 #' @param technology_coefficients_matrix A technology coefficient matrix created
-#' by the \code{\link{input_coefficient_matrix_create}} or 
-#' \code{\link{output_coefficient_matrix_create}}.
+#' by the \code{\link{input_coefficient_matrix_create}}.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
 #' @importFrom dplyr mutate across
@@ -17,7 +21,7 @@
 #' @export 
 
 leontief_inverse_create <- function ( technology_coefficients_matrix, 
-                                       digits=NULL) {
+                                      digits=NULL ) {
 
   leontief_matrix<- leontief_matrix_create( 
        technology_coefficients_matrix = technology_coefficients_matrix 
@@ -41,6 +45,18 @@ leontief_inverse_create <- function ( technology_coefficients_matrix,
   row.names (named_inverse) <- seq_len(nrow(named_inverse))
   
  if ( is.null(digits) ) return (named_inverse)
+}
+
+#' @rdname leontief_inverse_create
+#' @export
+leontieff_inverse_create <- function (technology_coefficients_matrix, 
+                                      digits=NULL) {
   
-  round_table ( named_inverse, digits = digits  )
+  .Deprecated(new = leontief_inverse_create(technology_coefficients_matrix, 
+                                            digits=NULL), 
+              msg = "leontieff_inverse_create() is spelled correctly as leontief_inverse_create()")
+  
+  leontief_inverse_create(technology_coefficients_matrix, 
+                          digits=NULL)
+  
 }

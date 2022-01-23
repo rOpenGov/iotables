@@ -31,7 +31,7 @@ forward_linkages <- function ( output_coefficient_matrix,
   output_coefficient_matrix <- mutate (output_coefficient_matrix, 
                                        across(where(is.factor), as.character) )
   first_col <- output_coefficient_matrix [, 1]
-  G <- ghosh_inverse_create( output_coefficient_matrix )
+  G <- ghosh_inverse_create(output_coefficient_matrix)
   FLm <- G
   FLm$forward_linkages <- rowSums(G[, -1])
   

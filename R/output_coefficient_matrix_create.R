@@ -11,12 +11,14 @@
 #' @param data_table A symmetric input-output table, a use table, 
 #' a margins or tax table retrieved by the \code{\link{iotable_get}}. 
 #' In case you use \code{type="tfu"} you need to input a
-#' full iotable, create by the \code{\link{iotable_get}}, because you will need
-#' the final demand column.
+#' full iotable, create by the \code{\link{iotable_get}}, because 
+#' the final demand column is in the second quadrant of the IOT.
 #' @param total The \code{output='total'} (or CPA_TOTAL, depending on the 
 #' names in your table, default) returns the output coefficients
 #' for products (intermediates) while the \code{final_demand} returns output 
-#' coefficients for final demand. See Eurostat Manual, p495 and p507.
+#' coefficients for final demand. See 
+#' \href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39}{Eurostat Manual of Supply, Use and Input-Output Tables}
+#' p495 and p507.
 #' @param digits An integer showing the precision of the technology matrix in 
 #' digits. Default is \code{NULL} when no rounding is applied.
 #' @return An output coefficient matrix of data.frame class. 
@@ -61,7 +63,7 @@ output_coefficient_matrix_create <- function (data_table,
     last_column <- quadrant_separator_find ( data_table, 
                                              include_total = FALSE )
    }  else {
-      stop ("Paramter 'output' must be either total (CPA_TOTAL) or final_demand.")
+      stop ("Paramter 'output' must be any of 'CPA_TOTAL', 'TOTAL', 'final_demand', 'tfu' or 'total_final_use'.")
     }
   
   demand <- data_table [, demand_col ]

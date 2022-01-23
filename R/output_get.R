@@ -1,4 +1,4 @@
-#' Get an output vector
+#' @title Get an output vector
 #' 
 #' This is a wrapper function around the \code{\link{primary_input_get}} 
 #' function. 

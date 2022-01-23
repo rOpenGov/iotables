@@ -2,9 +2,7 @@
 % Please edit documentation in R/ghosh_inverse_create.R
 \name{ghosh_inverse_create}
 \alias{ghosh_inverse_create}
-\title{Create the inverse of a Ghosh-matrix.
-
-Create the Ghosh-inverse from the output coefficients.}
+\title{Create the inverse of a Ghosh-matrix}
 \usage{
 ghosh_inverse_create(output_coefficients_matrix, digits = NULL)
 }
@@ -16,9 +14,20 @@ by the \code{\link{output_coefficient_matrix_create}}.}
 digits. Default is \code{NULL} when no rounding is applied.}
 }
 \description{
-Create the inverse of a Ghosh-matrix.
-
 Create the Ghosh-inverse from the output coefficients.
+}
+\details{
+The Ghosh-inverse is \deqn{G = (I-B)^-1}
+where B is the output coefficient matrix
+created by \code{\link{output_coefficient_matrix_create}}.
+See 
+the United Nations
+\href{https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf}{Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications}
+pp 622--639.
+
+For the similar inverse 
+created from input coefficients, see the 
+\code{\link{leontief_inverse_create}} function.
 }
 \examples{
 om <- output_coefficient_matrix_create( 

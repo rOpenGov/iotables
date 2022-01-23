@@ -18,7 +18,6 @@
 #' L <- leontief_matrix_create( technology_coefficients_matrix = tm )
 #' @export 
 
-
 leontief_matrix_create <- function ( technology_coefficients_matrix ) { 
 
   key_column <- as.character(unlist (technology_coefficients_matrix[,1]))
@@ -53,4 +52,15 @@ leontief_matrix_create <- function ( technology_coefficients_matrix ) {
  Leontief[,1] <- as.character(Leontief[,1])
  
  Leontief
+}
+
+#' @rdname leontief_matrix_create
+#' @export
+leontieff_matrix_create <- function (technology_coefficients_matrix) {
+  
+  .Deprecated(new = leontief_matrix_create(technology_coefficients_matrix), 
+              msg = "leontieff_matrix_create() is spelled correctly as leontief_matrix_create()")
+  
+  leontief_matrix_create(technology_coefficients_matrix)
+  
 }

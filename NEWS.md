@@ -1,6 +1,7 @@
 # iotables 0.4.9
-* Replication of results from the Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications published by the United Nations.
+* Extending replication results from the [Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications](https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf) published by the United Nations.
 * A new function, 'gosh_inverse_create()' for the creation of forward linkages.
+* See also a long-form documentation (publication candidate) [iotables: an R Package for Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data](https://zenodo.org/record/5887038#.Ye2ovv7MLIU) on Zenodo.
 
 # iotablles 0.4.8
 * A new function, 'output_coefficients_create()' creates a conforming vector of various air pollutants for European input-output tables.

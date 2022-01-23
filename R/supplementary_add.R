@@ -75,7 +75,7 @@ supplementary_add <- function ( data_table,
   if ( any(c("final_consumption_households", "p3_s14") %in% tolower ( names (siot_ext)))  ) {
     household_col <- which ( tolower ( names ( siot_ext)) %in% c("final_consumption_households", "p3_s14") )
     new_rows <- which ( tolower ( as.character(siot_ext[,1])) %in% key_column )
-    siot_ext[new_rows, household_col] <- ifelse ( is.na(siot_ext[new_rows, household_col]), 0, siot_ext[new_row, household_col])
+    siot_ext[new_rows, household_col] <- ifelse ( is.na(siot_ext[new_rows, household_col]), 0, siot_ext[new_rows, household_col])
   }
   
  siot_ext

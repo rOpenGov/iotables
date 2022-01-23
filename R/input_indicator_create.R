@@ -46,8 +46,8 @@ input_indicator_create <- function ( data_table,
     stop ( "The inputs were not found")
   } else if ( length(inputs_present) < length(input_row)) {
     
-    not_found <- msg_enumerate(input_row [! input_row %in% key_column[inputs_present]]) 
-    input_msg <- msg_enumerate(input_row)
+    not_found <- chars_collapse(input_row [! input_row %in% key_column[inputs_present]]) 
+    input_msg <- chars_collapse(input_row)
     warning ( glue::glue("In input_indicator_create(data_table, input_row = {input_msg}) the rows {not_found} were not found in the data_table."))
   }
   

@@ -68,7 +68,9 @@ vector_transpose <- function( data_table,
 #'   output column (`names_from`), and which column (or columns) to get the
 #'   cell values from (`values_from`).
 #' @param key_column_values You can explicitly supply key column values. Defaults to \code{NULL} when the
-#' key column values will be created from the long data. 
+#' key column values will be created from the long data.
+#' @importFrom assertthat assert_that
+#' @importFrom glue glue 
 #' @family iotables processing functions
 #' @examples 
 #' vector_transpose_wider (data_table =  germany_airpol[, -2],
@@ -87,16 +89,37 @@ vector_transpose_wider <- function ( data_table,
                                      key_column_values = NULL) {
   
   if (is.null(key_column_name)) key_column_name <- names(data_table)[1]
-  if ( ncol(data_table)>2 & is_key_column_present(data_table) ) {
-    pivot_wider ( data_table, 
-                  names_from = names_from, 
-                  values_from = values_from )
-  } else {
+  
+  assertthat::assert_that(names_from %in% names(data_table), 
+                          msg = glue("in vector_transpose_wider(data_table, names_from='{names_from}') '{names_from}' cannot be found in the data_table")
+                          )
+  
+  assertthat::assert_that(values_from %in% names(data_table), 
+                          msg = glue("in vector_transpose_wider(data_table, values_from='{values_from}') '{values_from}' cannot be found in the data_table")
+  )
+  
+  if ( ncol(data_table)>=2 & is_key_column_present(data_table) & is.null(key_column_values) ) {
+    # No need to create a new key column
+    # See unit test with airpol_wide_1
+    pivot_wider(data_table, 
+                names_from = names_from, 
+                values_from = values_from)
+  } else if ( is_key_column_present(data_table) & !is.null(key_column_values) & names(data_table)[1] != names_from ) {
+    # The key column must be REPLACED
+    # See unit test with airpol_wide_3
     bind_cols (
       key_column_create(key_column_name, key_column_values), 
-      pivot_wider ( data_table, 
-                    names_from = names_from, 
-                    values_from = values_from ))
+      pivot_wider(data_table %>% select(-1), 
+                  names_from = names_from, 
+                  values_from = values_from))
+  } else {
+    # The new key column will have to be added to the table
+    # See unit test with airpol_wide_2
+    bind_cols (
+      key_column_create(key_column_name, key_column_values), 
+      pivot_wider(data_table, 
+                  names_from = names_from, 
+                  values_from = values_from ))
   }
 }
 

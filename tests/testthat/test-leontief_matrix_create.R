@@ -22,7 +22,12 @@ L_nl <- leontief_matrix_create( technology_coefficients_matrix =
 I_nl <- leontief_inverse_create(technology_coefficients_matrix =
                                    nl_coeff)
 
-
+test_that("incorrect spelling is warned", {
+  expect_warning(leontieff_inverse_create( technology_coefficients_matrix =
+                                             de_coeff ))
+  expect_warning(leontieff_matrix_create( technology_coefficients_matrix =
+                                             de_coeff ))
+})
 
 
 require(dplyr)
