@@ -6,10 +6,7 @@
 #' a margins or tax table retrieved by the  \code{\link{iotable_get}}
 #' function. 
 #' @param input_row The name of input(s) for which you want to create the 
-#' indicator(s). Must be present in the \code{data_table}. Use this if the input rows are not
-#' given in a separate variable, therefore \code{input_vector=NULL}.
-#' @param input_vector Input vector(s) in a conforming format with the \code{data_table}. 
-#' Defaults to \code{NULL}.
+#' indicator(s). Must be present in the \code{data_table}.
 #' @param households If the households column should be added, 
 #' defaults to \code{FALSE}.
 #' @param digits Rounding digits, if omitted, no rounding takes place.
@@ -23,7 +20,6 @@
 #' @examples  
 #' input_indicator_create( data_table = iotable_get(), 
 #'                         input_row = c("gva", "compensation_employees"),
-#'                         input_vector = NULL,
 #'                         digits = 4, 
 #'                         indicator_names = c("GVA indicator", "Income indicator"))
 ##' @export

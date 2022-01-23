@@ -10,7 +10,7 @@ A data frame with 72 observations and 4 variables.
   \item{airpol}{The abbreviation of the air pollutant.}
   \item{induse}{Column labels, following the Eurostat convention with differences.}
   \item{iotables_col}{Column labels for iotables package abbreviations.}
-  \item{values}{The actual values of the table in thousand tons.}  
+  \item{value}{The actual values of the table in thousand tons.}  
 }
 }
 \source{

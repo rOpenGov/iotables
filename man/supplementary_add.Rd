@@ -18,9 +18,6 @@ vector or a data frame of several rows.}
 
 \item{supplementary_names}{Optional names for the new supplementary rows. 
 Defaults  to \code{NULL}.}
-
-\item{empty_to_fill}{What should happen with missing column values? Defaults to \code{0}. If you want
-to avoid division by zero, you may consider a very small value such as 0.000001.}
 }
 \value{
 An extended \code{data_table} with the new row(s) binded.

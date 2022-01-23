@@ -15,7 +15,7 @@ function.}
 
 \item{row_names}{An optional name or vector of names for the key column. Defaults to \code{NULL}.}
 
-\item{empty_to_fill}{What should happen with missing column values? Defaults to \code{0}. If you want
+\item{empty_fill}{What should happen with missing column values? Defaults to \code{0}. If you want
 to avoid division by zero, you may consider a very small value such as 0.000001.}
 }
 \value{
@@ -39,7 +39,7 @@ rows_add (iotable_get(), rows_to_add = rows_to_add)
 rows_add (iotable_get(), 
           rows_to_add = c(industry_group    =  1534, 
                           trade_group       =  4),
-         row_names    = "CH4_emission" )
+          row_names    = "CH4_emission" )
 }
 \seealso{
 Other iotables processing functions: 

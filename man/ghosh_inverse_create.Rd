@@ -22,8 +22,8 @@ Create the Ghosh-inverse from the output coefficients.
 }
 \examples{
 om <- output_coefficient_matrix_create( 
-  data_table = iotable_get(), 
-  households = FALSE)
+  data_table = iotable_get()
+  )
   
 ghosh_inverse_create( output_coefficients_matrix = om )
 }

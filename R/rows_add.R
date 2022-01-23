@@ -10,7 +10,7 @@
 #' function. 
 #' @param rows_to_add A data frame or a named numeric vector.
 #' @param row_names An optional name or vector of names for the key column. Defaults to \code{NULL}.
-#' @param empty_to_fill What should happen with missing column values? Defaults to \code{0}. If you want
+#' @param empty_fill What should happen with missing column values? Defaults to \code{0}. If you want
 #' to avoid division by zero, you may consider a very small value such as 0.000001.
 #' @return An extended \code{data_table} with the new row(s) binded.
 #' @family iotables processing functions
@@ -26,7 +26,7 @@
 #' rows_add (iotable_get(), 
 #'           rows_to_add = c(industry_group    =  1534, 
 #'                           trade_group       =  4),
-#'          row_names    = "CH4_emission" )
+#'           row_names    = "CH4_emission" )
 #' @export
  
 rows_add <- function(data_table, rows_to_add, row_names = NULL, empty_fill = 0 ) {

@@ -28,6 +28,10 @@ vector_transpose(
 
 \item{values_to}{Defaults to \code{'value'}.}
 
+\item{key_column_name}{The name of the first column. Defaults to \code{NULL} when it is not changed.
+It should usually match the key column of the matrix or vector you would like to join the new 
+vector created with \code{vector_transpose_longer}.}
+
 \item{.keep}{Keep the indicator identifier column? Defaults to \code{FALSE}.}
 }
 \value{

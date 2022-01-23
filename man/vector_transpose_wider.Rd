@@ -13,9 +13,15 @@ vector_transpose_wider(
 )
 }
 \arguments{
+\item{names_from, values_from}{A pair of
+arguments describing which column (or columns) to get the name of the
+output column (`names_from`), and which column (or columns) to get the
+cell values from (`values_from`).}
+
 \item{key_column_name}{The name of the key column.}
 
-\item{key_column_values}{The value(s) of the key column}
+\item{key_column_values}{You can explicitly supply key column values. Defaults to \code{NULL} when the
+key column values will be created from the long data.}
 }
 \description{
 Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
