@@ -8,10 +8,8 @@
 #' @param data_table A matrix or vector that should have a key column.
 #' @param output An output vector created with \code{output_get}.
 #' @examples 
-#' emissions_de <- germany_airpol[, -3] 
-#' emissions_de <- vector_transpose_wider( names_from = "iotables_col", values_from = "value")
 #' output_bp <- output_get (iotable_get())
-#' output_coefficients_create (emissions_de, output_bp)
+#' output_coefficients_create (iotable_get(), output_bp)
 #' @export
 
 output_coefficients_create <- function ( data_table, output ) {
@@ -28,6 +26,6 @@ output_coefficients_create <- function ( data_table, output ) {
       bind_cols ( coefficient_vector ) 
   }
   
-  do.call ( rbind, lapply ( 1:nrow(emissions_de), fn_coeff_create)) %>% as_tibble()
+  do.call ( rbind, lapply (1:nrow(emissions_de), fn_coeff_create)) %>% as_tibble()
   
 }
