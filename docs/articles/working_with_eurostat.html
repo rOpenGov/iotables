@@ -78,7 +78,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Working With Eurostat Data</h1>
                         <h4 data-toc-skip class="author">Daniel Antal, CFA</h4>
             
-            <h4 data-toc-skip class="date">2022-01-22</h4>
+            <h4 data-toc-skip class="date">2022-01-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/iotables/blob/HEAD/vignettes/working_with_eurostat.Rmd" class="external-link"><code>vignettes/working_with_eurostat.Rmd</code></a></small>
       <div class="d-none name"><code>working_with_eurostat.Rmd</code></div>
@@ -169,7 +169,7 @@
 
 <span class="va">cz_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_get.html">output_get</a></span><span class="op">(</span>data_table <span class="op">=</span> <span class="va">cz_io</span><span class="op">)</span>
 <span class="va">sk_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/output_get.html">output_get</a></span><span class="op">(</span>data_table <span class="op">=</span> <span class="va">sk_io</span><span class="op">)</span> </code></pre></div>
-<p>By default, total rows and columns are removed when creating use tables. You need to remove the columns and rows that are completely empty, or any row our column that has missing (<code>NA</code> or <code>NaN</code>) values. For example, when a country like Slovakia leaves the <code>CPA_L68A</code> technical roww/column pair empty, you must remove it consistently from all vectors and matrixes, also from data that you are joining for further economic or environmental impact analysis. The helper function <code><a href="../reference/empty_remove.html">empty_remove()</a></code> removes systematically such rows and columns from symmetric matrixes. Beware not to use it on tables that contain missing values by definition, or tables that are not necessarily symmetric. The function is intended to be used in the first quadrant of the system of input-output tables and for conforming matrices or vectors.</p>
+<p>By default, total rows and columns are removed when creating use tables. You need to remove the columns and rows that are completely empty, or any row our column that has missing (<code>NA</code> or <code>NaN</code>) values. For example, when a country like Slovakia leaves the <code>CPA_L68A</code> technical row/column pair empty, you must remove it consistently from all vectors and matrixes, also from data that you are joining for further economic or environmental impact analysis. The helper function <code><a href="../reference/empty_remove.html">empty_remove()</a></code> removes systematically such rows and columns from symmetric matrixes. Beware not to use it on tables that contain missing values by definition, or tables that are not necessarily symmetric. The function is intended to be used in the first quadrant of the system of input-output tables and for conforming matrices or vectors.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Remove the pre-processed naio_10_cp1700</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">naio_10_cp1700</span><span class="op">)</span></code></pre></div>

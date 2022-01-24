@@ -135,11 +135,6 @@ from the current sessions' temporary directory.
           <code><a href="output_coefficient_matrix_create.html">output_coefficient_matrix_create()</a></code> 
         </dt>
         <dd>Create an output coefficient matrix</dd>
-      </dl><dl><dt>
-          
-          <code><a href="output_coefficients_create.html">output_coefficients_create()</a></code> 
-        </dt>
-        <dd>Create output coefficients</dd>
       </dl></div><div class="section level2">
       <h2 id="siot-processing-functions">SIOT processing functions<a class="anchor" aria-label="anchor" href="#siot-processing-functions"></a></h2>
       
@@ -178,7 +173,10 @@ table.</dd>
           
           <code><a href="output_get.html">output_get()</a></code> 
         </dt>
-        <dd>Get an output vector</dd>
+        <dd>Get an output vector
+
+This is a wrapper function around the <code>primary_input_get</code> 
+function.</dd>
       </dl><dl><dt>
           
           <code><a href="total_tax_add.html">total_tax_add()</a></code> 
@@ -237,21 +235,17 @@ table.</dd>
         <dd>Create an inter-industry or input flow matrix</dd>
       </dl><dl><dt>
           
-          <code><a href="leontief_inverse_create.html">leontief_inverse_create()</a></code> 
+          <code><a href="leontief_inverse_create.html">leontief_inverse_create()</a></code> <code><a href="leontief_inverse_create.html">leontieff_inverse_create()</a></code> 
         </dt>
-        <dd>Create the inverse of a Leontief-matrix.
-
-The inversion takes place after the basic properties of the Leontief matrix.</dd>
+        <dd>Create the inverse of a Leontief-matrix</dd>
       </dl><dl><dt>
           
           <code><a href="ghosh_inverse_create.html">ghosh_inverse_create()</a></code> 
         </dt>
-        <dd>Create the inverse of a Ghosh-matrix.
-
-Create the Ghosh-inverse from the output coefficients.</dd>
+        <dd>Create the inverse of a Ghosh-matrix</dd>
       </dl><dl><dt>
           
-          <code><a href="leontief_matrix_create.html">leontief_matrix_create()</a></code> 
+          <code><a href="leontief_matrix_create.html">leontief_matrix_create()</a></code> <code><a href="leontief_matrix_create.html">leontieff_matrix_create()</a></code> 
         </dt>
         <dd>Create a Leontief matrix</dd>
       </dl><dl><dt>
@@ -310,9 +304,7 @@ Create the Ghosh-inverse from the output coefficients.</dd>
           
           <code><a href="input_multipliers_create.html">input_multipliers_create()</a></code> 
         </dt>
-        <dd>Create input multipliers
-
-The function creates the multipliers (direct + indirect effects).</dd>
+        <dd>Create input multipliers</dd>
       </dl><dl><dt>
           
           <code><a href="output_multiplier_create.html">output_multiplier_create()</a></code> 

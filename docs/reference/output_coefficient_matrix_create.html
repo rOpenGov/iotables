@@ -66,13 +66,15 @@ input-output table.</p>
 <dd><p>A symmetric input-output table, a use table, 
 a margins or tax table retrieved by the <code><a href="iotable_get.html">iotable_get</a></code>. 
 In case you use <code>type="tfu"</code> you need to input a
-full iotable, create by the <code><a href="iotable_get.html">iotable_get</a></code>, because you will need
-the final demand column.</p></dd>
+full iotable, create by the <code><a href="iotable_get.html">iotable_get</a></code>, because 
+the final demand column is in the second quadrant of the IOT.</p></dd>
 <dt>total</dt>
 <dd><p>The <code>output='total'</code> (or CPA_TOTAL, depending on the 
 names in your table, default) returns the output coefficients
 for products (intermediates) while the <code>final_demand</code> returns output 
-coefficients for final demand. See Eurostat Manual, p495 and p507.</p></dd>
+coefficients for final demand. See 
+<a href="https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39" class="external-link">Eurostat Manual of Supply, Use and Input-Output Tables</a>
+p495 and p507.</p></dd>
 <dt>digits</dt>
 <dd><p>An integer showing the precision of the technology matrix in 
 digits. Default is <code>NULL</code> when no rounding is applied.</p></dd>
