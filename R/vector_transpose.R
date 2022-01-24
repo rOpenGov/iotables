@@ -1,9 +1,9 @@
 #' @title Transpose a vector to a long form
-#' @description Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
+#' @description Many vectors (indicators, multipliers) are create in the wide form to conform matrixes in 
 #' analytical functions.  For printing it is more useful to have them in long form. 
 #' @details This is a wrapper around \code{\link[tidyr]{pivot_longer}} so you do not necessarily need to
 #' import or load the entire \emph{tidyr} package.
-#' @param data_table A matrix or vector that should have a key column.
+#' @param data_table A matrix or vector that normally has a key column.
 #' @param names_to Defaults to \code{'nace_r2'}. 
 #' @param values_to Defaults to \code{'value'}.
 #' @param key_column_name The name of the first column. Defaults to \code{NULL} when it is not changed.
@@ -58,11 +58,13 @@ vector_transpose <- function( data_table,
 
 
 #' @title Transpose a vector to wider format
-#' @description Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
+#' @description Many vectors (indicators, multipliers) are create in the wide form to conform matrixes in 
 #' analytical functions.  For binding it is more useful to have them in wide format.
 #' @details This is a wrapper around \code{\link[tidyr]{pivot_wider}} so you do not necessarily need to
 #' import or load the entire \emph{tidyr} package.
 #' @inheritParams key_column_create 
+#' @param data_table A matrix or vector that normally has a key column. If the key column must be created 
+#' or replaced, used \code{key_column_name}  and \code{key_column_values}.
 #' @param names_from,values_from A pair of
 #'   arguments describing which column (or columns) to get the name of the
 #'   output column (`names_from`), and which column (or columns) to get the
@@ -82,11 +84,11 @@ vector_transpose <- function( data_table,
 #'                         values_from = 'value', 
 #'                         key_column_values = "CO2_emission" )
 #' @export 
-vector_transpose_wider <- function ( data_table, 
-                                     names_from, 
-                                     values_from,
-                                     key_column_name = NULL, 
-                                     key_column_values = NULL) {
+vector_transpose_wider <- function (data_table, 
+                                    names_from, 
+                                    values_from,
+                                    key_column_name = NULL, 
+                                    key_column_values = NULL) {
   
   if (is.null(key_column_name)) key_column_name <- names(data_table)[1]
   

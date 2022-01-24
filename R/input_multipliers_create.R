@@ -1,16 +1,19 @@
 #' @title Create input multipliers
 #' 
-#' The function creates the multipliers (direct + indirect effects).
+#' @description The function creates the multipliers (direct + indirect effects).
 #' @param input_requirements A matrix or vector created by 
 #' \code{\link{input_indicator_create}}
 #' @param Im A Leontief-inverse created by \code{\link{leontief_inverse_create}}.
+#' @param multiplier_name An optional name to be placed in the key column of the multiplier.
+#' Defaults to \code{NULL}.
 #' @param digits Rounding digits, defaults to \code{NULL}, in which case 
 #' no rounding takes place. Rounding is important if you replicate examples from the literature,
 #' rounding differences can add up to visible differences in matrix equations.
 #' @importFrom dplyr select mutate across
 #' @importFrom rlang .data
 #' @return A data frame with the vector of multipliers and the an 
-#' auxiliary metadata column (for joining with other matrixes.)
+#' auxiliary metadata column, containing an automatically given row identifier (for joining with other matrixes) 
+#' which can be  overruled with setting \code{multiplier_name}.  
 #' @family multiplier functions
 #' @examples  
 #' nl <- netherlands_2006

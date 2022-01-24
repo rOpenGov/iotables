@@ -13,6 +13,9 @@ vector_transpose_wider(
 )
 }
 \arguments{
+\item{data_table}{A matrix or vector that normally has a key column. If the key column must be created 
+or replaced, used \code{key_column_name}  and \code{key_column_values}.}
+
 \item{names_from, values_from}{A pair of
 arguments describing which column (or columns) to get the name of the
 output column (`names_from`), and which column (or columns) to get the
@@ -24,7 +27,7 @@ cell values from (`values_from`).}
 key column values will be created from the long data.}
 }
 \description{
-Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
+Many vectors (indicators, multipliers) are create in the wide form to conform matrixes in 
 analytical functions.  For binding it is more useful to have them in wide format.
 }
 \details{

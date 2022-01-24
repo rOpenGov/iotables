@@ -2,9 +2,7 @@
 % Please edit documentation in R/input_multipliers_create.R
 \name{input_multipliers_create}
 \alias{input_multipliers_create}
-\title{Create input multipliers
-
-The function creates the multipliers (direct + indirect effects).}
+\title{Create input multipliers}
 \usage{
 input_multipliers_create(
   input_requirements,
@@ -19,17 +17,19 @@ input_multipliers_create(
 
 \item{Im}{A Leontief-inverse created by \code{\link{leontief_inverse_create}}.}
 
+\item{multiplier_name}{An optional name to be placed in the key column of the multiplier.
+Defaults to \code{NULL}.}
+
 \item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
 no rounding takes place. Rounding is important if you replicate examples from the literature,
 rounding differences can add up to visible differences in matrix equations.}
 }
 \value{
 A data frame with the vector of multipliers and the an 
-auxiliary metadata column (for joining with other matrixes.)
+auxiliary metadata column, containing an automatically given row identifier (for joining with other matrixes) 
+which can be  overruled with setting \code{multiplier_name}.
 }
 \description{
-Create input multipliers
-
 The function creates the multipliers (direct + indirect effects).
 }
 \examples{

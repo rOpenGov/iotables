@@ -22,7 +22,7 @@ vector_transpose(
 )
 }
 \arguments{
-\item{data_table}{A matrix or vector that should have a key column.}
+\item{data_table}{A matrix or vector that normally has a key column.}
 
 \item{names_to}{Defaults to \code{'nace_r2'}.}
 
@@ -39,7 +39,7 @@ A long form vector with a key column, and optionally the identifier of the indic
 the first column.
 }
 \description{
-Many vectors (indicators, multipliers) are create in the wide form to confom matrixes in 
+Many vectors (indicators, multipliers) are create in the wide form to conform matrixes in 
 analytical functions.  For printing it is more useful to have them in long form.
 }
 \details{
