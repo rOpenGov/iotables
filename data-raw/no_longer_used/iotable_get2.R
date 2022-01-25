@@ -70,16 +70,16 @@
 #' @export 
 
 iotable_get2 <- function ( labelled_io_data = NULL, 
-                          source = "germany_1990", 
-                          geo = "DE",
-                          year = 1990, unit = "MIO_EUR", 
-                          stk_flow = "DOM", 
-                          labelling = "iotables", 
-                          data_directory = NULL, 
-                          force_download = TRUE) { 
+                           source = "germany_1990", 
+                           geo = "DE",
+                           year = 1990, unit = "MIO_EUR", 
+                           stk_flow = "DOM", 
+                           labelling = "iotables", 
+                           data_directory = NULL, 
+                           force_download = TRUE) { 
  
   if ( labelling == 'eurostat' ) labelling <- 'short'
-  validated_iotable_inputs(source, geo, labelling, unit, force_download)
+  validated_iotable_inputs(source, labelling, force_download)
   ## Parameter exception handling -------------------------------------
   if (is.null(labelled_io_data) & is.null(geo)) stop ("The 'geo' parameter must be a valid Eurostat 'geo' code")
   if (is.null(labelled_io_data) & !source %in% c("germany_1990", 
@@ -294,8 +294,6 @@ get_siot_metadata_cols <- function(source) {
 #' @keywords internal
 select_iotable <- function(labelled_io_data, geo, year, unit, stk_flow) {
   
- 
-  
   if ( is.null(labelled_io_data)) {
     nested <- FALSE
   } else if ( "data" %in% names(labelled_io_data) ) {
@@ -418,16 +416,39 @@ select_iotable <- function(labelled_io_data, geo, year, unit, stk_flow) {
 }
 
 #' @keywords internal
-validated_iotable_inputs <- function(source, geo, labelling, unit, force_download) {
+validated_iotable_inputs <- function(source, labelling, force_download) {
   if (is.null(source)){ stop ("Parameter 'source' is a mandatory input.")}
+  
+  replication_sources <- c("germany_1990", 
+                           "uk_2010", 
+                           "croatia_2010_1900", 
+                           "croatia_2010_1800", 
+                           "croatia_2010_1700")
+  
+  tax_and_margin_sources <- c("naio_10_cp1620",  "naio_10_cp1630", 
+                              "naio_10_pyp1620", "naio_10_pyp1630")
+  
+  uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
+  
+  prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
+                "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
+                "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
+                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
+
+  trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
+                                  'croatia_2010_1900')
+  
   assertthat::assert_that(is.logical(force_download), 
                           msg = "Parameter force_download must be TRUE or FALSE")
   
   assertthat::assert_that(labelling %in% c("iotables", "short"), 
                           msg = "Parmater labelling must be 'short' or 'iotables'.")
   
-  assertthat::assert_that( unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC"), 
-                           msg = "Currency unit must be MIO_NAC, MIO_EUR or T_NAC.")
+  possible_sources <- c(prod_ind, trow_tcol, tax_and_margin_sources, uk_tables, replication_sources)
+  
+  assertthat::assert_that(source %in% possible_sources, 
+                          msg = glue("Parmater source='{source}' is not among  one of the possible sources:\n'{chars_collapse(possible_sources)}'."))
+
   # what to do with geo?
 }
 
