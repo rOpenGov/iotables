@@ -1,8 +1,8 @@
-#' Get Available Years For Input-Output Tables
+#' @title Get the available years from bulk downloaded input-output tables
 #' 
-#' The function selects the available tables by year or time as a date 
+#' @description The function selects the available tables by year or time as a date 
 #' for a specific country and currency unit in the Eurostat bulk file.
-#' Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
+#' @details Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
 #' directly, rather via this function, if and when it is necessary. 
 #' @param source A data source, for example \code{naio_10_cp1700}. 
 #' Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)	
@@ -34,7 +34,6 @@
 #' downloaded file in the \code{data_directory} or the temporary directory, 
 #' if it exists. Will force download only in a new session.
 #' @return A vector with the years that have available input-output tables.
-#' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange across
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
@@ -53,6 +52,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
                                data_directory = NULL,
                                force_download = TRUE ) { 
 ##Initialize variables ------------
+  # This function needs to be modernized at one point.  It does what it should but it is 
+  # superflous and uses old non-standard evaluation.
   values  <- .<-  NULL #non-standard evaluation creates a varning in build. 
   time <- t_cols2  <- t_rows2 <- by_row <- by_col <- tmp_rds <- NULL
   account_group <- digit_1 <- digit_2 <- group <- quadrant <- NULL

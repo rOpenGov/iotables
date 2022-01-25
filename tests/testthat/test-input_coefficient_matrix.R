@@ -1,9 +1,7 @@
-context ("Creating an  input coefficient matrix")
-
-de_input_flow <- input_flow_get ( iotable_get() )
+de_input_flow <- input_flow_get(iotable_get())
 
 nl <- netherlands_2006
-nl_input_flow <- input_flow_get ( data_table = nl )
+nl_input_flow <- input_flow_get (data_table = nl)
 
 
 nl_coeff   <- input_coefficient_matrix_create( data_table = nl,
@@ -28,7 +26,7 @@ BSBS <- de_input_coefficients %>%
   dplyr::select ( .data$business_services_group ) %>%
   as.numeric()
 
-test_that("get_input_flow correct input coefficients are returned", {
+test_that("input_flow_get correct and input_coefficient_matrix_create work as expected together", {
   expect_equal(business_agriculture_input, 0.0828, tolerance = .00005)
   expect_equal(BSBS, 0.279, tolerance = .00005)
   expect_equal(nl_services_row, c(

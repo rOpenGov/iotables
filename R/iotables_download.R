@@ -29,8 +29,9 @@
 ##'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytical Tables data}
 ##' } 
 #' @param source See the available list of sources above in the Description. 
-#' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
-#' try to save the pre-processed data file here with labelling. 
+#' @param data_directory Defaults to \code{NULL} when the files will be temporarily stored
+#' in the path retrieved by \code{\link[base]{tempdir}}. If it is a different valid directory, 
+#' it will try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{FALSE} which will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists. \code{TRUE} will
 #' try to download the file from the Eurostat warehouse.

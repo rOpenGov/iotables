@@ -39,7 +39,10 @@ The following code, if specifically run (it will not run on default), will downl
 The contents of the [not_included](https://github.com/rOpenGov/iotables/tree/master/not_included) directory can be found on GitHub, but they are not released and distributed with the package.
 
 ```{r download, eval=FALSE}
-# Not run on vignette
+# The following code can replicate the retrieval.  we have saved the results into the 
+# internal naio_10_product_x_product.rda file of the iotables package. Because of the file 
+# sizes invoved, this may take several minutes.
+
 not_included_directory <- file.path('..', 'not_included')
 if ( ! dir.exists(not_included_directory) ) dir.create (not_included_directory)
 # The contents of the 'not_included' directory can be found on GitHub, 
@@ -54,23 +57,24 @@ naio_10_cp1700 <- iotables_download(
 # the demonstration.
 
 naio_10_cp1700 <- naio_10_cp1700 %>%
-  dplyr::filter ( geo %in% c("CZ", "SK")) %>%
-  dplyr::filter ( year %in% c(2010, 2015))
+ filter ( geo %in% c("CZ", "SK")) %>%
+ filter ( year %in% c(2010, 2015))
 
-#Conforming employment data both sexes from 15 years old, year 2015.
-#prod_na vocabulary for product x product conformity
+# Conforming employment data both sexes from 15 years old, year 2015.
+# prod_na vocabulary for product x product conformity
 emp_cz <- employment_get(
   geo = "CZ", year = "2015", sex = "Total",
   age = "Y_GE15", labelling = "prod_na", 
   data_directory = not_included_directory,
   force_download = TRUE)
 
-#Conforming employment data #both sexes from 15 years old, year 2017.
-emp_sk <- employment_get(geo = "SK", year = "2017", sex = "Total",
-  age = "Y_GE15", labelling = "prod_na",
-  data_directory = not_included_directory,
-  force_download = TRUE)
-
+# Conforming employment data #both sexes from 15 years old, year 2017.
+emp_sk <- employment_get(geo = "SK", year = "2017", 
+                         sex = "Total", age = "Y_GE15", labelling = "prod_na",
+                         data_directory = not_included_directory,
+                         force_download = TRUE)
+```
+```{r savedata, eval=FALSE}
 save (naio_10_cp1700, emp_sk, emp_cz, 
       file = file.path('..', 'inst', 'extdata',
                        'naio_10_product_x_product.rda'))
@@ -78,7 +82,7 @@ save (naio_10_cp1700, emp_sk, emp_cz,
 
 For a quicker building of the vignette, the data is retrieved from the *not_included* directory. The chunk above can reproduce this data file. 
 
-```{r load}
+```{r loadpresaved}
 #load from pre-saved file to increase running speed
 load (system.file('extdata', 
                   'naio_10_product_x_product.rda', 
@@ -91,18 +95,17 @@ In this vignette example the Czech (2015) and the Slovak (2010) euro tables are 
 The Slovak SIOT table contains empty columns and rows.  They must be removed to avoid division by zero errors.
 
 ```{r preprocess}
-cz_io <- iotable_get( labelled_io_data = naio_10_cp1700, 
-                       source = "naio_10_cp1700", geo = "CZ", 
-                       year = 2015, unit = "MIO_EUR", 
-                       stk_flow = "TOTAL",
-                       labelling = "short" )
+cz_io <- iotable_get(labelled_io_data = naio_10_cp1700, 
+                     source = "naio_10_cp1700", geo = "CZ", 
+                     year = 2015, unit = "MIO_EUR", 
+                     stk_flow = "TOTAL",
+                     labelling = "short" )
 
-sk_io <- iotable_get( labelled_io_data = naio_10_cp1700, 
+sk_io <- iotable_get(labelled_io_data = naio_10_cp1700, 
                       source = "naio_10_cp1700", geo = "SK", 
                       year = 2010, unit = "MIO_EUR", 
                       stk_flow = "TOTAL",
-                      labelling = "short" )
-
+                      labelling = "short")
 
 cz_input_flow <- input_flow_get(data_table = cz_io)
 sk_input_flow <- input_flow_get(data_table = sk_io)
@@ -113,17 +116,19 @@ sk_output <- output_get(data_table = sk_io)
 
 By default, total rows and columns are removed when creating use tables. You need to remove the columns and rows that are completely empty, or any row our column that has missing (`NA` or `NaN`) values. For example, when a country like Slovakia leaves the `CPA_L68A` technical row/column pair empty, you must remove it consistently from all vectors and matrixes, also from data that you are joining for further economic or environmental impact analysis. The helper function `empty_remove()` removes systematically such rows and columns from symmetric matrixes. Beware not to use it on tables that contain missing values by definition, or tables that are not necessarily symmetric. The function is intended to be used in the first quadrant of the system of input-output tables and for conforming matrices or vectors.
 
-```{r freeupmemory}
+```{r freeupmemory, include=FALSE}
 # Remove the pre-processed naio_10_cp1700
 rm(naio_10_cp1700)
 ```
 
-
 ## Analytic functions {#analytic-functions}
+
+To make demand-driven Leontief input-output system work we need to create some special matrixes. If you work in the supply-driven Ghosh system, very similar steps need to be made. Instead of the `input_coefficient_matrix_create()` in this example, use the `output_coefficient_matrix_create()`, and 
+instead of creating the Leontief-inverse, create the Ghosh-inverse with `ghosh_inverse_create()`.
 
 ### Input coefficients matrix
 
-The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.
+The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations follows the numbering of the *Eurostat Manual*.
 
 (9)  $a_{ij}$ = $X_{ij}$ / $x_j$  [recap: (43) is the same]
 
@@ -133,8 +138,10 @@ It checks the correct ordering of columns, and furthermore it fills up 0 values 
 input_coeff_matrix_cz <- input_coefficient_matrix_create(data_table = cz_io)
 input_coeff_matrix_sk <- input_coefficient_matrix_create(data_table = sk_io) 
 ```
-```{r printinputcoeff}
-head(input_coeff_matrix_cz[,1:8])
+Let's print the top left corner 5x5 submatrix of the table. The `iotables` objects contain a key column, in this case `prod_na` (which shows the rows following the [Eurostat vocabulary for products and gross value added components](http://dd.eionet.europa.eu/vocabulary/eurostat/prod_na/).
+
+```{r printinputcoeff, echo=FALSE}
+head(input_coeff_matrix_cz[1:5,1:6])
 ```
 
 In the Czech SIOTs, they are removed by the statistical authority, so the Czech SIOTs appear smaller. 
@@ -160,8 +167,11 @@ I_cz <- leontief_inverse_create(input_coeff_matrix_cz)
 L_sk <- leontief_matrix_create(input_coeff_matrix_sk)
 I_sk <- leontief_inverse_create(input_coeff_matrix_sk)
 ```
-```{r printpartleontief}
-head(I_cz[,1:8])
+
+Again, let's print the top left 5x5 submatrix from the Czech Leontief-inverse:
+
+```{r printpartleontief, echo=FALSE}
+head(I_cz[1:5,1:6])
 ```
 
 You can create the Leontief-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
@@ -192,8 +202,11 @@ primary_inputs_sk <- coefficient_matrix_create(data_table = sk_io,
 direct_cz <- direct_effects_create( primary_inputs_cz, I_cz )  
 direct_sk <- direct_effects_create( primary_inputs_sk, I_sk )
 ```
-```{r printdirect}
-head(direct_cz[,1:8])
+
+Again, let's print only the top left 5x5 submatrix:
+
+```{r printdirect, echo=FALSE}
+head(direct_cz[1:5,1:6])
 ```
 
 Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.) 
@@ -202,17 +215,17 @@ This is not the total effect, because some of the increased production will tran
 
 ## Total effects {#total-effects}
 
+The total effects take into consideration that the economy is a system. When an sector faces increased demand and tries to fulfil it, it will create additional demand among its suppliers, and will make more products available for further use in the downstream purchasing sectors.
+
 ### Input multipliers
 
-The `input_multipliers_create` function will create the various multipliers for each product. 
+The `input_multipliers_create` function will create the various multipliers for each product. *The calculation follows the Eurostat Manual p 499-502.*
 
 (63) Z = B(I-A)^-1^ 
 
 B = vector of input coefficients compared to final demand / supply.
 
 Z = direct and indirect requirements for wages (or other income)
-
->The calculation follows the Eurostat Manual p 499-502.
 
 The code chunk below prints a part of the Czech multipliers, rounded to 4 digits. 
 
@@ -227,13 +240,20 @@ primary_inputs_sk <- coefficient_matrix_create(data_table = sk_io,
 
 not_removed_cols <- names(primary_inputs_sk)[names(primary_inputs_sk) %in% names(I_sk)] 
 
-multipliers_cz <- input_multipliers_create( 
-  primary_inputs_cz[,names(primary_inputs_cz) %in% names(I_cz)], I_cz )  
-multipliers_sk <- input_multipliers_create( primary_inputs_sk[not_removed_cols], I_sk ) 
-```
+input_requirements_cz <- primary_inputs_cz[,names(primary_inputs_cz) %in% names(I_cz)]
 
-```{r printtotal}
-head(multipliers_cz[,1:8])
+multipliers_cz <- input_multipliers_create(
+  input_requirements = input_requirements_cz,
+  Im = I_cz, 
+  multiplier_name = paste0(input_requirements_cz$prod_na, "_multiplier")  ) 
+
+multipliers_sk <- input_multipliers_create( 
+  input_requirements = primary_inputs_sk[not_removed_cols], 
+  Im = I_sk, 
+  multiplier_name = primary_inputs_sk[not_removed_cols]$prod_na) 
+```
+```{r printtotal, echo=FALSE}
+head(multipliers_cz[1:5, 1:6])
 ```
 
 ### Employment indicators and multipliers {#employment-multipliers}
@@ -263,8 +283,12 @@ emp_indicator_cz <- full_join (cz_io,
 emp_effect_sk <- direct_effects_create(emp_indicator_sk, I_sk)  
 emp_effect_cz <- direct_effects_create(emp_indicator_cz, I_cz)  
 ```
+The `vector_transpose_longer()` is a wrapper around [tidyr::pivot_longer](https://tidyr.tidyverse.org/reference/pivot_longer.html) but respects the key column which contains the row names. It helps us shape the results in a better readible, long format.
+
+
 ```{r printemploymenteffect}
-vector_transpose_longer (emp_effect_cz, values_to ="employment_effect_cz") %>%
+vector_transpose_longer(emp_effect_cz, 
+                        values_to ="employment_effect_cz") %>%
   left_join (vector_transpose_longer(emp_effect_sk, 
                                      values_to = "employment_effect_sk"), 
              by = 'nace_r2' ) %>%
@@ -283,6 +307,8 @@ emp_multiplier_cz <- input_multipliers_create(
   emp_indicator_cz[,names(emp_indicator_cz) %in% names(I_cz)], 
   I_cz )  
 ```
+
+Only the top 8 employment multipliers are shown (arranged by the ordering of the Slovak multipliers in descending order):
 
 ```{r printemploymentindicator}
 vector_transpose_longer (emp_multiplier_cz, values_to ="employment_multiplier_cz") %>%
@@ -306,6 +332,9 @@ output_multipliers_cz <- output_multiplier_create (input_coeff_matrix_cz)
 output_multipliers_sk <- output_multiplier_create (input_coeff_matrix_sk %>%
                                                      empty_remove())
 ```
+
+Let's take a look at the five top employment multipliers in Czechia:
+
 ```{r printoutputmultiplierscz}
 vector_transpose_longer (emp_multiplier_cz, 
                          values_to ="employment_multiplier_cz") %>%
@@ -346,8 +375,10 @@ output_coeff_sk <- output_coefficient_matrix_create(
   data_table = sk_io, 
   total = "tfu")
 ```
-```{r printoutputcoeff}
-output_coeff_cz[,1:6]
+The top left 5x5 submatrix of the output coefficient matrix is shown below for Czechia:
+
+```{r printoutputcoeff, echo=FALSE}
+output_coeff_cz[1:5,1:6]
 ```
 
 From the output coefficient matrix we can create the Leontief-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
@@ -356,7 +387,10 @@ From the output coefficient matrix we can create the Leontief-matrix for outputs
 cz_fw <- forward_linkages(output_coeff_cz)
 sk_fw <- forward_linkages(output_coeff_sk)
 ```
-```{r printforwardlinkages}
+
+The first few forward linkage strength indicators are shown below for Czechia:
+
+```{r printforwardlinkages, echo=FALSE}
 head(cz_fw)
 ```
 

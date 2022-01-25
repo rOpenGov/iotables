@@ -1,3 +1,6 @@
+# iotables 0.5
+* Under the hood changes, a complete re-arrangement of 'iotables_get()'.  The code is modernized and placed into many internal functions for readability. Some of these code gets its own unit-testing. No changes in functionality.
+
 # iotables 0.4.9
 * Extending replication results from the [Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications](https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf) published by the United Nations.
 * A new function, 'gosh_inverse_create()' for the creation of forward linkages.

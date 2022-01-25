@@ -1,5 +1,5 @@
 
-test_that("is_key_column_present", {
+test_that("Testing is_key_column_present() in various settings", {
   expect_error(is_key_column_present ( data.frame (agriculture = 0.0123,
                                               manufacturing = 0.1436,
                                               trade = 0.0921))

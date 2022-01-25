@@ -42,13 +42,11 @@ input_coefficient_matrix_create <- function ( data_table,
                                               households = FALSE,
                                               digits     = NULL) {
   
-  
-  cm <- coefficient_matrix_create(
-                             data_table = data_table, 
-                             total = "output", 
-                             return_part = "products", 
-                             households = households,
-                             digits = digits)
+  cm <- coefficient_matrix_create(data_table = data_table, 
+                                  total = "output", 
+                                  return_part = "products", 
+                                  households = households,
+                                  digits = digits)
   
   potential_total_names <- c( "cpa_total", "total")
   

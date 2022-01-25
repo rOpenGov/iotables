@@ -27,6 +27,7 @@
 #' by \code{total} with a key column. Optionally the results are rounded to 
 #' given \code{digits}. 
 #' @importFrom dplyr mutate across left_join
+#' @importFrom tidyselect vars_select_helpers
 #' @references See 
 #' \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
@@ -37,12 +38,12 @@
 #'                           digits = 4 )
 #' @export 
 
-coefficient_matrix_create <- function ( data_table, 
-                                        total = "output", 
-                                        digits = NULL, 
-                                        remove_empty = TRUE,
-                                        households = FALSE,
-                                        return_part = NULL) {
+coefficient_matrix_create <- function (data_table, 
+                                       total = "output", 
+                                       digits = NULL, 
+                                       remove_empty = TRUE,
+                                       households = FALSE,
+                                       return_part = NULL) {
   
   # Create a coefficient matrix, including primary inputs.  
   # For the Leontief matrix, only the inputs part (first quadrant is used)
@@ -107,7 +108,11 @@ coefficient_matrix_create <- function ( data_table,
   total_row <-  total_row %>% mutate (across(where(is.factor), null_to_eps)) # avoid division by zero
   total_row
   
-  coeff_matrix <- data_table
+  where <- tidyselect::vars_select_helpers$where
+  
+  ## Make sure that no integers remain in the data table, because they cannot be divided with numerics.
+  coeff_matrix <- data_table %>%
+    mutate (across(where(is.numeric), as.numeric))
   
   if (households == TRUE)  last_column <- last_column+1
   ###The actual creation of the coefficients-----

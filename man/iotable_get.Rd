@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_get.R
 \name{iotable_get}
 \alias{iotable_get}
-\title{Get an input-output table fom bulk file}
+\title{Get an input-output table from bulk file}
 \usage{
 iotable_get(
   labelled_io_data = NULL,
@@ -13,7 +13,7 @@ iotable_get(
   stk_flow = "DOM",
   labelling = "iotables",
   data_directory = NULL,
-  force_download = TRUE
+  force_download = FALSE
 )
 }
 \arguments{
@@ -35,7 +35,7 @@ the hard disk or from the Eurostat website invoking the same function.}
  \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
- \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
+ \item{\code{naio_10_pyp1630}}{ Table of taxes less subsidies on products at previous years' prices}
 } 
 For further information consult the 
 \href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.}
@@ -62,7 +62,8 @@ product x product, industry x industry or product x industry table.
 The alternative is \code{short} or \code{eurostat} which is the 
 original short row or column code of Eurostat or OECD.}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, 
+\item{data_directory}{Defaults to \code{NULL} when the files will be temporarily stored
+in the path retrieved by \code{\link[base]{tempdir}}. If it is a different valid directory, 
 it will try to save the pre-processed data file here with labelling.}
 
 \item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
@@ -77,7 +78,7 @@ not correctly ordered for further matrix equations.
 \description{
 This function is used to filter out  a single input-output table from
 a database, for example a raw file downloaded from the Eurostat 
-website.  It provides some functionality to avoid some pitfalls.
+website. It provides some functionality to avoid some pitfalls.
 }
 \details{
 Unless you want to work with bulk data files, 
