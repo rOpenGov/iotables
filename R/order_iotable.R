@@ -9,6 +9,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
   ## iotable_get.
   
   croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 'croatia_2010_1900')
+  uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
   
   ## Exception handling for tax and margin tables ------------------------------------------------
   stk_flow_input <- adjust_stk_flow(stk_flow = stk_flow, source = source)
@@ -24,8 +25,8 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
   if ( source %in% prod_ind ) {
     ## Ordering IOTs following the prod_ind vocabulary 
     ## First define the joining variables for left_join with metadata
-    col_join <- names(iotable)[ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col", "uk_col") )] 
-    row_join <- names(iotable)[ which( names(iotable) %in% c("prod_na", "prod_na_lab", "iotables_row", "uk_row") )] 
+    col_join <- names(iotable)[ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col") )] 
+    row_join <- names(iotable)[ which( names(iotable) %in% c("prod_na", "prod_na_lab", "iotables_row") )] 
     
     ## Define the variables that will not be used from the metadata
     remove_vars <- c("quadrant", "account_group", "variable", 
@@ -35,8 +36,17 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     if ( "stk_flow" %in% names(iotable) ) {
       # The germany_1990 files have no stk_input columns.
       iotable_labelled <- iotable %>%
-        filter(.data$stk_flow == stk_flow_input ) 
-    } else {
+        filter( .data$stk_flow == stk_flow_input ) 
+    } else if ( source %in% uk_tables ) {
+      iotable_labelled <-  iotable %>%
+        rename ( induse = .data$uk_col,
+                 induse_lab = .data$uk_col_lab,
+                 prod_na = .data$uk_row, 
+                 prod_na_lab = .data$uk_row_lab) 
+      
+      col_join <- c("induse", "induse_lab")
+      row_join <- c("prod_na", "prod_na_lab")
+    }else {
       iotable_labelled <- iotable
     }
     

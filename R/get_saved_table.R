@@ -110,7 +110,6 @@ find_saved_table <- function(labelled_io_data, geo, unit, year, stk_flow) {
 get_package_iots <- function( source_input ) {
   ## Read from file or internal dataset ----
   if ( source_input == "germany_1990" ) {
-    
     germany_1990 <- getdata(germany_1990) 
     labelled_io_data <- germany_1990    # use germany example 
     labelled_io_data$year <- 1990
@@ -133,6 +132,10 @@ get_package_iots <- function( source_input ) {
     labelled_io_data <- croatia_2010_1900 %>%
       mutate ( year = lubridate::year(.data$time))
     
+  } else if ( source_input == "uk_2010_data") {
+    uk_2010_data <- getdata(uk_2010_data)
+    labelled_io_data <-  uk_2010_data %>%
+      mutate ( year = 2010 )
   }
   labelled_io_data
 }

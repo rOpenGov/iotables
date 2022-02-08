@@ -152,7 +152,8 @@ iotable_get <- function (labelled_io_data = NULL,
   
   if ( is.null(labelled_io_data) ) {
     # The data is retrieved if the user is not using already reatrieved data as input. 
-    if (source_input %in% c("germany_1990", "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900")) {
+    if (source_input %in% c("germany_1990", "croatia_2010_1700", 
+                            "croatia_2010_1800", "croatia_2010_1900")) {
       labelled_io_data <- get_package_iots(source_input)   ## internal function in get_saved_table.R
     } else if (file.exists(tmp_rds) & ! force_download & ! is_internal_dataset ) {
       ## Try to retrieve the already downloaded file 
@@ -197,6 +198,7 @@ iotable_get <- function (labelled_io_data = NULL,
   }
   
   ## Get and order the IOT -------------------------------------------------------------------------- 
+  ## The source file for this internal function is order_iotable.R
   iotable_labelled_wide <- order_iotable(iotable = iotable, 
                                          stk_flow = stk_flow_input, 
                                          source = source_input, 
