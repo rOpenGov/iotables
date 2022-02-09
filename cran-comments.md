@@ -14,4 +14,6 @@
 
 
 ## Notes
-This is mainly a documentation release that prepares the package for a peer-reviewed journal publication, and mainly adds new unit tests that replicate published, reliable sources. The only real addition to the exported functionality is ghosh_inverse_create, which is, however, only a wrapper using supply-side name conventions for leontief_inverse_create.  
+I received a note from CRAN that the fedora build had a broken link and the package will be removed by 12 Februrary 2022.  'Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error).' The link was not broken, and I think that this problem was due to some latency on the Eurostat website, but the vignette no longer makes this external download.
+
+There is a planned major release of verion 1.0 of this package with a publication in the near future, but we did not want to include new functionality in this patch release, only documentation improvements and the removal of the download that occassionally gets too slow.

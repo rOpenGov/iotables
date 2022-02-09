@@ -42,7 +42,8 @@ Imports:
     readxl,
     rlang,
     assertthat,
-    glue
+    glue,
+    tidyselect
 Suggests: 
     testthat,
     rmarkdown,
