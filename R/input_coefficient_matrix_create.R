@@ -42,18 +42,19 @@ input_coefficient_matrix_create <- function ( data_table,
                                               households = FALSE,
                                               digits     = NULL) {
   
-  cm <- coefficient_matrix_create(data_table = data_table, 
-                                  total = "output", 
-                                  return_part = "products", 
-                                  households = households,
-                                  digits = digits)
+  cm <- coefficient_matrix_create(
+    data_table = data_table, 
+    total = "output", 
+    return_part = "products", 
+    households = households,
+    digits = digits)
   
   potential_total_names <- c( "cpa_total", "total")
   
   #TOTAL rows and columns must be removed
   key_column <- tolower(as.character(unlist(cm[,1])))
-  remove_col <- which(potential_total_names %in% names(cm))
-  remove_row <- which (key_column %in% potential_total_names)
+  remove_col <- which(potential_total_names %in% names(cm) )
+  remove_row <- which (  key_column %in% potential_total_names  )
   
   if ( length(remove_row) > 0 ) {
     cm <-  cm[-remove_row, ]  
@@ -62,7 +63,7 @@ input_coefficient_matrix_create <- function ( data_table,
   if ( length(remove_col) > 0 ) {
     cm <-  cm[,-remove_col ]  
   }
-
+  
   cm
   
 }

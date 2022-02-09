@@ -1,6 +1,16 @@
-#' United Kingdom Input-Output Analytical Tables, 2010												
+#' @title United Kingdom Input-Output Analytical Tables, 2010												
 #'
-#' The Excel-imported UK data.
+#' @description Replication data exported from the Office of National Statistics.
+#' 
+#' @details You can retrieve the data with \code{\link{iotable_get}}, setting the 
+#' \code{source} parameter as follows:
+#' \itemize{
+##'  \item{\code{uk_2010_siot}}{ Input-Output table (domestic use, basic prices, product by product) }
+##'  \item{\code{uk_2010_use}}{ Domestic use table at basic prices (product by industry) }
+##'  \item{\code{uk_2010_imports}}{ Imports use table at basic prices (product by product) }
+##'  \item{\code{uk_2010_coeff}}{ Matrix of coefficients (product by product) }
+##'  \item{\code{uk_2010_inverse}}{ Leontief Inverse (product by product) }
+##' }  
 #' @usage data(uk_2010_data)
 #' @source \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' @format A data frame with 10 variables.

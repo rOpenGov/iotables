@@ -17,8 +17,7 @@ define_prod_ind <- function() {
   c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
     "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
     "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
-    "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990", 
-    "uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
+    "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
 }
 
 #' @keywords internal
@@ -79,6 +78,9 @@ get_metadata_rows <- function(source) {
   
   trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
                                   'croatia_2010_1900')
+  
+  uk_tables <- c("uk_2010_siot", "uk_2010_use", "uk_2010_imports", "uk_2010_coeff", "uk_2010_inverse")
+  
   if ( source %in% prod_ind ) {
     get_vocabulary_prod_ind()
   }  else if ( source %in% trow_tcol ) {
@@ -100,6 +102,9 @@ get_metadata_cols <- function(source) {
   
   trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
                                   'croatia_2010_1900')
+  
+  uk_tables <- c("uk_2010_siot", "uk_2010_use", "uk_2010_imports", "uk_2010_coeff", "uk_2010_inverse")
+  
   if ( source %in% prod_ind ) {
     get_vocabulary_induse()
   }  else if ( source %in% trow_tcol ) {

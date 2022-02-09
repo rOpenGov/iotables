@@ -4,7 +4,6 @@
 \alias{get_saved_table}
 \alias{find_saved_table}
 \alias{get_package_iots}
-\alias{uk_test_data_exceptions}
 \title{Get an input-output table from a downloaded bulk file}
 \usage{
 get_saved_table(labelled_io_data, geo, year, unit, stk_flow)
@@ -12,8 +11,6 @@ get_saved_table(labelled_io_data, geo, year, unit, stk_flow)
 find_saved_table(labelled_io_data, geo, unit, year, stk_flow)
 
 get_package_iots(source_input)
-
-uk_test_data_exceptions(labelled_io_data, source)
 }
 \description{
 Get an input-output table from a downloaded bulk file

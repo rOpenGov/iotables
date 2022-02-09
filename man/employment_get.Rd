@@ -69,7 +69,6 @@ Currently works only with product x product tables.
 \seealso{
 Other import functions: 
 \code{\link{airpol_get}()},
-\code{\link{iotable_get}()},
 \code{\link{iotables_download}()},
 \code{\link{iotables_metadata_get}()},
 \code{\link{iotables_read_tempdir}()}

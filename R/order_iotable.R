@@ -5,11 +5,11 @@
 #' @importFrom rlang .data
 #' @keywords internal
 order_iotable <- function(iotable, stk_flow, source, labelling) {
-  ## Logically this should be called from iotables_download, too. But now it is called from 
-  ## iotable_get.
+  ## Logically this should be called from iotables_download, too. 
+  # But now it is called from iotable_get.
   
   croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 'croatia_2010_1900')
-  uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
+  uk_tables <- c("uk_2010_siot", "uk_2010_use", "uk_2010_imports", "uk_2010_coeff", "uk_2010_inverse")
   
   ## Exception handling for tax and margin tables ------------------------------------------------
   stk_flow_input <- adjust_stk_flow(stk_flow = stk_flow, source = source)
@@ -18,11 +18,30 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
   prod_ind <- define_prod_ind()
   
   ## Getting the vocabulary information ----------------------------------------------------------
-  metadata_rows <- get_metadata_rows(source) %>% mutate ( across(where(is.factor), as.character) )
-  metadata_cols <- get_metadata_cols(source) %>% mutate ( across(where(is.factor), as.character) )
+  ## Source file is utils-metadata.R
+  
+  if ( source %in% uk_tables) {
+    metadata_uk_2010 <- getdata(metadata_uk_2010)
+    metadata_cols <- metadata_uk_2010  %>%
+      dplyr::filter ( !is.na(.data$uk_col)) %>%
+      dplyr::select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
+      mutate ( uk_col = gsub("\\.", "-", as.character(.data$uk_col))) %>%
+      mutate ( uk_col = gsub(" & ", "-", as.character(.data$uk_col))) %>%
+      mutate ( uk_col = trimws(.data$uk_col, 'both'))
+    
+    metadata_rows <- metadata_uk_2010  %>%
+      filter ( !is.na(.data$uk_row)) %>%
+      select ( -all_of(c("uk_col", "uk_col_label", "induse", "col_order")) ) %>%
+      mutate ( uk_row = gsub("\\.", "-", as.character(.data$uk_row))) %>%
+      mutate ( uk_row = gsub(" & ", "-", as.character(.data$uk_row)))
+  } else {
+    metadata_rows <- get_metadata_rows(source) %>% mutate ( across(where(is.factor), as.character) )
+    metadata_cols <- get_metadata_cols(source) %>% mutate ( across(where(is.factor), as.character) )
+    
+  }
   
   ## Factor reordering & row ordering -------------------------------------------------------------
-  if ( source %in% prod_ind ) {
+  if ( source %in% c(prod_ind, uk_tables) ) {
     ## Ordering IOTs following the prod_ind vocabulary 
     ## First define the joining variables for left_join with metadata
     col_join <- names(iotable)[ which( names(iotable) %in% c("induse", "induse_lab", "iotables_col") )] 
@@ -37,16 +56,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
       # The germany_1990 files have no stk_input columns.
       iotable_labelled <- iotable %>%
         filter( .data$stk_flow == stk_flow_input ) 
-    } else if ( source %in% uk_tables ) {
-      iotable_labelled <-  iotable %>%
-        rename ( induse = .data$uk_col,
-                 induse_lab = .data$uk_col_lab,
-                 prod_na = .data$uk_row, 
-                 prod_na_lab = .data$uk_row_lab) 
-      
-      col_join <- c("induse", "induse_lab")
-      row_join <- c("prod_na", "prod_na_lab")
-    }else {
+    } else {
       iotable_labelled <- iotable
     }
     
@@ -70,6 +80,14 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
       mutate(induse  = forcats::fct_reorder(induse, 
                                             as.numeric(.data$col_order))) 
     
+    if ( all(c("uk_row", "uk_col") %in%  names (iotable_labelled)) ) {
+      iotable_labelled <- iotable_labelled %>%
+        mutate(iotables_row = forcats::fct_reorder(uk_row ,
+                                                   as.numeric(.data$row_order))) %>%
+        mutate(iotables_col = forcats::fct_reorder(uk_col, 
+                                                   as.numeric(.data$col_order)))
+    }
+    
     if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
         mutate(iotables_row = forcats::fct_reorder(iotables_row ,
@@ -77,37 +95,49 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
         mutate(iotables_col = forcats::fct_reorder(iotables_col, 
                                                    as.numeric(.data$col_order)))
     }
-  } else  {
-    ## Ordering IOTs that do not follow the prod_na vocabulary with an exception to the old
-    ## Croatia replication data. 
-    if ( ! source %in% croatia_files ){  
-      # First join the necessary vocabulary from the metadata...
-      by_col <- names(iotable)[which ( names(iotable) %in% c("t_cols2", "t_cols2_lab", "iotables_col") )]
-      by_row <- names(iotable)[which ( names(iotable) %in% c("t_rows2", "t_rows2_lab", "iotables_row") )]
-      
-      iotable_labelled <- iotable %>%
-        mutate ( across(where(is.factor), as.character) ) %>%
-        left_join(metadata_cols, by = by_col)  %>%
-        left_join(metadata_rows, by = by_row) %>%
-        arrange ( .data$row_order, .data$col_order )
-    } else {
-      ## This is the exception for Croatia
-      iotable_labelled <- iotable 
-
+  } else if ( ! source %in% croatia_files ) {
+    ## Ordering IOTs that do not follow the prod_na vocabulary 
+    if ( all(c("uk_row", "uk_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
-        arrange ( .data$row_order, .data$col_order ) %>% # ?needed
-        mutate(t_rows2 = forcats::fct_reorder(t_rows2, 
-                                              as.numeric(.data$row_order))) %>%
-        mutate(t_cols2 = forcats::fct_reorder(t_cols2, 
-                                              as.numeric( .data$col_order ))) %>%
-        mutate(iotables_row = forcats::fct_reorder(iotables_row, 
+        mutate(iotables_row = forcats::fct_reorder(uk_row ,
+                                                   as.numeric(.data$row_order))) %>%
+        mutate(iotables_col = forcats::fct_reorder(uk_col, 
+                                                   as.numeric(.data$col_order)))
+    }
+    if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
+      iotable_labelled <- iotable_labelled %>%
+        mutate(iotables_row = forcats::fct_reorder(iotables_row ,
                                                    as.numeric(.data$row_order))) %>%
         mutate(iotables_col = forcats::fct_reorder(iotables_col, 
                                                    as.numeric(.data$col_order)))
     }
+  } else {
+    ## This is the exception for Croatia
+    iotable_labelled <- iotable 
+    
+    # First join the necessary vocabulary from the metadata...
+    by_col <- names(iotable)[which ( names(iotable) %in% c("t_cols2", "t_cols2_lab", "iotables_col") )]
+    by_row <- names(iotable)[which ( names(iotable) %in% c("t_rows2", "t_rows2_lab", "iotables_row") )]
+    
+    iotable_labelled <- iotable %>%
+      mutate ( across(where(is.factor), as.character) ) %>%
+      left_join(metadata_cols, by = by_col)  %>%
+      left_join(metadata_rows, by = by_row) %>%
+      arrange ( .data$row_order, .data$col_order )
+    
+    iotable_labelled <- iotable_labelled %>%
+      arrange ( .data$row_order, .data$col_order ) %>% # ?needed
+      mutate(t_rows2 = forcats::fct_reorder(t_rows2, 
+                                            as.numeric(.data$row_order))) %>%
+      mutate(t_cols2 = forcats::fct_reorder(t_cols2, 
+                                            as.numeric( .data$col_order ))) %>%
+      mutate(iotables_row = forcats::fct_reorder(iotables_row, 
+                                                 as.numeric(.data$row_order))) %>%
+      mutate(iotables_col = forcats::fct_reorder(iotables_col, 
+                                                 as.numeric(.data$col_order)))
+  }
    
-  } #end of not prod_na cases
-  
+
   ## selecting which labelling to use -------------------------------------------------
   if ( labelling == "iotables" ) {
     ## Only one labelling can be selected, start with the 
@@ -119,12 +149,16 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     
   } else if ( labelling == "short" & source %in% prod_ind ) {
     ## Labelling with the Eurostat prod_ind vocabulary
-    
     iotable_labelled_w <- iotable_labelled %>%
       select(all_of(c("prod_na", "induse", "values"))) %>%
       filter( !is.na(.data$prod_na) )  %>%
       pivot_wider(names_from = .data$induse, values_from = .data$values)
     
+  } else if ( source %in% uk_tables ){
+    iotable_labelled_w <- iotable_labelled %>%
+      select(all_of(c("uk_row", "uk_col", "values"))) %>%
+      filter( !is.na(.data$uk_row) )  %>%
+      pivot_wider(names_from = .data$uk_col, values_from = .data$values)
   } else {
     ## Labelling with the special Croatia replication files 
     iotable_labelled_w <- iotable_labelled %>%

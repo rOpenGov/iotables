@@ -18,6 +18,111 @@ get_saved_table <- function (labelled_io_data,
   iot %>% unnest(.data$data)
 }
 
+#' @rdname get_saved_table
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr filter
+#' @importFrom rlang .data
+#' @keywords internal
+find_saved_table <- function(labelled_io_data, geo, unit, year, stk_flow) {
+  geo_input <- geo
+  unit_input <- unit
+  year_input <- year
+  stk_flow_input <- stk_flow
+  
+  assert_that( all( c("geo", "unit", "year", "stk_flow", "data") %in% names(labelled_io_data) ), 
+               msg = "The columns 'geo', 'year', 'unit', 'stk_flow' columns and the nested 'data' column must be present in labelled_io_data.")
+  
+  assert_that( geo_input %in% labelled_io_data$geo, 
+               msg = glue("The labelled_io_data$geo column does not contain geo='{geo_input}'."))
+  
+  subset_labelled_io_data <- labelled_io_data %>% filter ( .data$geo == geo_input )
+  
+  assert_that( unit_input %in% subset_labelled_io_data$unit, 
+               msg = glue("The labelled_io_data$unit column does not contain unit='{unit_input}' (for geo='{geo_input}')."))
+  
+  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( .data$unit == unit_input )
+  
+  assert_that( stk_flow_input %in% subset_labelled_io_data$stk_flow, 
+               msg = glue("The labelled_io_data$stk_flow column does not contain {stk_flow_input} (for geo='{geo_input}')."))
+  
+  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( .data$stk_flow == stk_flow_input )
+  
+  assert_that( year_input %in% subset_labelled_io_data$year, 
+               msg = glue("The labelled_io_data$year column does not contain year='{year_input'} (for geo='{geo_input}', unit='{unit_input}', stk_flow='{stk_flow_input}'.)"))
+  
+  subset_labelled_io_data  %>% filter ( .data$year == year_input )
+}
+
+#' @rdname get_saved_table
+#' @importFrom lubridate year
+#' @importFrom dplyr mutate
+#' @keywords internal
+get_package_iots <- function( source_input ) {
+  
+  
+  uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
+  
+  ## Read from file or internal dataset ----
+  if ( source_input == "germany_1990" ) {
+    germany_1990 <- getdata(germany_1990) 
+    labelled_io_data <- germany_1990    # use germany example 
+    labelled_io_data$year <- 1990
+    
+  } else if ( source_input == "croatia_2010_1700" ) { 
+    
+    croatia_2010_1700 <- getdata(croatia_2010_1700)
+    labelled_io_data <- croatia_2010_1700 %>%
+      mutate ( year = lubridate::year(.data$time))
+    
+  } else if ( source_input == "croatia_2010_1800" )  {
+    
+    croatia_2010_1800 <- getdata(croatia_2010_1800)
+    labelled_io_data <- croatia_2010_1800   %>%
+      mutate ( year = lubridate::year (.data$time))
+    
+  } else if ( source_input == "croatia_2010_1900" )  {
+    
+    croatia_2010_1900 <- getdata(croatia_2010_1900)
+    labelled_io_data <- croatia_2010_1900 %>%
+      mutate ( year = lubridate::year(.data$time))
+    
+  } else if ( source_input %in% uk_tables) {
+    data("uk_2010_data")
+    labelled_io_data <-  uk_2010_data %>%
+      mutate ( year = 2010 )
+    
+    if ( source %in% uk_tables ) {
+      if ( source == "uk_2010_siot") {
+        labelled_io_data <- labelled_io_data %>%
+          filter ( .data$indicator == 'Input-Output table (domestic use, basic prices, product by product)')
+      }
+      
+      if ( source == "uk_2010_use") {
+        labelled_io_data <- labelled_io_data %>%
+          filter ( .data$indicator == 'Domestic use table at basic prices (product by industry)')
+      }
+      
+      if ( source == "uk_2010_imports") {
+        labelled_io_data <- labelled_io_data %>%
+          filter ( .data$indicator == 'Imports use table at basic prices (product by product)')
+      }
+      
+      if ( source == "uk_2010_coeff") {
+        labelled_io_data <- labelled_io_data %>%
+          filter ( .data$indicator == 'Matrix of coefficients (product by product)')
+      }
+      
+      if ( source == "uk_2010_inverse") {
+        labelled_io_data <- labelled_io_data %>%
+          filter ( .data$indicator == 'Leontief Inverse (product by product)')
+      }
+    }
+    }
+  labelled_io_data
+}
+
+## old_table_selection_function in data-raw/old_table_selection_function.R
+
 #' @keywords internal
 not_in_use <- function() {
   tmp_iot <- iot %>%
@@ -67,109 +172,3 @@ not_in_use <- function() {
       pivot_wider( names_from = "iotables_label", values_from = "values")
   } 
 }
-
-#' @rdname get_saved_table
-#' @importFrom assertthat assert_that
-#' @importFrom dplyr filter
-#' @importFrom rlang .data
-#' @keywords internal
-find_saved_table <- function(labelled_io_data, geo, unit, year, stk_flow) {
-  geo_input <- geo
-  unit_input <- unit
-  year_input <- year
-  stk_flow_input <- stk_flow
-  
-  assert_that( all( c("geo", "unit", "year", "stk_flow", "data") %in% names(labelled_io_data) ), 
-               msg = "The columns 'geo', 'year', 'unit', 'stk_flow' columns and the nested 'data' column must be present in labelled_io_data.")
-  
-  assert_that( geo_input %in% labelled_io_data$geo, 
-               msg = glue("The labelled_io_data$geo column does not contain geo='{geo_input}'."))
-  
-  subset_labelled_io_data <- labelled_io_data %>% filter ( .data$geo == geo_input )
-  
-  assert_that( unit_input %in% subset_labelled_io_data$unit, 
-               msg = glue("The labelled_io_data$unit column does not contain unit='{unit_input}' (for geo='{geo_input}')."))
-  
-  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( .data$unit == unit_input )
-  
-  assert_that( stk_flow_input %in% subset_labelled_io_data$stk_flow, 
-               msg = glue("The labelled_io_data$stk_flow column does not contain {stk_flow_input} (for geo='{geo_input}')."))
-  
-  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( .data$stk_flow == stk_flow_input )
-  
-  assert_that( year_input %in% subset_labelled_io_data$year, 
-               msg = glue("The labelled_io_data$year column does not contain year='{year_input'} (for geo='{geo_input}', unit='{unit_input}', stk_flow='{stk_flow_input}'.)"))
-  
-  subset_labelled_io_data  %>% filter ( .data$year == year_input )
-}
-
-#' @rdname get_saved_table
-#' @importFrom lubridate year
-#' @importFrom dplyr mutate
-#' @keywords internal
-get_package_iots <- function( source_input ) {
-  ## Read from file or internal dataset ----
-  if ( source_input == "germany_1990" ) {
-    germany_1990 <- getdata(germany_1990) 
-    labelled_io_data <- germany_1990    # use germany example 
-    labelled_io_data$year <- 1990
-    
-  } else if ( source_input == "croatia_2010_1700" ) { 
-    
-    croatia_2010_1700 <- getdata(croatia_2010_1700)
-    labelled_io_data <- croatia_2010_1700 %>%
-      mutate ( year = lubridate::year(.data$time))
-    
-  } else if ( source_input == "croatia_2010_1800" )  {
-    
-    croatia_2010_1800 <- getdata(croatia_2010_1800)
-    labelled_io_data <- croatia_2010_1800   %>%
-      mutate ( year = lubridate::year (.data$time))
-    
-  } else if ( source_input == "croatia_2010_1900" )  {
-    
-    croatia_2010_1900 <- getdata(croatia_2010_1900)
-    labelled_io_data <- croatia_2010_1900 %>%
-      mutate ( year = lubridate::year(.data$time))
-    
-  } else if ( source_input == "uk_2010_data") {
-    uk_2010_data <- getdata(uk_2010_data)
-    labelled_io_data <-  uk_2010_data %>%
-      mutate ( year = 2010 )
-  }
-  labelled_io_data
-}
-
-#' @rdname get_saved_table
-#' @keywords internal
-uk_test_data_exceptions <- function (labelled_io_data, source) {
-  if ( source == "uk_2010_siot") {
-    labelled_io_data <- labelled_io_data %>%
-      filter( .data$indicator == 'Input-Output table (domestic use, basic prices, product by product)')
-  }
-  
-  if ( source == "uk_2010_use") {
-    labelled_io_data <- labelled_io_data %>%
-      filter( .data$indicator == 'Domestic use table at basic prices (product by industry)')
-  }
-  
-  if ( source == "uk_2010_imports") {
-    labelled_io_data <- labelled_io_data %>%
-      filter( .data$indicator == 'Imports use table at basic prices (product by product)')
-  }
-  
-  if ( source == "uk_2010_coeff") {
-    labelled_io_data <- labelled_io_data %>%
-      filter( .data$indicator == 'Matrix of coefficients (product by product)')
-  }
-  
-  if ( source == "uk_2010_inverse") {
-    labelled_io_data <- labelled_io_data %>%
-      filter( .data$indicator == 'Leontief Inverse (product by product)')
-  }
-  
-  labelled_io_data
-}
-
-## old_table_selection_function in data-raw/old_table_selection_function.R
-

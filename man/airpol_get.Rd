@@ -69,7 +69,6 @@ airpol_get( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T")
 \seealso{
 Other import functions: 
 \code{\link{employment_get}()},
-\code{\link{iotable_get}()},
 \code{\link{iotables_download}()},
 \code{\link{iotables_metadata_get}()},
 \code{\link{iotables_read_tempdir}()}

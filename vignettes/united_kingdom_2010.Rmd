@@ -9,18 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup knitr, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
-
-```{r setup, include=TRUE, message=FALSE}
 library(iotables)
-library(dplyr, quietly = TRUE) 
-library(tidyr, quietly = TRUE)
-library(testthat, quietly = TRUE)
+require(dplyr); require(tidyr); require(testthat)
 ```
 
 The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. 
@@ -30,19 +25,23 @@ It is unlikely that these tables will be required by other purposes than control
 ```{r read_control_data, eval=FALSE}
 uk_2010_data <- iotables_download ( source = "uk_2010" )
 save ( uk_2010_data, file = file.path('data-raw', 'uk_2010_data.rda'))
-uk_test_results <- iotables:::uk_2010_results_get()
+uk_test_results <- iotables:::uk_2010_results_get ()
 #saved as package data
 ```
 
 For the actual symmetric input-output table (see ) you can use the download function originally designed for the Eurostat bulk downloader. 
 
 ```{r downloading_excel_data}
-uk_siot              <- iotable_get (labelled_io_data = uk_2010_data, 
-                                     source = "uk_2010_siot")
-uk_published_coeff   <- iotable_get (labelled_io_data = uk_2010_data, 
-                                     source = "uk_2010_siot")
-uk_published_inverse <- iotable_get (labelled_io_data = uk_2010_data, 
-                                     source = "uk_2010_siot")
+data(uk_2010_data)
+uk_siot              <- iotable_get ( 
+                          labelled_io_data = uk_2010_data, 
+                          source = "uk_2010_siot" )
+uk_published_coeff   <- iotable_get ( 
+                          labelled_io_data = uk_2010_data, 
+                          source = "uk_2010_coeff" )
+uk_published_inverse <- iotable_get ( 
+                          labelled_io_data = uk_2010_data, 
+                          source = "uk_2010_inverse" )
 ```
 
 ## Matrix of Coefficients
@@ -52,59 +51,53 @@ The matrix of coefficients is described on page 14-15 and the data can be found 
 ```{r compare_coeff}
 uk_input_coeff <- input_coefficient_matrix_create(data_table = uk_siot)
 
-uk_coeff_published <- select (uk_input_coeff, 1 ) %>%
-  left_join ( iotable_get ( labelled_io_data = uk_2010_data, 
-                            source = "uk_2010_coeff" ) %>%
-                mutate ( across(where(is.factor), as.character)), 
-              by = "prod_na")
+coeff_comparison <- select (uk_input_coeff, 1 ) %>%
+  left_join ( uk_published_coeff, by = "prod_na")
 
 test_that("correct data is returned", {
   expect_equal(round(uk_input_coeff[,2:8], 8),
-               round(uk_coeff_published  [,2:8], 8)) })
+               round(coeff_comparison [,2:8], 8)) })
 ```
 
 Comparing the first 7 columns of the two coefficient matrixes at 8 decimal point precision they are equal. Given the size of the matrixes, not all the matrix is compared here, but such a comparison can be made. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.
 
 ## Leontief-inverse
 
-The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns with 8-digits precision we see that the re-calculated inverse and the published inverse is the same.
+The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns at 8 digit precision we see that the re-calculated inverse and the published inverse is the same.
 
 ```{r compare_inverse}
 uk_calculated_inverse <- leontief_inverse_create(uk_input_coeff)
-uk_published_inverse <- select (uk_calculated_inverse, 1 ) %>%
-  left_join ( iotable_get ( labelled_io_data = uk_2010_data, 
-                        source = "uk_2010_inverse" ) %>%
-                mutate ( across(where(is.factor), as.character)), 
-              by = "prod_na")
+
+inverse_comparison <- select (uk_calculated_inverse, 1 ) %>%
+  left_join (uk_calculated_inverse, by = "prod_na")
 
 test_that("correct data is returned", {
   expect_equal(round(uk_calculated_inverse[,2:8], 8),
-               round(uk_published_inverse  [,2:8], 8)) })
+               round(inverse_comparison[,2:8], 8)) })
 ```
 
 ## Employment cost effects
 
 ```{r compare_effects}
 employment_effect_results <- uk_test_results %>%
-  select ( .data$uk_row_label, .data$`Employment cost effects`)
+  select ( uk_row_label, `Employment cost effects`)
 
 primary_inputs_uk <- coefficient_matrix_create(
     data_table  = uk_siot, 
     total       = 'output', 
     return_part = 'primary_inputs')
 
-employment_input <- filter (primary_inputs_uk , .data$prod_na == "D1")
+employment_input <- filter (primary_inputs_uk , prod_na == "D1")
 
-employment_effects <- direct_effects_create( employment_input, uk_calculated_inverse) %>%
-  pivot_longer( -all_of("prod_na"), names_to = "prod" ) %>%
-  mutate ( prod_na = .data$prod ) %>%
-  select ( -.data$prod ) %>%
-  left_join ( metadata_uk_2010 %>%
-                select (all_of(c("prod_na", "uk_row_label"))),
-              by = "prod_na") %>%
-  left_join ( employment_effect_results, by = 'uk_row_label') %>%
+employment_effects <- direct_effects_create( employment_input, uk_calculated_inverse ) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( employment_effect_results, by = 'uk_row_label' ) %>%
   filter ( !is.na(uk_row_label )) %>%
-  relocate ( .data$value, .after = .data$uk_row_label )
+  select ( prod_na, uk_row_label, values, `Employment cost effects`)
 
 
 iotables:::create_knitr_table (
@@ -124,13 +117,13 @@ GVA is not shown in the Excel table explicitly, but can be calculated as the sum
 
 ```{r gva_effects}
 uk_siot2 <- uk_siot %>%
-  filter (.data$prod_na %in% c("B2A3G", "D1", "D29X39"))  %>%
-  summarise ( across(where(is.numeric), sum, na.rm = TRUE) ) %>%
+  filter (  prod_na %in% c("B2A3G", "D1", "D29X39") )  %>%
+  summarize_if ( is.numeric, sum, na.rm = TRUE ) %>%
   cbind ( data.frame ( prod_na = "GVA"), . ) %>%
   rbind ( uk_siot, .)
 
 gva_effect_results <- uk_test_results %>%
-  select ( .data$uk_row_label, .data$`GVA effects`)
+  select ( uk_row_label, `GVA effects`)
 
 gva_input <- coefficient_matrix_create(
    data_table  = uk_siot2, 
@@ -138,16 +131,16 @@ gva_input <- coefficient_matrix_create(
    return_part = 'primary_inputs') %>%
   filter ( prod_na == "GVA" )
 
-gva_effects <- direct_effects_create( gva_input, uk_calculated_inverse ) %>%
-  pivot_longer( -all_of("prod_na"), names_to = "prod" ) %>%
-  mutate ( prod_na = .data$prod ) %>%
-  select ( -.data$prod ) %>%
-  left_join ( metadata_uk_2010 %>%
-                select (all_of(c("prod_na", "uk_row_label"))),
-              by = "prod_na") %>%
+gva_effects <- direct_effects_create( gva_input,
+                                      uk_calculated_inverse ) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
   left_join ( gva_effect_results, by = 'uk_row_label' ) %>%
   filter ( !is.na(uk_row_label )) %>%
-  relocate ( .data$value, .after = .data$uk_row_label )
+  select ( prod_na, uk_row_label, values, `GVA effects`)
 
 iotables:::create_knitr_table (
       data_table =  gva_effects[1:10,], 
@@ -163,7 +156,7 @@ Turning to multipliers, using the same inputs we get them back with the followin
 
 ```{r compare_emp_multipliers}
 empc_multiplier_results <- uk_test_results %>%
-  select ( .data$uk_row_label, .data$`Employment cost multiplier`)
+  select ( uk_row_label, `Employment cost multiplier`)
 
 empc_indicator_uk <- coefficient_matrix_create(
    data_table  = uk_siot, 
@@ -174,15 +167,14 @@ empc_indicator_uk <- coefficient_matrix_create(
 empc_multipliers <- input_multipliers_create(
   input_requirements = empc_indicator_uk,
   uk_calculated_inverse) %>%
-  pivot_longer( -all_of("prod_na"), names_to = "prod" ) %>%
-  mutate ( prod_na = .data$prod ) %>%
-  select ( -.data$prod ) %>%
-  left_join ( metadata_uk_2010 %>%
-                select (all_of(c("prod_na", "uk_row_label"))),
-              by = "prod_na") %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label ), 
+              by = 'prod_na') %>%
   left_join ( empc_multiplier_results, by = 'uk_row_label' ) %>%
-  filter ( !is.na(uk_row_label ))  %>%
-  relocate ( .data$value, .after = .data$uk_row_label )
+  filter ( !is.na(uk_row_label )) %>%
+  select ( prod_na, uk_row_label, values, `Employment cost multiplier`)
 
 iotables:::create_knitr_table (
       data_table =  empc_multipliers [1:10,], digits = 4,
@@ -193,24 +185,20 @@ iotables:::create_knitr_table (
 
 
 ## GVA multipliers
-
 Following from the GVA effects, after summarizing GVA and adding it to the input requirements we can calculate the `GVA multipliers`.
 
-```{r gva_comp}
+```{r gva_comp, eval=FALSE}
 gva_multipliers <- input_multipliers_create(
   input_requirements = gva_input,
-  uk_calculated_inverse) %>%
-  pivot_longer( -all_of("prod_na"), names_to = "prod" ) %>%
-  mutate ( prod_na = .data$prod ) %>%
-  select ( -.data$prod ) %>%
-  left_join ( metadata_uk_2010 %>%
-                select (all_of(c("prod_na", "uk_row_label"))),
-              by = "prod_na") %>%
-  left_join ( uk_test_results %>%
-                select ( .data$uk_row_label, .data$`GVA multiplier`), by = 'uk_row_label' ) %>%
+                       uk_calculated_inverse) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( gva_multiplier_results, by = 'uk_row_label' ) %>%
   filter ( !is.na(uk_row_label )) %>%
-  relocate ( .data$value, .after = .data$uk_row_label )
-
+  select ( prod_na, uk_row_label, values, `GVA multiplier`)
 
 iotables:::create_knitr_table (
   data_table =  gva_multipliers [1:10,], digits = 4,
@@ -233,18 +221,19 @@ iotables:::create_knitr_table (
 At last, the comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.
 
 ```{r compare_output_multipliers}
-uk_output_multipliers <- output_multiplier_create(uk_input_coeff) %>%
-  pivot_longer( -all_of("prod_na"), names_to = "prod" ) %>%
-  mutate ( prod_na = .data$prod ) %>%
-  select ( -.data$prod ) %>%
-  left_join ( metadata_uk_2010 %>%
-                select (all_of(c("prod_na", "uk_row_label"))),
-              by = "prod_na") %>%
-  left_join ( uk_test_results %>%
-                select ( .data$uk_row_label, .data$`Output multiplier`), by = 'uk_row_label' ) %>%
-  filter ( !is.na(uk_row_label )) %>%
-  relocate ( .data$value, .after = .data$uk_row_label )
+output_multiplier_results <- uk_test_results %>%
+  select ( uk_row_label, `Output multiplier`)
 
+uk_output_multipliers <- output_multiplier_create(uk_input_coeff) %>%
+  gather ( prod, values, !!2:ncol(.)) %>%
+  mutate ( prod_na = prod ) %>%
+  select ( -prod ) %>%
+  left_join ( select ( metadata_uk_2010, prod_na, uk_row_label  ), 
+              by = 'prod_na') %>%
+  left_join ( output_multiplier_results, 
+              by = 'uk_row_label' ) %>%
+  filter ( !is.na(uk_row_label) ) %>%
+  select ( prod_na, uk_row_label, values, `Output multiplier`)
 
 iotables:::create_knitr_table (
       data_table =  uk_output_multipliers [1:10,], 
