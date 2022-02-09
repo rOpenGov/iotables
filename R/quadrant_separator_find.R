@@ -18,7 +18,7 @@ quadrant_separator_find <- function(data_table,
        last_column <- which(tolower(names(data_table))  %in% c("total", "cpa_total") )
        if ( ! include_total ) last_column <- last_column -1 #if total columns are not needed, the last but total
      } else if ( any(c("households", "p13_s14") %in% tolower(names(data_table)))) {
-       last_column <- which(tolower(names(data_table)) %in% c("households", "p13_s14")-1 )
+       last_column <- which(tolower(names(data_table)) %in% c("households", "p13_s14"))-1
      } else  if ( 'cpa_u' %in% tolower ( names (data_table)) ) { 
        last_column <- which(tolower(names(data_table)) =='cpa_u')
      } else if ( 'cpa_t' %in% tolower (names(data_table))) { 

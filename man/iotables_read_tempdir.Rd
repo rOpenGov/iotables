@@ -66,7 +66,6 @@ iotables_read_tempdir (source = "naio_10_pyp1750")
 Other import functions: 
 \code{\link{airpol_get}()},
 \code{\link{employment_get}()},
-\code{\link{iotable_get}()},
 \code{\link{iotables_download}()},
 \code{\link{iotables_metadata_get}()}
 }
