@@ -99,7 +99,7 @@ iotable_get <- function ( labelled_io_data = NULL,
     validate_source(source)
   }
   
-  ##Avoiding no visible binding for global variable 'data' ----------
+  ## Avoiding no visible binding for global variable 'data' ----------
   getdata <- function(...)
   {
     e <- new.env()

@@ -34,8 +34,8 @@ adjust_stk_flow <- function( stk_flow, source ) {
 
 #' @keywords internal
 get_vocabulary_prod_ind <- function() {
-  getdata (metadata) %>%  # For tables that follow prod_ind vocabulary
-    filter( variable == "prod_na") %>%
+  getdata ("metadata") %>%  # For tables that follow prod_ind vocabulary
+    filter( .data$variable == "prod_na") %>%
     dplyr::rename ( prod_na = .data$code) %>%
     dplyr::rename ( prod_na_lab = .data$label ) %>%
     dplyr::rename ( row_order = .data$numeric_label ) %>%
@@ -44,8 +44,8 @@ get_vocabulary_prod_ind <- function() {
 
 #' @keywords internal
 get_vocabulary_induse <- function() {
-  getdata(metadata) %>%  # For tables that follow the induse vocabulary
-    filter( variable == "induse") %>%
+  getdata("metadata") %>%  # For tables that follow the induse vocabulary
+    filter( .data$variable == "induse") %>%
     dplyr::rename ( induse = .data$code) %>%
     dplyr::rename ( induse_lab = .data$label )%>%
     dplyr::rename ( col_order = .data$numeric_label ) %>%
@@ -54,18 +54,19 @@ get_vocabulary_induse <- function() {
 
 #' @keywords internal
 get_vocabulary_t_rows <- function() {
-  getdata(metadata) %>%
-    filter( variable == "t_rows") %>%
+  getdata("metadata") %>%
+    filter( .data$variable == "t_rows") %>%
     dplyr::rename ( t_rows2 = .data$code) %>%
     dplyr::rename ( t_rows2_lab = .data$label ) %>%
     dplyr::rename ( row_order = .data$numeric_label ) %>%
     dplyr::rename ( iotables_row = .data$iotables_label )
 }
 
+#' @importFrom dplyr rename
 #' @keywords internal
 get_vocabulary_t_cols <- function() {
-  getdata(metadata) %>%
-    filter( variable == "t_cols") %>%
+  getdata("metadata") %>%
+    filter( .data$variable == "t_cols") %>%
     dplyr::rename ( t_cols2 = .data$code) %>%
     dplyr::rename ( t_cols2_lab = .data$label ) %>%
     dplyr::rename ( col_order = .data$numeric_label ) %>%
@@ -75,18 +76,18 @@ get_vocabulary_t_cols <- function() {
 #' @keywords internal
 get_metadata_rows <- function(source) {
   prod_ind <- define_prod_ind()
-  
   trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
                                   'croatia_2010_1900')
   
-  uk_tables <- c("uk_2010_siot", "uk_2010_use", "uk_2010_imports", "uk_2010_coeff", "uk_2010_inverse")
+  uk_tables <- c("uk_2010_siot", "uk_2010_use", "uk_2010_imports",
+                 "uk_2010_coeff", "uk_2010_inverse")
   
   if ( source %in% prod_ind ) {
     get_vocabulary_prod_ind()
   }  else if ( source %in% trow_tcol ) {
     get_vocabulary_t_rows()
   } else if ( source %in% uk_tables ) {
-    getdata(metadata_uk_2010) %>%
+    getdata("metadata_uk_2010") %>%
       filter ( !is.na(.data$uk_row)) %>%
       select ( -all_of(c("uk_col", "uk_col_label", "induse", "col_order")) ) %>%
       mutate ( uk_row = gsub("\\.", "-", as.character(.data$uk_row))) %>%
@@ -110,7 +111,7 @@ get_metadata_cols <- function(source) {
   }  else if ( source %in% trow_tcol ) {
     get_vocabulary_t_cols()
   } else if ( source %in% uk_tables ) {
-    getdata(metadata_uk_2010)  %>%
+    getdata("metadata_uk_2010")  %>%
       filter( !is.na(.data$uk_col)) %>%
       select( -.data$uk_row, -.data$uk_row_label, -.data$prod_na, -.data$row_order) %>%
       mutate ( uk_col = gsub("\\.", "-", as.character(.data$uk_col))) %>%

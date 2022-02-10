@@ -21,7 +21,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
   ## Source file is utils-metadata.R
   
   if ( source %in% uk_tables) {
-    metadata_uk_2010 <- getdata(metadata_uk_2010)
+    metadata_uk_2010 <- getdata("metadata_uk_2010")
     metadata_cols <- metadata_uk_2010  %>%
       dplyr::filter ( !is.na(.data$uk_col)) %>%
       dplyr::select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
@@ -75,41 +75,31 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     ## Do the reordering if the metadata variable is called prod_na
     iotable_labelled <- iotable_labelled %>%
       arrange (.data$row_order, .data$col_order ) %>%
-      mutate(prod_na = forcats::fct_reorder(prod_na, 
-                                            as.numeric(.data$row_order))) %>%
-      mutate(induse  = forcats::fct_reorder(induse, 
-                                            as.numeric(.data$col_order))) 
+      mutate(prod_na = fct_reorder(.data$prod_na, as.numeric(.data$row_order))) %>%
+      mutate(induse  = fct_reorder(.data$induse, as.numeric(.data$col_order))) 
     
     if ( all(c("uk_row", "uk_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
-        mutate(iotables_row = forcats::fct_reorder(uk_row ,
-                                                   as.numeric(.data$row_order))) %>%
-        mutate(iotables_col = forcats::fct_reorder(uk_col, 
-                                                   as.numeric(.data$col_order)))
+        mutate(iotables_row = fct_reorder(.data$uk_row, as.numeric(.data$row_order))) %>%
+        mutate(iotables_col = fct_reorder(.datauk_col, as.numeric(.data$col_order)))
     }
     
     if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
-        mutate(iotables_row = forcats::fct_reorder(iotables_row ,
-                                                   as.numeric(.data$row_order))) %>%
-        mutate(iotables_col = forcats::fct_reorder(iotables_col, 
-                                                   as.numeric(.data$col_order)))
+        mutate(iotables_row = fct_reorder(.data$iotables_row, as.numeric(.data$row_order))) %>%
+        mutate(iotables_col = fct_reorder(.data$iotables_col, as.numeric(.data$col_order)))
     }
   } else if ( ! source %in% croatia_files ) {
     ## Ordering IOTs that do not follow the prod_na vocabulary 
     if ( all(c("uk_row", "uk_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
-        mutate(iotables_row = forcats::fct_reorder(uk_row ,
-                                                   as.numeric(.data$row_order))) %>%
-        mutate(iotables_col = forcats::fct_reorder(uk_col, 
-                                                   as.numeric(.data$col_order)))
+        mutate(iotables_row = fct_reorder(.data$uk_row, as.numeric(.data$row_order))) %>%
+        mutate(iotables_col = fct_reorder(.data$uk_col, as.numeric(.data$col_order)))
     }
     if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
-        mutate(iotables_row = forcats::fct_reorder(iotables_row ,
-                                                   as.numeric(.data$row_order))) %>%
-        mutate(iotables_col = forcats::fct_reorder(iotables_col, 
-                                                   as.numeric(.data$col_order)))
+        mutate(iotables_row = fct_reorder(.data$iotables_row, as.numeric(.data$row_order))) %>%
+        mutate(iotables_col = fct_reorder(.data$iotables_col, as.numeric(.data$col_order)))
     }
   } else {
     ## This is the exception for Croatia
@@ -127,14 +117,10 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     
     iotable_labelled <- iotable_labelled %>%
       arrange ( .data$row_order, .data$col_order ) %>% # ?needed
-      mutate(t_rows2 = forcats::fct_reorder(t_rows2, 
-                                            as.numeric(.data$row_order))) %>%
-      mutate(t_cols2 = forcats::fct_reorder(t_cols2, 
-                                            as.numeric( .data$col_order ))) %>%
-      mutate(iotables_row = forcats::fct_reorder(iotables_row, 
-                                                 as.numeric(.data$row_order))) %>%
-      mutate(iotables_col = forcats::fct_reorder(iotables_col, 
-                                                 as.numeric(.data$col_order)))
+      mutate(t_rows2 = fct_reorder(.data$t_rows2, as.numeric(.data$row_order))) %>%
+      mutate(t_cols2 = fct_reorder(.data$t_cols2, as.numeric( .data$col_order ))) %>%
+      mutate(iotables_row = fct_reorder(.data$iotables_row, as.numeric(.data$row_order))) %>%
+      mutate(iotables_col = fct_reorder(.data$iotables_col, as.numeric(.data$col_order)))
   }
    
 
@@ -143,7 +129,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     ## Only one labelling can be selected, start with the 
     ## internal package  'iotables' labelling
     iotable_labelled_w <- iotable_labelled %>%
-      arrange (iotables_row, iotables_col) %>%
+      arrange (.data$iotables_row, .data$iotables_col) %>%
       select(all_of(c("iotables_col", "iotables_row", "values"))) %>% 
       pivot_wider (names_from = .data$iotables_col, values_from = .data$values)
     

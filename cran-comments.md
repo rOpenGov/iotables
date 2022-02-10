@@ -8,7 +8,9 @@
 * r_hub: r-release-macosx-arm64|4.1.1|macosx|macOS 11.5.2 (20G95)|Mac mini|Apple M1|
 
 ## testthat results
-
+https://builder.r-hub.io/status/iotables_0.9.tar.gz-d948f754b0534ba7a9da18a0eaec16b7
+   https://builder.r-hub.io/status/iotables_0.9.tar.gz-b86d04f5ecb54d75804215455e91b9c6
+   https://builder.r-hub.io/status/iotables_0.9.tar.gz-43f11768051b4d16a84269b4b920ffe0
 
 ## R CMD check results
 
