@@ -49,8 +49,9 @@ Eurostat manual. The `germany_1995` dataset is a simplified 6x6 sized
 SIOT taken from the `Eurostat Manual` (`p481`). The package function
 examples can be checked against [published results from Jörg
 Beutel](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
-These calculations can be followed in the [Germany 1990
-vignette](https://iotables.dataobservatory.eu/articles/germany_1995.html).
+These calculations can be followed in the [Introduction to
+iotables](https://iotables.dataobservatory.eu/articles/intro.html)
+vignette.
 
 The calculation of induced effects (Type-II multipliers) are following
 the [Input-Output Multipliers Specification Sheet and Supporting
