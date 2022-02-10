@@ -60,7 +60,7 @@ devtools::install_github("rOpenGov/iotables")
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can download the manual in PDF for the  [0.9.9 development release](https://iotables.dataobservatory.eu/iotables_0.499.pdf). and follow the changes on the [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html). 
+You can download the manual in PDF for the  [0.9.9 development release](https://iotables.dataobservatory.eu/iotables_0.99.pdf). and follow the changes on the [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html). 
 
 See also a long-form documentation (publication candidate) [iotables: an R Package for Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data](https://zenodo.org/record/5887038#.Ye2ovv7MLIU) on Zenodo.
 

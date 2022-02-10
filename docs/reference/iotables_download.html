@@ -18,7 +18,7 @@ input-output table."><meta property="og:image" content="/logo.png"><!-- mathjax 
     
     <a class="navbar-brand me-2" href="../index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,8 +78,9 @@ input-output table.</p>
     <dl><dt>source</dt>
 <dd><p>See the available list of sources above in the Description.</p></dd>
 <dt>data_directory</dt>
-<dd><p>Defaults to <code>NULL</code>, if a valid directory, it will 
-try to save the pre-processed data file here with labelling.</p></dd>
+<dd><p>Defaults to <code>NULL</code> when the files will be temporarily stored
+in the path retrieved by <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></code>. If it is a different valid directory, 
+it will try to save the pre-processed data file here with labelling.</p></dd>
 <dt>force_download</dt>
 <dd><p>Defaults to <code>FALSE</code> which will use the existing downloaded file
 in the <code>data_directory</code> or the temporary directory, if it exists. <code>TRUE</code> will
@@ -118,7 +119,6 @@ The function will make a copy of the rds file in this directory.</p><ul><li><p><
     <div class="dont-index"><p>Other import functions: 
 <code><a href="airpol_get.html">airpol_get</a>()</code>,
 <code><a href="employment_get.html">employment_get</a>()</code>,
-<code><a href="iotable_get.html">iotable_get</a>()</code>,
 <code><a href="iotables_metadata_get.html">iotables_metadata_get</a>()</code>,
 <code><a href="iotables_read_tempdir.html">iotables_read_tempdir</a>()</code></p></div>
     </div>
@@ -127,9 +127,9 @@ The function will make a copy of the rds file in this directory.</p><ul><li><p><
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"> <span class="va">io_tables</span> <span class="op">&lt;-</span> <span class="fu">iotables_download</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"naio_10_pyp1750"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_pyp1750 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpeqcCtX/eurostat/naio_10_pyp1750_date_code_FF.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Table naio_10_pyp1750 cached at C:\Users\DANIEL~1\AppData\Local\Temp\RtmpWMjwEy/eurostat/naio_10_pyp1750_date_code_FF.rds</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 96 input-output tables into the temporary directory.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpeqcCtX/naio_10_pyp1750_processed.rds.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved the raw data of this table type in temporary directory C:\Users\DANIEL~1\AppData\Local\Temp\RtmpWMjwEy/naio_10_pyp1750_processed.rds.</span>
 <span class="r-in"> <span class="co"># }</span></span>
 </code></pre></div>
     </div>

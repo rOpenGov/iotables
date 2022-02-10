@@ -75,7 +75,7 @@ devtools::install_github("rOpenGov/iotables")
 ```
 
 You can download the manual in PDF for the [0.9.9 development
-release](https://iotables.dataobservatory.eu/iotables_0.499.pdf). and
+release](https://iotables.dataobservatory.eu/iotables_0.99.pdf). and
 follow the changes on the
 [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html).
 
