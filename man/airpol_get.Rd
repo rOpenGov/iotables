@@ -47,7 +47,7 @@ Get air emissions accounts by NACE Rev. 2 activity for environmental impact
 assessments.
 }
 \details{
-Currently works only with product x product tables. 
+Currently tested only with product x product tables. 
 The dataset air emissions accounts by NACE Rev. 2 activity [env_ac_ainah_r2] has five dimensions:
 The Air pollutant \code{airpol} variables are collected on the emissions of the following pollutants: 
 carbon dioxide without emissions from biomass (CO2), carbon dioxide from biomass (Biomass CO2), 
@@ -63,7 +63,7 @@ Acidifying gases \code{ACG} and Tropospheric ozone precursors \code{O3PR}.
 }
 \examples{
 \donttest{
-airpol_get( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T") 
+airpol_get(airpol = "GHG", geo="BE", year = 2020, unit = "THS_T") 
 }
 }
 \seealso{

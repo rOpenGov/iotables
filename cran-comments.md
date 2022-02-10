@@ -14,6 +14,15 @@
 0 errors v | 0 warnings v | 0 notes v
 
 ## Notes
-I received a note from CRAN that the fedora build had a broken link and the package will be removed by 12 Februrary 2022.  'Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error).' The link was not broken, and I think that this problem was due to some latency on the Eurostat website, but the vignette no longer makes this external download.
+1. I received a note from CRAN that the fedora build had a broken link and the package will be removed by 12 Februrary 2022.  'Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error).' The link was not broken, and I think that this problem was due to some latency on the Eurostat website, but the vignette no longer makes this external download.
+
+2. Found the following (possibly) invalid URLs:
+    URL: https://iotables.dataobservatory.eu/articles/germany_1995.html
+      From: README.md
+      Status: 404
+      Message: Not Found 
+      
+I made this error when submitting the fix. The article is now correctly on the package website and the link is correctly pointing to it.      
 
 There is a planned major release of verion 1.0 of this package with a publication in the near future, but we did not want to include new functionality in this patch release, only documentation improvements and the removal of the download that occassionally gets too slow.
+
