@@ -14,16 +14,16 @@
 #' @format A data frame with 228 observations and 10 variables.
 #'\describe{
 #'   \item{prod_na}{Technology codes in row names, following the Eurostat convention.}
-#'   \item{prod_na_lab}{Longer labels for t_rows2}
+#'   \item{prod_na_lab}{Longer labels for t_rows2.}
 #'   \item{induse}{Column labels, following the Eurostat convention with differences.}
-#'   \item{iotables_row}{Row labels, i.e. to be used in key column, for iotables package abbreviations}
-#'   \item{iotables_col}{Column labels for iotables package abbreviations}
-#'   \item{values}{The actual values of the table in million euros}  
-#'   \item{unit}{MIO_EUR, the same as Eurostat}
+#'   \item{iotables_row}{Row labels, i.e. to be used in key column, for iotables package abbreviations.}
+#'   \item{iotables_col}{Column labels for iotables package abbreviations.}
+#'   \item{values}{The actual values of the table in million euros.}  
+#'   \item{unit}{MIO_EUR, the same as Eurostat.}
 #'   \item{unit_lab}{Million euros. Eurostat usually has euro and national currency unit values, too.}
-#'   \item{geo}{ISO / Eurostat country code for Germany, i.e. DE}
-#'   \item{geo_lab}{ISO / Eurostat country name, Germany}
-#'   \item{time}{Date of the SIOT}     
+#'   \item{geo}{ISO/Eurostat country code for Germany, i.e. DE.}
+#'   \item{geo_lab}{ISO/Eurostat country name, Germany.}
+#'   \item{time}{Date of the SIOT.}     
 #' }
 #' @family Validation datasets
 "germany_1995"

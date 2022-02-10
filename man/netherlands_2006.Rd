@@ -38,11 +38,11 @@ Coastal Systems Assessment project's input-output multiplier
 specification sheet. It is used as a simple example SIOT for 
 controlled analytical results. The column names were slightly altered 
 to resemble more the current Eurostat conventions and the main example 
-dataset \code{\link{germany_1990}}.
+dataset \code{\link{germany_1995}}.
 }
 \seealso{
 Other Validation datasets: 
-\code{\link{germany_1990}},
+\code{\link{germany_1995}},
 \code{\link{germany_airpol}},
 \code{\link{uk_2010_data}},
 \code{\link{uk_test_results}}

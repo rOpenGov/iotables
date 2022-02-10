@@ -18,5 +18,5 @@ An integer value with the final household expenditure. Returns
 Return the position of final household expenditure
 }
 \examples{
-household_column_find( iotable_get ( source = 'germany_1990') )
+household_column_find( iotable_get ( source = 'germany_1995') )
 }

@@ -6,7 +6,7 @@
 \usage{
 iotable_year_get(
   labelled_io_data = NULL,
-  source = "germany_1990",
+  source = "germany_1995",
   geo = "DE",
   unit = "MIO_EUR",
   time_unit = "year",
@@ -65,7 +65,7 @@ Unless you want to work with bulk data files, you should not invoke  \code{\link
 directly, rather via this function, if and when it is necessary.
 }
 \examples{
-germany_years <- iotable_year_get ( source = "germany_1990", geo = 'DE', 
+germany_years <- iotable_year_get ( source = "germany_1995", geo = 'DE', 
                                     unit = "MIO_EUR" )
 }
 \seealso{

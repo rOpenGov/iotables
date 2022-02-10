@@ -42,7 +42,7 @@ You can retrieve the data with \code{\link{iotable_get}}, setting the
 }
 \seealso{
 Other Validation datasets: 
-\code{\link{germany_1990}},
+\code{\link{germany_1995}},
 \code{\link{germany_airpol}},
 \code{\link{netherlands_2006}},
 \code{\link{uk_test_results}}

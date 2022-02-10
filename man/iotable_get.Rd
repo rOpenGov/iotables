@@ -6,7 +6,7 @@
 \usage{
 iotable_get(
   labelled_io_data = NULL,
-  source = "germany_1990",
+  source = "germany_1995",
   geo = "DE",
   year = 1990,
   unit = "MIO_EUR",
@@ -85,7 +85,7 @@ you should not invoke  \code{\link{iotables_download}}
 directly, rather via this function, if and when it is necessary.
 }
 \examples{
-germany_table <- iotable_get( source = "germany_1990", 
+germany_table <- iotable_get( source = "germany_1995", 
                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
                  labelling  = "iotables" )
 }
