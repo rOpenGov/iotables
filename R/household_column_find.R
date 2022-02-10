@@ -5,7 +5,7 @@
 #' @return An integer value with the final household expenditure. Returns 
 #' \code{NULL} if not found.
 #' @examples 
-#' household_column_find( iotable_get ( source = 'germany_1990') )
+#' household_column_find( iotable_get ( source = 'germany_1995') )
 #' @export
 
 household_column_find <- function(data_table) {

@@ -74,18 +74,18 @@ germany_long <- germany_total %>%
 
 names ( germany_long)
 
-germany_1990 <- germany_long %>%
+germany_1995 <- germany_long %>%
   dplyr::select ( -iotables_label_c, -ordering_c, -c_quadrant, 
            -iotables_label_r, -ordering_r, -r_quadrant, 
            -quadrant, -numeric_label ) %>%
   dplyr::mutate ( prod_na = toupper(prod_na)) 
 
-usethis::use_data(germany_1990, overwrite = TRUE)
+usethis::use_data(germany_1995, overwrite = TRUE)
 
 
 #usethis::use_data ( germany_metadata_rows, germany_metadata_cols, 
 #                     internal = TRUE, overwrite = TRUE)
 
-germany_1990
+germany_1995
 
 

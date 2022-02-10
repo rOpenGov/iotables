@@ -63,9 +63,9 @@ get_package_iots <- function( source_input ) {
   uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
   
   ## Read from file or internal dataset ----
-  if ( source_input == "germany_1990" ) {
-    germany_1990 <- getdata("germany_1990") 
-    labelled_io_data <- germany_1990    # use germany example 
+  if ( source_input == "germany_1995" ) {
+    germany_1995 <- getdata("germany_1995") 
+    labelled_io_data <- germany_1995    # use germany example 
     labelled_io_data$year <- 1990
     
   } else if ( source_input == "croatia_2010_1700"  ) { 

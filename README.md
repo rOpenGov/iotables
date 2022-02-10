@@ -6,7 +6,7 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.4.9-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
@@ -45,12 +45,12 @@ be consulted for further information about the data and the metadata.
 
 In order to test the analytical functions of the package and to have a
 manageable sized example data set, we use the real-life data from the
-Eurostat manual. The `germany_1990` dataset is a simplified 6x6 sized
+Eurostat manual. The `germany_1995` dataset is a simplified 6x6 sized
 SIOT taken from the `Eurostat Manual` (`p481`). The package function
 examples can be checked against [published results from Jörg
 Beutel](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
 These calculations can be followed in the [Germany 1990
-vignette](https://iotables.dataobservatory.eu/articles/germany_1990.html).
+vignette](https://iotables.dataobservatory.eu/articles/germany_1995.html).
 
 The calculation of induced effects (Type-II multipliers) are following
 the [Input-Output Multipliers Specification Sheet and Supporting
@@ -60,7 +60,7 @@ The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotables 0.4.7 from CRAN or the latest 0.4.9 development
+You can install iotables 0.4.7 from CRAN or the latest 0.9.9 development
 version with github:
 
 ``` r
@@ -74,8 +74,8 @@ devtools::install_github("rOpenGov/iotables")
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can download the manual in PDF for the [0.4.9 development
-release](https://iotables.dataobservatory.eu/iotables_0.4.9.pdf). and
+You can download the manual in PDF for the [0.9.9 development
+release](https://iotables.dataobservatory.eu/iotables_0.499.pdf). and
 follow the changes on the
 [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html).
 
@@ -93,7 +93,7 @@ Supply, Use and Input-Output
 Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
 (Eurostat Manual, Chapter 15.) This is a good introduction to understand
 what will the functions do, and to check that they work correctly. From
-0.4.9 it extended with the replication results from the [Handbook on
+0.9.9 it extended with the replication results from the [Handbook on
 Supply and Use Tables and Input-Output Tables with Extensions and
 Applications](https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf)
 published by the United Nations.
@@ -149,8 +149,8 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows:
 
-Daniel Antal. (2022, January 24). rOpenGov/iotables: Importing and
-Manipulating Symmetric Input-Output Tables (Version 0.4.9). Zenodo.
+Daniel Antal. (2022, February 10). rOpenGov/iotables: Importing and
+Manipulating Symmetric Input-Output Tables (Version 0.9.9). Zenodo.
 [https://doi.org/10.5281/zenodo.5802515](https://zenodo.org/record/5153006/)
 for released version. Development version URL:
 <https://ropengov.github.io/iotables/>

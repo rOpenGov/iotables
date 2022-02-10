@@ -53,7 +53,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     remove_vars <- remove_vars [remove_vars %in% names (metadata_cols)]
     
     if ( "stk_flow" %in% names(iotable) ) {
-      # The germany_1990 files have no stk_input columns.
+      # The germany_1995 files have no stk_input columns.
       iotable_labelled <- iotable %>%
         filter( .data$stk_flow == stk_flow_input ) 
     } else {

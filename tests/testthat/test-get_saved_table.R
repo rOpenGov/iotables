@@ -18,5 +18,5 @@ test_that("get_saved_table finds exceptions", {
 })
 
 test_that("get_package_iots works", {
-  expect_equal (unique(get_package_iots("germany_1990")$geo), "DE")
+  expect_equal (unique(get_package_iots("germany_1995")$geo), "DE")
 })

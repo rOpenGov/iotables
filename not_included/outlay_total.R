@@ -6,8 +6,8 @@
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename
 #' @examples
-#'  data (germany_1990)
-#'  input_flow_de <- input_flow_get(labelled_io_data = germany_1990, 
+#'  data (germany_1995)
+#'  input_flow_de <- input_flow_get(labelled_io_data = germany_1995, 
 #'                geo = 'DE', year = 1990,
 #'                unit = "M_EUR", named = TRUE)
 #'  outlays <- outlay_total( input_flow_matrix = input_flow_de) 

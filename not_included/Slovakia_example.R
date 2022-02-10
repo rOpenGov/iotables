@@ -50,7 +50,7 @@ sk_use_1700_2 <- use_table_get2 ( source = "naio_10_cp1700", geo = "SK",
                                stk_flow = "DOM", households = TRUE,
                                keep_total = TRUE)
 
-DE_use_1700_2 <- use_table_get2 ( source = "germany_1990", geo = "DE",
+DE_use_1700_2 <- use_table_get2 ( source = "germany_1995", geo = "DE",
                                   year = 1990, unit = "MIO_EUR",
                                   stk_flow = "DOM", households = TRUE,
                                   keep_total = TRUE)

@@ -1,6 +1,6 @@
 
 cm_de <-  coefficient_matrix_create ( 
-  data_table = iotable_get ( source = "germany_1990"), 
+  data_table = iotable_get ( source = "germany_1995"), 
   total = "output", 
   digits = 4 )
 
@@ -13,12 +13,12 @@ test_that("correct data is returned by coefficient_matrix_create()", {
 })
 
 test_that("Households are treated correctly in coefficient_matrix_create", {
-  expect_equal(ncol(coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
+  expect_equal(ncol(coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1995"), 
                                                 total = "output",
                                                 households = TRUE,
                                                 digits = 4 )), 
                8)
-  expect_equal(ncol(coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1990"), 
+  expect_equal(ncol(coefficient_matrix_create ( data_table = iotable_get ( source = "germany_1995"), 
                                                 total = "output",
                                                 digits = 4 )), 
                7)

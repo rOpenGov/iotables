@@ -65,13 +65,13 @@
 #' @importFrom glue glue
 #' @family import functions
 #' @examples 
-#' germany_table <- iotable_get( source = "germany_1990", 
+#' germany_table <- iotable_get( source = "germany_1995", 
 #'                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
 #'                  labelling  = "iotables" )
 #' @export 
 
 iotable_get <- function (labelled_io_data = NULL, 
-                         source = "germany_1990", 
+                         source = "germany_1995", 
                          geo = "DE",
                          year = 1990, 
                          unit = "MIO_EUR", 
@@ -91,10 +91,10 @@ iotable_get <- function (labelled_io_data = NULL,
   
   croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
                      'croatia_2010_1900')
-  internal_datasets <- c(croatia_files, "germany_1990", uk_tables)
+  internal_datasets <- c(croatia_files, "germany_1995", uk_tables)
   is_internal_dataset <- source %in% internal_datasets
   
-  if ( source == "germany_1990" ) { 
+  if ( source == "germany_1995" ) { 
     year <- year_input <- 1990
     geo <- geo_input <- "DE"
     unit <- unit_input <- "MIO_EUR"
@@ -209,7 +209,7 @@ iotable_get <- function (labelled_io_data = NULL,
   ## No need to save the data when the data source is one of the internal (replication) datasets 
   ## of the iotables package itself.
   
-  if ( ! source %in% c("germany_1990", croatia_files) ) {
+  if ( ! source %in% c("germany_1995", croatia_files) ) {
     ## No need to save the internal replication data of the package.
     message ( "Saving ", save_file_name, save_msg_text )
     saveRDS(iotable_labelled_wide, save_file_path, version=2)
@@ -223,7 +223,7 @@ iotable_get <- function (labelled_io_data = NULL,
 # This is legeacy code to handle old UK replication data -----------------------
 #' @keywords internal
 iotable_get_old <- function ( labelled_io_data = NULL, 
-                              source = "germany_1990", 
+                              source = "germany_1995", 
                               geo = "DE",
                               year = 1990, unit = "MIO_EUR", 
                               stk_flow = "DOM", 
@@ -243,7 +243,7 @@ iotable_get_old <- function ( labelled_io_data = NULL,
   ## Parameter exception handling -------------------------------------
   if (is.null(source)){ stop ("Parameter 'source' is a mandatory input.")}
   if (is.null(labelled_io_data) & is.null(geo)) stop ("The 'geo' parameter must be a valid Eurostat 'geo' code")
-  if (is.null(labelled_io_data) & !source %in% c("germany_1990", 
+  if (is.null(labelled_io_data) & !source %in% c("germany_1995", 
                                                  "uk_2010", 
                                                  "croatia_2010_1900", 
                                                  "croatia_2010_1800", 
@@ -272,7 +272,7 @@ iotable_get_old <- function ( labelled_io_data = NULL,
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
-                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
+                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1995")
   
   trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
                                   'croatia_2010_1900')
@@ -293,11 +293,11 @@ iotable_get_old <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = .data$numeric_label ) %>%
       dplyr::rename ( iotables_col = .data$iotables_label )
     
-    if ( source == "germany_1990" ) { 
+    if ( source == "germany_1995" ) { 
       year <- 1990
       geo <- "DE"
       unit <- "MIO_EUR"
-      source <- "germany_1990"
+      source <- "germany_1995"
     }
     
     year_input <- year
@@ -380,10 +380,10 @@ iotable_get_old <- function ( labelled_io_data = NULL,
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
     
     ## Read from file or internal dataset ----
-    if ( source_inputed == "germany_1990" ) {
+    if ( source_inputed == "germany_1995" ) {
       
-      germany_1990 <- getdata(germany_1990) 
-      labelled_io_data <- germany_1990    # use germany example 
+      germany_1995 <- getdata(germany_1995) 
+      labelled_io_data <- germany_1995    # use germany example 
       labelled_io_data$year <- 1990
       
     } else if ( source_inputed == "croatia_2010_1700" ) { 
@@ -472,7 +472,7 @@ iotable_get_old <- function ( labelled_io_data = NULL,
   
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , 
                        "croatia_2010_1900" , 
-                       "germany_1990", uk_tables ) ) {
+                       "germany_1995", uk_tables ) ) {
     selected_table <- which (   ## get the number of table to be selected
       labelled_io_data$year == year & 
         as.character(labelled_io_data$geo) == geo &

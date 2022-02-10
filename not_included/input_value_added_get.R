@@ -8,8 +8,8 @@
 #' @param named Defaults to TRUE and returns a matrix. TRUE returns a tibble containing the technology raws as a key column. The FALSE returns only a numeric vector.
 #'
 #' @examples
-#'  data (germany_1990)
-#'  value_added <- input_value_added_get( labelled_io_data = germany_1990, 
+#'  data (germany_1995)
+#'  value_added <- input_value_added_get( labelled_io_data = germany_1995, 
 #'                           technology = NULL, geo = "DE", 
 #'                           year = 1990, unit = "M_EUR", named = TRUE) 
 #' @importFrom magrittr %>%

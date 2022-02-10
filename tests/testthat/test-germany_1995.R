@@ -1,4 +1,4 @@
-hh_consumption <- germany_1990 %>%
+hh_consumption <- germany_1995 %>%
   dplyr::filter ( prod_na == "P1") %>%
   dplyr::filter ( iotables_col  == "final_consumption_households" ) %>%
   dplyr::select ( values ) %>%

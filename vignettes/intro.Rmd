@@ -27,9 +27,9 @@ This vignette uses `library(tidyverse)`, more particularly `dplyr` and `tidyr`, 
 
 ## Germany sample files
 
-The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.
+The `germany_1995` dataset is a simplified 6x6 sized SIOT taken from the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.
 
-The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the `germany_1990` dataset and the Manual should cause no misunderstandings.
+The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the `germany_1995` dataset and the Manual should cause no misunderstandings.
 
 ```{r iotables}
 germany_io <- iotable_get( labelling = "iotables" )

@@ -7,7 +7,7 @@
 #' @return A tibble/data.frame with a key row and a symmetric matrix, 
 #' after removing all empty columns and rows at the same time. 
 #' @examples 
-#' test_table <- input_coefficient_matrix_create(iotable_get(source = "germany_1990"))
+#' test_table <- input_coefficient_matrix_create(iotable_get(source = "germany_1995"))
 #' test_table[, 2] <- 0
 #' empty_remove (test_table)
 #' @export

@@ -1,4 +1,4 @@
-siot <- iotable_get(source = "germany_1990", 
+siot <- iotable_get(source = "germany_1995", 
                     geo = 'DE', year = 1990, 
                     unit = "MIO_EUR",
                     labelling = "short")

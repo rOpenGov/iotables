@@ -137,7 +137,7 @@ multipliers_sk %>%
 
 ## Package vignettes 
 
-The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1990.html) provides an introduction of input-output economics and re-creates the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://iotables.dataobservatory.eu/articles/germany_1990.html), by Jörg Beutel (Eurostat Manual).
+The [Germany 1990](https://iotables.dataobservatory.eu/articles/germany_1995.html) provides an introduction of input-output economics and re-creates the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://iotables.dataobservatory.eu/articles/germany_1995.html), by Jörg Beutel (Eurostat Manual).
 
 The [United Kingdom Input-Output Analytical Tables Daniel Antal, based on the work edited by Richard Wild](https://iotables.dataobservatory.eu/articles/united_kingdom_2010.html) is a use case on how to correctly import data from outside Eurostat (i.e. not with `eurostat::get_eurostat()`) and join it properly to a SIOT.  We also used this example to create unit tests of our functions from a published, official government statistical release. 
 

@@ -1,6 +1,6 @@
 
-data(germany_1990)
-germany_io <- iotable_get (source= "germany_1990", labelling = 'iotables' )
+data(germany_1995)
+germany_io <- iotable_get (source= "germany_1995", labelling = 'iotables' )
 data_table <- germany_airpol %>%
   filter ( .data$airpol == "CO2") %>%
   select ( .data$iotables_col, .data$value) 

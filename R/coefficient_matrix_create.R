@@ -33,7 +33,7 @@
 #' for explanation on the use of the Coefficient matrix.
 #' @family indicator functions
 #' @examples 
-#' coefficient_matrix_create(data_table = iotable_get(source = "germany_1990"), 
+#' coefficient_matrix_create(data_table = iotable_get(source = "germany_1995"), 
 #'                           total = "output", 
 #'                           digits = 4 )
 #' @export 

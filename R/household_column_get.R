@@ -7,7 +7,7 @@
 #' @importFrom dplyr mutate across
 #' @family iotables processing functions
 #' @examples 
-#' household_column_get(iotable_get (source = 'germany_1990'))
+#' household_column_get(iotable_get (source = 'germany_1995'))
 #' @export
 
 household_column_get <- function(data_table) {

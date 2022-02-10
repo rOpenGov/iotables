@@ -17,7 +17,7 @@ define_prod_ind <- function() {
   c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
     "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
     "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
-    "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
+    "naio_10_pyp1620", "naio_10_pyp1630", "germany_1995")
 }
 
 #' @keywords internal

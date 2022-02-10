@@ -65,13 +65,13 @@
 #' @importFrom rlang .data
 #' @family iotables import functions
 #' @examples 
-#' germany_table <- iotable_get( source = "germany_1990", 
+#' germany_table <- iotable_get( source = "germany_1995", 
 #'                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
 #'                  labelling  = "iotables" )
 #' @export 
 
 iotable_get <- function ( labelled_io_data = NULL, 
-                          source = "germany_1990", 
+                          source = "germany_1995", 
                           geo = "DE",
                           year = 1990, unit = "MIO_EUR", 
                           stk_flow = "DOM", 
@@ -91,7 +91,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   ## Parameter exception handling -------------------------------------
   if (is.null(source)){ stop ("Parameter 'source' is a mandatory input.")}
   if (is.null(labelled_io_data) & is.null(geo)) stop ("The 'geo' parameter must be a valid Eurostat 'geo' code")
-  if (is.null(labelled_io_data) & !source %in% c("germany_1990", 
+  if (is.null(labelled_io_data) & !source %in% c("germany_1995", 
                                                  "uk_2010", 
                                                  "croatia_2010_1900", 
                                                  "croatia_2010_1800", 
@@ -111,7 +111,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   if ( source %in% c("naio_10_cp1620",  "naio_10_cp1630", 
                      "naio_10_pyp1620", "naio_10_pyp1630")
        ) {
-    stk_flow_input <- 'TOTAL'  #tax and margin tables only have one version 
+    stk_flow_input <- 'TOTAL'  # tax and margin tables only have one version 
   }
   
   uk_tables <- c("uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse")
@@ -120,7 +120,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp15", "naio_10_cp16",
                 "naio_10_cp1610", "naio_10_cp1620", "naio_10_cp1630", 
-                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1990")
+                "naio_10_pyp1620", "naio_10_pyp1630", "germany_1995")
   
   trow_tcol <- croatia_files <- c('croatia_2010_1700', 'croatia_2010_1800', 
                                   'croatia_2010_1900')
@@ -141,11 +141,11 @@ iotable_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = .data$numeric_label ) %>%
       dplyr::rename ( iotables_col = .data$iotables_label )
     
-    if ( source == "germany_1990" ) { 
+    if ( source == "germany_1995" ) { 
       year <- 1990
       geo <- "DE"
       unit <- "MIO_EUR"
-      source <- "germany_1990"
+      source <- "germany_1995"
     }
     
     year_input <- year
@@ -228,10 +228,10 @@ iotable_get <- function ( labelled_io_data = NULL,
     tmp_rds <- file.path(tempdir(), paste0(source, "_", labelling, ".rds"))
     
     ## Read from file or internal dataset ----
-    if ( source_inputed == "germany_1990" ) {
+    if ( source_inputed == "germany_1995" ) {
       
-      germany_1990 <- getdata(germany_1990) 
-      labelled_io_data <- germany_1990    # use germany example 
+      germany_1995 <- getdata("germany_1995") 
+      labelled_io_data <- germany_1995    # use germany example 
       labelled_io_data$year <- 1990
       
     } else if ( source_inputed == "croatia_2010_1700" ) { 
@@ -320,7 +320,7 @@ iotable_get <- function ( labelled_io_data = NULL,
 
   if ( ! source %in% c("croatia_2010_1700" , "croatia_2010_1800" , 
                        "croatia_2010_1900" , 
-                       "germany_1990", uk_tables ) ) {
+                       "germany_1995", uk_tables ) ) {
     selected_table <- which (   ## get the number of table to be selected
       labelled_io_data$year == year & 
         as.character(labelled_io_data$geo) == geo &

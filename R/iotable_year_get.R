@@ -39,12 +39,12 @@
 #' @importFrom lubridate year
 #' @family iotables processing functions
 #' @examples 
-#' germany_years <- iotable_year_get ( source = "germany_1990", geo = 'DE', 
+#' germany_years <- iotable_year_get ( source = "germany_1995", geo = 'DE', 
 #'                                     unit = "MIO_EUR" )
 #' @export 
 
 iotable_year_get <- function ( labelled_io_data = NULL, 
-                               source = "germany_1990", 
+                               source = "germany_1995", 
                                geo = "DE",
                                unit = "MIO_EUR",
                                time_unit = 'year',
@@ -70,7 +70,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   }
   
   if ( ! time_unit %in% c("year", "time") ) { time_unit <- "year"}
-  if ( source == "germany_1990") { time_unit <- "time"   }
+  if ( source == "germany_1995") { time_unit <- "time"   }
   
 
   
@@ -112,7 +112,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
       dplyr::rename ( col_order = numeric_label ) %>%
       dplyr::rename ( iotables_col = iotables_label )
     
-  } else if ( source == "germany_1990" ) {  #German simplified tables
+  } else if ( source == "germany_1995" ) {  #German simplified tables
     metadata_rows <- germany_metadata_rows  
     metadata_cols <- germany_metadata_cols 
   } else {
@@ -140,8 +140,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
     tmp_rds1 <- file.path(tempdir(), paste0(source, "_iotables.rds")) #if iotables labelled version was created earlier
     tmp_rds2 <- file.path(tempdir(), paste0(source, "_short.rds")) #if short labelled version was created earlier
     tmp_rds3 <- file.path(tempdir(), paste0(source, ".rds")) #if non-labelled was created earlier
-    if ( source_inputed == "germany_1990" ) {
-      labelled_io_data <- iotables::germany_1990    # use germany example 
+    if ( source_inputed == "germany_1995" ) {
+      labelled_io_data <- iotables::germany_1995    # use germany example 
     } else if ( source_inputed == "croatia_2010_1700" ) { 
       labelled_io_data <- iotables::croatia_2010_1700 %>%
         mutate ( year = lubridate::year ( time ))

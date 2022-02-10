@@ -34,7 +34,7 @@ germany_airpol_long <- germany_airpol %>%
            geo = "DE", 
            time = as.Date ("1990-01-01"), year = 1990)
 
-iotable_get (labelled_io_data = germany_airpol, source = "germany_1990",
+iotable_get (labelled_io_data = germany_airpol, source = "germany_1995",
              unit = "T_TON", geo = "DE", year = 1990, labelling = "short")
   
 
@@ -103,12 +103,12 @@ germany_long <- germany %>%
   arrange ( t_rows2, t_cols2 )
 
 
-germany_1990 <- germany_long %>%
+germany_1995 <- germany_long %>%
   dplyr::select ( -iotables_label_c, -ordering_c, -c_quadrant, 
            -iotables_label_r, -ordering_r, -r_quadrant, 
            -quadrant, -iotables_row, -numeric_label )
 
-devtools::use_data(germany_1990, overwrite = TRUE)
+devtools::use_data(germany_1995, overwrite = TRUE)
 
 employment_metadata <- 
 

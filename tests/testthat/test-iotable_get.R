@@ -5,10 +5,10 @@ test_that("Necessary input parameters are checked in iotable_get()", {
 })
 
 test_that("Correct data is returned by iotable_get()", {
-  expect_equal(as.numeric(iotable_get(source = 'germany_1990', 
+  expect_equal(as.numeric(iotable_get(source = 'germany_1995', 
                                       geo = 'DE', year = 1990, 
                                       unit = "MIO_EUR", labelling = "iotables")[1,2]), 1131)
-  expect_equal(as.character(unlist(iotable_get(source = 'germany_1990', 
+  expect_equal(as.character(unlist(iotable_get(source = 'germany_1995', 
                                         geo = 'DE', year = 1990, 
                                         unit = "MIO_EUR", labelling = 'short')[4,1])), "CPA_G-I")
   expect_equal(as.numeric(iotable_get(source = "croatia_2010_1800", geo = "HR",
@@ -39,7 +39,7 @@ run_only_manually <- function() {
   })
 }
 
-germany_table <- iotable_get(source = 'germany_1990', 
+germany_table <- iotable_get(source = 'germany_1995', 
                              geo = 'DE', year = 1990, 
                              unit = "MIO_EUR", labelling = "iotables")
 

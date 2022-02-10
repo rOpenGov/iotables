@@ -1,5 +1,6 @@
 # iotables 0.9
 * This is a patch for a vignette that has occassional building problems, and the last release before the major release 1.0 with a long-form publication.
+* The `germany_1990` dataset was incorrectly named, because it refers to another year, it is now corrected to be `germany_1995`.
 
 # iotables 0.4.9
 * Extending replication results from the [Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications](https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf) published by the United Nations.

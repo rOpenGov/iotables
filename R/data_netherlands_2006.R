@@ -5,7 +5,7 @@
 #' specification sheet. It is used as a simple example SIOT for 
 #' controlled analytical results. The column names were slightly altered 
 #' to resemble more the current Eurostat conventions and the main example 
-#' dataset \code{\link{germany_1990}}.
+#' dataset \code{\link{germany_1995}}.
 #' @format A data frame with 14 observations and 13 variables.
 #' @source Source: Input-Output Multipliers Specification Sheet and Supporting
 #' Material in the Spicosa Project Report

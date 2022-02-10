@@ -22,7 +22,7 @@ The iotables are exactly designed for these tasks.  Currently the package downlo
 
 The aim of this introduction is not to introduce input-output economics, or SIOTs in detail.  The Eurostat manual on input-output tables and the [Eurostat tematic page](http://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology/symmetric-input-output-tables) should be consulted for further information about the data and the metadata. 
 
-In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1990` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual.  The package function examples can be checked against Jörg Beutel's published results. 
+In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual.  The `germany_1995` dataset is a simplified 6x6 sized SIOT taken from the Eurostat SIOT manual.  The package function examples can be checked against Jörg Beutel's published results. 
 
 To show how to work with other IO tables and other data, we include the latest SIOT and employment statistics from Croatia with the package.  Croatia joined the EU after 2010 and the country's SIOTs are following the Eurostat guidelines but are not available on Eurostat yet.  Because they are almost identical to a Eurostat SIOT, they give a good opportunity to review the real-life processing challenges when you cannot rely on the Eurostat downloader.  The Croatian data are found in several small datasets to show the filtering and joining of real-life data.  
 
@@ -153,7 +153,7 @@ In all cases, the `households = TRUE` parameter will add the household consumpti
 
 ```{r example_output_household, echo = FALSE, warning = FALSE, message = FALSE}
 
-de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
+de_output <- iotables::output_get ( source = "germany_1995", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = TRUE, labelling = "iotables")
 print (de_output)
@@ -189,12 +189,12 @@ The Eurostat SIOT's contain only the basic, but already very structured tables, 
 Currently only the `input_indicator_create ()` function is available which can carefully create the indicators by pairing the input vector with the output vector. [It is under reprogramming, will be corrected very soon. Not working in this form.]
 
 ```{r employment_indicator, message = FALSE}
-de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
+de_output <- iotables::output_get ( source = "germany_1995", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = TRUE, labelling = "short")
 
 de_wages <- iotables::primary_input_get ( input = "d1",
-                       source = "germany_1990", geo = "DE",
+                       source = "germany_1995", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = TRUE, labelling = "short")
 
@@ -211,11 +211,11 @@ The most frequently used input-output equations are programmed into convenient R
 The `leontief_matrix_create()` function creates the Leontief-matrix from the appropriate SIOT fields.  The `leontief_inverse_create(L)` creates the inverse of the Leontief-matrix which is used in all basic equations.  
 
 ```{r example_leontief, message = FALSE}
-de_use <- iotables::use_table_get ( source = "germany_1990", geo = "DE",
+de_use <- iotables::use_table_get ( source = "germany_1995", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = FALSE, labelling = "iotables")
 
-de_output <- iotables::output_get ( source = "germany_1990", geo = "DE",
+de_output <- iotables::output_get ( source = "germany_1995", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = FALSE, labelling = "iotables")
 
@@ -243,7 +243,7 @@ Using the analytical functions we can calculate the employment multipliers for t
 ```{r employment_multiplier, message = FALSE}
 #needs updatign with new vocubulary
 de_emp <- iotables::primary_input_get ( input = "compensation_employees",
-                       source = "germany_1990", geo = "DE",
+                       source = "germany_1995", geo = "DE",
                        year = 1990, unit = "MIO_EUR", 
                        households = FALSE, labelling = "iotables")
 
@@ -268,7 +268,7 @@ For easier automated and human testing the example input-output table is importe
 
 ```{r testing, message=FALSE}
 require (tidyr) ; require (dplyr)
-head ( iotables::germany_1990, 2)
+head ( iotables::germany_1995, 2)
 
 ```
 
