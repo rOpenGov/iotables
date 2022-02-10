@@ -2,7 +2,7 @@
 % Please edit documentation in R/supplementary_add.R
 \name{supplementary_add}
 \alias{supplementary_add}
-\title{Add Supplementary Data}
+\title{Add supplementary data}
 \usage{
 supplementary_add(data_table, supplementary_data, supplementary_names = NULL)
 }
