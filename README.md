@@ -12,7 +12,7 @@
 [![CRAN\_time\_from\_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5896882.svg)](https://doi.org/10.5281/zenodo.5896882)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6033771.svg)](https://doi.org/10.5281/zenodo.6033771)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
 [![Follow
@@ -60,7 +60,7 @@ The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotables 0.4.7 from CRAN or the latest 0.9.9 development
+You can install iotables 0.4.7 from CRAN or the latest 0.9 development
 version with github:
 
 ``` r
@@ -74,8 +74,8 @@ devtools::install_github("rOpenGov/iotables")
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
-You can download the manual in PDF for the [0.9.9 development
-release](https://iotables.dataobservatory.eu/iotables_0.99.pdf). and
+You can download the manual in PDF for the [0.9 development
+release](https://iotables.dataobservatory.eu/iotables_0.9.pdf). and
 follow the changes on the
 [Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html).
 
@@ -150,8 +150,8 @@ Contributions are very welcome:
 **Kindly cite this work** as follows:
 
 Daniel Antal. (2022, February 10). rOpenGov/iotables: Importing and
-Manipulating Symmetric Input-Output Tables (Version 0.9.9). Zenodo.
-[https://doi.org/10.5281/zenodo.5802515](https://zenodo.org/record/5153006/)
+Manipulating Symmetric Input-Output Tables (Version 0.9). Zenodo.
+[https://doi.org/10.5281/zenodo.6033771](https://zenodo.org/record/5153006/)
 for released version. Development version URL:
 <https://ropengov.github.io/iotables/>
 
