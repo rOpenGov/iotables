@@ -22,7 +22,8 @@
 #'  \code{CO2_BIO}, \code{CO_NMVOCE}, \code{GHG}, \code{HFC_CO2E}, \code{N2O}, \code{N2O_CO2E}, 
 #'  \code{NF3_SF6_CO2E}, \code{NH3}, \code{NH3_SO2E}, \code{NMVOC}, \code{NOX}, \code{NOX_NMVOCE}, 
 #'  \code{NOX_SO2E}, \code{O3PR}, \code{PFC_CO2E}, \code{PM10}, \code{PM2_5}, \code{SOX_SO2E}.
-#' @param geo The country code. 
+#' @param geo The country code. The special value \code{'germany_1995'} will return the 
+#' replication dataset \code{\link{germany_airpol}}.
 #' @param year The year.  The average employment will be created for the given
 #' year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
 #' employment statistics.
@@ -49,13 +50,25 @@
 #' input-output tables.
 #' @family import functions
 #' @examples 
-#' \donttest{
-#' airpol_get(airpol = "GHG", geo="BE", year = 2020, unit = "THS_T") 
-#' }
+#' airpol_get(airpol = "CO2", geo="germany_1995", year = 1995, unit = "THS_T") 
 #' @export
 
 airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T", 
                         data_directory = NULL, force_download = TRUE) {
+  
+  
+  if ( geo == "germany_1995") {
+    ## Avoid large examples on CRAN
+    airpol_input <- airpol
+    return_df <- getdata('germany_airpol') %>%
+      filter ( .data$airpol %in% airpol_input ) %>%
+      select (.data$iotables_col, .data$value ) %>%
+      pivot_wider(names_from = .data$iotables_col, 
+                  values_from = .data$value) %>%
+      mutate ( indicator = paste0(airpol_input, "_emission")) %>%
+      relocate ( .data$indicator, .before = everything())
+    return(return_df)
+  }
   
   if ( force_download ) {
     tmp <- eurostat::get_eurostat("env_ac_ainah_r2")

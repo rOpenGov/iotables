@@ -24,7 +24,8 @@ airpol_get(
 \code{NF3_SF6_CO2E}, \code{NH3}, \code{NH3_SO2E}, \code{NMVOC}, \code{NOX}, \code{NOX_NMVOCE}, 
 \code{NOX_SO2E}, \code{O3PR}, \code{PFC_CO2E}, \code{PM10}, \code{PM2_5}, \code{SOX_SO2E}.}
 
-\item{geo}{The country code.}
+\item{geo}{The country code. The special value \code{'germany_1995'} will return the 
+replication dataset \code{\link{germany_airpol}}.}
 
 \item{year}{The year.  The average employment will be created for the given
 year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
@@ -62,9 +63,7 @@ for further details, particularly on the calculation of Global warming potential
 Acidifying gases \code{ACG} and Tropospheric ozone precursors \code{O3PR}.
 }
 \examples{
-\donttest{
-airpol_get(airpol = "GHG", geo="BE", year = 2020, unit = "THS_T") 
-}
+airpol_get(airpol = "CO2", geo="germany_1995", year = 1995, unit = "THS_T") 
 }
 \seealso{
 Other import functions: 

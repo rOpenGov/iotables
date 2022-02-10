@@ -22,7 +22,11 @@
       Status: 404
       Message: Not Found 
       
-I made this error when submitting the fix. The article is now correctly on the package website and the link is correctly pointing to it.      
+3. airpol_get: no visible binding for global variable 'germany_airpol'
+Undefined global functions or variables:
+  germany_airpol
+      
+I made this error when submitting the fix. They are both corrected. 
 
 There is a planned major release of verion 1.0 of this package with a publication in the near future, but we did not want to include new functionality in this patch release, only documentation improvements and the removal of the download that occassionally gets too slow.
 
