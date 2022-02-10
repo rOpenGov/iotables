@@ -23,8 +23,8 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
   if ( source %in% uk_tables) {
     metadata_uk_2010 <- getdata("metadata_uk_2010")
     metadata_cols <- metadata_uk_2010  %>%
-      dplyr::filter ( !is.na(.data$uk_col)) %>%
-      dplyr::select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
+      filter ( !is.na(.data$uk_col)) %>%
+      select ( -all_of(c("uk_row", "uk_row_label", "prod_na", "row_order")) ) %>%
       mutate ( uk_col = gsub("\\.", "-", as.character(.data$uk_col))) %>%
       mutate ( uk_col = gsub(" & ", "-", as.character(.data$uk_col))) %>%
       mutate ( uk_col = trimws(.data$uk_col, 'both'))
@@ -68,8 +68,8 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
       left_join( metadata_rows, by = row_join ) 
     
     if ( nrow(iotable_labelled)== 0 ) {
-      stop ( "No rows found with geo = ", geo_input, " year = ", year_input, 
-             " unit = ", unit_input, " and stk_flow = ", stk_flow_input, "." )
+      stop ( "No rows found with parameters order_iotable(source='", source, 
+             "' labelling= '", labelling, "' and stk_flow = '", stk_flow, "')." )
     }
     
     ## Do the reordering if the metadata variable is called prod_na
@@ -81,7 +81,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     if ( all(c("uk_row", "uk_col") %in%  names (iotable_labelled)) ) {
       iotable_labelled <- iotable_labelled %>%
         mutate(iotables_row = fct_reorder(.data$uk_row, as.numeric(.data$row_order))) %>%
-        mutate(iotables_col = fct_reorder(.datauk_col, as.numeric(.data$col_order)))
+        mutate(iotables_col = fct_reorder(.data$uk_col, as.numeric(.data$col_order)))
     }
     
     if ( all(c("iotables_row", "iotables_col") %in%  names (iotable_labelled)) ) {
