@@ -44,7 +44,9 @@ leontief_inverse_create <- function ( technology_coefficients_matrix,
   names (named_inverse)     <- names (leontief_matrix)
   row.names (named_inverse) <- seq_len(nrow(named_inverse))
   
- if ( is.null(digits) ) return (named_inverse)
+ if ( is.null(digits) ) return (named_inverse) else {
+   round_table (named_inverse, digits = digits)
+ }
 }
 
 #' @rdname leontief_inverse_create

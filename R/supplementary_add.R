@@ -1,4 +1,4 @@
-#' @title Add Supplementary Data
+#' @title Add supplementary data
 #'
 #' @description Add supplementary data to a SIOT, a use, supply or margins table.
 #' @details This function is a wrapper around the more general \code{\link{rows_add}} function.

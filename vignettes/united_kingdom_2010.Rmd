@@ -14,8 +14,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(iotables)
-require(dplyr); require(tidyr); require(testthat)
+library(dplyr, quietly=TRUE)
+library(tidyr, quietly=TRUE)
+library(testthat, quietly=TRUE)
 ```
 
 The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. 
@@ -31,7 +32,8 @@ uk_test_results <- iotables:::uk_2010_results_get ()
 
 For the actual symmetric input-output table (see ) you can use the download function originally designed for the Eurostat bulk downloader. 
 
-```{r downloading_excel_data}
+```{r downloaded_excel_data}
+library(iotables)
 data(uk_2010_data)
 uk_siot              <- iotable_get ( 
                           labelled_io_data = uk_2010_data, 

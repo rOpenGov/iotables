@@ -51,7 +51,7 @@ The direct effects will show how many thousand tons of extra greenhouse gases wi
 
 ```{r ghgindicators}
 be_io <- BE %>%
-  rows_add(ghg)
+  supplementary_add(ghg)
 
 ghg_indicator <- input_indicator_create( 
   data_table = be_io,
@@ -89,7 +89,7 @@ co2 <- airpol_get(airpol="CO2", geo="BE", year=2020, unit = "THS_T")
 
 ```{r co2indicators}
 be_io_c <- BE %>%
-  rows_add(co2)
+  supplementary_add(co2)
 
 co2_indicator <- input_indicator_create ( 
   data_table  = be_io_c,
@@ -112,7 +112,7 @@ methane <- airpol_get (airpol = "CH4", geo="BE", year = 2020, unit = "THS_T")
 ```
 ```{r methaneindicators}
 be_io_m <- BE %>%
-  rows_add(methane)
+  supplementary_add(methane)
 
 methane_indicator <- input_indicator_create ( 
   data_table = be_io_m,

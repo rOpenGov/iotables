@@ -108,7 +108,8 @@ L_de <- leontief_matrix_create (
   technology_coefficients_matrix = de_input_coeff 
   )
 I_de   <- leontief_inverse_create(de_input_coeff)
-I_de_4 <- leontief_inverse_create(de_input_coeff, digits = 4)
+I_de_4 <- leontief_inverse_create(technology_coefficients_matrix=de_input_coeff,
+                                  digits = 4)
 print (I_de_4[,1:3])
 ```
 
@@ -356,13 +357,25 @@ And the multipliers (which include both the direct and indirect emissions of the
 
 \eqn{B(I-A)^{-1}}
 
+You can create a single multiplier with `?multiplier_create`.
+
+```{r CO2multiplier}
+multiplier_create( 
+  input_vector    = emission_coeffs[2,],
+  Im              = I_de,
+  multiplier_name = "CO2_multiplier", 
+  digits = 4 )
+```
+To create a tidy table of indicators of using a loop:
+
 ```{r emissionmultipliers}
 names(emission_coeffs)[1] <- names(I_de)[1]
 emission_multipliers <- cbind (
   key_column_create(names(emission_coeffs)[1], 
                     gsub("_indicator", "_multiplier", unlist(emission_coeffs[-1,1]))), 
   do.call( rbind, 
-           lapply ( 2:nrow(emission_coeffs), function(x) equation_solve (emission_coeffs[x, ], I_de) )
+           lapply ( 2:nrow(emission_coeffs), 
+                    function(x) equation_solve(emission_coeffs[x, ], I_de) )
            ) %>% as.data.frame()
   )
 
