@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="index.html">iotables</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.0001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,14 +93,14 @@
 </h2>
 <p>You can install iotables 0.4.7 from CRAN or the latest 0.9 development version with github:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># From CRAN:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"iotables"</span><span class="op">)</span>
-
-<span class="co"># From Github (development version)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rOpenGov/iotables"</span><span class="op">)</span>
-
-<span class="co">#with vignettes:</span>
-<span class="co">#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># From CRAN:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"iotables"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># From Github (development version)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rOpenGov/iotables"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#with vignettes:</span></span>
+<span><span class="co">#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)</span></span></code></pre></div>
 <p>You can download the manual in PDF for the <a href="https://iotables.dataobservatory.eu/iotables_0.9.pdf" class="external-link">0.9 development release</a>. and follow the changes on the <a href="https://iotables.dataobservatory.eu/news/index.html" class="external-link">Changelog/NEWS</a>.</p>
 <p>See also a long-form documentation (publication candidate) <a href="https://zenodo.org/record/5887038#.Ye2ovv7MLIU" class="external-link">iotables: an R Package for Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data</a> on Zenodo.</p>
 </div>
@@ -118,6 +118,10 @@
 <p>Eurostat’s data can be downloaded in several tidy, long-form, files, and a lot of filtering is needed to start working with it.</p>
 <p>Currently the following Eurostat SIOTs can be used:</p>
 <table class="table">
+<colgroup>
+<col width="45%">
+<col width="54%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">Table type</th>
 <th align="center">source code</th>
@@ -235,7 +239,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg" alt="rOG-badge"></a></li>
-<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.9-orange.svg?style=flat-square" alt="packageversion"></a></li>
+<li><a href="https://github.com/rOpenGov/iotables/commits/master" class="external-link"><img src="https://img.shields.io/badge/Package%20version-0.9.0.0001-orange.svg?style=flat-square" alt="packageversion"></a></li>
 <li><a href="https://github.com/rOpenGov/iotables/actions" class="external-link"><img src="https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/version/iotables" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://cran.r-project.org/package=iotables" class="external-link"><img src="https://www.r-pkg.org/badges/ago/iotables" alt="CRAN_time_from_release"></a></li>
@@ -243,6 +247,7 @@
 <li><a href="https://doi.org/10.5281/zenodo.6033771" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6033771.svg" alt="DOI"></a></li>
 <li><a href="https://choosealicense.com/" class="external-link"><img src="https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg" alt="license"></a></li>
 <li><a href="https://app.codecov.io/gh/rOpenGov/iotables" class="external-link"><img src="https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://dataobservatory.eu/" class="external-link"><img src="https://img.shields.io/badge/ecosystem-dataobservatory.eu-3EA135.svg" alt="dataobservatory"></a></li>
 <li><a href="https://twitter.com/intent/follow?screen_name=ropengov" class="external-link"><img src="https://img.shields.io/twitter/follow/ropengov.svg?style=social" alt="Follow rOpenGov"></a></li>
 <li><a href="https://twitter.com/intent/follow?screen_name=antaldaniel" class="external-link"><img src="https://img.shields.io/twitter/follow/antaldaniel.svg?style=social" alt="Follow author"></a></li>
 </ul>
@@ -259,7 +264,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer>

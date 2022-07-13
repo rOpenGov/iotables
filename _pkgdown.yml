@@ -45,6 +45,10 @@ articles:
        - united_kingdom_2010
 
 reference:
+  - title: "Overview"
+    desc: "Package overview"
+    contents:
+      - iotables
   - title: "Importing"
     desc: >
       Download the data from the Eurostat warehouse, or, in special cases, from the package's in-built
