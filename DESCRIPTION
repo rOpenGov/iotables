@@ -2,7 +2,7 @@ Package: iotables
 Type: Package
 Title: Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data
 Date: 2022-01-25
-Version: 0.9
+Version: 0.9.0.0001
 Authors@R:
     c(person("Daniel", "Antal", role = c("aut", "cre"),
              email = "daniel.antal@dataobservatory.eu", 
@@ -26,7 +26,7 @@ BugReports: https://github.com/rOpenGov/iotables/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Imports: 
     dplyr,
     eurostat,
