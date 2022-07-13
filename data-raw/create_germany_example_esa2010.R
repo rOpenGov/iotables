@@ -58,7 +58,7 @@ germany_long <- germany_total %>%
   mutate ( c_quadrant = ifelse ( ordering_c > 6, yes = "3_4", no = "1_2")) %>%
   mutate ( geo  = "DE") %>%
   mutate ( geo_lab = "Germany") %>%
-  mutate ( time = as.Date ('1990-01-01')) %>%
+  mutate ( time = as.Date ('1995-01-01')) %>%
   mutate ( unit = 'MIO_EUR' ) %>%
   mutate ( unit_lab = "Million euro") %>%
   mutate ( prod_na = tolower(prod_na)) %>%

@@ -4,12 +4,15 @@ test_that("Necessary input parameters are checked in iotable_get()", {
                            unit = "MIO_EUR", labelling = "iotables"))
 })
 
+iotable_get ( source = "germany_1995", year = 1995)
+
+
 test_that("Correct data is returned by iotable_get()", {
   expect_equal(as.numeric(iotable_get(source = 'germany_1995', 
-                                      geo = 'DE', year = 1990, 
+                                      geo = 'DE', year = 1995, 
                                       unit = "MIO_EUR", labelling = "iotables")[1,2]), 1131)
   expect_equal(as.character(unlist(iotable_get(source = 'germany_1995', 
-                                        geo = 'DE', year = 1990, 
+                                        geo = 'DE', year = 1995, 
                                         unit = "MIO_EUR", labelling = 'short')[4,1])), "CPA_G-I")
   expect_equal(as.numeric(iotable_get(source = "croatia_2010_1800", geo = "HR",
                                       year = 2010, unit = "T_NAC")[1,3]), 
@@ -40,7 +43,7 @@ run_only_manually <- function() {
 }
 
 germany_table <- iotable_get(source = 'germany_1995', 
-                             geo = 'DE', year = 1990, 
+                             geo = 'DE', year = 1995, 
                              unit = "MIO_EUR", labelling = "iotables")
 
 hh <- germany_table$final_consumption_households[which( germany_table$iotables_row == "output")]

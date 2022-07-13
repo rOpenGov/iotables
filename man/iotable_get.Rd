@@ -8,7 +8,7 @@ iotable_get(
   labelled_io_data = NULL,
   source = "germany_1995",
   geo = "DE",
-  year = 1990,
+  year = 1995,
   unit = "MIO_EUR",
   stk_flow = "DOM",
   labelling = "iotables",

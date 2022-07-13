@@ -1,4 +1,4 @@
-library (dplyr) ; library(tidyr) ; library (devtools)
+library (dplyr) ; library(tidyr) 
 
 germany <- read.csv ( "data-raw/Beutel_15_4.csv", stringsAsFactors = F)
 germany_airpol <- read.csv(file.path("data-raw", "germany_15_3_airpol.csv"), stringsAsFactors = F) 
@@ -32,10 +32,10 @@ germany_airpol_long <- germany_airpol %>%
   mutate ( unit = "T_TON", 
            unit_lab = "Thousand tons", 
            geo = "DE", 
-           time = as.Date ("1990-01-01"), year = 1990)
+           time = as.Date ("1995-01-01"), year = 1995)
 
 iotable_get (labelled_io_data = germany_airpol, source = "germany_1995",
-             unit = "T_TON", geo = "DE", year = 1990, labelling = "short")
+             unit = "T_TON", geo = "DE", year = 1995, labelling = "short")
   
 
 
