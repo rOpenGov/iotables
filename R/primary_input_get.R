@@ -1,6 +1,5 @@
 #' @title Get primary inputs
-#'
-#' This function will retrieve any primary input from the input-output 
+#' @description This function will retrieve any primary input from the input-output 
 #' table. 
 #' @param data_table A symmetric input-output table, a use table, or a 
 #' supply table retrieved by the  \code{\link{iotable_get}} function. 
