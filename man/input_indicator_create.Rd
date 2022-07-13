@@ -30,7 +30,7 @@ the names in the key column of \code{input_matrix} will be used to create the
 indicator names.}
 }
 \value{
-A tibble (data frame) containing  \code{input_matrix} divided by the \code{output_vector}
+A tibble (data frame) containing the \code{input_matrix} divided by the \code{output_vector} 
 with a key column for products or industries.
 }
 \description{

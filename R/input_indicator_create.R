@@ -13,7 +13,7 @@
 #' @param indicator_names The names of new indicators. Defaults to \code{NULL} when 
 #' the names in the key column of \code{input_matrix} will be used to create the 
 #' indicator names.
-#' @return A tibble (data frame) containing  \code{input_matrix} divided by the \code{output_vector}
+#' @return A tibble (data frame) containing the \code{input_matrix} divided by the \code{output_vector} 
 #' with a key column for products or industries.
 #' @importFrom dplyr mutate across
 #' @family indicator functions
