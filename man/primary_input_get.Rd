@@ -2,10 +2,7 @@
 % Please edit documentation in R/primary_input_get.R
 \name{primary_input_get}
 \alias{primary_input_get}
-\title{Get primary inputs
-
-This function will retrieve any primary input from the input-output 
-table.}
+\title{Get primary inputs}
 \usage{
 primary_input_get(data_table, primary_input = "compensation_employees")
 }
@@ -20,8 +17,6 @@ A data frame with the vector of multipliers and the an
 auxiliary metadata column (for joining with other matrixes.)
 }
 \description{
-Get primary inputs
-
 This function will retrieve any primary input from the input-output 
 table.
 }

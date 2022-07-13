@@ -1,6 +1,5 @@
 #' @title Get an output vector
-#' 
-#' This is a wrapper function around the \code{\link{primary_input_get}} 
+#' @description This is a wrapper function around the \code{\link{primary_input_get}} 
 #' function. 
 #' @param data_table A symmetric input-output table or use table retrieved 
 #' by the  

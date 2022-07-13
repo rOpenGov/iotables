@@ -1,7 +1,8 @@
 #' @title Read input-output tables from temporary directory
-#'
-#' Validate the \code{source} input parameter and try to load the table
+#' @description Validate the \code{source} input parameter and try to load the table
 #' from the current sessions' temporary directory.
+#' @details 
+#' Possible \code{source} parameters:
 #'  \itemize{
 #'  \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
 #'  \item{\code{naio_10_pyp1700}}{Symmetric input-output table at basic prices (product by product) (previous years prices)}
