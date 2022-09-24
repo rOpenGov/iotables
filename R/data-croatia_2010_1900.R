@@ -2,7 +2,7 @@
 #'
 #' 1900 - Symmetric input-output table for imports (product x product)
 #' In thousand kunas (T_NAC)
-#' @source   \href{https://www.dzs.hr/}{Državni zavod za statistiku}.
+#' @source   \href{https://dzs.gov.hr/}{Državni zavod za statistiku}.
 #' @usage data(croatia_2010_1900)
 #' @format A data frame with 13 variables. 
 #'\describe{

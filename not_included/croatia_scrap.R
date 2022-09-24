@@ -17,7 +17,7 @@ croatia_temp_file <- paste0(tempdir(),
                             "\\croatia.xlsx" )
 
 ?download.file 
-download.file(url = "https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx",
+download.file(url = "https://dzs.gov.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx",
               destfile = croatia_temp_file,
               mode = 'wb' )
 

@@ -5,7 +5,7 @@
 <!-- <img src="/man/figures/logo.png" align="right" height="205 width="205"/>-->
 
 ![iotables](man/figures/logo20.png)
-[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.9.1-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
@@ -29,7 +29,7 @@ structure. They are often found in spreadsheets that follow this
 structure, or in the case Eurostat in a data repository. In both cases
 they in reproducible research must be downloaded and restructured to
 programmatically accessible form. Often these highly structured
-statistics need to be analyzed together with other data, for example,
+statistics need to be analysed together with other data, for example,
 when employment effects and multipliers are calculated. In this case
 processing the employment data to SIOT conforming format is a
 significant preprocessing challenge.
@@ -59,7 +59,7 @@ vignette.
 The calculation of induced effects (Type-II multipliers) are following
 the [Input-Output Multipliers Specification Sheet and Supporting
 Material, Spicosa Project
-Report](http://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf).
+Report](https://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf).
 The analytical functions are tested against this example, too.
 
 ## Installation
@@ -77,11 +77,6 @@ devtools::install_github("rOpenGov/iotables")
 #with vignettes:
 #devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
-
-You can download the manual in PDF for the [0.9 development
-release](https://iotables.dataobservatory.eu/iotables_0.9.pdf). and
-follow the changes on the
-[Changelog/NEWS](https://iotables.dataobservatory.eu/news/index.html).
 
 See also a long-form documentation (publication candidate) [iotables: an
 R Package for Reproducible Input-Output Economics Analysis, Economic and
@@ -164,7 +159,7 @@ improved continuous integration, and
 [@pitkant](https://github.com/pitkant) for implementing many good
 practices on improving the code. See
 [contributors](https://github.com/ropengov/iotables/graphs/contributors).
-This project is part of [rOpenGov](http://ropengov.org).
+This project is part of [rOpenGov](https://ropengov.org).
 
 ## Code of Conduct
 

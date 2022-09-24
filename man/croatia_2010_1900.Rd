@@ -23,7 +23,7 @@ A data frame with 13 variables.
   }
 }
 \source{
-\href{https://www.dzs.hr/}{Državni zavod za statistiku}.
+\href{https://dzs.gov.hr/}{Državni zavod za statistiku}.
 }
 \usage{
 data(croatia_2010_1900)

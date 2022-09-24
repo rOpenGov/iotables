@@ -3,7 +3,7 @@
 #' 1800 - Symmetric input-output table for domestic production 
 #' (product x product)
 #' In thousand kunas (T_NAC)
-#' @source   \href{https://www.dzs.hr/}{Državni zavod za statistiku}.
+#' @source   \href{https://dzs.gov.hr/}{Državni zavod za statistiku}.
 #' @usage data(croatia_2010_1800)
 #' @format A data frame with 13 variables. 
 #'\describe{
