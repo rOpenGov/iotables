@@ -45,7 +45,7 @@ The aim of this introduction is not to introduce input-output economics, or SIOT
 
 In order to test the analytical functions of the package and to have a manageable sized example data set, we use the real-life data from the Eurostat manual. The `germany_1995` dataset is a simplified 6x6 sized SIOT taken from the `Eurostat Manual` (`p481`).  The package function examples can be checked against [published results from Jörg Beutel](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). These calculations can be followed in the [Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html) vignette.
 
-The calculation of induced effects (Type-II multipliers) are following the [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](https://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf). The analytical functions are tested against this example, too.
+The calculation of induced effects (Type-II multipliers) are following the [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](https://web.archive.org/web/20220331124544/www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf). The analytical functions are tested against this example, too.
 
 ## Installation
 

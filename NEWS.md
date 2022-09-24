@@ -74,7 +74,7 @@ is seldom used, as the analytical function will call it as needed.
 * New convenience function for nicer printing of structured SIOT tables and related matrix results.  Not yet exported, first will be used on vignettes only. 
 
 # iotables 0.3.7
-* New example `data(netherlands_2006)`, terminology and analytical improvements following  [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](https://www.coastal-saf.eu/output-step/pdf/Specification sheet I_O_final.pdf). Results are checked against the publication.
+* New example `data(netherlands_2006)`, terminology and analytical improvements following  [Input-Output Multipliers Specification Sheet and Supporting Material, Spicosa Project Report](https://web.archive.org/web/20220331124544/www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf). Results are checked against the publication.
 * For terminological clarity, earlier `direct_supply_effects_create()` function is renamed `direct_supply_effects_create()`.
 * The function `effects_create()` currently refers to the function returning direct effects of a change in demand.
 * The function `multipliers_create()` refers to the function returning direct and indirect effects of a change in demand.
