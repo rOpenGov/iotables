@@ -1,14 +1,16 @@
 ## Test environments
-* local Window 10 install, r-version 4.1.2
+* x86_64-w64-mingw32 (64-bit), R version 4.2.1 (2022-06-23 ucrt)
 * R-devel with win-builder.r-project.org, x86_64-w64-mingw32, R Under development (unstable) (2022-09-23 r82903 ucrt)
+* -oldrelease with win-builder.r-project.org
 * mac.r-project.org
+* Appveyor R version 4.2.1 Patched (2022-09-23 r82903 ucrt)
 
 
 ## testthat results
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 87 ]
 
 ## R CMD check results
-0 errors v | 0 warnings v | 0 notes 
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 ## Notes
 1. I received an email from CRAN about "Found the following HTML validation

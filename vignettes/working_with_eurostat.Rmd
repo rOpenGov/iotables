@@ -136,17 +136,17 @@ In the Czech SIOTs, they are removed by the statistical authority, so the Czech 
 
 Most countries do not use the *L_68A*, *CPA_U* [Services provided by extraterritorial organisations and bodies] and *CPA_T* [Services of households as employers; undifferentiated goods and services produced by households for own use]industries, instead they use *L_68B* for the income component of real estates, and they do not calculate the   In order to prevent division by zero errors, they are symmetrically removed from rows and columns.  This will not change the results. 
 
-### Creating the Leontieff-matrix and its inverse {#leontieff-inverse}
+### Creating the Leontief-matrix and its inverse {#leontieff-inverse}
 
-The Leontieff matrix is derived from Leontieff equation system.  
+The Leontief matrix is derived from Leontief equation system.  
 
 (19) $(I-A)x = y$
 
-The Leontieff matrix is defined as $(I-A)$ and it is created with the `leontieff_matrix_create()` function.
+The Leontief matrix is defined as $(I-A)$ and it is created with the `leontieff_matrix_create()` function.
 
-The Leontieff inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontieff-matrix.
+The Leontief inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontief-matrix.
 
-The code chunk below prints a small part of the Czech Leontieff-inverse.
+The code chunk below prints a small part of the Czech Leontief-inverse.
 
 ```{r leontieff, results='asis'}
 L_cz <- leontieff_matrix_create( input_coeff_matrix_cz  )
@@ -158,13 +158,13 @@ I_sk <- leontieff_inverse_create( input_coeff_matrix_sk )
 knitr::kable(head(I_cz[,1:8]))
 ```
 
-You can create the Leontieff-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
+You can create the Leontief-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
 
 ## Direct effect indicators
 
 The direct effects can be compared to intermediate production, domestic product or total supply.  
 
->The calculation follows the Eurostat Manaul on p497-499
+>The calculation follows the Eurostat Manual on p497-499
 
 (60)  $a_{ij}$ = $z_{ij}$ / $x_j$  [recap: (43) is the same]
 
@@ -301,7 +301,7 @@ output_coeff_sk <- output_coefficient_matrix_create(
 knitr::kable (head(output_coeff_cz[,1:8]))
 ```
 
-From the output coefficient matrix we can create the Leontieff-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
+From the output coefficient matrix we can create the Leontief-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
 
 ```{r forward, results='asis', eval=FALSE}
 cz_fw <- forward_linkages ( output_coeff_cz )

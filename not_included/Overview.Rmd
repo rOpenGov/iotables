@@ -16,7 +16,7 @@ Also a quote using `>`:
 > "He who gives up [code] safety for [code] speed deserves neither."
 ([via](https://twitter.com/hadleywickham/status/504368538874703872))
 
-The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure.  They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository.  In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form.  Often these highly structured statistics need to be analyzed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
+The symmetric input-output tables (SIOTs) are complex statistical products that present inter-related statistics in a predefined structure.  They are often found in spreadsheets that follow this structure, or in the case Eurostat in a data repository.  In both cases they in reproducible research must be downloaded and restructured to programmatically accessible form.  Often these highly structured statistics need to be analysed together with other data, for example, when employment effects and multipliers are calculated. In this case processing the employment data to SIOT conforming format is a significant preprocessing challenge.
 
 The iotables are exactly designed for these tasks.  Currently the package downloads and processes standardized European SIOTs conforming to the latest statistical regulations, i.e. SIOTs starting from the year 2010.  The analytical functions work with any SIOTs but only standardized SIOTs have reproducible input functions. It is intended to later include European SIOTs from 1995 and OECD standardized SIOTs in later versions. 
 
@@ -162,7 +162,7 @@ print (de_output)
 
 ###Third quadrant or primary inputs
 
-The following function gets the primary input that you want to analyze. The `households` paramter select or deselects the household consumption expenditure column. In case it is selected, it set to default 0.
+The following function gets the primary input that you want to analyse. The `households` paramter select or deselects the household consumption expenditure column. In case it is selected, it set to default 0.
 
 ```{r example_primary_output, eval = FALSE, echo = FALSE, warning = FALSE, message = FALSE}
 

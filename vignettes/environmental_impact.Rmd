@@ -21,7 +21,7 @@ library(dplyr, quietly=TRUE)
 library(tidyr, quietly=TRUE)
 ```
 
-In this example we will show which economic activities contribute the most the greenhouse emissions in Belgium.  We want to how much the increase of one unit of production will increase the CO2-equivalent of various greenhouse gases, not only CO2 itself, but also methane (CH4), Nitrous oxide (N2O), and fluorinated gases (e.g., chlorofluorocarbons, hydrochlorofluorocarbons, and halons). While we talk most about CO2, the greenhouse gas that is emmitted in the greatest quantity, but it is not the only culprit for global warming. Especially fluorinated gases have a high potential to increase the greenhouse effect.
+In this example we will show which economic activities contribute the most the greenhouse emissions in Belgium.  We want to how much the increase of one unit of production will increase the CO2-equivalent of various greenhouse gases, not only CO2 itself, but also methane (CH4), Nitrous oxide (N2O), and fluorinated gases (e.g., chlorofluorocarbons, hydrochlorofluorocarbons, and halons). While we talk most about CO2, the greenhouse gas that is emitted in the greatest quantity, but it is not the only culprit for global warming. Especially fluorinated gases have a high potential to increase the greenhouse effect.
 
 ## Importing the data
 

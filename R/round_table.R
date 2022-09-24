@@ -10,8 +10,8 @@
 #' @importFrom dplyr mutate across
 #' @keywords internal
 
-round_table <- function ( data_table, 
-                          digits = NULL) {
+round_table <- function (data_table, 
+                         digits = NULL) {
 
   if (!is.null(digits)) { # Rounding digits must be numeric, if given
     if (! inherits(digits, "numeric") ) {
@@ -20,8 +20,8 @@ round_table <- function ( data_table,
       return(data_table) }
   }
    
-  round_eps <- function ( x, digits ) {
+  round_eps <- function (x, digits) {
     ifelse (x == 1e-06, x, round (x, digits))
   }
-  data_table %>%  mutate (across(where(is.numeric), round_eps, digits))
+  data_table %>% mutate (across(where(is.numeric), round_eps, digits))
 }

@@ -111,7 +111,7 @@ iotables:::create_knitr_table (
 ```
 
 
-The comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.
+The comparison of output multipliers show that our code gives the same results. Only ten industries are shown.
 
 ## GVA effects
 
@@ -220,7 +220,7 @@ iotables:::create_knitr_table (
 
 ## Output multipliers
 
-At last, the comparison of output mulitipliers show that our code gives the same results. Only ten industries are shown.
+At last, the comparison of output multipliers show that our code gives the same results. Only ten industries are shown.
 
 ```{r compare_output_multipliers}
 output_multiplier_results <- uk_test_results %>%

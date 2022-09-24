@@ -52,4 +52,4 @@ Suggests:
     covr
 Depends: R(>= 3.5.0)
 VignetteBuilder: knitr
-Language: en-US
+Language: en-GB
