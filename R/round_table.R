@@ -13,8 +13,8 @@
 round_table <- function ( data_table, 
                           digits = NULL) {
 
-  if (!is.null(digits)) { ##rounding digits must be numeric, if given
-    if ( class(digits) != "numeric") {
+  if (!is.null(digits)) { # Rounding digits must be numeric, if given
+    if (! inherits(digits, "numeric") ) {
       warning ("Error: rounding digits are not given as a numeric input, 
                no rounding took place.") 
       return(data_table) }
