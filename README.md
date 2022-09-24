@@ -59,7 +59,7 @@ vignette.
 The calculation of induced effects (Type-II multipliers) are following
 the [Input-Output Multipliers Specification Sheet and Supporting
 Material, Spicosa Project
-Report](https://www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf).
+Report](https://web.archive.org/web/20220331124544/www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf).
 The analytical functions are tested against this example, too.
 
 ## Installation
