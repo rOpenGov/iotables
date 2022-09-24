@@ -1,8 +1,8 @@
-#' Employment metadata
+#' @title Employment metadata
 #'
-#' An arrangement of the Eurostat national accounts vocabulary to match with 
+#' @description An arrangement of the Eurostat national accounts vocabulary to match with 
 #' employment statistics data. 
-#' @usage data(metadata)
+#' @usage data(employment_metadata)
 #' @format A data frame with 6 variables.  
 #'\describe{
 #'   \item{emp_code}{code used in the employment statistics}

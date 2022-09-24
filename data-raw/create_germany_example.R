@@ -1,55 +1,7 @@
-library (dplyr) ; library(tidyr) 
+library(dplyr)
+library(tidyr) 
 
 germany <- read.csv ( "data-raw/Beutel_15_4.csv", stringsAsFactors = F)
-germany_airpol <- read.csv(file.path("data-raw", "germany_15_3_airpol.csv"), stringsAsFactors = F) 
-germany_airpol <- germany_airpol %>% 
-  pivot_longer ( cols = -all_of("airpol"),
-                 names_to = "iotables_col") %>%
-  mutate ( induse = plyr::mapvalues (.data$iotables_col, 
-                                     from = c('agriculture_group', 'industry_group', 'construction',
-                                              'trade_group', 'business_services_group', 'other_services_group', 
-                                              'final_consumption_households', 'output_bp'), 
-                                     to = c("CPA_A", "CPA_B-E", "CPA_F", "CPA_G-I", 
-                                            "CPA_J-N", "CPA_O-T", "P3_S14", "P1")) ) %>%
-  relocate (.data$value, .after = everything())
-
-usethis::use_data(germany_airpol, overwrite = TRUE)
-
-germany_airpol_long <- germany_airpol %>% 
-  pivot_longer ( cols = all_of("airpol"),
-                 values_to = "iotables_row") %>%
-  select (-.data$name) %>%
-  mutate ( prod_na = iotables_row ) %>%
-  pivot_longer ( cols = -any_of(c("iotables_row", "prod_na")), 
-                 names_to = 'iotables_col', 
-                 values_to = 'values') %>%
-  mutate ( induse = plyr::mapvalues (.data$iotables_col, 
-                                    from = c('agriculture_group', 'industry_group', 'construction_group',
-                                             'trade_group', 'business_services_group', 'other_services_group', 
-                                             'final_consumption_households', 'output_bp'), 
-                                    to = c("CPA_A", "CPA_B-E", "CPA_F", "CPA_G-I", 
-                                           "CPA_J-N", "CPA_O-T", "P3_S14", "P1"))) %>%
-  mutate ( unit = "T_TON", 
-           unit_lab = "Thousand tons", 
-           geo = "DE", 
-           time = as.Date ("1995-01-01"), year = 1995)
-
-iotable_get (labelled_io_data = germany_airpol, source = "germany_1995",
-             unit = "T_TON", geo = "DE", year = 1995, labelling = "short")
-  
-
-
-#write.csv (iotables:::germany_metadata_rows, "germany_metadata_rows.csv")
-#write.csv (iotables:::germany_metadata_cols, "germany_metadata_cols.csv")
-
-
-#germany_metadata_cols <- readxl::read_excel("data-raw/Germany_metadata.xlsx", 
-#                                            sheet = "germany_metadata_cols") %>%
- # mutate_if ( is.factor, as.character )
-
-#germany_metadata_rows <- readxl::read_excel("data-raw/Germany_metadata.xlsx", 
-  #                                           sheet = "germany_metadata_rows") %>%
- # mutate_if ( is.factor, as.character )
 
 germany_long <- germany %>%
   gather ( t_cols2, values, agriculture_group:output_bp) %>%
@@ -72,7 +24,7 @@ germany_long <- germany %>%
                                                    'D29_M_D39', 'K1', 'B2N_B3N',
                                                    'B1G', 'P1', 
                                                    'EMP-WS', 'EMP-FTE', 'EMP'  
-                                                   ), 
+                                          ), 
                                           to = seq(1:19))) %>%
   mutate ( ordering_c  = plyr::mapvalues (t_cols2, 
                                           from = c('agriculture_group', 'manufacturing_group', 'construction_group',
@@ -105,12 +57,67 @@ germany_long <- germany %>%
 
 germany_1995 <- germany_long %>%
   dplyr::select ( -iotables_label_c, -ordering_c, -c_quadrant, 
-           -iotables_label_r, -ordering_r, -r_quadrant, 
-           -quadrant, -iotables_row, -numeric_label )
+                  -iotables_label_r, -ordering_r, -r_quadrant, 
+                  -quadrant, -iotables_row, -numeric_label )
 
-devtools::use_data(germany_1995, overwrite = TRUE)
+usethis::use_data(germany_1995, overwrite = TRUE)
 
-employment_metadata <- 
+germany_airpol <- read.csv(file.path("data-raw", "germany_15_3_airpol.csv"), stringsAsFactors = F) 
+germany_airpol <- germany_airpol %>% 
+  pivot_longer ( cols = -all_of("airpol"),
+                 names_to = "iotables_col") %>%
+  mutate ( induse = plyr::mapvalues (.data$iotables_col, 
+                                     from = c('agriculture_group', 'industry_group', 'construction',
+                                              'trade_group', 'business_services_group', 'other_services_group', 
+                                              'final_consumption_households', 'output_bp'), 
+                                     to = c("CPA_A", "CPA_B-E", "CPA_F", "CPA_G-I", 
+                                            "CPA_J-N", "CPA_O-T", "P3_S14", "P1")) ) %>%
+  relocate (.data$value, .after = everything())
 
-devtools::use_data ( germany_metadata_rows, germany_metadata_cols, 
+usethis::use_data(germany_airpol, overwrite = TRUE)
+
+not_used <- function() {
+  germany_airpol_long <- germany_airpol %>% 
+    pivot_longer ( cols = all_of("airpol"),
+                   values_to = "iotables_row") %>%
+    select (-.data$name) %>%
+    mutate ( prod_na = .data$iotables_row ) %>%
+    pivot_longer ( cols = -any_of(c("iotables_row", "prod_na")), 
+                   names_to = 'iotables_col', 
+                   values_to = 'values') %>%
+    mutate ( induse = plyr::mapvalues (.data$iotables_col, 
+                                       from = c('agriculture_group', 'industry_group', 'construction_group',
+                                                'trade_group', 'business_services_group', 'other_services_group', 
+                                                'final_consumption_households', 'output_bp'), 
+                                       to = c("CPA_A", "CPA_B-E", "CPA_F", "CPA_G-I", 
+                                              "CPA_J-N", "CPA_O-T", "P3_S14", "P1"))) %>%
+    mutate ( unit = "T_TON", 
+             unit_lab = "Thousand tons", 
+             geo = "DE", 
+             time = as.Date ("1995-01-01"), year = 1995)
+  
+  iotable_get (labelled_io_data = germany_airpol, source = "germany_1995",
+               unit = "T_TON", geo = "DE", year = 1995, labelling = "short") 
+}
+
+  
+
+
+#write.csv (iotables:::germany_metadata_rows, "germany_metadata_rows.csv")
+#write.csv (iotables:::germany_metadata_cols, "germany_metadata_cols.csv")
+
+
+#germany_metadata_cols <- readxl::read_excel("data-raw/Germany_metadata.xlsx", 
+#                                            sheet = "germany_metadata_cols") %>%
+ # mutate_if ( is.factor, as.character )
+
+#germany_metadata_rows <- readxl::read_excel("data-raw/Germany_metadata.xlsx", 
+  #                                           sheet = "germany_metadata_rows") %>%
+ # mutate_if ( is.factor, as.character )
+
+
+
+#employment_metadata <- 
+
+usethis::use_data ( germany_metadata_rows, germany_metadata_cols, 
                      internal = TRUE, overwrite = TRUE)

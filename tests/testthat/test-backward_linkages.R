@@ -1,7 +1,6 @@
-context ("Creating backwards linkages")
 
 
-de_coeff <- input_coefficient_matrix_create( iotable_get(), digits = 4)
+de_coeff <- input_coefficient_matrix_create(data_table = iotable_get(), digits = 4)
 
 I <- leontief_inverse_create ( de_coeff )
 I4 <- sapply ( I[, 2:ncol(I)], function (x) round(x, 4)) # sapply because we do not know the dimensions

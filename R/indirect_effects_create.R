@@ -20,29 +20,27 @@
 #'
 #' I_nl <- leontief_inverse_create(input_coeff_nl)
 #'
-#' direct_effects_create(input_requirements = compensation_indicator, 
-#'                       inverse = I_nl)
+#' indirect_effects_create(input_requirements = compensation_indicator, 
+#'                         inverse = I_nl)
 #' @export
 
 indirect_effects_create <- function ( input_requirements,
                                       inverse,
                                       digits = NULL) { 
-  . <- NULL
-  
-  names_direct <- names ( input_requirements )
-  new_key_column <- input_requirements %>%
-    select (1:2) %>%
-    mutate( across(1, gsub(pattern ="_indicator",
-                                          replacement = "", 
-                                          x =. )) ) %>%
-    mutate( across(1, paste0(., "_indirect_effect")))
-  
+  names_direct <- names(input_requirements)
   col_n <- ncol(input_requirements)
  
   #columns of the left matrix must be the same as the number of rows of 
   #the right matrix
   #Remove key column------
   key_column                <- subset ( input_requirements, select = 1)
+  
+  new_key_column <- gsub(pattern ="_indicator", replacement = "", key_column[,1])
+  new_key_column <- paste0(new_key_column, "_indirect_effect")
+  new_key_column <- data.frame( key_colum = as.character(key_column))
+  names(new_key_column)[1] <- names(input_requirements)[1]
+  
+  
   input_requirements_matrix <- input_requirements[,-1]
   inverse                   <- inverse[, -1]
 
@@ -64,6 +62,6 @@ indirect_effects_create <- function ( input_requirements,
       multipliers <- round ( indirect_effects, digits )
    }
   
-  cbind (new_key_column[,1], indirect_effects)
+  cbind (new_key_column, indirect_effects)
  
 }

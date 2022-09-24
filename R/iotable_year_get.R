@@ -74,7 +74,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   
 
   
-##Veryfing source parameter and loading the labelling  ----
+  ## Veryfing source parameter and loading the labelling  ----
   prod_ind <- c("naio_10_cp1700", "naio_10_cp1750", "naio_10_pyp1700",
                 "naio_10_pyp1750", "naio_10_cp1620", "naio_10_cp1630", 
                 "naio_10_pyp1620", "naio_10_pyp1630" )
@@ -83,7 +83,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   
   if ( source %in% prod_ind ) { 
     metadata_rows <- iotables::metadata %>%  #tables that follow prod_ind vocabulary
-      dplyr::filter ( variable == "prod_na") %>%
+      filter ( variable == "prod_na") %>%
       dplyr::rename ( prod_na = code) %>%
       dplyr::rename ( prod_na_lab = label ) %>%
       dplyr::rename ( row_order = numeric_label ) %>%
@@ -122,8 +122,8 @@ iotable_year_get <- function ( labelled_io_data = NULL,
   metadata_rows <- mutate ( metadata_rows, across(where(is.factor), as.character) )
   metadata_cols <- mutate ( metadata_cols, across(where(is.factor), as.character) )
   
-  ###Exception handling for wrong paramters-----
-  if ( is.null(labelled_io_data) ) {  #if not directly inputed data 
+  # Exception handling for wrong paramters -----------------------
+  if ( is.null(labelled_io_data) ) {  # if not directly inputed data 
     if (is.null(geo)) stop ("Error: no country selected.")
   
     if (! unit  %in% c("MIO_NAC", "MIO_EUR", "T_NAC")) {
@@ -136,7 +136,7 @@ iotable_year_get <- function ( labelled_io_data = NULL,
       }
     }
 
-    ##Creating a temporary file name for the input-output table ----
+    # Creating a temporary file name for the input-output table -------------
     tmp_rds1 <- file.path(tempdir(), paste0(source, "_iotables.rds")) #if iotables labelled version was created earlier
     tmp_rds2 <- file.path(tempdir(), paste0(source, "_short.rds")) #if short labelled version was created earlier
     tmp_rds3 <- file.path(tempdir(), paste0(source, ".rds")) #if non-labelled was created earlier
@@ -163,9 +163,9 @@ iotable_year_get <- function ( labelled_io_data = NULL,
                                                 force_download = force_download ) 
       }
     } # use eurostat files 
-  } #end of possible downloads or data retrieval if not directly inputed
+  } # end of possible downloads or data retrieval if not directly inputed
   
- ##Veryfing parameters ----  
+ ## Veryfing parameters ----  
   
   if ( nchar(geo_input) == 2 & geo_input == tolower(geo_input)) { 
      geo_input <- toupper (geo_input)
@@ -194,9 +194,9 @@ iotable_year_get <- function ( labelled_io_data = NULL,
    return_values <- sort(unique ( labelled_io_data$time[selected_tables] )) 
  }
   
- if ( length( return_values > 0 ) ) {
-   message ( "The following years are available for ", geo, " in ", unit , " currency units:\n", 
-             paste(return_values, collapse = '; ' ), ".")
+ if ( length(return_values > 0) ) {
+   #message ( "The following years are available for ", geo, " in ", unit , " currency units:\n", 
+  #           paste(return_values, collapse = '; ' ), ".")
  } else { 
    warning ( "No tables are available for ", 
              geo, " in ", unit , " currency units.")

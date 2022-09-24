@@ -16,7 +16,7 @@ A data frame with 6 variables.
 }
 }
 \usage{
-data(metadata)
+data(employment_metadata)
 }
 \description{
 An arrangement of the Eurostat national accounts vocabulary to match with 
