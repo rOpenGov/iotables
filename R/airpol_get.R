@@ -45,7 +45,7 @@
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
 #' in the \code{data_directory} or the temporary directory, if it exists.
 #' @source Eurostat folder  
-#' \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}
+#' \href{https://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
 #' @family import functions

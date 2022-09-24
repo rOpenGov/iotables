@@ -25,7 +25,7 @@
 #' @importFrom eurostat get_eurostat
 #' @importFrom rlang .data
 #' @source Eurostat statistic 
-#' \href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+#' \href{https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
 #' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
@@ -54,6 +54,16 @@ employment_get <- function ( geo,
   if ( ! labelling %in% c("iotables", 'prod_na', 'induse')) {
     stop("Labelling must be any of 'iotables', 'prod_na' [product x product] or 'induse' [industry x industry]")
   }
+  
+  ## Avoiding no visible binding for global variable 'data' ----------
+  getdata <- function(...)
+  {
+    e <- new.env()
+    name <- utils::data(..., envir = e)[1]
+    e[[name]]
+  }
+  
+  employment_metadata <- getdata("employment_metadata")
   
   save_employment_file <- paste0('employment_', tolower (age), '_',
                                  tolower(sex), '_', 
@@ -143,7 +153,7 @@ employment_get <- function ( geo,
   
   ## Year selection and exception handling -------------------------------------  
   
-  if ( year_input %in% unique ( emp$year ) ) {
+  if ( year %in% unique ( emp$year ) ) {
     emp <- emp %>% filter ( .data$year == year )
   } else {
     stop ("No employment data found with the year parameter = ", year )
@@ -176,10 +186,7 @@ employment_get <- function ( geo,
     left_join ( employment_metadata, 
                        by = "emp_code") %>%  # iotables:::employment_metadata
     dplyr::group_by (  .data$code, .data$variable, .data$iotables_label ) %>%
-    dplyr::summarize ( values = sum(.data$values)) %>%
-    dplyr::mutate ( geo = geo ) %>%
-    dplyr::mutate ( year = year_input ) %>%
-    dplyr::mutate ( sex = sex ) 
+    dplyr::summarize ( values = sum(.data$values)) 
   
   
   ## If data_directory exists, save results ------------------------------- 

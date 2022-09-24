@@ -5,18 +5,18 @@
 \title{Get employment data}
 \source{
 Eurostat statistic 
-\href{http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+\href{https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
 by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 }
 \usage{
 employment_get(
-  geo = "CZ",
+  geo,
   year = "2010",
   sex = "Total",
   age = "Y_GE15",
   labelling = "iotables",
   data_directory = NULL,
-  force_download = TRUE
+  force_download = FALSE
 )
 }
 \arguments{
@@ -40,7 +40,7 @@ industry SIOTs \code{"induse"}.}
 \item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
 data file here with labelling.}
 
-\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
+\item{force_download}{Defaults to \code{FALSE}. It will use the existing downloaded file
 in the \code{data_directory} or the temporary directory, if it exists.}
 }
 \value{

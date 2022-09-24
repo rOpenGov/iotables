@@ -5,7 +5,7 @@
 \title{Get air pollutant data}
 \source{
 Eurostat folder  
-\href{http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}
+\href{https://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&dataset=env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}
 }
 \usage{
 airpol_get(

@@ -12,7 +12,7 @@
 ##'  \item{\code{uk_2010_inverse}}{ Leontief Inverse (product by product) }
 ##' }  
 #' @usage data(uk_2010_data)
-#' @source \href{https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
+#' @source \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' @format A data frame with 10 variables.
 #'\describe{
 #'   \item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.} 
