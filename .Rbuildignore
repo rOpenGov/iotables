@@ -25,3 +25,4 @@
 ^_pkgdown\.yml$
 ^logo.png$
 ^CRAN-SUBMISSION$
+^appveyor\.yml$
