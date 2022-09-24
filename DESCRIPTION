@@ -23,7 +23,6 @@ Description: Pre-processing and basic analytical tasks related to working
     <http://ropengov.github.io/> to open source open government initiatives.
 URL: https://iotables.dataobservatory.eu/
 BugReports: https://github.com/rOpenGov/iotables/issues
-DOI: 10.5281/zenodo.7109769
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -25,7 +25,7 @@
 #' @importFrom eurostat get_eurostat
 #' @importFrom rlang .data
 #' @source Eurostat statistic 
-#' \href{https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsq_egan22d&lang=en}{Employment 
+#' \href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{Employment 
 #' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.

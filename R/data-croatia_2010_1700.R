@@ -2,7 +2,7 @@
 #'
 #' 1700 - Symmetric input-output table at basic prices (product x product)
 #' In thousand kunas (T_NAC)
-#' @source   \href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
+#' @source   \href{https://www.dzs.hr/}{Državni zavod za statistiku}.
 #' @usage data(croatia_2010_1700)
 #' @format A data frame with 13 variables. 
 #'\describe{

@@ -23,7 +23,7 @@ A data frame with 13 variables.
   }
 }
 \source{
-\href{https://www.dzs.hr/Hrv_Eng/publication/2015/12-01-04_01_2015.xlsx}{Eurostat Manual of Supply, Use and Input-Output Tables} Updated 17 December 2015.
+\href{https://www.dzs.hr/}{Državni zavod za statistiku}.
 }
 \usage{
 data(croatia_2010_1900)
