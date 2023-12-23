@@ -149,15 +149,15 @@ iotables_download <- function ( source = "naio_10_cp1700",
   if ( "stk_flow" %in% names ( downloaded ) ) {
     downloaded_nested <- nest (
       downloaded, 
-      data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
-                        "year", "unit", "unit_lab", "stk_flow", "stk_flow_lab"))
-      ) 
+      data = -any_of(c("geo", "geo_lab", "time", "time_lab", 
+                       "year", "unit", "unit_lab", "stk_flow", "stk_flow_lab"))
+    ) 
   } else { 
     downloaded_nested <- nest (
       downloaded, 
-      data = -any_of(c( "geo", "geo_lab", "time", "time_lab", 
-                        "year", "unit", "unit_lab"))
-      ) 
+      data = -any_of(c("geo", "geo_lab", "time", "time_lab", 
+                       "year", "unit", "unit_lab"))
+    ) 
   }
 
   if( !is.null(data_directory) ) {
