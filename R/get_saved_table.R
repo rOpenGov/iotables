@@ -35,22 +35,22 @@ find_saved_table <- function(labelled_io_data, geo, unit, year, stk_flow) {
   assert_that( geo_input %in% labelled_io_data$geo, 
                msg = glue("The labelled_io_data$geo column does not contain geo='{geo_input}'."))
   
-  subset_labelled_io_data <- labelled_io_data %>% filter ( .data$geo == geo_input )
+  subset_labelled_io_data <- labelled_io_data %>% filter ( geo == geo_input )
   
   assert_that( unit_input %in% subset_labelled_io_data$unit, 
                msg = glue("The labelled_io_data$unit column does not contain unit='{unit_input}' (for geo='{geo_input}')."))
   
-  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( .data$unit == unit_input )
+  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( unit == unit_input )
   
   assert_that( stk_flow_input %in% subset_labelled_io_data$stk_flow, 
                msg = glue("The labelled_io_data$stk_flow column does not contain {stk_flow_input} (for geo='{geo_input}')."))
   
-  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( .data$stk_flow == stk_flow_input )
+  subset_labelled_io_data  <- subset_labelled_io_data  %>% filter ( stk_flow == stk_flow_input )
   
   assert_that( year_input %in% subset_labelled_io_data$year, 
                msg = glue("The labelled_io_data$year column does not contain year='{year_input'} (for geo='{geo_input}', unit='{unit_input}', stk_flow='{stk_flow_input}'.)"))
   
-  subset_labelled_io_data  %>% filter ( .data$year == year_input )
+  subset_labelled_io_data  %>% filter ( year == year_input )
 }
 
 #' @rdname get_saved_table
@@ -90,27 +90,27 @@ get_package_iots <- function( source_input ) {
     if ( source %in% uk_tables ) {
       if ( source == "uk_2010_siot") {
         labelled_io_data <- labelled_io_data %>%
-          filter ( .data$indicator == 'Input-Output table (domestic use, basic prices, product by product)')
+          filter ( indicator == 'Input-Output table (domestic use, basic prices, product by product)')
       }
       
       if ( source == "uk_2010_use") {
         labelled_io_data <- labelled_io_data %>%
-          filter ( .data$indicator == 'Domestic use table at basic prices (product by industry)')
+          filter ( indicator == 'Domestic use table at basic prices (product by industry)')
       }
       
       if ( source == "uk_2010_imports") {
         labelled_io_data <- labelled_io_data %>%
-          filter ( .data$indicator == 'Imports use table at basic prices (product by product)')
+          filter ( indicator == 'Imports use table at basic prices (product by product)')
       }
       
       if ( source == "uk_2010_coeff") {
         labelled_io_data <- labelled_io_data %>%
-          filter ( .data$indicator == 'Matrix of coefficients (product by product)')
+          filter ( indicator == 'Matrix of coefficients (product by product)')
       }
       
       if ( source == "uk_2010_inverse") {
         labelled_io_data <- labelled_io_data %>%
-          filter ( .data$indicator == 'Leontief Inverse (product by product)')
+          filter ( indicator == 'Leontief Inverse (product by product)')
       }
     }
     }

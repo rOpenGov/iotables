@@ -9,7 +9,7 @@
 #' directly, rather via this function, if and when it is necessary.
 #'  
 #' @param source A data source, for example \code{naio_10_cp1700}. 
-#'  \itemize{
+#'  \describe{
 ##'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
 ##'  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
 ##'  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
@@ -129,17 +129,17 @@ iotable_get <- function ( labelled_io_data = NULL,
     
     metadata_rows <- getdata (metadata) %>%  #tables that follow prod_ind vocabulary
       dplyr::filter ( variable == "prod_na") %>%
-      dplyr::rename ( prod_na = .data$code) %>%
-      dplyr::rename ( prod_na_lab = .data$label ) %>%
-      dplyr::rename ( row_order = .data$numeric_label ) %>%
-      dplyr::rename ( iotables_row = .data$iotables_label )
+      dplyr::rename ( prod_na = code) %>%
+      dplyr::rename ( prod_na_lab = label ) %>%
+      dplyr::rename ( row_order = numeric_label ) %>%
+      dplyr::rename ( iotables_row = iotables_label )
     
     metadata_cols <- getdata(metadata) %>%
       dplyr::filter ( variable == "induse") %>%
-      dplyr::rename ( induse = .data$code) %>%
-      dplyr::rename ( induse_lab = .data$label )%>%
-      dplyr::rename ( col_order = .data$numeric_label ) %>%
-      dplyr::rename ( iotables_col = .data$iotables_label )
+      dplyr::rename ( induse = code) %>%
+      dplyr::rename ( induse_lab = label )%>%
+      dplyr::rename ( col_order = numeric_label ) %>%
+      dplyr::rename ( iotables_col = iotables_label )
     
     if ( source == "germany_1995" ) { 
       year <- 1990
@@ -159,17 +159,17 @@ iotable_get <- function ( labelled_io_data = NULL,
     
     metadata_rows <- metadata %>%
       dplyr::filter ( variable == "t_rows") %>%
-      dplyr::rename ( t_rows2 = .data$code) %>%
-      dplyr::rename ( t_rows2_lab = .data$label ) %>%
-      dplyr::rename ( row_order = .data$numeric_label ) %>%
-      dplyr::rename ( iotables_row = .data$iotables_label )
+      dplyr::rename ( t_rows2 = code) %>%
+      dplyr::rename ( t_rows2_lab = label ) %>%
+      dplyr::rename ( row_order = numeric_label ) %>%
+      dplyr::rename ( iotables_row = iotables_label )
     
     metadata_cols <- metadata %>%
       dplyr::filter ( variable == "t_cols") %>%
-      dplyr::rename ( t_cols2 = .data$code) %>%
-      dplyr::rename ( t_cols2_lab = .data$label ) %>%
-      dplyr::rename ( col_order = .data$numeric_label ) %>%
-      dplyr::rename ( iotables_col = .data$iotables_label )
+      dplyr::rename ( t_cols2 = code) %>%
+      dplyr::rename ( t_cols2_lab = label ) %>%
+      dplyr::rename ( col_order = numeric_label ) %>%
+      dplyr::rename ( iotables_col = iotables_label )
     
     year_input <- year
     geo_input <- geo
@@ -267,27 +267,27 @@ iotable_get <- function ( labelled_io_data = NULL,
   if ( source %in% uk_tables ) {
     if ( source == "uk_2010_siot") {
       labelled_io_data <- labelled_io_data %>%
-        dplyr::filter ( .data$indicator == 'Input-Output table (domestic use, basic prices, product by product)')
+        dplyr::filter ( indicator == 'Input-Output table (domestic use, basic prices, product by product)')
     }
     
     if ( source == "uk_2010_use") {
       labelled_io_data <- labelled_io_data %>%
-        dplyr::filter ( .data$indicator == 'Domestic use table at basic prices (product by industry)')
+        dplyr::filter ( indicator == 'Domestic use table at basic prices (product by industry)')
     }
     
     if ( source == "uk_2010_imports") {
       labelled_io_data <- labelled_io_data %>%
-        dplyr::filter ( .data$indicator == 'Imports use table at basic prices (product by product)')
+        dplyr::filter ( indicator == 'Imports use table at basic prices (product by product)')
     }
     
     if ( source == "uk_2010_coeff") {
       labelled_io_data <- labelled_io_data %>%
-        dplyr::filter ( .data$indicator == 'Matrix of coefficients (product by product)')
+        dplyr::filter ( indicator == 'Matrix of coefficients (product by product)')
     }
     
     if ( source == "uk_2010_inverse") {
       labelled_io_data <- labelled_io_data %>%
-        dplyr::filter ( .data$indicator == 'Leontief Inverse (product by product)')
+        dplyr::filter ( indicator == 'Leontief Inverse (product by product)')
     }
   } 
    
@@ -423,19 +423,19 @@ iotable_get <- function ( labelled_io_data = NULL,
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::arrange (iotables_row, iotables_col) %>%
       dplyr::select ( all_of(c("iotables_col", "iotables_row", "values")) ) %>% 
-      tidyr::spread (iotables_col, .data$values)
+      tidyr::spread (iotables_col, values)
     
   } else if ( labelling == "short" & source %in% prod_ind ) {
     
     iotable_labelled_w <- iotable_labelled %>%
-      dplyr::select (.data$prod_na, .data$induse, .data$values) %>%
+      dplyr::select (.data$prod_na, induse, values) %>%
       dplyr::filter ( !is.na(.data$prod_na) )  %>%
-      tidyr::spread (induse, .data$values )
+      tidyr::spread (induse, values )
 
   } else {
     iotable_labelled_w <- iotable_labelled %>%
       dplyr::select ( all_of(c("t_rows2", "t_cols2", "values")) ) %>%
-      tidyr::spread ( t_cols2, .data$values )
+      tidyr::spread ( t_cols2, values )
   }
   
   if (!is.null(data_directory) ) {

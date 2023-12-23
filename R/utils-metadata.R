@@ -35,42 +35,42 @@ adjust_stk_flow <- function( stk_flow, source ) {
 #' @keywords internal
 get_vocabulary_prod_ind <- function() {
   getdata ("metadata") %>%  # For tables that follow prod_ind vocabulary
-    filter( .data$variable == "prod_na") %>%
-    dplyr::rename ( prod_na = .data$code) %>%
-    dplyr::rename ( prod_na_lab = .data$label ) %>%
-    dplyr::rename ( row_order = .data$numeric_label ) %>%
-    dplyr::rename ( iotables_row = .data$iotables_label )
+    filter( variable == "prod_na") %>%
+    dplyr::rename ( prod_na = code) %>%
+    dplyr::rename ( prod_na_lab = label ) %>%
+    dplyr::rename ( row_order = numeric_label ) %>%
+    dplyr::rename ( iotables_row = iotables_label )
 }
 
 #' @keywords internal
 get_vocabulary_induse <- function() {
   getdata("metadata") %>%  # For tables that follow the induse vocabulary
-    filter( .data$variable == "induse") %>%
-    dplyr::rename ( induse = .data$code) %>%
-    dplyr::rename ( induse_lab = .data$label )%>%
-    dplyr::rename ( col_order = .data$numeric_label ) %>%
-    dplyr::rename ( iotables_col = .data$iotables_label )
+    filter( variable == "induse") %>%
+    dplyr::rename ( induse = code) %>%
+    dplyr::rename ( induse_lab = label )%>%
+    dplyr::rename ( col_order = numeric_label ) %>%
+    dplyr::rename ( iotables_col = iotables_label )
 }
 
 #' @keywords internal
 get_vocabulary_t_rows <- function() {
   getdata("metadata") %>%
-    filter( .data$variable == "t_rows") %>%
-    dplyr::rename ( t_rows2 = .data$code) %>%
-    dplyr::rename ( t_rows2_lab = .data$label ) %>%
-    dplyr::rename ( row_order = .data$numeric_label ) %>%
-    dplyr::rename ( iotables_row = .data$iotables_label )
+    filter( variable == "t_rows") %>%
+    dplyr::rename ( t_rows2 = code) %>%
+    dplyr::rename ( t_rows2_lab = label ) %>%
+    dplyr::rename ( row_order = numeric_label ) %>%
+    dplyr::rename ( iotables_row = iotables_label )
 }
 
 #' @importFrom dplyr rename
 #' @keywords internal
 get_vocabulary_t_cols <- function() {
   getdata("metadata") %>%
-    filter( .data$variable == "t_cols") %>%
-    dplyr::rename ( t_cols2 = .data$code) %>%
-    dplyr::rename ( t_cols2_lab = .data$label ) %>%
-    dplyr::rename ( col_order = .data$numeric_label ) %>%
-    dplyr::rename ( iotables_col = .data$iotables_label )
+    filter( variable == "t_cols") %>%
+    dplyr::rename ( t_cols2 = code) %>%
+    dplyr::rename ( t_cols2_lab = label ) %>%
+    dplyr::rename ( col_order = numeric_label ) %>%
+    dplyr::rename ( iotables_col = iotables_label )
 }
 
 #' @keywords internal

@@ -13,7 +13,7 @@
 #' Particulate matter smaller than 10 micrometre (PM10), Particulate matter smaller than 2,5 micrometre (PM2,5), 
 #' Sulphur dioxide (SO2), Ammonia (NH3).
 #' 
-#' See \href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_esms.htm}{Reference Metadata in Euro SDMX Metadata Structure (ESMS)}
+#' See \href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm}{Reference Metadata in Single Integrated Metadata Structure (SIMS)}
 #' for further details, particularly on the calculation of Global warming potential \code{GHG}, 
 #' Acidifying gases \code{ACG} and Tropospheric ozone precursors \code{O3PR}.
 #' 
@@ -61,12 +61,12 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
     ## Avoid large examples on CRAN
     airpol_input <- airpol
     return_df <- getdata('germany_airpol') %>%
-      filter ( .data$airpol %in% airpol_input ) %>%
-      select (.data$iotables_col, .data$value ) %>%
-      pivot_wider(names_from = .data$iotables_col, 
-                  values_from = .data$value) %>%
+      filter ( airpol %in% airpol_input ) %>%
+      select (.data$iotables_col, value ) %>%
+      pivot_wider(names_from = iotables_col, 
+                  values_from = value) %>%
       mutate ( indicator = paste0(airpol_input, "_emission")) %>%
-      relocate ( .data$indicator, .before = everything())
+      relocate ( indicator, .before = everything())
     return(return_df)
   }
   
@@ -124,21 +124,21 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
   country_ghg <- airpol_df %>%
     mutate ( nace_r2 = ifelse (.data$nace_r2=="TOTAL",
                                yes = "TOTAL", 
-                               no = paste0("CPA_", .data$nace_r2))
+                               no = paste0("CPA_", nace_r2))
     ) %>%
     mutate ( nace_r2 = case_when ( 
-      .data$nace_r2 == "CPA_C10-C12" ~ "CPA_C10-12",
-      .data$nace_r2 == "CPA_C13-C15" ~ "CPA_C13-15", 
-      .data$nace_r2 == "CPA_C31_C32" ~ "CPA_C31_32", 
-      .data$nace_r2 == "CPA_E37-E39" ~ "CPA_E37-39",
-      .data$nace_r2 == "CPA_J59_J60" ~ "CPA_J59_60",
-      .data$nace_r2 == "CPA_J62_J63" ~ "CPA_J62_63",
-      .data$nace_r2 == "CPA_M69_M70" ~ "CPA_M69_70",
-      .data$nace_r2 == "CPA_M74_M75" ~ "CPA_M74_75",
-      .data$nace_r2 == "CPA_N80-N82" ~ "CPA_N80-82",
-      .data$nace_r2 == "CPA_Q87_Q88" ~ "CPA_Q87_88",
-      .data$nace_r2 == "CPA_R90-R92" ~ "CPA_R90-92",
-      TRUE ~ .data$nace_r2))
+      nace_r2 == "CPA_C10-C12" ~ "CPA_C10-12",
+      nace_r2 == "CPA_C13-C15" ~ "CPA_C13-15", 
+      nace_r2 == "CPA_C31_C32" ~ "CPA_C31_32", 
+      nace_r2 == "CPA_E37-E39" ~ "CPA_E37-39",
+      nace_r2 == "CPA_J59_J60" ~ "CPA_J59_60",
+      nace_r2 == "CPA_J62_J63" ~ "CPA_J62_63",
+      nace_r2 == "CPA_M69_M70" ~ "CPA_M69_70",
+      nace_r2 == "CPA_M74_M75" ~ "CPA_M74_75",
+      nace_r2 == "CPA_N80-N82" ~ "CPA_N80-82",
+      nace_r2 == "CPA_Q87_Q88" ~ "CPA_Q87_88",
+      nace_r2 == "CPA_R90-R92" ~ "CPA_R90-92",
+      TRUE ~ nace_r2))
   
   ghg <- tibble (
     nace_r2 = prod_na
@@ -153,9 +153,9 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
   )
   
   group_match <- country_ghg %>%
-    rename ( nace  = .data$nace_r2) %>%
+    rename ( nace  = nace_r2) %>%
     mutate ( nace_r2 = substr(.data$nace, 1,5)) %>%
-    group_by ( .data$airpol, .data$unit, .data$geo, .data$time, .data$nace_r2 ) %>%
+    group_by ( airpol, unit, geo, time, nace_r2 ) %>%
     summarise ( values = sum(.data$values), .groups="keep") %>%
     inner_join ( ghg, by = "nace_r2" )
   
@@ -163,14 +163,14 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
   return_df <- ghg %>% left_join (
     direct_match %>%
       left_join ( group_match, by = c("airpol", "nace_r2", "unit", "geo", "time", "values") ) %>%
-      select ( .data$nace_r2, .data$values) %>%
+      select ( nace_r2, values) %>%
       full_join (L68, by = c("nace_r2", "values") ), 
     by = "nace_r2"
   ) %>%
-    pivot_wider ( names_from = .data$nace_r2, 
-                  values_from = .data$values) %>%
+    pivot_wider ( names_from = nace_r2, 
+                  values_from = values) %>%
     mutate ( indicator = paste0(airpol, "_emission")) %>%
-    relocate ( .data$indicator, .before = everything())
+    relocate ( indicator, .before = everything())
   
   return_df
   

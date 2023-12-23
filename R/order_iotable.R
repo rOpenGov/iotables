@@ -55,7 +55,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     if ( "stk_flow" %in% names(iotable) ) {
       # The germany_1995 files have no stk_input columns.
       iotable_labelled <- iotable %>%
-        filter( .data$stk_flow == stk_flow_input ) 
+        filter( stk_flow == stk_flow_input ) 
     } else {
       iotable_labelled <- iotable
     }
@@ -74,7 +74,7 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     
     ## Do the reordering if the metadata variable is called prod_na
     iotable_labelled <- iotable_labelled %>%
-      arrange (.data$row_order, .data$col_order ) %>%
+      arrange (.data$row_order, col_order ) %>%
       mutate(prod_na = fct_reorder(.data$prod_na, as.numeric(.data$row_order))) %>%
       mutate(induse  = fct_reorder(.data$induse, as.numeric(.data$col_order))) 
     
@@ -113,12 +113,12 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
       mutate ( across(where(is.factor), as.character) ) %>%
       left_join(metadata_cols, by = by_col)  %>%
       left_join(metadata_rows, by = by_row) %>%
-      arrange ( .data$row_order, .data$col_order )
+      arrange ( row_order, col_order )
     
     iotable_labelled <- iotable_labelled %>%
-      arrange ( .data$row_order, .data$col_order ) %>% # ?needed
+      arrange ( row_order, col_order ) %>% # ?needed
       mutate(t_rows2 = fct_reorder(.data$t_rows2, as.numeric(.data$row_order))) %>%
-      mutate(t_cols2 = fct_reorder(.data$t_cols2, as.numeric( .data$col_order ))) %>%
+      mutate(t_cols2 = fct_reorder(.data$t_cols2, as.numeric( col_order ))) %>%
       mutate(iotables_row = fct_reorder(.data$iotables_row, as.numeric(.data$row_order))) %>%
       mutate(iotables_col = fct_reorder(.data$iotables_col, as.numeric(.data$col_order)))
   }
@@ -129,27 +129,27 @@ order_iotable <- function(iotable, stk_flow, source, labelling) {
     ## Only one labelling can be selected, start with the 
     ## internal package  'iotables' labelling
     iotable_labelled_w <- iotable_labelled %>%
-      arrange (.data$iotables_row, .data$iotables_col) %>%
+      arrange (.data$iotables_row, iotables_col) %>%
       select(all_of(c("iotables_col", "iotables_row", "values"))) %>% 
-      pivot_wider (names_from = .data$iotables_col, values_from = .data$values)
+      pivot_wider (names_from = iotables_col, values_from = values)
     
   } else if ( labelling == "short" & source %in% prod_ind ) {
     ## Labelling with the Eurostat prod_ind vocabulary
     iotable_labelled_w <- iotable_labelled %>%
       select(all_of(c("prod_na", "induse", "values"))) %>%
       filter( !is.na(.data$prod_na) )  %>%
-      pivot_wider(names_from = .data$induse, values_from = .data$values)
+      pivot_wider(names_from = induse, values_from = values)
     
   } else if ( source %in% uk_tables ){
     iotable_labelled_w <- iotable_labelled %>%
       select(all_of(c("uk_row", "uk_col", "values"))) %>%
       filter( !is.na(.data$uk_row) )  %>%
-      pivot_wider(names_from = .data$uk_col, values_from = .data$values)
+      pivot_wider(names_from = uk_col, values_from = values)
   } else {
     ## Labelling with the special Croatia replication files 
     iotable_labelled_w <- iotable_labelled %>%
       select(all_of(c("t_rows2", "t_cols2", "values")) ) %>%
-      pivot_wider(names_from = .data$t_cols2, values_from = .data$values)
+      pivot_wider(names_from = t_cols2, values_from = values)
   }
   
   # Return the labelled IOT in wide format:

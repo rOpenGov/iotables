@@ -1,3 +1,7 @@
+# iotables 0.9.2
+
+* This is a documentation fix.
+
 # iotables 0.9.1
 * This is a minor release that fixes a bug report on `indirect_effects_create()` and a  HTML version of manual issue on CRAN.
 

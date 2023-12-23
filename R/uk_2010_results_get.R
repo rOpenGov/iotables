@@ -46,7 +46,7 @@ uk_2010_results_get <- function ( path = NULL )  {
     select (1) %>%
     set_names( "values" ) %>%
     cbind ( tibble::tibble ( vars = c("indicator", "unit"))) %>%
-    pivot_wider ( names_from = .data$vars, values_from = .data$values)
+    pivot_wider ( names_from = vars, values_from = values)
     
   message ( "Reading ... ", uk_metadata$indicator )
   
@@ -56,12 +56,12 @@ uk_2010_results_get <- function ( path = NULL )  {
                                           skip = 4,
                                           col_names = TRUE) %>%
     select (-1) %>% 
-    dplyr::rename ( uk_row_label = .data$Product, 
-                    output_multiplier_rank = .data$Rank...4, 
-                    employment_cost_multiplier = .data$Rank...6, 
-                    gva_multiplier_rank = .data$Rank...8, 
-                    employment_cost_effects_rank = .data$Rank...10,
-                    gva_effects_rank = .data$Rank...12 ) %>%
+    dplyr::rename ( uk_row_label = Product, 
+                    output_multiplier_rank = Rank...4, 
+                    employment_cost_multiplier = Rank...6, 
+                    gva_multiplier_rank = Rank...8, 
+                    employment_cost_effects_rank = Rank...10,
+                    gva_effects_rank = Rank...12 ) %>%
     mutate ( indicator = uk_metadata$indicator[1]) %>%
     mutate(across(where(is.factor), as.character))
   

@@ -21,7 +21,7 @@ from the current sessions' temporary directory.
 }
 \details{
 Possible \code{source} parameters:
- \itemize{
+ \describe{
  \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
  \item{\code{naio_10_pyp1700}}{Symmetric input-output table at basic prices (product by product) (previous years prices)}
  \item{\code{naio_10_cp1750}}{Symmetric input-output table at basic prices (industry by industry)}

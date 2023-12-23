@@ -58,7 +58,7 @@ Non-methane volatile organic compounds, (NMVOC), carbon monoxide (CO),
 Particulate matter smaller than 10 micrometre (PM10), Particulate matter smaller than 2,5 micrometre (PM2,5), 
 Sulphur dioxide (SO2), Ammonia (NH3).
 
-See \href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_esms.htm}{Reference Metadata in Euro SDMX Metadata Structure (ESMS)}
+See \href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm}{Reference Metadata in Single Integrated Metadata Structure (SIMS)}
 for further details, particularly on the calculation of Global warming potential \code{GHG}, 
 Acidifying gases \code{ACG} and Tropospheric ozone precursors \code{O3PR}.
 }

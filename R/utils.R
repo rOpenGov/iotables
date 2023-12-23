@@ -49,7 +49,7 @@ is_key_column_present <- function (data_table, potential_keywords=NULL) {
 #' @return A character vector of length=1 collapsing the character vector with \code{collapse} if
 #' the original length is more than 1. Used to create more legible error messages.
 #' @keywords internal 
-chars_collapse <- function (x, sep = ", ") {
+chars_collapse <- function (x, collapse = ", ") {
   if (length(x)>1) x <- paste(x, collapse = ", ")
   x
 }

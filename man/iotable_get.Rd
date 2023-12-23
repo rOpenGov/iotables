@@ -23,7 +23,7 @@ in the memory. Defaults to \code{NULL} when  the data will be retrieved from
 the hard disk or from the Eurostat website invoking the same function.}
 
 \item{source}{A data source, for example \code{naio_10_cp1700}. 
- \itemize{
+ \describe{
  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}

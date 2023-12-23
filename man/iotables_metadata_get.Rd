@@ -24,7 +24,7 @@ If \code{dat} is not inputed as a nested data frame created by
 \code{\link{iotables_download}}, validate the \code{source} input 
 parameter and try to load the table from the current sessions' 
 temporary directory.
- \itemize{
+ \describe{
  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}

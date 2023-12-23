@@ -4,7 +4,7 @@
 \alias{chars_collapse}
 \title{Collapse character vectors}
 \usage{
-chars_collapse(x, sep = ", ")
+chars_collapse(x, collapse = ", ")
 }
 \arguments{
 \item{x}{A character vector}

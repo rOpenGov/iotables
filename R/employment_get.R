@@ -144,7 +144,7 @@ employment_get <- function ( geo,
  
  ## Geo selection and exception handling--------------------------------  
  if ( geo %in% unique (emp$geo) ) {
-    emp <- emp %>% dplyr::filter ( .data$geo == geo )
+    emp <- emp %>% dplyr::filter ( geo == geo )
   } else {
     stop ("No employment data found with geo parameter = ", geo )
   }
@@ -154,7 +154,7 @@ employment_get <- function ( geo,
   ## Year selection and exception handling -------------------------------------  
   
   if ( year %in% unique ( emp$year ) ) {
-    emp <- emp %>% filter ( .data$year == year )
+    emp <- emp %>% filter ( year == year )
   } else {
     stop ("No employment data found with the year parameter = ", year )
   }
@@ -179,13 +179,13 @@ employment_get <- function ( geo,
   ## Data processing for employment variables ------------------------------------ 
   employment <- emp %>%
     mutate (   nace_r2 = as.character(.data$nace_r2) ) %>%
-    group_by ( .data$nace_r2, .data$year ) %>%
+    group_by ( nace_r2, year ) %>%
     summarize ( values = mean(.data$values)) %>%
-    dplyr::rename ( emp_code = .data$nace_r2 ) %>%
+    dplyr::rename ( emp_code = nace_r2 ) %>%
     ungroup () %>%
     left_join ( employment_metadata, 
                        by = "emp_code") %>%  # iotables:::employment_metadata
-    dplyr::group_by (  .data$code, .data$variable, .data$iotables_label ) %>%
+    dplyr::group_by (  code, variable, iotables_label ) %>%
     dplyr::summarize ( values = sum(.data$values)) 
   
   
@@ -211,7 +211,7 @@ employment_get <- function ( geo,
     )
     
     primary_employment_input <- employment %>%
-      filter ( .data$variable == "prod_na" ) #does not matter which, not used
+      filter ( variable == "prod_na" ) #does not matter which, not used
     
     ##No employment for imputed rent column-------------------------------- 
     
@@ -220,8 +220,8 @@ employment_get <- function ( geo,
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      select ( .data$iotables_label, .data$values ) %>%
-      tidyr::spread ( .data$iotables_label, .data$values )    #use iotables_label in this case
+      select ( iotables_label, values ) %>%
+      tidyr::spread ( iotables_label, values )    #use iotables_label in this case
     
   } else if ( labelling == "prod_na" ){  ## this is the product x product labelling format 
     prefix <- data.frame ( 
@@ -229,15 +229,15 @@ employment_get <- function ( geo,
     )
     
     primary_employment_input <- employment %>%
-      dplyr::filter ( .data$variable == "prod_na" )
+      dplyr::filter ( variable == "prod_na" )
     
     imputed_rent <- data.frame ( 
       CPA_L68A = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      dplyr::select ( .data$code, .data$values ) %>%
-      tidyr::spread ( .data$code, .data$values )     #use code for standard Eurostat library
+      dplyr::select ( code, values ) %>%
+      tidyr::spread ( code, values )     #use code for standard Eurostat library
     
   } else if (labelling == "induse" ) {  # this is the industry x industry labelling format
     prefix <- data.frame ( 
@@ -245,15 +245,15 @@ employment_get <- function ( geo,
     )
     
     primary_employment_input <- employment %>%
-      dplyr::filter ( .data$variable == "induse" )
+      dplyr::filter ( variable == "induse" )
     
     imputed_rent <- data.frame ( 
       L68A = 0
     )
     primary_employment_input <-  primary_employment_input %>% 
       dplyr::ungroup() %>%
-      dplyr::select ( .data$code, .data$values ) %>%
-      tidyr::spread ( .data$code, .data$values )      #use code for standard Eurostat library
+      dplyr::select ( code, values ) %>%
+      tidyr::spread ( code, values )      #use code for standard Eurostat library
     
   } else {
     warning("No L68A was added.")

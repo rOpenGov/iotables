@@ -42,7 +42,7 @@ normal R session exit.
 To save the file for further use (which is necessary in analytical work because
 download times are long) set the  \code{download_directory} [see parameters]. 
 The function will make a copy of the rds file in this directory.
- \itemize{
+ \describe{
  \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
  \item{\code{naio_10_pyp1700}}{Symmetric input-output table at basic prices (product by product) (previous years prices)}
  \item{\code{naio_10_cp1750}}{Symmetric input-output table at basic prices (industry by industry)}

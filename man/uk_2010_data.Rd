@@ -32,7 +32,7 @@ Replication data exported from the Office of National Statistics.
 \details{
 You can retrieve the data with \code{\link{iotable_get}}, setting the 
 \code{source} parameter as follows:
-\itemize{
+\describe{
  \item{\code{uk_2010_siot}}{ Input-Output table (domestic use, basic prices, product by product) }
  \item{\code{uk_2010_use}}{ Domestic use table at basic prices (product by industry) }
  \item{\code{uk_2010_imports}}{ Imports use table at basic prices (product by product) }

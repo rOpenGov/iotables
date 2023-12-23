@@ -13,7 +13,7 @@
 #' To save the file for further use (which is necessary in analytical work because
 #' download times are long) set the  \code{download_directory} [see parameters]. 
 #' The function will make a copy of the rds file in this directory.
-#'  \itemize{
+#'  \describe{
 ##'  \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
 ##'  \item{\code{naio_10_pyp1700}}{Symmetric input-output table at basic prices (product by product) (previous years prices)}
 ##'  \item{\code{naio_10_cp1750}}{Symmetric input-output table at basic prices (industry by industry)}
@@ -45,6 +45,7 @@
 #' @importFrom lubridate year
 #' @importFrom rlang set_names
 #' @importFrom glue glue
+#' @importFrom assertthat assert_that
 #' @family import functions
 #' @examples
 #' \donttest{
@@ -68,9 +69,9 @@ iotables_download <- function ( source = "naio_10_cp1700",
     return(downloaded)
   }
   
-  assertthat::assert_that(
+  assert_that(
     'data.frame' %in% class(downloaded) & ncol(downloaded)>6 & nrow(downloaded)>1, 
-    msg = glue::glue("The download of {source} was not successful.")
+    msg = glue("The download of {source} was not successful.")
   )
   
   lab_names <- paste0(names(downloaded), "_lab")
@@ -79,7 +80,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   downloaded_labelled <- downloaded  %>%
     eurostat::label_eurostat (fix_duplicated = TRUE) 
   
-  assertthat::assert_that(
+  assert_that(
     length(names(downloaded_labelled)) == length(lab_names), 
     msg = "in iotables_download() ncol(downloaded_labelled) != ncol(downloaded)"
     )
@@ -87,8 +88,8 @@ iotables_download <- function ( source = "naio_10_cp1700",
   downloaded_labelled <- downloaded_labelled %>%   # add meaningful labels to raw data
     rlang::set_names(lab_names) %>%  
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%  # because long and wide formats are not symmetric
-    rename ( values = .data$values_lab ) %>%
-    mutate ( year = lubridate::year(.data$time_lab))
+    rename ( values = values_lab ) %>%
+    mutate ( year = lubridate::year(time_lab))
   
   # Join the labelled and the not labelled files, so that both versions are avialable
   
