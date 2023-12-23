@@ -88,6 +88,7 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   downloaded_labelled <- downloaded_labelled %>%   # add meaningful labels to raw data
     rlang::set_names(lab_names) %>%  
+    rename ( time_lab = TIME_PERIOD_lab ) %>%
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%  # because long and wide formats are not symmetric
     rename ( values = values_lab ) %>%
     mutate ( year = lubridate::year(time_lab))
@@ -96,7 +97,8 @@ iotables_download <- function ( source = "naio_10_cp1700",
   
   downloaded <- downloaded  %>%
     mutate ( rows = seq_len(nrow(downloaded)) ) %>%
-    left_join ( downloaded_labelled, by = c("rows", "values"))
+    left_join ( downloaded_labelled, by = c("rows", "values")) %>%
+    rename ( time = TIME_PERIOD )
   
   names(downloaded)
   

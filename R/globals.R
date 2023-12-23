@@ -15,8 +15,10 @@ utils::globalVariables(c(
   "iotables_label", # <employment_get>
   "values", # <employment_get>
   ".data", # <iotable_get>
+  "TIME_PERIOD_lab", # <iotables_download>
   "values_lab", # <iotables_download>
   "time_lab", # <iotables_download>
+  "TIME_PERIOD", # <iotables_download>
   "uk_col", # <order_iotable>
   "uk_row", # <order_iotable>
   "row_order", # <order_iotable>
