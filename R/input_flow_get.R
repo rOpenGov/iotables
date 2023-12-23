@@ -11,7 +11,8 @@
 #' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
 #' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
 #' removed to avoid division by zero error in the analytic functions.
-#' @importFrom dplyr mutate across left_join select
+#' @importFrom dplyr mutate across left_join select where
+#' @autoglobal
 #' @return A data flow matrix (a symmetric use table) with a key column.
 #' @family analytic object functions
 #' @examples 

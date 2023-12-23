@@ -48,7 +48,12 @@ Suggests:
     testthat,
     rmarkdown,
     spelling,
-    covr
+    covr,
+    roxyglobals
 Depends: R(>= 3.5.0)
 VignetteBuilder: knitr
 Language: en-GB
+Roxygen: list(roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
+Config/roxyglobals/filename: globals.R
+Config/roxyglobals/unique: FALSE

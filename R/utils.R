@@ -53,3 +53,5 @@ chars_collapse <- function (x, collapse = ", ") {
   if (length(x)>1) x <- paste(x, collapse = ", ")
   x
 }
+
+

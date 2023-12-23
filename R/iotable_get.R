@@ -86,6 +86,7 @@ iotable_get <- function ( labelled_io_data = NULL,
   iotables_row <- iotables_col <- prod_na <- induse <- variable <-  NULL
   row_order <- col_order <- code <- label <- NULL
   uk_col <- uk_col_label <- uk_row <- uk_row_label <- indicator <- NULL
+  numeric_label <- iotables_label <- values <- NULL
 
   if ( labelling == 'eurostat' ) labelling <- 'short'
   ## Parameter exception handling -------------------------------------

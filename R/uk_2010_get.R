@@ -15,6 +15,7 @@
 #' @importFrom rlang set_names
 #' @importFrom utils download.file
 #' @importFrom readxl read_excel
+#' @autoglobal
 #' @examples
 #' \dontrun{
 #' uk2010 <- uk_2010_get()
