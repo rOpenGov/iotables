@@ -16,4 +16,3 @@
 ## Notes
 - I received an email from CRAN about issues on various Linux platforms with documentation problems. These were related to changes in Roxygen that I fixed. 
 - I also fixed the change in tidyverse reference to the . pronoun (.data$ -> $) that gave warnings in tests, and placing global variable definitions instead when needed.
-- On some testing environments I get an error when the example in iotables_download() examples is run. This is set not to run on CRAN, because it would download a large file from the Eurostat data warehouse. The error is caused when the no test is ignored and a larger files is downloaded then the assigned disk space for tests.
