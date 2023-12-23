@@ -1,0 +1,12 @@
+bibentry(
+  bibtype  = "misc",
+  title    = "Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data",
+  author   =  person(given  ="Daniel", family="Antal", 
+                     role = c("aut", "cre"), 
+                     comment = c(ORCID = "0000-0001-7513-6760")), 
+  year     =  2023,
+  publisher = "The Comprehensive R Archive Network",
+  url      =  "https://iotables.dataobservatory.eu/",
+  doi      =  "10.5281/zenodo.5887037"
+)
+
