@@ -1,7 +1,7 @@
 #' @title Get an input-output table from a downloaded bulk file
 #' @importFrom dplyr distinct across left_join rename select any_of
 #' @importFrom tidyr pivot_wider unnest
-#' @importFrom rlang .data
+
 #' @keywords internal
 get_saved_table <- function (labelled_io_data, 
                              geo, 
@@ -21,7 +21,7 @@ get_saved_table <- function (labelled_io_data,
 #' @rdname get_saved_table
 #' @importFrom assertthat assert_that
 #' @importFrom dplyr filter
-#' @importFrom rlang .data
+
 #' @keywords internal
 find_saved_table <- function(labelled_io_data, geo, unit, year, stk_flow) {
   geo_input <- geo

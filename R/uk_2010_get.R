@@ -67,7 +67,7 @@ uk_2010_get <- function ( path = NULL )  {
       pivot_longer( -all_of("rowname"), names_to = "var", values_to="value") %>%
       tidyr::pivot_wider(names_from = rowname, values_from = value)  %>%
       rlang::set_names(c("remove", "uk_col", "uk_col_lab")) %>%
-      dplyr::select  ( -.data$remove ) %>%
+      dplyr::select  ( -remove ) %>%
       mutate(across(where(is.factor), as.character)) 
     
     uk_data_sheet <- readxl::read_excel ( path,

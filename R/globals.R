@@ -4,14 +4,17 @@ utils::globalVariables(c(
   "iotables_col", # <airpol_get>
   "value", # <airpol_get>
   "indicator", # <airpol_get>
+  ".data", # <airpol_get>
   "nace_r2", # <airpol_get>
   "time", # <airpol_get>
   "values", # <airpol_get>
+  ".data", # <employment_get>
   "nace_r2", # <employment_get>
   "code", # <employment_get>
   "variable", # <employment_get>
   "iotables_label", # <employment_get>
   "values", # <employment_get>
+  ".data", # <iotable_get>
   "values_lab", # <iotables_download>
   "time_lab", # <iotables_download>
   "uk_col", # <order_iotable>
@@ -30,6 +33,7 @@ utils::globalVariables(c(
   "rowname", # <uk_2010_get>
   "value", # <uk_2010_get>
   ".", # <uk_2010_get>
+  ".data", # <uk_2010_get>
   "uk_col_lab", # <uk_2010_get>
   "uk_col", # <uk_2010_get>
   "uk_row_lab", # <uk_2010_get>
@@ -62,6 +66,8 @@ utils::globalVariables(c(
   "label", # <get_vocabulary_t_cols>
   "numeric_label", # <get_vocabulary_t_cols>
   "iotables_label", # <get_vocabulary_t_cols>
+  ".data", # <get_metadata_rows>
+  ".data", # <get_metadata_cols>
   "uk_row", # <get_metadata_cols>
   "uk_row_label", # <get_metadata_cols>
   "prod_na", # <get_metadata_cols>

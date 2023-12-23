@@ -39,7 +39,7 @@
 #' @importFrom glue glue
 #' @importFrom assertthat assert_that
 #' @importFrom eurostat get_eurostat
-#' @importFrom rlang .data
+
 #' @param data_directory Defaults to \code{NULL}, if a valid directory, it will 
 #' try to save the pre-processed data file here with labelling. 
 #' @param force_download Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file

@@ -10,7 +10,7 @@
 #' no rounding takes place. Rounding is important if you replicate examples from the literature,
 #' rounding differences can add up to visible differences in matrix equations.
 #' @importFrom dplyr select mutate across
-#' @importFrom rlang .data
+
 #' @return A data frame with the vector of multipliers and the an 
 #' auxiliary metadata column, containing an automatically given row identifier (for joining with other matrixes) 
 #' which can be  overruled with setting \code{multiplier_name}.  

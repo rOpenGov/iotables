@@ -40,10 +40,10 @@ Imports:
     kableExtra,
     tibble,
     readxl,
-    rlang,
     assertthat,
     glue,
-    tidyselect
+    tidyselect,
+    rlang
 Suggests: 
     testthat,
     rmarkdown,
@@ -52,7 +52,7 @@ Suggests:
     roxyglobals
 Depends: R(>= 3.5.0)
 VignetteBuilder: knitr
-Language: en-GB
+Language: en-US
 Roxygen: list(roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
 Config/roxyglobals/filename: globals.R

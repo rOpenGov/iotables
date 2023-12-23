@@ -23,7 +23,7 @@
 #' @importFrom dplyr filter select mutate left_join rename ungroup summarize group_by
 #' @importFrom tidyr spread
 #' @importFrom eurostat get_eurostat
-#' @importFrom rlang .data
+
 #' @source Eurostat statistic 
 #' \href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{Employment 
 #' by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}

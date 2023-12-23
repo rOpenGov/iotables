@@ -62,7 +62,7 @@
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
 #' @importFrom utils data
-#' @importFrom rlang .data
+
 #' @family iotables import functions
 #' @autoglobal
 #' @examples 
