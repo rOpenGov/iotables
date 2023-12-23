@@ -14,6 +14,7 @@
 #' @importFrom utils download.file
 #' @importFrom tidyr pivot_wider
 #' @importFrom readxl read_excel
+#' @autoglobal
 #' @examples
 #' \dontrun{
 #' uk_results <- iotables:::uk_2010_results_get ()

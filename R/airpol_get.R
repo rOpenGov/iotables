@@ -49,6 +49,7 @@
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
 #' @family import functions
+#' @autoglobal
 #' @examples 
 #' airpol_get(airpol = "CO2", geo="germany_1995", year = 1995, unit = "THS_T") 
 #' @export
@@ -62,7 +63,7 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
     airpol_input <- airpol
     return_df <- getdata('germany_airpol') %>%
       filter ( airpol %in% airpol_input ) %>%
-      select (.data$iotables_col, value ) %>%
+      select ( iotables_col, value ) %>%
       pivot_wider(names_from = iotables_col, 
                   values_from = value) %>%
       mutate ( indicator = paste0(airpol_input, "_emission")) %>%
@@ -83,16 +84,16 @@ airpol_get <- function( airpol = "GHG", geo="BE", year = 2020, unit = "THS_T",
       }
   }
   
-  assertthat::assert_that(
+  assert_that(
     airpol %in% tmp$airpol, 
-    msg = glue::glue("{airpol} is not recognized as an air pollutant in Eurostat table env_ac_ainah_r2")
+    msg = glue("{airpol} is not recognized as an air pollutant in Eurostat table env_ac_ainah_r2")
   )
   
   airpol_df <- tmp[ tmp$airpol == airpol, ]
   
-  assertthat::assert_that(
+  assert_that(
     geo %in% airpol_df$geo, 
-    msg = glue::glue("No data for geo='{geo}' with airpol='{airpol}' in year={year} and unit='{unit}' in Eurostat table env_ac_ainah_r2")
+    msg = glue("No data for geo='{geo}' with airpol='{airpol}' in year={year} and unit='{unit}' in Eurostat table env_ac_ainah_r2")
   )
   
   airpol_df <- airpol_df[airpol_df$geo == geo,]

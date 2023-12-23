@@ -47,6 +47,7 @@
 #' @importFrom glue glue
 #' @importFrom assertthat assert_that
 #' @family import functions
+#' @autoglobal
 #' @examples
 #' \donttest{
 #'  io_tables <- iotables_download(source = "naio_10_pyp1750")

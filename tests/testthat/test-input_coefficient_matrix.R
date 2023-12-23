@@ -10,7 +10,7 @@ nl_coeff   <- input_coefficient_matrix_create( data_table = nl,
 
 nl_services_row <- nl_coeff %>%
   dplyr::filter ( prod_na == "services_group" ) %>%
-  dplyr::select ( -.data$prod_na ) %>%
+  dplyr::select ( -prod_na ) %>%
   unlist() %>% as.numeric ()
 
 de_input_coefficients <- input_coefficient_matrix_create (

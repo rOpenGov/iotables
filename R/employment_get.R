@@ -30,6 +30,7 @@
 #' @return A data.frame with auxiliary metadata to conform the symmetric
 #' input-output tables.
 #' @family import functions
+#' @autoglobal
 #' @examples
 #' \dontrun{
 #'  io_tables <- get_employment ( 

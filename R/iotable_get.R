@@ -64,6 +64,7 @@
 #' @importFrom utils data
 #' @importFrom rlang .data
 #' @family iotables import functions
+#' @autoglobal
 #' @examples 
 #' germany_table <- iotable_get( source = "germany_1995", 
 #'                  geo = 'DE', year = 1990, unit = "MIO_EUR", 
