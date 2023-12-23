@@ -1,5 +1,5 @@
 ## Test environments
-
+* Windows 10, x86_64-w64-mingw32, R version 4.3.2 (2023-10-31 ucrt)
 * Ubuntu Linux 20.04.1 LTS, R-release, GCC on rhub
 * Fedora Linux, R-devel, clang, gfortran on rhub
 * Windows Server 2022 x64 (build 20348), R version 4.3.2 (2023-10-31 ucrt) https://win-builder.r-project.org/

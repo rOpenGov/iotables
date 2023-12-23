@@ -6,37 +6,33 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.9.1-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9.2-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7109769.svg)](https://doi.org/10.5281/zenodo.7109769)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10428078.svg)](https://doi.org/10.5281/zenodo.10428078)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/iotables?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/iotables)
 [![dataobservatory](https://img.shields.io/badge/ecosystem-dataobservatory.eu-3EA135.svg)](https://dataobservatory.eu/)
-[![Follow
-rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
-[![Follow
-author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
 
 The symmetric input-output tables (SIOTs) are complex statistical
 products that present inter-related statistics in a predefined
 structure. They are often found in spreadsheets that follow this
-structure, or in the case Eurostat in a data repository. In both cases
-they in reproducible research must be downloaded and restructured to
-programmatically accessible form. Often these highly structured
+structure or, in the case of Eurostat, in a data repository. In both
+cases in, reproducible research must be downloaded and restructured to a
+programmatically accessible form. Often, these highly structured
 statistics need to be analysed together with other data, for example,
-when employment effects and multipliers are calculated. In this case
+when calculating employment effects and multipliers. In this case,
 processing the employment data to SIOT conforming format is a
 significant preprocessing challenge.
 
-The iotables are exactly designed for these tasks. Currently the package
-downloads and processes standardized European SIOTs conforming to the
-latest statistical regulations, i.e. SIOTs starting from the year 2010.
+The iotables are exactly designed for these tasks. Currently, the
+package downloads and processes standardized European SIOTs conforming
+to the latest statistical regulations, i.e. SIOTs starting from 2010.
 
 The aim of this introduction is not to introduce input-output economics,
 or SIOTs in detail. The [Eurostat Manual of Supply, Use and Input-Output
@@ -46,10 +42,10 @@ page](https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview)
 (for further reference: `Eurostat Manual`) in the documentation should
 be consulted for further information about the data and the metadata.
 
-In order to test the analytical functions of the package and to have a
-manageable sized example data set, we use the real-life data from the
+To test the analytical functions of the package and to have a
+manageable-sized example data set, we use real-life data from the
 Eurostat manual. The `germany_1995` dataset is a simplified 6x6 sized
-SIOT taken from the `Eurostat Manual` (`p481`). The package function
+SIOT was taken from the `Eurostat Manual` (`p481`). The package function
 examples can be checked against [published results from Jörg
 Beutel](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
 These calculations can be followed in the [Introduction to
@@ -139,10 +135,10 @@ prices.
 
 Contributions are very welcome:
 
--   [Issue tracker](https://github.com/ropengov/iotables/issues) for
-    feedback and bug reports.
--   [Pull requests](https://github.com/ropengov/iotables/)
--   [Github page](https://github.com/ropengov/iotables/)
+- [Issue tracker](https://github.com/ropengov/iotables/issues) for
+  feedback and bug reports.
+- [Pull requests](https://github.com/ropengov/iotables/)
+- [Github page](https://github.com/ropengov/iotables/)
 
 ### Acknowledgements
 

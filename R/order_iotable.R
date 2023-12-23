@@ -1,5 +1,5 @@
 #' @importFrom dplyr filter select mutate rename left_join arrange all_of 
-#' @importFrom dply across where
+#' @importFrom dplyr across where
 #' @importFrom tidyr pivot_wider
 #' @importFrom forcats fct_reorder
 #' @importFrom utils data
