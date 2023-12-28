@@ -56,6 +56,8 @@ employment_get <- function ( geo,
     stop("Labelling must be any of 'iotables', 'prod_na' [product x product] or 'induse' [industry x industry]")
   }
   
+  year_number <- as.numeric(year)
+  
   ## Avoiding no visible binding for global variable 'data' ----------
   getdata <- function(...)
   {
@@ -145,31 +147,40 @@ employment_get <- function ( geo,
  
  ## Geo selection and exception handling--------------------------------  
  if ( geo %in% unique (emp$geo) ) {
-    emp <- emp %>% dplyr::filter ( geo == geo )
+   select_geo <- which(as.character(emp$geo) %in% as.character(geo))
+   emp <- emp[select_geo, ]
   } else {
     stop ("No employment data found with geo parameter = ", geo )
+  }
+  
+  if ( "TIME_PERIOD" %in% names(emp) ) {
+    # Breaking change from eurostat 4.0.0
+    emp <- emp %>% rename ( time = TIME_PERIOD)
   }
   
   emp$year <- as.numeric(substr(as.character(emp$time), start = 1, stop = 4))
   
   ## Year selection and exception handling -------------------------------------  
   
-  if ( year %in% unique ( emp$year ) ) {
-    emp <- emp %>% filter ( year == year )
+  if ( year %in% unique (emp$year) ) {
+    select_year <- which(emp$year %in% year_number)
+    emp <- emp[select_year, ]
   } else {
     stop ("No employment data found with the year parameter = ", year )
   }
   
   ## Age group selection and exception handling ---------------------------------  
   if ( age %in% unique (emp$age) ) {
-    emp <- emp %>% filter (.data$age == age)
+    select_age <- which(as.character(emp$age) %in% as.character(age))
+    emp <- emp[select_age, ]
   } else {
     stop ("No employment data found with the age parameter = ", age )
   }
   
   ## Sex variable selection and exception handling-------------------------------- 
   if ( sex %in% unique (emp$sex) ) {
-    emp <- emp %>% filter (.data$sex == sex)
+    select_sex <- which(as.character(emp$sex) %in% as.character(sex))
+    emp <- emp[select_sex, ]
   } else {
     stop ("No employment data found with sex parameter = ", sex )
   }
@@ -181,13 +192,13 @@ employment_get <- function ( geo,
   employment <- emp %>%
     mutate (   nace_r2 = as.character(.data$nace_r2) ) %>%
     group_by ( nace_r2, year ) %>%
-    summarize ( values = mean(.data$values)) %>%
+    summarize ( values = mean(.data$values), .groups = "drop") %>%
     dplyr::rename ( emp_code = nace_r2 ) %>%
     ungroup () %>%
     left_join ( employment_metadata, 
                        by = "emp_code") %>%  # iotables:::employment_metadata
     dplyr::group_by (  code, variable, iotables_label ) %>%
-    dplyr::summarize ( values = sum(.data$values)) 
+    dplyr::summarize ( values = sum(.data$values), .groups = "drop") 
   
   
   ## If data_directory exists, save results ------------------------------- 

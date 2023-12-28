@@ -188,17 +188,17 @@ iotable_get <- function ( labelled_io_data = NULL,
       metadata_uk_2010 <- getdata(metadata_uk_2010)
       
       metadata_cols <- metadata_uk_2010  %>%
-        dplyr::filter ( !is.na(.data$uk_col)) %>%
+        dplyr::filter ( !is.na(uk_col)) %>%
         dplyr::select ( -uk_row, -uk_row_label, -prod_na, -row_order) %>%
-        mutate ( uk_col = gsub("\\.", "-", as.character(.data$uk_col))) %>%
-        mutate ( uk_col = gsub(" & ", "-", as.character(.data$uk_col))) %>%
-        mutate ( uk_col = trimws(.data$uk_col, 'both'))
+        mutate ( uk_col = gsub("\\.", "-", as.character(uk_col))) %>%
+        mutate ( uk_col = gsub(" & ", "-", as.character(uk_col))) %>%
+        mutate ( uk_col = trimws(uk_col, 'both'))
       
       metadata_rows <- metadata_uk_2010  %>%
-        filter ( !is.na(.data$uk_row)) %>%
+        filter ( !is.na(uk_row)) %>%
         select ( -all_of(c("uk_col", "uk_col_label", "induse", "col_order")) ) %>%
-        mutate ( uk_row = gsub("\\.", "-", as.character(.data$uk_row))) %>%
-        mutate ( uk_row = gsub(" & ", "-", as.character(.data$uk_row)))
+        mutate ( uk_row = gsub("\\.", "-", as.character(uk_row))) %>%
+        mutate ( uk_row = gsub(" & ", "-", as.character(uk_row)))
       
       prod_ind <- c(prod_ind, uk_tables)
     }  else {
@@ -240,19 +240,19 @@ iotable_get <- function ( labelled_io_data = NULL,
       
       croatia_2010_1700 <- getdata(croatia_2010_1700)
       labelled_io_data <- croatia_2010_1700 %>%
-        mutate ( year = lubridate::year(.data$time))
+        mutate ( year = lubridate::year(time))
       
     } else if ( source_inputed == "croatia_2010_1800" )  {
       
       croatia_2010_1800 <- getdata(croatia_2010_1800)
       labelled_io_data <- croatia_2010_1800   %>%
-        mutate ( year = lubridate::year (.data$time))
+        mutate ( year = lubridate::year (time))
       
     } else if ( source_inputed == "croatia_2010_1900" )  {
       
       croatia_2010_1900 <- getdata(croatia_2010_1900)
       labelled_io_data <- croatia_2010_1900 %>%
-        mutate ( year = lubridate::year(.data$time))
+        mutate ( year = lubridate::year(time))
       
     } else {
       if ( tmp_rds %in% list.files (path = tempdir()) ) {
@@ -430,8 +430,8 @@ iotable_get <- function ( labelled_io_data = NULL,
   } else if ( labelling == "short" & source %in% prod_ind ) {
     
     iotable_labelled_w <- iotable_labelled %>%
-      dplyr::select (.data$prod_na, induse, values) %>%
-      dplyr::filter ( !is.na(.data$prod_na) )  %>%
+      dplyr::select (prod_na, induse, values) %>%
+      dplyr::filter ( !is.na(prod_na) )  %>%
       tidyr::spread (induse, values )
 
   } else {
