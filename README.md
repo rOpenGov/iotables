@@ -6,7 +6,9 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.9.2-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9.3-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![Project Status:
+Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/iotables)](https://cran.r-project.org/package=iotables)
 [![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)

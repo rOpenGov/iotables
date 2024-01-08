@@ -1,5 +1,3 @@
-
-
 de_coeff <- input_coefficient_matrix_create(data_table = iotable_get(), digits = 4)
 
 I <- leontief_inverse_create ( de_coeff )
