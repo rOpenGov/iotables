@@ -26,3 +26,7 @@
 ^logo.png$
 ^CRAN-SUBMISSION$
 ^appveyor\.yml$
+^codemeta\.json$
+^lastMiKTeXException
+^CRAN-SUBMISSION$
+^dataspice$
