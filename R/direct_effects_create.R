@@ -23,7 +23,7 @@
 #' I_nl <- leontief_inverse_create( input_coeff_nl )
 #'
 #' direct_effects_create(input_requirements = compensation_indicator, 
-#'                            inverse = I_nl)
+#'                       inverse = I_nl)
 #' @export
 
 direct_effects_create <- function ( input_requirements,

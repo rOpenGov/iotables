@@ -26,8 +26,7 @@
 #' @return A data.frame that contains the matrix of  \code{data_table} divided 
 #' by \code{total} with a key column. Optionally the results are rounded to 
 #' given \code{digits}. 
-#' @importFrom dplyr mutate across left_join
-#' @importFrom tidyselect vars_select_helpers
+#' @importFrom dplyr mutate across left_join where
 #' @references See 
 #' \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 #' for explanation on the use of the Coefficient matrix.
@@ -109,14 +108,14 @@ coefficient_matrix_create <- function (data_table,
   total_row <-  total_row %>% mutate(across(where(is.factor), as.character))
   total_row <-  total_row %>% mutate (across(where(is.factor), null_to_eps)) # avoid division by zero
   total_row
-  
-  where <- tidyselect::vars_select_helpers$where
-  
-  ## Make sure that no integers remain in the data table, because they cannot be divided with numerics.
+
+  ## Make sure that no integers remain in the data table, because they cannot
+  ## be divided with numerics.
   coeff_matrix <- data_table %>%
     mutate (across(where(is.numeric), as.numeric))
   
   if (households == TRUE)  last_column <- last_column+1
+  
   ###The actual creation of the coefficients-----
   
   for ( i in seq_len(nrow(data_table)) ) {

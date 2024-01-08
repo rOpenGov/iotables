@@ -8,13 +8,14 @@ utils::globalVariables(c(
   "nace_r2", # <airpol_get>
   "time", # <airpol_get>
   "values", # <airpol_get>
+  "TIME_PERIOD", # <employment_get>
   ".data", # <employment_get>
   "nace_r2", # <employment_get>
   "code", # <employment_get>
   "variable", # <employment_get>
   "iotables_label", # <employment_get>
   "values", # <employment_get>
-  ".data", # <iotable_get>
+  "time", # <iotable_get>
   "values_lab", # <iotables_download>
   "TIME_PERIOD_lab", # <iotables_download>
   "time_lab", # <iotables_download>
