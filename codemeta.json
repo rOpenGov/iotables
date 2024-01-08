@@ -4,10 +4,10 @@
   "identifier": "iotables",
   "description": "Pre-processing and basic analytical tasks related to working with Eurostat's symmetric input-output tables and provide basic input-output economics calculations. The package is part of rOpenGov <http://ropengov.github.io/> to open source open government initiatives.",
   "name": "iotables: Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data",
-  "codeRepository": "https://github.com/rOpenGov/iotables",
+  "codeRepository": "https://iotables.dataobservatory.eu/",
   "issueTracker": "https://github.com/rOpenGov/iotables/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -308,11 +308,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2365.857KB",
+  "fileSize": "2354.795KB",
   "citation": [
     {
       "@type": "CreativeWork",
-      "datePublished": "2023",
+      "datePublished": "2024",
       "author": [
         {
           "@type": "Person",
@@ -322,15 +322,10 @@
         }
       ],
       "name": "Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data",
-      "identifier": "10.5281/zenodo.5887037",
+      "identifier": "10.5281/zenodo.10472240",
       "url": "https://iotables.dataobservatory.eu/",
-      "@id": "https://doi.org/10.5281/zenodo.5887037",
-      "sameAs": "https://doi.org/10.5281/zenodo.5887037"
+      "@id": "https://doi.org/10.5281/zenodo.10472240",
+      "sameAs": "https://doi.org/10.5281/zenodo.10472240"
     }
-  ],
-  "relatedLink": ["https://iotables.dataobservatory.eu/", "https://CRAN.R-project.org/package=iotables"],
-  "releaseNotes": "https://github.com/rOpenGov/iotables/blob/master/NEWS.md",
-  "readme": "https://github.com/rOpenGov/iotables/blob/master/README.md",
-  "contIntegration": ["https://github.com/rOpenGov/iotables/actions", "https://app.codecov.io/gh/rOpenGov/iotables", "https://ci.appveyor.com/project/rOpenGov/iotables"],
-  "keywords": ["rstats", "r-package", "r"]
+  ]
 }

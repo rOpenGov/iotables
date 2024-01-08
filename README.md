@@ -14,7 +14,7 @@ Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repost
 [![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5887037.svg)](https://doi.org/10.5281/zenodo.5887037)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10472240.svg)](https://doi.org/10.5281/zenodo.10472240/)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
 [![AppVeyor build
@@ -146,9 +146,9 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows:
 
-Daniel Antal. (2022. September 24.) rOpenGov/iotables: Importing and
-Manipulating Symmetric Input-Output Tables (Version 0.9.1). Zenodo.
-[https://doi.org/10.5281/zenodo.7109769](https://zenodo.org/record/5153006/)
+Daniel Antal. (2024. January 8.) rOpenGov/iotables: Importing and
+Manipulating Symmetric Input-Output Tables (Version 0.9.3). CRAN.
+[https://doi.org/10.5281/zenodo.10472240](https://zenodo.org/record/5153006/)
 for released version. Development version URL:
 <https://ropengov.github.io/iotables/>
 
