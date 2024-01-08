@@ -1,8 +1,8 @@
 Package: iotables
 Type: Package
 Title: Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data
-Date: 2023-12-23
-Version: 0.9.2
+Date: 2024-01-08
+Version: 0.9.3
 Authors@R:
     c(person("Daniel", "Antal", role = c("aut", "cre"),
              email = "daniel.antal@dataobservatory.eu", 
