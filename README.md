@@ -6,7 +6,7 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.9.3-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9.31-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![Project Status:
 Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
@@ -62,8 +62,8 @@ The analytical functions are tested against this example, too.
 
 ## Installation
 
-You can install iotables 0.9 from CRAN or the latest 0.9.1 development
-version with github:
+You can install iotables 0.9.3 from CRAN or the latest 0.9.31
+development version with github:
 
 ``` r
 # From CRAN:

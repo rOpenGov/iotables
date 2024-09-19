@@ -53,7 +53,7 @@ The calculation of induced effects (Type-II multipliers) are following the [Inpu
 
 ## Installation
 
-You can install iotables 0.9 from CRAN or the latest 0.9.1 development version with github:
+You can install iotables 0.9.3 from CRAN or the latest 0.9.31 development version with github:
 
 ```{r gh-installation, eval = FALSE}
 # From CRAN:

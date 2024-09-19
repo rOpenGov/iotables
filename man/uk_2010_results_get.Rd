@@ -22,6 +22,6 @@ by Richard Wild.
 }
 \examples{
 \dontrun{
-uk_results <- iotables:::uk_2010_results_get ()
+uk_results <- iotables:::uk_2010_results_get()
 }
 }

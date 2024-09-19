@@ -24,8 +24,8 @@ employment statistics data.
 }
 \seealso{
 Other Metadata datasets: 
-\code{\link{metadata_uk_2010}},
-\code{\link{metadata}}
+\code{\link{metadata}},
+\code{\link{metadata_uk_2010}}
 }
 \concept{Metadata datasets}
 \keyword{datasets}

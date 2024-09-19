@@ -39,7 +39,9 @@ input_multipliers_create <- function ( input_requirements,
   
   
   if (is.null(multiplier_name)) {
-    multiplier_name <- gsub("_coefficients|_coefficient|_effect", "_multiplier", input_requirements[1])
+    multiplier_name <- gsub("_coefficients|_coefficient|_effect", 
+                            "_multiplier", 
+                            unlist(input_requirements[1]))
   }
   
   
