@@ -1,3 +1,9 @@
+# iotables 0.9.32
+
+* New article on terminology
+* Minor bug fixes
+* Developing new functionality (ongoing)
+
 # iotables 0.9.31
 
 * Minor fix so that input multipliers print again correctly with `input_multipliers_create()`.
