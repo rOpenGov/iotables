@@ -27,6 +27,7 @@
 #'   \item{exports}{Simple aggregated exports}
 #'   \item{total_use}{Simple aggregated total use}              
 #' }
+#' @source \href{https://hal.science/hal-03233439}{Input-Output Multipliers. Specification sheet and supporting material}
 #' @family Validation datasets
 "netherlands_2006"
 

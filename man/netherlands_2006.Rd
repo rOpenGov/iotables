@@ -28,6 +28,8 @@ A data frame of 13 observations in 14 variables.
 \source{
 Source: Input-Output Multipliers Specification Sheet and Supporting
 Material in the Spicosa Project Report
+
+\href{https://hal.science/hal-03233439}{Input-Output Multipliers. Specification sheet and supporting material}
 }
 \usage{
 data(netherlands_2006)
