@@ -1,30 +1,42 @@
-#' @title Simple input-output table for Germany, 1995.
-#' 
-#' @description Replication data taken from the Eurostat Manual, 
-#' Table 15.4: Input-output table of domestic output at basic prices (Version A)
+#' @title Simple input-output table for Germany, 1995
 #'
-#' @details For testing and documentation purposes a well documented example is taken the Eurostat Manual.
-#' The table in the Eurostat manual is brought to the format used by the Eurostat database.
-#' It is a small dataset for examples, but it is also instructive to understand how Eurostat
-#' stores the highly structured SIOTs in long-form tidy datasets. 
-#' The labels were slightly alterred to reflect the transition from the vocabulary
-#' of ESA95 to ESA2010 since the publication of the Manual.
-#' @source \href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 482
-#' @usage data(germany_1995)
-#' @format A data frame with 228 observations and 10 variables.
-#'\describe{
-#'   \item{prod_na}{Technology codes in row names, following the Eurostat convention.}
-#'   \item{prod_na_lab}{Longer labels for t_rows2.}
-#'   \item{induse}{Column labels, following the Eurostat convention with differences.}
-#'   \item{iotables_row}{Row labels, i.e. to be used in key column, for iotables package abbreviations.}
-#'   \item{iotables_col}{Column labels for iotables package abbreviations.}
-#'   \item{values}{The actual values of the table in million euros.}  
-#'   \item{unit}{MIO_EUR, the same as Eurostat.}
-#'   \item{unit_lab}{Million euros. Eurostat usually has euro and national currency unit values, too.}
-#'   \item{geo}{ISO/Eurostat country code for Germany, i.e. DE.}
-#'   \item{geo_lab}{ISO/Eurostat country name, Germany.}
-#'   \item{time}{Date of the SIOT.}     
+#' @description
+#' Replication dataset from the **Eurostat Manual**, Table 15.4:  
+#' *Input-output table of domestic output at basic prices (Version A)*.
+#'
+#' @details
+#' This dataset is used for testing and documentation purposes. It is a
+#' well-documented example taken from the Eurostat Manual. The table has
+#' been reformatted into the same long-form tidy structure as the Eurostat
+#' database SIOTs.  
+#'
+#' The labels were slightly adjusted to reflect the transition from the
+#' ESA95 vocabulary to ESA2010 since the publication of the Manual.
+#'
+#' @source
+#' [Eurostat Manual of Supply, Use and Input-Output Tables, p. 482](
+#' https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/
+#' b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
+#'
+#' @format A data frame with 228 observations and 11 variables:
+#' \describe{
+#'   \item{prod_na}{Technology codes in row names, following Eurostat
+#'     conventions.}
+#'   \item{prod_na_lab}{Longer labels corresponding to `t_rows2`.}
+#'   \item{induse}{Column labels, following Eurostat conventions with
+#'     minor differences.}
+#'   \item{iotables_row}{Row labels (to be used in key columns), using
+#'     `iotables` abbreviations.}
+#'   \item{iotables_col}{Column labels using `iotables` abbreviations.}
+#'   \item{values}{Table values in million euros.}
+#'   \item{unit}{Unit identifier. Always `"MIO_EUR"`.}
+#'   \item{unit_lab}{Label for the unit: "million euros". Eurostat usually
+#'     provides both euro and national currency values.}
+#'   \item{geo}{Country code for Germany (`"DE"`).}
+#'   \item{geo_lab}{Country name (`"Germany"`).}
+#'   \item{time}{Reference year of the SIOT.}
 #' }
-#' @family Validation datasets
+#'
+#' @family validation datasets
 "germany_1995"
 
