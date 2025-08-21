@@ -6,7 +6,7 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.9.3201-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9.3203-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![Project Status:
 Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
@@ -17,8 +17,6 @@ downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.o
 [![DOI](https://doi.org/10.32614/CRAN.package.dataset.svg)](https://doi.org/10.5281/zenodo.10472240/)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/iotables?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/iotables)
 [![dataobservatory](https://img.shields.io/badge/ecosystem-dataobservatory.eu-3EA135.svg)](https://dataobservatory.eu/)
 
 The symmetric input-output tables (SIOTs) are complex statistical
@@ -72,8 +70,8 @@ install.packages("iotables")
 # From Github (development version)
 devtools::install_github("rOpenGov/iotables")
 
-#with vignettes:
-#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
+# with vignettes:
+# devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
 ```
 
 See also a long-form documentation (publication candidate) [iotables: an
