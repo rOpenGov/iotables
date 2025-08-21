@@ -1,59 +1,56 @@
 Package: iotables
 Type: Package
-Title: Reproducible Input-Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data
+Title: Reproducible Input–Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data
+Version: 0.9.3202
 Date: 2024-12-16
-Version: 0.9.3201
-Authors@R:
-    c(person("Daniel", "Antal", role = c("aut", "cre"),
-             email = "daniel.antal@dataobservatory.eu", 
+Authors@R: 
+    c(
+      person("Daniel", "Antal", 
+             email = "daniel.antal@dataobservatory.eu",
+             role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7513-6760")),
-      person(given = "Kasia",
-             family = "Kulma",
-             role = "ctb", 
+      person("Kasia", "Kulma", 
+             role = "ctb",
              comment = c(ORCID = "0000-0002-2952-9720")),
-      person(given = "Pyry",
-             family = "Kantanen", 
-             role = "ctb", 
+      person("Pyry", "Kantanen",
+             role = "ctb",
              comment = c(ORCID = "0000-0003-2853-2765"))
-             )
-Maintainer: Daniel Antal <daniel.antal@dataobservatory.eu>  
-Description: Pre-processing and basic analytical tasks related to working
-    with Eurostat's symmetric input-output tables and provide basic
-    input-output economics calculations. The package is part of rOpenGov
-    <http://ropengov.github.io/> to open source open government initiatives.
-URL: https://iotables.dataobservatory.eu/
-BugReports: https://github.com/rOpenGov/iotables/issues
+    )
+Maintainer: Daniel Antal <daniel.antal@dataobservatory.eu>
+Description: Pre-processing and basic analytical tasks for working with 
+    Eurostat's symmetric input–output tables, and basic input–output 
+    economics calculations. Part of rOpenGov <https://ropengov.github.io/> 
+    for open source open government initiatives.
 License: MIT + file LICENSE
-Encoding: UTF-8
+URL: https://iotables.dataobservatory.eu/, https://github.com/rOpenGov/iotables
+BugReports: https://github.com/rOpenGov/iotables/issues
 LazyData: true
-RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5.0)
 Imports: 
+    assertthat,
     dplyr,
     eurostat,
-    magrittr,
-    tidyr,
     forcats,
-    utils,
-    plyr,
-    lubridate,
-    knitr,
-    kableExtra,
-    tibble,
-    readxl,
-    assertthat,
     glue,
+    kableExtra,
+    knitr,
+    lubridate,
+    magrittr,
+    readxl,
+    rlang,
+    tibble,
+    tidyr,
     tidyselect,
-    rlang
+    utils
 Suggests: 
-    testthat,
+    covr,
     rmarkdown,
     spelling,
-    covr,
-    roxyglobals
-Depends: R(>= 3.5.0)
-VignetteBuilder: knitr
+    testthat (>= 3.0.0)
+Encoding: UTF-8
 Language: en-US
-Roxygen: list(roclets = c("collate", "namespace", "rd",
-    "roxyglobals::global_roclet"))
-Config/roxyglobals/filename: globals.R
-Config/roxyglobals/unique: FALSE
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+VignetteBuilder: knitr
+
