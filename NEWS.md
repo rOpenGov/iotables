@@ -1,5 +1,8 @@
 # New development version
 
+* New development version for rOpenSci review, updating test infrastructure, 
+modernising documentation.
+
 # iotables 0.9.32
 
 * New article on terminology

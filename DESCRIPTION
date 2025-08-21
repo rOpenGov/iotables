@@ -1,8 +1,8 @@
 Package: iotables
 Type: Package
 Title: Reproducible Input–Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data
-Version: 0.9.3202
-Date: 2024-12-16
+Version: 0.9.3203
+Date: 2025-08-21
 Authors@R: 
     c(
       person("Daniel", "Antal", 

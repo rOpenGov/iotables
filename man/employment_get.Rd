@@ -4,9 +4,8 @@
 \alias{employment_get}
 \title{Get employment data}
 \source{
-Eurostat statistic 
-\href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{Employment 
-by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
+Eurostat dataset:
+\url{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}
 }
 \usage{
 employment_get(
@@ -20,51 +19,48 @@ employment_get(
 )
 }
 \arguments{
-\item{geo}{The country code.}
+\item{geo}{A two-letter country code (Eurostat style).}
 
-\item{year}{The year.  The average employment will be created for the given
-year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
-employment statistics.}
+\item{year}{Year of employment data (>= 2008, when NACE Rev. 2 was
+introduced).}
 
-\item{sex}{Defaults to \code{"Total"}. Enter \code{"Females"} or \code{"F"} for
-female employment, \code{"Males"} or \code{"M"} for male employment.}
+\item{sex}{Employment by sex. Defaults to \code{"Total"}. Use \code{"Females"}/\code{"F"} or
+\code{"Males"}/\code{"M"}.}
 
-\item{age}{Defaults to \code{"Y_GE15"}, which is the Eurostat code for employment in 
-all age groups starting from 15-years-old. Any Eurostat code can be used as a 
-parameter.}
+\item{age}{Eurostat age code. Defaults to \code{"Y_GE15"}. Any Eurostat code can
+be supplied.}
 
-\item{labelling}{Either \code{"iotables"} or the applicable short code, 
-for product x product SIOTs \code{"prod_na"} and in the case of industry x 
-industry SIOTs \code{"induse"}.}
+\item{labelling}{Either \code{"iotables"}, \code{"prod_na"} (product × product) or
+\code{"induse"} (industry × industry).}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
-data file here with labelling.}
+\item{data_directory}{Optional path to save or load pre-processed employment
+data.}
 
-\item{force_download}{Defaults to \code{FALSE}. It will use the existing downloaded file
-in the \code{data_directory} or the temporary directory, if it exists.}
+\item{force_download}{Logical. If \code{TRUE}, forces a fresh download even if a
+file exists locally.}
 }
 \value{
-A data.frame with auxiliary metadata to conform the symmetric
-input-output tables.
+A \code{data.frame} formatted to conform with Eurostat SIOTs, with
+auxiliary metadata.
 }
 \description{
-Download the employment data for a country and arrange it to the 
-64x64 SIOTs.
+Download Eurostat employment data for a country and arrange it to match 64x64
+symmetric input–output tables (SIOTs).
 }
 \details{
-Currently works only with product x product tables.
+Currently only works with product × product tables.
 }
 \examples{
 \dontrun{
- io_tables <- get_employment ( 
-               geo = "CZ", 
-               year = "2010",
-               sex = "Total", 
-               age = "Y_GE15",
-               data_directory = NULL,
-               force_download = TRUE
-               )
- }
+employment <- employment_get(
+  geo = "CZ",
+  year = "2010",
+  sex = "Total",
+  age = "Y_GE15",
+  data_directory = NULL,
+  force_download = TRUE
+)
+}
 }
 \seealso{
 Other import functions: 
