@@ -2,20 +2,23 @@
 % Please edit documentation in R/utils.R
 \name{is_key_column_present}
 \alias{is_key_column_present}
-\title{Is a keyword present in a key column?}
+\title{Check if a key column is present}
 \usage{
 is_key_column_present(data_table, potential_keywords = NULL)
 }
 \arguments{
-\item{data_table}{A matrix or vector that should have a key column.}
+\item{data_table}{A data frame with a key column in its first position.}
 
-\item{potential_keywords}{Potential keywords that should be present in the key column, defaults to
-\code{NULL} in which case it will asserted that the first column is not numeric.}
+\item{potential_keywords}{Optional character vector of keywords expected in
+the key column. Defaults to \code{NULL}, in which case the function only asserts
+that the first column is not numeric.}
 }
 \value{
-A logical variable of length 1, \code{TRUE} or \code{FALSE}.
+A logical scalar: \code{TRUE} if the key column is valid, otherwise throws
+an error with a descriptive message.
 }
 \description{
-Is a keyword present in a key column?
+Tests whether the first column of a data frame contains either
+non-numeric values (default) or any of the \code{potential_keywords} supplied.
 }
 \keyword{internal}

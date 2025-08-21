@@ -1,20 +1,50 @@
+test_that("is_key_column_present() works in different scenarios", {
+  # Case 1: first column is numeric → should error
+  expect_error(
+    is_key_column_present(data.frame(
+      agriculture = 0.0123,
+      manufacturing = 0.1436,
+      trade = 0.0921
+    )),
+    "expected non-numeric first col"
+  )
+  
+  # Case 2: key column exists but no keyword match → should error
+  expect_error(
+    is_key_column_present(
+      data.frame(
+        indicator = "your_indicator",
+        agriculture = 0.0123,
+        manufacturing = 0.1436,
+        trade = 0.0921
+      ),
+      potential_keywords = c("her_indicator", "his_indicator")
+    ),
+    "has no key column containing any of"
+  )
+  
+  # Case 3: valid keyword present → should return TRUE
+  expect_true(
+    is_key_column_present(
+      data.frame(
+        indicator = "your_indicator",
+        agriculture = 0.0123,
+        manufacturing = 0.1436,
+        trade = 0.0921
+      ),
+      potential_keywords = c("her_indicator", "your_indicator")
+    )
+  )
+})
 
-test_that("Testing is_key_column_present() in various settings", {
-  expect_error(is_key_column_present ( data.frame (agriculture = 0.0123,
-                                              manufacturing = 0.1436,
-                                              trade = 0.0921))
-               )
-  expect_error(is_key_column_present ( data.frame (indicator = "your_indicator", 
-                                                   agriculture = 0.0123,
-                                                   manufacturing = 0.1436,
-                                                   trade = 0.0921), 
-                                       potential_keywords = c("her_indicator", "his_indicator"))
+test_that("validate_source() correctly validates sources", {
+  # Invalid source
+  expect_error(
+    validate_source("not_a_table"),
+    "is not in supported tables"
   )
-  expect_true(is_key_column_present ( data.frame (indicator = "your_indicator", 
-                                                   agriculture = 0.0123,
-                                                   manufacturing = 0.1436,
-                                                   trade = 0.0921), 
-                                       potential_keywords = c("her_indicator", "your_indicator"))
-  )
+  
+  # Valid source
+  expect_silent(validate_source("naio_10_cp1700"))
 })
 
