@@ -1,3 +1,7 @@
+
+#' @keywords internal
+fn_na_to_null <- function(x) ifelse(is.na(x), 0, x)
+
 #' @title Validate source parameter
 #'
 #' @description Internal function that checks whether the given `source`
@@ -51,7 +55,7 @@ is_key_column_present <- function(data_table, potential_keywords = NULL) {
     "data.frame" %in% class(data_table),
     msg = "The 'data_table' must be a data.frame."
   )
-  
+
   if (!is.null(potential_keywords)) {
     msg_potential_keywords <- paste(potential_keywords, collapse = "', '")
     assertthat::assert_that(
@@ -88,4 +92,3 @@ chars_collapse <- function(x, collapse = ", ") {
   if (length(x) > 1) x <- paste(x, collapse = collapse)
   x
 }
-

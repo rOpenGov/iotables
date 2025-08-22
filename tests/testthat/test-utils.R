@@ -8,7 +8,7 @@ test_that("is_key_column_present() works in different scenarios", {
     )),
     "expected non-numeric first col"
   )
-  
+
   # Case 2: key column exists but no keyword match → should error
   expect_error(
     is_key_column_present(
@@ -22,7 +22,7 @@ test_that("is_key_column_present() works in different scenarios", {
     ),
     "has no key column containing any of"
   )
-  
+
   # Case 3: valid keyword present → should return TRUE
   expect_true(
     is_key_column_present(
@@ -43,8 +43,7 @@ test_that("validate_source() correctly validates sources", {
     validate_source("not_a_table"),
     "is not in supported tables"
   )
-  
+
   # Valid source
   expect_silent(validate_source("naio_10_cp1700"))
 })
-

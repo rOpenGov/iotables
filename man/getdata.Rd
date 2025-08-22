@@ -2,15 +2,15 @@
 % Please edit documentation in R/utils-metadata.R
 \name{getdata}
 \alias{getdata}
-\title{Various internal functions to work with IOT metadata, including the labelling 
-vocabularies, row and column ordering. 
+\title{Various internal functions to work with IOT metadata, including the labelling
+vocabularies, row and column ordering.
 None of these functions should be exported.}
 \usage{
 getdata(...)
 }
 \description{
-Various internal functions to work with IOT metadata, including the labelling 
-vocabularies, row and column ordering. 
+Various internal functions to work with IOT metadata, including the labelling
+vocabularies, row and column ordering.
 None of these functions should be exported.
 }
 \keyword{internal}
