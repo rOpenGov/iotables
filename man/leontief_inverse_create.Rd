@@ -13,7 +13,7 @@ leontieff_inverse_create(technology_coefficients_matrix, digits = NULL)
 \item{technology_coefficients_matrix}{A technology coefficient matrix created
 by the \code{\link{input_coefficient_matrix_create}}.}
 
-\item{digits}{An integer showing the precision of the technology matrix in 
+\item{digits}{An integer showing the precision of the technology matrix in
 digits. Default is \code{NULL} when no rounding is applied.}
 }
 \description{
@@ -22,15 +22,16 @@ Create the Leontief inverse from the technology coefficient matrix.
 \details{
 The Leontief-inverse is \deqn{L = (I-A)^-1}
 where B is the input coefficient matrix
-created by \code{\link{input_coefficient_matrix_create}}. For the similar inverse 
-created from output coefficients, see the 
+created by \code{\link{input_coefficient_matrix_create}}. For the similar inverse
+created from output coefficients, see the
 \code{\link{ghosh_inverse_create}} function.
 }
 \examples{
-tm <- input_flow_get ( 
-  data_table = iotable_get(), 
-  households = FALSE)
-I <- leontief_inverse_create( technology_coefficients_matrix = tm )
+tm <- input_flow_get(
+  data_table = iotable_get(),
+  households = FALSE
+)
+I <- leontief_inverse_create(technology_coefficients_matrix = tm)
 }
 \seealso{
 Other analytic object functions: 

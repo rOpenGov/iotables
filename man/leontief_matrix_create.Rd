@@ -10,25 +10,26 @@ leontief_matrix_create(technology_coefficients_matrix)
 leontieff_matrix_create(technology_coefficients_matrix)
 }
 \arguments{
-\item{technology_coefficients_matrix}{A technology coefficient 
-matrix created by the \code{\link{input_coefficient_matrix_create}} or 
+\item{technology_coefficients_matrix}{A technology coefficient
+matrix created by the \code{\link{input_coefficient_matrix_create}} or
 \code{\link{output_coefficient_matrix_create}}.}
 }
 \value{
-A Leontief matrix of data.frame class. The column names are 
+A Leontief matrix of data.frame class. The column names are
 ordered, and the row names are in the first, auxiliary metadata column.
 }
 \description{
-Create a Leontief matrix from technology matrix after some basic error 
-handling. Most likely you will need this function as a step to invoke 
-the  function to create its inverse: 
+Create a Leontief matrix from technology matrix after some basic error
+handling. Most likely you will need this function as a step to invoke
+the  function to create its inverse:
 \code{\link{leontief_inverse_create}}.
 }
 \examples{
-tm <- input_flow_get ( 
-  data_table = iotable_get(), 
-  households = FALSE)
-L <- leontief_matrix_create( technology_coefficients_matrix = tm )
+tm <- input_flow_get(
+  data_table = iotable_get(),
+  households = FALSE
+)
+L <- leontief_matrix_create(technology_coefficients_matrix = tm)
 }
 \seealso{
 Other analytic object functions: 
