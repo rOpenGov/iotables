@@ -18,11 +18,13 @@ The column containing final household expenditure. If not found
 Return Final Household Expenditure
 }
 \examples{
-household_column_get(iotable_get (source = 'germany_1995'))
+household_column_get(iotable_get(source = "germany_1995"))
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},
 \code{\link{matrix_round}()},
