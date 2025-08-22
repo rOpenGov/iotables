@@ -59,7 +59,7 @@ rows_add <- function(data_table,
   if (is.numeric(rows_to_add)) {
     rows_to_add <- as.data.frame(t(rows_to_add))
   }
-  
+
   if (is.null(row_names)) {
     if (!is.numeric(rows_to_add[, 1])) {
       key_column <- key_column_create(
@@ -81,19 +81,19 @@ rows_add <- function(data_table,
       key_column_values = row_names
     )
   }
-  
+
   columns_required <- ifelse(
     is_key_column_present(data_table),
     ncol(data_table) - 1,
     ncol(data_table)
   )
-  
+
   numeric_names <- if (is_key_column_present(data_table)) {
     names(data_table)[-1]
   } else {
     names(data_table)
   }
-  
+
   empty_values <- as.data.frame(
     matrix(
       rep(empty_fill, columns_required * nrow(rows_to_add)),
@@ -102,13 +102,13 @@ rows_add <- function(data_table,
   )
   names(empty_values) <- numeric_names
   empty_values <- bind_cols(key_column, empty_values)
-  
+
   completed <- if (!is.numeric(rows_to_add[, 1])) {
     rows_to_add[, -1]
   } else {
     rows_to_add
   }
-  
+
   to_complete_rows <- empty_values[, !names(empty_values) %in% names(completed)]
   dplyr::bind_rows(data_table, bind_cols(completed, to_complete_rows))
 }
