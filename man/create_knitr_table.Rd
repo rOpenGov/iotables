@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_knitr_table.R
 \name{create_knitr_table}
 \alias{create_knitr_table}
-\title{Create an output-independent, well formatted kable table}
+\title{Create an output-independent, formatted kable table}
 \usage{
 create_knitr_table(
   data_table,
@@ -23,57 +23,60 @@ create_knitr_table(
 )
 }
 \arguments{
-\item{data_table}{data.frame, tibble, named matrix or a knitr_kable object.}
+\item{data_table}{A \code{data.frame}, tibble, named matrix, or \code{knitr_kable} object.}
 
-\item{digits}{Number of digits to display in the case of numeric variables.}
+\item{digits}{Number of digits to display for numeric variables.
+Defaults to \code{getOption("digits")}.}
 
-\item{caption}{A table caption, defaults to empty \code{NA}.}
+\item{caption}{Optional table caption. Defaults to \code{NA} (no caption).}
 
-\item{col.names}{The col.names parameter of the kable table, if \code{NULL},
-filled with the names of the \code{data_table}.}
+\item{col.names}{Column names for the table. If \code{NULL}, uses
+\code{names(data_table)}.}
 
-\item{col_width}{Defaults to \code{NULL}. In this case all col_align parameters
-will be \code{"c"} for centered.}
+\item{col_width}{Numeric vector of column widths. If \code{NULL}, defaults to
+2 for the first column and equal share for the rest.}
 
-\item{width_unit}{Defaults to \code{"cm"}.}
+\item{width_unit}{Character. Unit for column widths (default \code{"cm"}).}
 
-\item{col_align}{Defaults to \code{NULL}. In this case \code{'l'} for the
-first column and \code{'r'} for the rest of the columns, 
-i.e.\code{"l", "c", ..., "c"}}
+\item{col_align}{Column alignment. Defaults to \code{"l"} for the first column,
+\code{"c"} for others.}
 
-\item{border_right_cols, }{Defaults to \code{NULL}. 
-In this case \code{TRUE} for the first column and \code{FALSE}
-for the rest of the columns, i.e.\code{T, F, ..., F}}
+\item{border_right_cols}{Logical vector for right-hand column borders.
+Defaults to \code{TRUE} for the first column, \code{FALSE} otherwise.}
 
-\item{bold_cols}{Defaults to \code{NULL}. In this case none of the 
-the columns are bold, i.e. identical to \code{F, F, ..., F}.}
+\item{bold_cols}{Logical vector. If \code{TRUE}, makes the column bold.
+Defaults to all \code{FALSE}.}
 
-\item{bootstrap_options}{Defaults to \code{c("striped", "hover", "condensed")} and
-only used for \code{output_format = "html"}.}
+\item{bootstrap_options}{Passed to \code{\link[kableExtra:kable_styling]{kableExtra::kable_styling()}} for
+HTML output. Defaults to \code{c("striped", "hover", "condensed")}.}
 
-\item{latex_options}{Defaults to \code{NULL)}.}
+\item{latex_options}{Passed to \code{\link[kableExtra:kable_styling]{kableExtra::kable_styling()}} for
+LaTeX output. Defaults to \code{c("scale_down", "striped")}.}
 
-\item{output_format}{Defaults to \code{'html'}. Alternatives are \code{'latex'}. 
-\code{'image'}, recommended for Word files, is removed because it depends
-on magick which is not available on all R platforms.}
+\item{output_format}{Character: \code{"html"}, \code{"latex"}, or \code{"image"}.
+If \code{NULL}, auto-detects from knitr options.}
 
-\item{keep_pdf}{Defaults to  \code{FALSE} and only used if \code{output_format = 'image'}.}
+\item{keep_pdf}{Logical. Only relevant for \code{output_format = "image"}.
+Defaults to \code{FALSE}.}
 
-\item{latex_header_includes}{Currently defaults to \code{c(
-"\\usepackage[magyar]{babel}",
-"\\usepackage[utf8]{inputenc}")}
-It can be any valid latex option setting, but if packages are used, the 
-packages must be installed on your Latex engine.}
+\item{latex_header_includes}{Character vector of LaTeX headers to include.
+Defaults to \code{c("\\\\usepackage[magyar]{babel}", "\\\\usepackage[utf8]{inputenc}")}.}
+}
+\value{
+A \code{knitr_kable} object with styling applied.
 }
 \description{
-Create an output-independent, well formatted kable table
+Wrapper around \code{\link[knitr:kable]{knitr::kable()}} with sensible defaults
+for alignment, borders, and formatting, compatible with HTML and LaTeX
+output formats.
 }
 \examples{
-foo = data.frame ( 
-  observation = c("indicator1", "indicator2", "indicator3"), 
-  indicator_1 = c(100,105,95), 
-  indicator_2 = c(102,104,76)
-  )
-  
+foo <- data.frame(
+  observation = c("indicator1", "indicator2", "indicator3"),
+  indicator_1 = c(100, 105, 95),
+  indicator_2 = c(102, 104, 76)
+)
+
+create_knitr_table(foo, caption = "Demo table")
 }
 \keyword{internal}
