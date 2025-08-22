@@ -7,14 +7,16 @@
 non_zero_columns_find(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use table or a supply 
-table.}
+\item{data_table}{A column (vector) from a symmetric input–output table,
+a use table, or a supply table. May also be a factor or character vector.}
 }
 \value{
-A vector of \code{TRUE} and \code{FALSE} values for the table.
+A logical value: \code{TRUE} if the column contains at least one non-zero
+numeric entry, or if the input is a factor/character column; \code{FALSE}
+otherwise.
 }
 \description{
-This is an internal function to help finding empty columns and rows in 
-symmetric tables.
+Internal helper to detect empty columns (or rows) in symmetric input–output
+style tables.
 }
 \keyword{internal}
