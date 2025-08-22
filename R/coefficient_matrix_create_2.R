@@ -132,7 +132,7 @@ coefficient_matrix_create <- function(data_table,
   earnings_name <- potential_houeshold_earning_names[
     which(potential_houeshold_earning_names %in% key_column)
   ]
-
+  # division by zero
   household_earnings_row <- coeff_matrix[which(earnings_name == key_column), ]
 
   # If only a part should be returned-----------------------------
