@@ -2,37 +2,42 @@
 % Please edit documentation in R/backward_linkages.R
 \name{backward_linkages}
 \alias{backward_linkages}
-\title{Backward linkages}
+\title{Backward Linkages}
 \usage{
 backward_linkages(Im)
 }
 \arguments{
-\item{Im}{A Leontief inverse matrix created by the
-\code{\link{leontief_inverse_create}} function.}
+\item{Im}{A Leontief inverse matrix created by \code{\link[=leontief_inverse_create]{leontief_inverse_create()}}.}
 }
 \value{
-The vector of industry (product) backward linkages in a wide
-data.frame class, following the column names of the Leontief 
-inverse matrix.
+A one-row \code{data.frame} containing the backward linkage values for
+each column (industry or product) of the Leontief inverse. The first column
+is the sector key column, and the remaining columns correspond to the
+linkage values.
 }
 \description{
-Indicate the interconnection of a particular sector to other sectors
-from which it purchases inputs (demand side). When a sector increases its output, 
-it will increase the total (intermediate) demand on all other sectors, which is measured
-by backward linkages.
+Compute the backward linkages of each industry or product sector from a
+Leontief inverse matrix. Backward linkages indicate how strongly a sector is
+interconnected on the demand side: when a sector increases its output, it
+will increase intermediate demand on all other sectors.
 }
 \details{
-Backward linkages are defined as the column sum of the Leontief inverse, 
-in line with  the Eurostat Manual of Supply, Use and
-Input-Output Tables (see p506-507.) and the 
-Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications of 
-the United Nations (see p636.)
+Backward linkages are defined as the column sums of the Leontief
+inverse, in line with the \emph{Eurostat Manual of Supply, Use and Input–Output
+Tables} (pp. 506–507) and the \emph{United Nations Handbook on Supply and Use
+Tables and Input–Output Tables with Extensions and Applications} (p. 636).
 }
 \examples{
-de_coeff <- input_coefficient_matrix_create( iotable_get(), 
-                                             digits = 4 )
-I <- leontief_inverse_create (de_coeff)
-backward_linkages (I)
+de_coeff <- input_coefficient_matrix_create(iotable_get(), digits = 4)
+I <- leontief_inverse_create(de_coeff)
+backward_linkages(I)
+
+# Trivial example: identity matrix gives linkages = 1
+I <- diag(3)
+colnames(I) <- rownames(I) <- c("A", "B", "C")
+I_df <- data.frame(sector = rownames(I), I, check.names = FALSE)
+backward_linkages(I_df)
+
 }
 \seealso{
 Other linkage functions: 
