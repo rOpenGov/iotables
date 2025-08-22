@@ -3,31 +3,40 @@
 \docType{data}
 \name{metadata}
 \alias{metadata}
-\title{Metadata}
+\title{Eurostat National Accounts Vocabulary Metadata}
 \format{
-A data frame with 8 variables.
+A data frame with 8 variables:
 \describe{
-  \item{variable}{Eurostat vocabulary source, i.e. t_rows, t_cols, prod_na, induse}
-  \item{group}{ Informal labelling for macroeconomic groups }
-  \item{code}{Eurostat labels}
-  \item{label}{Eurostat label descriptions}
-  \item{quadrant}{Where to place the data from a long-form raw data file}  
-  \item{account_group}{Different from Eurostat tables, in thousand national currency units.}
-  \item{numeric_label}{ ordering from quadrant, account_group, digit_1, digit_2}     
-  \item{iotables_label}{Custom, machine_readable snake format variable names}                     
+\item{variable}{Eurostat vocabulary source (e.g., \code{t_rows}, \code{t_cols}, \code{prod_na}, \code{induse}).}
+\item{group}{Informal macroeconomic grouping label.}
+\item{code}{Eurostat label codes.}
+\item{label}{Eurostat label descriptions.}
+\item{quadrant}{Indicates where to place the data from a long-form raw data file.}
+\item{account_group}{Grouping of accounts (different from Eurostat tables),
+values are in thousands of national currency units.}
+\item{numeric_label}{Ordering key derived from \code{quadrant}, \code{account_group},
+and digit-based codes.}
+\item{iotables_label}{Custom machine-readable snake_case variable names.}
 }
 }
 \usage{
-data(metadata)
+metadata
 }
 \description{
-An arrangement of the Eurostat national accounts vocabulary, used to correctly
-order wide format rows and columns from bulk long-form tables.
+A reference dataset containing the Eurostat national accounts vocabulary,
+used to correctly order wide-format rows and columns when reshaping bulk
+long-form tables.
+}
+\details{
+This dataset provides a controlled vocabulary and ordering scheme
+for working with Eurostat input–output and national accounts tables. It is
+used internally by functions that reshape raw Eurostat data into consistent
+wide-format representations.
 }
 \seealso{
-Other Metadata datasets: 
+Other metadata datasets: 
 \code{\link{employment_metadata}},
 \code{\link{metadata_uk_2010}}
 }
-\concept{Metadata datasets}
+\concept{metadata datasets}
 \keyword{datasets}

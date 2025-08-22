@@ -1,18 +1,18 @@
 ---
-title: "terminology"
+title: "Terminology"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{terminology}
+  %\VignetteIndexEntry{Terminology}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setupvignette, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(scipen=999)
+options(scipen = 999)
 ```
 
 
@@ -21,22 +21,24 @@ options(scipen=999)
 library(iotables)
 ```
 
-```{r}
+Retrieve the demo dataset, the Germany 1995 Symmetric Input-Output Table: 
+
+```{r germany}
 germany_siot <- iotable_get()
 ```
 
 ### First quadrant
 
-The first quadrant of the symmetric input-output tables, or in other words, the _domestic intermediate matrix_, input-output flows between a simplifed, 6 sectors of the German economy in 1995. 
+The first quadrant of the symmetric input-output tables, or in other words, the _domestic intermediate matrix_, input-output flows between a simplified, 6 sectors of the German economy in 1995. 
 
-```{r}
+```{r firstq}
 germany_siot[c(1:7), c(1:7)]
 ```
 
 Rowwise we see the flow of inputs. For example, at basic prices, out of the total demand for business services(423933), 193176	of the production of the business services are used by other business service providers, 65755	by trade enterprises, and 34223 by other service industries.
 
 ```{r outputflow}
-germany_siot[5,c(1, 5:8)]
+germany_siot[5, c(1, 5:8)]
 ```
 
 The columns describe the structure of the input of the corresponding sector. For example, the business service sectors needed 15058 input from the other services, and 13371 imports from abroad (shown in the table below), to meet the final domestic demand of 423933 for business services (shown in the table above):
@@ -48,7 +50,7 @@ germany_siot[c(5:9), c(1, 6)]
 
 ## Coefficients
 
-Input coefficients for domestic intermediates
+### Input coefficients for domestic intermediates
 
 The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.
 
@@ -58,7 +60,7 @@ $a_{ij}$: input coefficient for domestic goods and services</br>
 $x_{ij}$: flow of domestic commodity i to sector j, i.e., a cell in the first quadrant.</br>
 $x_j$: output of j
 
-```{r}
+```{r inputcoeffmatrix, eval=FALSE}
 input_coefficient_matrix_create_2(iotable_get(), digits = 2)
 ```
 
