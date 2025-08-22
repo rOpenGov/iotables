@@ -1,11 +1,11 @@
 #' Multipliers and effects (product) for testing
-#' from the United Kingdom Input-Output Analytical Tables, 2010												
+#' from the United Kingdom Input-Output Analytical Tables, 2010
 #'
 #' The Excel-imported UK data.
 #' @usage data(uk_test_results)
 #' @format A data frame with 12 variables.
-#'\describe{
-#'   \item{uk_row_label}{The UK row label} 
+#' \describe{
+#'   \item{uk_row_label}{The UK row label}
 #'   \item{Output multiplier}{The imported Output multipliers}
 #'   \item{output_multiplier_rank}{The imported ranking of output multipliers}
 #'   \item{Employment cost multiplier}{The imported Employment cost multipliers.}

@@ -25,4 +25,3 @@
 #'
 #' @family validation datasets
 "germany_airpol"
-

@@ -1,14 +1,14 @@
 #' @title Simple input-output table for Germany, 1995
 #'
 #' @description
-#' Replication dataset from the **Eurostat Manual**, Table 15.4:  
+#' Replication dataset from the **Eurostat Manual**, Table 15.4:
 #' *Input-output table of domestic output at basic prices (Version A)*.
 #'
 #' @details
 #' This dataset is used for testing and documentation purposes. It is a
 #' well-documented example taken from the Eurostat Manual. The table has
 #' been reformatted into the same long-form tidy structure as the Eurostat
-#' database SIOTs.  
+#' database SIOTs.
 #'
 #' The labels were slightly adjusted to reflect the transition from the
 #' ESA95 vocabulary to ESA2010 since the publication of the Manual.
@@ -39,4 +39,3 @@
 #'
 #' @family validation datasets
 "germany_1995"
-
