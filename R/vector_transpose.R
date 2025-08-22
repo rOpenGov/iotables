@@ -48,14 +48,14 @@ vector_transpose_longer <- function(data_table,
                                     .keep = FALSE) {
   is_key_column_present(data_table)
   key_column <- names(data_table)[1]
-  
+
   return_df <- data_table %>%
     tidyr::pivot_longer(
       -all_of(key_column),
       names_to  = names_to,
       values_to = values_to
     )
-  
+
   if (.keep) return_df else return_df[, -1]
 }
 
@@ -110,15 +110,15 @@ vector_transpose_wider <- function(data_table,
                                    key_column_name = NULL,
                                    key_column_values = NULL) {
   if (is.null(key_column_name)) key_column_name <- names(data_table)[1]
-  
+
   assertthat::assert_that(names_from %in% names(data_table),
-                          msg = glue("in vector_transpose_wider(data_table, names_from='{names_from}') '{names_from}' cannot be found in the data_table")
+    msg = glue("in vector_transpose_wider(data_table, names_from='{names_from}') '{names_from}' cannot be found in the data_table")
   )
-  
+
   assertthat::assert_that(values_from %in% names(data_table),
-                          msg = glue("in vector_transpose_wider(data_table, values_from='{values_from}') '{values_from}' cannot be found in the data_table")
+    msg = glue("in vector_transpose_wider(data_table, values_from='{values_from}') '{values_from}' cannot be found in the data_table")
   )
-  
+
   if (ncol(data_table) >= 2 && is_key_column_present(data_table) && is.null(key_column_values)) {
     pivot_wider(
       data_table,
@@ -126,7 +126,7 @@ vector_transpose_wider <- function(data_table,
       values_from = all_of(values_from)
     )
   } else if (is_key_column_present(data_table) && !is.null(key_column_values) &&
-             names(data_table)[1] != names_from) {
+    names(data_table)[1] != names_from) {
     bind_cols(
       key_column_create(key_column_name, key_column_values),
       pivot_wider(

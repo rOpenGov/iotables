@@ -30,8 +30,10 @@ test_that("key_column_create works with empty values", {
 
 
 test_that("key_column_create returns correct tibble", {
-  out <- key_column_create("iotables_row", 
-                           c("CO2_multiplier", "CH4_multiplier"))
+  out <- key_column_create(
+    "iotables_row",
+    c("CO2_multiplier", "CH4_multiplier")
+  )
   expect_equal(
     out,
     tibble::tibble(iotables_row = c("CO2_multiplier", "CH4_multiplier"))
@@ -80,4 +82,3 @@ test_that("vector_transpose_longer drops key column when .keep = FALSE", {
   out <- vector_transpose_longer(df, .keep = FALSE)
   expect_equal(names(out), c("nace_r2", "value"))
 })
-
