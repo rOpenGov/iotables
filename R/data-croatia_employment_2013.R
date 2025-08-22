@@ -16,4 +16,3 @@
 #'
 #' @family Croatia 2010 datasets
 "croatia_employment_2013"
-

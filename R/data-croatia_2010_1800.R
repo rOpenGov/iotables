@@ -2,8 +2,8 @@
 #'
 #' @description
 #' Symmetric input-output table (SIOT) for domestic production (product ×
-#' product), code **1800**.  
-#'  
+#' product), code **1800**.
+#'
 #' Values are expressed in thousand kunas (T_NAC).
 #'
 #' @format A data frame with 13 variables:

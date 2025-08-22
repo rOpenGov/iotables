@@ -1,8 +1,8 @@
 #' @title Input-output table for Croatia, 2010
 #'
 #' @description
-#' Symmetric input-output table at basic prices (product × product).  
-#' Original code: **1700**.  
+#' Symmetric input-output table at basic prices (product × product).
+#' Original code: **1700**.
 #' Values are expressed in thousand kunas (`T_NAC`).
 #'
 #' @source

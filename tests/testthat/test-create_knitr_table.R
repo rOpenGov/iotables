@@ -4,9 +4,9 @@ test_that("create_knitr_table works with a simple data frame", {
     observation = c("indicator1", "indicator2"),
     value = c(100, 200)
   )
-  
+
   tbl <- create_knitr_table(foo, caption = "Demo")
-  
+
   expect_s3_class(tbl, "knitr_kable")
 })
 
