@@ -12,7 +12,11 @@ get_saved_table <- function(labelled_io_data,
     geo <- toupper(geo)
   }
 
-  iot <- find_saved_table(labelled_io_data, geo = geo, year = year, unit = unit, stk_flow = stk_flow)
+  iot <- find_saved_table(labelled_io_data, 
+                          geo = geo, 
+                          year = year, 
+                          unit = unit, 
+                          stk_flow = stk_flow)
 
   iot %>% unnest(.data$data)
 }
@@ -51,7 +55,7 @@ find_saved_table <- function(labelled_io_data, geo, unit, year, stk_flow) {
   subset_labelled_io_data <- subset_labelled_io_data %>% filter(stk_flow == stk_flow_input)
 
   assert_that(year_input %in% subset_labelled_io_data$year,
-    msg = glue("The labelled_io_data$year column does not contain year='{year_input'} (for geo='{geo_input}', unit='{unit_input}', stk_flow='{stk_flow_input}'.)")
+    msg = glue("The labelled_io_data$year column does not contain year='{year_input}' (for geo='{geo_input}', unit='{unit_input}', stk_flow='{stk_flow_input}'.)")
   )
 
   subset_labelled_io_data %>% filter(year == year_input)
