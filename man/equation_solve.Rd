@@ -2,39 +2,43 @@
 % Please edit documentation in R/equation_solve.R
 \name{equation_solve}
 \alias{equation_solve}
-\title{Solve a basic (matrix) equation}
+\title{Solve a basic matrix equation}
 \usage{
 equation_solve(LHS = NULL, Im = NULL)
 }
 \arguments{
-\item{LHS}{A left-hand side vector with a key column containing the 
-industry or product names for matching, for example the employment coefficients.}
+\item{LHS}{A one-row data frame (or matrix) with a key column first and
+numeric columns named to match the Leontief inverse.}
 
-\item{Im}{A Leontief-inverse with a key column containing the industry or 
-product names for matching.}
+\item{Im}{A Leontief inverse with a key column first and a square numeric
+block whose column names match the \code{LHS} numeric names.}
 }
 \value{
-A data.frame with auxiliary metadata to conform the symmetric
-input-output tables.
+A numeric 1×N matrix containing the solution
+\eqn{\text{LHS} \times \text{Im}}.
 }
 \description{
-The function matches to parts of the matrix equation, using the named
-formats with row names and solves the matrix equation.
+Match a left-hand side (LHS) vector to a Leontief inverse by column names
+and compute the matrix product \eqn{\text{LHS} \times \text{Im}}.
 }
 \details{
-This function is used in wrapper functions, such as \code{\link{multiplier_create}}.
-to solve particular problems, but it can be used directly, too.
-The function only performs the lhs %*% im matrix equation, but after 
-pairing industries and checking for exceptions.
+This helper is used by higher-level wrappers such as
+\code{\link[=multiplier_create]{multiplier_create()}}. It assumes both inputs have a first key column,
+followed by numeric columns whose names define the alignment. The function
+multiplies the numeric row of \code{LHS} by the numeric block of \code{Im} after a
+basic conformity check.
 }
 \examples{
-Im = data.frame (
-a = c("row1", "row2"), 
-b = c(1,1), 
-c = c(2,0))
-LHS = data.frame (
-a = "lhs", 
-b = 1, 
-c = 0.5)
-equation_solve (Im = Im, LHS = LHS)
+Im <- data.frame(
+  a = c("row1", "row2"),
+  b = c(1, 1),
+  c = c(2, 0)
+)
+LHS <- data.frame(
+  a = "lhs",
+  b = 1,
+  c = 0.5
+)
+equation_solve(Im = Im, LHS = LHS)
+
 }
