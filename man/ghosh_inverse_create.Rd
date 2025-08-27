@@ -40,6 +40,7 @@ ghosh_inverse_create(om)
 Other analytic object functions: 
 \code{\link{input_flow_get}()},
 \code{\link{leontief_inverse_create}()},
-\code{\link{leontief_matrix_create}()}
+\code{\link{leontief_matrix_create}()},
+\code{\link{output_coefficient_matrix_create}()}
 }
 \concept{analytic object functions}
