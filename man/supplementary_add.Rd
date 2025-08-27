@@ -2,55 +2,70 @@
 % Please edit documentation in R/supplementary_add.R
 \name{supplementary_add}
 \alias{supplementary_add}
-\title{Add supplementary data}
+\title{Add supplementary rows to an IO/SUT table}
 \usage{
 supplementary_add(data_table, supplementary_data, supplementary_names = NULL)
 }
 \arguments{
-\item{data_table}{A SIOT, a use table, a supply table, or a margins 
-table.}
+\item{data_table}{A SIOT, use, supply, or margins table (key column + numeric columns).}
 
-\item{supplementary_data}{Supplementary data to be added. 
-It must be a data.frame
-or tibble with a key column containing the indicator's name, 
-and the column names must match with the \code{data_table}. Can be a 
-vector or a data frame of several rows.}
+\item{supplementary_data}{A data frame (or tibble) of one or more rows to add. It may already
+contain a key column (first column). Otherwise, provide
+\code{supplementary_names} or the keys will be auto-generated. All other
+column names must match \code{data_table}.}
 
-\item{supplementary_names}{Optional names for the new supplementary rows. 
-Defaults  to \code{NULL}.}
+\item{supplementary_names}{Optional character vector of row names for the key column; length
+must equal \code{nrow(supplementary_data)}. Ignored if a key column is
+already present.}
 }
 \value{
-An extended \code{data_table} with the new row(s) binded.
-
-A symmetric input-output table with supplementary data,  
-of data.frame class. 
-The column names are ordered, and the row names are in the 
-first, auxiliary metadata column.
+A \code{data.frame} with the rows of \code{supplementary_data} bound to
+\code{data_table} and aligned to its key and numeric columns.
 }
 \description{
-Add supplementary data to a SIOT, a use, supply or margins table.
+Append supplementary indicators (e.g., emissions coefficients) as new
+rows to a symmetric input–output table (SIOT), use, supply, or margins
+table. This is a light wrapper around \code{\link[=rows_add]{rows_add()}}.
 }
 \details{
-This function is a wrapper around the more general \code{\link{rows_add}} function.
+Column names in \code{supplementary_data} must match the numeric columns of
+\code{data_table}. If the key column is missing, it is created from
+\code{supplementary_names} or auto-generated as \code{supplementary_row_#}.
+
+When a household final consumption column is present (e.g.,
+\code{final_consumption_households}, \code{P3_S14}), new rows get \code{0} in that
+column if the supplied values are \code{NA}.
+
+For terminology, see Eurostat’s \emph{Manual of Supply, Use and Input-Output
+Tables}.
+(Eurostat, 2008; ISBN 978-92-79-04704-3)
 }
 \examples{
 de_io <- iotable_get()
-CO2_coefficients <- data.frame(agriculture_group = 0.2379,
-                               industry_group    = 0.5172, 
-                               construction = 0.0456,
-                               trade_group = 0.1320, 
-                               business_services_group = 0.0127,
-                               other_services_group = 0.0530)
-CH4_coefficients <- data.frame(agriculture_group = 0.0349,
-                               industry_group    = 0.0011, 
-                               construction = 0,
-                               trade_group = 0, 
-                               business_services_group = 0,
-                               other_services_group = 0.0021)
-CO2 <- cbind (data.frame(iotables_row = "CO2"), 
-              CO2_coefficients)
-CH4 <- cbind(data.frame (iotables_row = "CH4_coefficients"),
-             CH4_coefficients)
+CO2_coefficients <- data.frame(
+  agriculture_group = 0.2379,
+  industry_group = 0.5172,
+  construction = 0.0456,
+  trade_group = 0.1320,
+  business_services_group = 0.0127,
+  other_services_group = 0.0530
+)
+CH4_coefficients <- data.frame(
+  agriculture_group = 0.0349,
+  industry_group = 0.0011,
+  construction = 0,
+  trade_group = 0,
+  business_services_group = 0,
+  other_services_group = 0.0021
+)
+CO2 <- cbind(
+  data.frame(iotables_row = "CO2"),
+  CO2_coefficients
+)
+CH4 <- cbind(
+  data.frame(iotables_row = "CH4_coefficients"),
+  CH4_coefficients
+)
 de_coeff <- input_coefficient_matrix_create ( iotable_get() )
 emissions <- rbind (CO2, CH4)
 
@@ -60,6 +75,8 @@ supplementary_add(de_io, emissions)
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},
