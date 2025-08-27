@@ -1,22 +1,37 @@
-#' @title Create input indicator(s)
+#' Create input indicator(s)
 #'
-#' @description The function creates the input indicators from the inputs and
-#' the outputs.
-#' @param data_table A symmetric input-output table, a use table,
-#' a margins or tax table retrieved by the  \code{\link{iotable_get}}
-#' function.
-#' @param input_row The name of input(s) for which you want to create the
-#' indicator(s). Must be present in the \code{data_table}.
-#' @param households If the households column should be added,
-#' defaults to \code{FALSE}.
-#' @param digits Rounding digits, if omitted, no rounding takes place.
-#' @param indicator_names The names of new indicators. Defaults to \code{NULL} when
-#' the names in the key column of \code{input_matrix} will be used to create the
-#' indicator names.
-#' @return A tibble (data frame) containing the \code{input_matrix} divided by the \code{output_vector}
-#' with a key column for products or industries.
-#' @importFrom dplyr mutate across
+#' Compute input indicators (e.g., GVA, compensation of employees) by selecting
+#' specific input rows from the input-coefficient matrix.
+#'
+#' @details
+#' Let \eqn{A} be the input-coefficient matrix (rows are inputs, columns are
+#' products/industries). An *input indicator* for a given input row \eqn{r} is
+#' simply the row \eqn{A_{r\cdot}}. These indicators are used in Beutel (2012)
+#' and the Eurostat *Manual of Supply, Use and Input-Output Tables* (e.g.,
+#' pp. 495–498) to derive effects and multipliers.
+#'
+#' Internally, the function builds \eqn{A} via
+#' [coefficient_matrix_create()], then keeps only the requested input
+#' rows and renames the key column to `*_indicator`. Optional rounding is
+#' applied to numeric columns.
+#'
+#' @param data_table A symmetric input–output table, use table, margins, or
+#'   tax table retrieved by [iotable_get()].
+#' @param input_row Character vector of input row names to extract (e.g.,
+#'   `"gva"`, `"compensation_employees"`). Matching is case-insensitive.
+#' @param digits Integer number of decimal places for rounding. Default
+#'   `NULL` (no rounding).
+#' @param households Logical; include a households column if available.
+#'   Default `FALSE`.
+#' @param indicator_names Optional character vector of names for the returned
+#'   indicators. If `NULL`, names are taken from the key column in the selected
+#'   rows of the coefficient matrix and suffixed with `"_indicator"`.
+#'
+#' @return A `data.frame` whose first column is a key, followed by the selected
+#'   input-indicator rows as numeric columns.
+#'
 #' @family indicator functions
+#'
 #' @examples
 #' input_indicator_create(
 #'   data_table = iotable_get(),
@@ -24,9 +39,19 @@
 #'   digits = 4,
 #'   indicator_names = c("GVA indicator", "Income indicator")
 #' )
-##' @export
+#'
+#' # Beutel/Eurostat example: GVA indicator (cf. Manual, ~p. 498)
+#' ii <- input_indicator_create(
+#'   data_table = iotable_get(),
+#'   input_row = "gva",
+#'   digits = 4
+#' )
+#' head(ii)
+#'
+#' @export
 input_indicator_create <- function(data_table,
-                                   input_row = c("gva_bp", "net_tax_production"),
+                                   input_row = c("gva_bp", 
+                                                 "net_tax_production"),
                                    digits = NULL,
                                    households = FALSE,
                                    indicator_names = NULL) {
@@ -39,10 +64,8 @@ input_indicator_create <- function(data_table,
   )
 
   key_column <- tolower(as.character(unlist(cm[, 1])))
-  key_column
 
   inputs_present <- which(key_column %in% tolower(input_row))
-  inputs_present
 
   if (length(inputs_present) == 0) {
     stop("The inputs were not found")
@@ -56,7 +79,8 @@ input_indicator_create <- function(data_table,
 
   final_names <- NULL
 
-  if (!is.null(indicator_names)) { # adding custom names, if inputed
+  if (!is.null(indicator_names)) { 
+    # adding custom names, if inputed
     if (length(indicator_names) == nrow(input_matrix)) {
       final_names <- indicator_names
     } else {
@@ -66,7 +90,8 @@ input_indicator_create <- function(data_table,
   }
 
   if (is.null(final_names)) { # creating default names
-    final_names <- paste0(as.character(unlist(input_matrix[, 1])), "_indicator")
+    final_names <- paste0(as.character(unlist(input_matrix[, 1])), 
+                          "_indicator")
   }
 
   input_matrix[, 1] <- final_names

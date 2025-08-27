@@ -13,36 +13,58 @@ input_indicator_create(
 )
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table, 
-a margins or tax table retrieved by the  \code{\link{iotable_get}}
-function.}
+\item{data_table}{A symmetric input–output table, use table, margins, or
+tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{input_row}{The name of input(s) for which you want to create the 
-indicator(s). Must be present in the \code{data_table}.}
+\item{input_row}{Character vector of input row names to extract (e.g.,
+\code{"gva"}, \code{"compensation_employees"}). Matching is case-insensitive.}
 
-\item{digits}{Rounding digits, if omitted, no rounding takes place.}
+\item{digits}{Integer number of decimal places for rounding. Default
+\code{NULL} (no rounding).}
 
-\item{households}{If the households column should be added, 
-defaults to \code{FALSE}.}
+\item{households}{Logical; include a households column if available.
+Default \code{FALSE}.}
 
-\item{indicator_names}{The names of new indicators. Defaults to \code{NULL} when 
-the names in the key column of \code{input_matrix} will be used to create the 
-indicator names.}
+\item{indicator_names}{Optional character vector of names for the returned
+indicators. If \code{NULL}, names are taken from the key column in the selected
+rows of the coefficient matrix and suffixed with \code{"_indicator"}.}
 }
 \value{
-A tibble (data frame) containing the \code{input_matrix} divided by the \code{output_vector} 
-with a key column for products or industries.
+A \code{data.frame} whose first column is a key, followed by the selected
+input-indicator rows as numeric columns.
 }
 \description{
-The function creates the input indicators from the inputs and
-the outputs.
+Compute input indicators (e.g., GVA, compensation of employees) by selecting
+specific input rows from the input-coefficient matrix.
+}
+\details{
+Let \eqn{A} be the input-coefficient matrix (rows are inputs, columns are
+products/industries). An \emph{input indicator} for a given input row \eqn{r} is
+simply the row \eqn{A_{r\cdot}}. These indicators are used in Beutel (2012)
+and the Eurostat \emph{Manual of Supply, Use and Input-Output Tables} (e.g.,
+pp. 495–498) to derive effects and multipliers.
+
+Internally, the function builds \eqn{A} via
+\code{\link[=coefficient_matrix_create]{coefficient_matrix_create()}}, then keeps only the requested input
+rows and renames the key column to \verb{*_indicator}. Optional rounding is
+applied to numeric columns.
 }
 \examples{
- 
-input_indicator_create( data_table = iotable_get(), 
-                        input_row = c("gva", "compensation_employees"),
-                        digits = 4, 
-                        indicator_names = c("GVA indicator", "Income indicator"))
+input_indicator_create(
+  data_table = iotable_get(),
+  input_row = c("gva", "compensation_employees"),
+  digits = 4,
+  indicator_names = c("GVA indicator", "Income indicator")
+)
+
+# Beutel/Eurostat example: GVA indicator (cf. Manual, ~p. 498)
+ii <- input_indicator_create(
+  data_table = iotable_get(),
+  input_row = "gva",
+  digits = 4
+)
+head(ii)
+
 }
 \seealso{
 Other indicator functions: 
