@@ -7,33 +7,42 @@
 indirect_effects_create(input_requirements, inverse, digits = NULL)
 }
 \arguments{
-\item{input_requirements}{A matrix or vector created by 
-\code{\link{input_indicator_create}}}
+\item{input_requirements}{A data frame or matrix produced by
+\code{\link[=input_indicator_create]{input_indicator_create()}}, with a key column first and numeric columns
+thereafter.}
 
-\item{inverse}{A Leontief-inverse created by \code{\link{leontief_inverse_create}}.}
+\item{inverse}{A Leontief inverse created by
+\code{\link[=leontief_inverse_create]{leontief_inverse_create()}}, with a key column first and numeric columns
+thereafter.}
 
-\item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
-no rounding takes place.}
+\item{digits}{Integer number of decimal places for rounding. Defaults to
+\code{NULL} (no rounding).}
 }
 \value{
-A data.frame containing the indirect effects and the necessary
-metadata to sort them or join them with other matrixes.
+A \code{data.frame} containing the indirect effects and the first
+(key) column to allow sorting or joins with other tables.
 }
 \description{
-The function creates the indirect effects vector.
+Compute an indirect-effects vector from an input requirement indicator and
+a Leontief inverse.
 }
 \examples{
- 
-nl <- netherlands_2006
+data(netherlands_2006)
 
 input_coeff_nl <- input_coefficient_matrix_create(
- data_table  = netherlands_2006, 
- households = FALSE) 
+  data_table = netherlands_2006,
+  households = FALSE
+)
 
-compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation_employees')
+compensation_indicator <- input_indicator_create(
+  netherlands_2006, "compensation_employees"
+)
 
 I_nl <- leontief_inverse_create(input_coeff_nl)
 
-indirect_effects_create(input_requirements = compensation_indicator, 
-                        inverse = I_nl)
+indirect_effects_create(
+  input_requirements = compensation_indicator,
+  inverse = I_nl
+)
+
 }
