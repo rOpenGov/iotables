@@ -1,4 +1,3 @@
-
 #' @keywords internal
 fn_na_to_null <- function(x) ifelse(is.na(x), 0, x)
 

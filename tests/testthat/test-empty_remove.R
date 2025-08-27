@@ -6,13 +6,13 @@ test_that("empty_remove drops all-zero columns and matching rows", {
     C = c(0, 2, 0),
     check.names = FALSE
   )
-  
+
   out <- suppressMessages(empty_remove(tbl))
-  
+
   # Column "B" and row "B" should be gone
   expect_false("B" %in% names(out))
   expect_false("B" %in% out$sector)
-  
+
   # Other sectors remain
   expect_true(all(c("A", "C") %in% names(out)))
 })
@@ -40,10 +40,10 @@ test_that("empty_remove handles NA columns as empty", {
 
 test_that("empty_remove() removes empty rows as expected", {
   test_table <- input_coefficient_matrix_create(iotable_get(source = "germany_1995"))
-  
+
   test_table[, 2] <- 0
   subsetted <- empty_remove(test_table)
-  
+
   expect_equal(
     names(subsetted),
     c(
