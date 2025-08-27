@@ -1,6 +1,6 @@
 test_that("household_column_get works with germany_1995", {
   households <- household_column_get(iotable_get(source = "germany_1995"))
-  
+
   expect_s3_class(households, "data.frame")
   expect_equal(
     as.numeric(unlist(households[1:2, 2])),
@@ -11,9 +11,9 @@ test_that("household_column_get works with germany_1995", {
 
 test_that("household_column_get works with netherlands_2006", {
   data("netherlands_2006")
-  
+
   households <- household_column_get(netherlands_2006)
-  
+
   expect_s3_class(households, "data.frame")
   expect_equal(names(households)[2], "final_consumption_households")
 })

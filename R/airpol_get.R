@@ -1,16 +1,16 @@
 #' Get air pollutant data
 #'
-#' @description  
+#' @description
 #' Retrieve air emissions accounts by NACE Rev. 2 activity for environmental
 #' impact assessments. Currently tested only with product × product tables.
 #'
-#' @details  
+#' @details
 #' The Eurostat dataset *Air emissions accounts by NACE Rev. 2 activity*
 #' (`env_ac_ainah_r2`) contains emissions of major pollutants, including:
 #' CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6 (incl. NF3), NOx, NMVOC,
-#' CO, PM10, PM2.5, SO2, and NH3.  
+#' CO, PM10, PM2.5, SO2, and NH3.
 #'
-#' For details, see the 
+#' For details, see the
 #' [Eurostat Reference Metadata (SIMS)](https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm),
 #' particularly on aggregated indicators: global warming potential (`GHG`),
 #' acidifying gases (`ACG`), and tropospheric ozone precursors (`O3PR`).
@@ -27,11 +27,11 @@
 #' @param force_download Logical, defaults to `TRUE`. If `FALSE`, the function
 #'   reuses an existing file in `data_directory` or a temporary directory.
 #'
-#' @return  
+#' @return
 #' A data frame with auxiliary metadata conforming to symmetric input–output
 #' tables.
 #'
-#' @source  
+#' @source
 #' Eurostat dataset:
 #' [Air emissions accounts by NACE Rev. 2 activity](https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2).
 #'
@@ -47,9 +47,9 @@
 #' @export
 
 
-airpol_get <- function(airpol = "GHG", 
-                       geo = "BE", 
-                       year = 2020, 
+airpol_get <- function(airpol = "GHG",
+                       geo = "BE",
+                       year = 2020,
                        unit = "THS_T",
                        data_directory = NULL, force_download = TRUE) {
   if (geo == "germany_1995") {
