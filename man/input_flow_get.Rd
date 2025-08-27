@@ -7,14 +7,14 @@
 input_flow_get(data_table, empty_remove = FALSE, households = TRUE)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table or use table 
+\item{data_table}{A symmetric input-output table or use table
 retrieved by the \code{\link{iotable_get}} function.}
 
-\item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty 
-primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
+\item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty
+primary input rows, choose \code{FALSE}. Empty product/industry rows are always
 removed to avoid division by zero error in the analytic functions.}
 
-\item{households}{Defaults to \code{FALSE}. If \code{TRUE}, the 
+\item{households}{Defaults to \code{FALSE}. If \code{TRUE}, the
 final household expenditure is added to the input flow table.}
 }
 \value{
@@ -24,19 +24,22 @@ A data flow matrix (a symmetric use table) with a key column.
 Select the first quadrant of the symmetric input-output table.
 }
 \details{
-The first quadrant is called the input flow matrix, or the input requirements matrix, 
+The first quadrant is called the input flow matrix, or the input requirements matrix,
 or the inter-industry matrix in different contexts.
 }
 \examples{
-input_flow <- input_flow_get(data_table = iotable_get(), 
-                             empty_remove = FALSE,
-                             households = TRUE)
+input_flow <- input_flow_get(
+  data_table = iotable_get(),
+  empty_remove = FALSE,
+  households = TRUE
+)
 
 }
 \seealso{
 Other analytic object functions: 
 \code{\link{ghosh_inverse_create}()},
 \code{\link{leontief_inverse_create}()},
-\code{\link{leontief_matrix_create}()}
+\code{\link{leontief_matrix_create}()},
+\code{\link{output_coefficient_matrix_create}()}
 }
 \concept{analytic object functions}
