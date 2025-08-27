@@ -49,10 +49,10 @@ test_that("employment_get works with different labelling formats", {
   skip_if_no_eurostat()
   res_prod <- employment_get("CZ", year = "2010", labelling = "prod_na")
   res_ind <- employment_get("CZ", year = "2010", labelling = "induse")
-  
+
   expect_s3_class(res_prod, "data.frame")
   expect_s3_class(res_ind, "data.frame")
-  
+
   expect_true(any(grepl("employment_", names(res_prod)[1])))
   expect_true(any(grepl("employment_", names(res_ind)[1])))
 })
@@ -66,11 +66,10 @@ test_that("employment_get handles UK/EL special geo codes", {
     "Switching GB to Eurostat abbreviation UK"
   )
   expect_s3_class(res_uk, "data.frame")
-  
+
   expect_warning(
     res_el <- employment_get("GR", year = "2010"),
     "Switching GR to Eurostat abbreviation EL"
   )
   expect_s3_class(res_el, "data.frame")
 })
-
