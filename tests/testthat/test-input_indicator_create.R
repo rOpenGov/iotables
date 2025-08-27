@@ -74,13 +74,13 @@ test_that("input_indicator_create() returns expected compensation data", {
   )
 })
 
-test_that("input_indicator_create() returns expected data 
+test_that("input_indicator_create() returns expected data
           from the Eurostat Manual p498", {
   data_table <- iotable_get()
   de_gva <- primary_input_get(data_table,
-                              primary_input = "gva"
+    primary_input = "gva"
   )
-  
+
   de_gva_indicator <- input_indicator_create(
     data_table = data_table,
     input_row = "gva",
