@@ -43,7 +43,7 @@ leontief_matrix_create <- function(technology_coefficients_matrix) {
 
   total_row <- which(c("total", "cpa_total") %in% tolower(key_column))
   total_col <- which(c("total", "cpa_total") %in% tolower(names(technology_coefficients_matrix)))
-  
+
   if (length(total_row) > 0) {
     technology_coefficients_matrix <- technology_coefficients_matrix[-total_row, ]
   }

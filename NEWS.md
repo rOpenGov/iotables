@@ -1,7 +1,7 @@
 # New development version
 
-* New development version for rOpenSci review, updating test infrastructure, 
-modernising documentation.
+* New development version updating test infrastructure, modernising documentation,
+removing outdated dependencies, and fixing some edge cases.
 
 # iotables 0.9.32
 
