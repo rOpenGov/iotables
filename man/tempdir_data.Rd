@@ -15,7 +15,7 @@ try to download the file from the Eurostat warehouse.}
 }
 \description{
 To save time of downloading and processing during a session, the download functions
-rely on the use of saving copies in the tempdir(). The downloads are always placed there and 
+rely on the use of saving copies in the tempdir(). The downloads are always placed there and
 each import looks for them first in the tempdir().
 }
 \keyword{internal}

@@ -1,7 +1,7 @@
 #' @title Read input-output tables from temporary directory
 #' @description Validate the \code{source} input parameter and try to load the table
 #' from the current sessions' temporary directory.
-#' @details 
+#' @details
 #' Possible \code{source} parameters:
 #'  \describe{
 #'  \item{\code{naio_10_cp1700}}{Symmetric input-output table at basic prices (product by product)}
@@ -17,10 +17,10 @@
 #'  \item{\code{naio_10_cp1630}}{Table of taxes less subsidies on products at basic prices}
 #'  \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
 #'  \item{\code{uk_2010_siot}}{United Kingdom Input-Output Analytical Tables data}
-#' } 
+#' }
 #' @param source See the available list of sources above in the Description.
 #' Defaults to  \code{source = "naio_10_cp1700"}.
-#' @return A nested data frame. Each input-output table is in a separate 
+#' @return A nested data frame. Each input-output table is in a separate
 #' row of the nested output, where all the metadata are in columns, and the
 #' actual, tidy, ordered input-output table is in the data \code{data} column.
 #' @family import functions
@@ -28,19 +28,16 @@
 #' \donttest{
 #' # The table must be present in the sessions' temporary directory:
 #' iotables_download(source = "naio_10_pyp1750")
-#' 
-#' iotables_read_tempdir (source = "naio_10_pyp1750")
+#'
+#' iotables_read_tempdir(source = "naio_10_pyp1750")
 #' }
 #' @export
 
-iotables_read_tempdir <- function( source = "naio_10_cp1700" ) {
-  
+iotables_read_tempdir <- function(source = "naio_10_cp1700") {
   validate_source(source)
-  temporary_file <- file.path(tempdir(), paste0(source, '_processed.rds'))
-  
+  temporary_file <- file.path(tempdir(), paste0(source, "_processed.rds"))
+
   if (file.exists(temporary_file)) {
     readRDS(temporary_file)
-  } 
+  }
 }
-
-                   

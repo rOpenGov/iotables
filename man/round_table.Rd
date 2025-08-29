@@ -7,17 +7,17 @@
 round_table(data_table, digits = NULL)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, or a use table, or a 
+\item{data_table}{A symmetric input-output table, or a use table, or a
 supply table, or a margin or a tax table.}
 
 \item{digits}{Number of digits for rounding.}
 }
 \value{
-A tibble with a key row and a symmetric matrix, 
+A tibble with a key row and a symmetric matrix,
 after removing all empty columns and rows at the same time.
 }
 \description{
-This is an internal function to do the rounding on all numeric elements 
+This is an internal function to do the rounding on all numeric elements
 of the table for comparability with external sources that use rounding.
 }
 \keyword{internal}
