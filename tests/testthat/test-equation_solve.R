@@ -9,7 +9,7 @@ test_that("equation_solve multiplies a simple LHS by Im", {
     A = 0.5,
     B = 1.0
   )
-  
+
   sol <- equation_solve(LHS = LHS, Im = Im)
   # numeric 1x2 matrix: [0.5*1 + 1*3, 0.5*2 + 1*4] = [3.5, 5]
   expect_true(is.matrix(sol))
@@ -32,7 +32,7 @@ test_that("equation_solve drops allowed missing codes from LHS", {
     B = 3,
     TOTAL = 999 # allowed to be dropped per code path
   )
-  
+
   expect_warning(
     sol <- equation_solve(LHS = LHS, Im = Im),
     "from the input vector is removed"

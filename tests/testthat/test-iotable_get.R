@@ -51,7 +51,7 @@ test_that("Correct data is returned by iotable_get()", {
 
 
 run_only_manually <- function() {
-  # This test is too time and resource consuming for automatically 
+  # This test is too time and resource consuming for automatically
   # running on CRAN.
   test <- iotable_get(
     source = "naio_10_cp1750", stk_flow = "TOTAL",
@@ -64,14 +64,14 @@ run_only_manually <- function() {
   })
 }
 
-test_that("Correct data is returned for private consumption 
+test_that("Correct data is returned for private consumption
           by iotable_get()", {
   germany_table <- iotable_get(
     source = "germany_1995",
     geo = "DE", year = 1995,
     unit = "MIO_EUR", labelling = "iotables"
   )
-  
+
   hh <- germany_table$final_consumption_households[which(germany_table$iotables_row == "output")]
   expect_equal(hh, 1001060)
 })
@@ -91,4 +91,3 @@ test_that("labelling switches shape of first column as documented", {
   expect_identical(names(de_iot)[1], "iotables_row")
   expect_true(names(de_short)[1] %in% c("prod_na", "t_rows2"))
 })
-

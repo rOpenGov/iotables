@@ -1,4 +1,3 @@
-
 test_that("Necessary input parameters are checked", {
   expect_error(iotables_download(
     source = "naio_10_cp1701",
@@ -9,11 +8,11 @@ test_that("Necessary input parameters are checked", {
 
 test_that("returns early when tempdir_data is already processed", {
   fake_processed <- data.frame(
-    geo = "DE", unit = "MIO_EUR", 
-    year = 1995, 
-    data = I(list(data.frame(x=1)))
+    geo = "DE", unit = "MIO_EUR",
+    year = 1995,
+    data = I(list(data.frame(x = 1)))
   )
-  
+
   with_mocked_bindings(
     validate_source = function(src) invisible(TRUE),
     tempdir_data = function(src, force_download) fake_processed,
@@ -28,8 +27,8 @@ test_that("returns early when tempdir_data is already processed", {
 })
 
 test_that("errors when download shape is not plausible", {
-  fake_bad <- data.frame(a=1, b=2, c=3) # too few cols/rows
-  
+  fake_bad <- data.frame(a = 1, b = 2, c = 3) # too few cols/rows
+
   with_mocked_bindings(
     validate_source = function(src) invisible(TRUE),
     tempdir_data = function(src, force_download) fake_bad,

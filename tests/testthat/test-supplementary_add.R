@@ -1,8 +1,8 @@
 test_that("supplementary_add() returns correct values", {
   # Check against The Eurostat Manual page 494
   de_io <- iotable_get()
-  
-  
+
+
   CO2_coefficients <- data.frame(
     agriculture_group = 0.2379,
     industry_group = 0.5172,
@@ -11,7 +11,7 @@ test_that("supplementary_add() returns correct values", {
     business_services_group = 0.0127,
     other_services_group = 0.0530
   )
-  
+
   CH4_coefficients <- data.frame(
     agriculture_group = 0.0349,
     industry_group = 0.0011,
@@ -24,17 +24,17 @@ test_that("supplementary_add() returns correct values", {
     data.frame(iotables_row = "CO2_coefficients"),
     CO2_coefficients
   )
-  
+
   CH4 <- cbind(
     data.frame(iotables_row = "CH4_coefficients"),
     CH4_coefficients
   )
-  
+
   de_coeff <- input_coefficient_matrix_create(iotable_get())
-  
+
   emissions <- rbind(CO2, CH4)
   supplementary_data <- emissions
-  
+
   extended <- supplementary_add(
     data_table = de_io,
     supplementary_data = emissions
