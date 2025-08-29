@@ -1,6 +1,6 @@
 #' Primary input abbreviations
 #'
-#' Only currently used primary inputs. Abbreviations for filtering. 
+#' Only currently used primary inputs. Abbreviations for filtering.
 #' @format A data frame with 105 rows (including empty ones) and 2 variables.
 #' \describe{
 #'   \item{t_rows2}{Eurostat code of the input.}

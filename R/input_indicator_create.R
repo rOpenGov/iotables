@@ -50,8 +50,10 @@
 #'
 #' @export
 input_indicator_create <- function(data_table,
-                                   input_row = c("gva_bp", 
-                                                 "net_tax_production"),
+                                   input_row = c(
+                                     "gva_bp",
+                                     "net_tax_production"
+                                   ),
                                    digits = NULL,
                                    households = FALSE,
                                    indicator_names = NULL) {
@@ -79,7 +81,7 @@ input_indicator_create <- function(data_table,
 
   final_names <- NULL
 
-  if (!is.null(indicator_names)) { 
+  if (!is.null(indicator_names)) {
     # adding custom names, if inputed
     if (length(indicator_names) == nrow(input_matrix)) {
       final_names <- indicator_names
@@ -90,8 +92,10 @@ input_indicator_create <- function(data_table,
   }
 
   if (is.null(final_names)) { # creating default names
-    final_names <- paste0(as.character(unlist(input_matrix[, 1])), 
-                          "_indicator")
+    final_names <- paste0(
+      as.character(unlist(input_matrix[, 1])),
+      "_indicator"
+    )
   }
 
   input_matrix[, 1] <- final_names

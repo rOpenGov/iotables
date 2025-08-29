@@ -23,4 +23,3 @@
 #'
 #' @family metadata datasets
 "employment_metadata"
-

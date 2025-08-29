@@ -85,7 +85,7 @@ equation_solve <- function(LHS = NULL, Im = NULL) {
   )
 
   if (is.null(joined)) {
-    stop("Error: no result is returned.")  # early termination if not 
+    stop("Error: no result is returned.") # early termination if not
   }
 
   ### Joining matrices to find out if all data is present -----------------
