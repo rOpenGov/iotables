@@ -51,7 +51,7 @@
 #' }
 #'
 #' @family import functions
-#' @importFrom dplyr filter select mutate left_join rename any_of
+#' @importFrom dplyr filter select mutate left_join rename any_of recode
 #' @importFrom tidyr nest
 #' @importFrom eurostat get_eurostat label_eurostat
 #' @importFrom lubridate year
@@ -123,44 +123,28 @@ iotables_download <- function(source = "naio_10_cp1700",
   }
 
   if (source == "naio_cp17_r2") {
-    downloaded$t_cols2 <- plyr::mapvalues(
-      downloaded$t_cols2,
-      from = c(
-        "CPA_N80-N82", "CPA_R90-R92", "CPA_E37-E39",
-        "CPA_C10-C12", "CPA_C13-C15",
-        "CPA_C31_C32", "CPA_J59_J60",
-        "CPA_J62_J63", "CPA_M69_M70", "CPA_Q87_Q88",
-        "CPA_M74_M75", "CPA_O84", "CPA_P85",
-        "CPA_D35"
-      ),
-      to = c(
-        "CPA_N80-82", "CPA_R90-92", "CPA_E37-39",
-        "CPA_C10-12", "CPA_C13-15",
-        "CPA_C31_32", "CPA_J59_60",
-        "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88",
-        "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D"
-      )
+    # Harmonize certain CPA aggregate codes
+    cpa_map <- c(
+      "CPA_N80-N82" = "CPA_N80-82",
+      "CPA_R90-R92" = "CPA_R90-92",
+      "CPA_E37-E39" = "CPA_E37-39",
+      "CPA_C10-C12" = "CPA_C10-12",
+      "CPA_C13-C15" = "CPA_C13-15",
+      "CPA_C31_C32" = "CPA_C31_32",
+      "CPA_J59_J60" = "CPA_J59_60",
+      "CPA_J62_J63" = "CPA_J62_63",
+      "CPA_M69_M70" = "CPA_M69_70",
+      "CPA_Q87_Q88" = "CPA_Q87_88",
+      "CPA_M74_M75" = "CPA_M74_75",
+      "CPA_O84"     = "CPA_O",
+      "CPA_P85"     = "CPA_P",
+      "CPA_D35"     = "CPA_D"
     )
-
-    downloaded$t_rows2 <- plyr::mapvalues(
-      downloaded$t_rows2,
-      from = c(
-        "CPA_N80-N82", "CPA_R90-R92", "CPA_E37-E39",
-        "CPA_C10-C12", "CPA_C13-C15",
-        "CPA_C31_C32", "CPA_J59_J60",
-        "CPA_J62_J63", "CPA_M69_M70", "CPA_Q87_Q88",
-        "CPA_M74_M75", "CPA_O84", "CPA_P85", "CPA_D35"
-      ),
-      to = c(
-        "CPA_N80-82", "CPA_R90-92", "CPA_E37-39",
-        "CPA_C10-12", "CPA_C13-15",
-        "CPA_C31_32", "CPA_J59_60",
-        "CPA_J62_63", "CPA_M69_70", "CPA_Q87_88",
-        "CPA_M74_75", "CPA_O", "CPA_P", "CPA_D"
-      )
-    )
+    
+    downloaded$t_cols2 <- dplyr::recode(downloaded$t_cols2, !!!cpa_map)
+    downloaded$t_rows2 <- dplyr::recode(downloaded$t_rows2, !!!cpa_map)
   } # end of _r2
-
+  
 
   if ("stk_flow" %in% names(downloaded)) {
     downloaded_nested <- nest(
