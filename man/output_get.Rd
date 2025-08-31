@@ -2,29 +2,44 @@
 % Please edit documentation in R/output_get.R
 \name{output_get}
 \alias{output_get}
-\title{Get an output vector}
+\title{Get the output (P1) vector}
 \usage{
 output_get(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table or use table retrieved 
-by the  
-\code{\link{iotable_get}} function.}
+\item{data_table}{A symmetric input–output table or use table
+retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 }
 \value{
-A data frame with the vector of multipliers and the an 
-auxiliary metadata column (for joining with other matrixes.)
+A one-row data frame: the first column is the key column; remaining
+columns give output (P1) by product/industry.
 }
 \description{
-This is a wrapper function around the \code{\link{primary_input_get}} 
-function.
+Convenience wrapper around \code{\link[=primary_input_get]{primary_input_get()}} that returns the row
+labelled \strong{Output (P1)} from a symmetric input–output table (SIOT) or
+from a use table retrieved by \code{\link[=iotable_get]{iotable_get()}}.
+}
+\details{
+In the Eurostat framework, \strong{Output} is transaction \strong{P1}, usually
+recorded at \strong{basic prices} (often labelled "output" or "output_bp").
+It is a balancing item of the use table / SIOT, \strong{not} a “primary
+input” (primary inputs are value added components and imports, shown
+in the third quadrant). This helper merely selects the row labelled
+\code{"output"}, \code{"output_bp"}, \code{"P1"} or \code{"p1"} if present.
 }
 \examples{
-output_get ( data_table = iotable_get () )
+# Output (P1) from the package demo table
+iot_germany <- iotable_get()
+output_get(data_table = iot_germany)
+
 }
 \seealso{
+\code{\link[=primary_input_get]{primary_input_get()}}, \code{\link[=iotable_get]{iotable_get()}}
+
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},
