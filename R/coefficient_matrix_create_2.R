@@ -1,43 +1,56 @@
-#' @title Create a coefficient matrix
+#' Create a coefficient matrix
 #'
-#' @description Create a coefficient matrix from a Symmetric Input-Output Table.
+#' @description
+#' Compute a coefficient matrix from a symmetric input–output table (SIOT),
+#' use table, or similar. By default, coefficients are related to industry
+#' output, but other totals (if present) can be used as denominator.
 #'
-#' @details The coefficient matrix is related by default to output, but you can change
-#' this to total supply or other total aggregate if it exists
-#' in your table.
-#' @param data_table A symmetric input-output table, a use table,
-#' a margins or tax table retrieved by the  \code{\link{iotable_get}}
-#'  function.
-#' @param total Usually an output vector with a key column, defaults to
-#' \code{"output"} which equals \code{"P1"} or \code{"output_bp"}.
-#' You can use other rows for comparison, for example \code{"TS_BP"}
-#' if it exists in the matrix.
-#' @param digits An integer showing the precision of the technology matrix in
-#' digits. Default is \code{NULL} when no rounding is applied.
-#' @param return_part Defaults to \code{NULL}. You can choose \code{"product"}
-#' or \code{"industry"} to return an input coefficient matrix or
-#' \code{"primary_inputs"} to get only the total intermediate use and
-#' proportional primary inputs.
-#' @param remove_empty Defaults to \code{TRUE}. If you want to keep empty
-#' primary input rows, choose \code{FALSE}. Empty product/industry rows are
-#' always removed to avoid division by zero error in the analytic functions.
-#' @param households Defaults to \code{NULL}. Household column can be added
-#' with \code{TRUE}.
-#' @return A data.frame that contains the matrix of  \code{data_table} divided
-#' by \code{total} with a key column. Optionally the results are rounded to
-#' given \code{digits}.
-#' @importFrom dplyr mutate across left_join where
-#' @references See
-#' \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
-#' for explanation on the use of the Coefficient matrix.
+#' @details
+#' The coefficient matrix \eqn{A} is formed by dividing each row of the
+#' inter-industry flows by an output or supply total. By default, the
+#' denominator is `"output"` (equivalent to `"P1"` or `"output_bp"`).
+#' Alternative totals can be supplied via the `total` argument.
+#'
+#' Empty rows/columns are removed by default to avoid division by zero,
+#' but can be retained with `remove_empty = FALSE`.
+#'
+#' @param data_table A symmetric input–output table, use table, margins or
+#'   tax table retrieved by [iotable_get()].
+#' @param total Character. Row label to use as denominator. Defaults to
+#'   `"output"`, equivalent to `"P1"` or `"output_bp"`. Other totals such
+#'   as `"TS_BP"` may be used if present.
+#' @param digits Optional integer. Number of digits for rounding. Default
+#'   `NULL` (no rounding).
+#' @param return_part Optional. `"products"`, `"industries"`, or
+#'   `"primary_inputs"` to select a subset of the matrix. Default `NULL`
+#'   returns the full coefficient matrix.
+#' @param remove_empty Logical. Defaults to `TRUE`. If `FALSE`, empty
+#'   primary-input rows are kept. Empty product/industry rows are always
+#'   removed.
+#' @param households Logical. If `TRUE`, include household column. Default
+#'   `FALSE`.
+#'
+#' @return A data frame with:
+#' - The key column from `data_table`
+#' - Numeric columns containing input coefficients
+#' Optionally rounded if `digits` is provided.
+#'
+#' @references
+#' Office for National Statistics (UK), *Input–Output Analytical Tables
+#' 2010*. [Archived link](https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html)
+#'
 #' @family indicator functions
+#'
 #' @examples
 #' coefficient_matrix_create(
 #'   data_table = iotable_get(source = "germany_1995"),
 #'   total = "output",
 #'   digits = 4
 #' )
+#'
+#' @importFrom dplyr mutate across left_join where
 #' @export
+
 
 coefficient_matrix_create <- function(data_table,
                                       total = "output",
@@ -86,7 +99,6 @@ coefficient_matrix_create <- function(data_table,
   }
 
   key_column <- tolower(as.character(unlist(data_table[, 1])))
-  key_column
 
   ## Getting the row for division
   if (total %in% c("output", "p1", "output_bp")) {
@@ -112,7 +124,7 @@ coefficient_matrix_create <- function(data_table,
   null_to_eps <- function(x) ifelse(x == 0, 0.000001, x)
   total_row <- total_row %>% mutate(across(where(is.factor), as.character))
   total_row <- total_row %>% mutate(across(where(is.factor), null_to_eps)) # avoid division by zero
-  total_row
+
 
   ## Make sure that no integers remain in the data table, because they cannot
   ## be divided with numerics.

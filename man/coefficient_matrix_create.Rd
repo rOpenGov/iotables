@@ -24,52 +24,58 @@ coefficient_matrix_create(
 )
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table,
-a margins or tax table retrieved by the  \code{\link{iotable_get}}
-function.}
+\item{data_table}{A symmetric input–output table, use table, margins or
+tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{total}{Usually an output vector with a key column, defaults to
-\code{"output"} which equals \code{"P1"} or \code{"output_bp"}.
-You can use other rows for comparison, for example \code{"TS_BP"}
-if it exists in the matrix.}
+\item{total}{Character. Row label to use as denominator. Defaults to
+\code{"output"}, equivalent to \code{"P1"} or \code{"output_bp"}. Other totals such
+as \code{"TS_BP"} may be used if present.}
 
-\item{digits}{An integer showing the precision of the technology matrix in
-digits. Default is \code{NULL} when no rounding is applied.}
+\item{digits}{Optional integer. Number of digits for rounding. Default
+\code{NULL} (no rounding).}
 
-\item{remove_empty}{Defaults to \code{TRUE}. If you want to keep empty
-primary input rows, choose \code{FALSE}. Empty product/industry rows are
-always removed to avoid division by zero error in the analytic functions.}
+\item{remove_empty}{Logical. Defaults to \code{TRUE}. If \code{FALSE}, empty
+primary-input rows are kept. Empty product/industry rows are always
+removed.}
 
-\item{households}{Defaults to \code{NULL}. Household column can be added
-with \code{TRUE}.}
+\item{households}{Logical. If \code{TRUE}, include household column. Default
+\code{FALSE}.}
 
-\item{return_part}{Defaults to \code{NULL}. You can choose \code{"product"}
-or \code{"industry"} to return an input coefficient matrix or
-\code{"primary_inputs"} to get only the total intermediate use and
-proportional primary inputs.}
+\item{return_part}{Optional. \code{"products"}, \code{"industries"}, or
+\code{"primary_inputs"} to select a subset of the matrix. Default \code{NULL}
+returns the full coefficient matrix.}
 }
 \value{
 A data.frame that contains the matrix of  \code{data_table} divided
 by \code{total} with a key column. Optionally the results are rounded to
 given \code{digits}.
 
-A data.frame that contains the matrix of  \code{data_table} divided
-by \code{total} with a key column. Optionally the results are rounded to
-given \code{digits}.
+A data frame with:
+\itemize{
+\item The key column from \code{data_table}
+\item Numeric columns containing input coefficients
+Optionally rounded if \code{digits} is provided.
+}
 }
 \description{
 Create a coefficient matrix from a Symmetric Input-Output Table.
 
-Create a coefficient matrix from a Symmetric Input-Output Table.
+Compute a coefficient matrix from a symmetric input–output table (SIOT),
+use table, or similar. By default, coefficients are related to industry
+output, but other totals (if present) can be used as denominator.
 }
 \details{
 The coefficient matrix is related by default to output, but you can change
 this to total supply or other total aggregate if it exists
 in your table.
 
-The coefficient matrix is related by default to output, but you can change
-this to total supply or other total aggregate if it exists
-in your table.
+The coefficient matrix \eqn{A} is formed by dividing each row of the
+inter-industry flows by an output or supply total. By default, the
+denominator is \code{"output"} (equivalent to \code{"P1"} or \code{"output_bp"}).
+Alternative totals can be supplied via the \code{total} argument.
+
+Empty rows/columns are removed by default to avoid division by zero,
+but can be retained with \code{remove_empty = FALSE}.
 }
 \examples{
 coefficient_matrix_create(
@@ -82,15 +88,15 @@ coefficient_matrix_create(
   total = "output",
   digits = 4
 )
+
 }
 \references{
 See
 \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 for explanation on the use of the Coefficient matrix.
 
-See
-\href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
-for explanation on the use of the Coefficient matrix.
+Office for National Statistics (UK), \emph{Input–Output Analytical Tables
+2010}. \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{Archived link}
 }
 \seealso{
 Other indicator functions: 
