@@ -30,9 +30,14 @@
 #' I_df <- data.frame(sector = rownames(I), I, check.names = FALSE)
 #' backward_linkages(I_df)
 #'
+#' @importFrom dplyr mutate across
+#' @importFrom tidyselect where
 #' @export
 backward_linkages <- function(Im) {
-  Im <- mutate(Im, across(where(is.factor), function(x) as.character(x)))
+  
+  Im <- dplyr::mutate(Im, dplyr::across(where(is.factor), 
+                                        function(x) as.character(x))
+                      )
 
   total_row <- data.frame(
     name = "backward linkages"
