@@ -2,40 +2,59 @@
 % Please edit documentation in R/input_flow_get.R
 \name{input_flow_get}
 \alias{input_flow_get}
-\title{Create an inter-industry or input flow matrix}
+\title{Create an inter-industry (intermediate-use) matrix}
 \usage{
 input_flow_get(data_table, empty_remove = FALSE, households = TRUE)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table or use table
-retrieved by the \code{\link{iotable_get}} function.}
+\item{data_table}{A symmetric input–output table (product-by-product
+or industry-by-industry) obtained via \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{empty_remove}{Defaults to \code{TRUE}. If you want to keep empty
-primary input rows, choose \code{FALSE}. Empty product/industry rows are always
-removed to avoid division by zero error in the analytic functions.}
+\item{empty_remove}{Logical. Reserved; currently ignored (no effect).
+Default \code{FALSE}.}
 
-\item{households}{Defaults to \code{FALSE}. If \code{TRUE}, the
-final household expenditure is added to the input flow table.}
+\item{households}{Logical. If \code{TRUE}, append the
+\code{final_consumption_households} column. Default \code{TRUE}.}
 }
 \value{
-A data flow matrix (a symmetric use table) with a key column.
+A data frame with the key column and the Quadrant I block; if
+\code{households = TRUE}, the household final consumption column is
+appended.
 }
 \description{
-Select the first quadrant of the symmetric input-output table.
+Return the Quadrant I block (intermediate consumption) of a symmetric
+input–output table. Optionally append the final household consumption
+column for Type-II modelling.
 }
 \details{
-The first quadrant is called the input flow matrix, or the input requirements matrix,
-or the inter-industry matrix in different contexts.
+In the Eurostat framework, the Quadrant I block shows \emph{intermediate
+consumption} by industry (columns) and product (rows), valued at
+purchasers’ prices. Final household consumption belongs to the final
+uses block (not Quadrant I); when \code{households = TRUE}, that column is
+appended for convenience in Type-II analyses that endogenise private
+consumption. See the \emph{Eurostat Manual of Supply, Use and
+Input-Output Tables} for the quadrant layout and definitions.
 }
 \examples{
-input_flow <- input_flow_get(
-  data_table = iotable_get(),
+# Basic extraction (Quadrant I + households column)
+x <- input_flow_get(
+  data_table   = iotable_get(),
   empty_remove = FALSE,
-  households = TRUE
+  households   = TRUE
+)
+
+# Quadrant I only (no households column)
+y <- input_flow_get(
+  data_table   = iotable_get(),
+  empty_remove = FALSE,
+  households   = FALSE
 )
 
 }
 \seealso{
+\code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}},
+\code{\link[=leontief_inverse_create]{leontief_inverse_create()}}
+
 Other analytic object functions: 
 \code{\link{ghosh_inverse_create}()},
 \code{\link{leontief_inverse_create}()},
