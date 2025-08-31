@@ -15,8 +15,9 @@ differences.}
 }
 }
 \source{
-\link{Eurostat Manual of Supply, Use and Input-Output Tables, p. 482}(
-https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/
+Eurostat (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables},
+p. 482.
+\link{PDF}(https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/
 b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
 }
 \usage{

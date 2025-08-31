@@ -10,8 +10,9 @@
 #' publication of the Eurostat Manual.
 #'
 #' @source
-#' [Eurostat Manual of Supply, Use and Input-Output Tables, p. 482](
-#' https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/
+#' Eurostat (2008). *Eurostat Manual of Supply, Use and Input–Output Tables*,
+#' p. 482.  
+#' [PDF](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/
 #' b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
 #'
 #' @format A data frame with 72 observations and 4 variables:
@@ -24,4 +25,5 @@
 #' }
 #'
 #' @family validation datasets
+
 "germany_airpol"
