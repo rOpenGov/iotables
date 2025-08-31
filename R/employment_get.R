@@ -1,31 +1,41 @@
-#' Get employment data
+#' Get Eurostat employment data for SIOTs
 #'
-#' Download Eurostat employment data for a country and arrange it to match 64x64
-#' symmetric input–output tables (SIOTs).
+#' Download employment data from Eurostat (dataset
+#' [lfsq_egan22d](https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d))
+#' and arrange it to match 64 × 64 symmetric input–output tables (SIOTs).
 #'
-#' Currently only works with product × product tables.
+#' @details
+#' - Currently implemented only for product × product tables.
+#' - Country codes are harmonized: `"GB"` → `"UK"`, `"GR"` → `"EL"`.
+#' - Sex is normalized internally to Eurostat codes `"T"`, `"F"`, `"M"`.
+#' - Results are cached as `.rds` files in `data_directory` if supplied.
+#' - An imputed rent column (`L68A`/`CPA_L68A`) with zero is always added.
 #'
-#' @param geo A two-letter country code (Eurostat style).
+#' @param geo A two-letter country code (Eurostat style). `"GB"` and `"GR"`
+#'   are automatically converted to `"UK"` and `"EL"`.
 #' @param year Year of employment data (>= 2008, when NACE Rev. 2 was
 #'   introduced).
-#' @param sex Employment by sex. Defaults to `"Total"`. Use `"Females"`/`"F"` or
-#'   `"Males"`/`"M"`.
-#' @param age Eurostat age code. Defaults to `"Y_GE15"`. Any Eurostat code can
-#'   be supplied.
-#' @param labelling Either `"iotables"`, `"prod_na"` (product × product) or
-#'   `"induse"` (industry × industry).
-#' @param data_directory Optional path to save or load pre-processed employment
-#'   data.
-#' @param force_download Logical. If `TRUE`, forces a fresh download even if a
-#'   file exists locally.
+#' @param sex Employment by sex. Defaults to `"Total"`. Alternatives are
+#'   `"Female"`/`"F"`, `"Male"`/`"M"`. Case-insensitive.
+#' @param age Eurostat age code. Defaults to `"Y_GE15"`. Any valid Eurostat
+#'   code may be supplied (see Eurostat metadata).
+#' @param labelling Controls output row/column labelling:
+#'   - `"iotables"`: iotables manual-style labels
+#'   - `"prod_na"`: product × product (CPA codes)
+#'   - `"induse"`: industry × industry (NACE codes)
+#' @param data_directory Optional path to save/load pre-processed employment
+#'   data (`.rds` files). If `NULL`, only downloads are used.
+#' @param force_download Logical. If `TRUE`, forces a fresh Eurostat download
+#'   even if local cache files exist.
 #'
-#' @return A `data.frame` formatted to conform with Eurostat SIOTs, with
-#'   auxiliary metadata.
+#' @return A one-row `data.frame` containing employment input values aligned
+#'   with the chosen SIOT labelling, including an imputed rent column set to 0.
 #'
-#' @source Eurostat dataset:
-#'   <https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d>
+#' @source Eurostat dataset
+#'   [lfsq_egan22d](https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d)
 #'
 #' @family import functions
+#' @importFrom dplyr ungroup rename filter mutate summarize
 #' @examples
 #' \dontrun{
 #' employment <- employment_get(
@@ -38,6 +48,7 @@
 #' )
 #' }
 #' @export
+
 
 employment_get <- function(geo,
                            year = "2010",

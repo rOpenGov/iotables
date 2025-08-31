@@ -2,10 +2,10 @@
 % Please edit documentation in R/employment_get.R
 \name{employment_get}
 \alias{employment_get}
-\title{Get employment data}
+\title{Get Eurostat employment data for SIOTs}
 \source{
-Eurostat dataset:
-\url{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}
+Eurostat dataset
+\href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{lfsq_egan22d}
 }
 \usage{
 employment_get(
@@ -19,36 +19,48 @@ employment_get(
 )
 }
 \arguments{
-\item{geo}{A two-letter country code (Eurostat style).}
+\item{geo}{A two-letter country code (Eurostat style). \code{"GB"} and \code{"GR"}
+are automatically converted to \code{"UK"} and \code{"EL"}.}
 
 \item{year}{Year of employment data (>= 2008, when NACE Rev. 2 was
 introduced).}
 
-\item{sex}{Employment by sex. Defaults to \code{"Total"}. Use \code{"Females"}/\code{"F"} or
-\code{"Males"}/\code{"M"}.}
+\item{sex}{Employment by sex. Defaults to \code{"Total"}. Alternatives are
+\code{"Female"}/\code{"F"}, \code{"Male"}/\code{"M"}. Case-insensitive.}
 
-\item{age}{Eurostat age code. Defaults to \code{"Y_GE15"}. Any Eurostat code can
-be supplied.}
+\item{age}{Eurostat age code. Defaults to \code{"Y_GE15"}. Any valid Eurostat
+code may be supplied (see Eurostat metadata).}
 
-\item{labelling}{Either \code{"iotables"}, \code{"prod_na"} (product × product) or
-\code{"induse"} (industry × industry).}
+\item{labelling}{Controls output row/column labelling:
+\itemize{
+\item \code{"iotables"}: iotables manual-style labels
+\item \code{"prod_na"}: product × product (CPA codes)
+\item \code{"induse"}: industry × industry (NACE codes)
+}}
 
-\item{data_directory}{Optional path to save or load pre-processed employment
-data.}
+\item{data_directory}{Optional path to save/load pre-processed employment
+data (\code{.rds} files). If \code{NULL}, only downloads are used.}
 
-\item{force_download}{Logical. If \code{TRUE}, forces a fresh download even if a
-file exists locally.}
+\item{force_download}{Logical. If \code{TRUE}, forces a fresh Eurostat download
+even if local cache files exist.}
 }
 \value{
-A \code{data.frame} formatted to conform with Eurostat SIOTs, with
-auxiliary metadata.
+A one-row \code{data.frame} containing employment input values aligned
+with the chosen SIOT labelling, including an imputed rent column set to 0.
 }
 \description{
-Download Eurostat employment data for a country and arrange it to match 64x64
-symmetric input–output tables (SIOTs).
+Download employment data from Eurostat (dataset
+\href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{lfsq_egan22d})
+and arrange it to match 64 × 64 symmetric input–output tables (SIOTs).
 }
 \details{
-Currently only works with product × product tables.
+\itemize{
+\item Currently implemented only for product × product tables.
+\item Country codes are harmonized: \code{"GB"} → \code{"UK"}, \code{"GR"} → \code{"EL"}.
+\item Sex is normalized internally to Eurostat codes \code{"T"}, \code{"F"}, \code{"M"}.
+\item Results are cached as \code{.rds} files in \code{data_directory} if supplied.
+\item An imputed rent column (\code{L68A}/\code{CPA_L68A}) with zero is always added.
+}
 }
 \examples{
 \dontrun{
