@@ -6,15 +6,14 @@
 #'
 #' @details
 #' In Eurostat/ESA terminology, tax rows commonly include:
-#' - **Taxes less subsidies on products** (codes **D.2 – D.3**), and
-#' - **Other net taxes on production** (codes **D.29 – D.39**).
-#' These appear in the value-added (primary inputs) section of the use/SIOT
-#' layout. :contentReference[oaicite:1]{index=1}
+#' - **Taxes less subsidies on products** (codes D.2–D.3), and
+#' - **Other net taxes on production** (codes D.29–D.39).
 #'
-#' The function sums the specified rows **column-wise** over all numeric
-#' columns and appends the result as `total_tax_name`. If a household final
-#' consumption column is present (e.g. `final_consumption_households` or
-#' `p3_s14`), any missing value in the new total row is replaced by zero.
+#' These appear in the value-added (primary inputs) section of the use/SIOT
+#' layout. The function sums the specified rows **column-wise** over all
+#' numeric columns and appends the result as `total_tax_name`. If a household
+#' final consumption column is present (e.g. `final_consumption_households`
+#' or `p3_s14`), any missing value in the new total row is replaced by zero.
 #'
 #' @param data_table A symmetric input–output table (SIOT) or use table
 #'   whose primary inputs include tax rows (see Details). Typically obtained
@@ -33,7 +32,13 @@
 #' @section Terminology:
 #' Eurostat uses the lines “Taxes less subsidies on products” and “Other net
 #' taxes on production” in published tables; these correspond, respectively,
-#' to D.2–D.3 and D.29–D.39. :contentReference[oaicite:2]{index=2}
+#' to D.2–D.3 and D.29–D.39.
+#'
+#' @references
+#' Eurostat (2008). *Eurostat Manual of Supply, Use and Input–Output Tables*,
+#' ch. 13.  
+#' United Nations (2018). *Handbook on Supply and Use Tables and Input–Output
+#' Tables with Extensions and Applications (Rev. 1, “white cover”)*, ch. 10.
 #'
 #' @examples
 #' de_io <- iotable_get()

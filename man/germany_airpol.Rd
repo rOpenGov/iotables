@@ -33,7 +33,8 @@ publication of the Eurostat Manual.
 }
 \seealso{
 Other validation datasets: 
-\code{\link{germany_1995}}
+\code{\link{germany_1995}},
+\code{\link{uk_test_results}}
 }
 \concept{validation datasets}
 \keyword{datasets}

@@ -43,8 +43,7 @@ align with the main example dataset \link{germany_1995}.
 }
 \seealso{
 Other Validation datasets: 
-\code{\link{uk_2010_data}},
-\code{\link{uk_test_results}}
+\code{\link{uk_2010_data}}
 }
 \concept{Validation datasets}
 \keyword{datasets}

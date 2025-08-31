@@ -2,32 +2,50 @@
 % Please edit documentation in R/primary_input_get.R
 \name{primary_input_get}
 \alias{primary_input_get}
-\title{Get primary inputs}
+\title{Get a primary input row}
 \usage{
 primary_input_get(data_table, primary_input = "compensation_employees")
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table, or a 
-supply table retrieved by the  \code{\link{iotable_get}} function.}
+\item{data_table}{A symmetric I–O table, use table, or supply table as
+returned by \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{primary_input}{The primary input to be returned from the table.}
+\item{primary_input}{Character. The primary input to return. Accepts common
+synonyms (e.g., "compensation of employees", "cfc", "taxes on production",
+"operating surplus", "imports").}
 }
 \value{
-A data frame with the vector of multipliers and the an 
-auxiliary metadata column (for joining with other matrixes.)
+A data frame containing the key column and the matching primary-
+input row.
 }
 \description{
-This function will retrieve any primary input from the input-output 
-table.
+Retrieve a named primary-input row from a symmetric input–output table,
+a use table, or a supply table (as returned by \code{\link[=iotable_get]{iotable_get()}}).
+}
+\details{
+In I–O accounting, \emph{primary inputs} (e.g., compensation of employees,
+consumption of fixed capital, taxes on production/subsidies, operating
+surplus/mixed income, and—when relevant—imports used for domestic
+production) are shown in the value-added block (third quadrant).
 }
 \examples{
-comp_employees_de <- primary_input_get(
-  data_table = iotable_get(), 
-  primary_input = "compensation_employees") 
+primary_input_get(iotable_get(), "compensation of employees")
+primary_input_get(iotable_get(), "consumption of fixed capital")
+# With package’s default short code:
+primary_input_get(iotable_get(), "compensation_employees")
+
+}
+\references{
+Eurostat (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables},
+ch. 13.
+United Nations (2018). \emph{Handbook on Supply and Use Tables and Input–Output
+Tables with Extensions and Applications (Rev. 1, “white cover”)}, ch. 10.
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},

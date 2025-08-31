@@ -34,32 +34,37 @@ primary inputs block (Quadrant III) of a SIOT or use table.
 \details{
 In Eurostat/ESA terminology, tax rows commonly include:
 \itemize{
-\item \strong{Taxes less subsidies on products} (codes \strong{D.2 – D.3}), and
-\item \strong{Other net taxes on production} (codes \strong{D.29 – D.39}).
-These appear in the value-added (primary inputs) section of the use/SIOT
-layout. :contentReference[oaicite:1]{index=1}
+\item \strong{Taxes less subsidies on products} (codes D.2–D.3), and
+\item \strong{Other net taxes on production} (codes D.29–D.39).
 }
 
-The function sums the specified rows \strong{column-wise} over all numeric
-columns and appends the result as \code{total_tax_name}. If a household final
-consumption column is present (e.g. \code{final_consumption_households} or
-\code{p3_s14}), any missing value in the new total row is replaced by zero.
+These appear in the value-added (primary inputs) section of the use/SIOT
+layout. The function sums the specified rows \strong{column-wise} over all
+numeric columns and appends the result as \code{total_tax_name}. If a household
+final consumption column is present (e.g. \code{final_consumption_households}
+or \code{p3_s14}), any missing value in the new total row is replaced by zero.
 }
 \section{Terminology}{
 
 Eurostat uses the lines “Taxes less subsidies on products” and “Other net
 taxes on production” in published tables; these correspond, respectively,
-to D.2–D.3 and D.29–D.39. :contentReference[oaicite:2]{index=2}
+to D.2–D.3 and D.29–D.39.
 }
 
 \examples{
 de_io <- iotable_get()
 total_tax_add(
-  data_table    = de_io,
-  tax_names     = c("net_tax_products", "net_tax_production"),
+  data_table = de_io,
+  tax_names = c("net_tax_products", "net_tax_production"),
   total_tax_name = "total_tax"
 )
 
+}
+\references{
+Eurostat (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables},
+ch. 13.
+United Nations (2018). \emph{Handbook on Supply and Use Tables and Input–Output
+Tables with Extensions and Applications (Rev. 1, “white cover”)}, ch. 10.
 }
 \seealso{
 Other iotables processing functions: 

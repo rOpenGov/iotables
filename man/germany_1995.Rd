@@ -47,7 +47,8 @@ ESA95 vocabulary to ESA2010 since the publication of the Manual.
 }
 \seealso{
 Other validation datasets: 
-\code{\link{germany_airpol}}
+\code{\link{germany_airpol}},
+\code{\link{uk_test_results}}
 }
 \concept{validation datasets}
 \keyword{datasets}

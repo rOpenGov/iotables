@@ -3,37 +3,40 @@
 \docType{data}
 \name{uk_test_results}
 \alias{uk_test_results}
-\title{Multipliers and effects (product) for testing
-from the United Kingdom Input-Output Analytical Tables, 2010}
+\title{UK multipliers and effects (product), 2010}
 \format{
-A data frame with 12 variables.
+A data frame with 12 variables:
 \describe{
-  \item{uk_row_label}{The UK row label} 
-  \item{Output multiplier}{The imported Output multipliers}
-  \item{output_multiplier_rank}{The imported ranking of output multipliers}
-  \item{Employment cost multiplier}{The imported Employment cost multipliers.}
-  \item{employment_cost_multiplier}{The imported ranking of Employment cost multipliers.}
-  \item{Employment cost effects}{The imported Employment cost multipliers.}
-  \item{employment_cost_effects_rank}{The imported ranking of employment cost multipliers.}
-  \item{GVA effects}{The imported GVA effects.}
-  \item{gva_effects_rank}{The imported ranking GVA effects.}
-  \item{gva_multiplier_rank}{The imported ranking GVA multipliers.}
-  \item{GVA multiplier}{The imported GVA multipliers.}
-  \item{indicator}{Indicator names.}
+\item{uk_row_label}{The UK row label.}
+\item{output_multiplier}{The imported output multipliers.}
+\item{output_multiplier_rank}{The published ranking of output multipliers.}
+\item{employment_cost_multiplier}{The imported employment cost multipliers.}
+\item{employment_cost_multiplier_rank}{The ranking of employment cost multipliers.}
+\item{employment_cost_effects}{The imported employment cost effects.}
+\item{employment_cost_effects_rank}{The ranking of employment cost effects.}
+\item{gva_effects}{The imported GVA effects.}
+\item{gva_effects_rank}{The ranking of GVA effects.}
+\item{gva_multiplier}{The imported GVA multipliers.}
+\item{gva_multiplier_rank}{The ranking of GVA multipliers.}
+\item{indicator}{Indicator names.}
 }
 }
 \usage{
-data(uk_test_results)
+uk_test_results
 }
 \description{
-The Excel-imported UK data.
+Test dataset from the United Kingdom Input–Output Analytical Tables,
+2010 (imported from the official Excel release).
+}
+\details{
+This dataset contains output, employment cost, and GVA multipliers
+and effects, together with their published rankings. It is provided
+for validation and testing of multiplier calculations in \code{iotables}.
 }
 \seealso{
-Other Validation datasets: 
+Other validation datasets: 
 \code{\link{germany_1995}},
-\code{\link{germany_airpol}},
-\code{\link{netherlands_2006}},
-\code{\link{uk_2010_data}}
+\code{\link{germany_airpol}}
 }
-\concept{Validation datasets}
+\concept{validation datasets}
 \keyword{datasets}
