@@ -23,7 +23,8 @@
 #' @family multiplier functions
 
 #' @importFrom tibble tibble
-#'
+#' @importFrom stats setNames
+#' 
 #' @examples
 #' de_input_coeff <- input_coefficient_matrix_create(
 #'   iotable_get(), digits = 4
@@ -42,7 +43,7 @@ output_multiplier_create <- function(input_coefficient_matrix) {
   multipliers <- colSums(numeric_block)
   
   tibble::tibble(
-    !!key_col := "output_multipliers",
+    stats::setNames(list("output_multipliers"), key_col),
     !!!as.list(multipliers)
   )
 }
