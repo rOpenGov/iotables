@@ -48,22 +48,22 @@ output_coefficient_matrix_create <- function(data_table,
                                              total = "tfu",
                                              digits = NULL) {
   check_digits(digits = digits)
-  
+
   data_table <- data_table %>%
     dplyr::mutate(dplyr::across(where(is.factor), function(x) as.character(x)))
-  
+
   # Remove empty rows/cols
   data_table <- empty_remove(data_table)
-  
+
   total_row <- which(tolower(as.character(unlist(data_table[, 1])))
-                     %in% c("cpa_total", "total"))
-  
+  %in% c("cpa_total", "total"))
+
   if (length(total_row) == 0) {
     stop("Total row not found")
   } else {
     data_table <- data_table[1:(total_row - 1), ]
   }
-  
+
   if (total == "total") {
     demand_col <- which(tolower(names(data_table)) %in% c("cpa_total", "total"))
     last_column <- quadrant_separator_find(data_table)
@@ -76,41 +76,41 @@ output_coefficient_matrix_create <- function(data_table,
   } else {
     stop("Paramter 'output' must be any of 'CPA_TOTAL', 'TOTAL', 'final_demand', 'tfu' or 'total_final_use'.")
   }
-  
+
   demand <- data_table[, demand_col]
-  demand  # (no-op line retained to avoid logic changes)
-  
+  demand # (no-op line retained to avoid logic changes)
+
   # Keep only the first quadrant (key + inter-industry block) — use base subsetting
   keep_first_name <- names(data_table)[1]
   data_table <- data_table[, 1:last_column, drop = FALSE]
-  
+
   # Build the first (key) column for the result
   first_col <- as.data.frame(data_table[, 1])
   names(first_col) <- keep_first_name
-  
+
   null_to_eps <- function(x) ifelse(x == 0, 0.000001, x)
-  
+
   demand <- null_to_eps(as.numeric(unlist(demand)))
-  
+
   # Avoid division by zero with epsilon (row-wise denominator)
   data_table <- vapply(
     data_table[seq_len(nrow(data_table)), 2:last_column, drop = FALSE],
     null_to_eps,
     numeric(nrow(data_table))
   )
-  
+
   output_coeff <- apply(
     data_table, 2,
     function(i) i / demand
   )
-  
+
   output_coeff <- as.data.frame(output_coeff)
   output_coeff <- cbind(first_col, output_coeff)
-  
+
   if (is.null(digits)) {
     return(output_coeff)
   }
-  
+
   if (digits >= 0) {
     round_eps <- function(x, digits) ifelse(x == 1e-06, x, round(x, digits))
     output_coeff <- output_coeff %>%

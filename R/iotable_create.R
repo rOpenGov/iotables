@@ -81,7 +81,7 @@ iotable_create <- function(q1, q2, q3,
 
   # --- Build tibble ---
   out <- tibble::tibble(
-    !!id_col := rownames(mat),
+    !!sym(id_col) := rownames(mat),
     !!!as.data.frame(mat)
   )
 
@@ -218,7 +218,7 @@ iotable_create_stacked <- function(q1, q2, q3,
   mat <- rbind(upper, lower)
 
   out <- tibble::tibble(
-    !!id_col := rownames(mat),
+    !!sym(id_col) := rownames(mat),
     !!!as.data.frame(mat)
   )
 

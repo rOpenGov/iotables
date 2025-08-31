@@ -140,11 +140,11 @@ iotables_download <- function(source = "naio_10_cp1700",
       "CPA_P85"     = "CPA_P",
       "CPA_D35"     = "CPA_D"
     )
-    
+
     downloaded$t_cols2 <- dplyr::recode(downloaded$t_cols2, !!!cpa_map)
     downloaded$t_rows2 <- dplyr::recode(downloaded$t_rows2, !!!cpa_map)
   } # end of _r2
-  
+
 
   if ("stk_flow" %in% names(downloaded)) {
     downloaded_nested <- nest(

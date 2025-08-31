@@ -31,8 +31,8 @@
 #'   currency). Alternative: `"MIO_EUR"`.
 #' @param stk_flow Flow type. Defaults to `"DOM"` (domestic output).
 #'   Alternatives:
-#'   - `"IMP"` for imports  
-#'   - `"TOTAL"` for total output  
+#'   - `"IMP"` for imports
+#'   - `"TOTAL"` for total output
 #'   For sources `"naio_10_cp1620"` (margins) and `"naio_10_cp1630"` (taxes),
 #'   only `"TOTAL"` is used.
 #' @param time_unit Return mode for time. `"year"` (default) returns numeric
@@ -113,33 +113,41 @@ iotable_year_get <- function(labelled_io_data = NULL,
   if (source %in% prod_ind) {
     metadata_rows <- iotables::metadata %>% # tables that follow prod_ind vocabulary
       filter(variable == "prod_na") %>%
-      dplyr::rename(prod_na = code, 
-                    prod_na_lab = label, 
-                    row_order = numeric_label, 
-                    iotables_row = iotables_label) 
+      dplyr::rename(
+        prod_na = code,
+        prod_na_lab = label,
+        row_order = numeric_label,
+        iotables_row = iotables_label
+      )
 
     metadata_cols <- iotables::metadata %>%
       dplyr::filter(variable == "induse") %>%
-      dplyr::rename(induse = code, 
-                    induse_lab = label, 
-                    col_order = numeric_label,
-                    iotables_col = iotables_label) 
-  } else if (source %in% trow_tcol) { 
+      dplyr::rename(
+        induse = code,
+        induse_lab = label,
+        col_order = numeric_label,
+        iotables_col = iotables_label
+      )
+  } else if (source %in% trow_tcol) {
     # tables that follow trow_tcol vocabulary
 
     metadata_rows <- iotables::metadata %>%
       dplyr::filter(variable == "t_rows") %>%
-      dplyr::rename(t_rows2 = code, 
-                    t_rows2_lab = label, 
-                    row_order = numeric_label, 
-                    iotables_row = iotables_label) 
+      dplyr::rename(
+        t_rows2 = code,
+        t_rows2_lab = label,
+        row_order = numeric_label,
+        iotables_row = iotables_label
+      )
 
     metadata_cols <- iotables::metadata %>%
       dplyr::filter(variable == "t_cols") %>%
-      dplyr::rename(t_cols2 = code, 
-                    t_cols2_lab = label, 
-                    col_order = numeric_label, 
-                    iotables_col = iotables_label)
+      dplyr::rename(
+        t_cols2 = code,
+        t_cols2_lab = label,
+        col_order = numeric_label,
+        iotables_col = iotables_label
+      )
   } else if (source == "germany_1995") { # German simplified tables
     metadata_rows <- germany_metadata_rows
     metadata_cols <- germany_metadata_cols
@@ -151,7 +159,7 @@ iotable_year_get <- function(labelled_io_data = NULL,
   metadata_cols <- mutate(metadata_cols, across(where(is.factor), as.character))
 
   # Exception handling for wrong paramters -----------------------
-  if (is.null(labelled_io_data)) { 
+  if (is.null(labelled_io_data)) {
     # if not directly inputed data
     if (is.null(geo)) stop("Error: no country selected.")
 
@@ -167,11 +175,14 @@ iotable_year_get <- function(labelled_io_data = NULL,
 
     # Creating a temporary file name for the input-output table -------------
     tmp_rds1 <- file.path(
-      tempdir(), paste0(source, "_iotables.rds")) # if iotables labelled version was created earlier
+      tempdir(), paste0(source, "_iotables.rds")
+    ) # if iotables labelled version was created earlier
     tmp_rds2 <- file.path(
-      tempdir(), paste0(source, "_short.rds")) # if short labelled version was created earlier
+      tempdir(), paste0(source, "_short.rds")
+    ) # if short labelled version was created earlier
     tmp_rds3 <- file.path(
-      tempdir(), paste0(source, ".rds")) # if non-labelled was created earlier
+      tempdir(), paste0(source, ".rds")
+    ) # if non-labelled was created earlier
     if (source_inputed == "germany_1995") {
       labelled_io_data <- iotables::germany_1995 # use germany example
     } else if (source_inputed == "croatia_2010_1700") {

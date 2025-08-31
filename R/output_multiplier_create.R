@@ -24,10 +24,11 @@
 
 #' @importFrom tibble tibble
 #' @importFrom stats setNames
-#' 
+#'
 #' @examples
 #' de_input_coeff <- input_coefficient_matrix_create(
-#'   iotable_get(), digits = 4
+#'   iotable_get(),
+#'   digits = 4
 #' )
 #'
 #' output_multiplier_create(de_input_coeff)
@@ -36,12 +37,12 @@
 
 output_multiplier_create <- function(input_coefficient_matrix) {
   inv <- leontief_inverse_create(input_coefficient_matrix)
-  
+
   key_col <- names(inv)[1]
   numeric_block <- inv[, -1, drop = FALSE]
-  
+
   multipliers <- colSums(numeric_block)
-  
+
   tibble::tibble(
     stats::setNames(list("output_multipliers"), key_col),
     !!!as.list(multipliers)

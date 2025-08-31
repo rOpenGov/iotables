@@ -7,13 +7,13 @@
 direct_effects_create(input_requirements, inverse, digits = NULL)
 }
 \arguments{
-\item{input_requirements}{A matrix or vector created by 
+\item{input_requirements}{A matrix or vector created by
 \code{\link{input_indicator_create}}}
 
-\item{inverse}{A Leontief-inverse created by 
+\item{inverse}{A Leontief-inverse created by
 \code{\link{leontief_inverse_create}}.}
 
-\item{digits}{Rounding digits, defaults to \code{NULL}, in which case 
+\item{digits}{Rounding digits, defaults to \code{NULL}, in which case
 no rounding takes place.}
 }
 \value{
@@ -24,19 +24,21 @@ metadata to sort them or join them with other matrixes.
 The function creates the effects.
 }
 \examples{
- 
 nl <- netherlands_2006
 
 input_coeff_nl <- input_coefficient_matrix_create(
- data_table  = netherlands_2006, 
- households = FALSE) 
+  data_table = netherlands_2006,
+  households = FALSE
+)
 
-compensation_indicator <- input_indicator_create(netherlands_2006, 'compensation_employees')
+compensation_indicator <- input_indicator_create(netherlands_2006, "compensation_employees")
 
-I_nl <- leontief_inverse_create( input_coeff_nl )
+I_nl <- leontief_inverse_create(input_coeff_nl)
 
-direct_effects_create(input_requirements = compensation_indicator, 
-                      inverse = I_nl)
+direct_effects_create(
+  input_requirements = compensation_indicator,
+  inverse = I_nl
+)
 }
 \seealso{
 Other indicator functions: 

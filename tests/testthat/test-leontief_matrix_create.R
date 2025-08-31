@@ -62,14 +62,14 @@ test_that("Leontief matrix values are correct", {
     as.numeric()
 
   expect_equal(AAL[1], expected = 0.9742, tolerance = .0001)
-  #expect_equal(as.numeric(L_nl[1, 2:7]),
+  # expect_equal(as.numeric(L_nl[1, 2:7]),
   #  expected = c(0.875, 0.000, -0.039, -0.002, -0.001, -0.001),
   #  tolerance = 0.0005
-  #)
-  #expect_equal(round(as.numeric(I_nl[1, 2:7]), 3),
+  # )
+  # expect_equal(round(as.numeric(I_nl[1, 2:7]), 3),
   #  expected = c(1.154, 0.002, 0.057, 0.006, 0.012, 0.006),
   #  tolerance = 0.0005
-  #)
+  # )
 
   # Leontief inverse values are correct
   expect_equal(TBI, expected = 0.035494905, tolerance = .0001)

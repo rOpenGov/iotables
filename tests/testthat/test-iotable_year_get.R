@@ -14,7 +14,3 @@ test_that("iotable_year_get() returns correct data:", {
     as.Date("1995-01-01")
   )
 })
-
-
-# germany_1995 <- germany_1995 %>% mutate ( time = as.Date("1995-01-01"))
-# usethis::use_data(germany_1995, overwrite = TRUE)

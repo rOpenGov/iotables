@@ -36,7 +36,7 @@
 #'
 #' @references
 #' Eurostat (2008). *Eurostat Manual of Supply, Use and Input–Output Tables*,
-#' ch. 13.  
+#' ch. 13.
 #' United Nations (2018). *Handbook on Supply and Use Tables and Input–Output
 #' Tables with Extensions and Applications (Rev. 1, “white cover”)*, ch. 10.
 #'

@@ -9,11 +9,23 @@ Symbols declared here avoid R CMD check "no visible binding for global variable"
 notes. This file is transitional: as functions are refactored to use
 \code{.data$var} or \code{.env$var} pronouns, entries can be removed.
 
+Symbols declared here avoid R CMD check "no visible binding for global variable"
+notes. This file is transitional: as functions are refactored to use
+\code{.data$var} or \code{.env$var} pronouns, entries can be removed.
+
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Pre-processing and basic analytical tasks for working with Eurostat's symmetric input–output tables, and basic input–output economics calculations. Part of rOpenGov \url{https://ropengov.github.io/} for open source open government initiatives.
 }
 \seealso{
+Useful links:
+\itemize{
+  \item \url{https://iotables.dataobservatory.eu/}
+  \item \url{https://github.com/rOpenGov/iotables}
+  \item Report bugs at \url{https://github.com/rOpenGov/iotables/issues}
+}
+
+
 Useful links:
 \itemize{
   \item \url{https://iotables.dataobservatory.eu/}

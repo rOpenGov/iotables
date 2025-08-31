@@ -35,7 +35,8 @@ Tables with Extensions and Applications} (p. 637).
 data_table <- iotable_get()
 
 de_out <- output_coefficient_matrix_create(
-  data_table, "tfu", digits = 4
+  data_table, "tfu",
+  digits = 4
 )
 
 forward_linkages(
