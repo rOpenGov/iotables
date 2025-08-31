@@ -57,6 +57,16 @@ test_that("employment_get works with different labelling formats", {
   expect_true(any(grepl("employment_", names(res_ind)[1])))
 })
 
+test_that("employment_get errors on invalid sex", {
+  skip_on_cran()
+  skip_if_not_installed("eurostat")
+  skip_if_no_eurostat()
+  expect_error(
+    employment_get("CZ", year = "2010", sex = "nonsense"),
+    "No employment data found with sex parameter"
+  )
+})
+
 test_that("employment_get handles UK/EL special geo codes", {
   skip_on_cran() # avoid spurious failures due to Eurostat availability
   skip_if_not_installed("eurostat")
