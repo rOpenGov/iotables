@@ -32,7 +32,8 @@ Tables with Extensions and Applications}, §15.35.
 }
 \examples{
 de_input_coeff <- input_coefficient_matrix_create(
-  iotable_get(), digits = 4
+  iotable_get(),
+  digits = 4
 )
 
 output_multiplier_create(de_input_coeff)
