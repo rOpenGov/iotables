@@ -1,40 +1,73 @@
-#' @title Get primary inputs
-#' @description This function will retrieve any primary input from the input-output 
-#' table. 
-#' @param data_table A symmetric input-output table, a use table, or a 
-#' supply table retrieved by the  \code{\link{iotable_get}} function. 
-#' @param primary_input The primary input to be returned from the table.
-#' @importFrom dplyr select mutate across where
-#' @return A data frame with the vector of multipliers and the an 
-#' auxiliary metadata column (for joining with other matrixes.)
+#' Get a primary input row
+#'
+#' Retrieve a named primary-input row from a symmetric input-output table,
+#' a use table, or a supply table (as returned by [iotable_get()]).
+#'
+#' @details
+#' In I–O accounting, *primary inputs* (e.g., compensation of employees,
+#' consumption of fixed capital, taxes on production/subsidies, operating
+#' surplus/mixed income, and—when relevant—imports used for domestic
+#' production) are shown in the value-added block (third quadrant). See
+#' Eurostat (2008), ch. 13; UN (2018), ch. 10. :contentReference[oaicite:2]{index=2}
+#'
+#' @param data_table A symmetric I–O table, use table, or supply table as
+#'   returned by [iotable_get()].
+#' @param primary_input Character. The primary input to return. Accepts common
+#'   synonyms (e.g., "compensation of employees", "cfc", "taxes on production",
+#'   "operating surplus", "imports").
+#'
+#' @importFrom dplyr select mutate across where any_of
+#' @return A data frame containing the key column and the matching primary-
+#'   input row.
 #' @family iotables processing functions
-#' @autoglobal
+#'
 #' @examples
-#' comp_employees_de <- primary_input_get(
-#'   data_table = iotable_get(), 
-#'   primary_input = "compensation_employees") 
+#' primary_input_get(iotable_get(), "compensation of employees")
+#' primary_input_get(iotable_get(), "consumption of fixed capital")
+#' # With package’s default short code:
+#' primary_input_get(iotable_get(), "compensation_employees")
+#'
 #' @export
 
-primary_input_get <- function ( data_table,
-                                primary_input = "compensation_employees") {
+primary_input_get <- function(data_table,
+                              primary_input = "compensation_employees") {
   
-  if ( is.null(data_table)) { 
-    stop ( "No input-output table was given as an input")
-    }
-  
-  last_column <- quadrant_separator_find ( data_table )
-  
-  data_table <- data_table %>% 
-    mutate(across(where(is.factor), as.character)) %>%
-    select(1:last_column)
-  
-  if ( primary_input %in% data_table[[1]] ) {
-    input_row <- which ( data_table[[1]] == primary_input )
-  } else {
-    stop("The input is not found in this data source.")
+  if (is.null(data_table)) {
+    stop("No input-output table was given as input.")
+  }
+  if (!is.data.frame(data_table)) {
+    stop("`data_table` must be a data.frame (or tibble).")
+  }
+  if (!is.character(primary_input) || length(primary_input) != 1L) {
+    stop("`primary_input` must be a single character string.")
   }
 
-  data_table[input_row, ]
+  data_table <- dplyr::mutate(
+    data_table,
+    dplyr::across(dplyr::where(is.factor), as.character)
+  )
+  
+  # Select all until the last column in the quadrant
+  last_column <- quadrant_separator_find(data_table)
+  if (!is.numeric(last_column) || length(last_column) != 1L ||
+      is.na(last_column) || last_column < 2L ||
+      last_column > ncol(data_table)) {
+    stop("Quadrant separator is invalid for this table.")
+  }
+  
+  # Limit to the economic block (by position, preserving current behavior)
+  data_table <- data_table[, seq_len(last_column), drop = FALSE]
+
+  # First column is the label/key column
+  labels <- data_table[[1L]]
+  
+  hits <- which(labels == primary_input)
+  if (length(hits) == 0L) {
+    stop("The requested primary input was not found in the first column.")
+  }
+  if (length(hits) > 1L) {
+    stop("Multiple rows match `primary_input`; labels must be unique.")
+  }
+  
+  data_table[hits, , drop = FALSE]
 }
-
-
