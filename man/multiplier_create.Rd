@@ -12,49 +12,70 @@ multiplier_create(
 )
 }
 \arguments{
-\item{input_vector}{An input matrix or vector created by the 
-\code{\link{input_indicator_create}} function.}
+\item{input_vector}{A named numeric vector (or 1-column matrix)
+created by \code{\link[=input_indicator_create]{input_indicator_create()}} whose names match the ordering
+of the Leontief inverse columns.}
 
-\item{Im}{The Leontief inverse as a named object created by the 
-\code{\link{leontief_inverse_create}} function.}
+\item{Im}{A Leontief inverse matrix created by
+\code{\link[=leontief_inverse_create]{leontief_inverse_create()}}. Column names must correspond to products
+or industries consistent with \code{input_vector}.}
 
-\item{multiplier_name}{A variable name to be given to the returned multipliers. 
-Defaults to \code{multiplier}.}
+\item{multiplier_name}{A string used for the key column that labels the
+returned multipliers. Default is \code{"multiplier"}.}
 
-\item{digits}{Rounding digits, if omitted, no rounding takes place.}
+\item{digits}{Optional integer. If supplied and non-negative, round the
+resulting multipliers to this number of decimal places. Negative
+values are ignored (no rounding).}
 }
 \value{
-A data frame with the vector of multipliers and the an 
-auxiliary metadata column (for joining with other matrixes.)
+A data frame with:
+\itemize{
+\item a first key column (character) named as the first column of
+\code{input_vector} and filled with \code{multiplier_name}, and
+\item one numeric column per product/industry containing the multipliers.
+}
 }
 \description{
-This function is in fact a wrapper around the \code{\link{equation_solve}} function, 
-adding a key column with the name to the multiplier the maintain structural
-consistency.
+Wrapper around \code{\link[=equation_solve]{equation_solve()}} that computes total multipliers by
+post-multiplying an input indicator vector with a Leontief inverse and
+adds a key column carrying the multiplier name for consistent joins.
 }
 \details{
-As opposed to direct effects, multipliers are expressed per input of
-product/industry.
+In the Eurostat IO framework, multipliers measure \emph{total} effects per
+unit of \strong{final demand}, by product or industry (via the Leontief
+inverse \eqn{(I - A)^{-1}}). This contrasts with \emph{direct effects},
+which reflect only the immediate (first-round) impact.
+
+The function delegates the numerical solve to \code{\link[=equation_solve]{equation_solve()}} and
+then formats the result for tidy joining with other IO tables. Ensure
+that the dimension ordering and names of \code{input_vector} and \code{Im}
+correspond; otherwise results will be misaligned.
 }
 \examples{
+# Minimal workflow -----------------------------------------------
 data_table <- iotable_get()
 
-coeff_de <- input_coefficient_matrix_create( data_table )
+coeff_de <- input_coefficient_matrix_create(data_table)
 
-de_gva_indicator <- input_indicator_create (
-  data_table = data_table, 
-  input = 'gva')  #this is a correct input
+de_gva_indicator <- input_indicator_create(
+  data_table = data_table,
+  input = "gva"
+)
 
-I_de <- leontief_inverse_create( coeff_de )
+I_de <- leontief_inverse_create(coeff_de)
 
-de_gva_multipliers <- multiplier_create ( 
-  input_vector    = de_gva_indicator,
-  Im              = I_de,
-  multiplier_name = "employment_multiplier", 
-  digits = 4 )
+de_gva_multipliers <- multiplier_create(
+  input_vector = de_gva_indicator,
+  Im = I_de,
+  multiplier_name = "employment_multiplier",
+  digits = 4
+)
 
 }
 \seealso{
+\code{\link[=equation_solve]{equation_solve()}}, \code{\link[=input_indicator_create]{input_indicator_create()}},
+\code{\link[=leontief_inverse_create]{leontief_inverse_create()}}
+
 Other multiplier functions: 
 \code{\link{input_multipliers_create}()}
 }
