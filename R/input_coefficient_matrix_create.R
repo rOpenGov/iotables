@@ -17,8 +17,6 @@
 #'
 #' @param data_table A symmetric input–output table, a use table,
 #' a margins or tax table retrieved by [iotable_get()].
-#' @param total Character scalar giving the name of the total/output column to use.
-#'   Defaults to `"output"`.
 #' @param households Logical; include the households column if available. Default `FALSE`.
 #' @param digits Optional integer precision to round the resulting matrix. Default `NULL`
 #'   (no rounding).

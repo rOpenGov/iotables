@@ -14,9 +14,6 @@ a margins or tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 
 \item{digits}{Optional integer precision to round the resulting matrix. Default \code{NULL}
 (no rounding).}
-
-\item{total}{Character scalar giving the name of the total/output column to use.
-Defaults to \code{"output"}.}
 }
 \value{
 A \code{data.frame} containing the input coefficient matrix (first quadrant / products),
