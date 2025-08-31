@@ -77,6 +77,7 @@ de_gva_multipliers <- multiplier_create(
 \code{\link[=leontief_inverse_create]{leontief_inverse_create()}}
 
 Other multiplier functions: 
-\code{\link{input_multipliers_create}()}
+\code{\link{input_multipliers_create}()},
+\code{\link{output_multiplier_create}()}
 }
 \concept{multiplier functions}
