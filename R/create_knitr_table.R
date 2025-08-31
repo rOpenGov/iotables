@@ -34,15 +34,6 @@
 #' @importFrom knitr kable is_latex_output is_html_output
 #' @importFrom kableExtra kable_styling column_spec
 #' @keywords internal
-#'
-#' @examples
-#' foo <- data.frame(
-#'   observation = c("indicator1", "indicator2", "indicator3"),
-#'   indicator_1 = c(100, 105, 95),
-#'   indicator_2 = c(102, 104, 76)
-#' )
-#'
-#' create_knitr_table(foo, caption = "Demo table")
 create_knitr_table <- function(data_table,
                                digits = NULL,
                                caption = NA,

@@ -70,13 +70,4 @@ Wrapper around \code{\link[knitr:kable]{knitr::kable()}} with sensible defaults
 for alignment, borders, and formatting, compatible with HTML and LaTeX
 output formats.
 }
-\examples{
-foo <- data.frame(
-  observation = c("indicator1", "indicator2", "indicator3"),
-  indicator_1 = c(100, 105, 95),
-  indicator_2 = c(102, 104, 76)
-)
-
-create_knitr_table(foo, caption = "Demo table")
-}
 \keyword{internal}
