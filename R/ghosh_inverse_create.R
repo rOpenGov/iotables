@@ -1,32 +1,37 @@
-#' Create the inverse of a Ghosh matrix
+#' Create Ghosh inverse from output coefficients
 #'
-#' Create the Ghosh inverse from output coefficients.
+#' Create the Ghosh inverse from an output-coefficient matrix.
 #'
 #' @details
-#' The Ghosh inverse is defined as \deqn{G = (I - B)^{-1}},
-#' where \eqn{B} is the output‑coefficient matrix created by
-#' [output_coefficient_matrix_create()].
-#' See the United Nations
-#' \href{https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf}
-#' {*Handbook on Supply and Use Tables and Input‑Output Tables with Extensions
-#' and Applications*}, pp. 622–639.
+#' The Ghosh inverse is defined as \deqn{G = (I - B)^{-1}}, where \eqn{B} is
+#' the output-coefficient matrix created by
+#' [output_coefficient_matrix_create()]. See the United Nations *Handbook on
+#' Supply and Use Tables and Input-Output Tables with Extensions and
+#' Applications* (2018, Rev. 1), pp. 622–639
+#' [PDF](https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf).
 #'
 #' For the analogous inverse from input coefficients, see
 #' [leontief_inverse_create()].
 #'
-#' @param output_coefficients_matrix A technology‑coefficient matrix created by
+#' @param output_coefficients_matrix A technology-coefficient matrix created by
 #'   [output_coefficient_matrix_create()].
 #' @param digits Integer precision for rounding. Default `NULL` (no rounding).
 #'
-#' @return A `data.frame` with the original key column and the Ghosh inverse in
+#' @return A data frame with the original key column and the Ghosh inverse in
 #'   the remaining columns. If `digits` is provided, values are rounded.
 #'
-#' @importFrom dplyr mutate across
+#' @importFrom dplyr mutate across where
 #' @family analytic object functions
 #'
 #' @examples
+#' # Minimal example
 #' om <- output_coefficient_matrix_create(iotable_get())
 #' ghosh_inverse_create(om)
+#'
+#' # Using the Germany 1995 benchmark table (Eurostat manual):
+#' # data(germany_1995)
+#' # om_de <- output_coefficient_matrix_create(germany_1995)
+#' # ghosh_inverse_create(om_de)
 #'
 #' @export
 
