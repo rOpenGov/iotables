@@ -12,7 +12,7 @@
 #' uses block (not Quadrant I); when `households = TRUE`, that column is
 #' appended for convenience in Type-II analyses that endogenise private
 #' consumption. See the *Eurostat Manual of Supply, Use and
-#' Input-Output Tables* for the quadrant layout and definitions. 
+#' Input-Output Tables* for the quadrant layout and definitions.
 #'
 #' @param data_table A symmetric input–output table (product-by-product
 #'   or industry-by-industry) obtained via [iotable_get()].
@@ -53,7 +53,6 @@
 input_flow_get <- function(data_table,
                            empty_remove = FALSE,
                            households = TRUE) {
-  
   data_table <- mutate(data_table, across(where(is.factor), as.character))
 
   # Remove empty columns and rows

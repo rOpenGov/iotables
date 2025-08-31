@@ -38,8 +38,8 @@
 #' @examples
 #' de_io <- iotable_get()
 #' total_tax_add(
-#'   data_table    = de_io,
-#'   tax_names     = c("net_tax_products", "net_tax_production"),
+#'   data_table = de_io,
+#'   tax_names = c("net_tax_products", "net_tax_production"),
 #'   total_tax_name = "total_tax"
 #' )
 #'

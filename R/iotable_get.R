@@ -212,8 +212,8 @@ iotable_get <- function(labelled_io_data = NULL,
     metadata_rows,
     dplyr::across(tidyselect::where(is.factor), as.character)
   )
-  
-  metadata_cols <-  dplyr::mutate(
+
+  metadata_cols <- dplyr::mutate(
     metadata_cols,
     dplyr::across(tidyselect::where(is.factor), as.character)
   )

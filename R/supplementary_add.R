@@ -15,7 +15,7 @@
 #' column if the supplied values are `NA`.
 #'
 #' For terminology, see Eurostat’s *Manual of Supply, Use and Input-Output
-#' Tables*.  
+#' Tables*.
 #' (Eurostat, 2008; ISBN 978-92-79-04704-3)
 #'
 #' @param data_table

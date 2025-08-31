@@ -34,10 +34,10 @@
 #' @importFrom tidyselect where
 #' @export
 backward_linkages <- function(Im) {
-  
-  Im <- dplyr::mutate(Im, dplyr::across(where(is.factor), 
-                                        function(x) as.character(x))
-                      )
+  Im <- dplyr::mutate(Im, dplyr::across(
+    where(is.factor),
+    function(x) as.character(x)
+  ))
 
   total_row <- data.frame(
     name = "backward linkages"
