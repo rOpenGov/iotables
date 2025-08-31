@@ -38,6 +38,7 @@
 #' @family import functions
 #'
 #' @importFrom dplyr relocate mutate select filter left_join full_join
+#' @importFrom dplyr case_when group_by everything inner_join summarise
 #' @importFrom tidyr pivot_wider
 #' @importFrom glue glue
 #'
@@ -49,8 +50,6 @@
 #'   unit = "THS_T"
 #' )
 #' @export
-
-
 airpol_get <- function(airpol = "GHG",
                        geo = "BE",
                        year = 2020,
