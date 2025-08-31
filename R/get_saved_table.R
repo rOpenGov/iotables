@@ -12,11 +12,12 @@ get_saved_table <- function(labelled_io_data,
     geo <- toupper(geo)
   }
 
-  iot <- find_saved_table(labelled_io_data, 
-                          geo = geo, 
-                          year = year, 
-                          unit = unit, 
-                          stk_flow = stk_flow)
+  iot <- find_saved_table(labelled_io_data,
+    geo = geo,
+    year = year,
+    unit = unit,
+    stk_flow = stk_flow
+  )
 
   iot %>% unnest(.data$data)
 }

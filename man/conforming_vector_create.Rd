@@ -2,32 +2,37 @@
 % Please edit documentation in R/conforming_vector_create.R
 \name{conforming_vector_create}
 \alias{conforming_vector_create}
-\title{Create an empty conforming vector}
+\title{Create an Empty Conforming Vector}
 \usage{
 conforming_vector_create(data_table)
 }
 \arguments{
-\item{data_table}{A use table, Leontief-matrix, Leontief-inverse,
-a coefficient matrix or other named matrix / vector.}
+\item{data_table}{A use table, coefficient matrix, Leontief matrix, or other
+named matrix or data frame.}
 }
 \value{
-A wide-format conforming vector of data frame class, 
-with column names matching the metadata of the \code{data_table}.
+A one-row \code{data.frame} with the same column names as \code{data_table},
+but with all values set to zero.
 }
 \description{
-This helper function creates you a named vector that conforms your
-analytical objects, such as the use table, the Leontief-matrix, 
-etc. With 60x60 matrixes it is easy to make mistakes with manual 
-definition. The empty effects vector can be used in \code{.csv} format
-as a sample to import scenarios from a spreadsheet application.
+Create a named vector (in wide format) that conforms to the structure of a
+given analytical object, such as a use table, coefficient matrix, or
+Leontief matrix. This helps avoid mistakes when manually defining large
+vectors (e.g., for 60 × 60 matrices).
+}
+\details{
+The empty conforming vector can also be exported to \code{.csv} format and used
+as a template for importing scenarios from a spreadsheet application.
 }
 \examples{
 de_input_flow <- input_flow_get(data_table = iotable_get())
+conforming_vector_create(de_input_flow)
 
-conforming_vector_create (data_table = de_input_flow)
 }
 \seealso{
 Other iotables processing functions: 
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},

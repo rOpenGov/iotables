@@ -7,15 +7,17 @@
 household_column_get(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use table or
-a supply table.}
+\item{data_table}{A symmetric input-output table, a use table, or a
+supply table.}
 }
 \value{
-The column containing final household expenditure. If not found
-\code{NULL} is returned.
+A tibble/data frame with the key column and the household
+expenditure column. Returns \code{NULL} if no household column is found.
 }
 \description{
-Return Final Household Expenditure
+Extracts the column of final household expenditure from a
+symmetric input-output table, a use table, or a supply table. If no
+household expenditure column is detected, returns \code{NULL}.
 }
 \examples{
 household_column_get(iotable_get(source = "germany_1995"))

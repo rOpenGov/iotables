@@ -82,4 +82,4 @@ multiplier_create <- function(input_vector,
   named_multipliers[, 1] <- as.character(named_multipliers[, 1])
 
   if (!is.null(digits)) matrix_round(named_multipliers, digits) else named_multipliers
-} 
+}

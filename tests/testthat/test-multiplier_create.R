@@ -1,51 +1,53 @@
-library(testthat)
+test_that("Eurostat manual (§5.0.1): DE multipliers match published", {
+  data_table <- iotable_get()
 
-context("Eurostat Manual examples")
-coeff_de <- input_coefficient_matrix_create(iotable_get())
+  coeff_de <- input_coefficient_matrix_create(data_table)
 
-de_gva_indicator <- input_indicator_create(
-  data_table = iotable_get(),
-  input = "gva"
-) # this is a correct input
+  de_gva_indicator <- input_indicator_create(
+    data_table = data_table,
+    input = "gva"
+  )
 
-I_de <- leontief_inverse_create(coeff_de)
+  I_de <- leontief_inverse_create(coeff_de)
 
-de_emp_indicator <- input_indicator_create(
-  data_table = iotable_get(),
-  input = "employment_domestic_total"
-)
+  de_emp_indicator <- input_indicator_create(
+    data_table = data_table,
+    input = "employment_domestic_total"
+  )
 
+  de_gva_multipliers <- multiplier_create(
+    input_vector = de_gva_indicator,
+    Im = I_de,
+    multiplier_name = "employment_multiplier",
+    digits = 4
+  )
 
+  gva_de_published <- c(0.8450, 0.7647, 0.8615, 0.9019, 0.9393, 0.9199)
 
-de_gva_multipliers <- multiplier_create(
-  input_vector = de_gva_indicator,
-  Im = I_de,
-  multiplier_name = "employment_multiplier",
-  digits = 4
-)
+  employment_multipliers <- multiplier_create(
+    input_vector = de_emp_indicator,
+    Im = I_de,
+    multiplier_name = "employment_multiplier",
+    digits = 4
+  )
 
-# Eurostat Manual 501
-gva_de_published <- c(0.8450, 0.7647, 0.8615, 0.9019, 0.9393, 0.9199)
+  emp_de_published <- c(0.0326, 0.0162, 0.0207, 0.0237, 0.0112, 0.0242)
 
-employment_multipliers <- multiplier_create(
-  input_vector = de_emp_indicator,
-  Im = I_de,
-  multiplier_name = "employment_multiplier",
-  digits = 4
-)
-
-emp_de_published <- c(0.0326, 0.0162, 0.0207, 0.0237, 0.0112, 0.0242)
-
-test_that("correct data is returned from netherlands_2006", {
-  expect_equal(as.numeric(de_gva_multipliers[2:7]),
-    gva_de_published,
+  expect_equal(
+    object = as.numeric(de_gva_multipliers[2:7]),
+    expected = gva_de_published,
     tolerance = 1e-3
   )
-  expect_equal(as.numeric(employment_multipliers[2:7]),
-    emp_de_published,
+
+  expect_equal(
+    object = as.numeric(employment_multipliers[2:7]),
+    expected = emp_de_published,
     tolerance = 1e-3
   )
 })
+
+
+
 
 
 later <- function() {

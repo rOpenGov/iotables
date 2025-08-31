@@ -24,37 +24,37 @@ coefficient_matrix_create(
 )
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table, 
+\item{data_table}{A symmetric input-output table, a use table,
 a margins or tax table retrieved by the  \code{\link{iotable_get}}
- function.}
+function.}
 
-\item{total}{Usually an output vector with a key column, defaults to 
+\item{total}{Usually an output vector with a key column, defaults to
 \code{"output"} which equals \code{"P1"} or \code{"output_bp"}.
-You can use other rows for comparison, for example \code{"TS_BP"} 
+You can use other rows for comparison, for example \code{"TS_BP"}
 if it exists in the matrix.}
 
-\item{digits}{An integer showing the precision of the technology matrix in 
+\item{digits}{An integer showing the precision of the technology matrix in
 digits. Default is \code{NULL} when no rounding is applied.}
 
-\item{remove_empty}{Defaults to \code{TRUE}. If you want to keep empty 
+\item{remove_empty}{Defaults to \code{TRUE}. If you want to keep empty
 primary input rows, choose \code{FALSE}. Empty product/industry rows are
 always removed to avoid division by zero error in the analytic functions.}
 
-\item{households}{Defaults to \code{NULL}. Household column can be added 
+\item{households}{Defaults to \code{NULL}. Household column can be added
 with \code{TRUE}.}
 
-\item{return_part}{Defaults to \code{NULL}. You can choose \code{"product"} 
+\item{return_part}{Defaults to \code{NULL}. You can choose \code{"product"}
 or \code{"industry"} to return an input coefficient matrix or
-\code{"primary_inputs"} to get only the total intermediate use and 
+\code{"primary_inputs"} to get only the total intermediate use and
 proportional primary inputs.}
 }
 \value{
-A data.frame that contains the matrix of  \code{data_table} divided 
-by \code{total} with a key column. Optionally the results are rounded to 
+A data.frame that contains the matrix of  \code{data_table} divided
+by \code{total} with a key column. Optionally the results are rounded to
 given \code{digits}.
 
-A data.frame that contains the matrix of  \code{data_table} divided 
-by \code{total} with a key column. Optionally the results are rounded to 
+A data.frame that contains the matrix of  \code{data_table} divided
+by \code{total} with a key column. Optionally the results are rounded to
 given \code{digits}.
 }
 \description{
@@ -64,27 +64,31 @@ Create a coefficient matrix from a Symmetric Input-Output Table.
 }
 \details{
 The coefficient matrix is related by default to output, but you can change
-this to total supply or other total aggregate if it exists 
+this to total supply or other total aggregate if it exists
 in your table.
 
 The coefficient matrix is related by default to output, but you can change
-this to total supply or other total aggregate if it exists 
+this to total supply or other total aggregate if it exists
 in your table.
 }
 \examples{
-coefficient_matrix_create(data_table = iotable_get(source = "germany_1995"), 
-                          total = "output", 
-                          digits = 4 )
-coefficient_matrix_create(data_table = iotable_get(source = "germany_1995"), 
-                          total = "output", 
-                          digits = 4 )
+coefficient_matrix_create(
+  data_table = iotable_get(source = "germany_1995"),
+  total = "output",
+  digits = 4
+)
+coefficient_matrix_create(
+  data_table = iotable_get(source = "germany_1995"),
+  total = "output",
+  digits = 4
+)
 }
 \references{
-See 
+See
 \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 for explanation on the use of the Coefficient matrix.
 
-See 
+See
 \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
 for explanation on the use of the Coefficient matrix.
 }

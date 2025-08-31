@@ -61,8 +61,8 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter select mutate rename left_join arrange
-#' @importFrom dplyr mutate_if
-#' @importFrom tidyselect one_of all_of
+#' @importFrom dplyr across
+#' @importFrom tidyselect any_of all_of where
 #' @importFrom tidyr spread pivot_wider
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
@@ -208,8 +208,15 @@ iotable_get <- function(labelled_io_data = NULL,
     stop("This type of input-output database is not (yet) recognized by iotables.")
   }
 
-  metadata_rows <- mutate_if(metadata_rows, is.factor, as.character)
-  metadata_cols <- mutate_if(metadata_cols, is.factor, as.character)
+  metadata_rows <- dplyr::mutate(
+    metadata_rows,
+    dplyr::across(tidyselect::where(is.factor), as.character)
+  )
+  
+  metadata_cols <-  dplyr::mutate(
+    metadata_cols,
+    dplyr::across(tidyselect::where(is.factor), as.character)
+  )
 
   ### Exception handling for wrong paramters that are not directly inputed-----
   if (is.null(labelled_io_data)) { # if not directly inputed data
@@ -375,10 +382,10 @@ iotable_get <- function(labelled_io_data = NULL,
 
     iotable_labelled <- iotable %>%
       dplyr::filter(stk_flow == stk_flow_input) %>%
-      dplyr::mutate_if(is.factor, as.character) %>%
+      dplyr::mutate(dplyr::across(tidyselect::where(is.factor), as.character)) %>%
       dplyr::left_join(metadata_cols, by = col_join) %>%
-      dplyr::select(-one_of(remove_vars)) %>% # remove repeating columns before joining rows
-      dplyr::mutate_if(is.factor, as.character) %>%
+      dplyr::select(-tidyselect::any_of(remove_vars)) %>% # remove repeating columns before joining rows
+      dplyr::mutate(dplyr::across(tidyselect::where(is.factor), as.character)) %>%
       dplyr::left_join(metadata_rows, by = row_join)
 
     if (nrow(iotable_labelled) == 0) {
@@ -416,7 +423,7 @@ iotable_get <- function(labelled_io_data = NULL,
       by_row <- names(iotable)[which(names(iotable) %in% c("t_rows2", "t_rows2_lab", "iotables_row"))]
 
       iotable_labelled <- iotable %>%
-        mutate_if(is.factor, as.character) %>%
+        dplyr::mutate(dplyr::across(tidyselect::where(is.factor), as.character)) %>%
         left_join(metadata_cols, by = by_col) %>%
         left_join(metadata_rows, by = by_row) %>%
         arrange(row_order, col_order)

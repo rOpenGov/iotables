@@ -36,7 +36,7 @@
 #' [Air emissions accounts by NACE Rev. 2 activity](https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2).
 #'
 #' @family import functions
-#' 
+#'
 #' @importFrom dplyr relocate mutate select filter left_join full_join
 #' @importFrom tidyr pivot_wider
 #' @importFrom glue glue

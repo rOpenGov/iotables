@@ -50,8 +50,6 @@
 #' @importFrom tidyselect where
 #' @export
 
-
-
 input_flow_get <- function(data_table,
                            empty_remove = FALSE,
                            households = TRUE) {
