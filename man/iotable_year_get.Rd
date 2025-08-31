@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_year_get.R
 \name{iotable_year_get}
 \alias{iotable_year_get}
-\title{Get the available years from bulk downloaded input-output tables}
+\title{Get available years from bulk IO tables}
 \usage{
 iotable_year_get(
   labelled_io_data = NULL,
@@ -16,61 +16,77 @@ iotable_year_get(
 )
 }
 \arguments{
-\item{labelled_io_data}{If you have downloaded a bulk data file with 
-\code{\link{iotables_download}}, it is faster to work with the data
-in the memory. Defaults to \code{NULL} when  the data will be retrieved from
-the hard disk or from the Eurostat website invoking the same function.}
+\item{labelled_io_data}{Optional labelled IO data from
+\code{\link[=iotables_download]{iotables_download()}}. If supplied, avoids re-reading from disk.}
 
-\item{source}{A data source, for example \code{naio_10_cp1700}. 
-Symmetric input-output table at basic prices (product by product) (naio_10_cp1700)    
-Symmetric input-output table at basic prices (industry by industry) (naio_10_cp1750)
-Symmetric input-output table at basic prices (product by product) (previous years prices) (naio_10_pyp1700)
-Symmetric input-output table at basic prices (industry by industry) (previous years prices) (naio_10_pyp1750)
-Table of trade and transport margins at basic prices (naio_10_cp1620) and 
-at previous' years prices (naio_10_pyp1620)
-Table of taxes less subsidies on products at basic prices (naio_10_cp1630)    and
-at previous' years prices (naio_10_pyp1630)
-For further information consult the 
-\href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.}
+\item{source}{Character. Eurostat product code (see Details).}
 
-\item{geo}{A country code or a country name.  For example, \code{SK} or as \code{Slovakia}.}
+\item{geo}{Country code or name (e.g. \code{"SK"} or \code{"Slovakia"}).}
 
-\item{unit}{A character string containing the currency unit, defaults to \code{MIO_NAC} (million national currency unit). 
-The alternative is \code{MIO_EUR}.}
+\item{unit}{Currency unit. Defaults to \code{"MIO_NAC"} (millions of national
+currency). Alternative: \code{"MIO_EUR"}.}
 
-\item{time_unit}{Defaults to \code{'year'} and years are returned as numbers. 
-Alternative is to return  \code{'time'} as vector of dates.}
+\item{time_unit}{Return mode for time. \code{"year"} (default) returns numeric
+years; \code{"time"} returns a vector of dates.}
 
-\item{stk_flow}{Defaults to \code{DOM} as domestic output, alternative \code{IMP} for imports 
-and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and 
-trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
-less subsidies only \code{TOTAL} is not used.}
+\item{stk_flow}{Flow type. Defaults to \code{"DOM"} (domestic output).
+Alternatives:
+\itemize{
+\item \code{"IMP"} for imports
+\item \code{"TOTAL"} for total output
+For sources \code{"naio_10_cp1620"} (margins) and \code{"naio_10_cp1630"} (taxes),
+only \code{"TOTAL"} is used.
+}}
 
-\item{data_directory}{Defaults to \code{NULL}. Use if it you used a data_directory
-parameter with \code{\link{iotable_get}} or \code{\link{iotables_download}}.}
+\item{data_directory}{Optional path used with \code{\link[=iotable_get]{iotable_get()}} or
+\code{\link[=iotables_download]{iotables_download()}} to persist bulk data.}
 
-\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
-downloaded file in the \code{data_directory} or the temporary directory, 
-if it exists. Will force download only in a new session.}
+\item{force_download}{Logical. Defaults to \code{TRUE}. If \code{FALSE}, reuse an
+existing file in \code{data_directory} or \code{tempdir()} when available.}
 }
 \value{
-A vector with the years that have available input-output tables.
+A numeric vector of years, or a date vector if
+\code{time_unit = "time"}.
 }
 \description{
-The function selects the available tables by year or time as a date 
-for a specific country and currency unit in the Eurostat bulk file.
+Query which years are available for a given Eurostat IO product,
+country (\code{geo}), and currency unit in a bulk download.
 }
 \details{
-Unless you want to work with bulk data files, you should not invoke  \code{\link{iotables_download}} 
-directly, rather via this function, if and when it is necessary.
+This function is usually called indirectly via \code{\link[=iotable_get]{iotable_get()}}.
+You normally do not need to call \code{\link[=iotables_download]{iotables_download()}} yourself
+unless working with bulk Eurostat files.
+
+Supported Eurostat products include (non-exhaustive):
+\itemize{
+\item \code{"naio_10_cp1700"} — Symmetric IO table, basic prices (product × product)
+\item \code{"naio_10_cp1750"} — Symmetric IO table, basic prices (industry × industry)
+\item \code{"naio_10_pyp1700"} — Symmetric IO table (product × product),
+previous years’ prices
+\item \code{"naio_10_pyp1750"} — Symmetric IO table (industry × industry),
+previous years’ prices
+\item \code{"naio_10_cp1620"} / \code{"naio_10_pyp1620"} — Trade & transport margins
+\item \code{"naio_10_cp1630"} / \code{"naio_10_pyp1630"} — Taxes less subsidies on products
+}
+
+See the \href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input–Output Tables page}.
 }
 \examples{
-germany_years <- iotable_year_get ( source = "germany_1995", geo = 'DE', 
-                                    unit = "MIO_EUR" )
+germany_years <- iotable_year_get(
+  source = "germany_1995", geo = "DE", unit = "MIO_EUR"
+)
+# Return as dates
+germany_dates <- iotable_year_get(
+  source = "germany_1995", geo = "DE",
+  unit = "MIO_EUR", time_unit = "time"
+)
+
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{key_column_create}()},
 \code{\link{matrix_round}()},
