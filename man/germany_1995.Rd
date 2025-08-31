@@ -3,19 +3,19 @@
 \docType{data}
 \name{germany_1995}
 \alias{germany_1995}
-\title{Simple input-output table for Germany, 1995}
+\title{Simple input–output table for Germany, 1995}
 \format{
 A data frame with 228 observations and 11 variables:
 \describe{
 \item{prod_na}{Technology codes in row names, following Eurostat
 conventions.}
-\item{prod_na_lab}{Longer labels corresponding to \code{t_rows2}.}
+\item{prod_na_lab}{Longer labels corresponding to the \code{t_rows2} codes.}
 \item{induse}{Column labels, following Eurostat conventions with
 minor differences.}
-\item{iotables_row}{Row labels (to be used in key columns), using
-\code{iotables} abbreviations.}
-\item{iotables_col}{Column labels using \code{iotables} abbreviations.}
-\item{values}{Table values in million euros.}
+\item{iotables_row}{Row labels (used in key columns) in \code{iotables}
+abbreviations.}
+\item{iotables_col}{Column labels in \code{iotables} abbreviations.}
+\item{values}{Table values in millions of euros.}
 \item{unit}{Unit identifier. Always \code{"MIO_EUR"}.}
 \item{unit_lab}{Label for the unit: "million euros". Eurostat usually
 provides both euro and national currency values.}
@@ -25,16 +25,16 @@ provides both euro and national currency values.}
 }
 }
 \source{
-\link{Eurostat Manual of Supply, Use and Input-Output Tables, p. 482}(
-https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/
-b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)
+Eurostat (2008). \emph{Eurostat Manual of Supply, Use and Input–Output
+Tables}, p. 482. Available from:
+\url{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF}
 }
 \usage{
 germany_1995
 }
 \description{
-Replication dataset from the \strong{Eurostat Manual}, Table 15.4:
-\emph{Input-output table of domestic output at basic prices (Version A)}.
+Replication dataset from the Eurostat Manual, Table 15.4:
+\emph{Input–output table of domestic output at basic prices (Version A)}.
 }
 \details{
 This dataset is used for testing and documentation purposes. It is a
