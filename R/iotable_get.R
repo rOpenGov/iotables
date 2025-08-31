@@ -63,7 +63,7 @@
 #' @importFrom dplyr filter select mutate rename left_join arrange
 #' @importFrom dplyr mutate_if
 #' @importFrom tidyselect one_of all_of
-#' @importFrom tidyr spread
+#' @importFrom tidyr spread pivot_wider
 #' @importFrom forcats fct_reorder
 #' @importFrom lubridate year
 #' @importFrom utils data
