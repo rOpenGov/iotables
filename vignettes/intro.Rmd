@@ -42,7 +42,7 @@ de_output <- primary_input_get(germany_io, "output")
 print(de_output[c(1:4)])
 ```
 
-The `input_flow()` function selects the first quadrant, often called as input flow matrix, or inter-industry matrix, from the German input-output table. The `primary_input_get()` selects on of the primary inputs, in this case, the output from the table. 
+The `input_flow()` function selects the first quadrant, often called the input flow matrix, or inter-industry matrix, from the German input-output table. The `primary_input_get()` selects one of the primary inputs, in this case, the output from the table. 
 
 ## Direct effects
 
@@ -54,7 +54,7 @@ The input coefficients for domestic intermediates are defined in the [Eurostat M
 
 The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the *Eurostat Manual*.
 
-(9)  \eqn{a_{ij}} = \eqn{X_{ij} / x_{j}}  [recap: (43) is the same, and the same equation is (2) on page 484 with comparative results]
+(9) \deqn{a_{ij} = X_{ij} / x_{j}}{a_ij = X_ij / x_j}  [recap: (43) is the same, and the same equation is (2) on page 484 with comparative results]
 
 It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.
 
@@ -144,7 +144,7 @@ de_emp_indicator <- input_indicator_create(
 vector_transpose_longer(de_emp_indicator)
 ```
 
-Often we want to analyse the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated / disaggregated precisely with the same industry breakup as our SIOT table.
+Often we want to analyse the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated or disaggregated precisely with the same industry breakup as our SIOT table.
 
 European employment statistics have greater detail than our tables, so employment statistics must be aggregated to conform the 60 (61, 62) columns of the SIOT.  There is a difference in the columns based on how national statistics offices treat imputed real estate income and household production, and trade margins. Czech SIOTs are smaller than most SIOTs because they do not have these columns and rows.
 
@@ -214,7 +214,7 @@ The indicator shows that manufacturing has the lowest, and other services has th
 
 *You can check these values against the Table 15.16 of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) on page 501 (row 10).*
 
-You can recreate the whole matrix, when the data data permits, with `input_multipliers_create()` as shown here. Alternatively, you can create your own custom multipliers with `multiplier_create()` as shown in the following example. 
+You can recreate the whole matrix, when the data permits, with `input_multipliers_create()` as shown here. Alternatively, you can create your own custom multipliers with `multiplier_create()` as shown in the following example. 
 
 ```{r inputmultipliers}
 input_reqr <- coefficient_matrix_create(
@@ -237,7 +237,7 @@ These multipliers are Type-I multipliers. The type-I GVA multiplier shows the to
 
 ### Employment multipliers
 
-The E matrix contains the input coefficients for labor (created by `input_indicator_create()`). The following matrix equation defines the employment multipliers.
+The E matrix contains the input coefficients for labour (created by `input_indicator_create()`). The following matrix equation defines the employment multipliers.
 
 (64) Z = E(I-A)^-1^ 
 
@@ -311,7 +311,7 @@ vector_transpose_longer(backward_linkages(I_de),
 
 *You can check the results against Table 15.19 on page 506 of the* Eurostat Manual.
 
-Manufacturing has the highest backward linkages, and other services the least. An increased demand for manufacturing usually effects supplier industries. Service industry usually have a high labor input, and their main effect is increased spending of the wages earned in the services.
+Manufacturing has the highest backward linkages, and other services the least. An increased demand for manufacturing usually affects supplier industries. Service industry usually have a high labour input, and their main effect is increased spending of the wages earned in the services.
 
 ### Forward linkages 
 

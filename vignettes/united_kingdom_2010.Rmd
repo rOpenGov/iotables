@@ -19,9 +19,9 @@ library(tidyr, quietly = TRUE)
 library(testthat, quietly = TRUE)
 ```
 
-The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, organized data is available with them. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. 
+The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, and organised data is available. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table. 
 
-It is unlikely that these tables will be required by other purposes than controlling the package. The UK IO tables for other years are available these are consistent with different Blue Books and there could therefore be important methodological and classification changes. Furthermore, ONS currently publishes ESA2010 compatible SIOTs with analytical tables annually.
+It is unlikely these tables will be required for purposes other than validating the package. The UK IO tables for other years are available these are consistent with different Blue Books and there could therefore be important methodological and classification changes. Furthermore, ONS currently publishes ESA2010 compatible SIOTs with analytical tables annually.
 
 ```{r read_control_data, eval=FALSE}
 uk_2010_data <- iotables_download(source = "uk_2010")
@@ -67,18 +67,20 @@ test_that("correct data is returned", {
 })
 ```
 
-Comparing the first 7 columns of the two coefficient matrixes at 8 decimal point precision they are equal. Given the size of the matrixes, not all the matrix is compared here, but such a comparison can be made. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.
+Comparing the first seven columns of the two coefficient matrices are equal to eight decimal places. Given the size of the matrixes, not all columns are compared here, but such a comparison could be performed if needed. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.
 
 ## Leontief-inverse
 
-The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns at 8 digit precision we see that the re-calculated inverse and the published inverse is the same.
+The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns we see that the recalculated inverse and the published inverse are identical to eight decimal places.
 
 ```{r compare_inverse}
 uk_calculated_inverse <- leontief_inverse_create(uk_input_coeff)
 
 inverse_comparison <- select(uk_calculated_inverse, 1) %>%
   left_join(uk_calculated_inverse, by = "prod_na")
-
+```
+```{r compare_inverse_2, eval=FALSE}
+# Not evaluated in the vignette:
 test_that("correct data is returned", {
   expect_equal(
     round(uk_calculated_inverse[, 2:8], 8),
@@ -206,8 +208,8 @@ iotables:::create_knitr_table(
 )
 ```
 
-
 ## GVA multipliers
+
 Following from the GVA effects, after summarizing GVA and adding it to the input requirements we can calculate the `GVA multipliers`.
 
 ```{r gva_comp, eval=FALSE}
@@ -224,13 +226,6 @@ gva_multipliers <- input_multipliers_create(
   left_join(gva_multiplier_results, by = "uk_row_label") %>%
   filter(!is.na(uk_row_label)) %>%
   select(prod_na, uk_row_label, values, `GVA multiplier`)
-
-iotables:::create_knitr_table(
-  data_table = gva_multipliers[1:10, ], digits = 4,
-  caption = "Comparison of Calculated And Published GVA Multipliers",
-  col.names = c("industry code", "row label", "calculated", "published"),
-  col_width = c(2, 11, 3, 3)
-)
 
 iotables:::create_knitr_table(
   data_table = gva_multipliers[1:10, ],

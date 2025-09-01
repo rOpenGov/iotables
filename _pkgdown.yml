@@ -43,6 +43,12 @@ articles:
       See also Get Started.
     contents:
        - united_kingdom_2010
+  - title: "Terminology"
+    desc: >
+      An ongoing review of the terminology of the package in the light of EU, UN
+      and scientific sources.
+    contents:
+       - terminology
 
 reference:
   - title: "Overview"
