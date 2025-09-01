@@ -20,7 +20,7 @@
 #'   `"SOX_SO2E"`. See **Details** for the full list.
 #' @param geo Country code. The special value `"germany_1995"` returns the
 #'   built-in replication dataset [germany_airpol].
-#' @param year Reference year (≥2008 for NACE Rev. 2 statistics).
+#' @param year Reference year (2008 or later for NACE Rev. 2 statistics).
 #' @param unit Unit of measure. Defaults to `"THS_T"` (thousand tons).
 #' @param data_directory Optional directory path. If valid, the downloaded and
 #'   pre-processed data will be saved here.

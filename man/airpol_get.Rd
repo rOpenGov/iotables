@@ -25,7 +25,7 @@ airpol_get(
 \item{geo}{Country code. The special value \code{"germany_1995"} returns the
 built-in replication dataset \link{germany_airpol}.}
 
-\item{year}{Reference year (≥2008 for NACE Rev. 2 statistics).}
+\item{year}{Reference year (2008 or later for NACE Rev. 2 statistics).}
 
 \item{unit}{Unit of measure. Defaults to \code{"THS_T"} (thousand tons).}
 
