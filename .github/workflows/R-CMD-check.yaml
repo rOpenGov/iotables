@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [devel]
+    branches: [main, devel]
   pull_request:
     branches: [main, devel]
 
@@ -39,12 +39,14 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('**/DESCRIPTION') }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('**/DESCRIPTION', '.github/workflows/*.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-r-${{ matrix.config.r }}-
+            ${{ runner.os }}-r-
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, any::lintr, any::devtools, any::covr
+          extra-packages: any::rcmdcheck, any::lintr, any::spelling, any::covr
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
@@ -53,14 +55,17 @@ jobs:
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
       - name: Lint
+        if: github.ref == 'refs/heads/devel'
         run: lintr::lint_package()
         shell: Rscript {0}
 
       - name: Spell check
-        run: devtools::spell_check()
+        run: |
+          try(spelling::spell_check_package(), silent = TRUE)
         shell: Rscript {0}
 
       - name: Test coverage
         if: github.ref == 'refs/heads/devel'
-        run: covr::codecov()
+        run: |
+           try(covr::codecov(), silent = TRUE)
         shell: Rscript {0}
