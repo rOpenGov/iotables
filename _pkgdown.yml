@@ -1,7 +1,9 @@
+url: https://iotables.dataobservatory.eu
+
 home:
   links:
-  - text: http://iotables.dataobservatory.eu
-    href: http://iotables.dataobservatory.eu
+  - text: Project site
+    href: https://iotables.dataobservatory.eu
 
 
 authors:
@@ -51,10 +53,6 @@ articles:
        - terminology
 
 reference:
-  - title: "Overview"
-    desc: "Package overview"
-    contents:
-      - iotables
   - title: "Importing"
     desc: >
       Download the data from the Eurostat warehouse, or, in special cases, from the package's in-built
@@ -145,7 +143,7 @@ reference:
       - metadata
       - primary_inputs
       - employment_metadata
-      - netherlands_2006
+      - netherlands_2000
   - title: "Validation Data - United Kingdom"
     desc: >
      Validation datasets for cross-checking with published results, and special datasets for Croatia and

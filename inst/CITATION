@@ -4,11 +4,11 @@ bibentry(
   author   =  person(given  ="Daniel", family="Antal", 
                      role = c("aut", "cre"), 
                      comment = c(ORCID = "0000-0001-7513-6760")), 
-  year     =  2024,
-  month    = "January", 
-  day      = "8", 
+  year     =  2025,
+  month    = "September", 
+  day      = "1", 
   publisher = "The Comprehensive R Archive Network",
   url      =  "https://iotables.dataobservatory.eu/",
-  doi      =  "10.5281/zenodo.10472240"
+  doi      =  "10.32614/CRAN.package.iotables"
 )
 

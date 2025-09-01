@@ -1,7 +1,36 @@
-# New development version
+# iotables 0.9.4
 
-* New development version updating test infrastructure, modernising documentation,
-removing outdated dependencies, and fixing some edge cases.
+# iotables 0.9.32xx
+
+## Minor release highlights
+
+This release focuses on stability, documentation, and preparing the
+ground for a forthcoming major release:
+
+- **Dependencies**: Updated for modern `dplyr` and `tidyr`, removed use
+  of deprecated `mutate_if()` and `plyr::mapvalues()`.
+- **Bug fixes**:
+  - Restored reproducibility of the `germany_1995` dataset from the
+    Eurostat Manual (Beutel, 2008).
+  - Corrected documentation mismatches for datasets and test results.
+  - Improved spelling consistency (en-GB).
+- **Documentation**:
+  - Expanded vignette on terminology (*work in progress*) to align
+    future terminology with Eurostat, UN, and OECD manuals.
+  - Clarified dataset origins (`netherlands_2000`, `uk_test_results`,
+    `germany_airpol`) and improved examples/tests against published
+    results.
+  - Improved developer notes in `data-raw/` to ensure reproducibility of
+    bundled datasets.
+  - Improved and modernised testthat suite for better unit testing and 
+    153 new unit tests.
+  - **Pkgdown site**: cleaned configuration, fixed missing URL and
+  reference errors.
+
+This version maintains backward compatibility with previous 0.9.3 (CRAN)
+releases, while setting the stage for a **future 1.0 release** with
+extended SIOT sources, enhanced reliability, and new functionality.
+
 
 # iotables 0.9.32
 
