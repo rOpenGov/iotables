@@ -64,13 +64,25 @@ jobs:
           try(spelling::spell_check_package(), silent = TRUE)
         shell: Rscript {0}
 
-      - name: Test coverage
+      - name: Test coverage (covr)
         if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel') &&
             matrix.config.os == 'ubuntu-latest' &&
-             matrix.config.r == 'release'
-         run: |
-           try(covr::codecov(token = Sys.getenv("CODECOV_TOKEN")), silent = TRUE)
-         shell: Rscript {0}
-         env:
-            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+            matrix.config.r == 'release'
+        run: |
+          cov <- covr::package_coverage()
+          covr::to_cobertura(cov, file = "coverage.xml")
+          try(covr::codecov(token = Sys.getenv("CODECOV_TOKEN"), coverage = cov),
+              silent = TRUE)
+        shell: Rscript {0}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Upload coverage to Codecov (action)
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel') &&
+            matrix.config.os == 'ubuntu-latest' &&
+            matrix.config.r == 'release'
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          fail_ci_if_error: true
