@@ -8,49 +8,45 @@ input_coefficient_matrix_create(data_table, households = FALSE, digits = NULL)
 }
 \arguments{
 \item{data_table}{A symmetric input–output table, a use table,
-a margins or tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
+or margins/tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{households}{Logical; include the households column if available. Default \code{FALSE}.}
+\item{households}{Logical; include the households column if available.
+Default \code{FALSE}.}
 
-\item{digits}{Optional integer precision to round the resulting matrix. Default \code{NULL}
-(no rounding).}
+\item{digits}{Optional integer precision to round the resulting matrix.
+Default \code{NULL} (no rounding).}
 }
 \value{
-A \code{data.frame} containing the input coefficient matrix (first quadrant / products),
-with the key (row label) retained as the first column. Any TOTAL rows/columns
-named like \code{"cpa_total"} or \code{"total"} (case-insensitive) are removed. If
-\code{digits} is provided, results are rounded.
+A \code{data.frame} containing the input coefficient matrix (products ×
+products), with the key (row label) retained as the first column.
+Any TOTAL rows/columns (\code{"cpa_total"}, \code{"total"}) are removed.
 }
 \description{
 Create an input coefficient matrix from the input flow matrix and the
-output vector. The two inputs must have consistent labelling, i.e.
-the same product/industry column names must be found in the use table
-(input flow) and in the output vector.
+output vector. This is a thin wrapper around
+\code{\link[=coefficient_matrix_create]{coefficient_matrix_create()}}, with \code{total = "output"} and
+\code{return_part = "products"}.
 }
 \details{
 The input coefficients of production activities may be interpreted as the
 corresponding cost shares for products and primary inputs in total output.
 Our terminology follows the
-\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables}.
-
-In some sources this matrix is called the \emph{technological coefficients} matrix.
-This is a thin wrapper around \code{\link[=coefficient_matrix_create]{coefficient_matrix_create()}}.
+\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF}{Eurostat
+Manual of Supply, Use and Input–Output Tables}. In some sources this
+is called the \emph{technological coefficients matrix}.
 }
 \examples{
-# Basic usage with the package-provided demo table
 cm <- input_coefficient_matrix_create(
-  iotable_get(),
-  total = "output",
+  iotable_get(source = "germany_1995"),
   digits = 4
 )
 head(cm)
 
-# Equivalent direct call via the underlying helper:
+# Equivalent direct call:
 cm2 <- coefficient_matrix_create(
-  data_table = iotable_get(),
+  iotable_get(source = "germany_1995"),
   total = "output",
   return_part = "products",
-  households = FALSE,
   digits = 4
 )
 
