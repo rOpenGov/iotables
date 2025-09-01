@@ -26,7 +26,7 @@ concurrency:
 
 defaults:
   run:
-    shell: bash -euo pipefail
+    shell: bash
 
 env:
   RHUB_CONFIG: ${{ github.event.inputs.config }}
@@ -41,16 +41,16 @@ jobs:
     steps:
       - name: Verify RHUB_TOKEN
         run: |
+          set -euo pipefail
           if [ -z "${{ secrets.RHUB_TOKEN }}" ]; then
             echo "::error::RHUB_TOKEN secret is not set. Add it in repo Settings → Secrets and variables → Actions."
             exit 1
           fi
-      # No checkout needed
+      # No checkout needed here
       - uses: r-hub/actions/setup@v1
         id: rhub-setup
         with:
           config: ${{ env.RHUB_CONFIG }}
-
 
   linux-containers:
     needs: setup
@@ -58,6 +58,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     name: "r-hub (container) — ${{ matrix.config.label }}"
+    env:
+      RHUB_TOKEN: ${{ secrets.RHUB_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
@@ -68,26 +70,26 @@ jobs:
       - uses: r-hub/actions/checkout@v1
       - uses: r-hub/actions/platform-info@v1
         with:
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
       - uses: r-hub/actions/setup-deps@v1
         with:
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
       - uses: r-hub/actions/run-check@v1
         with:
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+        continue-on-error: false
       - name: Upload r-hub results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: rhub-results-container-${{ matrix.config.label }}
           path: |
-            rhub-*.txt
-            rhub-*.log
+            **/*.Rcheck/**
+            rhub-*.{txt,log}
             rhub-library/
-            *.Rcheck/**
           if-no-files-found: ignore
           retention-days: 7
 
@@ -97,6 +99,8 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     timeout-minutes: 90
     name: "r-hub — ${{ matrix.config.label }}"
+    env:
+      RHUB_TOKEN: ${{ secrets.RHUB_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
@@ -106,28 +110,28 @@ jobs:
       - uses: r-hub/actions/setup-r@v1
         with:
           job-config: ${{ matrix.config.job-config }}
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
       - uses: r-hub/actions/platform-info@v1
         with:
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
       - uses: r-hub/actions/setup-deps@v1
         with:
           job-config: ${{ matrix.config.job-config }}
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
       - uses: r-hub/actions/run-check@v1
         with:
           job-config: ${{ matrix.config.job-config }}
-          token: ${{ secrets.RHUB_TOKEN }}
+          token: ${{ env.RHUB_TOKEN }}
+        continue-on-error: false
       - name: Upload r-hub results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: rhub-results-${{ matrix.config.label }}
           path: |
-            rhub-*.txt
-            rhub-*.log
+            **/*.Rcheck/**
+            rhub-*.{txt,log}
             rhub-library/
-            *.Rcheck/**
           if-no-files-found: ignore
           retention-days: 7
