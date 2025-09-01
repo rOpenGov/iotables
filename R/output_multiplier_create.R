@@ -22,7 +22,7 @@
 #'
 #' @family multiplier functions
 
-#' @importFrom tibble tibble
+#' @importFrom tibble as_tibble
 #' @importFrom stats setNames
 #'
 #' @examples
@@ -37,14 +37,14 @@
 
 output_multiplier_create <- function(input_coefficient_matrix) {
   inv <- leontief_inverse_create(input_coefficient_matrix)
-
+  multipliers <- colSums(inv[, -1, drop = FALSE])
   key_col <- names(inv)[1]
-  numeric_block <- inv[, -1, drop = FALSE]
-
-  multipliers <- colSums(numeric_block)
-
-  tibble::tibble(
-    stats::setNames(list("output_multipliers"), key_col),
-    !!!as.list(multipliers)
-  )
+  
+  # build a named list in base R
+  row <- c(list(output_multipliers = "output_multipliers"), 
+           as.list(multipliers))
+  names(row)[1] <- key_col
+  
+  tibble::as_tibble(row)
 }
+

@@ -1,6 +1,6 @@
 de_input_flow <- input_flow_get(iotable_get())
 
-nl <- netherlands_2006
+nl <- netherlands_2000
 nl_input_flow <- input_flow_get(data_table = nl)
 
 

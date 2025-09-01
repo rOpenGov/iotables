@@ -16,17 +16,17 @@ test_that("incorrect spelling is warned", {
 test_that("Leontief matrix values are correct", {
   # This tests need to be rewritten from the
   # original publication
-  nl_use <- input_flow_get(netherlands_2006)
+  nl_use <- input_flow_get(netherlands_2000)
   expect_s3_class(nl_use, "data.frame")
 
   nl_coeff_3 <- input_coefficient_matrix_create(
-    data_table = netherlands_2006,
+    data_table = netherlands_2000,
     digits = 3
   )
   expect_s3_class(nl_use, "data.frame")
 
   nl_coeff <- input_coefficient_matrix_create(
-    data_table = netherlands_2006,
+    data_table = netherlands_2000,
     digits = NULL
   )
 })

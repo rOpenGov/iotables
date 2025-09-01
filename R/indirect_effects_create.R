@@ -16,15 +16,15 @@
 #'   (key) column to allow sorting or joins with other tables.
 #'
 #' @examples
-#' data(netherlands_2006)
+#' data(netherlands_2000)
 #'
 #' input_coeff_nl <- input_coefficient_matrix_create(
-#'   data_table = netherlands_2006,
+#'   data_table = netherlands_2000,
 #'   households = FALSE
 #' )
 #'
 #' compensation_indicator <- input_indicator_create(
-#'   netherlands_2006, "compensation_employees"
+#'   netherlands_2000, "compensation_employees"
 #' )
 #'
 #' I_nl <- leontief_inverse_create(input_coeff_nl)

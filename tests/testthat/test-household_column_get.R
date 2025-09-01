@@ -9,10 +9,10 @@ test_that("household_column_get works with germany_1995", {
   )
 })
 
-test_that("household_column_get works with netherlands_2006", {
-  data("netherlands_2006")
+test_that("household_column_get works with netherlands_2000", {
+  data("netherlands_2000")
 
-  households <- household_column_get(netherlands_2006)
+  households <- household_column_get(netherlands_2000)
 
   expect_s3_class(households, "data.frame")
   expect_equal(names(households)[2], "final_consumption_households")

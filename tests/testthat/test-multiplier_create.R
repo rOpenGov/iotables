@@ -51,11 +51,11 @@ test_that("Eurostat manual (§5.0.1): DE multipliers match published", {
 
 
 later <- function() {
-  nl_use_2 <- input_flow_get(netherlands_2006,
+  nl_use_2 <- input_flow_get(netherlands_2000,
     households = TRUE
   )
 
-  nl_coeff_2 <- input_coefficient_matrix_create(netherlands_2006,
+  nl_coeff_2 <- input_coefficient_matrix_create(netherlands_2000,
     households = TRUE,
     digits = NULL
   )
@@ -73,12 +73,12 @@ later <- function() {
   )
 
 
-  gva_indicator_nl_2 <- input_indicator_create(netherlands_2006,
+  gva_indicator_nl_2 <- input_indicator_create(netherlands_2000,
     "value_added_bp",
     households = TRUE
   )
 
-  income_indicator_nl_2 <- input_indicator_create(netherlands_2006,
+  income_indicator_nl_2 <- input_indicator_create(netherlands_2000,
     "compensation_employees",
     households = TRUE
   )
@@ -100,7 +100,7 @@ later <- function() {
 
 
 
-  test_that("correct data is returned from netherlands_2006", {
+  test_that("correct data is returned from netherlands_2000", {
     expect_equal(as.numeric(income_nl_multipliers_2)[1:6],
       income_multipliers_2_published,
       tolerance = 1e-3
