@@ -24,7 +24,7 @@ ground for a forthcoming major release:
     bundled datasets.
   - Improved and modernised testthat suite for better unit testing and 
     153 new unit tests.
-  - **Pkgdown site**: cleaned configuration, fixed missing URL and
+  - **Website**: cleaned configuration, fixed missing URL and
   reference errors.
 
 This version maintains backward compatibility with previous 0.9.3 (CRAN)
