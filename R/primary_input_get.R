@@ -28,11 +28,20 @@
 #' @family iotables processing functions
 #'
 #' @examples
-#' primary_input_get(iotable_get(), "compensation of employees")
-#' primary_input_get(iotable_get(), "consumption of fixed capital")
-#' # With package’s default short code:
-#' primary_input_get(iotable_get(), "compensation_employees")
+#' # Get the Germany 1995 demo SIOT with default labelling
+#' de_iot <- iotable_get(source = "germany_1995")
 #'
+#' # Select compensation of employees (row code: "compensation_employees")
+#' primary_input_get(de_iot, "compensation_employees")
+#'
+#' # Get the same table with Eurostat short labelling
+#' de_iot_short <- iotable_get(source = "germany_1995", labelling = "short")
+#'
+#' # Consumption of fixed capital (row code: "K1")
+#' primary_input_get(de_iot_short, "K1")
+#'
+#' # Operating surplus and mixed income, net (row code: "B2A3N")
+#' primary_input_get(de_iot_short, "B2A3N")
 #' @export
 primary_input_get <- function(data_table,
                               primary_input = "compensation_employees") {
