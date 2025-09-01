@@ -3,19 +3,18 @@
 
 build_TEMPLATE <- function(
     path = file.path("data-raw", "TEMPLATE.csv"),
-    metadata = readRDS(file.path("data-raw", "TEMPLATE_metadata.rds"))
-) {
+    metadata = readRDS(file.path("data-raw", "TEMPLATE_metadata.rds"))) {
   library(dplyr)
   library(tidyr)
-  
+
   # TODO: load the correct raw CSV
   raw <- read.csv(path, stringsAsFactors = FALSE)
-  
+
   # TODO: add totals if necessary (example from Germany)
   raw <- raw %>%
     mutate(total = agriculture_group + industry_group + construction +
-             trade_group + business_services_group + other_services_group)
-  
+      trade_group + business_services_group + other_services_group)
+
   # TODO: pivot exactly the right set of columns (list them explicitly!)
   long <- raw %>%
     pivot_longer(
@@ -33,19 +32,19 @@ build_TEMPLATE <- function(
     mutate(
       # TODO: adapt induse recode to dataset
       induse = dplyr::recode(iotables_col,
-                             "agriculture_group" = "CPA_A",
-                             "industry_group" = "CPA_B-E",
-                             "construction" = "CPA_F",
-                             "trade_group" = "CPA_G-I",
-                             "business_services_group" = "CPA_J-N",
-                             "other_services_group" = "CPA_O-T",
-                             "total" = "CPA_TOTAL",
-                             "final_consumption_households" = "P3_S14",
-                             "final_consumption_government" = "P3_S13",
-                             "gross_capital_formation" = "P5",
-                             "inventory_change" = "P52",
-                             "exports" = "P6",
-                             "total_final_use" = "TFU"
+        "agriculture_group" = "CPA_A",
+        "industry_group" = "CPA_B-E",
+        "construction" = "CPA_F",
+        "trade_group" = "CPA_G-I",
+        "business_services_group" = "CPA_J-N",
+        "other_services_group" = "CPA_O-T",
+        "total" = "CPA_TOTAL",
+        "final_consumption_households" = "P3_S14",
+        "final_consumption_government" = "P3_S13",
+        "gross_capital_formation" = "P5",
+        "inventory_change" = "P52",
+        "exports" = "P6",
+        "total_final_use" = "TFU"
       ),
       # TODO: adjust geo, time, units
       geo = "DE",
@@ -55,18 +54,19 @@ build_TEMPLATE <- function(
       unit_lab = "Million euro",
       values = as.integer(round(values))
     )
-  
+
   # Apply metadata
   long$prod_na <- factor(long$prod_na, levels = metadata$prod_na_order)
   long$iotables_col <- factor(long$iotables_col,
-                              levels = metadata$iotables_col_levels)
+    levels = metadata$iotables_col_levels
+  )
   long <- dplyr::arrange(long, prod_na, iotables_col)
-  
+
   # Apply label lookups
   key <- paste(long$prod_na, long$iotables_col)
   long$prod_na_lab <- metadata$prod_na_lab_lookup[key]
-  long$i otables_row <- metadata$i otables_row_lookup[key]
-  
+  long$iotables_row <- metadata$iotables_row_lookup[key]
+
   # Coerce to stored classes
   for (col in names(metadata$col_classes)) {
     cls <- metadata$col_classes[[col]]
@@ -80,7 +80,7 @@ build_TEMPLATE <- function(
       long[[col]] <- as.character(long[[col]])
     }
   }
-  
+
   # Final selection in CRAN order
   out <- long %>%
     select(
@@ -88,7 +88,7 @@ build_TEMPLATE <- function(
       values, induse, geo, geo_lab, time, unit, unit_lab
     ) %>%
     as.data.frame()
-  
+
   out
 }
 

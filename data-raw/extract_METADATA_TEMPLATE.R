@@ -3,12 +3,12 @@
 
 extract_METADATA_TEMPLATE <- function(dataset) {
   stopifnot(is.data.frame(dataset))
-  
+
   list(
     col_classes = sapply(dataset, class),
     prod_na_order = as.character(unique(dataset$prod_na)),
     iotables_col_levels = if ("iotables_col" %in% names(dataset) &&
-                              is.factor(dataset$iotables_col)) {
+      is.factor(dataset$iotables_col)) {
       levels(dataset$iotables_col)
     } else {
       NULL
@@ -18,8 +18,8 @@ extract_METADATA_TEMPLATE <- function(dataset) {
       paste(dataset$prod_na, dataset$iotables_col)
     ),
     iotables_row_lookup = setNames(
-      dataset$i otables_row,
-      paste(dataset$prod_na, dataset$i otables_col)
+      dataset$iotables_row,
+      paste(dataset$prod_na, dataset$iotables_col)
     )
   )
 }
