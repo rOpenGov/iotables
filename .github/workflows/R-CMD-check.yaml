@@ -65,8 +65,12 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel') && matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
-        run: |
-          try(covr::codecov(), silent = TRUE)
-        shell: Rscript {0}
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devel') &&
+            matrix.config.os == 'ubuntu-latest' &&
+             matrix.config.r == 'release'
+         run: |
+           try(covr::codecov(token = Sys.getenv("CODECOV_TOKEN")), silent = TRUE)
+         shell: Rscript {0}
+         env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
