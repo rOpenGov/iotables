@@ -1,25 +1,33 @@
 ## Test environments
-* Windows 10, x86_64-w64-mingw32, R version 4.3.2 (2023-10-31 ucrt)
-* r-release-macosx-arm64|4.3.0|macosx|macOS 13.3.1 (22E261)|Mac mini|Apple M1||en_US.UTF-8|macOS 11.3|clang-1403.0.22.14.1|GNU Fortran (GCC) 12.2.0 on macbuilder
-
+* Windows 11, R version 4.5.0 (2025-04-11 ucrt)
+* rhub: linux, macOS (intel/arm64), Windows; 
+* rhub: Windows Server 2022, old, current and new release
 
 ## testthat results
 [ FAIL 0 | WARN 0 | SKIP 6 | PASS 234 ]
 
-Skipped tests work with downloading large Eurostat datasets from the Eurostat 
-warehouse for reproducing data samples.  They are not needed for testing the 
-package functionality and due to their heavy payload are exempted from testing 
-on CRAN.
+Skipped tests involve downloading large Eurostat datasets from the Eurostat 
+warehouse for reproducing sample data.  
+They are not required for package functionality and are exempt from CRAN testing 
+due to their heavy payload.
 
 ## Notes
-This is a minor release of iotables.
+This is a **minor release** of **iotables**.
 
-- Updates dependencies to current tidyverse (avoiding deprecated functions).
+- Updates dependencies to the current tidyverse, avoiding deprecated functions.
 - Fixes small bugs in dataset reproducibility and documentation mismatches.
 - Improves vignettes, terminology notes, and metadata alignment.
 - Adds background source checks for built-in datasets (Eurostat, UN, OECD).
-- Prepares for a forthcoming major release with extended SIOT coverage
-  and new analytical functionality.
+- Prepares for a forthcoming **major release** with extended SIOT coverage and 
+  new analytical functionality.
 
-This release maintains backward compatibility and focuses on stability,
-documentation, and quality control.
+This release maintains backward compatibility and focuses on **stability,
+documentation, and quality control**.
+
+### External links
+The package includes archived links to the UK National Archives 
+(ONS Input-Output Analytical Tables 2010).  
+These links return HTTP 202 *Accepted* but are valid and stable archival 
+references.  
+They are used **only in a vignette** for replication/validation and are not 
+essential for package functionality.
