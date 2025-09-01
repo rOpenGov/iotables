@@ -51,7 +51,13 @@ quadrant_separator_find_2 <- function(data_table, col_name = NULL) {
   next_n <- NULL
   prev_n <- max(which(var_names %in% potential_last_columns), na.rm = TRUE)
 
-  ordered_patterns <- potential_quadrant_2[unlist(lapply(lapply(potential_quadrant_2, \(x) grepl(x, var_names)), any))]
+  ordered_patterns <- potential_quadrant_2[
+    unlist(
+      lapply(
+        lapply(
+          potential_quadrant_2, function(x) grepl(x, var_names)
+          ), any)
+      )]
 
   if (length(ordered_patterns) > 0 && !is.na(ordered_patterns)[1]) {
     next_n <- min(which(grepl(ordered_patterns[1], var_names)), na.rm = TRUE)

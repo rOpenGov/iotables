@@ -24,5 +24,5 @@
 #' @export
 matrix_round <- function(data_table, digits = 0) {
   data_table %>%
-    mutate(across(where(is.numeric), \(x) round(x, digits)))
+    mutate(across(where(is.numeric), function(x) round(x, digits)))
 }
