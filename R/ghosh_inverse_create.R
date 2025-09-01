@@ -6,7 +6,7 @@
 #' @details
 #' The Ghosh inverse is defined as \eqn{G = (I - B)^{-1}}, where \eqn{B} is
 #' the output-coefficient matrix created by
-#' [output_coefficient_matrix_create()].  
+#' [output_coefficient_matrix_create()].
 #'
 #' See the United Nations *Handbook on Supply and Use Tables and Input–Output
 #' Tables with Extensions and Applications* (2018, Rev. 1), pp. 622–639

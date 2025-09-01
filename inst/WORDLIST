@@ -47,7 +47,6 @@ csv
 dataobservatory
 deqn
 detailedpubversion
-doi
 dplyr
 egan
 endogenise
@@ -76,7 +75,6 @@ magrittr
 metacran
 naio
 occassional
-org
 ouput
 packageversion
 prev
@@ -104,4 +102,3 @@ xls
 years’
 za
 zavod
-zenodo

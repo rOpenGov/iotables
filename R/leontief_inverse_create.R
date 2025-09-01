@@ -5,12 +5,12 @@
 #'
 #' @details
 #' The Leontief inverse is defined as
-#' \eqn{L = (I - A)^{-1}},  
+#' \eqn{L = (I - A)^{-1}},
 #' where \eqn{A} is the input-coefficient matrix created by
-#' [input_coefficient_matrix_create()].  
+#' [input_coefficient_matrix_create()].
 #'
 #' In the Eurostat *Manual of Supply, Use and Input–Output Tables* (Beutel, 2008),
-#' this formulation appears in Chapter 15 (see equations (19), (43), etc.).  
+#' this formulation appears in Chapter 15 (see equations (19), (43), etc.).
 #' The UN *Handbook on Supply and Use Tables and Input–Output Tables with Extensions
 #' and Applications* (2018, Rev. 1) also uses this standard definition (see pp. 619–621).
 #'
