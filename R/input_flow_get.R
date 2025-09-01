@@ -53,7 +53,10 @@
 input_flow_get <- function(data_table,
                            empty_remove = FALSE,
                            households = TRUE) {
-  data_table <- mutate(data_table, across(where(is.factor), as.character))
+  
+  data_table <- mutate(data_table, 
+                       across(where(is.factor), as.character)
+                       )
 
   # Remove empty columns and rows
   if (empty_remove) siot <- empty_remove(data_table)
@@ -69,7 +72,7 @@ input_flow_get <- function(data_table,
       by = names(quadrant)[1]
     )
   } else {
-    input_flow_table <- select(data_table, 1:last_column)
+    input_flow_table <- data_table[ , seq_len(last_column)]
   }
 
   key_column <- tolower(as.character(unlist(input_flow_table[, 1])))
