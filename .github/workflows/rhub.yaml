@@ -1,11 +1,3 @@
-# R-hub's generic GitHub Actions workflow file. It's canonical location is at
-# https://github.com/r-hub/actions/blob/v1/workflows/rhub.yaml
-# You can update this file to a newer version using the rhub2 package:
-#
-# rhub::rhub_setup()
-#
-# It is unlikely that you need to modify this file manually.
-
 name: R-hub
 run-name: "${{ github.event.inputs.id }}: ${{ github.event.inputs.name || format('Manually run by {0}', github.triggering_actor) }}"
 
@@ -13,43 +5,63 @@ on:
   workflow_dispatch:
     inputs:
       config:
-        description: 'A comma separated list of R-hub platforms to use.'
+        description: "Comma-separated R-hub platforms (e.g. linux,windows,macos)"
         type: string
-        default: 'linux,windows,macos'
+        default: "linux,windows,macos"
       name:
-        description: 'Run name. You can leave this empty now.'
+        description: "Run name (optional)"
         type: string
       id:
-        description: 'Unique ID. You can leave this empty now.'
+        description: "Unique ID (optional)"
         type: string
 
-jobs:
+# Principle of least privilege for GITHUB_TOKEN
+permissions:
+  contents: read
 
+# Prevent overlapping manual runs on the same ref
+concurrency:
+  group: rhub-${{ github.ref }}-${{ github.event.inputs.id || 'manual' }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -euo pipefail
+
+env:
+  RHUB_CONFIG: ${{ github.event.inputs.config }}
+
+jobs:
   setup:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       containers: ${{ steps.rhub-setup.outputs.containers }}
       platforms: ${{ steps.rhub-setup.outputs.platforms }}
-
     steps:
-    # NO NEED TO CHECKOUT HERE
-    - uses: r-hub/actions/setup@v1
-      with:
-        config: ${{ github.event.inputs.config }}
-      id: rhub-setup
+      - name: Verify RHUB_TOKEN
+        if: ${{ !secrets.RHUB_TOKEN }}
+        run: |
+          echo "::error::RHUB_TOKEN secret is not set. Add it in repo Settings → Secrets and variables → Actions."
+          exit 1
+      # No checkout needed
+      - uses: r-hub/actions/setup@v1
+        id: rhub-setup
+        with:
+          config: ${{ env.RHUB_CONFIG }}
 
   linux-containers:
     needs: setup
     if: ${{ needs.setup.outputs.containers != '[]' }}
     runs-on: ubuntu-latest
-    name: ${{ matrix.config.label }}
+    timeout-minutes: 90
+    name: "r-hub (container) — ${{ matrix.config.label }}"
     strategy:
       fail-fast: false
       matrix:
         config: ${{ fromJson(needs.setup.outputs.containers) }}
     container:
       image: ${{ matrix.config.container }}
-
     steps:
       - uses: r-hub/actions/checkout@v1
       - uses: r-hub/actions/platform-info@v1
@@ -64,17 +76,29 @@ jobs:
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+      - name: Upload r-hub results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rhub-results-container-${{ matrix.config.label }}
+          path: |
+            rhub-*.txt
+            rhub-*.log
+            rhub-library/
+            *.Rcheck/**
+          if-no-files-found: ignore
+          retention-days: 7
 
   other-platforms:
     needs: setup
     if: ${{ needs.setup.outputs.platforms != '[]' }}
     runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.label }}
+    timeout-minutes: 90
+    name: "r-hub — ${{ matrix.config.label }}"
     strategy:
       fail-fast: false
       matrix:
         config: ${{ fromJson(needs.setup.outputs.platforms) }}
-
     steps:
       - uses: r-hub/actions/checkout@v1
       - uses: r-hub/actions/setup-r@v1
@@ -93,3 +117,15 @@ jobs:
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+      - name: Upload r-hub results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rhub-results-${{ matrix.config.label }}
+          path: |
+            rhub-*.txt
+            rhub-*.log
+            rhub-library/
+            *.Rcheck/**
+          if-no-files-found: ignore
+          retention-days: 7
