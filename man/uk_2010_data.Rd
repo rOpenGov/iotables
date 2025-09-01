@@ -40,9 +40,5 @@ You can retrieve the data with \code{\link{iotable_get}}, setting the
 \item{\code{uk_2010_inverse}}{ Leontief Inverse (product by product) }
 }
 }
-\seealso{
-Other Validation datasets: 
-\code{\link{netherlands_2006}}
-}
 \concept{Validation datasets}
 \keyword{datasets}

@@ -41,7 +41,6 @@
 #' European Communities.
 #'
 #' @seealso
-#' [germany_1995_2010] for the ESA 2010–aligned variant,
 #' [iotable_get()] for extracting comparable tables from Eurostat.
 #'
 #' @examples
@@ -50,4 +49,3 @@
 #' # Verify against the Eurostat manual:
 #' subset(germany_1995, prod_na == "CPA_A" & iotables_col == "agriculture_group")
 "germany_1995"
-

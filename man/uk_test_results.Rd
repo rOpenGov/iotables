@@ -35,8 +35,8 @@ for validation and testing of multiplier calculations in \code{iotables}.
 }
 \seealso{
 Other validation datasets: 
-\code{\link{germany_1995}},
-\code{\link{germany_airpol}}
+\code{\link{germany_airpol}},
+\code{\link{netherlands_2000}}
 }
 \concept{validation datasets}
 \keyword{datasets}

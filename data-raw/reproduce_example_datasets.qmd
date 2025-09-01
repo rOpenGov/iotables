@@ -1,0 +1,132 @@
+---
+title: "Workflow for Reproducible Legacy Datasets in iotables"
+format: html
+editor: visual
+---
+
+This document explains how to rebuild, check, and maintain the legacy example datasets shipped in `iotables`. These datasets (e.g. `germany_1995`, `croatia_2010`, `uk_2010`) are used for unit tests and examples. They must be **long-term reproducible**.
+
+## 1. Identify the canonical source
+
+Each dataset has three representations:
+
+-   **Manual example** (Eurostat, UN): the authoritative published table.
+-   **CSV transcription** in `data-raw/`: clean copy of the manual table.
+-   **CRAN dataset** in `data/`: the R data.frame shipped with the package.
+
+The CSV + a builder script in `data-raw/` must always recreate the CRAN dataset.
+
+## 2. Record reference metadata once
+
+Run this once with the CRAN dataset to capture its structure:
+
+```{r reference, eval=FALSE}
+data(germany_1995, package = "iotables")
+
+metadata <- list(
+  col_classes = sapply(germany_1995, class),
+  prod_na_order = as.character(unique(germany_1995$prod_na)),
+  iotables_col_levels = levels(germany_1995$iotables_col),
+  prod_na_lab_lookup = setNames(
+    germany_1995$prod_na_lab,
+    paste(germany_1995$prod_na, germany_1995$iotables_col)
+  ),
+  iotables_row_lookup = setNames(
+    germany_1995$iotablesrow,
+    paste(germany_1995$prod_na, germany_1995$iotablescol)
+  )
+)
+
+saveRDS(metadata, file.path("data-raw", "germany_1995_metadata.rds"))
+```
+
+Repeat for each dataset. Commit the \*\_metadata.rds alongside its CSV.
+
+## 3. Write a builder
+
+Each dataset has a small function in `data-raw/`:
+
+```{r builder, eval=FALSE}
+build_germany_1995 <- function(
+    path = file.path("data-raw", "Beutel_15_4_esa2010.csv")) {
+  germany <- read.csv(path, stringsAsFactors = FALSE) %>%
+    mutate(total = agriculture_group + industry_group + construction +
+      trade_group + business_services_group + other_services_group)
+
+  germany_long <- germany %>%
+    pivot_longer(
+      cols = c(
+        agriculture_group, industry_group, construction,
+        trade_group, business_services_group, other_services_group,
+        total,
+        final_consumption_households, final_consumption_government,
+        gross_capital_formation, inventory_change, exports,
+        total_final_use
+      ),
+      names_to = "iotables_col",
+      values_to = "values"
+    )
+
+  # add recoded induse and metadata here …
+}
+```
+
+## 4. Apply reference metadata
+
+After pivoting:
+
+-   Reorder rows with `prod_na_order`.
+
+-   Set factor levels with `iotables_col_levels`.
+
+-   Copy label strings with `prod_na_lab_lookup` and `iotables_row_lookup`.
+
+-   Coerce column classes to `col_classes`.
+
+## 5. Compare before overwrite
+
+Always compare against the CRAN dataset before saving:
+
+```{r comparison, eval=FALSE}
+old <- germany_1995
+new <- build_germany_1995()
+
+stopifnot(identical(unclass(old), unclass(new)))
+```
+
+Only if this passes:
+
+```{r, eval=FALSE}
+usethis::use_data(new, overwrite = TRUE)
+```
+
+## 6. Lock with tests
+
+Each dataset gets a regression test in tests/:
+
+```{r testing, eval=FALSE}
+test_that("germany_1995 rebuilds identically", {
+  new <- build_germany_1995()
+  expect_identical(unclass(germany_1995), unclass(new))
+})
+```
+
+## 7. Document provenance
+
+In the roxygen docstring of each dataset:
+
+-   Cite the manual source (Eurostat / UN, table number).
+-   Note that the dataset is rebuilt from the CSV in data-raw/.
+-   State that metadata (labels, factor levels) is applied to guarantee reproducibility.
+
+## 8. Principles
+
+Never use column ranges (e.g. a:b) in `pivot_longer()`. Always list the 13 columns explicitly to avoid silent mismatches.
+
+-   Numbers come from CSV/manual.
+-   Labels and factors come from saved metadata.
+-   Tests guarantee stability.
+
+## 9. Using the template functions
+
+To simplify maintenance of all legacy datasets, two generic helpers are provided in `data-raw/`. The first, `extract_METADATA_TEMPLATE()`, records the column classes, factor levels, and label lookups from an existing dataset on CRAN, and saves them as an `*.rds` file in `data-raw/`. This needs to be run only once per dataset. The second, `build_TEMPLATE()`, reads the corresponding CSV file, pivots it into tidy long form, applies the saved metadata, and outputs a data frame that should be byte-for-byte identical to the CRAN dataset. For each legacy dataset, copy these templates, replace `TEMPLATE` with the dataset name (e.g. `germany_1995` or `croatia_2010_1700`), and adjust the CSV path, column list to pivot, and any dataset-specific metadata such as `geo` or `time`. This workflow guarantees reproducibility and avoids the trial-and-error we encountered when rebuilding Germany 1995.

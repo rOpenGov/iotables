@@ -23,26 +23,32 @@ de <- de %>%
   )
 
 # Beutel/Eurostat block ordering (6 industry cols first)
-q1_id <- c("agriculture_group",
-           "industry_group",       # formerly "manufacturing_group"
-           "construction",
-           "trade_group",
-           "business_services_group",
-           "other_services_group")
+q1_id <- c(
+  "agriculture_group",
+  "industry_group", # formerly "manufacturing_group"
+  "construction",
+  "trade_group",
+  "business_services_group",
+  "other_services_group"
+)
 
 # Standard final demand columns present in your CSVs
-final_use_id <- c("final_consumption_households",
-                  "final_consumption_government",
-                  "gross_capital_formation",
-                  "inventory_change",
-                  "exports")
+final_use_id <- c(
+  "final_consumption_households",
+  "final_consumption_government",
+  "gross_capital_formation",
+  "inventory_change",
+  "exports"
+)
 
 # Core primary inputs for Quadrant 3 (value added rows)
 # (D.1, D.29–D.39 (net), K.1, B.2n+B.3n net)
-primary_id <- c("compensation_employees",
-                "net_tax_production",
-                "consumption_fixed_capital",
-                "os_mixed_income_net")
+primary_id <- c(
+  "compensation_employees",
+  "net_tax_production",
+  "consumption_fixed_capital",
+  "os_mixed_income_net"
+)
 
 # --- safety checks ----------------------------------------------------------
 stopifnot(all(q1_id %in% names(de)))
@@ -59,9 +65,11 @@ stopifnot(row_id_col %in% names(de))
 # --- slice Quadrant blocks --------------------------------------------------
 # Q1 & Q2 are the TOP industry rows (same 6 names as q1_id) in Beutel
 # Your pasted example shows those exact row labels:
-industry_rows <- c("agriculture_group", "industry_group", "construction",
-                   "trade_group", "business_services_group",
-                   "other_services_group")
+industry_rows <- c(
+  "agriculture_group", "industry_group", "construction",
+  "trade_group", "business_services_group",
+  "other_services_group"
+)
 
 # Q3 rows are the four primary inputs listed above
 # (Beutel also contains totals, GVA, output, taxes on products, employment,
@@ -75,7 +83,9 @@ get_matrix <- function(dat, r_ids, c_ids, rcol = row_id_col) {
     filter(.data[[rcol]] %in% r_ids) %>%
     select(all_of(c(rcol, c_ids))) %>%
     arrange(factor(.data[[rcol]], levels = r_ids)) %>%
-    { `rownames<-`(as.matrix(select(., all_of(c_ids))), pull(., rcol)) }
+    {
+      `rownames<-`(as.matrix(select(., all_of(c_ids))), pull(., rcol))
+    }
 }
 
 # Q1: industries × industries
@@ -93,7 +103,7 @@ siot_de <- iotable_create(
   q1_id = q1_id,
   final_use_id = final_use_id,
   primary_id = primary_id,
-  id_col = "prod_na"    # keep canonical name used across iotables
+  id_col = "prod_na" # keep canonical name used across iotables
 )
 
 # Optional: validate closure in the Q1–Q3 core (GVA/Output rows are outside)
@@ -124,9 +134,11 @@ de_long_from_new <- siot_de %>%
   arrange(t_rows2, t_cols2)
 
 # Example for adding GVA & Output rows if your CSV has them as rows
-extra_rows <- c("gva", "output_bp", "net_tax_products",
-                "employment_wage_salary", "employment_self_employed",
-                "employment_domestic_total")
+extra_rows <- c(
+  "gva", "output_bp", "net_tax_products",
+  "employment_wage_salary", "employment_self_employed",
+  "employment_domestic_total"
+)
 
 has_extra <- de %>%
   filter(.data[[row_id_col]] %in% extra_rows) %>%
@@ -155,18 +167,18 @@ de_long_from_new <- bind_rows(de_long_from_new, has_extra) %>%
 
 common_pairs <- inner_join(
   de_long_from_new %>% select(t_rows2, t_cols2) %>% distinct(),
-  germany_1995       %>% select(t_rows2, t_cols2) %>% distinct(),
-  by = c("t_rows2","t_cols2")
+  germany_1995 %>% select(t_rows2, t_cols2) %>% distinct(),
+  by = c("t_rows2", "t_cols2")
 )
 
 cmp <- de_long_from_new %>%
-  semi_join(common_pairs, by = c("t_rows2","t_cols2")) %>%
+  semi_join(common_pairs, by = c("t_rows2", "t_cols2")) %>%
   select(t_rows2, t_cols2, values_new = values) %>%
   inner_join(
     germany_1995 %>%
-      semi_join(common_pairs, by = c("t_rows2","t_cols2")) %>%
+      semi_join(common_pairs, by = c("t_rows2", "t_cols2")) %>%
       select(t_rows2, t_cols2, values_old = values),
-    by = c("t_rows2","t_cols2")
+    by = c("t_rows2", "t_cols2")
   ) %>%
   mutate(diff = values_new - values_old)
 
@@ -181,24 +193,24 @@ library(testthat)
 test_that("new iotable_create reproduces germany_1995 core cells", {
   # source("data-raw/germany_1995_recreate.R")  # or inline the steps here
   # we assume objects de_long_from_new and germany_1995 exist
-  
+
   common <- dplyr::inner_join(
     dplyr::select(de_long_from_new, t_rows2, t_cols2) %>% dplyr::distinct(),
-    dplyr::select(germany_1995,     t_rows2, t_cols2) %>% dplyr::distinct(),
-    by = c("t_rows2","t_cols2")
+    dplyr::select(germany_1995, t_rows2, t_cols2) %>% dplyr::distinct(),
+    by = c("t_rows2", "t_cols2")
   )
-  
+
   cmp <- de_long_from_new %>%
-    dplyr::semi_join(common, by = c("t_rows2","t_cols2")) %>%
+    dplyr::semi_join(common, by = c("t_rows2", "t_cols2")) %>%
     dplyr::select(t_rows2, t_cols2, values_new = values) %>%
     dplyr::inner_join(
       germany_1995 %>%
-        dplyr::semi_join(common, by = c("t_rows2","t_cols2")) %>%
+        dplyr::semi_join(common, by = c("t_rows2", "t_cols2")) %>%
         dplyr::select(t_rows2, t_cols2, values_old = values),
-      by = c("t_rows2","t_cols2")
+      by = c("t_rows2", "t_cols2")
     ) %>%
     dplyr::mutate(diff = values_new - values_old)
-  
+
   expect_true(all(abs(cmp$diff) < 1e-8 | (is.na(cmp$diff) &
-                                            is.na(cmp$values_new) & is.na(cmp$values_old))))
+    is.na(cmp$values_new) & is.na(cmp$values_old))))
 })

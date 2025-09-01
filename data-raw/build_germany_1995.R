@@ -24,15 +24,14 @@ saveRDS(
 germany_1995_metadata <- readRDS(file.path("data-raw", "germany_1995_metadata_for_rebuild.rds"))
 
 build_germany_1995 <- function(
-    path = file.path("data-raw", "Beutel_15_4_esa2010.csv")
-) {
+    path = file.path("data-raw", "Beutel_15_4_esa2010.csv")) {
   library(dplyr)
   library(tidyr)
-  
+
   germany <- read.csv(path, stringsAsFactors = FALSE) %>%
     mutate(total = agriculture_group + industry_group + construction +
-             trade_group + business_services_group + other_services_group)
-  
+      trade_group + business_services_group + other_services_group)
+
   # pivot exactly 13 columns
   germany_long <- germany %>%
     pivot_longer(
@@ -47,7 +46,7 @@ build_germany_1995 <- function(
       names_to = "iotables_col",
       values_to = "values"
     )
-  
+
   # enforce factor levels and recode induse
   iotables_col_levels <- c(
     "agriculture_group", "industry_group", "construction",
@@ -57,52 +56,53 @@ build_germany_1995 <- function(
     "total_final_use"
   )
   germany_long$iotables_col <- factor(germany_long$iotables_col,
-                                      levels = iotables_col_levels)
-  
+    levels = iotables_col_levels
+  )
+
   germany_long <- germany_long %>%
     mutate(
       induse = dplyr::recode(iotables_col,
-                             "agriculture_group" = "CPA_A",
-                             "industry_group" = "CPA_B-E",
-                             "construction" = "CPA_F",
-                             "trade_group" = "CPA_G-I",
-                             "business_services_group" = "CPA_J-N",
-                             "other_services_group" = "CPA_O-T",
-                             "total" = "CPA_TOTAL",
-                             "final_consumption_households" = "P3_S14",
-                             "final_consumption_government" = "P3_S13",
-                             "gross_capital_formation" = "P5",
-                             "inventory_change" = "P52",
-                             "exports" = "P6",
-                             "total_final_use" = "TFU"
+        "agriculture_group" = "CPA_A",
+        "industry_group" = "CPA_B-E",
+        "construction" = "CPA_F",
+        "trade_group" = "CPA_G-I",
+        "business_services_group" = "CPA_J-N",
+        "other_services_group" = "CPA_O-T",
+        "total" = "CPA_TOTAL",
+        "final_consumption_households" = "P3_S14",
+        "final_consumption_government" = "P3_S13",
+        "gross_capital_formation" = "P5",
+        "inventory_change" = "P52",
+        "exports" = "P6",
+        "total_final_use" = "TFU"
       ),
       geo = "DE",
       geo_lab = "Germany",
       time = as.Date("1995-01-01"),
       unit = "MIO_EUR",
       unit_lab = "Million euro",
-      values = as.integer(round(values))  # match CRAN
+      values = as.integer(round(values)) # match CRAN
     )
-  
+
   # enforce final column order
   germany_1995 <- germany_long %>%
     select(
       prod_na, prod_na_lab, iotables_row, iotables_col,
       values, induse, geo, geo_lab, time, unit, unit_lab
     ) %>%
-    mutate(induse = as.character(induse)) %>%  # force match with CRAN
+    mutate(induse = as.character(induse)) %>% # force match with CRAN
     as.data.frame()
-  
-  
+
+
   germany_1995
 }
 
 new <- build_germany_1995()
-dim(new)  # should be 247 x 11
+dim(new) # should be 247 x 11
 
 subset(new, prod_na == "CPA_A" & iotables_col == "agriculture_group")$values
 subset(new, prod_na == "CPA_A" & iotables_col == "final_consumption_households")$values
-subset(new, prod_na == "B1G"   & iotables_col == "agriculture_group")$values
+subset(new, prod_na == "B1G" & iotables_col == "agriculture_group")$values
 
 
 identical(dim(old), dim(new))

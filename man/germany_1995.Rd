@@ -55,7 +55,6 @@ head(germany_1995)
 subset(germany_1995, prod_na == "CPA_A" & iotables_col == "agriculture_group")
 }
 \seealso{
-\link{germany_1995_2010} for the ESA 2010–aligned variant,
 \code{\link[=iotable_get]{iotable_get()}} for extracting comparable tables from Eurostat.
 }
 \keyword{datasets}

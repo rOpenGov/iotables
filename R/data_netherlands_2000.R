@@ -47,4 +47,3 @@
 #'
 #' @family validation datasets
 "netherlands_2000"
-

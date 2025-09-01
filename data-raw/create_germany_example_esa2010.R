@@ -109,7 +109,7 @@ germany_1995 <- germany_long %>%
   ) %>%
   dplyr::mutate(prod_na = toupper(prod_na))
 
-usethis::use_data(germany_1995, overwrite = TRUE)
+# usethis::use_data(germany_1995, overwrite = TRUE)
 
 
 # usethis::use_data ( germany_metadata_rows, germany_metadata_cols,
