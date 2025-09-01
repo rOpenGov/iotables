@@ -1,18 +1,33 @@
-#' @title Create the inverse of a Leontief-matrix
+#' @title Create the Leontief inverse
 #'
-#' @description Create the Leontief inverse from the technology coefficient matrix.
-#' @details  The Leontief-inverse is \deqn{L = (I-A)^-1}
-#' where A is the input coefficient matrix
-#' created by \code{\link{input_coefficient_matrix_create}}. For the similar inverse
-#' created from output coefficients, see the
-#' \code{\link{ghosh_inverse_create}} function.
+#' @description
+#' Compute the Leontief inverse from a technology-coefficient matrix.
 #'
-#' @param technology_coefficients_matrix A technology coefficient matrix created
-#' by the \code{\link{input_coefficient_matrix_create}}.
-#' @param digits An integer showing the precision of the technology matrix in
-#' digits. Default is \code{NULL} when no rounding is applied.
+#' @details
+#' The Leontief inverse is defined as
+#' \eqn{L = (I - A)^{-1}},  
+#' where \eqn{A} is the input-coefficient matrix created by
+#' [input_coefficient_matrix_create()].  
+#'
+#' In the Eurostat *Manual of Supply, Use and Input–Output Tables* (Beutel, 2008),
+#' this formulation appears in Chapter 15 (see equations (19), (43), etc.).  
+#' The UN *Handbook on Supply and Use Tables and Input–Output Tables with Extensions
+#' and Applications* (2018, Rev. 1) also uses this standard definition (see pp. 619–621).
+#'
+#' For the analogous inverse from output coefficients, see [ghosh_inverse_create()].
+#'
+#' @param technology_coefficients_matrix A technology-coefficient matrix created
+#'   by [input_coefficient_matrix_create()].
+#' @param digits Optional integer. Precision for rounding. Default `NULL`
+#'   (no rounding).
+#'
+#' @return
+#' A `data.frame` with the original key column and the Leontief inverse in the
+#' remaining columns. If `digits` is provided, values are rounded.
+#'
 #' @importFrom dplyr mutate across
 #' @family analytic object functions
+#'
 #' @examples
 #' # A tiny 2x2 system with hand-calculable inverse
 #' minimal_matrix <- data.frame(
@@ -29,7 +44,9 @@
 #'   households = FALSE
 #' )
 #' leontief_inverse_create(technology_coefficients_matrix = tm)
+#'
 #' @export
+
 
 
 leontief_inverse_create <- function(technology_coefficients_matrix,
