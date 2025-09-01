@@ -81,7 +81,7 @@ In Belgium (based on the last known, 2015 structure of the economy, but consider
 
 This is not the full picture, because the indicator only considers the direct green-house gas emissions (carbon dioxide, methane, and others) of the primary economic activities, but not the emissions of the upstream, supplier part of the value chain (backward linkages) and the economic activities in the downstream, buyer part of the value chain (forward linkages.)
 
-The category of *Manufacture of other non-metallic mineral products* in itself requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried nonmetallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
+The category of *Manufacture of other non-metallic mineral products* in itself requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried non-metallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
 
 Let's make a reality check, and calculate only with CO2:
 

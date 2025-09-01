@@ -333,7 +333,7 @@ The Ghosh-inverse is \deqn{G = (I-B)^-1}
 
 where B = the output coefficient matrix.
 
-The forward linkages are the rowwise sums of the Ghosh-inverse
+The forward linkages are the row-wise sums of the Ghosh-inverse
 
 
 ```{r forwardlinkages}
@@ -391,6 +391,7 @@ multiplier_create(
   digits = 4
 )
 ```
+
 To create a tidy table of indicators of using a loop:
 
 ```{r emissionmultipliers}
@@ -420,7 +421,7 @@ Because the equation of the final demand is:
 
 `r paste0("final_demand = ", paste(names(germany_io)[9:13], collapse = " + "))`
 
-we can calculate the final demand for the products of industries with creating the rowwise sums of the appropriate columns
+we can calculate the final demand for the products of industries with creating the row-wise sums of the appropriate columns
 
 ```{r finaldemand}
 final_demand <- rowSums(germany_io[1:6, 9:13])
@@ -437,7 +438,6 @@ where the term
 
 is the definition of the emission multipliers.
 
-
 ```{r emissioncontent}
 emission_content <- as.data.frame(
   round(as.matrix(emission_multipliers[1:3, -1]) %*% diag(final_demand), 0)
@@ -451,4 +451,5 @@ emission_content <- data.frame(
 
 emission_content[, 1:4]
 ```
+
 *This final result can be found on the bottom of the page 494 of the* [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).

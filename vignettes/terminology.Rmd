@@ -35,7 +35,7 @@ The first quadrant of the symmetric input-output tables, or in other words, the 
 germany_siot[c(1:7), c(1:7)]
 ```
 
-Rowwise we see the flow of inputs. For example, at basic prices, out of the total demand for business services (423933), 193176	of the production of the business services are used by other business service providers, 65755	by trade enterprises, and 34223 by other service industries.
+row-wise we see the flow of inputs. For example, at basic prices, out of the total demand for business services (423933), 193176	of the production of the business services are used by other business service providers, 65755	by trade enterprises, and 34223 by other service industries.
 
 ```{r outputflow}
 germany_siot[5, c(1, 5:8)]
@@ -76,9 +76,9 @@ $x_{ij}$ = flow of commodity i to sector j
 $x_j$ = output of sector i
 
 
-## Interindustry analysis
+## Inter-industry analysis
 
-The term **forward linkage** is used to indicate this interconnection of a particular sector to those to which it sells its output. In its simplest form, the strength of the forward linkage of a sector `i` is given by the rowwise sum of the direct output coefficients, which considers the direct supply-side economic affects of the sector `i` on the entire domestic economy.
+The term **forward linkage** is used to indicate this interconnection of a particular sector to those to which it sells its output. In its simplest form, the strength of the forward linkage of a sector `i` is given by the row-wise sum of the direct output coefficients, which considers the direct supply-side economic affects of the sector `i` on the entire domestic economy.
 
 In its simplest form, the strength of the _backward linkage_ of a sector j is given by the column sum of the direct input coefficients, which only considers the direct, demand-side affects of sector j on the entire domestic economy. The sum of the inverse of the input coefficients also considers the indirect effects.
 
