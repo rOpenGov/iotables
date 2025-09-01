@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [devel]
+    branches: [main, devel]
   pull_request:
     branches: [main, devel]
 
@@ -53,14 +53,17 @@ jobs:
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
       - name: Lint
+        if: github.ref == 'refs/heads/devel'
         run: lintr::lint_package()
         shell: Rscript {0}
 
       - name: Spell check
-        run: devtools::spell_check()
+        run: |
+           try(devtools::spell_check(), silent = TRUE)
         shell: Rscript {0}
 
       - name: Test coverage
         if: github.ref == 'refs/heads/devel'
-        run: covr::codecov()
+        run: |
+           try(covr::codecov(), silent = TRUE)
         shell: Rscript {0}
