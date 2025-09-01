@@ -1,10 +1,6 @@
 # iotables 0.9.4
 
-# iotables 0.9.32xx
-
-## Minor release highlights
-
-This release focuses on stability, documentation, and preparing the
+This [CRAN release](https://github.com/rOpenGov/iotables/releases/tag/0.9.4) focuses on stability, documentation, and preparing the
 ground for a forthcoming major release:
 
 - **Dependencies**: Updated for modern `dplyr` and `tidyr`, removed use
