@@ -45,4 +45,3 @@
 #'
 #' @family validation datasets
 "uk_test_results"
-
