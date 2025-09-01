@@ -1,57 +1,66 @@
-#' Get Metadata from Nested iotables File
+#' Extract metadata from a downloaded IO table
 #'
-#' Remove the data column and return only the metadata information of 
-#' input-output (or related tables) from a source.
-#' If \code{dat} is not inputed as a nested data frame created by 
-#' \code{\link{iotables_download}}, validate the \code{source} input 
-#' parameter and try to load the table from the current sessions' 
-#' temporary directory.
-#'  \describe{
-#'  \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
-#'  \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
-#'  \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
-#'  \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
-#'  \item{\code{naio_10_cp15}}{ Supply table at basic prices incl. transformation into purchasers' prices }
-#'  \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
-#'  \item{\code{naio_10_cp1610}}{ Use table at basic prices }
-#'  \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
-#'  \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
-#'  \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
-#'  \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
-#'  \item{\code{naio_10_pyp1630}}{ Table of taxes less subsidies on products at previous years' prices}
-#'  \item{\code{uk_2010_siot}}{ United Kingdom Input-Output Analytical Tables data}
-#' } 
-#' @param dat A nested data file created by \code{\link{iotables_download}}.
-#' Defaults to \code{NULL} in which case an attempt is made to find and read
-#' in the nested data from the current R sessions' temporary directory. 
-#' @param source See the available list of sources above in the Description. 
-#' @return A data frame, which contains the metadata of all available 
-#' input-output tables from a specific \code{source}.
+#' @description
+#' Return only the metadata information from a nested input–output (IO) table
+#' (or related table) created by [iotables_download()]. The `data` list-column
+#' is removed, leaving only metadata rows.
+#'
+#' @details
+#' If `dat` is `NULL`, the function tries to load the file corresponding to
+#' `source` from the current session's `tempdir()`.
+#'
+#' @section Sources:
+#' Supported Eurostat/ONS products include:
+#'
+#' - `"naio_10_cp1700"` — Symmetric IO table, basic prices (product × product)
+#' - `"naio_10_pyp1700"` — Symmetric IO table, basic prices (product × product), previous years’ prices
+#' - `"naio_10_cp1750"` — Symmetric IO table, basic prices (industry × industry)
+#' - `"naio_10_pyp1750"` — Symmetric IO table, basic prices (industry × industry), previous years’ prices
+#' - `"naio_10_cp15"` — Supply table at basic prices incl. margins/taxes
+#' - `"naio_10_cp16"` — Use table at purchasers’ prices
+#' - `"naio_10_cp1610"` — Use table at basic prices
+#' - `"naio_10_pyp1610"` — Use table at basic prices (previous years’ prices)
+#' - `"naio_10_cp1620"` / `"naio_10_pyp1620"` — Trade & transport margins
+#' - `"naio_10_cp1630"` / `"naio_10_pyp1630"` — Taxes less subsidies on products
+#' - `"uk_2010_siot"` — United Kingdom IO Analytical Tables
+#'
+#' @param dat A nested tibble created by [iotables_download()]. Defaults to
+#'   `NULL`, in which case the function attempts to read the file from
+#'   `tempdir()`.
+#' @param source Character. A valid data source code (see **Sources**).
+#'
+#' @return
+#' A tibble with only metadata columns. The `data` list-column is removed
+#' and unnested.
+#'
 #' @importFrom tidyr unnest
 #' @family import functions
+#'
 #' @examples
 #' \donttest{
-#' # The table must be present in the sessions' temporary directory:
+#' # Download data into tempdir()
 #' iotables_download(source = "naio_10_pyp1750")
-#' 
-#' # Now you can get the metadata:
+#'
+#' # Extract metadata only
 #' iotables_metadata_get(source = "naio_10_pyp1750")
-#' } 
+#' }
+#'
 #' @export
-
-iotables_metadata_get <- function (dat = NULL, 
-                                   source = "naio_10_cp1700" ) {
-  if ( is.null(dat)) {
+iotables_metadata_get <- function(dat = NULL,
+                                  source = "naio_10_cp1700") {
+  if (is.null(dat)) {
     validate_source(source)
     dat <- iotables_read_tempdir(source)
   }
-  
-  if ( !is.null(dat)) {
+
+  if (!is.null(dat)) {
     metadata <- dat[, !names(dat) %in% c("data")]
     tidyr::unnest(metadata, cols = c())
   } else {
-    message( "The temporary file for source='",source, 
-             "' is not found in\ntempdir='", 
-             tempdir(), "'")
-    }
+    message(
+      "The temporary file for source='", source,
+      "' is not found in\ntempdir='",
+      tempdir(), "'"
+    )
+  }
 }

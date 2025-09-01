@@ -2,21 +2,63 @@
 % Please edit documentation in R/household_column_find.R
 \name{household_column_find}
 \alias{household_column_find}
-\title{Return the position of final household expenditure}
+\title{Find Household Expenditure Column}
 \usage{
 household_column_find(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use table or a 
-supply table.}
+\item{data_table}{A symmetric input–output table, a use table, or a supply
+table.}
 }
 \value{
-An integer value with the final household expenditure. Returns 
-\code{NULL} if not found.
+An integer vector giving the position(s) of household expenditure
+columns. Returns \code{NULL} if none are found.
 }
 \description{
-Return the position of final household expenditure
+Identify the column position corresponding to final household expenditure in
+a symmetric input–output table or related table.
+}
+\details{
+The function searches column names case-insensitively. It first looks for
+exact matches among the following alternatives:
+\itemize{
+\item \code{"households"}
+\item \code{"p3_s14"}
+\item \code{"final_consumption_households"}
+\item \code{"final_consumption_household"}
+\item \code{"consumption_expenditure_household"}
+\item \code{"consumption_expenditure_households"}
+}
+
+If none of these are found, it falls back to any column name that contains
+\code{"households"}.
 }
 \examples{
-household_column_find( iotable_get ( source = 'germany_1995') )
+# German SIOT includes a household final consumption column
+household_column_find(iotable_get(source = "germany_1995"))
+
+# Custom example
+df <- data.frame(
+  sector = c("A", "B"),
+  households = c(100, 200)
+)
+household_column_find(df)
+
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_get}()},
+\code{\link{iotable_year_get}()},
+\code{\link{key_column_create}()},
+\code{\link{matrix_round}()},
+\code{\link{output_get}()},
+\code{\link{primary_input_get}()},
+\code{\link{rows_add}()},
+\code{\link{supplementary_add}()},
+\code{\link{total_tax_add}()},
+\code{\link{vector_transpose_longer}()},
+\code{\link{vector_transpose_wider}()}
+}
+\concept{iotables processing functions}

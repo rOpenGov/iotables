@@ -2,44 +2,50 @@
 % Please edit documentation in R/ghosh_inverse_create.R
 \name{ghosh_inverse_create}
 \alias{ghosh_inverse_create}
-\title{Create the inverse of a Ghosh-matrix}
+\title{Create Ghosh inverse from output coefficients}
 \usage{
 ghosh_inverse_create(output_coefficients_matrix, digits = NULL)
 }
 \arguments{
-\item{output_coefficients_matrix}{A technology coefficient matrix created
-by the \code{\link{output_coefficient_matrix_create}}.}
+\item{output_coefficients_matrix}{A technology-coefficient matrix created by
+\code{\link[=output_coefficient_matrix_create]{output_coefficient_matrix_create()}}.}
 
-\item{digits}{An integer showing the precision of the technology matrix in 
-digits. Default is \code{NULL} when no rounding is applied.}
+\item{digits}{Integer precision for rounding. Default \code{NULL} (no rounding).}
+}
+\value{
+A data frame with the original key column and the Ghosh inverse in
+the remaining columns. If \code{digits} is provided, values are rounded.
 }
 \description{
-Create the Ghosh-inverse from the output coefficients.
+Create the Ghosh inverse from an output-coefficient matrix.
 }
 \details{
-The Ghosh-inverse is \deqn{G = (I-B)^-1}
-where B is the output coefficient matrix
-created by \code{\link{output_coefficient_matrix_create}}.
-See 
-the United Nations
-\href{https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf}{Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications}
-pp 622--639.
+The Ghosh inverse is defined as \deqn{G = (I - B)^{-1}}, where \eqn{B} is
+the output-coefficient matrix created by
+\code{\link[=output_coefficient_matrix_create]{output_coefficient_matrix_create()}}. See the United Nations \emph{Handbook on
+Supply and Use Tables and Input-Output Tables with Extensions and
+Applications} (2018, Rev. 1), pp. 622–639
+\href{https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf}{PDF}.
 
-For the similar inverse 
-created from input coefficients, see the 
-\code{\link{leontief_inverse_create}} function.
+For the analogous inverse from input coefficients, see
+\code{\link[=leontief_inverse_create]{leontief_inverse_create()}}.
 }
 \examples{
-om <- output_coefficient_matrix_create( 
-  data_table = iotable_get()
-  )
-  
-ghosh_inverse_create( output_coefficients_matrix = om )
+# Minimal example
+om <- output_coefficient_matrix_create(iotable_get())
+ghosh_inverse_create(om)
+
+# Using the Germany 1995 benchmark table (Eurostat manual):
+# data(germany_1995)
+# om_de <- output_coefficient_matrix_create(germany_1995)
+# ghosh_inverse_create(om_de)
+
 }
 \seealso{
 Other analytic object functions: 
 \code{\link{input_flow_get}()},
 \code{\link{leontief_inverse_create}()},
-\code{\link{leontief_matrix_create}()}
+\code{\link{leontief_matrix_create}()},
+\code{\link{output_coefficient_matrix_create}()}
 }
 \concept{analytic object functions}

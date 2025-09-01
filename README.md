@@ -6,7 +6,7 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.9.3201-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9.4-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![Project Status:
 Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
@@ -14,27 +14,38 @@ Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repost
 [![CRAN_time_from_release](https://www.r-pkg.org/badges/ago/iotables)](https://cran.r-project.org/package=iotables)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/iotables)](https://cran.r-project.org/package=iotables)
-[![DOI](https://doi.org/10.32614/CRAN.package.dataset.svg)](https://doi.org/10.5281/zenodo.10472240/)
+[![DOI](https://doi.org/10.32614/CRAN.package.dataset.svg)](https://doi.org/10.32614/CRAN.package.dataset)
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 [![codecov](https://codecov.io/gh/rOpenGov/iotables/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rOpenGov/iotables)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/iotables?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/iotables)
 [![dataobservatory](https://img.shields.io/badge/ecosystem-dataobservatory.eu-3EA135.svg)](https://dataobservatory.eu/)
 
-The symmetric input-output tables (SIOTs) are complex statistical
-products that present inter-related statistics in a predefined
-structure. They are often found in spreadsheets that follow this
-structure or, in the case of Eurostat, in a data repository. In both
-cases in, reproducible research must be downloaded and restructured to a
+Symmetric input–output tables (SIOTs) are structured statistical
+products that capture inter-industry relationships within an economy.
+They are often found in spreadsheets that follow this structure or, in
+the case of Eurostat, in a data repository. In both cases in,
+reproducible research must be downloaded and restructured to a
 programmatically accessible form. Often, these highly structured
 statistics need to be analysed together with other data, for example,
 when calculating employment effects and multipliers. In this case,
 processing the employment data to SIOT conforming format is a
 significant preprocessing challenge.
 
-The iotables are exactly designed for these tasks. Currently, the
-package downloads and processes standardized European SIOTs conforming
-to the latest statistical regulations, i.e. SIOTs starting from 2010.
+The iotables package is designed for these tasks. Currently, the package
+downloads and processes standardized European SIOTs conforming to the
+latest statistical regulations, i.e. SIOTs starting from 2010.
+
+## Installation
+
+You can install iotables 0.9.3 from CRAN or the latest 0.9.31
+development version with github:
+
+``` r
+# From CRAN:
+install.packages("iotables")
+
+# From Github (development version)
+devtools::install_github("rOpenGov/iotables")
+```
 
 The aim of this introduction is not to introduce input-output economics,
 or SIOTs in detail. The [Eurostat Manual of Supply, Use and Input-Output
@@ -59,22 +70,6 @@ the [Input-Output Multipliers Specification Sheet and Supporting
 Material, Spicosa Project
 Report](https://web.archive.org/web/20220331124544/www.coastal-saf.eu/output-step/pdf/Specification%20sheet%20I_O_final.pdf).
 The analytical functions are tested against this example, too.
-
-## Installation
-
-You can install iotables 0.9.3 from CRAN or the latest 0.9.31
-development version with github:
-
-``` r
-# From CRAN:
-install.packages("iotables")
-
-# From Github (development version)
-devtools::install_github("rOpenGov/iotables")
-
-#with vignettes:
-#devtools::install_github("rOpenGov/iotables", build_vignettes = TRUE)
-```
 
 See also a long-form documentation (publication candidate) [iotables: an
 R Package for Reproducible Input-Output Economics Analysis, Economic and
@@ -146,11 +141,10 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows:
 
-Daniel Antal. (2024. January 8.) rOpenGov/iotables: Importing and
-Manipulating Symmetric Input-Output Tables (Version 0.9.3). CRAN.
-[https://doi.org/10.5281/zenodo.10472240](https://zenodo.org/record/5153006/)
-for released version. Development version URL:
-<https://ropengov.github.io/iotables/>
+Daniel Antal. (2025. September 1.) rOpenGov/iotables: Importing and
+Manipulating Symmetric Input-Output Tables (Version 0.9.4). CRAN.
+[DOI:10.32614/CRAN.package.iotables](https://doi.org/10.32614/CRAN.package.iotables)
+for released version.
 
 Thanks to [@KKulma](https://github.com/KKulma/) for setting up new and
 improved continuous integration, and

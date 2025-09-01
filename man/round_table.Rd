@@ -2,22 +2,51 @@
 % Please edit documentation in R/round_table.R
 \name{round_table}
 \alias{round_table}
-\title{Systematically round values in a table}
+\title{Systematically round numeric values in a table}
 \usage{
 round_table(data_table, digits = NULL)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, or a use table, or a 
-supply table, or a margin or a tax table.}
+\item{data_table}{A symmetric input–output table, a use table, a supply
+table, or a margins/taxes table. Must be a data frame or tibble.}
 
-\item{digits}{Number of digits for rounding.}
+\item{digits}{Integer scalar giving the number of digits for rounding.
+If \code{NULL}, no rounding is performed. If not numeric, a warning is
+issued and the table is returned unchanged.}
 }
 \value{
-A tibble with a key row and a symmetric matrix, 
-after removing all empty columns and rows at the same time.
+A tibble (if input was a tibble) or data frame with numeric
+columns rounded according to \code{digits}. Non-numeric columns are
+unchanged. If \code{digits = NULL} or invalid, the table is returned
+unchanged.
 }
 \description{
-This is an internal function to do the rounding on all numeric elements 
-of the table for comparability with external sources that use rounding.
+Utility function to round all numeric columns in an input-output style
+table. It is mainly intended for reproducibility and comparability with
+external sources that report rounded values. Non-numeric columns are left
+unchanged.
+
+Special cases:
+\itemize{
+\item If \code{digits = NULL} (default), the function returns the input unchanged
+(no rounding).
+\item Values exactly equal to \code{1e-06} are preserved to avoid suppressing small
+"epsilon" entries that occur in published IOTs and SUTs.
+}
+}
+\details{
+Rounding conventions in published tables differ across sources:
+\itemize{
+\item Eurostat (2008, \emph{Manual of Supply, Use and Input-Output Tables}),
+presents benchmark IOTs rounded to integers (millions of EUR).
+\item UN (2018, \emph{Handbook on SUTs and IOTs}), notes that examples may not
+sum exactly because of rounding (p. 15).
+}
+
+This function allows the user to replicate such rounded presentations
+while keeping analytic pipelines consistent. Internally, rounding should
+be used with care: repeated rounding in intermediate steps may accumulate
+error. For modelling, keep \code{digits = NULL} and apply rounding only when
+reproducing published sources.
 }
 \keyword{internal}

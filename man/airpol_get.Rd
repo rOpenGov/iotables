@@ -4,8 +4,8 @@
 \alias{airpol_get}
 \title{Get air pollutant data}
 \source{
-Eurostat folder  
-\href{https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}
+Eurostat dataset:
+\href{https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}.
 }
 \usage{
 airpol_get(
@@ -18,52 +18,49 @@ airpol_get(
 )
 }
 \arguments{
-\item{airpol}{The code of the air pollutant. Defaults \code{GHG}.
-\code{ACG}, \code{CH4}, \code{CH4_CO2E}, \code{CH4_NMVOCE}, \code{CO}, \code{CO2}, 
-\code{CO2_BIO}, \code{CO_NMVOCE}, \code{GHG}, \code{HFC_CO2E}, \code{N2O}, \code{N2O_CO2E}, 
-\code{NF3_SF6_CO2E}, \code{NH3}, \code{NH3_SO2E}, \code{NMVOC}, \code{NOX}, \code{NOX_NMVOCE}, 
-\code{NOX_SO2E}, \code{O3PR}, \code{PFC_CO2E}, \code{PM10}, \code{PM2_5}, \code{SOX_SO2E}.}
+\item{airpol}{Pollutant code. Defaults to \code{"GHG"}. Common values include
+\code{"ACG"}, \code{"CH4"}, \code{"CO2"}, \code{"NH3"}, \code{"NOX"}, \code{"PM10"}, \code{"PM2_5"},
+\code{"SOX_SO2E"}. See \strong{Details} for the full list.}
 
-\item{geo}{The country code. The special value \code{'germany_1995'} will return the 
-replication dataset \code{\link{germany_airpol}}.}
+\item{geo}{Country code. The special value \code{"germany_1995"} returns the
+built-in replication dataset \link{germany_airpol}.}
 
-\item{year}{The year.  The average employment will be created for the given
-year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
-employment statistics.}
+\item{year}{Reference year (2008 or later for NACE Rev. 2 statistics).}
 
-\item{unit}{Defaults to \code{"THS_T"} (thousand tons.)}
+\item{unit}{Unit of measure. Defaults to \code{"THS_T"} (thousand tons).}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will 
-try to save the pre-processed data file here with labelling.}
+\item{data_directory}{Optional directory path. If valid, the downloaded and
+pre-processed data will be saved here.}
 
-\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing downloaded file
-in the \code{data_directory} or the temporary directory, if it exists.}
+\item{force_download}{Logical, defaults to \code{TRUE}. If \code{FALSE}, the function
+reuses an existing file in \code{data_directory} or a temporary directory.}
 }
 \value{
-A data.frame with auxiliary metadata to conform the symmetric
-input-output tables.
+A data frame with auxiliary metadata conforming to symmetric input–output
+tables.
 }
 \description{
-Get air emissions accounts by NACE Rev. 2 activity for environmental impact
-assessments.
+Retrieve air emissions accounts by NACE Rev. 2 activity for environmental
+impact assessments. Currently tested only with product × product tables.
 }
 \details{
-Currently tested only with product x product tables. 
-The dataset air emissions accounts by NACE Rev. 2 activity [env_ac_ainah_r2] has five dimensions:
-The Air pollutant \code{airpol} variables are collected on the emissions of the following pollutants: 
-carbon dioxide without emissions from biomass (CO2), carbon dioxide from biomass (Biomass CO2), 
-nitroux oxide (N2O), methane (CH4), perfluorocarbons (PFCs), Hydrofluorocarbons (HFCs), 
-sulphur hexafluoride (SF6) including nitrogen trifluoride (NF3), nitrogen oxides (NOx), 
-Non-methane volatile organic compounds, (NMVOC), carbon monoxide (CO), 
-Particulate matter smaller than 10 micrometre (PM10), Particulate matter smaller than 2,5 micrometre (PM2,5), 
-Sulphur dioxide (SO2), Ammonia (NH3).
+The Eurostat dataset \emph{Air emissions accounts by NACE Rev. 2 activity}
+(\code{env_ac_ainah_r2}) contains emissions of major pollutants, including:
+CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6 (incl. NF3), NOx, NMVOC,
+CO, PM10, PM2.5, SO2, and NH3.
 
-See \href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm}{Reference Metadata in Single Integrated Metadata Structure (SIMS)}
-for further details, particularly on the calculation of Global warming potential \code{GHG}, 
-Acidifying gases \code{ACG} and Tropospheric ozone precursors \code{O3PR}.
+For details, see the
+\href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm}{Eurostat Reference Metadata (SIMS)},
+particularly on aggregated indicators: global warming potential (\code{GHG}),
+acidifying gases (\code{ACG}), and tropospheric ozone precursors (\code{O3PR}).
 }
 \examples{
-airpol_get(airpol = "CO2", geo="germany_1995", year = 1995, unit = "THS_T") 
+airpol_get(
+  airpol = "CO2",
+  geo = "germany_1995",
+  year = 1995,
+  unit = "THS_T"
+)
 }
 \seealso{
 Other import functions: 

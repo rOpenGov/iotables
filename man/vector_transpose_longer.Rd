@@ -3,7 +3,7 @@
 \name{vector_transpose_longer}
 \alias{vector_transpose_longer}
 \alias{vector_transpose}
-\title{Transpose a vector to a long form}
+\title{Transpose a Vector to Long Form}
 \usage{
 vector_transpose_longer(
   data_table,
@@ -22,41 +22,56 @@ vector_transpose(
 )
 }
 \arguments{
-\item{data_table}{A matrix or vector that normally has a key column.}
+\item{data_table}{A \code{data.frame} or tibble. The first column is assumed to
+be a key column.}
 
-\item{names_to}{Defaults to \code{'nace_r2'}.}
+\item{names_to}{Name of the new column containing previous column names.
+Default: \code{"nace_r2"}.}
 
-\item{values_to}{Defaults to \code{'value'}.}
+\item{values_to}{Name of the new column containing the values. Default:
+\code{"value"}.}
 
-\item{key_column_name}{The name of the first column. Defaults to \code{NULL} when it is not changed.
-It should usually match the key column of the matrix or vector you would like to join the new 
-vector created with \code{vector_transpose_longer}.}
+\item{key_column_name}{Optional. New name for the first (key) column. If
+\code{NULL} (default), the name is not changed.}
 
-\item{.keep}{Keep the indicator identifier column? Defaults to \code{FALSE}.}
+\item{.keep}{Logical. If \code{TRUE}, keep the indicator identifier column. If
+\code{FALSE} (default), drop it.}
 }
 \value{
-A long form vector with a key column, and optionally the identifier of the indicator in
-the first column.
+A tibble in long format with a key column and, if requested, the
+indicator identifier column.
 }
 \description{
-Many vectors (indicators, multipliers) are create in the wide form to conform matrixes in 
-analytical functions.  For printing it is more useful to have them in long form.
-}
-\details{
-This is a wrapper around \code{\link[tidyr]{pivot_longer}} so you do not necessarily need to
-import or load the entire \emph{tidyr} package.
+Convert a wide-form vector (e.g., indicators or multipliers) into long form,
+which is often more useful for printing or joining. This is a thin wrapper
+around \code{\link[tidyr:pivot_longer]{tidyr::pivot_longer()}}, provided so you do not need to load \strong{tidyr}
+explicitly.
 }
 \examples{
 vector_transpose_longer(
-  data.frame(indicator = "my_inidcator", 
-             agriculture = 0.0123,
-             manufacturing = 0.1436,
-             trade = 0.0921)
+  data.frame(
+    indicator = "my_indicator",
+    agriculture = 0.0123,
+    manufacturing = 0.1436,
+    trade = 0.0921
+  )
+)
+
+# Keep the indicator column
+vector_transpose_longer(
+  data.frame(
+    indicator = "my_indicator",
+    agriculture = 0.0123,
+    manufacturing = 0.1436
+  ),
+  .keep = TRUE
 )
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},

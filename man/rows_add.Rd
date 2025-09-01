@@ -2,48 +2,71 @@
 % Please edit documentation in R/rows_add.R
 \name{rows_add}
 \alias{rows_add}
-\title{Add conforming row(s)}
+\title{Add Conforming Row(s) to an Input–Output Table}
 \usage{
 rows_add(data_table, rows_to_add, row_names = NULL, empty_fill = 0)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table, 
-a margins or tax table retrieved by the  \code{\link{iotable_get}}
-function.}
+\item{data_table}{A symmetric input–output table, a use table, a margins
+table, or a tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{rows_to_add}{A data frame or a named numeric vector.}
+\item{rows_to_add}{A data frame or a named numeric vector containing the
+new row(s).}
 
-\item{row_names}{An optional name or vector of names for the key column. Defaults to \code{NULL}.}
+\item{row_names}{Optional character vector giving names for the new key
+column. If \code{NULL}, names are inferred (see \emph{Details}).}
 
-\item{empty_fill}{What should happen with missing column values? Defaults to \code{0}. If you want
-to avoid division by zero, you may consider a very small value such as 0.000001.}
+\item{empty_fill}{Value used to fill missing columns. Defaults to \code{0}.}
 }
 \value{
-An extended \code{data_table} with the new row(s) binded.
+A \code{data.frame} containing the original \code{data_table} extended with the new
+row(s).
 }
 \description{
-Add a conforming row, or elements of a conforming row to a names matrix.
+Add a conforming row, or elements of a conforming row, to a named
+input–output style data frame.
 }
 \details{
-If you want to add a single row manually, you can input a named numeric vector or a 
-data frame with a single row. For multiple rows, input them as wide form data frame (see examples.)
+You can add rows in several ways:
+\itemize{
+\item A \strong{data frame} with one or more rows, where the first column contains
+row identifiers.
+\item A \strong{named numeric vector}, which will be turned into a single-row
+data frame.
+}
+
+If no \code{row_names} are supplied and the first column of \code{rows_to_add} is
+numeric, new rows will be automatically labelled as \code{"new_row_1"},
+\code{"new_row_2"}, etc.
+
+Missing column values are filled with \code{empty_fill}, which defaults to \code{0}.
+If you want to avoid division by zero in later computations, you can set
+this to a very small value (e.g. \code{1e-6}).
 }
 \examples{
-rows_to_add <- data.frame(iotables_row      = "CO2_emission", 
-                          agriculture_group =  10448, 
-                          industry_group    =  558327, # -> construction is omitted
-                          trade_group       =  11194)
+rows_to_add <- data.frame(
+  iotables_row = "CO2_emission",
+  agriculture_group = 10448,
+  industry_group = 558327, # construction is omitted
+  trade_group = 11194
+)
 
-rows_add (iotable_get(), rows_to_add = rows_to_add)
+rows_add(iotable_get(), rows_to_add = rows_to_add)
 
-rows_add (iotable_get(), 
-          rows_to_add = c(industry_group    =  1534, 
-                          trade_group       =  4),
-          row_names    = "CH4_emission" )
+rows_add(iotable_get(),
+  rows_to_add = c(
+    industry_group = 1534,
+    trade_group = 4
+  ),
+  row_names = "CH4_emission"
+)
+
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},

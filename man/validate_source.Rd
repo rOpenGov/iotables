@@ -2,14 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{validate_source}
 \alias{validate_source}
-\title{Validate source Parameter}
+\title{Validate source parameter}
 \usage{
 validate_source(source)
 }
 \arguments{
-\item{source}{Possible data sources.}
+\item{source}{A character string naming the desired source table.}
+}
+\value{
+Invisibly returns the validated source string, otherwise throws an
+error if the source is not supported.
 }
 \description{
-Validate source Parameter
+Internal function that checks whether the given \code{source}
+argument matches one of the supported Eurostat or UK table identifiers.
 }
 \keyword{internal}

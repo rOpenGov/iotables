@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotable_get.R
 \name{iotable_get}
 \alias{iotable_get}
-\title{Get An Input-Output Table Fom Bulk File}
+\title{Get a single input–output table from bulk data}
 \usage{
 iotable_get(
   labelled_io_data = NULL,
@@ -17,76 +17,71 @@ iotable_get(
 )
 }
 \arguments{
-\item{labelled_io_data}{If you have downloaded a bulk data file with 
-\code{\link{iotables_download}}, it is faster to work with the data
-in the memory. Defaults to \code{NULL} when  the data will be retrieved from
-the hard disk or from the Eurostat website invoking the same function.}
+\item{labelled_io_data}{Optional nested bulk data as returned by
+\code{\link[=iotables_download]{iotables_download()}}. If \code{NULL} (default), data are retrieved from
+cache or downloaded.}
 
-\item{source}{A data source, for example \code{naio_10_cp1700}. 
- \describe{
- \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
- \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
- \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
- \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
- \item{\code{naio_10_cp15}}{ Supply table at basic prices incl. transformation into purchasers' prices }
- \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
- \item{\code{naio_10_cp1610}}{ Use table at basic prices }
- \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
- \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
- \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
- \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
- \item{\code{naio_10_pyp1630}}{Table of taxes less subsidies on products at previous years' prices}
-} 
-For further information consult the 
-\href{https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/overview}{Eurostat Symmetric Input-Output Tables} page.}
+\item{source}{Data source code (see list above).}
 
-\item{geo}{A country code or a country name.
-For example, \code{SK} or as \code{Slovakia}.}
+\item{geo}{Country code or name, e.g. \code{"SK"} or \code{"Slovakia"}.}
 
-\item{year}{A numeric variable containing the year. 
-Defaults to \code{2010}, because this year has the most data.}
+\item{year}{Numeric year. Defaults to \code{1990} for \code{germany_1995}.}
 
-\item{unit}{A character string containing the currency unit,
-defaults to \code{MIO_NAC} (million national currency unit). 
-The alternative is \code{MIO_EUR}.}
+\item{unit}{Currency unit, usually \code{"MIO_NAC"} or \code{"MIO_EUR"}.}
 
-\item{stk_flow}{Defaults to \code{DOM} as domestic output, 
-alternative \code{IMP} for imports 
-and \code{TOTAL} for total output. For \code{source = 'naio_10_cp1620'} and 
-trade and transport margins and  \code{source = 'naio_10_cp1630'} taxes 
-less subsidies only \code{TOTAL} is not used.}
+\item{stk_flow}{Stock/flow: \code{"DOM"}, \code{"IMP"}, or \code{"TOTAL"}. For
+margins/taxes (\code{cp1620}, \code{cp1630} and \code{pyp} variants) only \code{"TOTAL"}
+is used; other inputs are coerced with a warning.}
 
-\item{labelling}{Defaults to \code{iotables} which gives standard row 
-and column names regardless of the source of the table, or if it is a 
-product x product, industry x industry or product x industry table.
-The alternative is \code{short} or \code{eurostat} which is the 
-original short row or column code of Eurostat or OECD.}
+\item{labelling}{Column naming scheme: \code{"iotables"} (default) for
+consistent names; \code{"short"} for original short codes; \code{"eurostat"}
+is treated as \code{"short"}.}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, 
-it will try to save the pre-processed data file here with labelling.}
+\item{data_directory}{Optional directory to save the processed wide
+table (RDS). If \code{NULL}, nothing is saved.}
 
-\item{force_download}{Defaults to \code{TRUE}. If \code{FALSE} it will use the existing 
-downloaded file in the \code{data_directory} or the temporary 
-directory, if it exists. Will force download only in a new session.}
+\item{force_download}{Logical. If \code{TRUE}, force a fresh download when
+\code{labelled_io_data} is not supplied. Defaults to \code{TRUE}.}
 }
 \value{
-A wide format data.frame with a well-ordered input-output table.
-The bulk data files on the Eurostat website are in a long form and they are 
-not correctly ordered for further matrix equations.
+A \strong{wide} \code{data.frame} representing the selected IO table, with a key
+column followed by ordered numeric columns.
 }
 \description{
-This function is used to filter out  a single input-output table from
-a database, for example a raw file downloaded from the Eurostat 
-website.  It provides some functionality to avoid some pitfalls.
+Filter and reshape one IO/SUT table from a bulk dataset (typically a
+Eurostat download). In most workflows you will call this function
+rather than \code{\link[=iotables_download]{iotables_download()}}, which it invokes as needed.
 }
 \details{
-Unless you want to work with bulk data files, 
-you should not invoke  \code{\link{iotables_download}} 
-directly, rather via this function, if and when it is necessary.
+The Eurostat bulk tables arrive in long form and are not ordered for
+matrix algebra. This function selects the requested country (\code{geo}),
+year, unit and stock/flow (\code{stk_flow}), joins iotables metadata for
+consistent row/column labelling, and returns a \strong{wide} table ready
+for analysis.
+
+Supported sources include:
+\itemize{
+\item \code{naio_10_cp1700} — symmetric IO, basic prices (prod × prod)
+\item \code{naio_10_pyp1700} — previous years' prices
+\item \code{naio_10_cp1750} — symmetric IO, basic prices (ind × ind)
+\item \code{naio_10_pyp1750} — previous years' prices
+\item \code{naio_10_cp15} — supply at basic prices incl. margins/taxes
+\item \code{naio_10_cp16} — use at purchasers' prices
+\item \code{naio_10_cp1610} — use at basic prices
+\item \code{naio_10_cp1620} — trade & transport margins (basic prices)
+\item \code{naio_10_cp1630} — taxes less subsidies on products (basic prices)
+\item \verb{naio_10_pyp*} — corresponding previous years' prices variants
+\item \code{germany_1995} — packaged Beutel example
+\item \code{croatia_2010_1700/1800/1900} — packaged examples
+\item \verb{uk_2010_*} — packaged UK 2010 variants
+}
 }
 \examples{
-germany_table <- iotable_get( source = "germany_1995", 
-                 geo = 'DE', year = 1990, unit = "MIO_EUR", 
-                 labelling  = "iotables" )
+germany_table <- iotable_get(
+  source = "germany_1995",
+  geo = "DE", year = 1990, unit = "MIO_EUR",
+  labelling = "iotables"
+)
+
 }
 \concept{iotables import functions}

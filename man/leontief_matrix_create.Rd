@@ -10,30 +10,45 @@ leontief_matrix_create(technology_coefficients_matrix)
 leontieff_matrix_create(technology_coefficients_matrix)
 }
 \arguments{
-\item{technology_coefficients_matrix}{A technology coefficient 
-matrix created by the \code{\link{input_coefficient_matrix_create}} or 
-\code{\link{output_coefficient_matrix_create}}.}
+\item{technology_coefficients_matrix}{A technology coefficients
+matrix created by \code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}} or
+\code{\link[=output_coefficient_matrix_create]{output_coefficient_matrix_create()}}. The first column must be
+a key; remaining columns must be numeric.}
 }
 \value{
-A Leontief matrix of data.frame class. The column names are 
-ordered, and the row names are in the first, auxiliary metadata column.
+A \code{data.frame} whose first column is the key and whose
+remaining columns contain the Leontief matrix \eqn{(I - A)}.
 }
 \description{
-Create a Leontief matrix from technology matrix after some basic error 
-handling. Most likely you will need this function as a step to invoke 
-the  function to create its inverse: 
-\code{\link{leontief_inverse_create}}.
+Build the Leontief matrix \eqn{(I - A)} from a technology
+coefficients matrix \eqn{A}. This is the step used before
+computing the Leontief inverse, see \code{\link[=leontief_inverse_create]{leontief_inverse_create()}}.
+}
+\details{
+In Eurostat terminology (Manual of Supply, Use and Input-Output
+Tables), the technology coefficients matrix \eqn{A} is formed by
+dividing each column of the inter-industry flows by the output of
+that industry. The Leontief matrix is then \eqn{I - A}.
+
+This function removes any detected TOTAL rows/columns (e.g.
+\code{"total"}, \code{"cpa_total"}) before forming \eqn{I - A}, and returns
+a data frame with the original key column followed by the numeric
+block of \eqn{I - A}.
 }
 \examples{
-tm <- input_flow_get ( 
-  data_table = iotable_get(), 
-  households = FALSE)
-L <- leontief_matrix_create( technology_coefficients_matrix = tm )
+# From input coefficients (usual case)
+tm <- input_coefficient_matrix_create(
+  data_table = iotable_get(),
+  households = FALSE
+)
+L <- leontief_matrix_create(technology_coefficients_matrix = tm)
+
 }
 \seealso{
 Other analytic object functions: 
 \code{\link{ghosh_inverse_create}()},
 \code{\link{input_flow_get}()},
-\code{\link{leontief_inverse_create}()}
+\code{\link{leontief_inverse_create}()},
+\code{\link{output_coefficient_matrix_create}()}
 }
 \concept{analytic object functions}

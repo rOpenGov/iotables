@@ -12,13 +12,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-load(system.file(file.path("extdata", "environmental_impact_vignette.rda"), package = 'iotables'))
+load(system.file(file.path("extdata", "environmental_impact_vignette.rda"), package = "iotables"))
 ```
 
 ```{r setup, echo=FALSE, message=FALSE}
 library(iotables)
-library(dplyr, quietly=TRUE)
-library(tidyr, quietly=TRUE)
+library(dplyr, quietly = TRUE)
+library(tidyr, quietly = TRUE)
 ```
 
 In this example we will show which economic activities contribute the most the greenhouse emissions in Belgium.  We want to how much the increase of one unit of production will increase the CO2-equivalent of various greenhouse gases, not only CO2 itself, but also methane (CH4), Nitrous oxide (N2O), and fluorinated gases (e.g., chlorofluorocarbons, hydrochlorofluorocarbons, and halons). While we talk most about CO2, the greenhouse gas that is emitted in the greatest quantity, but it is not the only culprit for global warming. Especially fluorinated gases have a high potential to increase the greenhouse effect.
@@ -29,17 +29,19 @@ The following expression will import the symmetric input-output table for Belgiu
 
 ```{r getiotable, eval=FALSE}
 # For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
-BE <- iotable_get(source = "naio_10_cp1700", geo = "BE",
-                  year =2015, 
-                  labelling = "short", unit = "MIO_EUR", 
-                  stk_flow = "TOTAL")
+BE <- iotable_get(
+  source = "naio_10_cp1700", geo = "BE",
+  year = 2015,
+  labelling = "short", unit = "MIO_EUR",
+  stk_flow = "TOTAL"
+)
 ```
 
 The following expression gets the the greenhouse gas emissions in $CO_2$-equivalent thousand tons for Belgium in 2020. Under the hood, we download the air emissions accounts from the Eurostat data warehouse. AEA present data on air emissions in a way that is fully compatible with the concepts, principles and data of the national accounts, but needs further adjustment to input-output tables, which is accomplished by `airpol_get()`
 
 ```{r getairpol, eval=FALSE}
 # For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
-ghg <- airpol_get(airpol="GHG", geo="BE", year=2020, unit="THS_T")
+ghg <- airpol_get(airpol = "GHG", geo = "BE", year = 2020, unit = "THS_T")
 ```
 
 See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO2-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
@@ -52,17 +54,18 @@ The direct effects will show how many thousand tons of extra greenhouse gases wi
 be_io <- BE %>%
   supplementary_add(ghg)
 
-ghg_indicator <- input_indicator_create( 
+ghg_indicator <- input_indicator_create(
   data_table = be_io,
-  input_row  = "GHG_emission")
+  input_row  = "GHG_emission"
+)
 ```
 
 ```{r ghgindicator}
-# Only the top 5 is printed, rename, arrange and top_n are tidyverse functions: 
+# Only the top 5 is printed, rename, arrange and top_n are tidyverse functions:
 ghg_indicator %>%
-  vector_transpose_longer( .keep = TRUE ) %>%
-  rename ( GHG_emission_indicator = .data$value ) %>%
-  arrange ( -.data$GHG_emission_indicator ) %>%
+  vector_transpose_longer(.keep = TRUE) %>%
+  rename(GHG_emission_indicator = .data$value) %>%
+  arrange(-.data$GHG_emission_indicator) %>%
   top_n(5)
 ```
 
@@ -78,27 +81,28 @@ In Belgium (based on the last known, 2015 structure of the economy, but consider
 
 This is not the full picture, because the indicator only considers the direct green-house gas emissions (carbon dioxide, methane, and others) of the primary economic activities, but not the emissions of the upstream, supplier part of the value chain (backward linkages) and the economic activities in the downstream, buyer part of the value chain (forward linkages.)
 
-The category of *Manufacture of other non-metallic mineral products* in itself requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried nonmetallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
+The category of *Manufacture of other non-metallic mineral products* in itself requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried non-metallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
 
 Let's make a reality check, and calculate only with CO2:
 
 ```{r getco2indicators, eval=FALSE}
-co2 <- airpol_get(airpol="CO2", geo="BE", year=2020, unit = "THS_T")
+co2 <- airpol_get(airpol = "CO2", geo = "BE", year = 2020, unit = "THS_T")
 ```
 
 ```{r co2indicators}
 be_io_c <- BE %>%
   supplementary_add(co2)
 
-co2_indicator <- input_indicator_create ( 
+co2_indicator <- input_indicator_create(
   data_table  = be_io_c,
-  input_row   = "CO2_emission")
+  input_row   = "CO2_emission"
+)
 
-# Only the top 5 is printed: 
-co2_indicator %>% 
-  vector_transpose_longer( .keep = TRUE ) %>%
-  rename ( CO2_emission_indicator = .data$value ) %>%
-  arrange ( -.data$CO2_emission_indicator ) %>%
+# Only the top 5 is printed:
+co2_indicator %>%
+  vector_transpose_longer(.keep = TRUE) %>%
+  rename(CO2_emission_indicator = .data$value) %>%
+  arrange(-.data$CO2_emission_indicator) %>%
   top_n(5)
 ```
 
@@ -107,19 +111,20 @@ co2_indicator %>%
 Let's check methane, which is a far more potent green house gas than CO2.
 
 ```{r getmethaneindicators, eval=FALSE}
-methane <- airpol_get (airpol = "CH4", geo="BE", year = 2020, unit = "THS_T")
+methane <- airpol_get(airpol = "CH4", geo = "BE", year = 2020, unit = "THS_T")
 ```
 ```{r methaneindicators}
 be_io_m <- BE %>%
   supplementary_add(methane)
 
-methane_indicator <- input_indicator_create ( 
+methane_indicator <- input_indicator_create(
   data_table = be_io_m,
-  input_row  = "CH4_emission")
+  input_row  = "CH4_emission"
+)
 
-# Only the top 5 is printed: 
-methane_indicator %>% 
-  vector_transpose_longer( .keep = TRUE ) %>%
+# Only the top 5 is printed:
+methane_indicator %>%
+  vector_transpose_longer(.keep = TRUE) %>%
   rename(CH4_emission_indicator = .data$value) %>%
   arrange(-.data$CH4_emission_indicator) %>%
   top_n(5)
@@ -145,26 +150,28 @@ The multiplier considers these indirect effects, too. The top five polluters rem
 As expected, the *Manufacture of other non-metallic mineral products* gets ahead of *Air transport* as it is highly interrelated with *Mining and quarrying*. Making building more sustainable would be a great achievement, but there is no really clear path: as we can see, *Forestry and logging* come with their problems, too.
 
 ```{r ghgmultiplier, message=FALSE}
-I_be <- input_coefficient_matrix_create( 
-     data_table = BE, 
-     digits = 4) %>%
+I_be <- input_coefficient_matrix_create(
+  data_table = BE,
+  digits = 4
+) %>%
   leontief_inverse_create()
 
-ghg_multipliers <- multiplier_create( 
-  input_vector    = ghg_indicator,
-  Im              = I_be,
-  multiplier_name = "GHG_multiplier", 
-  digits = 4 )
+ghg_multipliers <- multiplier_create(
+  input_vector = ghg_indicator,
+  Im = I_be,
+  multiplier_name = "GHG_multiplier",
+  digits = 4
+)
 
-# Only the top 5 is printed: 
+# Only the top 5 is printed:
 ghg_multipliers %>%
   vector_transpose_longer(.keep = TRUE) %>%
-  rename ( GHG_multiplier = .data$value ) %>%
-  arrange ( -.data$GHG_multiplier ) %>%
+  rename(GHG_multiplier = .data$value) %>%
+  arrange(-.data$GHG_multiplier) %>%
   top_n(5)
 ```
 
 ```{r savevignettedata, eval=FALSE}
-save(methane, co2, ghg, BE, file = file.path(".." , "inst", "extdata", "environmental_impact_vignette.rda") )
+save(methane, co2, ghg, BE, file = file.path("..", "inst", "extdata", "environmental_impact_vignette.rda"))
 ```
 

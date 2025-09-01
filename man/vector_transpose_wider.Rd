@@ -2,7 +2,7 @@
 % Please edit documentation in R/vector_transpose.R
 \name{vector_transpose_wider}
 \alias{vector_transpose_wider}
-\title{Transpose a vector to wider format}
+\title{Transpose a Vector to Wide Form}
 \usage{
 vector_transpose_wider(
   data_table,
@@ -13,40 +13,43 @@ vector_transpose_wider(
 )
 }
 \arguments{
-\item{data_table}{A matrix or vector that normally has a key column. If the key column must be created 
-or replaced, used \code{key_column_name}  and \code{key_column_values}.}
+\item{data_table}{A \code{data.frame} or tibble, normally with a key column.
+If the key column must be created or replaced, use \code{key_column_name} and
+\code{key_column_values}.}
 
-\item{names_from, values_from}{A pair of
-arguments describing which column (or columns) to get the name of the
-output column (`names_from`), and which column (or columns) to get the
-cell values from (`values_from`).}
+\item{names_from, values_from}{Columns specifying the names of the output
+columns (\code{names_from}) and the values to fill (\code{values_from}).}
 
 \item{key_column_name}{The name of the key column.}
 
-\item{key_column_values}{You can explicitly supply key column values. Defaults to \code{NULL} when the
-key column values will be created from the long data.}
+\item{key_column_values}{Optional explicit key column values. Default:
+\code{NULL}, in which case values are inferred from the long data.}
 }
 \description{
-Many vectors (indicators, multipliers) are create in the wide form to conform matrixes in 
-analytical functions.  For binding it is more useful to have them in wide format.
-}
-\details{
-This is a wrapper around \code{\link[tidyr]{pivot_wider}} so you do not necessarily need to
-import or load the entire \emph{tidyr} package.
+Convert a long-form vector (e.g., indicators, multipliers) into wide form,
+which is often more useful for binding with input–output tables. This is a
+thin wrapper around \code{\link[tidyr:pivot_wider]{tidyr::pivot_wider()}}, provided so you do not need to
+load \strong{tidyr} explicitly.
 }
 \examples{
-vector_transpose_wider (data_table =  germany_airpol[, -2],
-                        names_from = 'induse',
-                        values_from = 'value')
-                        
-vector_transpose_wider (data_table =  germany_airpol[1:8, 3:4],
-                        names_from = 'induse',
-                        values_from = 'value', 
-                        key_column_values = "CO2_emission" )
+vector_transpose_wider(
+  data_table = germany_airpol[, -2],
+  names_from = "induse",
+  values_from = "value"
+)
+
+vector_transpose_wider(
+  data_table = germany_airpol[1:8, 3:4],
+  names_from = "induse",
+  values_from = "value",
+  key_column_values = "CO2_emission"
+)
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},

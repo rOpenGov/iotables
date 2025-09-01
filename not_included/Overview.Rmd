@@ -180,7 +180,7 @@ The fourth quadrant (primary inputs to final demand) is not used in version 0.2.
 
 ##Combining the data for economics 
 
-Practitioners can easily combine the tidy data or the standard matrices returned by the pre-processing functions. The most frequently used, basic combinations are included in the package, following the function guidelines of rOpenSci. However, using the named versions of the returned objects, any further combination can be easily programmed with careful joining, and performing rowwise or columnwise arithmetic operations. 
+Practitioners can easily combine the tidy data or the standard matrices returned by the pre-processing functions. The most frequently used, basic combinations are included in the package, following the function guidelines of rOpenSci. However, using the named versions of the returned objects, any further combination can be easily programmed with careful joining, and performing row-wise or columnwise arithmetic operations. 
 
 The biggest difficulty of working with SIOTs is usually the problem of (pre-)processing important axillary elements, for example the creattion of satellite accounts that strictly conform the SIOT's vectors or matrixes.  For example, when used in matrix algebraic equations with the a 64x64 input-flow table, the employment data must be aggregated (or disaggregated) into a numerical vector that has exactly 64 elements without missing values. Currently the exception handling is designed to throw at least meaningful errors in the process. 
 

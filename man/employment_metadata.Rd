@@ -3,29 +3,37 @@
 \docType{data}
 \name{employment_metadata}
 \alias{employment_metadata}
-\title{Employment metadata}
+\title{Employment Metadata}
 \format{
-A data frame with 6 variables.  
+A data frame with 6 variables:
 \describe{
-  \item{emp_code}{code used in the employment statistics}
-  \item{code}{Eurostat labels for SIOTs corresponding to emp_code}
-  \item{label}{Eurostat label descriptions for SIOTs corresponding to emp_code}
-  \item{variable}{Eurostat vocabulary source, i.e. t_rows, t_cols, prod_na, induse}
-  \item{group}{Different from Eurostat tables, in thousand national currency units.}
-  \item{iotables_label}{Custom, machine_readable snake format variable names}                     
+\item{emp_code}{Codes used in the employment statistics.}
+\item{code}{Eurostat labels for SIOTs corresponding to \code{emp_code}.}
+\item{label}{Eurostat label descriptions for SIOTs corresponding to
+\code{emp_code}.}
+\item{variable}{Eurostat vocabulary source (e.g., \code{t_rows}, \code{t_cols},
+\code{prod_na}, \code{induse}).}
+\item{group}{Grouping of accounts (different from Eurostat tables), in
+thousands of national currency units.}
+\item{iotables_label}{Custom machine-readable snake_case variable names.}
 }
 }
 \usage{
-data(employment_metadata)
+employment_metadata
 }
 \description{
-An arrangement of the Eurostat national accounts vocabulary to match with 
+A reference dataset linking Eurostat national accounts vocabulary with
 employment statistics data.
 }
+\details{
+This dataset provides a mapping between employment statistics codes and the
+vocabulary used in Eurostat input–output tables, ensuring compatibility when
+joining employment and national accounts data.
+}
 \seealso{
-Other Metadata datasets: 
+Other metadata datasets: 
 \code{\link{metadata}},
 \code{\link{metadata_uk_2010}}
 }
-\concept{Metadata datasets}
+\concept{metadata datasets}
 \keyword{datasets}

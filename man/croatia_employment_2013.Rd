@@ -3,21 +3,22 @@
 \docType{data}
 \name{croatia_employment_2013}
 \alias{croatia_employment_2013}
-\title{Croatian employment data for the year 2013}
+\title{Croatian employment data for 2013}
 \format{
-A data frame with 107 observations in 2 variables:
+A data frame with 107 observations and 3 variables:
 \describe{
-  \item{code}{Short labels}
-  \item{iotables_row}{iotables style labels}
-  \item{employment}{Employment in the sector in Croatia, not in thousands!}
+\item{code}{Short labels for industries or sectors.}
+\item{iotables_row}{\code{iotables}-style row labels.}
+\item{employment}{Employment in the sector (absolute values, not in
+thousands).}
 }
 }
 \usage{
 data(croatia_employment_2013)
 }
 \description{
-Aggregate Croatian detailed employment statistics into the Croatian (EU standard)
-Symmetric input-output table format.
+Aggregated employment statistics for Croatia in 2013, formatted to match
+the Eurostat standard symmetric input-output table (SIOT) structure.
 }
 \seealso{
 Other Croatia 2010 datasets: 

@@ -7,15 +7,18 @@
 chars_collapse(x, collapse = ", ")
 }
 \arguments{
-\item{x}{A character vector}
+\item{x}{A character vector.}
 
-\item{collapse}{A separator to collapse the \code{x} vector.}
+\item{collapse}{A separator string used if \code{x} has more than one element.}
 }
 \value{
-A character vector of length=1 collapsing the character vector with \code{collapse} if
-the original length is more than 1. Used to create more legible error messages.
+A character string of length one if \code{x} has length > 1, otherwise the
+original vector unchanged.
 }
 \description{
-A conditional wrapper around \code{\link[base]{paste}}.
+A wrapper around \code{\link[base:paste]{base::paste()}} that conditionally collapses a
+character vector. If the vector length is greater than one, it is collapsed
+using the supplied separator. Used internally to create legible error
+messages.
 }
 \keyword{internal}

@@ -2,25 +2,38 @@
 % Please edit documentation in R/matrix_round.R
 \name{matrix_round}
 \alias{matrix_round}
-\title{Round all matrix values to required number of digits.}
+\title{Round Matrix Values}
 \usage{
 matrix_round(data_table, digits = 0)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use, supply, tax or margins table.}
+\item{data_table}{A symmetric input–output table, use table, supply table,
+tax table, or margins table.}
 
-\item{digits}{An integer number, defaults to \code{0}.}
+\item{digits}{Integer number of decimal places to round to. Defaults to \code{0}.}
 }
 \value{
-The matrix, with the intact key column and the numeric columns rounded.
+A \code{data.frame} (or tibble) with the key column intact and all other
+numeric columns rounded to the given precision.
 }
 \description{
-For comparison with results created with other software or published with rounding,
-systematically round the values of an input-output table, a use, supply, tax or margins table.
+Round all numeric values in an input–output style table to a specified number
+of digits. The key column (first column) is preserved unchanged.
+}
+\details{
+This is useful for comparing results across software or publications that
+present rounded tables.
+}
+\examples{
+de_coeff <- input_coefficient_matrix_create(iotable_get())
+head(matrix_round(de_coeff, digits = 2))
+
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},

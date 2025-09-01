@@ -1,55 +1,83 @@
-#' @title Create an inter-industry or input flow matrix
-#' 
-#' @description Select the first quadrant of the symmetric input-output table.
-#' 
-#' @details The first quadrant is called the input flow matrix, or the input requirements matrix, 
-#' or the inter-industry matrix in different contexts.
-#' @param data_table A symmetric input-output table or use table 
-#' retrieved by the \code{\link{iotable_get}} function. 
-#' @param households Defaults to \code{FALSE}. If \code{TRUE}, the 
-#' final household expenditure is added to the input flow table.
-#' @param empty_remove Defaults to \code{TRUE}. If you want to keep empty 
-#' primary input rows, choose \code{FALSE}. Empty product/industry rows are always 
-#' removed to avoid division by zero error in the analytic functions.
-#' @importFrom dplyr mutate across left_join select where
-#' @autoglobal
-#' @return A data flow matrix (a symmetric use table) with a key column.
+#' Create an inter-industry (intermediate-use) matrix
+#'
+#' @description
+#' Return the Quadrant I block (intermediate consumption) of a symmetric
+#' input–output table. Optionally append the final household consumption
+#' column for Type-II modelling.
+#'
+#' @details
+#' In the Eurostat framework, the Quadrant I block shows *intermediate
+#' consumption* by industry (columns) and product (rows), valued at
+#' purchasers’ prices. Final household consumption belongs to the final
+#' uses block (not Quadrant I); when `households = TRUE`, that column is
+#' appended for convenience in Type-II analyses that endogenise private
+#' consumption. See the *Eurostat Manual of Supply, Use and
+#' Input-Output Tables* for the quadrant layout and definitions.
+#'
+#' @param data_table A symmetric input–output table (product-by-product
+#'   or industry-by-industry) obtained via [iotable_get()].
+#' @param households Logical. If `TRUE`, append the
+#'   `final_consumption_households` column. Default `TRUE`.
+#' @param empty_remove Logical. Reserved; currently ignored (no effect).
+#'   Default `FALSE`.
+#'
+#' @return
+#' A data frame with the key column and the Quadrant I block; if
+#' `households = TRUE`, the household final consumption column is
+#' appended.
+#'
+#' @seealso [input_coefficient_matrix_create()],
+#'   [leontief_inverse_create()]
+#'
 #' @family analytic object functions
-#' @examples 
-#' input_flow <- input_flow_get(data_table = iotable_get(), 
-#'                              empty_remove = FALSE,
-#'                              households = TRUE)
-#' 
-#' @export 
+#'
+#' @examples
+#' # Basic extraction (Quadrant I + households column)
+#' x <- input_flow_get(
+#'   data_table   = iotable_get(),
+#'   empty_remove = FALSE,
+#'   households   = TRUE
+#' )
+#'
+#' # Quadrant I only (no households column)
+#' y <- input_flow_get(
+#'   data_table   = iotable_get(),
+#'   empty_remove = FALSE,
+#'   households   = FALSE
+#' )
+#'
+#' @importFrom dplyr mutate across left_join
+#' @importFrom tidyselect where
+#' @export
 
-input_flow_get <- function ( data_table,
-                             empty_remove = FALSE,
-                             households = TRUE ) {  
-  
-  data_table <- mutate(data_table, across(where(is.factor), as.character))
-  
-  #Remove empty columns and rows
-  if ( empty_remove ) siot <- empty_remove(data_table)
-  
+input_flow_get <- function(data_table,
+                           empty_remove = FALSE,
+                           households = TRUE) {
+  data_table <- mutate(
+    data_table,
+    across(where(is.factor), as.character)
+  )
+
+  # Remove empty columns and rows
+  if (empty_remove) siot <- empty_remove(data_table)
+
   last_column <- quadrant_separator_find(data_table)
-  
-  ## Adding households, if requested----------------------------------------  
+
+  ## Adding households, if requested----------------------------------------
   if (households == TRUE) {
-    household_column <- household_column_get( data_table )
-    quadrant <- data_table [, 1:last_column]
-    input_flow_table <- left_join (
-            quadrant, household_column, 
-            by = names(quadrant)[1]
-            )
-  }  else {
-    input_flow_table <- select (data_table, 1:last_column)
+    household_column <- household_column_get(data_table)
+    quadrant <- data_table[, seq_len(last_column)]
+    input_flow_table <- left_join(
+      quadrant, household_column,
+      by = names(quadrant)[1]
+    )
+  } else {
+    input_flow_table <- data_table[, seq_len(last_column)]
   }
-  
-  key_column <- tolower(as.character(unlist(input_flow_table[,1])))
-  
+
+  key_column <- tolower(as.character(unlist(input_flow_table[, 1])))
+
   last_row <- which(key_column %in% c("total", "cpa_total"))
-  
-  input_flow_table[1:last_row,]
+
+  input_flow_table[1:last_row, ]
 }
-
-

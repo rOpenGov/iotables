@@ -3,47 +3,58 @@
 \docType{data}
 \name{germany_1995}
 \alias{germany_1995}
-\title{Simple input-output table for Germany, 1995.}
+\title{Germany 1995 symmetric input–output table (ESA 2010 codes)}
 \format{
-A data frame with 228 observations and 10 variables.
+A data frame with 247 rows and 11 columns:
 \describe{
-  \item{prod_na}{Technology codes in row names, following the Eurostat convention.}
-  \item{prod_na_lab}{Longer labels for t_rows2.}
-  \item{induse}{Column labels, following the Eurostat convention with differences.}
-  \item{iotables_row}{Row labels, i.e. to be used in key column, for iotables package abbreviations.}
-  \item{iotables_col}{Column labels for iotables package abbreviations.}
-  \item{values}{The actual values of the table in million euros.}  
-  \item{unit}{MIO_EUR, the same as Eurostat.}
-  \item{unit_lab}{Million euros. Eurostat usually has euro and national currency unit values, too.}
-  \item{geo}{ISO/Eurostat country code for Germany, i.e. DE.}
-  \item{geo_lab}{ISO/Eurostat country name, Germany.}
-  \item{time}{Date of the SIOT.}     
+\item{prod_na}{Row code (ESA 2010 / CPA aggregate).}
+\item{prod_na_lab}{Row label, long description.}
+\item{iotables_row}{Row identifier used internally.}
+\item{iotables_col}{Column identifier (factor with 13 levels).}
+\item{values}{Cell value, in millions of euros (integer).}
+\item{induse}{Column code (ESA 2010 / CPA aggregate or national accounts
+item).}
+\item{geo}{Country code, always \code{"DE"}.}
+\item{geo_lab}{Country name, \code{"Germany"}.}
+\item{time}{Reference year, as a Date (\code{"1995-01-01"}).}
+\item{unit}{Unit code, \code{"MIO_EUR"}.}
+\item{unit_lab}{Unit label, \code{"Million euro"}.}
 }
 }
 \source{
-\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 482
+Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and Input–Output
+Tables}, Table 15.4. Luxembourg: Office for Official Publications of the
+European Communities.
 }
 \usage{
-data(germany_1995)
+germany_1995
 }
 \description{
-Replication data taken from the Eurostat Manual, 
-Table 15.4: Input-output table of domestic output at basic prices (Version A)
+Reproduction of Table 15.4 in the Eurostat Manual
+(\emph{Input–output table of domestic output at basic prices, Version A}).
+This is a small, well-documented benchmark dataset that accompanies the
+\pkg{iotables} package. It is reformatted into the same long structure
+as Eurostat warehouse SIOTs, so that functions and tests can work
+identically on this example and on real Eurostat downloads.
 }
 \details{
-For testing and documentation purposes a well documented example is taken the Eurostat Manual.
-The table in the Eurostat manual is brought to the format used by the Eurostat database.
-It is a small dataset for examples, but it is also instructive to understand how Eurostat
-stores the highly structured SIOTs in long-form tidy datasets. 
-The labels were slightly alterred to reflect the transition from the vocabulary
-of ESA95 to ESA2010 since the publication of the Manual.
+The values come from Beutel (2008), \emph{Eurostat Manual of Supply, Use and
+Input–Output Tables}, Table 15.4. Labels and codes follow ESA 2010
+conventions (e.g. \code{CPA_A}, \code{CPA_B-E}, \code{P3_S14}),
+allowing direct comparison with modern Eurostat releases.
+
+This dataset underpins many unit tests in \pkg{iotables}: multipliers,
+coefficients, and linkage indices are validated against the published
+benchmark. Because it is small (247 rows), it is also used in vignettes
+and examples to demonstrate workflows.
+}
+\examples{
+data(germany_1995)
+head(germany_1995)
+# Verify against the Eurostat manual:
+subset(germany_1995, prod_na == "CPA_A" & iotables_col == "agriculture_group")
 }
 \seealso{
-Other Validation datasets: 
-\code{\link{germany_airpol}},
-\code{\link{netherlands_2006}},
-\code{\link{uk_2010_data}},
-\code{\link{uk_test_results}}
+\code{\link[=iotable_get]{iotable_get()}} for extracting comparable tables from Eurostat.
 }
-\concept{Validation datasets}
 \keyword{datasets}

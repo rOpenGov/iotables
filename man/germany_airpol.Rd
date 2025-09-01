@@ -3,36 +3,38 @@
 \docType{data}
 \name{germany_airpol}
 \alias{germany_airpol}
-\title{Air Pollution Table for Germany, 1995.}
+\title{Air pollution table for Germany, 1995}
 \format{
-A data frame with 72 observations and 4 variables.
+A data frame with 72 observations and 4 variables:
 \describe{
-  \item{airpol}{The abbreviation of the air pollutant.}
-  \item{induse}{Column labels, following the Eurostat convention with differences.}
-  \item{iotables_col}{Column labels for iotables package abbreviations.}
-  \item{value}{The actual values of the table in thousand tons.}  
+\item{airpol}{Abbreviation of the air pollutant.}
+\item{induse}{Column labels, following Eurostat conventions with minor
+differences.}
+\item{iotables_col}{Column labels using \code{iotables} abbreviations.}
+\item{value}{Values in thousand tons.}
 }
 }
 \source{
-\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0}{Eurostat Manual of Supply, Use and Input-Output Tables} p 482.
+Eurostat (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables},
+p. 482.
+Available at \url{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF}
 }
 \usage{
-data(germany_airpol)
+germany_airpol
 }
 \description{
-Air pollution values for validation.
+Air pollution values for validation and cross-checking with the Eurostat
+Manual.
 }
 \details{
-For testing purposes and cross-checking with the Eurostat manual.
-The labels were slightly alterred to reflect the transition from the vocabulary
-of ESA95 to ESA2010 since the publication of the Manual.
+This dataset is provided for testing purposes. Labels were slightly adjusted
+to reflect the transition from ESA95 to ESA2010 vocabulary since the
+publication of the Eurostat Manual.
 }
 \seealso{
-Other Validation datasets: 
-\code{\link{germany_1995}},
-\code{\link{netherlands_2006}},
-\code{\link{uk_2010_data}},
+Other validation datasets: 
+\code{\link{netherlands_2000}},
 \code{\link{uk_test_results}}
 }
-\concept{Validation datasets}
+\concept{validation datasets}
 \keyword{datasets}

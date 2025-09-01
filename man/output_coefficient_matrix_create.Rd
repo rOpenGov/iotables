@@ -7,42 +7,55 @@
 output_coefficient_matrix_create(data_table, total = "tfu", digits = NULL)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, a use table, 
-a margins or tax table retrieved by the \code{\link{iotable_get}}. 
-In case you use \code{type="tfu"} you need to input a
-full iotable, create by the \code{\link{iotable_get}}, because 
-the final demand column is in the second quadrant of the IOT.}
+\item{data_table}{A symmetric input–output table, use table, margins, or
+tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}. If you request
+\code{total = "tfu"} (total final use), you must supply a full table from
+\code{\link[=iotable_get]{iotable_get()}} because the TFU column is in the second quadrant.}
 
-\item{total}{The \code{output='total'} (or CPA_TOTAL, depending on the 
-names in your table, default) returns the output coefficients
-for products (intermediates) while the \code{final_demand} returns output 
-coefficients for final demand. See 
-\href{https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39}{Eurostat Manual of Supply, Use and Input-Output Tables}
-p495 and p507.}
+\item{total}{Which total to use for normalization. Use \code{"total"} (or the
+present table variant name, e.g. \code{"CPA_TOTAL"}) for output by product, or
+\code{"tfu"} / \code{"total_final_use"} / \code{"final_demand"} for total final use.
+Default: \code{"tfu"}.}
 
-\item{digits}{An integer showing the precision of the technology matrix in 
-digits. Default is \code{NULL} when no rounding is applied.}
+\item{digits}{Integer number of decimal places for rounding. Default \code{NULL}
+(no rounding).}
 }
 \value{
-An output coefficient matrix of data.frame class. 
-The column names are ordered, and the row names are in the 
-first, auxiliary metadata column.
+A \code{data.frame} whose first column is the key (product labels) and
+the remaining columns form the output-coefficient matrix. Column order
+follows the input.
 }
 \description{
-Create an output coefficient matrix from the input flow matrix or a symmetric
-input-output table.
+Create an output-coefficient matrix from a symmetric input–output table or
+a use table. Output coefficients can be interpreted as the market shares
+of products in total output (row-wise normalization).
 }
 \details{
-The output coefficients may be interpreted as the market shares of products
-in total output. If there are zero values in present, they will be changed to 
-0.000001 and you will get a warning. Some analytical equations cannot be 
-solved with zero elements. You either have faulty input data, or you have 
-to use some sort of data modification to carry on your analysis.
+Let \eqn{Z} be the inter-industry flow block and \eqn{x} the vector of
+product output (or, for final-demand shares, total final use).
+The output-coefficient matrix \eqn{B} is defined row-wise as
+\eqn{b_{ij} = z_{ij} / x_i}. In practice, zeros in the denominator can make
+equations unsolvable; this function replaces zeros with a small epsilon
+(\code{1e-6}) to avoid division by zero.
+
+Eurostat, \emph{Manual of Supply, Use and Input-Output Tables} (e.g., pp. 495,
+507) describes output coefficients and the Ghosh framework you may use
+these with.
 }
 \examples{
-data_table <- iotable_get() 
+data_table <- iotable_get()
+output_coefficient_matrix_create(
+  data_table = data_table,
+  total = "tfu",
+  digits = 4
+)
 
-output_coefficient_matrix_create (data_table = data_table, 
-                                  total = 'tfu',
-                                  digits = 4)
 }
+\seealso{
+Other analytic object functions: 
+\code{\link{ghosh_inverse_create}()},
+\code{\link{input_flow_get}()},
+\code{\link{leontief_inverse_create}()},
+\code{\link{leontief_matrix_create}()}
+}
+\concept{analytic object functions}

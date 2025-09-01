@@ -2,52 +2,57 @@
 % Please edit documentation in R/iotables_metadata_get.R
 \name{iotables_metadata_get}
 \alias{iotables_metadata_get}
-\title{Get Metadata from Nested iotables File}
+\title{Extract metadata from a downloaded IO table}
 \usage{
 iotables_metadata_get(dat = NULL, source = "naio_10_cp1700")
 }
 \arguments{
-\item{dat}{A nested data file created by \code{\link{iotables_download}}.
-Defaults to \code{NULL} in which case an attempt is made to find and read
-in the nested data from the current R sessions' temporary directory.}
+\item{dat}{A nested tibble created by \code{\link[=iotables_download]{iotables_download()}}. Defaults to
+\code{NULL}, in which case the function attempts to read the file from
+\code{tempdir()}.}
 
-\item{source}{See the available list of sources above in the Description.}
+\item{source}{Character. A valid data source code (see \strong{Sources}).}
 }
 \value{
-A data frame, which contains the metadata of all available 
-input-output tables from a specific \code{source}.
+A tibble with only metadata columns. The \code{data} list-column is removed
+and unnested.
 }
 \description{
-Remove the data column and return only the metadata information of 
-input-output (or related tables) from a source.
-If \code{dat} is not inputed as a nested data frame created by 
-\code{\link{iotables_download}}, validate the \code{source} input 
-parameter and try to load the table from the current sessions' 
-temporary directory.
- \describe{
- \item{\code{naio_10_cp1700}}{ Symmetric input-output table at basic prices (product by product)}
- \item{\code{naio_10_pyp1700}}{ Symmetric input-output table at basic prices (product by product) (previous years prices)}
- \item{\code{naio_10_cp1750}}{ Symmetric input-output table at basic prices (industry by industry)}
- \item{\code{naio_10_pyp1750}}{ Symmetric input-output table at basic prices (industry by industry) (previous years prices) }
- \item{\code{naio_10_cp15}}{ Supply table at basic prices incl. transformation into purchasers' prices }
- \item{\code{naio_10_cp16}}{ Use table at purchasers' prices }
- \item{\code{naio_10_cp1610}}{ Use table at basic prices }
- \item{\code{naio_10_pyp1610}}{ Use table at basic prices (previous years prices) (naio_10_pyp1610) }
- \item{\code{naio_10_cp1620}}{ Table of trade and transport margins at basic prices}
- \item{\code{naio_10_pyp1620}}{ Table of trade and transport margins at previous years' prices}
- \item{\code{naio_10_cp1630}}{ Table of taxes less subsidies on products at basic prices}
- \item{\code{naio_10_pyp1630}}{ Table of taxes less subsidies on products at previous years' prices}
- \item{\code{uk_2010_siot}}{ United Kingdom Input-Output Analytical Tables data}
+Return only the metadata information from a nested input–output (IO) table
+(or related table) created by \code{\link[=iotables_download]{iotables_download()}}. The \code{data} list-column
+is removed, leaving only metadata rows.
+}
+\details{
+If \code{dat} is \code{NULL}, the function tries to load the file corresponding to
+\code{source} from the current session's \code{tempdir()}.
+}
+\section{Sources}{
+
+Supported Eurostat/ONS products include:
+\itemize{
+\item \code{"naio_10_cp1700"} — Symmetric IO table, basic prices (product × product)
+\item \code{"naio_10_pyp1700"} — Symmetric IO table, basic prices (product × product), previous years’ prices
+\item \code{"naio_10_cp1750"} — Symmetric IO table, basic prices (industry × industry)
+\item \code{"naio_10_pyp1750"} — Symmetric IO table, basic prices (industry × industry), previous years’ prices
+\item \code{"naio_10_cp15"} — Supply table at basic prices incl. margins/taxes
+\item \code{"naio_10_cp16"} — Use table at purchasers’ prices
+\item \code{"naio_10_cp1610"} — Use table at basic prices
+\item \code{"naio_10_pyp1610"} — Use table at basic prices (previous years’ prices)
+\item \code{"naio_10_cp1620"} / \code{"naio_10_pyp1620"} — Trade & transport margins
+\item \code{"naio_10_cp1630"} / \code{"naio_10_pyp1630"} — Taxes less subsidies on products
+\item \code{"uk_2010_siot"} — United Kingdom IO Analytical Tables
 }
 }
+
 \examples{
 \donttest{
-# The table must be present in the sessions' temporary directory:
+# Download data into tempdir()
 iotables_download(source = "naio_10_pyp1750")
 
-# Now you can get the metadata:
+# Extract metadata only
 iotables_metadata_get(source = "naio_10_pyp1750")
-} 
+}
+
 }
 \seealso{
 Other import functions: 

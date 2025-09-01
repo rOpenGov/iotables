@@ -22,11 +22,13 @@ This function will likely be used with the creation of coefficients that need to
 a matrix that has a key column.
 }
 \examples{
-key_column_create ("iotables_row", c("CO2_multiplier", "CH4_multiplier"))
+key_column_create("iotables_row", c("CO2_multiplier", "CH4_multiplier"))
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{matrix_round}()},

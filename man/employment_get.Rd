@@ -2,11 +2,10 @@
 % Please edit documentation in R/employment_get.R
 \name{employment_get}
 \alias{employment_get}
-\title{Get employment data}
+\title{Get Eurostat employment data for SIOTs}
 \source{
-Eurostat statistic 
-\href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{Employment 
-by sex, age and detailed economic activity (from 2008 onwards, NACE Rev. 2 two digit level) - 1 000}
+Eurostat dataset
+\href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{lfsq_egan22d}
 }
 \usage{
 employment_get(
@@ -20,51 +19,60 @@ employment_get(
 )
 }
 \arguments{
-\item{geo}{The country code.}
+\item{geo}{A two-letter country code (Eurostat style). \code{"GB"} and \code{"GR"}
+are automatically converted to \code{"UK"} and \code{"EL"}.}
 
-\item{year}{The year.  The average employment will be created for the given
-year, starting with \code{2008}, when the NACE Rev 2 was introduced in 
-employment statistics.}
+\item{year}{Year of employment data (>= 2008, when NACE Rev. 2 was
+introduced).}
 
-\item{sex}{Defaults to \code{"Total"}. Enter \code{"Females"} or \code{"F"} for
-female employment, \code{"Males"} or \code{"M"} for male employment.}
+\item{sex}{Employment by sex. Defaults to \code{"Total"}. Alternatives are
+\code{"Female"}/\code{"F"}, \code{"Male"}/\code{"M"}. Case-insensitive.}
 
-\item{age}{Defaults to \code{"Y_GE15"}, which is the Eurostat code for employment in 
-all age groups starting from 15-years-old. Any Eurostat code can be used as a 
-parameter.}
+\item{age}{Eurostat age code. Defaults to \code{"Y_GE15"}. Any valid Eurostat
+code may be supplied (see Eurostat metadata).}
 
-\item{labelling}{Either \code{"iotables"} or the applicable short code, 
-for product x product SIOTs \code{"prod_na"} and in the case of industry x 
-industry SIOTs \code{"induse"}.}
+\item{labelling}{Controls output row/column labelling:
+\itemize{
+\item \code{"iotables"}: iotables manual-style labels
+\item \code{"prod_na"}: product × product (CPA codes)
+\item \code{"induse"}: industry × industry (NACE codes)
+}}
 
-\item{data_directory}{Defaults to \code{NULL}, if a valid directory, it will try to save the pre-processed 
-data file here with labelling.}
+\item{data_directory}{Optional path to save/load pre-processed employment
+data (\code{.rds} files). If \code{NULL}, only downloads are used.}
 
-\item{force_download}{Defaults to \code{FALSE}. It will use the existing downloaded file
-in the \code{data_directory} or the temporary directory, if it exists.}
+\item{force_download}{Logical. If \code{TRUE}, forces a fresh Eurostat download
+even if local cache files exist.}
 }
 \value{
-A data.frame with auxiliary metadata to conform the symmetric
-input-output tables.
+A one-row \code{data.frame} containing employment input values aligned
+with the chosen SIOT labelling, including an imputed rent column set to 0.
 }
 \description{
-Download the employment data for a country and arrange it to the 
-64x64 SIOTs.
+Download employment data from Eurostat (dataset
+\href{https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d}{lfsq_egan22d})
+and arrange it to match 64 × 64 symmetric input–output tables (SIOTs).
 }
 \details{
-Currently works only with product x product tables.
+\itemize{
+\item Currently implemented only for product × product tables.
+\item Country codes are harmonized: \code{"GB"} → \code{"UK"}, \code{"GR"} → \code{"EL"}.
+\item Sex is normalized internally to Eurostat codes \code{"T"}, \code{"F"}, \code{"M"}.
+\item Results are cached as \code{.rds} files in \code{data_directory} if supplied.
+\item An imputed rent column (\code{L68A}/\code{CPA_L68A}) with zero is always added.
+}
 }
 \examples{
 \dontrun{
- io_tables <- get_employment ( 
-               geo = "CZ", 
-               year = "2010",
-               sex = "Total", 
-               age = "Y_GE15",
-               data_directory = NULL,
-               force_download = TRUE
-               )
- }
+employment <- employment_get(
+  geo = "CZ",
+  year = "2010",
+  sex = "Total",
+  age = "Y_GE15",
+  data_directory = NULL,
+  force_download = TRUE
+)
+}
 }
 \seealso{
 Other import functions: 

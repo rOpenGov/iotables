@@ -2,23 +2,55 @@
 % Please edit documentation in R/empty_remove.R
 \name{empty_remove}
 \alias{empty_remove}
-\title{Symmetrically remove empty rows and columns}
+\title{Remove Empty Rows and Columns Symmetrically}
 \usage{
 empty_remove(data_table)
 }
 \arguments{
-\item{data_table}{A symmetric input-output table, or a symmetric part of a
-use table or a supply table.}
+\item{data_table}{A symmetric input–output table, or the symmetric quadrant
+of a use or supply table.}
 }
 \value{
-A tibble/data.frame with a key row and a symmetric matrix, 
-after removing all empty columns and rows at the same time.
+A \code{data.frame} (or tibble) with a key column and symmetric matrix,
+after removing all-zero (or all-missing) columns and their corresponding
+rows.
 }
 \description{
-Symmetrically remove columns with only zero values or with missing values.
+Remove columns and their corresponding rows if they contain only zeros or
+missing values. This ensures that the resulting table remains symmetric (same
+dimensions in rows and columns).
+}
+\details{
+The function first identifies columns that contain only zeros or
+missing values, then removes both those columns and the rows with matching
+labels in the first (key) column. A message is printed listing the removed
+columns.
 }
 \examples{
-test_table <- input_coefficient_matrix_create(iotable_get(source = "germany_1995"))
+# Example using the built-in demo table
+test_table <- input_coefficient_matrix_create(
+  iotable_get(source = "germany_1995")
+)
+
+# Set one column to zero, then remove it
 test_table[, 2] <- 0
-empty_remove (test_table)
+empty_remove(test_table)
+
 }
+\seealso{
+Other iotables processing functions: 
+\code{\link{conforming_vector_create}()},
+\code{\link{household_column_find}()},
+\code{\link{household_column_get}()},
+\code{\link{iotable_year_get}()},
+\code{\link{key_column_create}()},
+\code{\link{matrix_round}()},
+\code{\link{output_get}()},
+\code{\link{primary_input_get}()},
+\code{\link{rows_add}()},
+\code{\link{supplementary_add}()},
+\code{\link{total_tax_add}()},
+\code{\link{vector_transpose_longer}()},
+\code{\link{vector_transpose_wider}()}
+}
+\concept{iotables processing functions}

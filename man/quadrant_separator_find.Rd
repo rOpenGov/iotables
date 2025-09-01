@@ -7,7 +7,7 @@
 quadrant_separator_find(data_table, include_total = FALSE)
 }
 \arguments{
-\item{data_table}{A symmetric input output table, a use table or a supply 
+\item{data_table}{A symmetric input output table, a use table or a supply
 table.}
 
 \item{include_total}{Should the total (intermediary) output column be

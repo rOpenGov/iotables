@@ -2,7 +2,7 @@
 % Please edit documentation in R/total_tax_add.R
 \name{total_tax_add}
 \alias{total_tax_add}
-\title{Summarize and add tax data}
+\title{Add a total tax row (D.2–D.3 and D.29–D.39)}
 \usage{
 total_tax_add(
   data_table,
@@ -11,34 +11,66 @@ total_tax_add(
 )
 }
 \arguments{
-\item{data_table}{A SIOT, a use table, a supply table, or a margins 
-table that has product and production tax rows in among the primary inputs.}
+\item{data_table}{A symmetric input–output table (SIOT) or use table
+whose primary inputs include tax rows (see Details). Typically obtained
+via \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{tax_names}{Defaults to \code{("d21x31", "d29x39")}, 
-which are the Eurostat 
-names for taxes. The parameter is not case sensitive.}
+\item{tax_names}{Character vector of row labels to sum. Defaults to
+\code{c("d21x31","d29x39")}, shorthand for D.2–D.3 and D.29–D.39. Matching
+is currently made against the \strong{lower-cased key column}.}
 
-\item{total_tax_name}{Defaults to \code{'TOTAL_TAX'}. The name of the 
-summarized row. It is case sensitive.}
+\item{total_tax_name}{Character scalar for the new row label. Default
+\code{"TOTAL_TAX"}. (See Enhancements regarding case handling.)}
 }
 \value{
-A data frame with the vector of multipliers and the an 
-auxiliary metadata column (for joining with other matrixes.)
+A data frame like \code{data_table}, with one additional row named
+\code{total_tax_name} that equals the element-wise sum of the rows in
+\code{tax_names} over numeric columns.
 }
 \description{
-Create and add a total tax row, if there are multiple tax rows
-present in the \code{data_table}.
+Create and append a \strong{total tax} row by summing selected tax rows in the
+primary inputs block (Quadrant III) of a SIOT or use table.
 }
+\details{
+In Eurostat/ESA terminology, tax rows commonly include:
+\itemize{
+\item \strong{Taxes less subsidies on products} (codes D.2–D.3), and
+\item \strong{Other net taxes on production} (codes D.29–D.39).
+}
+
+These appear in the value-added (primary inputs) section of the use/SIOT
+layout. The function sums the specified rows \strong{column-wise} over all
+numeric columns and appends the result as \code{total_tax_name}. If a household
+final consumption column is present (e.g. \code{final_consumption_households}
+or \code{p3_s14}), any missing value in the new total row is replaced by zero.
+}
+\section{Terminology}{
+
+Eurostat uses the lines “Taxes less subsidies on products” and “Other net
+taxes on production” in published tables; these correspond, respectively,
+to D.2–D.3 and D.29–D.39.
+}
+
 \examples{
 de_io <- iotable_get()
+total_tax_add(
+  data_table = de_io,
+  tax_names = c("net_tax_products", "net_tax_production"),
+  total_tax_name = "total_tax"
+)
 
-total_tax_add (de_io, 
-               tax_names = c("net_tax_products",  "net_tax_production"),
-               total_tax_name = "total_tax")
+}
+\references{
+Eurostat (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables},
+ch. 13.
+United Nations (2018). \emph{Handbook on Supply and Use Tables and Input–Output
+Tables with Extensions and Applications (Rev. 1, “white cover”)}, ch. 10.
 }
 \seealso{
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
+\code{\link{empty_remove}()},
+\code{\link{household_column_find}()},
 \code{\link{household_column_get}()},
 \code{\link{iotable_year_get}()},
 \code{\link{key_column_create}()},
