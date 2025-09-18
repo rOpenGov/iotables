@@ -48,7 +48,7 @@ See `?airpol_get` for the type of air pollutants that you can add to a European 
 
 ## Direct and multiplied effects
 
-The direct effects will show how many thousand tons of extra greenhouse gases will be produced with each millions of euros of extra output from Belgium's industries. We are adding with `rows_add()` the greenhouse gas vector in a conforming form to inter-industry matrix of Belgium. We will only print the top five emitters. 
+The direct effects will show how many thousand tons of extra greenhouse gases will be produced with each millions of euros of extra output from Belgium's industries. We are adding with `supplementary_add()`—which wraps `rows_add()`—the greenhouse gas vector in a conforming form to inter-industry matrix of Belgium. We will only print the top five emitters.
 
 ```{r ghgindicators}
 be_io <- BE %>%
