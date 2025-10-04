@@ -7,58 +7,17 @@
 iotables_metadata_get(dat = NULL, source = "naio_10_cp1700")
 }
 \arguments{
-\item{dat}{A nested tibble created by \code{\link[=iotables_download]{iotables_download()}}. Defaults to
-\code{NULL}, in which case the function attempts to read the file from
-\code{tempdir()}.}
+\item{dat}{Optional. A nested tibble as returned by \code{\link[=iotables_download]{iotables_download()}}.
+If \code{NULL}, the function attempts to load it from \code{tempdir()} using the
+same cache naming convention (\code{"<source>_processed.rds"}).}
 
-\item{source}{Character. A valid data source code (see \strong{Sources}).}
+\item{source}{Character. A valid data source code (see Details).}
 }
 \value{
-A tibble with only metadata columns. The \code{data} list-column is removed
-and unnested.
+A tibble with metadata columns only (no \code{data} list-column).
 }
 \description{
-Return only the metadata information from a nested input–output (IO) table
-(or related table) created by \code{\link[=iotables_download]{iotables_download()}}. The \code{data} list-column
-is removed, leaving only metadata rows.
+Returns only the metadata (e.g. country, year, unit, flow) from a nested
+input–output (IO) table created by \code{\link[=iotables_download]{iotables_download()}}. Removes the
+heavy \code{data} list-column, leaving just metadata rows.
 }
-\details{
-If \code{dat} is \code{NULL}, the function tries to load the file corresponding to
-\code{source} from the current session's \code{tempdir()}.
-}
-\section{Sources}{
-
-Supported Eurostat/ONS products include:
-\itemize{
-\item \code{"naio_10_cp1700"} — Symmetric IO table, basic prices (product × product)
-\item \code{"naio_10_pyp1700"} — Symmetric IO table, basic prices (product × product), previous years’ prices
-\item \code{"naio_10_cp1750"} — Symmetric IO table, basic prices (industry × industry)
-\item \code{"naio_10_pyp1750"} — Symmetric IO table, basic prices (industry × industry), previous years’ prices
-\item \code{"naio_10_cp15"} — Supply table at basic prices incl. margins/taxes
-\item \code{"naio_10_cp16"} — Use table at purchasers’ prices
-\item \code{"naio_10_cp1610"} — Use table at basic prices
-\item \code{"naio_10_pyp1610"} — Use table at basic prices (previous years’ prices)
-\item \code{"naio_10_cp1620"} / \code{"naio_10_pyp1620"} — Trade & transport margins
-\item \code{"naio_10_cp1630"} / \code{"naio_10_pyp1630"} — Taxes less subsidies on products
-\item \code{"uk_2010_siot"} — United Kingdom IO Analytical Tables
-}
-}
-
-\examples{
-\donttest{
-# Download data into tempdir()
-iotables_download(source = "naio_10_pyp1750")
-
-# Extract metadata only
-iotables_metadata_get(source = "naio_10_pyp1750")
-}
-
-}
-\seealso{
-Other import functions: 
-\code{\link{airpol_get}()},
-\code{\link{employment_get}()},
-\code{\link{iotables_download}()},
-\code{\link{iotables_read_tempdir}()}
-}
-\concept{import functions}

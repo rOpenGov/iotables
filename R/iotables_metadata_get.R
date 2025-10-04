@@ -1,66 +1,58 @@
-#' Extract metadata from a downloaded IO table
+#' @title Extract metadata from a downloaded IO table
 #'
 #' @description
-#' Return only the metadata information from a nested input–output (IO) table
-#' (or related table) created by [iotables_download()]. The `data` list-column
-#' is removed, leaving only metadata rows.
+#' Returns only the metadata (e.g. country, year, unit, flow) from a nested
+#' input–output (IO) table created by [iotables_download()]. Removes the
+#' heavy `data` list-column, leaving just metadata rows.
 #'
-#' @details
-#' If `dat` is `NULL`, the function tries to load the file corresponding to
-#' `source` from the current session's `tempdir()`.
-#'
-#' @section Sources:
-#' Supported Eurostat/ONS products include:
-#'
-#' - `"naio_10_cp1700"` — Symmetric IO table, basic prices (product × product)
-#' - `"naio_10_pyp1700"` — Symmetric IO table, basic prices (product × product), previous years’ prices
-#' - `"naio_10_cp1750"` — Symmetric IO table, basic prices (industry × industry)
-#' - `"naio_10_pyp1750"` — Symmetric IO table, basic prices (industry × industry), previous years’ prices
-#' - `"naio_10_cp15"` — Supply table at basic prices incl. margins/taxes
-#' - `"naio_10_cp16"` — Use table at purchasers’ prices
-#' - `"naio_10_cp1610"` — Use table at basic prices
-#' - `"naio_10_pyp1610"` — Use table at basic prices (previous years’ prices)
-#' - `"naio_10_cp1620"` / `"naio_10_pyp1620"` — Trade & transport margins
-#' - `"naio_10_cp1630"` / `"naio_10_pyp1630"` — Taxes less subsidies on products
-#' - `"uk_2010_siot"` — United Kingdom IO Analytical Tables
-#'
-#' @param dat A nested tibble created by [iotables_download()]. Defaults to
-#'   `NULL`, in which case the function attempts to read the file from
-#'   `tempdir()`.
-#' @param source Character. A valid data source code (see **Sources**).
+#' @param dat Optional. A nested tibble as returned by [iotables_download()].
+#'   If `NULL`, the function attempts to load it from `tempdir()` using the
+#'   same cache naming convention (`"<source>_processed.rds"`).
+#' @param source Character. A valid data source code (see Details).
 #'
 #' @return
-#' A tibble with only metadata columns. The `data` list-column is removed
-#' and unnested.
+#' A tibble with metadata columns only (no `data` list-column).
 #'
-#' @importFrom tidyr unnest
-#' @family import functions
-#'
-#' @examples
-#' \donttest{
-#' # Download data into tempdir()
-#' iotables_download(source = "naio_10_pyp1750")
-#'
-#' # Extract metadata only
-#' iotables_metadata_get(source = "naio_10_pyp1750")
-#' }
-#'
+#' @importFrom assertthat assert_that
+#' @importFrom tibble as_tibble
+#' @importFrom glue glue
 #' @export
 iotables_metadata_get <- function(dat = NULL,
                                   source = "naio_10_cp1700") {
+  validate_source(source)
+  
+  # Load cached file if dat not provided
   if (is.null(dat)) {
-    validate_source(source)
-    dat <- iotables_read_tempdir(source)
-  }
-
-  if (!is.null(dat)) {
-    metadata <- dat[, !names(dat) %in% c("data")]
-    tidyr::unnest(metadata, cols = c())
-  } else {
-    message(
-      "The temporary file for source='", source,
-      "' is not found in\ntempdir='",
-      tempdir(), "'"
+    cache_file <- file.path(tempdir(), paste0(source, "_processed.rds"))
+    if (!file.exists(cache_file)) {
+      message(glue(
+        "No cached dataset found for source='{source}' in tempdir():\n{cache_file}\n",
+        "Try running iotables_download(source = '{source}') first."
+      ))
+      return(invisible(NULL))
+    }
+    
+    dat <- tryCatch(
+      readRDS(cache_file),
+      error = function(e) {
+        message("Failed to read cached data: ", conditionMessage(e))
+        NULL
+      }
     )
   }
+  
+  # Validate structure
+  if (is.null(dat) || !"data" %in% names(dat)) {
+    message(glue(
+      "No valid nested data found for source='{source}'.",
+      " Did you run iotables_download() first?"
+    ))
+    return(invisible(NULL))
+  }
+  
+  # Drop heavy list-column
+  metadata <- dat[, setdiff(names(dat), "data"), drop = FALSE]
+  
+  # Return a clean tibble
+  tibble::as_tibble(metadata)
 }
