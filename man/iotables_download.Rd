@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotables_download.R
 \name{iotables_download}
 \alias{iotables_download}
-\title{Download input–output tables (Eurostat)}
+\title{Download input–output tables (Eurostat or internal datasets)}
 \usage{
 iotables_download(
   source = "naio_10_cp1700",
@@ -15,69 +15,39 @@ iotables_download(
 )
 }
 \arguments{
-\item{source}{Character. The Eurostat product code (see above) or \code{"uk_2010"}.}
+\item{source}{Character. Eurostat dataset ID (e.g. \code{"naio_10_cp1700"})
+or internal dataset name (e.g. \code{"germany_1995"}, \code{"croatia_2010_1800"}, \code{"uk_2010_siot"}).}
 
-\item{data_directory}{Optional directory path where the processed nested
-tables will be saved as \code{"<source>_processed.rds"}. If \code{NULL} (default),
-results are saved to \code{tempdir()}.}
+\item{geo}{Country code (optional).}
 
-\item{force_download}{Logical. If \code{FALSE} (default), reuse a cached file
-in \code{data_directory} or \code{tempdir()} when available. If \code{TRUE}, force a
-fresh download from Eurostat.}
+\item{year}{Numeric (optional).}
+
+\item{unit}{Character, usually \code{"MIO_EUR"} or \code{"MIO_NAC"}.}
+
+\item{stk_flow}{Stock/flow indicator (\code{"DOM"}, \code{"IMP"}, \code{"TOTAL"}), optional.}
+
+\item{data_directory}{Directory to save processed data (default: \code{tempdir()}).}
+
+\item{force_download}{Logical, whether to force a new Eurostat download.}
 }
 \value{
-A \strong{nested} \code{data.frame} (one row per IO table) with metadata columns
-(\code{geo}, \code{unit}, \code{year}, \code{stk_flow}, etc.) and a list-column \code{data}
-containing the tidy table for each combination.
+A \strong{nested tibble}, with metadata columns (\code{geo}, \code{year}, \code{unit}, etc.)
+and a list-column \code{data} containing tidy IO tables.
 }
 \description{
-Download standard input–output (IO) and related tables. At the moment,
-only Eurostat products are supported. You usually do not need to call
-this directly; \code{\link[=iotable_get]{iotable_get()}} will invoke it as needed and return a
-filtered, tidy table.
+Downloads and prepares symmetric input–output (IO) or supply–use tables.
+Supports both Eurostat datasets and internal reference datasets
+(\code{germany_1995}, \verb{croatia_2010_*}, \verb{uk_2010_*}).
 }
 \details{
-Files are cached under \code{tempdir()} as RDS (e.g., \code{"naio_10_cp1750.rds"}).
+Files are cached under \code{tempdir()} as RDS (e.g., \code{"naio_10_cp1750_processed.rds"}).
 The temporary directory is cleared when the R session ends. To persist
 downloads across sessions (recommended for analytics), supply
-\code{data_directory} and the processed, \strong{nested} output will also be
-written there as \code{"<source>_processed.rds"}.
-
-Supported Eurostat products include (non-exhaustive):
-\itemize{
-\item \code{naio_10_cp1700} — Symmetric IO table, basic prices (product × product)
-\item \code{naio_10_pyp1700} — Same, previous years’ prices
-\item \code{naio_10_cp1750} — Symmetric IO table, basic prices (industry × industry)
-\item \code{naio_10_pyp1750} — Same, previous years’ prices
-\item \code{naio_10_cp15} — Supply table at basic prices incl. margins/taxes
-\item \code{naio_10_cp16} — Use table at purchasers’ prices
-\item \code{naio_10_cp1610} — Use table at basic prices
-\item \code{naio_10_pyp1610} — Use table at basic prices (previous years’ prices)
-\item \code{naio_10_cp1620} — Trade and transport margins at basic prices
-\item \code{naio_10_pyp1620} — Trade and transport margins at previous years’ prices
-\item \code{naio_10_cp1630} — Taxes less subsidies on products at basic prices
-\item \code{naio_10_pyp1630} — Taxes less subsidies on products, prev. years’ prices
-\item \code{uk_2010} — United Kingdom IO Analytical Tables (handled internally)
-}
-
-Eurostat API/format changes (e.g., \code{TIME_PERIOD} vs \code{time}) are handled
-for backward compatibility.
-}
-\note{
-Uses \code{\link[eurostat:clean_eurostat_cache]{eurostat::clean_eurostat_cache()}} internally when
-\code{force_download = TRUE} to clear stale cached files.
-}
-\examples{
-\donttest{
-io_tables <- iotables_download(source = "naio_10_pyp1750")
-}
-
+\code{data_directory}.
 }
 \seealso{
 Other import functions: 
-\code{\link{airpol_get}()},
 \code{\link{employment_get}()},
-\code{\link{iotables_metadata_get}()},
 \code{\link{iotables_read_tempdir}()}
 }
 \concept{import functions}

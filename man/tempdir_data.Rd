@@ -2,20 +2,29 @@
 % Please edit documentation in R/tempdir_data.R
 \name{tempdir_data}
 \alias{tempdir_data}
-\title{Download to and retrieve from the temporary directory a Eurostat dataset}
+\title{Deprecated: Retrieve or download Eurostat dataset from temporary cache}
 \usage{
-tempdir_data(id, force_download)
+tempdir_data(id, force_download = FALSE)
 }
 \arguments{
-\item{id}{The id of a Eurostat product.}
+\item{id}{Character. The Eurostat dataset identifier (e.g., \code{"naio_10_cp1700"}).}
 
-\item{force_download}{Defaults to \code{FALSE} which will use the existing downloaded file
-in the \code{data_directory} or the temporary directory, if it exists. \code{TRUE} will
-try to download the file from the Eurostat warehouse.}
+\item{force_download}{Logical. If \code{TRUE}, forces a re-download and ignores
+cached copies. Defaults to \code{FALSE}.}
+}
+\value{
+A raw Eurostat data frame.
 }
 \description{
-To save time of downloading and processing during a session, the download functions
-rely on the use of saving copies in the tempdir(). The downloads are always placed there and
-each import looks for them first in the tempdir().
+❌ \strong{Deprecated} — This internal helper is retained only for backward
+compatibility. It has been replaced by unified cache management inside
+\code{\link[=iotables_download]{iotables_download()}} and \code{\link[=airpol_get]{airpol_get()}}.
+
+The new caching system uses a session-local Eurostat cache directory
+(\code{file.path(tempdir(), "eurostat")}) with persistent \code{.rds} storage for
+downloaded tables.
+}
+\seealso{
+\code{\link[=iotables_download]{iotables_download()}}, \code{\link[=airpol_get]{airpol_get()}}
 }
 \keyword{internal}
