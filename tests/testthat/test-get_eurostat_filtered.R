@@ -1,26 +1,27 @@
 test_that("filtered Eurostat download returns correct values", {
-  skip_on_cran()
-  skip_on_ci()
-  downloaded <- get_eurostat_filtered(
-    id = "naio_10_cp1700",
-    filters = list(geo = "HU", 
-                   time = "2020", 
-                   stk_flow = "TOTAL")
-  )
-  expect_s3_class(downloaded, "data.frame")
-  expect_true(all(downloaded$stk_flow == "TOTAL"))
-  expect_true(all(downloaded$geo == "HU"))
-  expect_true(all(downloaded$TIME_PERIOD == as.Date("2020-01-01")))
-  expect_equal(attr(downloaded, "dataset"), "naio_10_cp1700")
+  skip_on_cran(); skip_on_ci()
   
-  downloaded_2 <- get_eurostat_filtered(
-    id = "naio_10_cp1750",
-    filters = list(geo = "CZ", 
-                   time = "2020", stk_flow = "TOTAL")
+  # CPA product×product
+  d1 <- get_eurostat_filtered(
+    id = "naio_10_cp1700",
+    filters = list(geo = "HU", time = "2020", stk_flow = "TOTAL")
   )
-  expect_s3_class(downloaded_2, "data.frame")
-  expect_true(all(downloaded_2$stk_flow == "TOTAL"))
-  expect_true(all(downloaded_2$geo == "CZ"))
-  expect_true(all(downloaded_2$TIME_PERIOD == as.Date("2020-01-01")))
-  expect_equal(attr(downloaded_2, "dataset"), "naio_10_cp1750")
+  expect_s3_class(d1, "data.frame")
+  expect_true(all(d1$stk_flow == "TOTAL"))
+  expect_true(all(d1$geo == "HU"))
+  expect_true(all(d1$TIME_PERIOD == as.Date("2020-01-01")))
+  expect_equal(attr(d1, "dataset"), "naio_10_cp1700")
+  expect_true(all(c("prd_ava","prd_use") %in% names(d1)))
+  
+  # NACE industry×industry
+  d2 <- get_eurostat_filtered(
+    id = "naio_10_cp1750",
+    filters = list(geo = "CZ", time = "2020", stk_flow = "TOTAL")
+  )
+  expect_s3_class(d2, "data.frame")
+  expect_true(all(d2$stk_flow == "TOTAL"))
+  expect_true(all(d2$geo == "CZ"))
+  expect_true(all(d2$TIME_PERIOD == as.Date("2020-01-01")))
+  expect_equal(attr(d2, "dataset"), "naio_10_cp1750")
+  expect_true(all(c("ind_ava","ind_use") %in% names(d2)))
 })
