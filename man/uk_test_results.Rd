@@ -53,7 +53,8 @@ cross-checks with \pkg{iotables} computations.
 
 Other validation datasets: 
 \code{\link{germany_airpol}},
-\code{\link{netherlands_2000}}
+\code{\link{netherlands_2000}},
+\code{\link{uk_2010_data}}
 }
 \concept{validation datasets}
 \keyword{datasets}

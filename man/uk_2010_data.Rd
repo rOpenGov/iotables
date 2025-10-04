@@ -3,42 +3,61 @@
 \docType{data}
 \name{uk_2010_data}
 \alias{uk_2010_data}
-\title{United Kingdom Input-Output Analytical Tables, 2010}
+\title{United Kingdom Input–Output Analytical Tables, 2010}
 \format{
-A data frame with 10 variables.
+A \link[tibble:tibble]{tibble} with \strong{10 variables}:
+
 \describe{
-\item{uk_row}{The UK row identifier. Dots and '&' converted to '-'.}
-\item{uk_row_lab}{The original UK row labels.}
-\item{uk_col}{The UK row identifier. Dots and '&' converted to '-'.}
-\item{uk_col_lab}{The original UK column labels.}
-\item{geo}{Eurostat-style geocode, i.e. UK }
-\item{geo_lab}{United Kingdom}
-\item{indicator}{The name of the indicator, i.e. Excel sheet.}
-\item{unit}{Eurostat label equivalents units, i.e. MIO_NAC.}
-\item{unit_lab}{Eurostat label equivalents, i.e. millions of national currency unit.}
-\item{values}{The numeric values of the variable}
-\item{year}{Constant = 2010.}
+\item{uk_row}{Row identifier (dots and \code{&} converted to \code{-}).}
+\item{uk_row_lab}{Original ONS row label.}
+\item{uk_col}{Column identifier (dots and \code{&} converted to \code{-}).}
+\item{uk_col_lab}{Original ONS column label.}
+\item{geo}{Eurostat-style geocode (constant: \code{"UK"}).}
+\item{geo_lab}{Human-readable country label (constant: \code{"United Kingdom"}).}
+\item{indicator}{Indicator or table name, matching Excel sheet title.}
+\item{unit}{Eurostat-style unit code (e.g. \code{"MIO_NAC"}).}
+\item{unit_lab}{Human-readable unit label (e.g. \code{"Million national currency"}).}
+\item{values}{Numeric values for each indicator.}
+\item{year}{Constant value: \code{2010}.}
 }
 }
 \source{
-\href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{United Kingdom Input-Output Analytical Tables 2010}
+Office for National Statistics (2010). \emph{United Kingdom Input–Output Analytical Tables, 2010.}
+Retrieved from the \href{https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html}{UK National Archives (ONS Web Archive)}.
 }
 \usage{
 data(uk_2010_data)
 }
 \description{
-Replication data exported from the Office of National Statistics.
+Official \strong{Input–Output Analytical Tables} for the United Kingdom (2010),
+published by the Office for National Statistics (ONS).
+
+These replication data are harmonized to the \emph{iotables} package format
+and can be accessed via \code{\link[=iotable_get]{iotable_get()}} by setting the \code{source} parameter
+to one of the available tables.
 }
 \details{
-You can retrieve the data with \code{\link{iotable_get}}, setting the
-\code{source} parameter as follows:
-\describe{
-\item{\code{uk_2010_siot}}{ Input-Output table (domestic use, basic prices, product by product) }
-\item{\code{uk_2010_use}}{ Domestic use table at basic prices (product by industry) }
-\item{\code{uk_2010_imports}}{ Imports use table at basic prices (product by product) }
-\item{\code{uk_2010_coeff}}{ Matrix of coefficients (product by product) }
-\item{\code{uk_2010_inverse}}{ Leontief Inverse (product by product) }
+The dataset includes five analytical table types from the 2010 UK Input–Output release:
+\itemize{
+\item \code{uk_2010_siot} — Input–Output table (domestic use, basic prices, product × product)
+\item \code{uk_2010_use} — Domestic use table at basic prices (product × industry)
+\item \code{uk_2010_imports} — Imports use table at basic prices (product × product)
+\item \code{uk_2010_coeff} — Matrix of coefficients (product × product)
+\item \code{uk_2010_inverse} — Leontief inverse (product × product)
 }
+
+These correspond to the Excel sheets from the official ONS publication.
 }
-\concept{Validation datasets}
+\seealso{
+\itemize{
+\item \code{\link[=iotable_get]{iotable_get()}} for accessing and filtering IO tables.
+\item \code{\link[=iotables_download]{iotables_download()}} for downloading current Eurostat and UK datasets.
+}
+
+Other validation datasets: 
+\code{\link{germany_airpol}},
+\code{\link{netherlands_2000}},
+\code{\link{uk_test_results}}
+}
+\concept{validation datasets}
 \keyword{datasets}
