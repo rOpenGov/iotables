@@ -235,13 +235,11 @@ employment_get <- function(geo,
 
     ## No employment for imputed rent column--------------------------------
 
-    imputed_rent <- data.frame(
-      real_estate_imputed_a = 0
-    )
     primary_employment_input <- primary_employment_input %>%
       dplyr::ungroup() %>%
       select(iotables_label, values) %>%
-      tidyr::spread(iotables_label, values) # use iotables_label in this case
+      tidyr::spread(iotables_label, values) %>%
+      ensure_l68_columns("real_estate_imputed_a") # use iotables_label in this case
   } else if (labelling == "prod_na") { ## this is the product x product labelling format
     prefix <- data.frame(
       prod_na = paste0("employment_", emp_sex)
@@ -250,13 +248,11 @@ employment_get <- function(geo,
     primary_employment_input <- employment %>%
       dplyr::filter(variable == "prod_na")
 
-    imputed_rent <- data.frame(
-      CPA_L68A = 0
-    )
     primary_employment_input <- primary_employment_input %>%
       dplyr::ungroup() %>%
       dplyr::select(code, values) %>%
-      tidyr::spread(code, values) # use code for standard Eurostat library
+      tidyr::spread(code, values) %>%
+      ensure_l68_columns("CPA_L68A") # use code for standard Eurostat library
   } else if (labelling == "induse") { # this is the industry x industry labelling format
     prefix <- data.frame(
       induse = paste0("employment_", emp_sex)
@@ -265,20 +261,17 @@ employment_get <- function(geo,
     primary_employment_input <- employment %>%
       dplyr::filter(variable == "induse")
 
-    imputed_rent <- data.frame(
-      L68A = 0
-    )
     primary_employment_input <- primary_employment_input %>%
       dplyr::ungroup() %>%
       dplyr::select(code, values) %>%
-      tidyr::spread(code, values) # use code for standard Eurostat library
+      tidyr::spread(code, values) %>%
+      ensure_l68_columns("L68A") # use code for standard Eurostat library
   } else {
     warning("No L68A was added.")
     return(primary_employment_input)
   }
 
   return_employment <- cbind(prefix, primary_employment_input)
-  return_employment <- cbind(return_employment, imputed_rent)
 
   return_employment
 }

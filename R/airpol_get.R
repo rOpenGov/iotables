@@ -150,11 +150,6 @@ airpol_get <- function(airpol = "GHG",
   direct_match <- country_ghg %>%
     inner_join(ghg, by = "nace_r2")
 
-  L68 <- tibble(
-    nace_r2 = c("CPA_L68A", "CPA_L68B"),
-    values = c(0, 0)
-  )
-
   group_match <- country_ghg %>%
     rename(nace = nace_r2) %>%
     mutate(nace_r2 = substr(.data$nace, 1, 5)) %>%
@@ -167,14 +162,14 @@ airpol_get <- function(airpol = "GHG",
     left_join(
       direct_match %>%
         left_join(group_match, by = c("airpol", "nace_r2", "unit", "geo", "time", "values")) %>%
-        select(nace_r2, values) %>%
-        full_join(L68, by = c("nace_r2", "values")),
+        select(nace_r2, values),
       by = "nace_r2"
     ) %>%
     pivot_wider(
       names_from = nace_r2,
       values_from = values
     ) %>%
+    ensure_l68_columns(c("CPA_L68A", "CPA_L68B")) %>%
     mutate(indicator = paste0(airpol, "_emission")) %>%
     relocate(indicator, .before = everything())
 

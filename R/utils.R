@@ -1,8 +1,42 @@
 #' @keywords internal
 fn_na_to_null <- function(x) ifelse(is.na(x), 0, x)
 
-#' @title Validate source parameter
+#' @title Ensure L68-related columns exist
 #'
+#' @description Internal helper that guarantees the requested real-estate
+#'   columns exist in a wide-format data frame. Missing columns are appended with
+#'   zeros, while existing non-zero values are preserved.
+#'
+#' @param data A wide `data.frame`.
+#' @param columns Character vector of column names that must be present.
+#'
+#' @return The input data frame with any missing columns added and filled with
+#'   zeros.
+#'
+#' @keywords internal
+ensure_l68_columns <- function(data, columns) {
+  assertthat::assert_that(
+    is.data.frame(data),
+    msg = "`data` must be a data.frame"
+  )
+
+  assertthat::assert_that(
+    is.character(columns),
+    length(columns) > 0,
+    msg = "`columns` must be a non-empty character vector"
+  )
+
+  missing_columns <- setdiff(columns, names(data))
+
+  for (column in missing_columns) {
+    data[[column]] <- 0
+  }
+
+  data
+}
+
+#' @title Validate source parameter
+#' 
 #' @description Internal function that checks whether the given `source`
 #'   argument matches one of the supported Eurostat or UK table identifiers.
 #'
