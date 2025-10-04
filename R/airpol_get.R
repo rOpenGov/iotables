@@ -29,7 +29,8 @@
 #'
 #' @return
 #' A data frame with auxiliary metadata conforming to symmetric input–output
-#' tables.
+#' tables. The first column is `indicator` and the further columns correspond
+#' to a Eurostat SIOT matrix's columns.
 #'
 #' @source
 #' Eurostat dataset:
@@ -39,6 +40,7 @@
 #'
 #' @importFrom dplyr relocate mutate select filter left_join full_join
 #' @importFrom dplyr case_when group_by everything inner_join summarise
+#' @importFrom dplyr rename
 #' @importFrom tidyr pivot_wider
 #' @importFrom glue glue
 #'
@@ -54,8 +56,10 @@ airpol_get <- function(airpol = "GHG",
                        geo = "BE",
                        year = 2020,
                        unit = "THS_T",
-                       data_directory = NULL, force_download = TRUE) {
+                       data_directory = NULL, 
+                       force_download = TRUE) {
   if (geo == "germany_1995") {
+   
     ## Avoid large examples on CRAN
     airpol_input <- airpol
     return_df <- getdata("germany_airpol") %>%
@@ -83,13 +87,19 @@ airpol_get <- function(airpol = "GHG",
     }
   }
 
+  tmp <- dplyr::rename(tmp, time = TIME_PERIOD)
+  
+  # Filter the relevant air pollutants's data -------------------------
   assert_that(
     airpol %in% tmp$airpol,
     msg = glue("{airpol} is not recognized as an air pollutant in Eurostat table env_ac_ainah_r2")
   )
+  
+  message("Filter may take a longer time due to the large raw files.")
 
   airpol_df <- tmp[tmp$airpol == airpol, ]
 
+  # Filter the relevant country's data -------------------------------
   assert_that(
     geo %in% airpol_df$geo,
     msg = glue("No data for geo='{geo}' with airpol='{airpol}' in year={year} and unit='{unit}' in Eurostat table env_ac_ainah_r2")
@@ -97,6 +107,7 @@ airpol_get <- function(airpol = "GHG",
 
   airpol_df <- airpol_df[airpol_df$geo == geo, ]
 
+  # Filter the relevant year's data ----------------------------------
   assertthat::assert_that(
     as.Date(paste0(year, "-01-01")) %in% airpol_df$time,
     msg = glue::glue("No data for year={year} with geo='{geo}'an airpol='{airpol}' and unit='{unit}' in Eurostat table env_ac_ainah_r2")
@@ -104,12 +115,16 @@ airpol_get <- function(airpol = "GHG",
 
   airpol_df <- airpol_df[airpol_df$time == as.Date(paste0(year, "-01-01")), ]
 
+  # Assert the relevant unit of measure ------------------------------
+  
   assertthat::assert_that(
     unit %in% airpol_df$unit,
     msg = glue::glue("No data for unit='{unit}' with geo='{geo}', airpol='{airpol}' and geo='{geo'} in Eurostat table env_ac_ainah_r2")
   )
 
   airpol_df <- airpol_df[airpol_df$unit == unit, ]
+  
+  # Matching columns -----------------------------------------------
 
   prod_na <- c(
     "CPA_A01", "CPA_A02", "CPA_A03", "CPA_B", "CPA_C10-12", "CPA_C13-15", "CPA_C16",
@@ -147,6 +162,8 @@ airpol_get <- function(airpol = "GHG",
     nace_r2 = prod_na
   )
 
+  # match CPA/prod_na codes when they are equivalent with each
+  # other
   direct_match <- country_ghg %>%
     inner_join(ghg, by = "nace_r2")
 
@@ -161,7 +178,8 @@ airpol_get <- function(airpol = "GHG",
   return_df <- ghg %>%
     left_join(
       direct_match %>%
-        left_join(group_match, by = c("airpol", "nace_r2", "unit", "geo", "time", "values")) %>%
+        left_join(group_match, by = c("airpol", "nace_r2", "unit",
+                                      "geo", "time", "values")) %>%
         select(nace_r2, values),
       by = "nace_r2"
     ) %>%
@@ -173,5 +191,9 @@ airpol_get <- function(airpol = "GHG",
     mutate(indicator = paste0(airpol, "_emission")) %>%
     relocate(indicator, .before = everything())
 
+  attr(return_df, "geo") <- geo
+  attr(return_df, "year") <- year
+  attr(return_df, "unit") <- unit
   return_df
 }
+

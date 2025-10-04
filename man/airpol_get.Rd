@@ -37,7 +37,8 @@ reuses an existing file in \code{data_directory} or a temporary directory.}
 }
 \value{
 A data frame with auxiliary metadata conforming to symmetric input–output
-tables.
+tables. The first column is \code{indicator} and the further columns correspond
+to a Eurostat SIOT matrix's columns.
 }
 \description{
 Retrieve air emissions accounts by NACE Rev. 2 activity for environmental
