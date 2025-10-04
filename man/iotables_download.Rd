@@ -6,6 +6,10 @@
 \usage{
 iotables_download(
   source = "naio_10_cp1700",
+  geo = NULL,
+  year = NULL,
+  unit = NULL,
+  stk_flow = NULL,
   data_directory = NULL,
   force_download = FALSE
 )
@@ -58,6 +62,10 @@ Supported Eurostat products include (non-exhaustive):
 
 Eurostat API/format changes (e.g., \code{TIME_PERIOD} vs \code{time}) are handled
 for backward compatibility.
+}
+\note{
+Uses \code{\link[eurostat:clean_eurostat_cache]{eurostat::clean_eurostat_cache()}} internally when
+\code{force_download = TRUE} to clear stale cached files.
 }
 \examples{
 \donttest{

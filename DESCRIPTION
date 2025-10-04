@@ -1,17 +1,14 @@
 Package: iotables
 Type: Package
 Title: Reproducible Input–Output Economics Analysis, Economic and Environmental Impact Assessment with Empirical Data
-Version: 0.9.41
-Date: 2025-09-18
+Version: 0.9.42
+Date: 2025-10-10
 Authors@R: 
     c(
       person("Daniel", "Antal", 
              email = "daniel.antal@dataobservatory.eu",
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7513-6760")),
-      person("Kasia", "Kulma", 
-             role = "ctb",
-             comment = c(ORCID = "0000-0002-2952-9720")),
       person("Pyry", "Kantanen",
              role = "ctb",
              comment = c(ORCID = "0000-0003-2853-2765"))
@@ -46,6 +43,7 @@ Imports:
     utils
 Suggests: 
     covr,
+    mockery,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0)

@@ -51,33 +51,101 @@
 #' }
 #'
 #' @family import functions
+#' @note Uses [eurostat::clean_eurostat_cache()] internally when
+#'   `force_download = TRUE` to clear stale cached files.
 #' @importFrom dplyr filter select mutate left_join rename any_of recode
 #' @importFrom tidyr nest
-#' @importFrom eurostat get_eurostat label_eurostat
+#' @importFrom eurostat get_eurostat label_eurostat set_eurostat_cache_dir
 #' @importFrom lubridate year
 #' @importFrom rlang set_names
 #' @importFrom glue glue
 #' @importFrom assertthat assert_that
 #' @export
 
-
 iotables_download <- function(source = "naio_10_cp1700",
+                              geo = NULL,
+                              year = NULL,
+                              unit = NULL,
+                              stk_flow = NULL,
                               data_directory = NULL,
                               force_download = FALSE) {
-  ## Parameter validation ---------------------------------------------
-  if (!source %in% c("uk_2010", "germany_1995")) {
-    validate_source(source)
-    downloaded <- tempdir_data(source, force_download)
-  } else if (source == "uk_2010") {
-    return(uk_2010_get())
+  
+  # ---- Ensure boolean argument ----
+  if (is.null(force_download)) force_download <- FALSE
+  
+  # ---- Handle built-in toy datasets -------------------------------
+  if (identical(source, "germany_1995")) {
+    if (interactive()) message("Using built-in dataset: germany_1995.")
+    return(iotable_get(source="germany_1995"))
   }
-
+  
+  # (Optional) extend here for other prepackaged examples
+  # if (identical(source, "example_siots")) return(iotables::example_siots())
+  
+  # ---- Validate Eurostat source -----------------------------------
+  validate_source(source)
+  
+  # Define a session-local Eurostat cache directory
+  cache_dir <- file.path(tempdir(), "eurostat")
+  if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
+  eurostat::set_eurostat_cache_dir(cache_dir)
+  
+  
+ 
+  # ---- Preflight: light download to see available years  ----------------------
+  filters <- list()
+  if (!is.null(geo))      filters$geo      <- geo
+  if (!is.null(stk_flow)) filters$stk_flow <- stk_flow
+  if (!is.null(unit))     filters$unit     <- unit
+  if (!is.null(year))     filters$TIME_PERIOD <- year
+  if (length(filters) == 0L) filters <- NULL
+  
+ 
+  downloaded <- tryCatch(
+    {
+      eurostat::get_eurostat(
+        id        = source,
+        cache     = !force_download,
+        cache_dir = cache_dir
+      )
+    },
+    error = function(e) {
+      msg <- paste0(
+        "Eurostat download failed for '", source, "': ",
+        conditionMessage(e)
+      )
+      message(msg)
+      NULL
+    },
+    warning = function(w) {
+      # Optional: show warnings only when interactive
+      if (interactive()) message("Eurostat warning: ", conditionMessage(w))
+      invokeRestart("muffleWarning")
+    }
+  )
+  
+  message("Downloaded ", format(object.size(downloaded), units = "MiB"))
+  
+  # Check if the right data was returned -------------------------
+  
   if (all(c("year", "data") %in% names(downloaded))) {
     # This is already processed
     message("Returning the processed SIOTs from tempdir. You can override this with force_download=TRUE.")
     return(downloaded)
   }
+  
+  # Allow a nested tibble returned directly ----------------------
+  if ("data" %in% names(downloaded) && is.list(downloaded$data)) {
+    if (interactive()) message("Returning the processed SIOTs from tempdir.")
+    return(downloaded)
+  }
 
+  # Stop gracefully if Eurostat's service was down -----------------
+  if (is.null(downloaded) || !is.data.frame(downloaded)) {
+    stop(glue("The download of {source} failed; Eurostat may be unavailable."))
+  }
+  
+  # Incorrect format was received -----------------------------------
   assert_that(
     "data.frame" %in% class(downloaded) & ncol(downloaded) > 6 & nrow(downloaded) > 1,
     msg = glue("The download of {source} was not successful.")
@@ -109,7 +177,8 @@ iotables_download <- function(source = "naio_10_cp1700",
   downloaded_labelled <- downloaded_labelled %>%
     mutate(year = lubridate::year(time_lab))
 
-  # Join the labelled and the not labelled files, so that both versions are avialable
+  # Join the labelled and the not labelled files, so that both
+  # versions are avialable
 
   downloaded <- downloaded %>%
     mutate(rows = seq_len(nrow(downloaded))) %>%
@@ -169,21 +238,41 @@ iotables_download <- function(source = "naio_10_cp1700",
       msg = glue::glue("The data_directory={data_directory} does not exist.")
     )
 
-    save_file_name <- file.path(data_directory, paste0(source, "_processed.rds")) # shoud have different name for processed
-    message("Saving ", nrow(downloaded_nested), " input-output tables.")
+    save_file_name <- file.path(data_directory, 
+                                paste0(source, 
+                                       "_processed.rds")
+                                ) # shoud have different name for 
+                                  #  processed
+    
+    # Saving the nested, downloaded data ---------
+    if (interactive()) {
+      message("Saving ", nrow(downloaded_nested), " input-output tables.")
+    }
     saveRDS(downloaded_nested, file = save_file_name, version = 2)
-    message(
-      "Saved the raw data of this table type in ",
-      save_file_name, "."
-    )
+    
+    # Reporting the save location ---------
+    if (interactive()) {
+      message(
+        "Saved the raw data of this table type in ",
+        save_file_name, "."
+      )
+    }
   } else {
-    save_file_name <- file.path(tempdir(), paste0(source, "_processed.rds"))
-    message("Saving ", nrow(downloaded_nested), " input-output tables into the temporary directory.")
+    save_file_name <- file.path(tempdir(), 
+                                paste0(source, 
+                                       "_processed.rds"))
+    if (interactive()){
+      message("Saving ", nrow(downloaded_nested), 
+              " input-output tables into the temporary directory.")
+    }
     saveRDS(downloaded_nested, file = save_file_name, version = 2)
-    message(
-      "Saved the raw data of this table type in temporary directory ",
-      save_file_name, "."
-    )
+    
+    if (interactive()){
+      message(
+        "Saved the raw data of this table type in temporary directory ",
+        save_file_name, "."
+      )
+    }
   }
 
   downloaded_nested
