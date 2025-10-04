@@ -36,7 +36,6 @@ adjust_stk_flow <- function(stk_flow, source) {
 }
 
 #' @keywords internal
-
 get_vocabulary_prod_ind <- function() {
   getdata("metadata") %>% # For tables that follow prod_ind vocabulary
     filter(variable == "prod_na") %>%
@@ -47,7 +46,6 @@ get_vocabulary_prod_ind <- function() {
 }
 
 #' @keywords internal
-
 get_vocabulary_induse <- function() {
   getdata("metadata") %>% # For tables that follow the induse vocabulary
     filter(variable == "induse") %>%
@@ -58,7 +56,6 @@ get_vocabulary_induse <- function() {
 }
 
 #' @keywords internal
-
 get_vocabulary_t_rows <- function() {
   getdata("metadata") %>%
     filter(variable == "t_rows") %>%
@@ -70,7 +67,6 @@ get_vocabulary_t_rows <- function() {
 
 #' @importFrom dplyr rename
 #' @keywords internal
-
 get_vocabulary_t_cols <- function() {
   getdata("metadata") %>%
     filter(variable == "t_cols") %>%
@@ -81,7 +77,6 @@ get_vocabulary_t_cols <- function() {
 }
 
 #' @keywords internal
-
 get_metadata_rows <- function(source) {
   prod_ind <- define_prod_ind()
   trow_tcol <- croatia_files <- c(
@@ -110,7 +105,6 @@ get_metadata_rows <- function(source) {
 }
 
 #' @keywords internal
-
 get_metadata_cols <- function(source) {
   prod_ind <- define_prod_ind()
 

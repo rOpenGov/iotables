@@ -36,7 +36,7 @@ ensure_l68_columns <- function(data, columns) {
 }
 
 #' @title Validate source parameter
-#' 
+#'
 #' @description Internal function that checks whether the given `source`
 #'   argument matches one of the supported Eurostat or UK table identifiers.
 #'

@@ -43,6 +43,9 @@ test_that("validate_source() correctly validates sources", {
     validate_source("not_a_table"),
     "is not in supported tables"
   )
+  
+  # Invalid source
+  expect_error(validate_source("naio_10_cp1701"))
 
   # Valid source
   expect_silent(validate_source("naio_10_cp1700"))
