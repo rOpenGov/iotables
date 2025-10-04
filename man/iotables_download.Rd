@@ -2,7 +2,7 @@
 % Please edit documentation in R/iotables_download.R
 \name{iotables_download}
 \alias{iotables_download}
-\title{Download input–output tables (Eurostat or internal datasets)}
+\title{Download input–output tables (Eurostat only)}
 \usage{
 iotables_download(
   source = "naio_10_cp1700",
@@ -15,8 +15,7 @@ iotables_download(
 )
 }
 \arguments{
-\item{source}{Character. Eurostat dataset ID (e.g. \code{"naio_10_cp1700"})
-or internal dataset name (e.g. \code{"germany_1995"}, \code{"croatia_2010_1800"}, \code{"uk_2010_siot"}).}
+\item{source}{Character. Eurostat dataset ID (e.g. \code{"naio_10_cp1700"}).}
 
 \item{geo}{Country code (optional).}
 
@@ -31,16 +30,17 @@ or internal dataset name (e.g. \code{"germany_1995"}, \code{"croatia_2010_1800"}
 \item{force_download}{Logical, whether to force a new Eurostat download.}
 }
 \value{
-A \strong{nested tibble}, with metadata columns (\code{geo}, \code{year}, \code{unit}, etc.)
+A \strong{nested tibble} with metadata columns (\code{geo}, \code{year}, \code{unit}, etc.)
 and a list-column \code{data} containing tidy IO tables.
 }
 \description{
-Downloads and prepares symmetric input–output (IO) or supply–use tables.
-Supports both Eurostat datasets and internal reference datasets
-(\code{germany_1995}, \verb{croatia_2010_*}, \verb{uk_2010_*}).
+Downloads and prepares symmetric input–output (IO) or supply–use tables
+directly from Eurostat. This modern version excludes all built-in
+datasets (\code{germany_1995}, \verb{croatia_2010_*}, \verb{uk_2010_*}) which are handled
+internally by \code{\link[=iotable_get]{iotable_get()}}.
 }
 \details{
-Files are cached under \code{tempdir()} as RDS (e.g., \code{"naio_10_cp1750_processed.rds"}).
+Files are cached under \code{tempdir()} as RDS (e.g. \code{"naio_10_cp1750_processed.rds"}).
 The temporary directory is cleared when the R session ends. To persist
 downloads across sessions (recommended for analytics), supply
 \code{data_directory}.
@@ -48,6 +48,7 @@ downloads across sessions (recommended for analytics), supply
 \seealso{
 Other import functions: 
 \code{\link{employment_get}()},
+\code{\link{iotables_download_old}()},
 \code{\link{iotables_read_tempdir}()}
 }
 \concept{import functions}

@@ -1,67 +1,31 @@
-#' Download input–output tables (Eurostat)
+#' Download input–output tables (Eurostat only)
 #'
 #' @description
-#' Download standard input–output (IO) and related tables. At the moment,
-#' only Eurostat products are supported. You usually do not need to call
-#' this directly; [iotable_get()] will invoke it as needed and return a
-#' filtered, tidy table.
+#' Downloads and prepares symmetric input–output (IO) or supply–use tables
+#' directly from Eurostat. This modern version excludes all built-in
+#' datasets (`germany_1995`, `croatia_2010_*`, `uk_2010_*`) which are handled
+#' internally by [iotable_get()].
 #'
 #' @details
-#' Files are cached under `tempdir()` as RDS (e.g., `"naio_10_cp1750.rds"`).
+#' Files are cached under `tempdir()` as RDS (e.g. `"naio_10_cp1750_processed.rds"`).
 #' The temporary directory is cleared when the R session ends. To persist
 #' downloads across sessions (recommended for analytics), supply
-#' `data_directory` and the processed, **nested** output will also be
-#' written there as `"<source>_processed.rds"`.
+#' `data_directory`.
 #'
-#' Supported Eurostat products include (non-exhaustive):
-#'
-#' - `naio_10_cp1700` — Symmetric IO table, basic prices (product × product)
-#' - `naio_10_pyp1700` — Same, previous years’ prices
-#' - `naio_10_cp1750` — Symmetric IO table, basic prices (industry × industry)
-#' - `naio_10_pyp1750` — Same, previous years’ prices
-#' - `naio_10_cp15` — Supply table at basic prices incl. margins/taxes
-#' - `naio_10_cp16` — Use table at purchasers’ prices
-#' - `naio_10_cp1610` — Use table at basic prices
-#' - `naio_10_pyp1610` — Use table at basic prices (previous years’ prices)
-#' - `naio_10_cp1620` — Trade and transport margins at basic prices
-#' - `naio_10_pyp1620` — Trade and transport margins at previous years’ prices
-#' - `naio_10_cp1630` — Taxes less subsidies on products at basic prices
-#' - `naio_10_pyp1630` — Taxes less subsidies on products, prev. years’ prices
-#' - `uk_2010` — United Kingdom IO Analytical Tables (handled internally)
-#'
-#' Eurostat API/format changes (e.g., `TIME_PERIOD` vs `time`) are handled
-#' for backward compatibility.
-#'
-#' @param source Character. The Eurostat product code (see above) or `"uk_2010"`.
-#' @param data_directory Optional directory path where the processed nested
-#'   tables will be saved as `"<source>_processed.rds"`. If `NULL` (default),
-#'   results are saved to `tempdir()`.
-#' @param force_download Logical. If `FALSE` (default), reuse a cached file
-#'   in `data_directory` or `tempdir()` when available. If `TRUE`, force a
-#'   fresh download from Eurostat.
+#' @param source Character. Eurostat dataset ID (e.g. `"naio_10_cp1700"`).
+#' @param geo Country code (optional).
+#' @param year Numeric (optional).
+#' @param unit Character, usually `"MIO_EUR"` or `"MIO_NAC"`.
+#' @param stk_flow Stock/flow indicator (`"DOM"`, `"IMP"`, `"TOTAL"`), optional.
+#' @param data_directory Directory to save processed data (default: `tempdir()`).
+#' @param force_download Logical, whether to force a new Eurostat download.
 #'
 #' @return
-#' A **nested** `data.frame` (one row per IO table) with metadata columns
-#' (`geo`, `unit`, `year`, `stk_flow`, etc.) and a list-column `data`
-#' containing the tidy table for each combination.
-#'
-#' @examples
-#' \donttest{
-#' io_tables <- iotables_download(source = "naio_10_pyp1750")
-#' }
+#' A **nested tibble** with metadata columns (`geo`, `year`, `unit`, etc.)
+#' and a list-column `data` containing tidy IO tables.
 #'
 #' @family import functions
-#' @note Uses [eurostat::clean_eurostat_cache()] internally when
-#'   `force_download = TRUE` to clear stale cached files.
-#' @importFrom dplyr filter select mutate left_join rename any_of recode
-#' @importFrom tidyr nest
-#' @importFrom eurostat get_eurostat label_eurostat set_eurostat_cache_dir
-#' @importFrom lubridate year
-#' @importFrom rlang set_names
-#' @importFrom glue glue
-#' @importFrom assertthat assert_that
 #' @export
-
 iotables_download <- function(source = "naio_10_cp1700",
                               geo = NULL,
                               year = NULL,
@@ -69,211 +33,175 @@ iotables_download <- function(source = "naio_10_cp1700",
                               stk_flow = NULL,
                               data_directory = NULL,
                               force_download = FALSE) {
-  
-  # ---- Ensure boolean argument ----
-  if (is.null(force_download)) force_download <- FALSE
-  
-  # ---- Handle built-in toy datasets -------------------------------
-  if (identical(source, "germany_1995")) {
-    if (interactive()) message("Using built-in dataset: germany_1995.")
-    return(iotable_get(source="germany_1995"))
+  data_directory <- data_directory # force it into local environment
+
+  # ---- Guard clause: block built-in datasets ------------------------------
+  builtin_sources <- c(
+    "germany_1995",
+    "croatia_2010_1700", "croatia_2010_1800", "croatia_2010_1900",
+    "uk_2010", "uk_2010_siot", "uk_2010_coeff", "uk_2010_inverse",
+    "netherlands_2000"
+  )
+
+  if (source %in% builtin_sources) {
+    stop(glue::glue(
+      "The dataset '{source}' is a built-in example handled by ",
+      "[iotable_get_builtin()].\n",
+      "Use that function instead of iotables_download()."
+    ), call. = FALSE)
   }
-  
-  # (Optional) extend here for other prepackaged examples
-  # if (identical(source, "example_siots")) return(iotables::example_siots())
-  
-  # ---- Validate Eurostat source -----------------------------------
+
+  if (is.null(force_download)) force_download <- FALSE
+
+  # ---- Validate source and setup cache --------------------------------------
   validate_source(source)
-  
-  # Define a session-local Eurostat cache directory
   cache_dir <- file.path(tempdir(), "eurostat")
   if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
   eurostat::set_eurostat_cache_dir(cache_dir)
-  
-  
- 
-  # ---- Preflight: light download to see available years  ----------------------
-  filters <- list()
-  if (!is.null(geo))      filters$geo      <- geo
-  if (!is.null(stk_flow)) filters$stk_flow <- stk_flow
-  if (!is.null(unit))     filters$unit     <- unit
-  if (!is.null(year))     filters$TIME_PERIOD <- year
-  if (length(filters) == 0L) filters <- NULL
-  
- 
-  downloaded <- tryCatch(
-    {
+
+  # ---- Download from Eurostat ----------------------------------------------
+  if (!is.null(geo) || !is.null(year) || !is.null(unit) || !is.null(stk_flow)) {
+    # Use lightweight JSON downloader when filters are given
+    filters <- list()
+    if (!is.null(geo)) filters$geo <- geo
+    if (!is.null(year)) filters$time <- as.character(year)
+    if (!is.null(unit)) filters$unit <- unit
+    if (!is.null(stk_flow)) filters$stk_flow <- stk_flow
+
+    downloaded <- get_eurostat_filtered(
+      id      = as.character(source),
+      filters = filters
+    )
+
+    message("Downloaded filtered subset (", nrow(downloaded), " rows).")
+  } else {
+    # Fallback to full Eurostat dataset + caching
+    downloaded <- tryCatch(
       eurostat::get_eurostat(
         id        = source,
         cache     = !force_download,
         cache_dir = cache_dir
-      )
-    },
-    error = function(e) {
-      msg <- paste0(
-        "Eurostat download failed for '", source, "': ",
-        conditionMessage(e)
-      )
-      message(msg)
-      NULL
-    },
-    warning = function(w) {
-      # Optional: show warnings only when interactive
-      if (interactive()) message("Eurostat warning: ", conditionMessage(w))
-      invokeRestart("muffleWarning")
-    }
-  )
-  
+      ),
+      error = function(e) {
+        stop("Eurostat download failed for '", source, "': ", conditionMessage(e))
+      }
+    )
+    message("Downloaded full dataset (", format(object.size(downloaded), units = "MiB"), ").")
+  }
+
   message("Downloaded ", format(object.size(downloaded), units = "MiB"))
-  
-  # Check if the right data was returned -------------------------
-  
-  if (all(c("year", "data") %in% names(downloaded))) {
-    # This is already processed
-    message("Returning the processed SIOTs from tempdir. You can override this with force_download=TRUE.")
-    return(downloaded)
-  }
-  
-  # Allow a nested tibble returned directly ----------------------
-  if ("data" %in% names(downloaded) && is.list(downloaded$data)) {
-    if (interactive()) message("Returning the processed SIOTs from tempdir.")
-    return(downloaded)
-  }
 
-  # Stop gracefully if Eurostat's service was down -----------------
-  if (is.null(downloaded) || !is.data.frame(downloaded)) {
-    stop(glue("The download of {source} failed; Eurostat may be unavailable."))
-  }
-  
-  # Incorrect format was received -----------------------------------
-  assert_that(
-    "data.frame" %in% class(downloaded) & ncol(downloaded) > 6 & nrow(downloaded) > 1,
-    msg = glue("The download of {source} was not successful.")
-  )
-
-  lab_names <- paste0(names(downloaded), "_lab")
-
-  # label the raw Eurostat file, add rename variables with _lab suffix
+  # ---- Label using Eurostat vocabulary -------------------------------------
   downloaded_labelled <- downloaded %>%
-    eurostat::label_eurostat(fix_duplicated = TRUE)
+    eurostat::label_eurostat(fix_duplicated = TRUE) %>%
+    dplyr::mutate(rows = seq_len(nrow(downloaded))) %>%
+    rlang::set_names(paste0(names(.), "_lab")) %>%
+    dplyr::rename(rows = rows_lab) %>%
+    dplyr::select(-tidyselect::any_of("values_lab")) %>%
+    {
+      # inside braces to allow conditional rename
+      if ("TIME_PERIOD_lab" %in% names(.)) {
+        dplyr::rename(., time_lab = TIME_PERIOD_lab)
+      } else {
+        .
+      }
+    }
+  # ---- Standardize time and year fields ------------------------------------
+  downloaded_time <- downloaded %>%
+    dplyr::rename_with(~ gsub("TIME_PERIOD", "time", .x)) %>%
+    dplyr::mutate(year = lubridate::year(time))
 
-  assert_that(
-    length(names(downloaded_labelled)) == length(lab_names),
-    msg = "in iotables_download() ncol(downloaded_labelled) != ncol(downloaded)"
+  # ---- Combine labelled + raw versions -------------------------------------
+  combined <- downloaded_time %>%
+    dplyr::mutate(rows = seq_len(nrow(downloaded_time))) %>%
+    dplyr::left_join(downloaded_labelled, by = "rows") %>%
+    dplyr::select(-rows)
+
+  # ---- Sanity checks -------------------------------------------------------
+  assertthat::assert_that(
+    is.numeric(combined$values),
+    msg = "combined$values must be numeric."
   )
 
-  downloaded_labelled <- downloaded_labelled %>% # add meaningful labels to raw data
-    rlang::set_names(lab_names) %>%
-    mutate(rows = seq_len(nrow(downloaded))) %>% # because long and wide formats are not symmetric
-    rename(values = values_lab)
+  # ---- Free up memory -----------------------------------------------
+  rm(downloaded_labelled)
+  invisible(gc())
 
-  if ("TIME_PERIOD_lab" %in% names(downloaded_labelled)) {
-    ## Breaking change in eurostat 4.0.0
-    ## keep this for backward compatiblitiy
-    downloaded_labelled <- downloaded_labelled %>%
-      rename(time_lab = TIME_PERIOD_lab)
-  }
+  # ---- Nest by metadata (identical to legacy schema) -----------------------
+  nesting_vars <- c(
+    "geo", "geo_lab", "time", "time_lab",
+    "year", "unit", "unit_lab",
+    "stk_flow", "stk_flow_lab"
+  )
 
-  downloaded_labelled <- downloaded_labelled %>%
-    mutate(year = lubridate::year(time_lab))
+  non_nesting_vars <- setdiff(names(combined), nesting_vars)
 
-  # Join the labelled and the not labelled files, so that both
-  # versions are avialable
-
-  downloaded <- downloaded %>%
-    mutate(rows = seq_len(nrow(downloaded))) %>%
-    left_join(downloaded_labelled, by = c("rows", "values"))
-
-  if ("TIME_PERIOD" %in% names(downloaded)) {
-    ## Breaking change in eurostat 4.0.0
-    ## keep this for backward compatiblitiy
-    downloaded <- downloaded %>%
-      rename(time = TIME_PERIOD)
-  }
-
-  if (source == "naio_cp17_r2") {
-    # Harmonize certain CPA aggregate codes
-    cpa_map <- c(
-      "CPA_N80-N82" = "CPA_N80-82",
-      "CPA_R90-R92" = "CPA_R90-92",
-      "CPA_E37-E39" = "CPA_E37-39",
-      "CPA_C10-C12" = "CPA_C10-12",
-      "CPA_C13-C15" = "CPA_C13-15",
-      "CPA_C31_C32" = "CPA_C31_32",
-      "CPA_J59_J60" = "CPA_J59_60",
-      "CPA_J62_J63" = "CPA_J62_63",
-      "CPA_M69_M70" = "CPA_M69_70",
-      "CPA_Q87_Q88" = "CPA_Q87_88",
-      "CPA_M74_M75" = "CPA_M74_75",
-      "CPA_O84"     = "CPA_O",
-      "CPA_P85"     = "CPA_P",
-      "CPA_D35"     = "CPA_D"
+  if (length(non_nesting_vars) == 0) {
+    # lightweight download already corresponds to one table
+    downloaded_nested <- tibble::tibble(
+      geo = unique(combined$geo),
+      year = unique(combined$year),
+      unit = unique(combined$unit),
+      stk_flow = unique(combined$stk_flow),
+      time = unique(combined$time),
+      data = list(combined)
     )
-
-    downloaded$t_cols2 <- dplyr::recode(downloaded$t_cols2, !!!cpa_map)
-    downloaded$t_rows2 <- dplyr::recode(downloaded$t_rows2, !!!cpa_map)
-  } # end of _r2
-
-
-  if ("stk_flow" %in% names(downloaded)) {
-    downloaded_nested <- nest(
-      downloaded,
-      data = -any_of(c(
-        "geo", "geo_lab", "time", "time_lab",
-        "year", "unit", "unit_lab", "stk_flow", "stk_flow_lab"
-      ))
-    )
+    message("Lightweight download contains a single SIOT; wrapped into nested structure.")
   } else {
-    downloaded_nested <- nest(
-      downloaded,
-      data = -any_of(c(
-        "geo", "geo_lab", "time", "time_lab",
-        "year", "unit", "unit_lab"
-      ))
+    message("Creating nested structure...")
+    downloaded_nested <- tidyr::nest(combined, data = -dplyr::any_of(nesting_vars))
+    message("Nesting done.")
+  }
+
+  # ---- Validation of nested structure --------------------------------------
+  if (nrow(downloaded_nested) > 0) {
+    assertthat::assert_that(
+      all(
+        vapply(
+          downloaded_nested$data,
+          function(df) is.numeric(df$values),
+          logical(1)
+        )
+      ),
+      msg = "Each nested table must have numeric `values`."
     )
   }
 
-  if (!is.null(data_directory)) {
-    assert_that(dir.exists(data_directory),
-      msg = glue::glue("The data_directory={data_directory} does not exist.")
-    )
+  # ---- Save ----------------------------------------------------------------
+  # Build a safe and descriptive filename
+  filter_suffix <- c()
 
-    save_file_name <- file.path(data_directory, 
-                                paste0(source, 
-                                       "_processed.rds")
-                                ) # shoud have different name for 
-                                  #  processed
-    
-    # Saving the nested, downloaded data ---------
-    if (interactive()) {
-      message("Saving ", nrow(downloaded_nested), " input-output tables.")
-    }
-    saveRDS(downloaded_nested, file = save_file_name, version = 2)
-    
-    # Reporting the save location ---------
-    if (interactive()) {
-      message(
-        "Saved the raw data of this table type in ",
-        save_file_name, "."
-      )
-    }
+  if (!is.null(geo)) filter_suffix <- c(filter_suffix, paste0("geo-", geo))
+  if (!is.null(year)) filter_suffix <- c(filter_suffix, paste0("year-", year))
+  if (!is.null(unit)) filter_suffix <- c(filter_suffix, paste0("unit-", unit))
+  if (!is.null(stk_flow)) filter_suffix <- c(filter_suffix, paste0("stk-", stk_flow))
+
+  # Join with underscores, sanitize for filesystem
+  filter_suffix <- paste(filter_suffix, collapse = "_")
+  if (filter_suffix != "") filter_suffix <- paste0("_", gsub("[^A-Za-z0-9_\\-]", "", filter_suffix))
+
+  base_filename <- paste0(source, filter_suffix, "_processed.rds")
+
+  save_path <- if (is.null(data_directory)) {
+    file.path(tempdir(), base_filename)
   } else {
-    save_file_name <- file.path(tempdir(), 
-                                paste0(source, 
-                                       "_processed.rds"))
-    if (interactive()){
-      message("Saving ", nrow(downloaded_nested), 
-              " input-output tables into the temporary directory.")
-    }
-    saveRDS(downloaded_nested, file = save_file_name, version = 2)
-    
-    if (interactive()){
-      message(
-        "Saved the raw data of this table type in temporary directory ",
-        save_file_name, "."
-      )
-    }
+    assertthat::assert_that(
+      dir.exists(data_directory),
+      msg = paste("data_directory not found:", data_directory)
+    )
+    file.path(data_directory, base_filename)
   }
 
+  saveRDS(downloaded_nested, save_path, version = 2)
+
+  if (interactive()) message("Saved processed file to ", save_path)
+
+  # ---- Final cleanup -----------------------------------------------
+  vars_to_remove <- c("downloaded_labelled", "downloaded_time", "combined")
+  vars_to_remove <- vars_to_remove[vars_to_remove %in% ls()]
+  if (length(vars_to_remove) > 0) rm(list = vars_to_remove, envir = environment())
+  invisible(gc())
+
+  # ---- Return --------------------------------------------------------------
   downloaded_nested
 }

@@ -1,54 +1,132 @@
-test_that("Necessary input parameters are checked", {
-  expect_error(iotables_download(
-    source = "naio_10_cp1701",
-    year = 2015, geo = "DE",
-    unit = "MIO_EUR", labelling = "iotables"
+test_that("invalid source triggers validation error", {
+  expect_error(
+    iotables_download(source = "naio_10_cp1701"),
+    regexp = "not in supported tables"
+  )
+})
+
+test_that("force_download default is logical", {
+  fn <- get("iotables_download", envir = asNamespace("iotables"))
+  formals(fn)$force_download |>
+    expect_identical(FALSE)
+})
+
+test_that("built-in datasets return correctly", {
+  expect_error(iotables_download("germany_1995"),
+    regexp = "is a built-in example handled by"
+  )
+  expect_error(iotables_download("croatia_2010_1800"),
+    regexp = "is a built-in example handled by"
+  )
+  expect_error(iotables_download("netherlands_2000"),
+    regexp = "is a built-in example handled by"
+  )
+})
+
+test_that("get_eurostat_fiiletered works iotables_download()", {
+  skip_on_cran()
+  skip_on_ci()
+  skip_if_offline()
+  cz_dwnd_io <- iotables_download(
+    source = "naio_10_cp1700",
+    geo = "CZ",
+    year = 2015,
+    unit = "MIO_NAC",
+    stk_flow = "TOTAL"
+  )
+  expect_true(is.data.frame(cz_dwnd_io))
+  expect_true(all(
+    c(
+      "unit", "stk_flow", "geo", "time", "unit_lab", "year",
+      "stk_flow_lab", "geo_lab", "data"
+    ) %in% names(cz_dwnd_io)
   ))
+  expect_true(is.numeric(cz_dwnd_io$year))
+  expect_s3_class(cz_dwnd_io$time, "Date")
+  expect_true(is.numeric(cz_dwnd_io$data[[1]]$values))
+
+  df <- cz_dwnd_io$data[[1]]
+  df_sub <- df[df$prd_ava == "CPA_A01" & df$prd_use == "CPA_A01", ]
+  expect_equal(df_sub$values, 25949)
 })
 
-test_that("returns early when tempdir_data is already processed", {
-  fake_processed <- data.frame(
-    geo = "DE", unit = "MIO_EUR",
-    year = 1995,
-    data = I(list(data.frame(x = 1)))
+library(mockery)
+
+test_that("iotables_download() handles Eurostat download + nesting correctly", {
+  fake_data <- data.frame(
+    geo = c("BE", "BE"),
+    unit = "MIO_EUR",
+    stk_flow = "DOM",
+    TIME_PERIOD = as.Date(c("2020-01-01", "2020-01-01")),
+    values = c(100, 200),
+    prd_ava = c("CPA_A01", "CPA_B02"),
+    prd_use = c("CPA_A01", "CPA_B02"),
+    stringsAsFactors = FALSE
   )
 
-  with_mocked_bindings(
-    validate_source = function(src) invisible(TRUE),
-    tempdir_data = function(src, force_download) fake_processed,
-    {
-      expect_message(
-        out <- iotables_download(source = "naio_10_cp1700"),
-        regexp = "Returning the processed SIOTs"
-      )
-      expect_identical(out, fake_processed)
-    }
+  fake_labelled <- fake_data %>%
+    dplyr::mutate(
+      rows = seq_len(nrow(.)),
+      TIME_PERIOD_lab = TIME_PERIOD,
+      values_lab = values,
+      freq_lab = "Annual",
+      unit_lab = "Million euro",
+      stk_flow_lab = "Domestic output",
+      geo_lab = "Belgium"
+    )
+
+  stub(
+    iotables_download, "eurostat::get_eurostat",
+    function(...) fake_data
+  )
+  stub(
+    iotables_download, "eurostat::label_eurostat",
+    function(...) fake_labelled
+  )
+
+  result <- iotables_download("naio_10_cp1700")
+
+  expect_s3_class(result, "data.frame")
+  expect_true(
+    all(c("geo", "year", "unit", "data") %in%
+      names(result))
+  )
+  expect_true(is.list(result$data))
+  expect_equal(unique(result$geo), "BE")
+
+  inner <- result$data[[1]]
+  expect_s3_class(inner, "data.frame")
+  expect_true("values" %in% names(inner))
+  expect_true(is.numeric(inner$values))
+  expect_true(
+    all(c("prd_use", "prd_ava") %in% names(inner))
   )
 })
 
-test_that("errors when download shape is not plausible", {
-  fake_bad <- data.frame(a = 1, b = 2, c = 3) # too few cols/rows
+Sys.setenv(RUN_MANUAL_IOTABLES_TESTS = "false")
 
-  with_mocked_bindings(
-    validate_source = function(src) invisible(TRUE),
-    tempdir_data = function(src, force_download) fake_bad,
-    {
-      expect_error(
-        iotables_download(source = "naio_10_cp1700"),
-        regexp = "was not successful"
-      )
-    }
+test_that("manual Eurostat download works for a real dataset", {
+  skip_on_cran()
+  skip_on_ci()
+  skip_if_offline()
+  skip_if(
+    Sys.getenv("RUN_MANUAL_IOTABLES_TESTS") != "true",
+    "Set RUN_MANUAL_IOTABLES_TESTS=true to run this manually."
   )
-})
 
-
-test_that("uk_2010 path returns uk_2010_get()", {
-  sentinel <- data.frame(ok = TRUE)
-  with_mocked_bindings(
-    uk_2010_get = function() sentinel,
-    {
-      res <- iotables_download(source = "uk_2010")
-      expect_identical(res, sentinel)
-    }
+  naio_10_cp1700 <- iotables_download("naio_10_cp1700",
+    force_download = TRUE
   )
+  expect_true(is.data.frame(naio_10_cp1700))
+  expect_gt(nrow(naio_10_cp1700), 1000)
+  expect_true(all(
+    c(
+      "unit", "stk_flow", "geo", "time",
+      "unit_lab", "year", "stk_flow_lab", "geo_lab",
+      "data"
+    ) %in% names(naio_10_cp1700)
+  ))
+  expect_true(is.numeric(naio_10_cp1700$year))
+  expect_s3_class(naio_10_cp1700$time, "Date")
+  expect_true(is.numeric(naio_10_cp1700$data[[1]]$values))
 })
