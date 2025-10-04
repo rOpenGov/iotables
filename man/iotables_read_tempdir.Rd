@@ -48,6 +48,7 @@ iotables_read_tempdir(source = "naio_10_pyp1750")
 \seealso{
 Other import functions: 
 \code{\link{employment_get}()},
-\code{\link{iotables_download}()}
+\code{\link{iotables_download}()},
+\code{\link{iotables_download_old}()}
 }
 \concept{import functions}

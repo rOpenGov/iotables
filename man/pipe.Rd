@@ -9,12 +9,16 @@ lhs \%>\% rhs
 \arguments{
 \item{lhs}{A value or the magrittr placeholder.}
 
-\item{rhs}{A function call using the magrittr semantics.}
+\item{rhs}{A function call using magrittr semantics.}
 }
 \value{
 The result of calling \code{rhs(lhs)}.
 }
 \description{
 See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
+}
+\details{
+This re-exports the pipe operator from \strong{magrittr} so that it can be
+used within the package without explicitly attaching magrittr.
 }
 \keyword{internal}
