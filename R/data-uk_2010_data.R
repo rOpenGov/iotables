@@ -1,11 +1,11 @@
 #' United Kingdom Input–Output Analytical Tables, 2010
 #'
 #' @description
-#' Official **Input–Output Analytical Tables** for the United Kingdom (2010), 
-#' published by the Office for National Statistics (ONS).  
-#' 
-#' These replication data are harmonized to the *iotables* package format 
-#' and can be accessed via [iotable_get()] by setting the `source` parameter 
+#' Official **Input–Output Analytical Tables** for the United Kingdom (2010),
+#' published by the Office for National Statistics (ONS).
+#'
+#' These replication data are harmonized to the *iotables* package format
+#' and can be accessed via [iotable_get()] by setting the `source` parameter
 #' to one of the available tables.
 #'
 #' @details
@@ -40,11 +40,11 @@
 #' }
 #'
 #' @source
-#' Office for National Statistics (2010). *United Kingdom Input–Output Analytical Tables, 2010.*  
+#' Office for National Statistics (2010). *United Kingdom Input–Output Analytical Tables, 2010.*
 #' Retrieved from the [UK National Archives (ONS Web Archive)](https://webarchive.nationalarchives.gov.uk/20160114044923/https://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html).
 #'
 #' @seealso
-#' - [iotable_get()] for accessing and filtering IO tables.  
+#' - [iotable_get()] for accessing and filtering IO tables.
 #' - [iotables_download()] for downloading current Eurostat and UK datasets.
 #'
 #' @family validation datasets

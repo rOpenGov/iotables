@@ -34,6 +34,7 @@ publication of the Eurostat Manual.
 \seealso{
 Other validation datasets: 
 \code{\link{netherlands_2000}},
+\code{\link{uk_2010_data}},
 \code{\link{uk_test_results}}
 }
 \concept{validation datasets}
