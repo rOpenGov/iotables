@@ -50,6 +50,45 @@ test_that("get_eurostat_fiiletered works iotables_download()", {
   expect_equal(df_sub$values, 25949)
 })
 
+cz_dwnd_io <- iotables_download(
+  source = "naio_10_cp1700",
+  geo = "CZ",
+  year = 2020,
+  unit = "MIO_NAC",
+  stk_flow = "TOTAL"
+)
+
+
+test_that("get_eurostat_fiiletered works iotables_download()", {
+  skip_on_cran()
+  skip_on_ci()
+  skip_if_offline()
+  czp_dwnd_io <- iotables_download(
+    source = "naio_10_cp1750",
+    geo = "CZ",
+    year = 2015,
+    unit = "MIO_NAC",
+    stk_flow = "TOTAL"
+  )
+  expect_true(is.data.frame(czp_dwnd_io))
+  expect_true(all(
+    c(
+      "unit", "stk_flow", "geo", "time", "unit_lab", "year",
+      "stk_flow_lab", "geo_lab", "data"
+    ) %in% names(czp_dwnd_io)
+  ))
+  expect_true(is.numeric(czp_dwnd_io$year))
+  expect_s3_class(czp_dwnd_io$time, "Date")
+  expect_true(is.numeric(czp_dwnd_io$data[[1]]$values))
+  
+  df <- czp_dwnd_io$data[[1]]
+  df_sub <- df[df$ind_ava == "A01" & df$ind_use == "A01", ]
+  expect_equal(df_sub$values,24600)
+})
+
+str(czp_dwnd_io)
+
+
 library(mockery)
 
 test_that("iotables_download() handles Eurostat download + nesting correctly", {
@@ -130,3 +169,21 @@ test_that("manual Eurostat download works for a real dataset", {
   expect_s3_class(naio_10_cp1700$time, "Date")
   expect_true(is.numeric(naio_10_cp1700$data[[1]]$values))
 })
+
+
+cz_new_items <- read_csv("data-raw/out_review3/cz_unmatched_with_data.csv") %>%
+  transmute(
+    variable = "induse",
+    code = code,
+    label = label,
+    iotables_label = label,    # same, or link to parent CPA aggregate
+    provenance = "CZ national detail (2025)",
+    safe_to_use = TRUE,
+    note = "CPA disaggregation — added under gap rule",
+    source = "CZ Eurostat SIOT 2015"
+  )
+
+metadata_all_extended <- bind_rows(metadata_all, cz_new_items) %>%
+  distinct(code, .keep_all = TRUE)
+
+write_csv(metadata_all_extended, "data-raw/out_review3/metadata_all_extended.csv")

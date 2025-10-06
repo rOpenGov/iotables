@@ -12,7 +12,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-load(system.file(file.path("extdata", "environmental_impact_vignette.rda"), package = "iotables"))
+load(system.file(
+  file.path("extdata", "environmental_impact_vignette.rda"),
+  package = "iotables"
+))
 ```
 
 ```{r setup, echo=FALSE, message=FALSE}
@@ -21,30 +24,34 @@ library(dplyr, quietly = TRUE)
 library(tidyr, quietly = TRUE)
 ```
 
-In this example, we show which economic activities contribute most to greenhouse gas emissions in Belgium. We want to know how much an additional unit of production increases the CO2-equivalent of various greenhouse gases, including methane (CH4), nitrous oxide (N2O), and fluorinated gases (e.g., chlorofluorocarbons, hydrochlorofluorocarbons, and halons). While CO2 is emitted in the greatest quantity, it is not the only culprit for global warming, and fluorinated gases have a particularly high potential to increase the greenhouse effect.
+In this example, we show which economic activities contribute most to greenhouse gas emissions in Belgium. We want to know how much an additional unit of production increases the CO₂-equivalent of various greenhouse gases, including methane (CH₄), nitrous oxide (N₂O), and fluorinated gases (e.g., chlorofluorocarbons, hydrochlorofluorocarbons, and halons). 
+
+While CO₂ is emitted in the greatest quantity, it is not the only culprit for global warming, and fluorinated gases have a particularly high potential to increase the greenhouse effect; therefore, in this example, we will work with the combined CO₂-equivalent effect of all green-house gases, abbreviated with `GHG`.
 
 ## Importing the data
 
 The following expression will import the symmetric input-output table for Belgium.  The `stk_flow = "TOTAL"`` makes clear that we are not only considering effects in the domestic (Belgian) economy, but imports, too. More about importing and working with matrixes can be found in the articles ([Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html), [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html).)
 
 ```{r getiotable, eval=FALSE}
-# For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
+# For faster building this data can be loaded from "../extdata/environmental_impact_vignette.rda"
 BE <- iotable_get(
-  source = "naio_10_cp1700", geo = "BE",
-  year = 2015,
-  labelling = "short", unit = "MIO_EUR",
+  source = "naio_10_cp1700",
+  geo = "BE",
+  year = 2020,
+  labelling = "short",
+  unit = "MIO_EUR",
   stk_flow = "TOTAL"
 )
 ```
 
-The following expression gets the the greenhouse gas emissions in $CO_2$-equivalent thousand tons for Belgium in 2020. Under the hood, we download the air emissions accounts from the Eurostat data warehouse. AEA present data on air emissions in a way that is fully compatible with the concepts, principles and data of the national accounts, but needs further adjustment to input-output tables, which is accomplished by `airpol_get()`
+The following expression gets the the greenhouse gas emissions in CO₂ CO₂ equivalent thousand tons for Belgium in 2020. Under the hood, we download the air emissions accounts from the Eurostat data warehouse. AEA present data on air emissions in a way that is fully compatible with the concepts, principles and data of the national accounts, but needs further adjustment to input-output tables, which is accomplished by `airpol_get()`
 
 ```{r getairpol, eval=FALSE}
 # For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
 ghg <- airpol_get(airpol = "GHG", geo = "BE", year = 2020, unit = "THS_T")
 ```
 
-See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO2-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
+See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO₂-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
 
 ## Direct and multiplied effects
 
@@ -83,7 +90,7 @@ This is not the full picture, because the indicator only considers the direct gr
 
 The category of *Manufacture of other non-metallic mineral products* in itself requires a bit of explanation: it may be many sort of economic activity such as the transformation of mined or quarried non-metallic minerals (such as sand, gravel, stone, clay, and refractory materials) with grinding, mixing, cutting, shaping, and honing into products for intermediate or final consumption. So we are talking about building products.
 
-Let's make a reality check, and calculate only with CO2:
+Let's make a reality check, and calculate only with CO₂:
 
 ```{r getco2indicators, eval=FALSE}
 co2 <- airpol_get(airpol = "CO2", geo = "BE", year = 2020, unit = "THS_T")
@@ -108,7 +115,7 @@ co2_indicator %>%
 
 *Crop and animal production, hunting and related service activities* falls out, and *CPA_H50 Water transport* comes back. Are those barges really so clean? And what happened with the agriculture?
 
-Let's check methane, which is a far more potent green house gas than CO2.
+Let's check methane, which is a far more potent green house gas than CO₂.
 
 ```{r getmethaneindicators, eval=FALSE}
 methane <- airpol_get(airpol = "CH4", geo = "BE", year = 2020, unit = "THS_T")
@@ -145,7 +152,7 @@ The appearance of *Mining and quarrying* is important, because it is the main in
 
 ## Total effects
 
-The multiplier considers these indirect effects, too. The top five polluters remain the same, but their ordering changes. *Crop and animal production, hunting and related service activities* goes ahead of *Fishing and aquaculture*---because methane is a more potent green house gas than CO2. Cattle and sheep emit plenty of methane, and there are plenty of cattle and sheep in Belgium.  The reason why it is important to consider these effects for each and every country, or, when possible, for regions, is that different countries produce different crops and animals. Producing poultry is far less problematic from a green house emission point of view than producing beef products. 
+The multiplier considers these indirect effects, too. The top five polluters remain the same, but their ordering changes. *Crop and animal production, hunting and related service activities* goes ahead of *Fishing and aquaculture*---because methane is a more potent green house gas than CO₂. Cattle and sheep emit plenty of methane, and there are plenty of cattle and sheep in Belgium.  The reason why it is important to consider these effects for each and every country, or, when possible, for regions, is that different countries produce different crops and animals. Producing poultry is far less problematic from a green house emission point of view than producing beef products. 
 
 As expected, the *Manufacture of other non-metallic mineral products* gets ahead of *Air transport* as it is highly interrelated with *Mining and quarrying*. Making building more sustainable would be a great achievement, but there is no really clear path: as we can see, *Forestry and logging* come with their problems, too.
 
