@@ -68,8 +68,7 @@ subset(metadata, variable == "prod_na")[1:6, c("code", "label")]
 
 Other metadata datasets: 
 \code{\link{employment_metadata}},
-\code{\link{metadata_uk_2010}},
-\code{\link{metadata_voc}}
+\code{\link{metadata_uk_2010}}
 }
 \concept{metadata datasets}
 \keyword{internal}

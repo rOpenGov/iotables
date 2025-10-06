@@ -1,0 +1,91 @@
+---
+title: "Metadata Vocabularies for Input–Output Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Metadata & Vocabulary}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(iotables)
+```
+
+## Import and Normalisation Workflow
+
+The four Eurostat vocabularies —\
+`ind_ava`, `ind_use`, `prd_ava`, and `prd_use` — were imported directly from the official Eurostat metadata registry (<https://dd.eionet.europa.eu/vocabulary/eurostat/>).\
+Each dataset mirrors the structure of its corresponding SDMX codelist and preserves Eurostat’s identifiers and validity information.
+
+### Data Sources
+
+| Vocabulary | Description | Source URL |
+|----|----|----|
+| `ind_ava` | Industries, adjustments and value added (rows for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_ava/> |
+| `ind_use` | Industry uses (columns for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_use/> |
+| `prd_ava` | Products, adjustments and value added (rows for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_ava/> |
+| `prd_use` | Product uses (columns for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_use/> |
+
+### Import Steps
+
+1.  **Raw Download**\
+    Each vocabulary was retrieved as an Excel export from EIONET’s vocabulary registry.
+
+2.  **Column Standardisation**\
+    Columns were renamed to a unified schema: `id, label, status, status_modified, notation, group, quadrant, numeric_order, iotables_label, block, uri`
+
+3.  **Quadrant and Block Assignment**\
+    Each item was assigned a `quadrant` and a semantic `block` consistent across vocabularies:
+
+    -   `10` = intermediate (Quadrant 1)
+
+    -   `20` = primary_inputs (Quadrant 3)
+
+    -   `30` = final_use (Quadrant 2)
+
+    -   `50` = extension / diagnostic\
+        Control totals such as *“Total supply at basic prices”* were retained as `block = "control_total"`.
+
+4.  **Ordinal Ordering**\
+    `numeric_order` was reindexed within each quadrant with consistent gaps (10, 20, …) to ensure reproducible ordering for matrix construction.
+
+5.  **URI Generation**\
+    Each code was linked to its SKOS concept using:
+
+```{r uri, eval=FALSE}
+df$uri <- sprintf(
+  "https://dd.eionet.europa.eu/vocabularyconcept/eurostat/%s/%s",
+  vocabulary_id,
+  df$notation
+)
+```
+
+6.  **Validation**\
+    Each table was checked for:
+
+    -   missing or duplicate IDs
+
+    -   monotone numeric order
+
+    -   alignment of quadrant ↔ block semantics
+
+7.  **Storage and Naming**
+
+The cleaned tibbles were stored as exported data objects:
+
+```         
+data/ind_ava.rda data/ind_use.rda data/prd_ava.rda data/prd_use.rda 
+```
+
+Each dataset can be loaded directly with `data(<name>)`.
+
+### Versioning
+
+All four vocabularies correspond to the 2025 Eurostat CPA 2.1 / ESA 2010 edition.

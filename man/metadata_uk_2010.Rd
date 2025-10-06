@@ -37,8 +37,7 @@ validation.
 \seealso{
 Other metadata datasets: 
 \code{\link{employment_metadata}},
-\code{\link{metadata}},
-\code{\link{metadata_voc}}
+\code{\link{metadata}}
 }
 \concept{metadata datasets}
 \keyword{datasets}

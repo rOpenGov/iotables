@@ -51,6 +51,12 @@ articles:
       and scientific sources.
     contents:
        - terminology
+  - title: "Metadata Vocabularies for Input–Output Analysis"
+    desc: >
+      Which Eurostat/SDMX vocabularies were imported and adopted for 
+      input-output analysis and how.
+    contents:
+       - methodology
 
 reference:
   - title: "Importing"
@@ -134,15 +140,24 @@ reference:
      For further analysis get data which conforms the structure of the SIOTs. 
     contents:
       - conforming_vector_create
+  - title: "Metadata & Vocabulary"
+    desc: >
+     Metadata and vocabulary for SIOT semantics.
+    contents:
+      - metadata
+      - employment_metadata
+      - ind_ava
+      - ind_use
+      - prd_ava
+      - prd_use
+      - metadata_uk_2010
   - title: "Data"
     desc: >
      Validation datasets for crosschecking with published results.
     contents:
       - germany_1995
       - germany_airpol
-      - metadata
       - primary_inputs
-      - employment_metadata
       - netherlands_2000
   - title: "Validation Data - United Kingdom"
     desc: >
@@ -152,7 +167,6 @@ reference:
       - uk_2010_data
       - uk_2010_results_get
       - uk_test_results
-      - metadata_uk_2010
   - title: "Validation Data - Croatia Pre-Accession SIOTs"
     desc: >
      Datasets for working with Croatia's pre-accession data. 
