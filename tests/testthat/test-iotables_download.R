@@ -80,10 +80,10 @@ test_that("get_eurostat_fiiletered works iotables_download()", {
   expect_true(is.numeric(czp_dwnd_io$year))
   expect_s3_class(czp_dwnd_io$time, "Date")
   expect_true(is.numeric(czp_dwnd_io$data[[1]]$values))
-  
+
   df <- czp_dwnd_io$data[[1]]
   df_sub <- df[df$ind_ava == "A01" & df$ind_use == "A01", ]
-  expect_equal(df_sub$values,24600)
+  expect_equal(df_sub$values, 24600)
 })
 
 str(czp_dwnd_io)
@@ -176,7 +176,7 @@ cz_new_items <- read_csv("data-raw/out_review3/cz_unmatched_with_data.csv") %>%
     variable = "induse",
     code = code,
     label = label,
-    iotables_label = label,    # same, or link to parent CPA aggregate
+    iotables_label = label, # same, or link to parent CPA aggregate
     provenance = "CZ national detail (2025)",
     safe_to_use = TRUE,
     note = "CPA disaggregation — added under gap rule",
