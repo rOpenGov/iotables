@@ -51,7 +51,7 @@
 #' `metadata_voc` enforces **code-based identity** following SDMX principles:
 #' two entries are considered identical if and only if their `code` values
 #' match. Labels and provenance fields may evolve, but code identity ensures
-#' that analytics remain semantically consistent.
+#' that analytics remain semantically consistent.  
 #'
 #' Key design features:
 #' \itemize{
@@ -87,6 +87,8 @@
 #' head(metadata_voc)
 #'
 #' # Filter for Eurostat 2025 product-use items
-#' subset(metadata_voc, variable == "prd_use" & provenance == "Eurostat 2025")[1:6, c("code", "label")]
+#' subset(metadata_voc, 
+#'   variable == "prd_use" &
+#'    provenance == "Eurostat 2025")[1:6, c("code", "label")]
 #'
 "metadata_voc"
