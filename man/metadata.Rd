@@ -3,40 +3,73 @@
 \docType{data}
 \name{metadata}
 \alias{metadata}
-\title{Eurostat National Accounts Vocabulary Metadata}
+\title{Eurostat National Accounts Vocabulary Metadata (legacy)}
 \format{
 A data frame with 8 variables:
 \describe{
-\item{variable}{Eurostat vocabulary source (e.g., \code{t_rows}, \code{t_cols}, \code{prod_na}, \code{induse}).}
-\item{group}{Informal macroeconomic grouping label.}
-\item{code}{Eurostat label codes.}
-\item{label}{Eurostat label descriptions.}
-\item{quadrant}{Indicates where to place the data from a long-form raw data file.}
-\item{account_group}{Grouping of accounts (different from Eurostat tables),
-values are in thousands of national currency units.}
-\item{numeric_label}{Ordering key derived from \code{quadrant}, \code{account_group},
-and digit-based codes.}
-\item{iotables_label}{Custom machine-readable snake_case variable names.}
+\item{variable}{Vocabulary source identifier (e.g. \code{t_rows}, \code{t_cols},
+\code{prod_na}, \code{induse}).}
+\item{group}{Informal macroeconomic grouping or block label.}
+\item{code}{Eurostat SDMX code used as identity.}
+\item{label}{Official Eurostat description of the code.}
+\item{quadrant}{Numeric indicator of table placement:
+\code{10} = intermediate (Quadrant 1),
+\code{20} = GVA/value added (Quadrant 3),
+\code{30} = final use (Quadrant 2).}
+\item{account_group}{Grouping of accounts (not part of the original Eurostat
+tables). Used for internal ordering and labelling.}
+\item{numeric_label}{Numeric key derived from \code{quadrant}, \code{account_group},
+and digit-based components of \code{code}, used to sort rows and columns.}
+\item{iotables_label}{Legacy, machine-readable label in snake_case used
+internally for ordering and analysis.}
 }
 }
 \usage{
 metadata
 }
 \description{
-A reference dataset containing the Eurostat national accounts vocabulary,
-used to correctly order wide-format rows and columns when reshaping bulk
-long-form tables.
+The \code{metadata} dataset provides the \strong{legacy} Eurostat national accounts
+vocabulary used in earlier versions of the \strong{iotables} package to correctly
+order wide-format rows and columns when reshaping bulk long-form Eurostat
+input–output (IO) and supply–use (SUT) tables.
+
+It predates the modern SDMX-aligned metadata system introduced in 2025 and
+has been retained for backward compatibility and reproducibility of analyses
+built on earlier versions of the Eurostat warehouse (ESA 2010, 2014–2022).
+
+The dataset encodes the structure of the pre-2023 vocabularies (\code{prod_na},
+\code{induse}, \code{t_rows}, \code{t_cols}) used by the legacy \code{iotable_get()} and
+\code{iotable_get_builtin()} functions. It provides the column and row ordering
+necessary for consistent matrix construction.
 }
 \details{
-This dataset provides a controlled vocabulary and ordering scheme
-for working with Eurostat input–output and national accounts tables. It is
-used internally by functions that reshape raw Eurostat data into consistent
-wide-format representations.
+This dataset is maintained only for compatibility with legacy Eurostat
+vocabularies (ESA 2010 format, pre-2023).
+For modern workflows, use \code{\link{metadata_voc}} — the SDMX-aligned canonical
+metadata vocabulary introduced in 2025.
+
+\strong{Transition note:}
+The functions \code{\link[=iotables_download]{iotables_download()}} and \code{\link[=iotable_get_eurostat]{iotable_get_eurostat()}} now use
+\code{metadata_voc} automatically. The \code{metadata} object remains accessible for
+reproducing results from earlier iotables versions (≤ 0.6.x) or from studies
+relying on the \verb{naio_10_cp16*} and \verb{naio_10_cp17*} datasets prior to the
+Eurostat vocabulary migration.
+}
+\examples{
+# Preview structure of legacy metadata
+head(metadata)
+
+# Filter for old 'prod_na' items (legacy ESA 2010 vocabulary)
+subset(metadata, variable == "prod_na")[1:6, c("code", "label")]
+
 }
 \seealso{
+\link{metadata_voc}, \code{\link[=iotable_get_eurostat]{iotable_get_eurostat()}}, \code{\link[=iotables_download]{iotables_download()}}
+
 Other metadata datasets: 
 \code{\link{employment_metadata}},
-\code{\link{metadata_uk_2010}}
+\code{\link{metadata_uk_2010}},
+\code{\link{metadata_voc}}
 }
 \concept{metadata datasets}
-\keyword{datasets}
+\keyword{internal}

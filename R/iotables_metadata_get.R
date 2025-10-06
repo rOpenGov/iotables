@@ -20,7 +20,7 @@
 iotables_metadata_get <- function(dat = NULL,
                                   source = "naio_10_cp1700") {
   validate_source(source)
-  
+
   # Load cached file if dat not provided
   if (is.null(dat)) {
     cache_file <- file.path(tempdir(), paste0(source, "_processed.rds"))
@@ -31,7 +31,7 @@ iotables_metadata_get <- function(dat = NULL,
       ))
       return(invisible(NULL))
     }
-    
+
     dat <- tryCatch(
       readRDS(cache_file),
       error = function(e) {
@@ -40,7 +40,7 @@ iotables_metadata_get <- function(dat = NULL,
       }
     )
   }
-  
+
   # Validate structure
   if (is.null(dat) || !"data" %in% names(dat)) {
     message(glue(
@@ -49,10 +49,10 @@ iotables_metadata_get <- function(dat = NULL,
     ))
     return(invisible(NULL))
   }
-  
+
   # Drop heavy list-column
   metadata <- dat[, setdiff(names(dat), "data"), drop = FALSE]
-  
+
   # Return a clean tibble
   tibble::as_tibble(metadata)
 }
