@@ -6,11 +6,27 @@
 vocabularies, row and column ordering.
 None of these functions should be exported.}
 \usage{
-getdata(...)
+getdata(x)
+
+getdata(x)
+}
+\arguments{
+\item{x}{Unquoted or quoted dataset name (character or symbol).}
+}
+\value{
+The dataset as a data frame or tibble.
 }
 \description{
-Various internal functions to work with IOT metadata, including the labelling
-vocabularies, row and column ordering.
-None of these functions should be exported.
+A robust internal utility that retrieves datasets by name, accepting
+either a quoted string (\code{"ind_ava"}) or a bare object name (\code{ind_ava}).
+It uses \code{utils::data()} to load objects into a temporary environment and
+returns the requested dataset invisibly. If the dataset is not found,
+a clear error message is raised (without warnings from \code{utils::data()}).
+}
+\examples{
+\dontrun{
+getdata(ind_ava)
+getdata("prd_use")
+}
 }
 \keyword{internal}

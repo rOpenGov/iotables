@@ -45,13 +45,14 @@ necessary for consistent matrix construction.
 \details{
 This dataset is maintained only for compatibility with legacy Eurostat
 vocabularies (ESA 2010 format, pre-2023).
-For modern workflows, use \code{\link{metadata_voc}} — the SDMX-aligned canonical
-metadata vocabulary introduced in 2025.
 
 \strong{Transition note:}
 The functions \code{\link[=iotables_download]{iotables_download()}} and \code{\link[=iotable_get_eurostat]{iotable_get_eurostat()}} now use
-\code{metadata_voc} automatically. The \code{metadata} object remains accessible for
-reproducing results from earlier iotables versions (≤ 0.6.x) or from studies
+use \link{ind_ava}, \link{prd_ava}, \link{ind_use}, \link{prd_use} —
+the SDMX-aligned canonical
+metadata vocabularies introduced in 2025.
+The \code{metadata} object remains accessible for
+reproducing results from earlier iotables versions (≤ 0.9.4) or from studies
 relying on the \verb{naio_10_cp16*} and \verb{naio_10_cp17*} datasets prior to the
 Eurostat vocabulary migration.
 }
@@ -64,7 +65,8 @@ subset(metadata, variable == "prod_na")[1:6, c("code", "label")]
 
 }
 \seealso{
-\link{metadata_voc}, \code{\link[=iotable_get_eurostat]{iotable_get_eurostat()}}, \code{\link[=iotables_download]{iotables_download()}}
+\link{ind_ava}, \link{prd_ava}, \link{ind_use}, \link{prd_use},
+\code{\link[=iotable_get_eurostat]{iotable_get_eurostat()}}, \code{\link[=iotables_download]{iotables_download()}}
 
 Other metadata datasets: 
 \code{\link{employment_metadata}},

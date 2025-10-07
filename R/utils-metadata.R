@@ -2,11 +2,81 @@
 #' vocabularies, row and column ordering.
 #' None of these functions should be exported.
 #' @keywords internal
-getdata <- function(...) {
+getdata <- function(x) {
+  name <- deparse(substitute(x))
+  # If already passed as string, keep as-is
+  if (is.character(x) && length(x) == 1L) name <- x
+  name
   e <- new.env()
-  name <- utils::data(..., envir = e)[1]
+  utils::data(list = name, envir = e)
+  if (!exists(name, envir = e)) {
+    stop("Dataset '", name, "' not found in iotables package data.")
+  }
   e[[name]]
 }
+
+
+#' Internal helper to load datasets safely from the iotables package
+#'
+#' @description
+#' A robust internal utility that retrieves datasets by name, accepting
+#' either a quoted string (`"ind_ava"`) or a bare object name (`ind_ava`).
+#' It uses `utils::data()` to load objects into a temporary environment and
+#' returns the requested dataset invisibly. If the dataset is not found,
+#' a clear error message is raised (without warnings from `utils::data()`).
+#'
+#' @param x Unquoted or quoted dataset name (character or symbol).
+#' @return The dataset as a data frame or tibble.
+#' @keywords internal
+#' @examples
+#' \dontrun{
+#' getdata(ind_ava)
+#' getdata("prd_use")
+#' }
+getdata <- function(x) {
+  # Handle both bare and quoted dataset names
+  name <- tryCatch(
+    {
+      nm <- deparse(substitute(x))
+      if (is.character(x) && length(x) == 1L) nm <- x
+      nm
+    },
+    error = function(e) {
+      stop("Invalid argument for 'x': must be a dataset name or string.", call. = FALSE)
+    }
+  )
+
+  # Prepare an isolated environment
+  e <- new.env(parent = emptyenv())
+
+  # Try loading dataset quietly
+  success <- tryCatch(
+    suppressMessages(
+      suppressWarnings(
+        utils::data(list = name, envir = e, package = "iotables")
+      )
+    ),
+    warning = function(w) {  # suppress "data set not found"
+      invokeRestart("muffleWarning")
+    },
+    error = function(err) {
+      stop(
+        "Dataset '", name, "' not found in iotables package data.",
+        "\nOriginal message: ", conditionMessage(err),
+        call. = FALSE
+      )
+    }
+  )
+
+  # Return dataset if found
+  if (!exists(name, envir = e)) {
+    stop("Dataset '", name, "' not found in iotables package data.", call. = FALSE)
+  }
+
+  e[[name]]
+}
+
+
 
 #' @keywords internal
 define_prod_ind <- function() {

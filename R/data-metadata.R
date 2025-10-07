@@ -37,18 +37,20 @@
 #' @details
 #' This dataset is maintained only for compatibility with legacy Eurostat
 #' vocabularies (ESA 2010 format, pre-2023).
-#' For modern workflows, use [`metadata_voc`] — the SDMX-aligned canonical
-#' metadata vocabulary introduced in 2025.
 #'
 #' \strong{Transition note:}
 #' The functions [`iotables_download()`] and [`iotable_get_eurostat()`] now use
-#' `metadata_voc` automatically. The `metadata` object remains accessible for
-#' reproducing results from earlier iotables versions (≤ 0.6.x) or from studies
+#' use [ind_ava], [prd_ava], [ind_use], [prd_use] —
+#' the SDMX-aligned canonical
+#' metadata vocabularies introduced in 2025. 
+#' The `metadata` object remains accessible for
+#' reproducing results from earlier iotables versions (≤ 0.9.4) or from studies
 #' relying on the `naio_10_cp16*` and `naio_10_cp17*` datasets prior to the
 #' Eurostat vocabulary migration.
 #'
 #' @family metadata datasets
-#' @seealso [metadata_voc], [iotable_get_eurostat()], [iotables_download()]
+#' @seealso [ind_ava], [prd_ava], [ind_use], [prd_use],
+#'  [iotable_get_eurostat()], [iotables_download()]
 #' @keywords internal
 #'
 #' @examples
