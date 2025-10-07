@@ -1,3 +1,10 @@
+library(dplyr)
+
+eurostat_voc <- readxl::read_excel(
+  here::here("data-raw", "eurostat_vocabularies_2025.xlsx"),
+  sheet = "ind_ava"
+)
+
 ind_ava <- readxl::read_excel(here::here("data-raw", "ind_ava.xlsx")) %>%
   mutate(
     block = case_when(
@@ -12,5 +19,7 @@ ind_ava <- readxl::read_excel(here::here("data-raw", "ind_ava.xlsx")) %>%
   select(-nr, -account_group) %>%
   rename(numeric_order = numeric_label) %>%
   arrange(numeric_order)
+
+assertthat::assert_that(length(setdiff(eurostat_voc$Id, ind_ava$id)) == 0)
 
 usethis::use_data(ind_ava)

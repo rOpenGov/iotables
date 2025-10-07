@@ -1,3 +1,10 @@
+library(dplyr)
+
+eurostat_voc <- readxl::read_excel(
+  here::here("data-raw", "eurostat_vocabularies_2025.xlsx"),
+  sheet = "ind_use"
+)
+
 ind_use <- readxl::read_excel(here::here("data-raw", "ind_use.xlsx")) %>%
   mutate(
     block = case_when(
@@ -11,6 +18,8 @@ ind_use <- readxl::read_excel(here::here("data-raw", "ind_use.xlsx")) %>%
   mutate(uri = sprintf("https://dd.eionet.europa.eu/vocabularyconcept/eurostat/ind_use/%s", notation)) %>%
   arrange(numeric_order) %>%
   select(-ind_use_notation)
+
+assertthat::assert_that(length(setdiff(eurostat_voc$Id, ind_use$id)) == 0)
 
 usethis::use_data(ind_use)
 names(ind_use)
