@@ -1,6 +1,6 @@
 library(dplyr)
 
-eurostat_voc <- readxl::read_excel(
+prd_ava_voc <- readxl::read_excel(
   here::here(
     "data-raw",
     "eurostat_vocabularies_2025.xlsx"
@@ -9,36 +9,44 @@ eurostat_voc <- readxl::read_excel(
 ) %>%
   janitor::clean_names()
 
-ind_ava_raw <- read.csv(here::here("data-raw", "ind_ava.csv")) %>%
-  janitor::clean_names() %>%
-  mutate ( vocabulary  = "ind_ava")
-prd_ava_raw <- read.csv(here::here("data-raw", "prd_ava.csv")) %>%
-  janitor::clean_names() %>% mutate (vocabulary = "prd_ava")
-prd_use_raw <- read.csv(here::here("data-raw", "prd_use.csv")) %>%
-  janitor::clean_names() %>% mutate (vocabulary = "prd_use")
-ind_use_raw <- read.csv(here::here("data-raw", "ind_use.csv")) %>%
-  janitor::clean_names() %>% mutate (vocabulary = "ind_use")
+prd_ava <- readxl::read_excel(here::here("data-raw", "prd_ava.xlsx"))
 
-eurostat_raw <- bind_rows(prd_ava_raw, ind_ava_raw) %>%
-  bind_rows(prd_use_raw ) %>%
-  bind_rows(ind_use_raw )
+eurostat_cpa <-  readxl::read_excel("eurostat_cpa.xlsx") %>%
+  mutate ( id = gsub("CPA_", "", notation)) %>%
+  select ( notation, id, numeric_order )
 
-io_prd_ava <- select(iotable, prd_ava, prd_ava_lab, values) %>%
-  mutate ( notation = prd_ava  ) %>% 
-  left_join( eurostat_raw )
+prd_ava_ext <- readxl::read_excel(here::here("data-raw", "prd_ava.xlsx")) %>%
+  left_join ( eurostat_cpa[eurostat_cpa$notation %in% prd_ava$id,] %>%
+                select ( id = notation, new_number = numeric_order)) %>%
+  mutate ( new_number = ifelse(is.na(new_number), numeric_order*10, new_number)) %>%
+  mutate ( new_number = ifelse(new_number<100000, new_number*10, new_number))
 
-prd_ava <- readxl::read_excel(
-  here::here("data-raw", "prd_ava.xlsx")) %>%
-  relocate(block, .before = uri) %>%
-  bind_rows(prd_ava %>%
-              filter ( id  == "TOTAL") %>%
-              mutate ( id = "CPA_TOTAL", 
-                       notation = "CPA_TOTAL", 
-                       status_modified = NA_character_, 
-                       status = "Observed")) %>%
-  arrange(numeric_order)
+prd_ava_extended <- eurostat_cpa[!eurostat_cpa$notation %in% prd_ava$id,] %>%
+  mutate( id= notation) %>%
+  select( id ) %>% left_join(cpa2_1) %>%
+  mutate ( status  = case_when(
+    id %in% cpa2_1$id ~ "valid in CPA2_1", 
+    TRUE ~ "valid in ind_ava"
+  )) %>%
+  mutate ( new_number  = numeric_order ) %>%
+  full_join( prd_ava_ext) %>%
+  mutate ( numeric_order = new_number ) %>%
+  select ( id, label, status, status_modified, 
+           notation, quadrant, numeric_order, 
+           iotables_label, block, uri) %>%
+  arrange(numeric_order) %>%
+  distinct(id, .keep_all = TRUE) %>% # some character coding problem
+  mutate ( numeric_order = ifelse(id == "CPA_TOTAL", 
+                                  190000, numeric_order)) %>%
+  arrange(numeric_order) 
 
-assertthat::assert_that(length(setdiff(eurostat_voc$Id, prd_ava$id)) == 0)
+assertthat::assert_that(all(prd_ava_voc$id %in%  prd_ava_extended$id))
 
-usethis::use_data(prd_ava)
+double <- prd_ava_extended %>% 
+  select ( id, notation, iotables_label ) %>%
+  group_by_all() %>% summarise( n = n()) %>%
+  filter ( n > 1) %>%
+  ungroup() %>% left_join ( prd_ava_extended)
 
+prd_ava <- prd_ava_extended
+usethis::use_data(prd_ava, overwrite = F)
