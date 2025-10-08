@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/rOpenGov/iotables",
   "issueTracker": "https://github.com/rOpenGov/iotables/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.4",
+  "version": "0.9.4900",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -31,12 +31,6 @@
     }
   ],
   "contributor": [
-    {
-      "@type": "Person",
-      "givenName": "Kasia",
-      "familyName": "Kulma",
-      "@id": "https://orcid.org/0000-0002-2952-9720"
-    },
     {
       "@type": "Person",
       "givenName": "Pyry",
@@ -65,6 +59,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "mockery",
+      "name": "mockery",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=mockery"
     },
     {
       "@type": "SoftwareApplication",
@@ -173,6 +179,18 @@
     },
     "7": {
       "@type": "SoftwareApplication",
+      "identifier": "httr2",
+      "name": "httr2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=httr2"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
       "identifier": "kableExtra",
       "name": "kableExtra",
       "provider": {
@@ -183,7 +201,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=kableExtra"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
@@ -195,7 +213,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
@@ -207,7 +225,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lubridate"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "magrittr",
       "name": "magrittr",
@@ -219,7 +237,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=magrittr"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "readxl",
       "name": "readxl",
@@ -231,7 +249,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readxl"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
@@ -243,12 +261,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -260,7 +278,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
@@ -272,7 +290,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "tidyselect",
       "name": "tidyselect",
@@ -284,14 +302,14 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyselect"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
     "SystemRequirements": null
   },
-  "fileSize": "2195.365KB",
+  "fileSize": "NAKB",
   "citation": [
     {
       "@type": "CreativeWork",

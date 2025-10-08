@@ -6,7 +6,7 @@
 
 ![iotables](man/figures/logo20.png)
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.9.41-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.9.4900-orange.svg?style=flat-square)](https://github.com/rOpenGov/iotables/commits/master)
 [![Project Status:
 Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/rOpenGov/iotables/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/iotables/actions)
@@ -36,7 +36,7 @@ latest statistical regulations, i.e. SIOTs starting from 2010.
 
 ## Installation
 
-You can install iotables 0.9.4 from CRAN or the latest 0.9.41
+You can install iotables 0.9.4 from CRAN or the latest 0.9.4900
 development version with github:
 
 ``` r
