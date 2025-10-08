@@ -9,7 +9,7 @@ A tibble (data frame) with 11 variables:
 \describe{
 \item{id}{Canonical Eurostat concept identifier.}
 \item{label}{Official Eurostat label (preferred English term).}
-\item{status}{Concept status flag (usually \code{"A"} for active).}
+\item{status}{"Valid" or "Adopted from CPA2_1".}
 \item{status_modified}{Date of last status modification.}
 \item{notation}{Alternate human-readable code or short form (e.g. \code{CPA_A01}).}
 \item{group}{Optional grouping of related industries or aggregates.}
@@ -57,13 +57,18 @@ and \emph{OP} – Purchases by residents abroad).
 These appear in the final-use block (\code{quadrant = 30}) and are retained for
 completeness and balancing, though they are not part of the analytical
 technology matrix.
+
+Because the Eurostat SIOT datasets sometimes contain more detailed industry
+breakup than their vocabulary, we adopted industry codeing from  \link{cpa2_1}.
+These codes are marked the "Adopted from CPA2_1" status.
 }
 \examples{
 data(ind_use)
 dplyr::count(ind_use, quadrant)
 }
 \seealso{
-Related Eurostat vocabularies: \link{ind_ava}, \link{prd_ava}, \link{prd_use}.
+Related Eurostat vocabularies: \link{ind_ava}, \link{prd_ava}, \link{prd_use},
+\link{cpa2_1}.
 }
 \keyword{Eurostat}
 \keyword{SIOT}

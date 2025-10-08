@@ -9,7 +9,7 @@ A tibble (data frame) with 11 variables:
 \describe{
 \item{id}{Canonical Eurostat concept identifier.}
 \item{label}{Official Eurostat label (preferred English term).}
-\item{status}{Concept status flag (usually \code{"A"} for active).}
+\item{status}{"Valid" or "Valid in CPA2_1".}
 \item{status_modified}{Date of last status modification.}
 \item{notation}{Alternate human-readable code or short form (e.g. \code{CPA_A01}).}
 \item{ind_ava_notation}{Legacy comparison column retained for internal cross-checks.}
@@ -54,12 +54,17 @@ ordinal numeric order for consistent placement when reshaping long-form data.
 The dataset retains published control totals and balancing items for
 completeness (e.g., \emph{Total supply at basic prices} or \emph{CIF/FOB adjustments}),
 but these rows are normally excluded from analytical matrices.
+
+Because the Eurostat SIOT datasets sometimes contain more detailed industry
+breakup than their vocabulary, we adopted industry codeing from  \link{cpa2_1}.
+These codes are marked the "Valid in CPA2_1" status.
 }
 \examples{
 data(prd_ava)
 }
 \seealso{
-Related Eurostat vocabularies: \link{ind_ava}, \link{ind_use}, \link{prd_use}.
+Related Eurostat vocabularies: \link{ind_ava}, \link{ind_use},
+\link{prd_use}, \link{cpa2_1}.
 }
 \keyword{Eurostat}
 \keyword{SIOT}

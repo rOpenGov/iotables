@@ -23,12 +23,16 @@
 #' These appear in the final-use block (`quadrant = 30`) and are retained for
 #' completeness and balancing, though they are not part of the analytical
 #' technology matrix.
+#' 
+#' Because the Eurostat SIOT datasets sometimes contain more detailed industry
+#' breakup than their vocabulary, we adopted industry codeing from  [cpa2_1].
+#' These codes are marked the "Adopted from CPA2_1" status.
 #'
 #' @format A tibble (data frame) with 11 variables:
 #' \describe{
 #'   \item{id}{Canonical Eurostat concept identifier.}
 #'   \item{label}{Official Eurostat label (preferred English term).}
-#'   \item{status}{Concept status flag (usually `"A"` for active).}
+#'   \item{status}{"Valid" or "Adopted from CPA2_1".}
 #'   \item{status_modified}{Date of last status modification.}
 #'   \item{notation}{Alternate human-readable code or short form (e.g. `CPA_A01`).}
 #'   \item{group}{Optional grouping of related industries or aggregates.}
@@ -49,7 +53,8 @@
 #' (<https://dd.eionet.europa.eu/vocabulary/eurostat/ind_use/>)
 #'
 #' @seealso
-#'   Related Eurostat vocabularies: [ind_ava], [prd_ava], [prd_use].
+#'   Related Eurostat vocabularies: [ind_ava], [prd_ava], [prd_use], 
+#'   [cpa2_1].
 #'
 #' @keywords datasets metadata Eurostat input-output SUT SIOT
 #'

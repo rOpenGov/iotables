@@ -19,12 +19,16 @@
 #' The dataset retains the published control total (“Total supply at basic prices”)
 #' for consistency with Eurostat’s metadata, but this row is normally excluded
 #' from analytical matrix operations.
+#' 
+#' Because the Eurostat SIOT datasets sometimes contain more detailed industry
+#' breakup than their vocabulary, we adopted industry codeing from  [cpa2_1].
+#' These codes are marked the "Adopted from CPA2_1" status.
 #'
 #' @format A tibble (data frame) with 10 variables:
 #' \describe{
 #'   \item{id}{Canonical Eurostat concept identifier.}
 #'   \item{label}{Official Eurostat label (preferred English term).}
-#'   \item{status}{Concept status flag (usually `"A"` for active).}
+#'   \item{status}{"Valid" or "Adopted from CPA2_1".}
 #'   \item{status_modified}{Date of the most recent status update.}
 #'   \item{notation}{Alternate human-readable code or short form (e.g. `CPA_A01`).}
 #'   \item{group}{Optional grouping of related industries or aggregates.}
@@ -45,7 +49,7 @@
 #'
 #' @seealso
 #'   Other Eurostat vocabularies included in the package:
-#'   [ind_use], [prd_use], [prd_ava].
+#'   [ind_use], [prd_use], [prd_ava], [cpa2_1].
 #'
 #' @keywords datasets metadata Eurostat input-output SUT SIOT
 #'

@@ -9,7 +9,7 @@ A tibble (data frame) with 11 variables:
 \describe{
 \item{id}{Canonical Eurostat concept identifier.}
 \item{label}{Official Eurostat label (preferred English term).}
-\item{status}{Concept status flag (usually \code{"A"} for active).}
+\item{status}{"Valid" or "Valid in CPA2_1".}
 \item{status_modified}{Date of last status modification.}
 \item{notation}{Alternate human-readable code or short form (e.g. \code{CPA_A01}).}
 \item{group}{Optional grouping of related products or aggregates.}
@@ -56,6 +56,10 @@ The dataset also retains control totals and adjustment items (Quadrant 30/50)
 such as \emph{Total use at purchasers’ prices}, \emph{CIF/FOB adjustments}, or
 \emph{Discrepancy}, which are part of Eurostat’s published codelist but are
 normally excluded from matrix algebra operations.
+
+Because the Eurostat SIOT datasets sometimes contain more detailed industry
+breakup than their vocabulary, we adopted industry codeing from  \link{cpa2_1}.
+These codes are marked the "Valid in CPA2_1" status.
 }
 \examples{
 data(prd_use)
