@@ -20,8 +20,8 @@ library(iotables)
 
 ## Import and Normalisation Workflow
 
-The four Eurostat vocabularies —\
-`ind_ava`, `ind_use`, `prd_ava`, and `prd_use` — were imported directly from the official Eurostat metadata registry (<https://dd.eionet.europa.eu/vocabulary/eurostat/>).\
+The five Eurostat vocabularies —\
+`ind_ava`, `ind_use`, `prd_ava`, `prd_use`, and `cpa2_1` — were imported directly from the official Eurostat metadata registry (<https://dd.eionet.europa.eu/vocabulary/eurostat/>).\
 Each dataset mirrors the structure of its corresponding SDMX codelist and preserves Eurostat’s identifiers and validity information.
 
 ### Data Sources
@@ -32,6 +32,7 @@ Each dataset mirrors the structure of its corresponding SDMX codelist and preser
 | `ind_use` | Industry uses (columns for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_use/> |
 | `prd_ava` | Products, adjustments and value added (rows for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_ava/> |
 | `prd_use` | Product uses (columns for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_use/> |
+| `cpa2_1` | Statistical Classification of Products by Activity (CPA 2.1) | <https://dd.eionet.europa.eu/vocabulary/eurostat/cpa2_1/> |
 
 ### Import Steps
 
@@ -85,6 +86,12 @@ data/ind_ava.rda data/ind_use.rda data/prd_ava.rda data/prd_use.rda
 ```
 
 Each dataset can be loaded directly with `data(<name>)`.
+
+### Adjustments to Vocabularies
+
+Although the four Eurostat vocabularies (`ind_ava`, `ind_use`, `prd_ava`, `prd_use`) were imported directly from the official Eurostat metadata registry, some modifications were necessary to ensure compatibility with the actual Eurostat input–output datasets. The main data sources, in particular `naio_10_cp1750` and `naio_10_cp1700`, occasionally include variables that are not coded according to the published and standardised vocabularies. While these inconsistencies are usually clear to a manual user, they can create ambiguity in a reproducible workflow where automated matching is required.
+
+For example, the *product × product* SIOTs for the Slovak Republic contain a more detailed industry breakdown than that defined in prd_ava and prd_use. To maintain alignment across datasets, all 0-, 1-, and 2-digit codes from the `cpa2_1` vocabulary were imputed into the four vocabularies. Each entry includes a validity flag in the status column, indicating whether the code is valid in the official Eurostat vocabulary or was adopted from observed but non-standard codes in the data. This approach preserves reproducibility while ensuring complete coverage of all codes encountered in current Eurostat data releases.
 
 ### Versioning
 

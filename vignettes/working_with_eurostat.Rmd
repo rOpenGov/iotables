@@ -18,17 +18,17 @@ library(iotables)
 require(dplyr)
 ```
 
-Symmetric input-output tables and their auxiliary tables are the most complex, structured statistical products that exit, because they contain relationships among 60x60 industry, the supply and the use of the GDP / GNP, and the income disturbing, trade and transport margins and tax receipts from these industries.
+Symmetric input–output tables and their auxiliary tables are among the most complex and structured statistical products. They describe relationships across roughly 63×63 industries, covering the supply and use of GDP/GNP, as well as income distribution, trade and transport margins, and tax receipts for each industry.
 
-The Eurostat website contains the symmetric input-output data in long form.  Working with this data requires a knowledge of the [Eurostat SNA vocabulary](https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view) to arrange the long data in the correct ordering of rows and columns. This is what the preprocessing functions of iotables handle. 
+Eurostat publishes symmetric input–output data in long form. Working with these data requires knowledge of the [Eurostat SNA vocabulary](https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view) to arrange them in the correct order of rows and columns. The preprocessing functions of the `iotables` package perform this task.
 
-Apart from handing a vast and not always well-documented vocabulary, the user is often confronted with "real-life" data issues, such as missing rows and columns in certain members states or spelling errors in the vocabulary.  Many hours of testing and exception handling went into the current form of the processing functions, but there are further problems may show up. Most of the testing was done on `product x product`  type SIOTs, because most member states use them. The functions work with `industry x industry` SIOTs, but further vocabulary exception may show up in their use. Please report these issues on [github](https://github.com/rOpenGov/iotables/issues).
+Beyond managing an extensive and sometimes poorly documented vocabulary, users often face “real-world” data issues such as missing rows or columns in some Member States or spelling inconsistencies in the vocabulary. Many hours of testing and exception handling have gone into the current processing functions, but further issues may still appear. Most testing has been carried out on `product x product` type SIOTs, as these are the most common among Member States. The functions also support `industry x industry` SIOTs, though additional vocabulary exceptions may occur in these cases. Please report such issues on [GitHub](https://github.com/rOpenGov/iotables/issues).
 
-You are most likely to work with the product x product tables. For the availability of other data see `?iotables_download`.
+You are most likely to work with the product × product tables. For information about the availability of other data, see `?iotables_download`.
 
-The analytical functions are presented at greater detail in the _Germany 1990_ vignette. The numbering of the equations refers to the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Eurostat Manual, Chapter 15.) The manual was prepared in 2008 under the `ESA95` standards. Currently Eurostat uses the `ESA2010` definitions, and some indicators in the manual are no longer available. In most uses this will not cause a problem.
+The analytical functions are described in more detail in the Germany 1990 vignette. The numbering of the equations follows the [Eurostat Manual of Supply, Use and Input–Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Chapter 15). The manual was prepared in 2008 under the ESA95 standards. Eurostat now uses ESA2010 definitions, and some indicators in the manual are no longer available, though this generally does not cause problems.
 
-Another very useful source of information on how to work with the tables [Input-output analytical tables: methods and application to UK National Accounts](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html). Since the United Kingdom at the time of writing the article was a member of the European Union, her national accounts follow the EU ESA standards.
+Another useful reference on working with input–output tables is [Input–Output Analytical Tables: Methods and Application to UK National Accounts](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html). At the time of publication, the United Kingdom was a member of the European Union, and its national accounts followed EU ESA standards.
 
 ## Getting and processing Eurostat data
 
@@ -67,7 +67,8 @@ emp_cz <- employment_get(
 
 # Conforming employment data #both sexes from 15 years old, year 2017.
 emp_sk <- employment_get(
-  geo = "SK", year = "2017", sex = "Total",
+  geo = "SK", 
+  year = "2017", sex = "Total",
   age = "Y_GE15", labelling = "prod_na",
   data_directory = not_included_directory,
   force_download = TRUE
@@ -93,19 +94,21 @@ load(system.file("extdata",
 
 In this vignette example the Czech (2015) national currency unit and the Slovak (2010) euro tables are created.  Since the Slovak national currency is the euro, there is no difference between the Slovak national currency unit and euro tables.
 
-```{r preprocess}
+```{r preprocess, eval=FALSE}
 cz_io <- iotable_get(
-  labelled_io_data = naio_10_cp1700,
-  source = "naio_10_cp1700", geo = "CZ",
-  year = 2015, unit = "MIO_NAC",
+  source = "naio_10_cp1700",
+  geo = "CZ",
+  year = 2015,
+  unit = "MIO_NAC",
   stk_flow = "TOTAL",
   labelling = "short"
 )
 
 sk_io <- iotable_get(
-  labelled_io_data = naio_10_cp1700,
-  source = "naio_10_cp1700", geo = "SK",
-  year = 2010, unit = "MIO_EUR",
+  source = "naio_10_cp1700",
+  geo = "SK",
+  year = 2015,
+  unit = "MIO_EUR",
   stk_flow = "TOTAL",
   labelling = "short"
 )
@@ -119,7 +122,6 @@ sk_output <- output_get(data_table = sk_io)
 ```
 
 By default, total rows and columns are removed when creating use tables. 
-
 ## Analytic functions {#analytic-functions}
 
 ### Input coefficients matrix
@@ -134,12 +136,10 @@ It checks the correct ordering of columns, and furthermore it fills up 0 values 
 
 ```{r inputcoeff, results='asis'}
 input_coeff_matrix_cz <- input_coefficient_matrix_create(
-  data_table = cz_io
-)
+  data_table = cz_io)
 
 input_coeff_matrix_sk <- input_coefficient_matrix_create(
-  data_table = sk_io
-)
+  data_table = sk_io)
 
 knitr::kable(head(input_coeff_matrix_cz[, 1:8]))
 ```
@@ -190,14 +190,12 @@ By default, `direct_supply_effects_create()` will compare inputs to total final 
 primary_inputs_cz <- coefficient_matrix_create(
   data_table = cz_io,
   total = "output",
-  return = "primary_inputs"
-)
+  return = "primary_inputs")
 
 primary_inputs_sk <- coefficient_matrix_create(
   data_table = sk_io,
   total = "output",
-  return = "primary_inputs"
-)
+  return = "primary_inputs")
 
 direct_cz <- direct_effects_create(primary_inputs_cz, I_cz)
 direct_sk <- direct_effects_create(primary_inputs_sk, I_sk)
@@ -228,14 +226,12 @@ The code chunk below prints a part of the Czech multipliers, rounded to 4 digits
 primary_inputs_cz <- coefficient_matrix_create(
   data_table = cz_io,
   total = "output",
-  return = "primary_inputs"
-)
+  return = "primary_inputs")
 
 primary_inputs_sk <- coefficient_matrix_create(
   data_table = sk_io,
   total = "output",
-  return = "primary_inputs"
-)
+  return = "primary_inputs")
 
 multipliers_cz <- input_multipliers_create(primary_inputs_cz, I_cz)
 multipliers_sk <- input_multipliers_create(primary_inputs_sk, I_sk)
@@ -254,15 +250,6 @@ Other inputs, for example, CO2 emissions may be used, but they are likely to be 
 names(emp_sk)[1] <- "prod_na"
 names(emp_cz)[1] <- "prod_na"
 
-emp_indicator_sk <- rbind(
-  sk_io[, 1:66],
-  emp_sk
-) %>%
-  coefficient_matrix_create(.,
-    return_part = "primary_inputs"
-  ) %>%
-  filter(prod_na == "employment_total")
-
 emp_indicator_cz <- full_join(
   cz_io,
   emp_cz
@@ -273,7 +260,6 @@ emp_indicator_cz <- full_join(
   filter(prod_na == "employment_total")
 
 
-emp_effect_sk <- direct_effects_create(emp_indicator_sk, I_sk)
 emp_effect_cz <- direct_effects_create(emp_indicator_cz, I_cz)
 
 knitr::kable(emp_effect_cz[1:8], digits = 5)
@@ -283,8 +269,8 @@ knitr::kable(emp_effect_cz[1:8], digits = 5)
 ```{r employmentindicator, results='asis'}
 # New function is needed to add employment vector to SIOT
 
-emp_multiplier_sk <- input_multipliers_create(emp_indicator_sk, I_sk)
-emp_multiplier_cz <- input_multipliers_create(emp_indicator_cz, I_cz)
+emp_multiplier_cz <- input_multipliers_create(
+  emp_indicator_cz, I_cz)
 
 knitr::kable(emp_multiplier_cz[1:8], digits = 5)
 ```
@@ -316,14 +302,12 @@ knitr::kable(head(cz_bw[, 1:8]), digits = 4)
 
 Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table. 
 
-```{r output_coeff, results='asis', eval=FALSE}
+```{r output_coeff, results='asis'}
 output_coeff_cz <- output_coefficient_matrix_create(
-  io_table = cz_io, total = "tfu", digits = 4
-)
+  data_table = cz_io, total = "TFU", digits = 4)
 
 output_coeff_sk <- output_coefficient_matrix_create(
-  io_table = sk_io, total = "tfu"
-)
+  data_table = sk_io, total = "TFU", digits = 4)
 
 knitr::kable(head(output_coeff_cz[, 1:8]))
 ```

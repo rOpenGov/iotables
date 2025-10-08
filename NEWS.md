@@ -1,3 +1,18 @@
+# iotables 0.9.5
+
+This new minor release imports the new `prd_ava`, `prd_use`, `ind_ava`, 
+`ind_use` and `cpa2_1` metadata vocabularies due to a change in the metada  
+definitions of the main data sources, i.e., the Eurostat 
+`naio_10_cp1700` `naio_10_cp1750` statistical products.
+
+- A new vignette explains these changes (*Metadata Vocabularies for Input–Output Analysis*).
+- A new modernised downloader helps to receive the new Eurostat data, 
+while the legacy data importers remain accessible `iotables_download()`, 
+`iotables_download_old()`, `iotable_get_eurostat()` and `iotable_get()`.
+- The *Working With Eurostat Data* vignette is updated, too.
+- Under the hoods, some code is modernised and made easier to read.
+- Many new unit tests are added to the package.
+
 # iotables 0.9.4
 
 This [CRAN release](https://github.com/rOpenGov/iotables/releases/tag/0.9.4) focuses on stability, documentation, and preparing the
