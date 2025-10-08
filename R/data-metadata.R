@@ -42,7 +42,7 @@
 #' The functions [`iotables_download()`] and [`iotable_get_eurostat()`] now use
 #' use [ind_ava], [prd_ava], [ind_use], [prd_use] —
 #' the SDMX-aligned canonical
-#' metadata vocabularies introduced in 2025. 
+#' metadata vocabularies introduced in 2025.
 #' The `metadata` object remains accessible for
 #' reproducing results from earlier iotables versions (≤ 0.9.4) or from studies
 #' relying on the `naio_10_cp16*` and `naio_10_cp17*` datasets prior to the
