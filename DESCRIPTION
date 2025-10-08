@@ -30,6 +30,7 @@ Imports:
     eurostat,
     forcats,
     glue,
+    httr2,
     kableExtra,
     knitr,
     lubridate,

@@ -2,7 +2,7 @@
 title: "Metadata Vocabularies for Input–Output Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Metadata & Vocabulary}
+  %\VignetteIndexEntry{Metadata Vocabularies for Input–Output Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,7 +27,7 @@ Each dataset mirrors the structure of its corresponding SDMX codelist and preser
 ### Data Sources
 
 | Vocabulary | Description | Source URL |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `ind_ava` | Industries, adjustments and value added (rows for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_ava/> |
 | `ind_use` | Industry uses (columns for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_use/> |
 | `prd_ava` | Products, adjustments and value added (rows for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_ava/> |

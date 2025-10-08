@@ -56,7 +56,7 @@ getdata <- function(x) {
         utils::data(list = name, envir = e, package = "iotables")
       )
     ),
-    warning = function(w) {  # suppress "data set not found"
+    warning = function(w) { # suppress "data set not found"
       invokeRestart("muffleWarning")
     },
     error = function(err) {
