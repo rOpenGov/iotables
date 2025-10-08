@@ -1,39 +1,39 @@
-test_that("Necessary input parameters are checked in iotable_get()", {
-  expect_error(iotable_get(
+test_that("Necessary input parameters are checked in iotable_get_builtin()", {
+  expect_error(iotable_get_builtin(
     source = "naio_10_cp1701",
     year = 2015, geo = "DE",
     unit = "MIO_EUR", labelling = "iotables"
   ))
 })
 
-test_that("Correct data is returned by iotable_get()", {
-  expect_equal(as.numeric(iotable_get(
+test_that("Correct data is returned by iotable_get_builtin()", {
+  expect_equal(as.numeric(iotable_get_builtin(
     source = "germany_1995",
     geo = "DE", year = 1995,
     unit = "MIO_EUR", labelling = "iotables"
   )[1, 2]), 1131)
 
-  expect_equal(as.character(unlist(iotable_get(
+  expect_equal(as.character(unlist(iotable_get_builtin(
     source = "germany_1995",
     geo = "DE", year = 1995,
     unit = "MIO_EUR", labelling = "short"
   )[4, 1])), "CPA_G-I")
   expect_equal(
-    as.numeric(iotable_get(
+    as.numeric(iotable_get_builtin(
       source = "croatia_2010_1800", geo = "HR",
       year = 2010, unit = "T_NAC"
     )[1, 3]),
     expected = 164159, tolerance = 0.6
   )
   expect_equal(
-    as.numeric(iotable_get(
+    as.numeric(iotable_get_builtin(
       source = "croatia_2010_1900", geo = "HR",
       year = 2010, unit = "T_NAC"
     )[2, 5]),
     expected = 1, tolerance = 0.5
   )
   expect_equal(
-    as.character(unlist(iotable_get(
+    as.character(unlist(iotable_get_builtin(
       source = "croatia_2010_1900", geo = "HR",
       year = 2010, unit = "T_NAC",
       labelling = "short"
@@ -41,7 +41,7 @@ test_that("Correct data is returned by iotable_get()", {
     expected = "CPA_A02"
   )
   expect_equal(
-    as.character(unlist(iotable_get(
+    as.character(unlist(iotable_get_builtin(
       source = "croatia_2010_1900", geo = "HR",
       year = 2010, unit = "T_NAC",
       labelling = "iotables"
@@ -52,8 +52,8 @@ test_that("Correct data is returned by iotable_get()", {
 
 
 test_that("Correct data is returned for private consumption
-          by iotable_get()", {
-  germany_table <- iotable_get(
+          by iotable_get_builtin()", {
+  germany_table <- iotable_get_builtin(
     source = "germany_1995",
     geo = "DE", year = 1995,
     unit = "MIO_EUR", labelling = "iotables"
@@ -65,12 +65,12 @@ test_that("Correct data is returned for private consumption
 
 
 test_that("labelling switches shape of first column as documented", {
-  de_iot <- iotable_get(
+  de_iot <- iotable_get_builtin(
     source = "germany_1995",
     geo = "DE", year = 1995, unit = "MIO_EUR",
     labelling = "iotables"
   )
-  de_short <- iotable_get(
+  de_short <- iotable_get_builtin(
     source = "germany_1995",
     geo = "DE", year = 1995, unit = "MIO_EUR",
     labelling = "short"
@@ -92,13 +92,13 @@ test_that("manual Eurostat download works for a real dataset", {
     "Manual test; set RUN_MANUAL_IOTABLES_TESTS=true to enable."
   )
 
-  test <- iotable_get(
+  test <- iotable_get_builtin(
     source = "naio_10_cp1750", stk_flow = "TOTAL",
     geo = "CZ", unit = "MIO_NAC", year = 2010,
     data_directory = "data-raw", force_download = FALSE
   )
 
-  test_that("Correct data is returned by iotable_get()", {
+  test_that("Correct data is returned by iotable_get_builtin()", {
     expect_equal(as.numeric(test[1, 2]), 10161)
   })
 })
