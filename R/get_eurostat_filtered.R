@@ -1,4 +1,7 @@
 #' @keywords internal
+#' @importFrom dplyr relocate filter 
+#' @importFrom httr2 req_user_agent req_retry req_error
+#' @importFrom httr2 resp_body_json req_perform resp_content_type
 get_eurostat_filtered <- function(id,
                                   filters = list(),
                                   type = "code",
@@ -9,17 +12,16 @@ get_eurostat_filtered <- function(id,
     "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/%s",
     id
   )
-  
+
   if (length(filters)) {
     query <- paste0(
-      names(filters),
-      "=",
+      names(filters), "=",
       vapply(filters, paste, collapse = ",", FUN.VALUE = character(1)),
       collapse = "&"
     )
     base_url <- paste0(base_url, "?", query)
   }
-  
+
   # ---- Download JSON --------------------------------------------------------
   jdat <- httr2::request(base_url) %>%
     httr2::req_user_agent("https://github.com/eviota/iotables") %>%
@@ -32,10 +34,10 @@ get_eurostat_filtered <- function(id,
       }
       httr2::resp_body_json(., simplifyVector = TRUE)
     }
-  
+
   dims <- jdat$dimension
-  ids  <- jdat$id
-  
+  ids <- jdat$id
+
   # ---- Construct tidy grid --------------------------------------------------
   dims_list <- lapply(dims[rev(ids)], function(x) {
     lab <- x$category$label
@@ -49,10 +51,10 @@ get_eurostat_filtered <- function(id,
       stop("Invalid 'type' argument.")
     }
   })
-  
+
   downloaded <- expand.grid(
     dims_list,
-    KEEP.OUT.ATTRS = FALSE,
+    KEEP.OUT.ATTRS = FALSE, 
     stringsAsFactors = FALSE
   ) %>%
     tibble::as_tibble() %>%
@@ -65,52 +67,75 @@ get_eurostat_filtered <- function(id,
       }
     )
   
-  # ---- Identify and filter table structure ----------------------------------
+  downloaded <- tibble::rowid_to_column(downloaded)
+  
+  # ---- Filter sparce matrix  -----------------------------------
   if (all(c("prd_ava", "prd_use") %in% names(downloaded))) {
-    # Product × Product (CPA)
-    valid_cpa_siot <- c(
-      "CPA_TOTAL", "CPA_A01", "CPA_A02", "CPA_A03", "CPA_B",
-      "CPA_C10-12", "CPA_C13-15", "CPA_C16", "CPA_C17", "CPA_C18", "CPA_C19",
-      "CPA_C20", "CPA_C21", "CPA_C22", "CPA_C23", "CPA_C24", "CPA_C25",
-      "CPA_C26", "CPA_C27", "CPA_C28", "CPA_C29", "CPA_C30", "CPA_C31_32",
-      "CPA_C33", "CPA_D", "CPA_E36", "CPA_E37-39", "CPA_F", "CPA_G45",
-      "CPA_G46", "CPA_G47", "CPA_H49", "CPA_H50", "CPA_H51", "CPA_H52",
-      "CPA_H53", "CPA_I55", "CPA_I56", "CPA_J58", "CPA_J59_60", "CPA_J61",
-      "CPA_J62_63", "CPA_K64", "CPA_K65", "CPA_K66", "CPA_L68A", "CPA_L68B",
-      "CPA_M69_70", "CPA_M71", "CPA_M72", "CPA_M73", "CPA_M74_75",
-      "CPA_N77", "CPA_N78", "CPA_N79", "CPA_N80-82", "CPA_O", "CPA_P",
-      "CPA_Q86", "CPA_Q87_88", "CPA_R90-92", "CPA_R93", "CPA_S94", "CPA_S95",
-      "CPA_S96", "CPA_T", "CPA_U",
-      # Balancing items
-      "CPA_B1G", "CPA_B2A3N", "CPA_B2A3G", "CPA_B3G", "CPA_D1", "CPA_D11",
-      "CPA_D21X31", "CPA_D29X39", "CPA_P1", "CPA_P2_ADJ", "CPA_P7",
-      "CPA_P51C", "CPA_IMP", "CPA_TS_BP"
-    )
-    downloaded <- downloaded %>%
-      dplyr::filter(prd_ava %in% valid_cpa_siot, prd_use %in% valid_cpa_siot)
+    # Product x Product Structure  --------
     
-  } else if (all(c("ind_ava", "ind_use") %in% names(downloaded))) {
-    # Industry × Industry (NACE)
-    valid_nace <- unique(c(
-      names(dims$ind_ava$category$label),
-      names(dims$ind_use$category$label)
-    ))
+    row_vocab <- getdata("prd_ava")
+    col_vocab <- getdata("prd_use")
+    
+    not_in_prd_ava <- downloaded %>%
+      filter (is.na(values) ) %>%
+      filter ( ! prd_ava %in% row_vocab )
+    
+    not_in_prd_use <- downloaded %>%
+      filter (is.na(values) ) %>%
+      filter ( ! prd_ava %in% col_vocab )
+    
+    valid_rows <- setdiff(
+      downloaded$rowid, 
+      c(not_in_prd_ava$rowid, not_in_prd_use$rowid))
+    
     downloaded <- downloaded %>%
-      dplyr::filter(ind_ava %in% valid_nace, ind_use %in% valid_nace)
-  } else {
-    warning("Could not identify IO structure (no prd_* or ind_* dimensions found). Skipping filtering.")
+      filter ( rowid %in% valid_rows ) %>%
+      select (-rowid)
   }
   
-  # ---- Harmonise with eurostat::get_eurostat() output -----------------------
+  if (all(c("ind_ava", "ind_use") %in% names(downloaded))) {
+    # Industry x Industry Structure  --------
+    
+    row_vocab <- getdata("ind_ava")
+    col_vocab <- getdata("ind_use")
+    
+    not_in_ind_ava <- downloaded %>%
+      filter (is.na(values) ) %>%
+      filter ( ! ind_ava %in% row_vocab )
+    
+    not_in_ind_use <- downloaded %>%
+      filter (is.na(values) ) %>%
+      filter ( ! ind_ava %in% col_vocab )
+    
+    valid_rows <- setdiff(
+      downloaded$rowid, 
+      c(not_in_ind_ava$rowid, not_in_ind_use$rowid))
+    
+    downloaded <- downloaded %>%
+      filter ( rowid %in% valid_rows ) %>%
+      select (-rowid)
+  }
+  
+
+  # ---- Harmonise time field -------------------------------------------------
   if ("time" %in% names(downloaded)) {
     downloaded <- downloaded %>%
       dplyr::rename(TIME_PERIOD = time) %>%
-      dplyr::mutate(TIME_PERIOD = as.Date(paste0(TIME_PERIOD, "-01-01")))
+      dplyr::mutate(TIME_PERIOD = as.Date(
+        paste0(TIME_PERIOD, "-01-01"))
+        )
   }
   
-  # ---- Finalise -------------------------------------------------------------
   attr(downloaded, "dataset") <- id
-  rm(jdat, dims, dims_list, ids)
+  
+  downloaded <- tibble::rowid_to_column(downloaded)
+  new_names <- names(downloaded)
+  change <- which(!names(downloaded) %in% c("rowid", "TIME_PERIOD", "values"))
+  new_names[change] <- paste0(new_names[change], "_lab")
+  
+  downloaded$year <- lubridate::year(downloaded$TIME_PERIOD)
+  
+  
   invisible(gc())
   downloaded
 }

@@ -76,9 +76,8 @@ employment <- employment_get(
 }
 \seealso{
 Other import functions: 
-\code{\link{airpol_get}()},
 \code{\link{iotables_download}()},
-\code{\link{iotables_metadata_get}()},
+\code{\link{iotables_download_old}()},
 \code{\link{iotables_read_tempdir}()}
 }
 \concept{import functions}
