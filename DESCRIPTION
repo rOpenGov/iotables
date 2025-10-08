@@ -49,7 +49,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0)
 Encoding: UTF-8
-Language: en-GB
+Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr
