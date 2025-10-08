@@ -1,5 +1,5 @@
 #' @keywords internal
-#' @importFrom dplyr relocate filter 
+#' @importFrom dplyr relocate filter
 #' @importFrom httr2 req_user_agent req_retry req_error
 #' @importFrom httr2 resp_body_json req_perform resp_content_type
 get_eurostat_filtered <- function(id,
@@ -54,7 +54,7 @@ get_eurostat_filtered <- function(id,
 
   downloaded <- expand.grid(
     dims_list,
-    KEEP.OUT.ATTRS = FALSE, 
+    KEEP.OUT.ATTRS = FALSE,
     stringsAsFactors = FALSE
   ) %>%
     tibble::as_tibble() %>%
@@ -66,76 +66,76 @@ get_eurostat_filtered <- function(id,
         replace(values, inds, vals)
       }
     )
-  
+
   downloaded <- tibble::rowid_to_column(downloaded)
-  
+
   # ---- Filter sparce matrix  -----------------------------------
   if (all(c("prd_ava", "prd_use") %in% names(downloaded))) {
     # Product x Product Structure  --------
-    
+
     row_vocab <- getdata("prd_ava")
     col_vocab <- getdata("prd_use")
-    
+
     not_in_prd_ava <- downloaded %>%
-      filter (is.na(values) ) %>%
-      filter ( ! prd_ava %in% row_vocab )
-    
+      filter(is.na(values)) %>%
+      filter(!prd_ava %in% row_vocab)
+
     not_in_prd_use <- downloaded %>%
-      filter (is.na(values) ) %>%
-      filter ( ! prd_ava %in% col_vocab )
-    
+      filter(is.na(values)) %>%
+      filter(!prd_ava %in% col_vocab)
+
     valid_rows <- setdiff(
-      downloaded$rowid, 
-      c(not_in_prd_ava$rowid, not_in_prd_use$rowid))
-    
+      downloaded$rowid,
+      c(not_in_prd_ava$rowid, not_in_prd_use$rowid)
+    )
+
     downloaded <- downloaded %>%
-      filter ( rowid %in% valid_rows ) %>%
-      select (-rowid)
+      filter(rowid %in% valid_rows) %>%
+      select(-rowid)
   }
-  
+
   if (all(c("ind_ava", "ind_use") %in% names(downloaded))) {
     # Industry x Industry Structure  --------
-    
+
     row_vocab <- getdata("ind_ava")
     col_vocab <- getdata("ind_use")
-    
+
     not_in_ind_ava <- downloaded %>%
-      filter (is.na(values) ) %>%
-      filter ( ! ind_ava %in% row_vocab )
-    
+      filter(is.na(values)) %>%
+      filter(!ind_ava %in% row_vocab)
+
     not_in_ind_use <- downloaded %>%
-      filter (is.na(values) ) %>%
-      filter ( ! ind_ava %in% col_vocab )
-    
+      filter(is.na(values)) %>%
+      filter(!ind_ava %in% col_vocab)
+
     valid_rows <- setdiff(
-      downloaded$rowid, 
-      c(not_in_ind_ava$rowid, not_in_ind_use$rowid))
-    
+      downloaded$rowid,
+      c(not_in_ind_ava$rowid, not_in_ind_use$rowid)
+    )
+
     downloaded <- downloaded %>%
-      filter ( rowid %in% valid_rows ) %>%
-      select (-rowid)
+      filter(rowid %in% valid_rows) %>%
+      select(-rowid)
   }
-  
+
 
   # ---- Harmonise time field -------------------------------------------------
   if ("time" %in% names(downloaded)) {
     downloaded <- downloaded %>%
       dplyr::rename(TIME_PERIOD = time) %>%
       dplyr::mutate(TIME_PERIOD = as.Date(
-        paste0(TIME_PERIOD, "-01-01"))
-        )
+        paste0(TIME_PERIOD, "-01-01")
+      ))
   }
-  
+
   attr(downloaded, "dataset") <- id
-  
+
   downloaded <- tibble::rowid_to_column(downloaded)
   new_names <- names(downloaded)
   change <- which(!names(downloaded) %in% c("rowid", "TIME_PERIOD", "values"))
   new_names[change] <- paste0(new_names[change], "_lab")
-  
+
   downloaded$year <- lubridate::year(downloaded$TIME_PERIOD)
-  
-  
   invisible(gc())
   downloaded
 }

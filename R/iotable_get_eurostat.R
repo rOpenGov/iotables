@@ -52,28 +52,30 @@ iotable_get_eurostat <- function(
 
   # --- Download --------------------------------------------------------------
   if (is.null(labelled_io_data)) {
-    io_filters <- list(geo = geo, 
-                       stk_flow = stk_flow,
-                       unit = unit)
-    
+    io_filters <- list(
+      geo = geo,
+      stk_flow = stk_flow,
+      unit = unit
+    )
+
     labelled_io_table <- get_eurostat_filtered(
       id = source,
       filter = io_filters
-    ) 
+    )
     if (!is.null(year)) {
       labelled_io_table <- labelled_io_table[labelled_io_table$year == year, ]
-      if ( length(labelled_io_table) == 0 ) {
+      if (length(labelled_io_table) == 0) {
         err_msg <- glue::glue("No data available in source='{source}' for the year='{year}'.")
         stop(err_msg)
       }
     }
   }
-  
+
   message("Retrieved dataset from Eurostat.")
 
   # --- Locate table ----------------------------------------------------------
-  
-  if ( !is.null(labelled_io_data)) {
+
+  if (!is.null(labelled_io_data)) {
     selected_table <- which(
       tolower(labelled_io_data$geo) == toupper(geo) &
         labelled_io_data$year == as.numeric(year) &
@@ -101,46 +103,48 @@ iotable_get_eurostat <- function(
 
     row_voc <- row_vars[which(row_vars %in% names(iotable))]
     col_voc <- col_vars[which(col_vars %in% names(iotable))]
-    
+
     row_vocab <- getdata(row_voc)
     col_vocab <- getdata(col_voc)
-    
+
     row_mismatch <- unique(iotable$prd_ava)[
-      which(! unique(iotable$prd_ava) %in% unique(row_vocab$id))
-      ]
-    
-    col_mismatch <- unique(iotable$prd_use)[
-      unique(iotable$prd_use)[which(! unique(iotable$prd_use) %in% unique(col_vocab$id))]
+      which(!unique(iotable$prd_ava) %in% unique(row_vocab$id))
     ]
     
+    col_mismatch <- unique(iotable$prd_use)[
+      which(!unique(iotable$prd_use) %in% unique(col_vocab$id))
+      ]
+
     assertthat::assert_that(
-      length(row_mismatch) == 0, 
+      length(row_mismatch) == 0,
       msg = glue::glue(
-        "Mismatch of row name vocabulary in '{source}' geo={geo} year={year}")
+        "Mismatch of row name vocabulary in '{source}' geo={geo} year={year}"
+      )
     )
-    
+
     assertthat::assert_that(
-      length(col_mismatch) == 0, 
+      length(col_mismatch) == 0,
       msg = glue::glue(
-        "Mismatch of col name vocabulary in '{source}' geo={geo} year={year}")
+        "Mismatch of col name vocabulary in '{source}' geo={geo} year={year}"
+      )
     )
-    
+
     iotable <- iotable %>%
       dplyr::rename(
         prod_na     = prd_ava, # rows
         induse      = prd_use, # columns
       )
-    
-    if ( "prod_ava_lab" %in% names(iotable)) {
-      iotable <- rename(iotable,  prod_na_lab = prd_ava_lab)
+
+    if ("prod_ava_lab" %in% names(iotable)) {
+      iotable <- rename(iotable, prod_na_lab = prd_ava_lab)
     } else {
-      iotable$prod_na_lab  = NA_character_
+      iotable$prod_na_lab <- NA_character_
     }
-    
-    if ( "induse_lab" %in% names(iotable)) {
-      iotable <- rename(iotable,  induse_lab = prd_use_lab)
+
+    if ("induse_lab" %in% names(iotable)) {
+      iotable <- rename(iotable, induse_lab = prd_use_lab)
     } else {
-      iotable$induse_lab  = NA_character_
+      iotable$induse_lab <- NA_character_
     }
     message("Detected product × product (CPA) structure.")
   }
@@ -150,51 +154,52 @@ iotable_get_eurostat <- function(
 
     row_voc <- row_vars[which(row_vars %in% names(iotable))]
     col_voc <- col_vars[which(col_vars %in% names(iotable))]
-    
+
     row_vocab <- getdata(row_voc)
     col_vocab <- getdata(col_voc)
-    
+
     row_mismatch <- unique(iotable$ind_ava)[
-      which(! unique(iotable$ind_ava) %in% unique(row_vocab$id))
+      which(!unique(iotable$ind_ava) %in% unique(row_vocab$id))
     ]
-    
+
     col_mismatch <- unique(iotable$ind_use)[
-      unique(iotable$ind_use)[which(! unique(iotable$ind_use) %in% unique(col_vocab$id))]
+      unique(iotable$ind_use)[which(!unique(iotable$ind_use) %in% unique(col_vocab$id))]
     ]
-    
+
     assertthat::assert_that(
-      length(row_mismatch) == 0, 
+      length(row_mismatch) == 0,
       msg = glue::glue(
-        "Mismatch of row name vocabulary in '{source}' geo={geo} year={year}")
+        "Mismatch of row name vocabulary in '{source}' geo={geo} year={year}"
+      )
     )
-    
+
     assertthat::assert_that(
-      length(col_mismatch) == 0, 
+      length(col_mismatch) == 0,
       msg = glue::glue(
-        "Mismatch of col name vocabulary in '{source}' geo={geo} year={year}")
+        "Mismatch of col name vocabulary in '{source}' geo={geo} year={year}"
+      )
     )
-    
+
     iotable <- iotable %>%
       dplyr::rename(
         prod_na     = ind_ava, # rows
         induse      = ind_use, # columns
       )
-    
-    if ( "ind_ava_lab" %in% names(iotable)) {
-      iotable <- rename(iotable,  prod_na_lab = ind_ava_lab)
+
+    if ("ind_ava_lab" %in% names(iotable)) {
+      iotable <- rename(iotable, prod_na_lab = ind_ava_lab)
     } else {
-      prod_na_lab  = NA_character_
+      prod_na_lab <- NA_character_
     }
-    
-    if ( "induse_lab" %in% names(iotable)) {
-      iotable <- rename(iotable,  induse_lab = ind_use_lab)
+
+    if ("induse_lab" %in% names(iotable)) {
+      iotable <- rename(iotable, induse_lab = ind_use_lab)
     } else {
-      induse_lab  = NA_character_
+      induse_lab <- NA_character_
     }
-    
+
     message("Detected industry × industry (NACE) structure.")
-    
-    }
+  }
 
   if (is.na(structure_type)) {
     review <- glue::glue(
@@ -239,15 +244,15 @@ iotable_get_eurostat <- function(
   iotable_labelled <- iotable %>%
     dplyr::left_join(meta_cols, by = "induse") %>%
     dplyr::left_join(meta_rows, by = "prod_na")
-  
+
   unlabelled_col <- iotable_labelled %>%
     dplyr::filter(is.na(col_order)) %>%
     dplyr::filter(!is.na(values))
-  
-  if ( nrow(unlabelled_col)>0) {
+
+  if (nrow(unlabelled_col) > 0) {
     warning(glue::glue(
-      "There are unidentified cells in '{source}' geo='{geo}' year='{year}'")
-      )
+      "There are unidentified cells in '{source}' geo='{geo}' year='{year}'"
+    ))
   }
 
   if (nrow(iotable_labelled) == 0) {
@@ -256,16 +261,36 @@ iotable_get_eurostat <- function(
 
   # --- Reorder factors -------------------------------------------------------
   if (!is.null(iotable_labelled$row_order)) {
+    # reorder for iotables labelling ------------------
     iotable_labelled$iotables_row <- forcats::fct_reorder(
-      iotable_labelled$iotables_row, 
+      iotable_labelled$iotables_row,
       as.numeric(iotable_labelled$row_order),
       .na_rm = TRUE
     )
   }
   
+  if (!is.null(iotable_labelled$row_order)) {
+    # reorder for eurostat short code labelling -----
+    iotable_labelled$prod_na <- forcats::fct_reorder(
+      iotable_labelled$prod_na,
+      as.numeric(iotable_labelled$row_order),
+      .na_rm = TRUE
+    )
+  }
+
   if (!is.null(iotable_labelled$col_order)) {
+    # reorder for iotables labelling ----------------
     iotable_labelled$iotables_col <- forcats::fct_reorder(
-      iotable_labelled$iotables_col, 
+      iotable_labelled$iotables_col,
+      as.numeric(iotable_labelled$col_order),
+      .na_rm = TRUE
+    )
+  }
+  
+  if (!is.null(iotable_labelled$col_order)) {
+    # reorder for eurostat short code labelling -----
+    iotable_labelled$induse <- forcats::fct_reorder(
+      iotable_labelled$induse,
       as.numeric(iotable_labelled$col_order),
       .na_rm = TRUE
     )
@@ -275,16 +300,18 @@ iotable_get_eurostat <- function(
   if (labelling == "iotables") {
     out <- iotable_labelled %>%
       dplyr::arrange(iotables_row, iotables_col) %>%
-      dplyr::select(iotables_row, iotables_col, values) %>%
-      tidyr::pivot_wider(names_from = iotables_col, values_from = values)
+      dplyr::select(iotables_row, iotables_col, values)  %>%
+      tidyr::pivot_wider(names_from = iotables_col, 
+                         values_from = values)
   } else {
     out <- iotable_labelled %>%
+      dplyr::arrange(prod_na, induse) %>%
       dplyr::select(prod_na, induse, values) %>%
       tidyr::pivot_wider(names_from = induse, values_from = values)
   }
 
   # --- Attach metadata back --------------------------------------------------
-  
+
   if (!is.null(labelled_io_data)) {
     out <- out %>%
       tibble::add_column(
@@ -294,13 +321,14 @@ iotable_get_eurostat <- function(
         stk_flow = labelled_io_data$stk_flow[[selected_table]],
         .before = 1
       )
-  } 
-  
+  }
+
   ver_n <- as.character(utils::packageVersion("iotables"))
   finish_time <- as.character(Sys.time())
   prov_text <- glue::glue(
-    "Created with R and the iotables library {ver_n} at {finish_time}." )
-  
+    "Created with R and the iotables library {ver_n} at {finish_time}."
+  )
+
   attr(out, "dataset_source") <- source
   attr(out, "geo") <- geo
   attr(out, "unit") <- unit
@@ -309,7 +337,7 @@ iotable_get_eurostat <- function(
   attr(out, "structure_type") <- structure_type
   attr(out, "provenance") <- prov_text
 
-  
+
   # --- Save if requested -----------------------------------------------------
   if (!is.null(data_directory)) {
     saveRDS(out, file.path(

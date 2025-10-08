@@ -5,7 +5,6 @@ home:
   - text: Project site
     href: https://iotables.dataobservatory.eu
 
-
 authors:
   Daniel Antal:
     href: https://reprex.nl/authors/daniel_antal/
@@ -56,7 +55,7 @@ articles:
       Which Eurostat/SDMX vocabularies were imported and adopted for 
       input-output analysis and how.
     contents:
-       - methodology
+       - metadata
 
 reference:
   - title: "Importing"
@@ -64,7 +63,9 @@ reference:
       Download the data from the Eurostat warehouse, or, in special cases, from the package's in-built
       library.
     contents:
+      - iotables
       - iotables_download
+      - iotables_download_old
       - iotables_read_tempdir
       - employment_get
       - airpol_get
@@ -77,6 +78,8 @@ reference:
     contents:
       - validate_source
       - iotable_get
+      - iotable_get_eurostat
+      - iotable_get_builtin
       - coefficient_matrix_create
       - input_coefficient_matrix_create
       - output_coefficient_matrix_create
@@ -146,6 +149,7 @@ reference:
     contents:
       - metadata
       - employment_metadata
+      - cpa2_1
       - ind_ava
       - ind_use
       - prd_ava

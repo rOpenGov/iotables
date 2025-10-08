@@ -42,13 +42,14 @@
 #' )
 #'
 #' @export
-coefficient_matrix_create <- function(data_table,
-                                      total = "output",
-                                      digits = NULL,
-                                      remove_empty = TRUE,
-                                      households = FALSE,
-                                      return_part = NULL,
-                                      ...) {
+coefficient_matrix_create <- function(
+    data_table,
+    total = "output",
+    digits = NULL,
+    remove_empty = TRUE,
+    households = FALSE,
+    return_part = NULL,
+    ...) {
   data_table <- data_table %>%
     dplyr::mutate(dplyr::across(where(is.factor), as.character))
 

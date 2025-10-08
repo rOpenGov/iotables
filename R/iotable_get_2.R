@@ -76,13 +76,12 @@ iotable_get <- function(
     labelled_io_data = NULL,
     source = "germany_1995",
     geo = "DE",
-    year = 1990, 
+    year = 1990,
     unit = "MIO_EUR",
     stk_flow = "DOM",
     labelling = "iotables",
     data_directory = NULL,
     force_download = TRUE) {
-  
   # Built-in datasets (legacy branch)
   builtin_sources <- c(
     "germany_1995",
