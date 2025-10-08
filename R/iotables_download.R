@@ -149,7 +149,9 @@ iotables_download <- function(source = "naio_10_cp1700",
     message("Lightweight download contains a single SIOT; wrapped into nested structure.")
   } else {
     message("Creating nested structure...")
-    downloaded_nested <- tidyr::nest(combined, data = -dplyr::any_of(nesting_vars))
+    downloaded_nested <- tidyr::nest(combined,
+      data = -dplyr::any_of(nesting_vars)
+    )
     message("Nesting done.")
   }
 

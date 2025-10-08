@@ -5,9 +5,11 @@ test_that("filtered Eurostat download returns correct values", {
   # CPA product×product
   d1 <- get_eurostat_filtered(
     id = "naio_10_cp1700",
-    filters = list(geo = "HU", 
-                   time = "2020", 
-                   stk_flow = "TOTAL")
+    filters = list(
+      geo = "HU",
+      time = "2020",
+      stk_flow = "TOTAL"
+    )
   )
   expect_s3_class(d1, "data.frame")
   expect_true(all(d1$stk_flow == "TOTAL"))
@@ -16,14 +18,16 @@ test_that("filtered Eurostat download returns correct values", {
   expect_equal(attr(d1, "dataset"), "naio_10_cp1700")
   expect_true(all(c("prd_ava", "prd_use") %in% names(d1)))
   expect_equal(sum(is.na(d1$values)), 0)
-  
+
 
   # NACE industry×industry
   d2 <- get_eurostat_filtered(
     id = "naio_10_cp1750",
-    filters = list(geo = "CZ", 
-                   time = "2020", 
-                   stk_flow = "TOTAL")
+    filters = list(
+      geo = "CZ",
+      time = "2020",
+      stk_flow = "TOTAL"
+    )
   )
   expect_s3_class(d2, "data.frame")
   expect_true(all(d2$stk_flow == "TOTAL"))
@@ -33,4 +37,3 @@ test_that("filtered Eurostat download returns correct values", {
   expect_true(all(c("ind_ava", "ind_use") %in% names(d2)))
   expect_equal(sum(is.na(d2$values)), 0)
 })
-

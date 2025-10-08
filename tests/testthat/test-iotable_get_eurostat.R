@@ -30,9 +30,9 @@ test_that("iotable_get_eurostat() with
   # CPA_01xCPA_02: 582
   # CPA_01xCPA_02: 297
   # CPA_02xCPA_02: 6356
-  
+
   test_that("Correct values are returned by iotable_get_eurostat()", {
-    expect_true(all(cz_eurostat_io$agriculture[c(1,2)]== c(25949, 582)))
+    expect_true(all(cz_eurostat_io$agriculture[c(1, 2)] == c(25949, 582)))
     expect_equal(cz_eurostat_io$forestry[1], 297)
     expect_equal(cz_eurostat_io$forestry[2], 6356)
   })
@@ -65,15 +65,14 @@ test_that("manual Eurostat download works for a real dataset", {
   # CPA_02: c(1039, 6740,1)
 
   test_that("Correct values are returned by iotable_get_eurostat()", {
-    expect_true(all(cz_iop$agriculture[c(1,2, 3)]==  c(24600,542,36)))
-    expect_equal(cz_iop$forestry[c(1:3)], c(1039, 6740,1))
+    expect_true(all(cz_iop$agriculture[c(1, 2, 3)] == c(24600, 542, 36)))
+    expect_equal(cz_iop$forestry[c(1:3)], c(1039, 6740, 1))
   })
-  
+
   test_that("Correct attributes are returned by iotable_get_eurostat()", {
     expect_equal(attr(cz_iop, "dataset_source"), "naio_10_cp1750")
     expect_equal(attr(cz_iop, "stk_flow"), "TOTAL")
     expect_equal(attr(cz_iop, "geo"), "CZ")
     expect_equal(attr(cz_iop, "unit"), "MIO_NAC")
   })
-  
 })
