@@ -203,7 +203,7 @@ test_that("iotable_get_eurostat() with a product x product dataset
   })
   
   test_that("Correct attributes are returned by iotable_get_eurostat()", {
-    expect_equal(attr(cz_eurostat_io, "dataset_source"), "naio_10_cp1700")
+    expect_equal(attr(cz_eurostat_io_short, "dataset_source"), "naio_10_cp1700")
   })
 })
 
