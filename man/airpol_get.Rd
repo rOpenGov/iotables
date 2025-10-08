@@ -2,10 +2,9 @@
 % Please edit documentation in R/airpol_get.R
 \name{airpol_get}
 \alias{airpol_get}
-\title{Get air pollutant data}
+\title{Get air pollutant data (Eurostat env_ac_ainah_r2)}
 \source{
-Eurostat dataset:
-\href{https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2}{Air emissions accounts by NACE Rev. 2 activity}.
+Eurostat dataset: \href{https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2}{env_ac_ainah_r2}
 }
 \usage{
 airpol_get(
@@ -14,60 +13,35 @@ airpol_get(
   year = 2020,
   unit = "THS_T",
   data_directory = NULL,
-  force_download = TRUE
+  force_download = FALSE
 )
 }
 \arguments{
-\item{airpol}{Pollutant code. Defaults to \code{"GHG"}. Common values include
-\code{"ACG"}, \code{"CH4"}, \code{"CO2"}, \code{"NH3"}, \code{"NOX"}, \code{"PM10"}, \code{"PM2_5"},
-\code{"SOX_SO2E"}. See \strong{Details} for the full list.}
+\item{airpol}{Pollutant code (e.g. \code{"GHG"}, \code{"CO2"}, \code{"CH4"}, \code{"NOX"}, \code{"NH3"}, etc.).}
 
-\item{geo}{Country code. The special value \code{"germany_1995"} returns the
-built-in replication dataset \link{germany_airpol}.}
+\item{geo}{Country code (e.g. \code{"BE"}, \code{"DE"}). The special value \code{"germany_1995"}
+returns the built-in example dataset \link{germany_airpol}.}
 
-\item{year}{Reference year (2008 or later for NACE Rev. 2 statistics).}
+\item{year}{Reference year (≥ 2008 for NACE Rev. 2).}
 
-\item{unit}{Unit of measure. Defaults to \code{"THS_T"} (thousand tons).}
+\item{unit}{Unit of measure (default \code{"THS_T"} = thousand tonnes).}
 
-\item{data_directory}{Optional directory path. If valid, the downloaded and
-pre-processed data will be saved here.}
+\item{data_directory}{Directory to save processed data (default: \code{tempdir()}).}
 
-\item{force_download}{Logical, defaults to \code{TRUE}. If \code{FALSE}, the function
-reuses an existing file in \code{data_directory} or a temporary directory.}
+\item{force_download}{Logical, whether to force a new Eurostat download.}
 }
 \value{
-A data frame with auxiliary metadata conforming to symmetric input–output
-tables. The first column is \code{indicator} and the further columns correspond
-to a Eurostat SIOT matrix's columns.
+A tidy data frame with air pollutant emissions aligned to IO classifications.
 }
 \description{
 Retrieve air emissions accounts by NACE Rev. 2 activity for environmental
-impact assessments. Currently tested only with product × product tables.
+impact assessments. Automatically manages Eurostat caching via \code{tempdir()}
+or a user-specified \code{data_directory}.
 }
 \details{
 The Eurostat dataset \emph{Air emissions accounts by NACE Rev. 2 activity}
 (\code{env_ac_ainah_r2}) contains emissions of major pollutants, including:
-CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6 (incl. NF3), NOx, NMVOC,
-CO, PM10, PM2.5, SO2, and NH3.
-
-For details, see the
-\href{https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm}{Eurostat Reference Metadata (SIMS)},
-particularly on aggregated indicators: global warming potential (\code{GHG}),
-acidifying gases (\code{ACG}), and tropospheric ozone precursors (\code{O3PR}).
+CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6, NOx, NMVOC, CO, PM10, PM2.5,
+SO2, and NH3. See Eurostat metadata for definitions of aggregated indicators
+(GHG, ACG, O3PR, etc.).
 }
-\examples{
-airpol_get(
-  airpol = "CO2",
-  geo = "germany_1995",
-  year = 1995,
-  unit = "THS_T"
-)
-}
-\seealso{
-Other import functions: 
-\code{\link{employment_get}()},
-\code{\link{iotables_download}()},
-\code{\link{iotables_metadata_get}()},
-\code{\link{iotables_read_tempdir}()}
-}
-\concept{import functions}

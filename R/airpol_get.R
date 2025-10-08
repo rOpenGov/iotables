@@ -1,131 +1,113 @@
-#' Get air pollutant data
+#' Get air pollutant data (Eurostat env_ac_ainah_r2)
 #'
 #' @description
 #' Retrieve air emissions accounts by NACE Rev. 2 activity for environmental
-#' impact assessments. Currently tested only with product × product tables.
+#' impact assessments. Automatically manages Eurostat caching via `tempdir()`
+#' or a user-specified `data_directory`.
 #'
 #' @details
 #' The Eurostat dataset *Air emissions accounts by NACE Rev. 2 activity*
 #' (`env_ac_ainah_r2`) contains emissions of major pollutants, including:
-#' CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6 (incl. NF3), NOx, NMVOC,
-#' CO, PM10, PM2.5, SO2, and NH3.
+#' CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6, NOx, NMVOC, CO, PM10, PM2.5,
+#' SO2, and NH3. See Eurostat metadata for definitions of aggregated indicators
+#' (GHG, ACG, O3PR, etc.).
 #'
-#' For details, see the
-#' [Eurostat Reference Metadata (SIMS)](https://ec.europa.eu/eurostat/cache/metadata/en/env_ac_ainah_r2_sims.htm),
-#' particularly on aggregated indicators: global warming potential (`GHG`),
-#' acidifying gases (`ACG`), and tropospheric ozone precursors (`O3PR`).
-#'
-#' @param airpol Pollutant code. Defaults to `"GHG"`. Common values include
-#'   `"ACG"`, `"CH4"`, `"CO2"`, `"NH3"`, `"NOX"`, `"PM10"`, `"PM2_5"`,
-#'   `"SOX_SO2E"`. See **Details** for the full list.
-#' @param geo Country code. The special value `"germany_1995"` returns the
-#'   built-in replication dataset [germany_airpol].
-#' @param year Reference year (2008 or later for NACE Rev. 2 statistics).
-#' @param unit Unit of measure. Defaults to `"THS_T"` (thousand tons).
-#' @param data_directory Optional directory path. If valid, the downloaded and
-#'   pre-processed data will be saved here.
-#' @param force_download Logical, defaults to `TRUE`. If `FALSE`, the function
-#'   reuses an existing file in `data_directory` or a temporary directory.
+#' @inheritParams iotables_download
+#' @param airpol Pollutant code (e.g. `"GHG"`, `"CO2"`, `"CH4"`, `"NOX"`, `"NH3"`, etc.).
+#' @param geo Country code (e.g. `"BE"`, `"DE"`). The special value `"germany_1995"`
+#'   returns the built-in example dataset [germany_airpol].
+#' @param year Reference year (≥ 2008 for NACE Rev. 2).
+#' @param unit Unit of measure (default `"THS_T"` = thousand tonnes).
 #'
 #' @return
-#' A data frame with auxiliary metadata conforming to symmetric input–output
-#' tables. The first column is `indicator` and the further columns correspond
-#' to a Eurostat SIOT matrix's columns.
+#' A tidy data frame with air pollutant emissions aligned to IO classifications.
 #'
-#' @source
-#' Eurostat dataset:
-#' [Air emissions accounts by NACE Rev. 2 activity](https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2).
-#'
-#' @family import functions
-#'
-#' @importFrom dplyr relocate mutate select filter left_join full_join
-#' @importFrom dplyr case_when group_by everything inner_join summarise
-#' @importFrom dplyr rename
-#' @importFrom tidyr pivot_wider
-#' @importFrom glue glue
-#'
-#' @examples
-#' airpol_get(
-#'   airpol = "CO2",
-#'   geo = "germany_1995",
-#'   year = 1995,
-#'   unit = "THS_T"
-#' )
+#' @source Eurostat dataset: [env_ac_ainah_r2](https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2)
 #' @export
 airpol_get <- function(airpol = "GHG",
                        geo = "BE",
                        year = 2020,
                        unit = "THS_T",
-                       data_directory = NULL, 
-                       force_download = TRUE) {
+                       data_directory = NULL,
+                       force_download = FALSE) {
+  # --- Handle built-in dataset -------------------------------------------
   if (geo == "germany_1995") {
-   
-    ## Avoid large examples on CRAN
     airpol_input <- airpol
     return_df <- getdata("germany_airpol") %>%
-      filter(airpol %in% airpol_input) %>%
-      select(iotables_col, value) %>%
-      pivot_wider(
-        names_from = iotables_col,
-        values_from = value
-      ) %>%
-      mutate(indicator = paste0(airpol_input, "_emission")) %>%
-      relocate(indicator, .before = everything())
+      dplyr::filter(airpol %in% airpol_input) %>%
+      dplyr::select(iotables_col, value) %>%
+      tidyr::pivot_wider(names_from = iotables_col, values_from = value) %>%
+      dplyr::mutate(indicator = paste0(airpol_input, "_emission")) %>%
+      dplyr::relocate(indicator, .before = dplyr::everything())
     return(return_df)
   }
 
-  if (force_download) {
-    tmp <- eurostat::get_eurostat("env_ac_ainah_r2")
+  # --- Define and prepare cache directory -------------------------------
+  cache_dir <- if (!is.null(data_directory)) {
+    data_directory
   } else {
-    tmp <- tempdir_data("env_ac_ainah_r2")
+    file.path(tempdir(), "eurostat")
+  }
+  if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
+
+  eurostat::set_eurostat_cache_dir(cache_dir)
+
+  cache_file <- file.path(cache_dir, "env_ac_ainah_r2_processed.rds")
+
+  # --- Retrieve data ----------------------------------------------------
+  if (!force_download && file.exists(cache_file)) {
+    message("Reading cached Eurostat air pollutant data from: ", cache_file)
+    tmp <- tryCatch(readRDS(cache_file), error = function(e) NULL)
+  } else {
+    message("Downloading Eurostat dataset env_ac_ainah_r2 (force_download=", force_download, ")")
+    tmp <- tryCatch(
+      eurostat::get_eurostat("env_ac_ainah_r2", cache = !force_download, cache_dir = cache_dir),
+      error = function(e) {
+        stop("Eurostat download failed: ", conditionMessage(e), call. = FALSE)
+      }
+    )
+    saveRDS(tmp, cache_file, version = 2)
+    message("Saved processed dataset to ", cache_file)
   }
 
-  if (!is.null(data_directory)) {
-    if (dir.exists(data_directory)) {
-      # If there is a temporary saving location given, save the data there.
-      saveRDS(tmp, file = file.path(data_directory, "env_ac_ainah_r2.rds"))
-    }
-  }
+  # --- Basic format check ----------------------------------------------
+  assertthat::assert_that(
+    is.data.frame(tmp),
+    msg = "Eurostat air pollutant dataset not loaded properly."
+  )
 
-  tmp <- dplyr::rename(tmp, time = TIME_PERIOD)
-  
-  # Filter the relevant air pollutants's data -------------------------
-  assert_that(
+  # Harmonize time column name
+  tmp <- dplyr::rename(tmp, time = dplyr::any_of("TIME_PERIOD"))
+
+  # --- Filter by pollutant ---------------------------------------------
+  assertthat::assert_that(
     airpol %in% tmp$airpol,
-    msg = glue("{airpol} is not recognized as an air pollutant in Eurostat table env_ac_ainah_r2")
+    msg = glue::glue("{airpol} is not recognized as a valid pollutant in env_ac_ainah_r2.")
   )
-  
-  message("Filter may take a longer time due to the large raw files.")
+  airpol_df <- dplyr::filter(tmp, airpol == !!airpol)
 
-  airpol_df <- tmp[tmp$airpol == airpol, ]
-
-  # Filter the relevant country's data -------------------------------
-  assert_that(
+  # --- Filter by country -----------------------------------------------
+  assertthat::assert_that(
     geo %in% airpol_df$geo,
-    msg = glue("No data for geo='{geo}' with airpol='{airpol}' in year={year} and unit='{unit}' in Eurostat table env_ac_ainah_r2")
+    msg = glue::glue("No data for geo='{geo}' in env_ac_ainah_r2.")
   )
+  airpol_df <- dplyr::filter(airpol_df, geo == !!geo)
 
-  airpol_df <- airpol_df[airpol_df$geo == geo, ]
-
-  # Filter the relevant year's data ----------------------------------
+  # --- Filter by year --------------------------------------------------
   assertthat::assert_that(
     as.Date(paste0(year, "-01-01")) %in% airpol_df$time,
-    msg = glue::glue("No data for year={year} with geo='{geo}'an airpol='{airpol}' and unit='{unit}' in Eurostat table env_ac_ainah_r2")
+    msg = glue::glue("No data for year={year} with geo='{geo}' in env_ac_ainah_r2.")
   )
+  airpol_df <- dplyr::filter(airpol_df, time == as.Date(paste0(year, "-01-01")))
 
-  airpol_df <- airpol_df[airpol_df$time == as.Date(paste0(year, "-01-01")), ]
-
-  # Assert the relevant unit of measure ------------------------------
-  
+  # --- Filter by unit --------------------------------------------------
   assertthat::assert_that(
     unit %in% airpol_df$unit,
-    msg = glue::glue("No data for unit='{unit}' with geo='{geo}', airpol='{airpol}' and geo='{geo'} in Eurostat table env_ac_ainah_r2")
+    msg = glue::glue("No data for unit='{unit}' for geo='{geo}' and airpol='{airpol}'.")
   )
+  airpol_df <- dplyr::filter(airpol_df, unit == !!unit)
 
-  airpol_df <- airpol_df[airpol_df$unit == unit, ]
-  
-  # Matching columns -----------------------------------------------
-
+  # --- Harmonize CPA/NACE structure -----------------------------------
   prod_na <- c(
     "CPA_A01", "CPA_A02", "CPA_A03", "CPA_B", "CPA_C10-12", "CPA_C13-15", "CPA_C16",
     "CPA_C17", "CPA_C18", "CPA_C19", "CPA_C20", "CPA_C21", "CPA_C22", "CPA_C23", "CPA_C24",
@@ -139,11 +121,10 @@ airpol_get <- function(airpol = "GHG",
   )
 
   country_ghg <- airpol_df %>%
-    mutate(nace_r2 = ifelse(.data$nace_r2 == "TOTAL",
-      yes = "TOTAL",
-      no = paste0("CPA_", nace_r2)
+    dplyr::mutate(nace_r2 = ifelse(nace_r2 == "TOTAL",
+      "TOTAL", paste0("CPA_", nace_r2)
     )) %>%
-    mutate(nace_r2 = case_when(
+    dplyr::mutate(nace_r2 = dplyr::case_when(
       nace_r2 == "CPA_C10-C12" ~ "CPA_C10-12",
       nace_r2 == "CPA_C13-C15" ~ "CPA_C13-15",
       nace_r2 == "CPA_C31_C32" ~ "CPA_C31_32",
@@ -158,42 +139,32 @@ airpol_get <- function(airpol = "GHG",
       TRUE ~ nace_r2
     ))
 
-  ghg <- tibble(
-    nace_r2 = prod_na
-  )
+  ghg <- tibble::tibble(nace_r2 = prod_na)
 
-  # match CPA/prod_na codes when they are equivalent with each
-  # other
-  direct_match <- country_ghg %>%
-    inner_join(ghg, by = "nace_r2")
+  direct_match <- dplyr::inner_join(country_ghg, ghg, by = "nace_r2")
 
   group_match <- country_ghg %>%
-    rename(nace = nace_r2) %>%
-    mutate(nace_r2 = substr(.data$nace, 1, 5)) %>%
-    group_by(airpol, unit, geo, time, nace_r2) %>%
-    summarise(values = sum(.data$values), .groups = "keep") %>%
-    inner_join(ghg, by = "nace_r2")
-
+    dplyr::rename(nace = nace_r2) %>%
+    dplyr::mutate(nace_r2 = substr(nace, 1, 5)) %>%
+    dplyr::group_by(airpol, unit, geo, time, nace_r2) %>%
+    dplyr::summarise(values = sum(values), .groups = "keep") %>%
+    dplyr::inner_join(ghg, by = "nace_r2")
 
   return_df <- ghg %>%
-    left_join(
+    dplyr::left_join(
       direct_match %>%
-        left_join(group_match, by = c("airpol", "nace_r2", "unit",
-                                      "geo", "time", "values")) %>%
-        select(nace_r2, values),
+        dplyr::left_join(group_match, by = c("airpol", "nace_r2", "unit", "geo", "time", "values")) %>%
+        dplyr::select(nace_r2, values),
       by = "nace_r2"
     ) %>%
-    pivot_wider(
-      names_from = nace_r2,
-      values_from = values
-    ) %>%
+    tidyr::pivot_wider(names_from = nace_r2, values_from = values) %>%
     ensure_l68_columns(c("CPA_L68A", "CPA_L68B")) %>%
-    mutate(indicator = paste0(airpol, "_emission")) %>%
-    relocate(indicator, .before = everything())
+    dplyr::mutate(indicator = paste0(airpol, "_emission")) %>%
+    dplyr::relocate(indicator, .before = dplyr::everything())
 
   attr(return_df, "geo") <- geo
   attr(return_df, "year") <- year
   attr(return_df, "unit") <- unit
-  return_df
-}
 
+  return(return_df)
+}
