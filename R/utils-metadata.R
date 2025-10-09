@@ -1,20 +1,6 @@
 #' Various internal functions to work with IOT metadata, including the labelling
 #' vocabularies, row and column ordering.
 #' None of these functions should be exported.
-#' @keywords internal
-getdata <- function(x) {
-  name <- deparse(substitute(x))
-  # If already passed as string, keep as-is
-  if (is.character(x) && length(x) == 1L) name <- x
-  name
-  e <- new.env()
-  utils::data(list = name, envir = e)
-  if (!exists(name, envir = e)) {
-    stop("Dataset '", name, "' not found in iotables package data.")
-  }
-  e[[name]]
-}
-
 
 #' Internal helper to load datasets safely from the iotables package
 #'
