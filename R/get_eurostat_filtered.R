@@ -139,3 +139,92 @@ get_eurostat_filtered <- function(id,
   invisible(gc())
   downloaded
 }
+
+
+#' Use this function for non-SIOT data like air pollutants or 
+#' employment
+#' @keywords internal
+#' @importFrom dplyr relocate filter
+#' @importFrom httr2 req_user_agent req_retry req_error
+#' @importFrom httr2 resp_body_json req_perform resp_content_type
+get_eurostat_data <- function(id,
+                                  filters = list(),
+                                  type = "code",
+                                  lang = "en",
+                                  ...) {
+  # ---- Build query URL ------------------------------------------------------
+  base_url <- sprintf(
+    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/%s",
+    id
+  )
+
+  if (length(filters)) {
+    query <- paste0(
+      names(filters), "=",
+      vapply(filters, paste, collapse = ",", FUN.VALUE = character(1)),
+      collapse = "&"
+    )
+    base_url <- paste0(base_url, "?", query)
+  }
+
+  # ---- Download JSON --------------------------------------------------------
+  jdat <- httr2::request(base_url) %>%
+    httr2::req_user_agent("https://github.com/eviota/iotables") %>%
+    httr2::req_retry(max_tries = 3, max_seconds = 60) %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_perform() %>%
+    {
+      if (httr2::resp_content_type(.) != "application/json") {
+        stop("Eurostat API did not return JSON", call. = FALSE)
+      }
+      httr2::resp_body_json(., simplifyVector = TRUE)
+    }
+
+  dims <- jdat$dimension
+  ids <- jdat$id
+
+  # ---- Construct tidy grid --------------------------------------------------
+  dims_list <- lapply(dims[rev(ids)], function(x) {
+    lab <- x$category$label
+    if (identical(type, "label")) {
+      unname(unlist(lab, use.names = FALSE))
+    } else if (identical(type, "code")) {
+      names(lab)
+    } else if (identical(type, "both")) {
+      unlist(lab)
+    } else {
+      stop("Invalid 'type' argument.")
+    }
+  })
+
+  downloaded <- expand.grid(
+    dims_list,
+    KEEP.OUT.ATTRS = FALSE,
+    stringsAsFactors = FALSE
+  ) %>%
+    tibble::as_tibble() %>%
+    dplyr::mutate(
+      values = NA_real_,
+      values = {
+        vals <- unlist(jdat$value, use.names = FALSE)
+        inds <- 1 + as.numeric(names(jdat$value))
+        replace(values, inds, vals)
+      }
+    )
+  
+  # ---- Harmonise time field -------------------------------------------------
+  if ("time" %in% names(downloaded)) {
+    downloaded <- downloaded %>%
+      dplyr::rename(TIME_PERIOD = time) %>%
+      dplyr::mutate(TIME_PERIOD = as.Date(
+        paste0(TIME_PERIOD, "-01-01")
+      ))
+  }
+
+  attr(downloaded, "dataset") <- id
+
+  downloaded <- tibble::rowid_to_column(downloaded)
+  downloaded$year <- lubridate::year(downloaded$TIME_PERIOD)
+  invisible(gc())
+  downloaded
+}

@@ -48,18 +48,38 @@ The following expression gets the the greenhouse gas emissions in CO₂ CO₂ eq
 
 ```{r getairpol, eval=FALSE}
 # For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
-ghg <- airpol_get(airpol = "GHG", geo = "BE", year = 2020, unit = "THS_T")
+ghg <- airpol_get(airpol = "GHG", 
+                  geo = "BE", 
+                  year = 2020, 
+                  unit = "THS_T")
 ```
 
 See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO₂-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
 
+Because we work with the `naio_10_cp1700` matrix, which is derived from
+product x product sources, the industry names of the SIOT start with `CPA`. 
+
+```{r siotnames}
+names(BE)[1:3]
+```
+The air pollution data is based on the NACE industry codes: 
+
+```{r convertocpa}
+names(ghg)[1:3]
+```
+The following utility will adjust the supplementary data. You do not need to make this step if you work with `naio_10_cp1750` SIOT data, which is estimated from industry x industry sources, and it uses NACE-like abbreviations.
+
+```{r convertocpa}
+ghg_prod <- convert_industry_to_product(ghg)
+names(ghg_prod)[1:3]
+```
 ## Direct and multiplied effects
 
 The direct effects will show how many thousand tons of extra greenhouse gases will be produced with each millions of euros of extra output from Belgium's industries. We are adding with `supplementary_add()`—which wraps `rows_add()`—the greenhouse gas vector in a conforming form to inter-industry matrix of Belgium. We will only print the top five emitters.
 
 ```{r ghgindicators}
 be_io <- BE %>%
-  supplementary_add(ghg)
+  supplementary_add(ghg_prod)
 
 ghg_indicator <- input_indicator_create(
   data_table = be_io,
@@ -93,12 +113,17 @@ The category of *Manufacture of other non-metallic mineral products* in itself r
 Let's make a reality check, and calculate only with CO₂:
 
 ```{r getco2indicators, eval=FALSE}
-co2 <- airpol_get(airpol = "CO2", geo = "BE", year = 2020, unit = "THS_T")
+co2 <- airpol_get(airpol = "CO2", 
+                  geo = "BE", 
+                  year = 2020, 
+                  unit = "THS_T")
 ```
 
 ```{r co2indicators}
 be_io_c <- BE %>%
-  supplementary_add(co2)
+  supplementary_add(
+    co2 %>% convert_industry_to_product()
+    )
 
 co2_indicator <- input_indicator_create(
   data_table  = be_io_c,
@@ -118,11 +143,16 @@ co2_indicator %>%
 Let's check methane, which is a far more potent green house gas than CO₂.
 
 ```{r getmethaneindicators, eval=FALSE}
-methane <- airpol_get(airpol = "CH4", geo = "BE", year = 2020, unit = "THS_T")
+methane <- airpol_get(airpol = "CH4",
+                      geo = "BE", 
+                      year = 2020, 
+                      unit = "THS_T")
 ```
 ```{r methaneindicators}
 be_io_m <- BE %>%
-  supplementary_add(methane)
+  supplementary_add(
+    methane %>% convert_industry_to_product()
+    )
 
 methane_indicator <- input_indicator_create(
   data_table = be_io_m,
@@ -142,10 +172,10 @@ methane_indicator %>%
 | NACE code   | Industry    | 
 | :---        |    :----:   | 
 | A01         | Crop and animal production, hunting and related service activities |
-| CPA_E37-39  | Sewerage, waste management, remediation activities |
+| E37-39  | Sewerage, waste management, remediation activities |
 | D           | Electricity, gas, steam and air conditioning supply |
-| CPA_B       | Mining and quarrying |
-| CPA_A02     | Forestry and logging |
+| B       | Mining and quarrying |
+| A02     | Forestry and logging |
 
 
 The appearance of *Mining and quarrying* is important, because it is the main input for the *Manufacture of other non-metallic mineral products*. Their effect may or may not be combined *in Belgium*, because the Belgian manufacturers can import mined or quarried products, too. 
