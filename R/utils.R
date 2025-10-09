@@ -125,3 +125,17 @@ chars_collapse <- function(x, collapse = ", ") {
   if (length(x) > 1) x <- paste(x, collapse = collapse)
   x
 }
+
+
+# Internal helper for deprecation messages without lifecycle dependency
+#' @keywords internal
+deprecate_warn <- function(old, 
+                           new = NULL, 
+                           version = NULL, 
+                           details = NULL) {
+  msg <- paste0("⚠️  The function `", old, "()` is deprecated")
+  if (!is.null(version)) msg <- paste0(msg, " since version ", version)
+  if (!is.null(new)) msg <- paste0(msg, " — use `", new, "()` instead")
+  if (!is.null(details)) msg <- paste0(msg, ". ", details)
+  warning(msg, call. = FALSE)
+}
