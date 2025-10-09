@@ -30,6 +30,14 @@
 #'   must equal `nrow(supplementary_data)`. Ignored if a key column is
 #'   already present.
 #'
+#' @references
+#' Table 15.13 (p. 494) in Beutel (2008),
+#'  *Eurostat Manual of Supply, Use and Input–Output Tables*,
+#' shows an environmental‐emission model built by adding CO₂ and CH₄ rows to
+#' the German 1995 input–output coefficients.  The same construction is
+#' reproduced here by `supplementary_add()` and the results are checked
+#' against this example.
+
 #' @return
 #' A `data.frame` with the rows of `supplementary_data` bound to
 #' `data_table` and aligned to its key and numeric columns.

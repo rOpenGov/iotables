@@ -13,46 +13,62 @@ leontieff_inverse_create(technology_coefficients_matrix, digits = NULL)
 \item{technology_coefficients_matrix}{A technology-coefficient matrix created
 by \code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}}.}
 
-\item{digits}{Optional integer. Precision for rounding. Default \code{NULL}
+\item{digits}{Optional integer specifying rounding precision. Default \code{NULL}
 (no rounding).}
 }
 \value{
-A \code{data.frame} with the original key column and the Leontief inverse in the
-remaining columns. If \code{digits} is provided, values are rounded.
+A \code{data.frame} with the original key column and the Leontief inverse
+in the remaining columns. If \code{digits} is supplied, values are rounded.
 }
 \description{
-Compute the Leontief inverse from a technology-coefficient matrix.
+Computes the \strong{Leontief inverse}, which measures the total
+(direct + indirect) requirements of all products or industries for one unit
+of final demand.
 }
 \details{
-The Leontief inverse is defined as
-\eqn{L = (I - A)^{-1}},
-where \eqn{A} is the input-coefficient matrix created by
-\code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}}.
+The Leontief inverse is defined as \deqn{L = (I - A)^{-1}} where
+\eqn{A} is the input-coefficient (or technology-coefficient) matrix created
+by \code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}}.
 
-In the Eurostat \emph{Manual of Supply, Use and Input–Output Tables} (Beutel, 2008),
-this formulation appears in Chapter 15 (see equations (19), (43), etc.).
-The UN \emph{Handbook on Supply and Use Tables and Input–Output Tables with Extensions
-and Applications} (2018, Rev. 1) also uses this standard definition (see pp. 619–621).
+Each element \eqn{l_{ij}} of \eqn{L} shows the total production of product
+\emph{i} required—both directly and indirectly—to satisfy one unit of final demand
+for product \emph{j}.
 
-For the analogous inverse from output coefficients, see \code{\link[=ghosh_inverse_create]{ghosh_inverse_create()}}.
+This formulation follows the \emph{Eurostat Manual of Supply, Use and Input–Output
+Tables} (Beutel 2008, Chapter 15; see equations (19), (43)) and the \emph{UN
+Handbook on Supply and Use Tables and Input–Output Tables with Extensions and
+Applications} (2018 Rev. 1, pp. 619–621). The Leontief inverse is also called
+the \strong{total requirements matrix} in both manuals.
+
+For the analogous inverse based on output coefficients, see
+\code{\link[=ghosh_inverse_create]{ghosh_inverse_create()}}.
 }
 \examples{
-# A tiny 2x2 system with hand-calculable inverse
+# --- Minimal hand-checkable 2×2 system ---
 minimal_matrix <- data.frame(
   sector = c("A", "B"),
   A = c(0.2, 0.4),
   B = c(0.1, 0.2)
 )
-
 leontief_inverse_create(minimal_matrix, digits = 3)
 
-# With a full example from the package
-tm <- input_flow_get(
-  data_table = iotable_get(),
-  households = FALSE
+# --- Full Eurostat example (Germany 1995) ---
+cm_de <- input_coefficient_matrix_create(
+  data_table = iotable_get(source = "germany_1995")
 )
-leontief_inverse_create(technology_coefficients_matrix = tm)
+leontief_inverse_create(cm_de)
 
+}
+\references{
+Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and
+Input–Output Tables.} Luxembourg: Office for Official Publications of the
+European Communities.
+
+Validation examples: – Table 15.6 (p. 485): Direct requirements (input
+coefficients) – Table 15.10 (p. 488): Total requirements (Leontief inverse)
+
+Results reproduced by \code{input_coefficient_matrix_create()} and
+\code{leontief_inverse_create()} using the built-in dataset \code{iotable_get(source = "germany_1995")}.
 }
 \seealso{
 Other analytic object functions: 

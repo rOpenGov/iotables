@@ -18,10 +18,12 @@
 #'   `FALSE`.
 #' @param digits Optional integer precision for rounding the coefficients.
 #'   Default `NULL` (no rounding).
-#' @references Beutel, J. (2008). *Eurostat Manual of Supply, Use and
-#' Input–Output Tables.* Luxembourg: Office for Official Publications of the
-#' European Communities. See especially Chapter 15, “Symmetric Input–Output
-#' Tables”.
+#' @references
+#' Beutel, J. (2008). *Eurostat Manual of Supply, Use and Input–Output Tables*.
+#' Luxembourg: Office for Official Publications of the European Communities,
+#' Table 15.6 (page 485). Validation against this reference confirms that
+#' `input_coefficient_matrix_create()` reproduces the standard
+#' Eurostat input–output coefficients for Germany 1995.
 #'
 #' United Nations et al. (2009). *System of National Accounts 2008*,
 #' §§14.90–14.91.

@@ -51,7 +51,6 @@ input_multipliers_create(
 }
 \seealso{
 Other multiplier functions: 
-\code{\link{multiplier_create}()},
 \code{\link{output_multiplier_create}()}
 }
 \concept{multiplier functions}

@@ -62,17 +62,17 @@ test_that("input_coefficient_matrix_create reproduces Beutel (2008)
     iotable_get(source = "germany_1995"),
     digits = 4
   )
-  
+
   # First cell (Agriculture → Agriculture)
   # Beutel Table 15.5, value = 0.0258
-  expect_equal(round(as.numeric(cm_de[1, 2]),4), 0.0258)
-  
+  expect_equal(round(as.numeric(cm_de[1, 2]), 4), 0.0258)
+
   # Agriculture → Manufacturing (approx 0.2822)
   expect_equal(as.numeric(cm_de[2, 3]), 0.2822, tolerance = 1e-3)
-  
+
   # Construction → Construction (approx  0.0158)
-  expect_equal(as.numeric(cm_de[3, 4]),  0.0158, tolerance = 1e-3)
-  
+  expect_equal(as.numeric(cm_de[3, 4]), 0.0158, tolerance = 1e-3)
+
   # Check matrix consistency
   expect_true(all(is.finite(as.matrix(cm_de[-1]))))
   expect_true(all(cm_de[-1] >= 0))

@@ -42,7 +42,6 @@ direct_effects_create(
 }
 \seealso{
 Other indicator functions: 
-\code{\link{coefficient_matrix_create}()},
-\code{\link{input_indicator_create}()}
+\code{\link{coefficient_matrix_create}()}
 }
 \concept{indicator functions}

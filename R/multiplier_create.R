@@ -37,6 +37,18 @@
 #'
 #' @family multiplier functions
 #'
+#'  @references
+#' Beutel, J. (2008).
+#' *Eurostat Manual of Supply, Use and Input–Output Tables.*
+#' Luxembourg: Office for Official Publications of the European
+#' Communities.
+#'
+#' Validation examples:
+#' – Table 15.16 (pp. 503–504): Total multipliers (Germany 1995)
+#'
+#' Results reproduced by `multiplier_create()` using
+#' `iotable_get(source = "germany_1995")`.
+#'
 #' @examples
 #' # Minimal workflow -----------------------------------------------
 #' data_table <- iotable_get()
@@ -59,12 +71,11 @@
 #'
 #' @export
 
-
 multiplier_create <- function(input_vector,
                               Im,
                               multiplier_name = "multiplier",
                               digits = NULL) {
-  if (!is.null(digits)) if (digits < 0) digits <- NULL
+  if (!is.null(digits) && digits < 0) digits <- NULL
 
   multipliers <- equation_solve(
     LHS = input_vector,

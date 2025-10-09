@@ -20,3 +20,18 @@ test_that("Leontief inverse works for a minimal matrix", {
     tolerance = 1e-3
   )
 })
+
+
+test_that("leontief_inverse_create() reproduces Beutel Table 15.10
+          on page 488", {
+  cm_de <- input_coefficient_matrix_create(
+    data_table = iotable_get(source = "germany_1995")
+  )
+  L <- leontief_inverse_create(cm_de)
+
+  # Table 15.10, diagonal values
+  # ~1.0339, 1.4292, 1.0289 for the same sectors
+  expect_equal(round(L[1, 2], 3), 1.0339, tolerance = 1e-3)
+  expect_equal(round(L[2, 3], 3), 1.4292, tolerance = 1e-3)
+  expect_equal(round(L[3, 4], 3), 1.0289, tolerance = 1e-3)
+})

@@ -41,7 +41,6 @@ output_multiplier_create(de_input_coeff)
 }
 \seealso{
 Other multiplier functions: 
-\code{\link{input_multipliers_create}()},
-\code{\link{multiplier_create}()}
+\code{\link{input_multipliers_create}()}
 }
 \concept{multiplier functions}

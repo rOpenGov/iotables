@@ -3,46 +3,55 @@
 \name{leontief_matrix_create}
 \alias{leontief_matrix_create}
 \alias{leontieff_matrix_create}
-\title{Create a Leontief matrix}
+\title{Create the Leontief matrix (I − A)}
 \usage{
 leontief_matrix_create(technology_coefficients_matrix)
 
 leontieff_matrix_create(technology_coefficients_matrix)
 }
 \arguments{
-\item{technology_coefficients_matrix}{A technology coefficients
-matrix created by \code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}} or
-\code{\link[=output_coefficient_matrix_create]{output_coefficient_matrix_create()}}. The first column must be
-a key; remaining columns must be numeric.}
+\item{technology_coefficients_matrix}{A technology coefficients matrix created
+by \code{\link[=input_coefficient_matrix_create]{input_coefficient_matrix_create()}} or \code{\link[=output_coefficient_matrix_create]{output_coefficient_matrix_create()}}.
+The first column must be a key; remaining columns must be numeric.}
 }
 \value{
-A \code{data.frame} whose first column is the key and whose
-remaining columns contain the Leontief matrix \eqn{(I - A)}.
+A \code{data.frame} whose first column is the key and whose remaining columns
+contain the Leontief matrix \eqn{(I - A)}.
 }
 \description{
-Build the Leontief matrix \eqn{(I - A)} from a technology
-coefficients matrix \eqn{A}. This is the step used before
-computing the Leontief inverse, see \code{\link[=leontief_inverse_create]{leontief_inverse_create()}}.
+Builds the \strong{Leontief matrix} \eqn{(I - A)} from a technology (input)
+coefficients matrix \eqn{A}. This is the intermediate step used before
+computing the Leontief inverse with \code{\link[=leontief_inverse_create]{leontief_inverse_create()}}.
 }
 \details{
-In Eurostat terminology (Manual of Supply, Use and Input-Output
-Tables), the technology coefficients matrix \eqn{A} is formed by
-dividing each column of the inter-industry flows by the output of
-that industry. The Leontief matrix is then \eqn{I - A}.
+In Eurostat terminology (\emph{Manual of Supply, Use and Input–Output Tables}),
+the technology coefficients matrix \eqn{A} is obtained by dividing each column
+of the inter-industry flows by the total output of that industry.
+The Leontief matrix is then \eqn{I - A}, also called the \emph{matrix of
+intermediate coefficients subtracted from identity}.
 
-This function removes any detected TOTAL rows/columns (e.g.
-\code{"total"}, \code{"cpa_total"}) before forming \eqn{I - A}, and returns
-a data frame with the original key column followed by the numeric
-block of \eqn{I - A}.
+This function removes any TOTAL rows/columns (e.g. \code{"total"}, \code{"cpa_total"})
+before forming \eqn{I - A}. It returns a \code{data.frame} with the original key
+column followed by the numeric block of \eqn{I - A}.
 }
 \examples{
 # From input coefficients (usual case)
-tm <- input_coefficient_matrix_create(
-  data_table = iotable_get(),
-  households = FALSE
-)
-L <- leontief_matrix_create(technology_coefficients_matrix = tm)
+tm <- input_coefficient_matrix_create(iotable_get(), households = FALSE)
+L <- leontief_matrix_create(tm)
 
+}
+\references{
+Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables.}
+Luxembourg: Office for Official Publications of the European Communities.
+
+Validation examples:
+– Table 15.6 (p. 485): Direct requirements (input coefficients A)
+– \strong{Table 15.9 (p. 487): Leontief matrix (I − A)}
+– Table 15.10 (p. 488): Leontief inverse (total requirements L = (I − A)⁻¹)
+
+Results reproduced by \code{input_coefficient_matrix_create()},
+\code{leontief_matrix_create()}, and \code{leontief_inverse_create()} using the built-in
+dataset \code{iotable_get(source = "germany_1995")}.
 }
 \seealso{
 Other analytic object functions: 

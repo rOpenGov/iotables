@@ -1,5 +1,6 @@
 test_that("supplementary_add() returns correct values", {
   # Check against The Eurostat Manual page 494
+  # Table 15.13: Emission model
   de_io <- iotable_get()
 
 

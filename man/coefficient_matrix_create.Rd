@@ -86,7 +86,6 @@ United Nations et al. (2009). \emph{System of National Accounts 2008},
 }
 \seealso{
 Other indicator functions: 
-\code{\link{direct_effects_create}()},
-\code{\link{input_indicator_create}()}
+\code{\link{direct_effects_create}()}
 }
 \concept{indicator functions}

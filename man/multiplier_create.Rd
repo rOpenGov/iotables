@@ -75,9 +75,17 @@ de_gva_multipliers <- multiplier_create(
 \seealso{
 \code{\link[=equation_solve]{equation_solve()}}, \code{\link[=input_indicator_create]{input_indicator_create()}},
 \code{\link[=leontief_inverse_create]{leontief_inverse_create()}}
-
-Other multiplier functions: 
-\code{\link{input_multipliers_create}()},
-\code{\link{output_multiplier_create}()}
 }
-\concept{multiplier functions}
+\concept{multiplier functions
+
+@references
+Beutel, J. (2008).
+\emph{Eurostat Manual of Supply, Use and Input–Output Tables.}
+Luxembourg: Office for Official Publications of the European
+Communities.
+
+Validation examples:
+– Table 15.16 (pp. 503–504): Total multipliers (Germany 1995)
+
+Results reproduced by \code{multiplier_create()} using
+\code{iotable_get(source = "germany_1995")}.}

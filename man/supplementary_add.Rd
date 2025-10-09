@@ -72,6 +72,14 @@ emissions <- rbind (CO2, CH4)
 # Check with the Eurostat Manual page 494:
 supplementary_add(de_io, emissions)
 }
+\references{
+Table 15.13 (p. 494) in Beutel (2008),
+\emph{Eurostat Manual of Supply, Use and Input–Output Tables},
+shows an environmental‐emission model built by adding CO₂ and CH₄ rows to
+the German 1995 input–output coefficients.  The same construction is
+reproduced here by \code{supplementary_add()} and the results are checked
+against this example.
+}
 \seealso{
 \code{\link[=convert_industry_to_product]{convert_industry_to_product()}}
 

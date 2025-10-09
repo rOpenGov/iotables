@@ -47,9 +47,6 @@ test_that("Eurostat manual (§5.0.1): DE multipliers match published", {
 })
 
 
-
-
-
 later <- function() {
   nl_use_2 <- input_flow_get(netherlands_2000,
     households = TRUE

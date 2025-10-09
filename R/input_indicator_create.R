@@ -32,6 +32,18 @@
 #'
 #' @family indicator functions
 #'
+#' #' @references
+#' Beutel, J. (2008).
+#' *Eurostat Manual of Supply, Use and Input–Output Tables.*
+#' Luxembourg: Office for Official Publications of the
+#' European Communities.
+#'
+#' Validation examples:
+#' – pp. 495–498: Input indicators (GVA, compensation of employees)
+#'
+#' Results reproduced by `input_indicator_create()` using
+#' `iotable_get(source = "germany_1995")`.
+#'
 #' @examples
 #' input_indicator_create(
 #'   data_table = iotable_get(),
@@ -100,5 +112,9 @@ input_indicator_create <- function(data_table,
 
   input_matrix[, 1] <- final_names
 
-  if (!is.null(digits)) matrix_round(input_matrix, digits) else input_matrix
+  if (!is.null(digits)) {
+    matrix_round(input_matrix, digits)
+  } else {
+    input_matrix
+  }
 }

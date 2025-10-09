@@ -66,9 +66,16 @@ ii <- input_indicator_create(
 head(ii)
 
 }
-\seealso{
-Other indicator functions: 
-\code{\link{coefficient_matrix_create}()},
-\code{\link{direct_effects_create}()}
-}
-\concept{indicator functions}
+\concept{indicator functions
+
+#' @references
+Beutel, J. (2008).
+\emph{Eurostat Manual of Supply, Use and Input–Output Tables.}
+Luxembourg: Office for Official Publications of the
+European Communities.
+
+Validation examples:
+– pp. 495–498: Input indicators (GVA, compensation of employees)
+
+Results reproduced by \code{input_indicator_create()} using
+\code{iotable_get(source = "germany_1995")}.}

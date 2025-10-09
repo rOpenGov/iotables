@@ -75,10 +75,11 @@ cm2 <- coefficient_matrix_create(
 
 }
 \references{
-Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and
-Input–Output Tables.} Luxembourg: Office for Official Publications of the
-European Communities. See especially Chapter 15, “Symmetric Input–Output
-Tables”.
+Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and Input–Output Tables}.
+Luxembourg: Office for Official Publications of the European Communities,
+Table 15.6 (page 485). Validation against this reference confirms that
+\code{input_coefficient_matrix_create()} reproduces the standard
+Eurostat input–output coefficients for Germany 1995.
 
 United Nations et al. (2009). \emph{System of National Accounts 2008},
 §§14.90–14.91.
