@@ -1,36 +1,56 @@
-#' @title Create a coefficient matrix
+#' @title Create an input (technical) coefficient matrix
 #'
 #' @description
-#' Compute a coefficient matrix from a symmetric input–output table (SIOT),
-#' use table, or similar. By default, coefficients are related to output,
-#' but you can use other totals if present.
+#' Computes the **input (technical) coefficient matrix** from a symmetric
+#' input–output table (SIOT), use table, or supply table. Each element
+#' represents the amount of a product used as input per unit of output
+#' (usually at basic prices).
 #'
 #' @details
-#' The coefficient matrix \eqn{A} is formed by dividing each row of the
-#' inter-industry flows by an output or supply total. By default, the
-#' denominator is `"output"` (equivalent to `"P1"` or `"output_bp"`).
-#' Alternative totals can be supplied via the `total` argument.
+#' The coefficient matrix \eqn{A}—also called the *technological* or
+#' *direct requirements* matrix—is obtained by dividing each element of
+#' the inter-industry (intermediate use) block \eqn{Z} by the corresponding
+#' column total of output \eqn{x}:
+#'
+#' \deqn{A_{ij} = Z_{ij} / x_j}
+#'
+#' where \eqn{Z_{ij}} denotes the use of product *i* by industry (or product)
+#' *j*, and \eqn{x_j} is total output at basic prices.
+#'
+#' This formulation follows the *Eurostat Manual of Supply, Use and
+#' Input–Output Tables* (Beutel, 2008, §15.1–15.3) and the *System of
+#' National Accounts 2008* (§14.90–14.91).
+#'
+#' By default, the denominator row is `"output"` (equivalent to ESA 2010
+#' transaction `"P1"` or `"output_bp"`). Alternative totals such as
+#' `"total"` or `"cpa_total"` may be used through the `total` argument.
 #'
 #' @param data_table A symmetric input–output table, use table, margins or
 #'   tax table retrieved by [iotable_get()].
-#' @param total Character. Row label to use as denominator. Defaults to
-#'   `"output"`. Accepts `"P1"`, `"output_bp"`, `"total"`, `"cpa_total"`.
-#' @param digits Optional integer. Number of digits for rounding. Default
-#'   `NULL` (no rounding).
+#' @param total Character. Label of the row used as denominator.
+#'   Defaults to `"output"`. Accepts `"P1"`, `"output_bp"`, `"total"`,
+#'   or `"cpa_total"`.
+#' @param digits Optional integer. Number of digits for rounding.
+#'   Default `NULL` (no rounding).
 #' @param return_part Optional. `"products"`, `"industries"`, or
-#'   `"primary_inputs"` to select a subset of the matrix. Default `NULL`
+#'   `"primary_inputs"` to select part of the matrix. Default `NULL`
 #'   returns the full matrix.
-#' @param remove_empty Logical. Defaults to `TRUE`. If `FALSE`, empty
-#'   primary-input rows are kept. Empty product/industry rows are always
-#'   removed.
-#' @param households Logical. If `TRUE`, include household column. Default
-#'   `FALSE`.
-#' @param ... Optional extra arguments for future extensions, ignored by
-#'   default.
+#' @param remove_empty Logical. Should empty rows be removed?
+#'   Defaults to `TRUE`.
+#' @param households Logical. If `TRUE`, include the household column.
+#'   Default `FALSE`.
+#' @param ... Reserved for future extensions.
 #'
-#' @return A data.frame with:
-#' - The key column from `data_table`
-#' - Numeric columns containing input coefficients
+#' @return
+#' A `data.frame` containing:
+#' - the key (row label) column from `data_table`
+#' - numeric columns with input (technical) coefficients
+#'
+#' @references
+#' Beutel, J. (2008). *Eurostat Manual of Supply, Use and Input–Output
+#' Tables*. Luxembourg: Publications Office of the European Union, ch. 15.  
+#' United Nations et al. (2009). *System of National Accounts 2008*,
+#' §§14.90–14.91.
 #'
 #' @family indicator functions
 #'
@@ -40,6 +60,7 @@
 #'   total = "output",
 #'   digits = 4
 #' )
+#' head(cm)
 #'
 #' @export
 coefficient_matrix_create <- function(
