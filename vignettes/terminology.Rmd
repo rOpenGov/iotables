@@ -38,7 +38,7 @@ An *input–output table (IOT)* describes the flow of products and services in a
 Eurostat distinguishes four *quadrants* of a SIOT:
 
 | Quadrant | Description | ESA 2010 / SNA 2008 Category |
-|--------------------|--------------------|--------------------------------|
+|----|----|----|
 | **I** | Intermediate consumption — flows between industries or products | *Intermediate use* |
 | **II** | Final demand — purchases by households, government, investment, exports | *Final use* |
 | **III** | Primary inputs — compensation of employees, net taxes, gross operating surplus | *Primary inputs* |
@@ -52,7 +52,7 @@ Input–output analysis is built on a small set of matrices and vectors.\
 The `iotables` package follows the same notation used in Beutel (2008).
 
 | Symbol | Meaning | Definition | Function in `iotables` |
-|------------------|------------------|------------------|-------------------|
+|----|----|----|----|
 | **Z** | Intermediate-consumption matrix | Flows of products between industries | `iotable_get()` |
 | **A** | Input (technical) coefficient matrix | `A_ij = Z_ij / X_j` | `input_coefficient_matrix_create()` |
 | **(I − A)** | Leontief matrix | Identity minus A | `leontief_matrix_create()` |
@@ -139,7 +139,7 @@ $o_{ij}$ = output coefficient for domestic goods and services (i = 1, ..., 6; j 
 ## Summary of key equations
 
 | No.        | Formula                     | Description                      |
-|:-----------------|:----------------------|:------------------------------|
+|:-----------|:----------------------------|:---------------------------------|
 | (5)        | $o_{ij}$ = $x_{ij}$ / $x_i$ | Output coefficient (Ghosh model) |
 | (9)        | $a_{ij}$ = $x_{ij}$ / $x_j$ | Input (technical) coefficient    |
 | (19), (43) | –                           | Identical to (9) for SIOTs       |
@@ -152,7 +152,7 @@ $o_{ij}$ = output coefficient for domestic goods and services (i = 1, ..., 6; j 
 All analytical functions of `iotables` reproduce the benchmark examples from Beutel (2008), *Eurostat Manual of Supply, Use and Input–Output Tables.*
 
 | Function | Concept | Beutel Table | Page |
-|:-----------------|:-----------------|:------------------|:----------------:|
+|:---|:---|:---|:--:|
 | `input_coefficient_matrix_create()` | Direct requirements (A) | 15.6 | 485 |
 | `leontief_matrix_create()` | Leontief matrix $(I − A)$ | 15.9 | 487 |
 | `leontief_inverse_create()` | Total requirements ($L$ = $(I − A)^{1}$) | 15.10 | 488 |
