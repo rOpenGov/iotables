@@ -48,7 +48,7 @@
 #'
 #' @references
 #' Beutel, J. (2008). *Eurostat Manual of Supply, Use and Input–Output
-#' Tables*. Luxembourg: Publications Office of the European Union, ch. 15.  
+#' Tables*. Luxembourg: Publications Office of the European Union, ch. 15.
 #' United Nations et al. (2009). *System of National Accounts 2008*,
 #' §§14.90–14.91.
 #'

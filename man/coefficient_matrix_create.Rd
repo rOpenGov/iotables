@@ -2,7 +2,7 @@
 % Please edit documentation in R/coefficient_matrix_create.R
 \name{coefficient_matrix_create}
 \alias{coefficient_matrix_create}
-\title{Create a coefficient matrix}
+\title{Create an input (technical) coefficient matrix}
 \usage{
 coefficient_matrix_create(
   data_table,
@@ -18,43 +18,56 @@ coefficient_matrix_create(
 \item{data_table}{A symmetric input–output table, use table, margins or
 tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
 
-\item{total}{Character. Row label to use as denominator. Defaults to
-\code{"output"}. Accepts \code{"P1"}, \code{"output_bp"}, \code{"total"}, \code{"cpa_total"}.}
+\item{total}{Character. Label of the row used as denominator.
+Defaults to \code{"output"}. Accepts \code{"P1"}, \code{"output_bp"}, \code{"total"},
+or \code{"cpa_total"}.}
 
-\item{digits}{Optional integer. Number of digits for rounding. Default
-\code{NULL} (no rounding).}
+\item{digits}{Optional integer. Number of digits for rounding.
+Default \code{NULL} (no rounding).}
 
-\item{remove_empty}{Logical. Defaults to \code{TRUE}. If \code{FALSE}, empty
-primary-input rows are kept. Empty product/industry rows are always
-removed.}
+\item{remove_empty}{Logical. Should empty rows be removed?
+Defaults to \code{TRUE}.}
 
-\item{households}{Logical. If \code{TRUE}, include household column. Default
-\code{FALSE}.}
+\item{households}{Logical. If \code{TRUE}, include the household column.
+Default \code{FALSE}.}
 
 \item{return_part}{Optional. \code{"products"}, \code{"industries"}, or
-\code{"primary_inputs"} to select a subset of the matrix. Default \code{NULL}
+\code{"primary_inputs"} to select part of the matrix. Default \code{NULL}
 returns the full matrix.}
 
-\item{...}{Optional extra arguments for future extensions, ignored by
-default.}
+\item{...}{Reserved for future extensions.}
 }
 \value{
-A data.frame with:
+A \code{data.frame} containing:
 \itemize{
-\item The key column from \code{data_table}
-\item Numeric columns containing input coefficients
+\item the key (row label) column from \code{data_table}
+\item numeric columns with input (technical) coefficients
 }
 }
 \description{
-Compute a coefficient matrix from a symmetric input–output table (SIOT),
-use table, or similar. By default, coefficients are related to output,
-but you can use other totals if present.
+Computes the \strong{input (technical) coefficient matrix} from a symmetric
+input–output table (SIOT), use table, or supply table. Each element
+represents the amount of a product used as input per unit of output
+(usually at basic prices).
 }
 \details{
-The coefficient matrix \eqn{A} is formed by dividing each row of the
-inter-industry flows by an output or supply total. By default, the
-denominator is \code{"output"} (equivalent to \code{"P1"} or \code{"output_bp"}).
-Alternative totals can be supplied via the \code{total} argument.
+The coefficient matrix \eqn{A}—also called the \emph{technological} or
+\emph{direct requirements} matrix—is obtained by dividing each element of
+the inter-industry (intermediate use) block \eqn{Z} by the corresponding
+column total of output \eqn{x}:
+
+\deqn{A_{ij} = Z_{ij} / x_j}
+
+where \eqn{Z_{ij}} denotes the use of product \emph{i} by industry (or product)
+\emph{j}, and \eqn{x_j} is total output at basic prices.
+
+This formulation follows the \emph{Eurostat Manual of Supply, Use and
+Input–Output Tables} (Beutel, 2008, §15.1–15.3) and the \emph{System of
+National Accounts 2008} (§14.90–14.91).
+
+By default, the denominator row is \code{"output"} (equivalent to ESA 2010
+transaction \code{"P1"} or \code{"output_bp"}). Alternative totals such as
+\code{"total"} or \code{"cpa_total"} may be used through the \code{total} argument.
 }
 \examples{
 cm <- coefficient_matrix_create(
@@ -62,7 +75,14 @@ cm <- coefficient_matrix_create(
   total = "output",
   digits = 4
 )
+head(cm)
 
+}
+\references{
+Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and Input–Output
+Tables}. Luxembourg: Publications Office of the European Union, ch. 15.
+United Nations et al. (2009). \emph{System of National Accounts 2008},
+§§14.90–14.91.
 }
 \seealso{
 Other indicator functions: 

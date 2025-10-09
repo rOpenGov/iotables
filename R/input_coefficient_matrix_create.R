@@ -41,32 +41,44 @@
 input_coefficient_matrix_create <- function(data_table,
                                             households = FALSE,
                                             digits = NULL) {
-  
-  alias_map <- c(tfu = "output", total = "total", cpa_total = "total")
+  # --- Normalize column names (case-insensitive) ------------------------------
+  names(data_table) <- tolower(names(data_table))
+
+  alias_map <- c(
+    tfu = "output",
+    total = "total",
+    cpa_total = "total"
+  )
   for (nm in names(alias_map)) {
-    matches <- which(tolower(names(data_table)) == nm)
-    if (length(matches) > 0 && !(alias_map[[nm]] %in% names(data_table))) {
-      names(data_table)[matches] <- alias_map[[nm]]
+    if (nm %in% names(data_table) && !(alias_map[[nm]] %in% names(data_table))) {
+      names(data_table)[names(data_table) == nm] <- alias_map[[nm]]
     }
   }
-  
+
+  # --- Handle missing total row (toy tables) ----------------------------------
+  if (!any(grepl("total|cpa_total|total output", tolower(data_table[[1]])))) {
+    return_part_arg <- NULL
+    warning("No 'total' or 'cpa_total' row found; returning full matrix without subsetting.")
+  } else {
+    return_part_arg <- "products"
+  }
+
   cm <- coefficient_matrix_create(
     data_table = data_table,
     total = "output",
-    return_part = "products",
+    return_part = return_part_arg,
     households = households,
     digits = digits
   )
-  
+
   potential_total_names <- c("cpa_total", "total")
-  
-  # remove TOTAL rows and columns
+
   key_column <- tolower(as.character(unlist(cm[, 1])))
   remove_col <- which(names(cm) %in% potential_total_names)
   remove_row <- which(key_column %in% potential_total_names)
-  
+
   if (length(remove_row) > 0) cm <- cm[-remove_row, , drop = FALSE]
-  if (length(remove_col) > 0) cm <- cm[, -remove_col, drop = FALSE]
-  
+  if (length(remove_col) > 0) cm <- cm[, -remove_col, , drop = FALSE]
+
   cm
 }
