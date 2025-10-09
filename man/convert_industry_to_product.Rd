@@ -23,12 +23,16 @@ with \code{ind_ava} or \code{ind_use} (or similar codes).
 \details{
 For example, \code{A01} (agriculture) is converted to \code{CPA_A01} (product
 of agriculture).
+
+This corresponds to the bridge matrix (B) defined in Eurostat
+Manual §15.4.2,  used to transform industry-based extensions to
+product-based form.
 }
 \examples{
 data_table <- data.frame(
-   ind_use = "A01", 
-   A01 = 1,  A02 = 3, TOTAL = 4, 
-   HH = 2
+  ind_use = "A01",
+  A01 = 1, A02 = 3, TOTAL = 4,
+  HH = 2
 )
 convert_industry_to_product(data_table)
 }

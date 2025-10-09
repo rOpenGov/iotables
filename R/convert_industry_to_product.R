@@ -7,6 +7,10 @@
 #' For example, `A01` (agriculture) is converted to `CPA_A01` (product
 #' of agriculture).
 #'
+#' This corresponds to the bridge matrix (B) defined in Eurostat
+#' Manual §15.4.2,  used to transform industry-based extensions to
+#' product-based form.
+#'
 #' @param data_table A table where the names of the columns are denoted
 #' with the `ind_ava` or `ind_use` or `ind_use` vocabularies, for
 #' example, agriculture is denoted with `A01`.

@@ -33,7 +33,7 @@
 #' @return
 #' A `data.frame` with the rows of `supplementary_data` bound to
 #' `data_table` and aligned to its key and numeric columns.
-#' 
+#'
 #' @seealso [convert_industry_to_product()]
 #'
 #' @family iotables processing functions
@@ -75,7 +75,6 @@
 supplementary_add <- function(data_table,
                               supplementary_data,
                               supplementary_names = NULL) {
-  
   if (!is.null(supplementary_names)) {
     if (length(supplementary_names) !=
       nrow(as.data.frame(supplementary_data))) {
