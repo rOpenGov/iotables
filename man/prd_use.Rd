@@ -5,14 +5,13 @@
 \alias{prd_use}
 \title{Eurostat Product Uses Vocabulary (\code{prd_use})}
 \format{
-A tibble (data frame) with 11 variables:
+A tibble (data frame) with 10 variables:
 \describe{
 \item{id}{Canonical Eurostat concept identifier.}
 \item{label}{Official Eurostat label (preferred English term).}
 \item{status}{"Valid" or "Valid in CPA2_1".}
 \item{status_modified}{Date of last status modification.}
 \item{notation}{Alternate human-readable code or short form (e.g. \code{CPA_A01}).}
-\item{group}{Optional grouping of related products or aggregates.}
 \item{quadrant}{Integer designating the analytical block:
 \code{10} = Intermediate (technology block, Q1);
 \code{20} = Primary inputs / GVA (Q3);
@@ -38,19 +37,20 @@ A reference codelist used in Eurostat’s national accounts framework for
 \strong{product × product} symmetric input–output tables (SIOTs).
 This vocabulary enumerates the \strong{columns} of product-based tables, covering
 intermediate product uses (Quadrant 1), value-added components (Quadrant 3),
-and the final-use block (Quadrant 2), as well as balancing or extension items.
+and the final-use block (Quadrant 2), as well as balancing or extension
+items.
 }
 \details{
-The \code{prd_use} vocabulary corresponds to the official Eurostat SDMX codelist
+The \code{prd_use} vocabulary corresponds to the official Eurostat SDMX
+codelist
 \emph{“Product uses”}.
-It is used by the \link{iotables} package to order the \strong{column dimension}
-of product-by-product tables (datasets such as \code{naio_10_cp1700}).
+It is used by the \link{iotables} package to order the \strong{column dimension} of
+product-by-product tables (datasets such as \code{naio_10_cp1700}).
 
 Codes follow \strong{CPA 2.1} for products and \strong{ESA 2010} for accounting
-aggregates.
-Each entry includes a quadrant identifier and a numeric order key that ensures
-consistent column ordering when reshaping Eurostat’s long-form data into
-analytical matrices.
+aggregates. Each entry includes a quadrant identifier and a numeric order key
+that ensures consistent column ordering when reshaping Eurostat’s long-form
+data into analytical matrices.
 
 The dataset also retains control totals and adjustment items (Quadrant 30/50)
 such as \emph{Total use at purchasers’ prices}, \emph{CIF/FOB adjustments}, or

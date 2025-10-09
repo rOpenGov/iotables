@@ -19,7 +19,7 @@
 #' The dataset retains the published control total (“Total supply at basic prices”)
 #' for consistency with Eurostat’s metadata, but this row is normally excluded
 #' from analytical matrix operations.
-#' 
+#'
 #' Because the Eurostat SIOT datasets sometimes contain more detailed industry
 #' breakup than their vocabulary, we adopted industry codeing from  [cpa2_1].
 #' These codes are marked the "Adopted from CPA2_1" status.

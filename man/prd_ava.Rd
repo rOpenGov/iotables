@@ -5,7 +5,7 @@
 \alias{prd_ava}
 \title{Eurostat Product Supply, Adjustments and Value Added Vocabulary (\code{prd_ava})}
 \format{
-A tibble (data frame) with 11 variables:
+A tibble (data frame) with 10 variables:
 \describe{
 \item{id}{Canonical Eurostat concept identifier.}
 \item{label}{Official Eurostat label (preferred English term).}
@@ -49,11 +49,13 @@ product-by-product tables (datasets such as \code{naio_10_cp1700}).
 
 Codes correspond to \strong{CPA 2.1} product classifications and ESA 2010
 accounting aggregates. Each entry includes a quadrant identifier and an
-ordinal numeric order for consistent placement when reshaping long-form data.
+ordinal numeric order for consistent placement when reshaping long-form
+data.
 
 The dataset retains published control totals and balancing items for
-completeness (e.g., \emph{Total supply at basic prices} or \emph{CIF/FOB adjustments}),
-but these rows are normally excluded from analytical matrices.
+completeness (e.g., \emph{Total supply at basic prices} or \emph{CIF/FOB
+adjustments}), but these rows are normally excluded from analytical
+matrices.
 
 Because the Eurostat SIOT datasets sometimes contain more detailed industry
 breakup than their vocabulary, we adopted industry codeing from  \link{cpa2_1}.
@@ -63,8 +65,8 @@ These codes are marked the "Valid in CPA2_1" status.
 data(prd_ava)
 }
 \seealso{
-Related Eurostat vocabularies: \link{ind_ava}, \link{ind_use},
-\link{prd_use}, \link{cpa2_1}.
+Related Eurostat vocabularies: \link{ind_ava}, \link{ind_use}, \link{prd_use},
+\link{cpa2_1}.
 }
 \keyword{Eurostat}
 \keyword{SIOT}

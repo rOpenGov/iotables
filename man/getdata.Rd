@@ -4,10 +4,9 @@
 \alias{getdata}
 \title{Various internal functions to work with IOT metadata, including the labelling
 vocabularies, row and column ordering.
-None of these functions should be exported.}
+None of these functions should be exported.
+Internal helper to load datasets safely from the iotables package}
 \usage{
-getdata(x)
-
 getdata(x)
 }
 \arguments{

@@ -5,14 +5,13 @@
 \alias{ind_use}
 \title{Eurostat Industry Uses Vocabulary (\code{ind_use})}
 \format{
-A tibble (data frame) with 11 variables:
+A tibble (data frame) with 10 variables:
 \describe{
 \item{id}{Canonical Eurostat concept identifier.}
 \item{label}{Official Eurostat label (preferred English term).}
 \item{status}{"Valid" or "Adopted from CPA2_1".}
 \item{status_modified}{Date of last status modification.}
 \item{notation}{Alternate human-readable code or short form (e.g. \code{CPA_A01}).}
-\item{group}{Optional grouping of related industries or aggregates.}
 \item{quadrant}{Integer designating the analytical block:
 \code{10} = Intermediate (technology block, Q1);
 \code{20} = Primary inputs / GVA (Q3);
@@ -37,26 +36,26 @@ ind_use
 A reference codelist used in Eurostat’s national accounts framework for
 \strong{industry × industry} (NACE-based) symmetric input–output tables (SIOTs).
 This vocabulary enumerates the \strong{columns} of the table, covering the
-intermediate-use block (Quadrant 1), the value-added block (Quadrant 3),
-and the final-use and balancing items (Quadrant 2/50).
+intermediate-use block (Quadrant 1), the value-added block (Quadrant 3), and
+the final-use and balancing items (Quadrant 2/50).
 }
 \details{
-The \code{ind_use} vocabulary corresponds to the official Eurostat SDMX codelist
+The \code{ind_use} vocabulary corresponds to the official Eurostat SDMX
+codelist
 \emph{“Industry uses”}.
-It is used by the \link{iotables} package to order the \strong{column dimension}
-of industry-by-industry tables (datasets such as \code{naio_10_cp1750}).
+It is used by the \link{iotables} package to order the \strong{column dimension} of
+industry-by-industry tables (datasets such as \code{naio_10_cp1750}).
 
 Codes follow \strong{NACE Rev. 2} for industries and \strong{ESA 2010} for accounting
-aggregates.
-Each entry includes its quadrant classification and an ordinal numeric
-sequence for reproducible column ordering when reshaping long-form data.
+aggregates. Each entry includes its quadrant classification and an ordinal
+numeric sequence for reproducible column ordering when reshaping long-form
+data.
 
 The vocabulary also includes recent Eurostat additions introduced in 2023
-(\emph{ITTM} – International trade and transport margins, \emph{MCH} – Merchanting,
-and \emph{OP} – Purchases by residents abroad).
-These appear in the final-use block (\code{quadrant = 30}) and are retained for
-completeness and balancing, though they are not part of the analytical
-technology matrix.
+(\emph{ITTM} – International trade and transport margins, \emph{MCH} – Merchanting, and
+\emph{OP} – Purchases by residents abroad). These appear in the final-use block
+(\code{quadrant = 30}) and are retained for completeness and balancing, though
+they are not part of the analytical technology matrix.
 
 Because the Eurostat SIOT datasets sometimes contain more detailed industry
 breakup than their vocabulary, we adopted industry codeing from  \link{cpa2_1}.

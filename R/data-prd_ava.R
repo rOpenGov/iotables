@@ -7,24 +7,26 @@
 #' selected control totals such as *“Total supply at basic prices”*.
 #'
 #' @details The `prd_ava` vocabulary aligns with the official Eurostat SDMX
-#' codelist
+#'   codelist
 #' *“Products, adjustments and value added”*.
-#' It is used by the [iotables] package to order the **row dimension** of
-#' product-by-product tables (datasets such as `naio_10_cp1700`).
+#'   It is used by the [iotables] package to order the **row dimension** of
+#'   product-by-product tables (datasets such as `naio_10_cp1700`).
 #'
-#' Codes correspond to **CPA 2.1** product classifications and ESA 2010
-#' accounting aggregates. Each entry includes a quadrant identifier and an
-#' ordinal numeric order for consistent placement when reshaping long-form data.
+#'   Codes correspond to **CPA 2.1** product classifications and ESA 2010
+#'   accounting aggregates. Each entry includes a quadrant identifier and an
+#'   ordinal numeric order for consistent placement when reshaping long-form
+#'   data.
 #'
-#' The dataset retains published control totals and balancing items for
-#' completeness (e.g., *Total supply at basic prices* or *CIF/FOB adjustments*),
-#' but these rows are normally excluded from analytical matrices.
-#' 
-#' Because the Eurostat SIOT datasets sometimes contain more detailed industry
-#' breakup than their vocabulary, we adopted industry codeing from  [cpa2_1].
-#' These codes are marked the "Valid in CPA2_1" status.
+#'   The dataset retains published control totals and balancing items for
+#'   completeness (e.g., *Total supply at basic prices* or *CIF/FOB
+#'   adjustments*), but these rows are normally excluded from analytical
+#'   matrices.
 #'
-#' @format A tibble (data frame) with 11 variables:
+#'   Because the Eurostat SIOT datasets sometimes contain more detailed industry
+#'   breakup than their vocabulary, we adopted industry codeing from  [cpa2_1].
+#'   These codes are marked the "Valid in CPA2_1" status.
+#'
+#' @format A tibble (data frame) with 10 variables:
 #' \describe{
 #'   \item{id}{Canonical Eurostat concept identifier.}
 #'   \item{label}{Official Eurostat label (preferred English term).}
@@ -48,8 +50,8 @@
 #' @source Eurostat metadata registry
 #'   (<https://dd.eionet.europa.eu/vocabulary/eurostat/prd_ava/>)
 #'
-#' @seealso Related Eurostat vocabularies: [ind_ava], [ind_use], 
-#' [prd_use], [cpa2_1].
+#' @seealso Related Eurostat vocabularies: [ind_ava], [ind_use], [prd_use],
+#'   [cpa2_1].
 #'
 #' @keywords datasets metadata Eurostat input-output SUT SIOT
 #'
