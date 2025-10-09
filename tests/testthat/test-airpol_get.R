@@ -10,8 +10,6 @@ test_that("airpol_get works with germany_1995 replication dataset", {
   expect_true("CO2_emission" %in% df$indicator)
 })
 
-Sys.setenv(RUN_MANUAL_IOTABLES_TESTS = "false")
-
 test_that("manual Eurostat download works for a real dataset", {
   skip_on_cran()
   skip_on_ci()
@@ -20,27 +18,72 @@ test_that("manual Eurostat download works for a real dataset", {
     Sys.getenv("RUN_MANUAL_IOTABLES_TESTS") != "true",
     "Set RUN_MANUAL_IOTABLES_TESTS=true to run this manually."
   )
-
-  test <- airpol_get(
+  
+  airpol_df <- airpol_get(
     airpol = "GHG",
     geo = "HU",
     year = 2020,
     unit = "THS_T",
     data_directory = NULL,
-    force_download = TRUE
+    force_download = FALSE
   )
-
+  
   test_that("Correct attributes are present", {
-    expect_equal(attr(test, "geo"), "HU")
-    expect_equal(attr(test, "year"), 2020L)
-    expect_equal(attr(test, "unit"), "THS_T")
+    expect_equal(attr(airpol_df, "geo"), "HU")
+    expect_equal(attr(airpol_df, "year"), 2020L)
+    expect_equal(attr(airpol_df, "unit"), "THS_T")
   })
-
+  
   # Check manually on
   # https://ec.europa.eu/eurostat/databrowser/view/
   # env_ac_ainah_r2__custom_18274018/default/table
-
+  
   test_that("Correct amount returned", {
-    expect_equal(round(test$CPA_A01, 2), 9509.31)
+    expect_equal(round(airpol_df$A01, 2), 9509.31)
+  })
+  
+  test_that("Grouped industry data is present", {
+    expect_true(all(c("A", "C", "C", "D", "E", 
+                      "F", "G", "H", "J", "K", "L", 
+                      "M", "N", "O", "P", "Q", "R", 
+                      "S", "T", "U") %in% names(airpol_df)))
   })
 })
+
+
+test_that("manual Eurostat download works for a real dataset", {
+  skip_on_cran()
+  skip_if_offline()
+
+  airpol_it <- airpol_get(
+    airpol = "GHG",
+    geo = "IT",
+    year = 2020,
+    unit = "THS_T",
+    data_directory = NULL,
+    force_download = TRUE
+  )
+  
+  test_that("Correct attributes are present", {
+    expect_equal(attr(airpol_it, "geo"), "IT")
+    expect_equal(attr(airpol_it, "year"), 2020L)
+    expect_equal(attr(airpol_it, "unit"), "THS_T")
+  })
+  
+  # Check manually on
+  # https://ec.europa.eu/eurostat/databrowser/view/
+  # env_ac_ainah_r2__custom_18274018/default/table
+  
+  test_that("Correct amount returned", {
+    expect_equal(round(airpol_it$A01, 2), 41975.13)
+    expect_equal(round(airpol_it$A02, 2), 65.69)
+  })
+  
+  test_that("Grouped industry data is present", {
+    expect_true(all(c("A", "C", "C", "D", "E", 
+                      "F", "G", "H", "J", "K", "L", 
+                      "M", "N", "O", "P", "Q", "R", 
+                      "S", "T", "U") %in% names(airpol_it)))
+  })
+})
+

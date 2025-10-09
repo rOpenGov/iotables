@@ -73,6 +73,8 @@ emissions <- rbind (CO2, CH4)
 supplementary_add(de_io, emissions)
 }
 \seealso{
+\code{\link[=convert_industry_to_product]{convert_industry_to_product()}}
+
 Other iotables processing functions: 
 \code{\link{conforming_vector_create}()},
 \code{\link{empty_remove}()},

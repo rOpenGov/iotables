@@ -33,6 +33,8 @@
 #' @return
 #' A `data.frame` with the rows of `supplementary_data` bound to
 #' `data_table` and aligned to its key and numeric columns.
+#' 
+#' @seealso [convert_industry_to_product()]
 #'
 #' @family iotables processing functions
 #' @importFrom dplyr bind_cols
@@ -73,6 +75,7 @@
 supplementary_add <- function(data_table,
                               supplementary_data,
                               supplementary_names = NULL) {
+  
   if (!is.null(supplementary_names)) {
     if (length(supplementary_names) !=
       nrow(as.data.frame(supplementary_data))) {
@@ -97,7 +100,7 @@ supplementary_add <- function(data_table,
     names(key_column) <- names(data_table)[1]
   }
 
-  siot_ext <- rows_add(data_table, supplementary_data)
+  siot_ext <- rows_add(data_table, rows_to_add = supplementary_data)
 
   if (any(c("final_consumption_households", "p3_s14") %in% tolower(names(siot_ext)))) {
     household_col <- which(tolower(names(siot_ext)) %in% c("final_consumption_households", "p3_s14"))

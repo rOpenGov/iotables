@@ -1,7 +1,7 @@
 test_that("filtered Eurostat download returns correct values", {
   skip_on_cran()
   skip_on_ci()
-
+  skip_if_offline()
   # CPA product×product
   d1 <- get_eurostat_filtered(
     id = "naio_10_cp1700",
@@ -36,4 +36,15 @@ test_that("filtered Eurostat download returns correct values", {
   expect_equal(attr(d2, "dataset"), "naio_10_cp1750")
   expect_true(all(c("ind_ava", "ind_use") %in% names(d2)))
   expect_equal(sum(is.na(d2$values)), 0)
+})
+
+test_that("filtered Eurostat download returns correct values", {
+  skip_on_cran()
+  skip_if_offline()
+  filters_list <- list(geo="IT", unit="THS_T", time=2020)
+  airpol_it <- get_eurostat_data(id="env_ac_ainah_r2", 
+                                  filters = filters_list)
+  expect_equal(unique(airpol_it$geo), "IT")
+  expect_equal(unique(airpol_it$unit), "THS_T")
+  expect_equal(unique(airpol_it$year), 2020L)
 })
