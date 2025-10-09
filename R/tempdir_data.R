@@ -26,39 +26,45 @@ tempdir_data <- function(id, force_download = FALSE) {
     version = "0.9.5",
     details = "Use iotables_download() instead, which now manages Eurostat cache directly."
   )
-  
+
   # Legacy behaviour
   tmpdir <- tempdir()
   processed_file <- file.path(tmpdir, paste0(id, "_processed.rds"))
   safe_read <- function(path) tryCatch(readRDS(path), error = function(e) NULL)
-  
+
   if (!force_download && file.exists(processed_file)) {
     if (interactive()) message("Using cached processed file in tempdir().")
     data <- safe_read(processed_file)
-    if (!is.null(data)) return(data)
+    if (!is.null(data)) {
+      return(data)
+    }
   }
-  
+
   cache_dir <- file.path(tmpdir, "eurostat")
   if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
   eurostat_files <- list.files(cache_dir, pattern = id, full.names = TRUE)
-  
+
   if (!force_download && length(eurostat_files) >= 1) {
     if (interactive()) message("Using cached Eurostat file from ", cache_dir)
     data <- safe_read(eurostat_files[[1L]])
-    if (!is.null(data)) return(data)
+    if (!is.null(data)) {
+      return(data)
+    }
   }
-  
+
   if (interactive()) {
-    message("Downloading Eurostat dataset ", id,
-            " (force_download = ", force_download, ").")
+    message(
+      "Downloading Eurostat dataset ", id,
+      " (force_download = ", force_download, ")."
+    )
   }
-  
+
   if (force_download) {
     unlink(processed_file, force = TRUE)
     if (length(eurostat_files)) unlink(eurostat_files, force = TRUE)
     suppressWarnings(eurostat::clean_eurostat_cache(cache_dir = cache_dir))
   }
-  
+
   downloaded <- tryCatch(
     eurostat::get_eurostat(id, cache = !force_download, cache_dir = cache_dir),
     error = function(e) {
@@ -66,11 +72,10 @@ tempdir_data <- function(id, force_download = FALSE) {
       NULL
     }
   )
-  
+
   if (is.null(downloaded) || !is.data.frame(downloaded)) {
     stop("Download of ", id, " failed. Check Eurostat availability or identifier.")
   }
-  
+
   downloaded
 }
-

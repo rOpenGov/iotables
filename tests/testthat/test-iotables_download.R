@@ -26,7 +26,7 @@ test_that("built-in datasets return correctly", {
 
 test_that("iotables_download() handles Eurostat download + nesting correctly", {
   library(mockery)
-  
+
   fake_data <- data.frame(
     geo = c("BE", "BE"),
     unit = "MIO_EUR",

@@ -4,7 +4,8 @@
 \alias{airpol_get}
 \title{Get air pollutant data (Eurostat env_ac_ainah_r2)}
 \source{
-Eurostat dataset: \href{https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2}{env_ac_ainah_r2}
+Eurostat dataset:
+\href{https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2}{env_ac_ainah_r2}
 }
 \usage{
 airpol_get(
@@ -17,10 +18,11 @@ airpol_get(
 )
 }
 \arguments{
-\item{airpol}{Pollutant code (e.g. \code{"GHG"}, \code{"CO2"}, \code{"CH4"}, \code{"NOX"}, \code{"NH3"}, etc.).}
+\item{airpol}{Pollutant code (e.g. \code{"GHG"}, \code{"CO2"}, \code{"CH4"}, \code{"NOX"},
+\code{"NH3"}, etc.).}
 
-\item{geo}{Country code (e.g. \code{"BE"}, \code{"DE"}). The special value \code{"germany_1995"}
-returns the built-in example dataset \link{germany_airpol}.}
+\item{geo}{Country code (e.g. \code{"BE"}, \code{"DE"}). The special value
+\code{"germany_1995"} returns the built-in example dataset \link{germany_airpol}.}
 
 \item{year}{Reference year (≥ 2008 for NACE Rev. 2).}
 
@@ -31,17 +33,18 @@ returns the built-in example dataset \link{germany_airpol}.}
 \item{force_download}{Logical, whether to force a new Eurostat download.}
 }
 \value{
-A tidy data frame with air pollutant emissions aligned to IO classifications.
+A tidy data frame with air pollutant emissions aligned to IO
+classifications.
 }
 \description{
-Retrieve air emissions accounts by NACE Rev. 2 activity for environmental
-impact assessments. Automatically manages Eurostat caching via \code{tempdir()}
-or a user-specified \code{data_directory}.
+Retrieve air emissions accounts by NACE Rev. 2 activity for
+environmental impact assessments. Automatically manages Eurostat caching via
+\code{tempdir()} or a user-specified \code{data_directory}.
 }
 \details{
-The Eurostat dataset \emph{Air emissions accounts by NACE Rev. 2 activity}
-(\code{env_ac_ainah_r2}) contains emissions of major pollutants, including:
-CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6, NOx, NMVOC, CO, PM10, PM2.5,
-SO2, and NH3. See Eurostat metadata for definitions of aggregated indicators
-(GHG, ACG, O3PR, etc.).
+The Eurostat dataset \emph{Air emissions accounts by NACE Rev. 2
+activity} (\code{env_ac_ainah_r2}) contains emissions of major pollutants,
+including: CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6, NOx, NMVOC, CO, PM10,
+PM2.5, SO2, and NH3. See Eurostat metadata for definitions of aggregated
+indicators (GHG, ACG, O3PR, etc.).
 }

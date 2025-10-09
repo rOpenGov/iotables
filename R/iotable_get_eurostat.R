@@ -32,7 +32,6 @@ iotable_get_eurostat <- function(
     data_directory = NULL,
     force_download = TRUE,
     labelled_io_data = NULL) {
-  
   if (labelling == "eurostat") labelling <- "short"
 
   # --- Validation ------------------------------------------------------------
@@ -110,10 +109,10 @@ iotable_get_eurostat <- function(
     row_mismatch <- unique(iotable$prd_ava)[
       which(!unique(iotable$prd_ava) %in% unique(row_vocab$id))
     ]
-    
+
     col_mismatch <- unique(iotable$prd_use)[
       which(!unique(iotable$prd_use) %in% unique(col_vocab$id))
-      ]
+    ]
 
     assertthat::assert_that(
       length(row_mismatch) == 0,
@@ -268,7 +267,7 @@ iotable_get_eurostat <- function(
       .na_rm = TRUE
     )
   }
-  
+
   if (!is.null(iotable_labelled$row_order)) {
     # reorder for eurostat short code labelling -----
     iotable_labelled$prod_na <- forcats::fct_reorder(
@@ -286,7 +285,7 @@ iotable_get_eurostat <- function(
       .na_rm = TRUE
     )
   }
-  
+
   if (!is.null(iotable_labelled$col_order)) {
     # reorder for eurostat short code labelling -----
     iotable_labelled$induse <- forcats::fct_reorder(
@@ -300,9 +299,11 @@ iotable_get_eurostat <- function(
   if (labelling == "iotables") {
     out <- iotable_labelled %>%
       dplyr::arrange(iotables_row, iotables_col) %>%
-      dplyr::select(iotables_row, iotables_col, values)  %>%
-      tidyr::pivot_wider(names_from = iotables_col, 
-                         values_from = values)
+      dplyr::select(iotables_row, iotables_col, values) %>%
+      tidyr::pivot_wider(
+        names_from = iotables_col,
+        values_from = values
+      )
   } else {
     out <- iotable_labelled %>%
       dplyr::arrange(prod_na, induse) %>%

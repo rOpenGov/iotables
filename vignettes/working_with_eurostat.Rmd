@@ -67,7 +67,7 @@ emp_cz <- employment_get(
 
 # Conforming employment data #both sexes from 15 years old, year 2017.
 emp_sk <- employment_get(
-  geo = "SK", 
+  geo = "SK",
   year = "2017", sex = "Total",
   age = "Y_GE15", labelling = "prod_na",
   data_directory = not_included_directory,
@@ -136,10 +136,12 @@ It checks the correct ordering of columns, and furthermore it fills up 0 values 
 
 ```{r inputcoeff, results='asis'}
 input_coeff_matrix_cz <- input_coefficient_matrix_create(
-  data_table = cz_io)
+  data_table = cz_io
+)
 
 input_coeff_matrix_sk <- input_coefficient_matrix_create(
-  data_table = sk_io)
+  data_table = sk_io
+)
 
 knitr::kable(head(input_coeff_matrix_cz[, 1:8]))
 ```
@@ -190,12 +192,14 @@ By default, `direct_supply_effects_create()` will compare inputs to total final 
 primary_inputs_cz <- coefficient_matrix_create(
   data_table = cz_io,
   total = "output",
-  return = "primary_inputs")
+  return = "primary_inputs"
+)
 
 primary_inputs_sk <- coefficient_matrix_create(
   data_table = sk_io,
   total = "output",
-  return = "primary_inputs")
+  return = "primary_inputs"
+)
 
 direct_cz <- direct_effects_create(primary_inputs_cz, I_cz)
 direct_sk <- direct_effects_create(primary_inputs_sk, I_sk)
@@ -226,12 +230,14 @@ The code chunk below prints a part of the Czech multipliers, rounded to 4 digits
 primary_inputs_cz <- coefficient_matrix_create(
   data_table = cz_io,
   total = "output",
-  return = "primary_inputs")
+  return = "primary_inputs"
+)
 
 primary_inputs_sk <- coefficient_matrix_create(
   data_table = sk_io,
   total = "output",
-  return = "primary_inputs")
+  return = "primary_inputs"
+)
 
 multipliers_cz <- input_multipliers_create(primary_inputs_cz, I_cz)
 multipliers_sk <- input_multipliers_create(primary_inputs_sk, I_sk)
@@ -270,7 +276,8 @@ knitr::kable(emp_effect_cz[1:8], digits = 5)
 # New function is needed to add employment vector to SIOT
 
 emp_multiplier_cz <- input_multipliers_create(
-  emp_indicator_cz, I_cz)
+  emp_indicator_cz, I_cz
+)
 
 knitr::kable(emp_multiplier_cz[1:8], digits = 5)
 ```
@@ -304,10 +311,12 @@ Forward linkages show the effects on other industries that use the product (indu
 
 ```{r output_coeff, results='asis'}
 output_coeff_cz <- output_coefficient_matrix_create(
-  data_table = cz_io, total = "TFU", digits = 4)
+  data_table = cz_io, total = "TFU", digits = 4
+)
 
 output_coeff_sk <- output_coefficient_matrix_create(
-  data_table = sk_io, total = "TFU", digits = 4)
+  data_table = sk_io, total = "TFU", digits = 4
+)
 
 knitr::kable(head(output_coeff_cz[, 1:8]))
 ```
