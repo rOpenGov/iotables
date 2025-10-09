@@ -35,7 +35,9 @@
 #'   [lfsq_egan22d](https://ec.europa.eu/eurostat/web/products-datasets/-/lfsq_egan22d)
 #'
 #' @family import functions
-#' @importFrom dplyr ungroup rename filter mutate summarize
+#' @importFrom dplyr ungroup rename filter mutate summarize group_by
+#' @importFrom dplyr ungroup
+#' @importFrom tidyr spread
 #' @examples
 #' \dontrun{
 #' employment <- employment_get(

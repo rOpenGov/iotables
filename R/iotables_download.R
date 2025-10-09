@@ -25,6 +25,13 @@
 #' and a list-column `data` containing tidy IO tables.
 #'
 #' @family import functions
+#' @importFrom utils object.size
+#' @importFrom glue glue
+#' @importFrom dplyr rename mutate select filter
+#' @importFrom tidyselect any_of
+#' @importFrom tidyr nest
+#' @importFrom rlang set_names
+#' @importFrom eurostat get_eurostat label_eurostat set_eurostat_cache_dir
 #' @export
 iotables_download <- function(source = "naio_10_cp1700",
                               geo = NULL,

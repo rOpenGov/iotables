@@ -23,6 +23,7 @@
 #' A tidy data frame with air pollutant emissions aligned to IO classifications.
 #'
 #' @source Eurostat dataset: [env_ac_ainah_r2](https://ec.europa.eu/eurostat/web/products-datasets/-/env_ac_ainah_r2)
+#' @importFrom dplyr everything filter select relocate
 #' @export
 airpol_get <- function(airpol = "GHG",
                        geo = "BE",
@@ -36,7 +37,8 @@ airpol_get <- function(airpol = "GHG",
     return_df <- getdata("germany_airpol") %>%
       dplyr::filter(airpol %in% airpol_input) %>%
       dplyr::select(iotables_col, value) %>%
-      tidyr::pivot_wider(names_from = iotables_col, values_from = value) %>%
+      tidyr::pivot_wider(names_from = iotables_col, 
+                         values_from = value) %>%
       dplyr::mutate(indicator = paste0(airpol_input, "_emission")) %>%
       dplyr::relocate(indicator, .before = dplyr::everything())
     return(return_df)
