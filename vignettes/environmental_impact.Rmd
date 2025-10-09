@@ -48,10 +48,12 @@ The following expression gets the the greenhouse gas emissions in CO₂ CO₂ eq
 
 ```{r getairpol, eval=FALSE}
 # For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
-ghg <- airpol_get(airpol = "GHG", 
-                  geo = "BE", 
-                  year = 2020, 
-                  unit = "THS_T")
+ghg <- airpol_get(
+  airpol = "GHG",
+  geo = "BE",
+  year = 2020,
+  unit = "THS_T"
+)
 ```
 
 See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT.  In this case, we will first use the calculated CO₂-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
@@ -113,17 +115,19 @@ The category of *Manufacture of other non-metallic mineral products* in itself r
 Let's make a reality check, and calculate only with CO₂:
 
 ```{r getco2indicators, eval=FALSE}
-co2 <- airpol_get(airpol = "CO2", 
-                  geo = "BE", 
-                  year = 2020, 
-                  unit = "THS_T")
+co2 <- airpol_get(
+  airpol = "CO2",
+  geo = "BE",
+  year = 2020,
+  unit = "THS_T"
+)
 ```
 
 ```{r co2indicators}
 be_io_c <- BE %>%
   supplementary_add(
     co2 %>% convert_industry_to_product()
-    )
+  )
 
 co2_indicator <- input_indicator_create(
   data_table  = be_io_c,
@@ -143,16 +147,18 @@ co2_indicator %>%
 Let's check methane, which is a far more potent green house gas than CO₂.
 
 ```{r getmethaneindicators, eval=FALSE}
-methane <- airpol_get(airpol = "CH4",
-                      geo = "BE", 
-                      year = 2020, 
-                      unit = "THS_T")
+methane <- airpol_get(
+  airpol = "CH4",
+  geo = "BE",
+  year = 2020,
+  unit = "THS_T"
+)
 ```
 ```{r methaneindicators}
 be_io_m <- BE %>%
   supplementary_add(
     methane %>% convert_industry_to_product()
-    )
+  )
 
 methane_indicator <- input_indicator_create(
   data_table = be_io_m,
@@ -209,6 +215,10 @@ ghg_multipliers %>%
 ```
 
 ```{r savevignettedata, eval=FALSE}
-save(methane, co2, ghg, BE, file = file.path("..", "inst", "extdata", "environmental_impact_vignette.rda"))
+save(methane, co2, ghg, BE,
+  file = here::here(
+    "inst", "extdata", "environmental_impact_vignette.rda"
+  )
+)
 ```
 

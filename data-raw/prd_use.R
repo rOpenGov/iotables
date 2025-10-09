@@ -17,7 +17,8 @@ prd_use <- readxl::read_excel(
   mutate(group = ifelse(grepl("^CPA_", notation), "Industry", group))
 
 eurostat_cpa <- readxl::read_excel(
-  here::here("data-raw", "eurostat_cpa.xlsx")) %>%
+  here::here("data-raw", "eurostat_cpa.xlsx")
+) %>%
   mutate(id = gsub("CPA_", "", notation)) %>%
   select(notation, id, numeric_order)
 

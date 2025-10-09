@@ -141,17 +141,17 @@ get_eurostat_filtered <- function(id,
 }
 
 
-#' Use this function for non-SIOT data like air pollutants or 
+#' Use this function for non-SIOT data like air pollutants or
 #' employment
 #' @keywords internal
 #' @importFrom dplyr relocate filter
 #' @importFrom httr2 req_user_agent req_retry req_error
 #' @importFrom httr2 resp_body_json req_perform resp_content_type
 get_eurostat_data <- function(id,
-                                  filters = list(),
-                                  type = "code",
-                                  lang = "en",
-                                  ...) {
+                              filters = list(),
+                              type = "code",
+                              lang = "en",
+                              ...) {
   # ---- Build query URL ------------------------------------------------------
   base_url <- sprintf(
     "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/%s",
@@ -211,7 +211,7 @@ get_eurostat_data <- function(id,
         replace(values, inds, vals)
       }
     )
-  
+
   # ---- Harmonise time field -------------------------------------------------
   if ("time" %in% names(downloaded)) {
     downloaded <- downloaded %>%

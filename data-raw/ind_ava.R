@@ -21,7 +21,8 @@ ind_ava <- readxl::read_excel(here::here("data-raw", "ind_ava.xlsx")) %>%
   arrange(numeric_order)
 
 eurostat_cpa_ind <- readxl::read_excel(
-  here::here("data-raw", "eurostat_cpa.xlsx")) %>%
+  here::here("data-raw", "eurostat_cpa.xlsx")
+) %>%
   select(id, new_number = numeric_order) %>%
   filter(grepl("^CPA", id)) %>%
   mutate(id = gsub("CPA_", "", id))
@@ -67,7 +68,7 @@ ind_ava_extended_2 <- ind_ava_extended_1 %>%
   filter(numeric_order != 308910) %>%
   distinct(id, .keep_all = TRUE) %>% # some character coding problem
   arrange(numeric_order) %>%
-  mutate ( notation = id )
+  mutate(notation = id)
 
 all(c(
   "C16" %in% ind_ava_extended_2$id,

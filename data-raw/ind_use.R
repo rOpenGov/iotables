@@ -20,7 +20,8 @@ ind_use <- readxl::read_excel(here::here("data-raw", "ind_use.xlsx")) %>%
   select(-ind_use_notation)
 
 eurostat_cpa <- readxl::read_excel(
-  here::here("data-raw", "eurostat_cpa.xlsx")) %>%
+  here::here("data-raw", "eurostat_cpa.xlsx")
+) %>%
   select(id, new_number = numeric_order) %>%
   filter(grepl("^CPA", id)) %>%
   mutate(id = gsub("CPA_", "", id))

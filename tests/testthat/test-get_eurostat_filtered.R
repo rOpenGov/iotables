@@ -41,9 +41,11 @@ test_that("filtered Eurostat download returns correct values", {
 test_that("filtered Eurostat download returns correct values", {
   skip_on_cran()
   skip_if_offline()
-  filters_list <- list(geo="IT", unit="THS_T", time=2020)
-  airpol_it <- get_eurostat_data(id="env_ac_ainah_r2", 
-                                  filters = filters_list)
+  filters_list <- list(geo = "IT", unit = "THS_T", time = 2020)
+  airpol_it <- get_eurostat_data(
+    id = "env_ac_ainah_r2",
+    filters = filters_list
+  )
   expect_equal(unique(airpol_it$geo), "IT")
   expect_equal(unique(airpol_it$unit), "THS_T")
   expect_equal(unique(airpol_it$year), 2020L)

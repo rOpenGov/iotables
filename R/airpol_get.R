@@ -9,15 +9,15 @@
 #' including: CO2, biomass CO2, N2O, CH4, PFCs, HFCs, SF6, NOx, NMVOC, CO, PM10,
 #' PM2.5, SO2, and NH3. See Eurostat metadata for definitions of aggregated
 #' indicators (GHG, ACG, O3PR, etc.).
-#' 
-#' @note The function adjusts the invalid industry codes, like 
+#'
+#' @note The function adjusts the invalid industry codes, like
 #' `C10-C12` to `C10-12`.
 #'
 #' @inheritParams iotables_download
-#' @param airpol Pollutant code (e.g. `"GHG"`, `"CO2"`, `"CH4"`, 
+#' @param airpol Pollutant code (e.g. `"GHG"`, `"CO2"`, `"CH4"`,
 #' `"NOX"`, `"NH3"`, etc.).
 #' @param geo Country code (e.g. `"BE"`, `"DE"`). The special value
-#'   `"germany_1995"` returns the built-in example dataset 
+#'   `"germany_1995"` returns the built-in example dataset
 #'    [germany_airpol].
 #' @param year Reference year (≥ 2008 for NACE Rev. 2).
 #' @param unit Unit of measure (default `"THS_T"` = thousand tonnes).
@@ -38,7 +38,6 @@ airpol_get <- function(airpol = "GHG",
                        unit = "THS_T",
                        data_directory = NULL,
                        force_download = FALSE) {
-  
   # --- Handle built-in dataset -------------------------------------------
   if (geo == "germany_1995") {
     airpol_input <- airpol
@@ -50,8 +49,9 @@ airpol_get <- function(airpol = "GHG",
         values_from = value
       ) %>%
       dplyr::mutate(indicator = paste0(airpol_input, "_emission")) %>%
-      dplyr::relocate(indicator, 
-                      .before = dplyr::everything())
+      dplyr::relocate(indicator,
+        .before = dplyr::everything()
+      )
     return(return_df)
   }
 
@@ -69,12 +69,14 @@ airpol_get <- function(airpol = "GHG",
   if (!force_download && file.exists(cache_file)) {
     message("Reading cached Eurostat air pollutant data from: ", cache_file)
     tmp <- tryCatch(readRDS(cache_file), error = function(e) NULL)
-  } 
-  
-  if ( !is.null(geo) || is.null(unit) || is.null(year)) {
-    filters_list <- list(geo=geo, unit=unit, time=year, airpol=airpol)
-    tmp <- get_eurostat_data(id="env_ac_ainah_r2", 
-                             filters = filters_list)
+  }
+
+  if (!is.null(geo) || is.null(unit) || is.null(year)) {
+    filters_list <- list(geo = geo, unit = unit, time = year, airpol = airpol)
+    tmp <- get_eurostat_data(
+      id = "env_ac_ainah_r2",
+      filters = filters_list
+    )
   } else {
     message("Downloading Eurostat dataset env_ac_ainah_r2 (force_download=", force_download, ")")
     tmp <- tryCatch(
@@ -134,7 +136,8 @@ airpol_get <- function(airpol = "GHG",
   assertthat::assert_that(
     unit %in% airpol_df$unit,
     msg = glue::glue(
-      "No data for unit='{unit}' for geo='{geo}' and airpol='{airpol}'.")
+      "No data for unit='{unit}' for geo='{geo}' and airpol='{airpol}'."
+    )
   )
   airpol_df <- dplyr::filter(airpol_df, unit == !!unit)
 
@@ -163,26 +166,30 @@ airpol_get <- function(airpol = "GHG",
     dplyr::summarise(values = sum(values), .groups = "keep") %>%
     dplyr::anti_join(country_ghg, by = "nace_r2") %>%
     dplyr::mutate(freq = "A")
-  
-  return_df <- dplyr::bind_rows(country_ghg, 
-                                group_match) 
-  
+
+  return_df <- dplyr::bind_rows(
+    country_ghg,
+    group_match
+  )
+
   if ("rowid" %in% names(return_df)) {
     return_df <- dplyr::select(return_df, -rowid)
   }
-  
+
   return_df <- return_df %>%
-    tidyr::pivot_wider(names_from = nace_r2, 
-                       values_from = values)  %>%
+    tidyr::pivot_wider(
+      names_from = nace_r2,
+      values_from = values
+    ) %>%
     ensure_l68_columns(c("L68A", "L68B")) %>%
-    dplyr::relocate( L68A, .after = "L") %>%
-    dplyr::relocate( L68B, .after = "L68A") %>%
-    dplyr::relocate( TOTAL, .after = "U") %>%
-    dplyr::relocate( U, .before = "TOTAL") %>%
+    dplyr::relocate(L68A, .after = "L") %>%
+    dplyr::relocate(L68B, .after = "L68A") %>%
+    dplyr::relocate(TOTAL, .after = "U") %>%
+    dplyr::relocate(U, .before = "TOTAL") %>%
     dplyr::mutate(prod_na = paste0(airpol, "_emission")) %>%
     dplyr::relocate(prod_na, .before = dplyr::everything()) %>%
-    select (-geo, -freq, -time, -airpol, -unit, -year)
-  
+    select(-geo, -freq, -time, -airpol, -unit, -year)
+
   attr(return_df, "geo") <- geo
   attr(return_df, "year") <- year
   attr(return_df, "unit") <- unit

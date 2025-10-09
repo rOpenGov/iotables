@@ -12,7 +12,8 @@ prd_ava_voc <- readxl::read_excel(
 prd_ava <- readxl::read_excel(here::here("data-raw", "prd_ava.xlsx"))
 
 eurostat_cpa <- readxl::read_excel(
-  here::here("data-raw", "eurostat_cpa.xlsx")) %>%
+  here::here("data-raw", "eurostat_cpa.xlsx")
+) %>%
   mutate(id = gsub("CPA_", "", notation)) %>%
   select(notation, id, numeric_order)
 
