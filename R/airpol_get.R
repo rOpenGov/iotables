@@ -1,7 +1,9 @@
 #' Get air pollutant data (Eurostat env_ac_ainah_r2)
 #'
-#' @description Retrieve air emissions accounts by NACE Rev. 2 activity for
-#' environmental impact assessments. Automatically manages Eurostat caching via
+#' @description Retrieves Air Emissions Accounts (env_ac_ainah_r2)
+#' by NACE Rev. 2 activity for
+#' environmental impact assessments.
+#' Automatically manages Eurostat caching via
 #' `tempdir()` or a user-specified `data_directory`.
 #'
 #' @details The Eurostat dataset *Air emissions accounts by NACE Rev. 2

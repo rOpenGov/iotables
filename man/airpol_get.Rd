@@ -38,8 +38,10 @@ A tidy data frame with air pollutant emissions aligned to IO
 classifications.
 }
 \description{
-Retrieve air emissions accounts by NACE Rev. 2 activity for
-environmental impact assessments. Automatically manages Eurostat caching via
+Retrieves Air Emissions Accounts (env_ac_ainah_r2)
+by NACE Rev. 2 activity for
+environmental impact assessments.
+Automatically manages Eurostat caching via
 \code{tempdir()} or a user-specified \code{data_directory}.
 }
 \details{
