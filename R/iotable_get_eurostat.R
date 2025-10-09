@@ -13,7 +13,7 @@
 #' consistent row/column labelling, and returns a **wide** table ready
 #' for analysis.
 #'
-#' @inheritParams iotables_download
+#' @inheritParams iotable_get
 #' @importFrom forcats fct_reorder
 #' @importFrom utils packageVersion
 #' @importFrom glue glue

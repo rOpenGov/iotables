@@ -17,19 +17,31 @@ iotable_get_eurostat(
 )
 }
 \arguments{
-\item{source}{Character. Eurostat dataset ID (e.g. \code{"naio_10_cp1700"}).}
+\item{source}{Data source code (see list above).}
 
-\item{geo}{Country code (optional).}
+\item{geo}{Country code or name, e.g. \code{"SK"} or \code{"Slovakia"}.}
 
-\item{year}{Numeric (optional).}
+\item{year}{Numeric year. Defaults to \code{1990} for \code{germany_1995}.}
 
-\item{unit}{Character, usually \code{"MIO_EUR"} or \code{"MIO_NAC"}.}
+\item{unit}{Currency unit, usually \code{"MIO_NAC"} or \code{"MIO_EUR"}.}
 
-\item{stk_flow}{Stock/flow indicator (\code{"DOM"}, \code{"IMP"}, \code{"TOTAL"}), optional.}
+\item{stk_flow}{Stock/flow: \code{"DOM"}, \code{"IMP"}, or \code{"TOTAL"}. For
+margins/taxes (\code{cp1620}, \code{cp1630} and \code{pyp} variants) only \code{"TOTAL"}
+is used; other inputs are coerced with a warning.}
 
-\item{data_directory}{Directory to save processed data (default: \code{tempdir()}).}
+\item{labelling}{Column naming scheme: \code{"iotables"} (default) for
+consistent names; \code{"short"} for original short codes; \code{"eurostat"}
+is treated as \code{"short"}.}
 
-\item{force_download}{Logical, whether to force a new Eurostat download.}
+\item{data_directory}{Optional directory to save the processed wide
+table (RDS). If \code{NULL}, nothing is saved.}
+
+\item{force_download}{Logical. If \code{TRUE}, force a fresh download when
+\code{labelled_io_data} is not supplied. Defaults to \code{TRUE}.}
+
+\item{labelled_io_data}{Optional nested bulk data as returned by
+\code{\link[=iotables_download]{iotables_download()}}. If \code{NULL} (default), data are retrieved from
+cache or downloaded.}
 }
 \value{
 A \strong{wide} \code{data.frame} representing the selected IO table.
