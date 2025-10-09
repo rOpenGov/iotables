@@ -3,8 +3,8 @@ title: "Terminology"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Terminology}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r setupvignette, include = FALSE}
@@ -17,100 +17,155 @@ options(scipen = 999)
 
 ## Introduction
 
-This vignette reviews the terminology used in input–output analysis, 
-with reference to the *Eurostat Manual of Supply, Use and Input–Output Tables* (Beutel, 2008). 
+This vignette reviews the terminology used in input–output analysis, with reference to the *Eurostat Manual of Supply, Use and Input–Output Tables* (Beutel, 2008).
 
-*Work in progress:* a more comprehensive review will follow, comparing 
-terminology with the UN Handbook (2018), OECD input–output matrices, 
-and recent economics literature. This vignette should therefore be 
-read as descriptive, showing how the iotables package currently uses 
-Eurostat-style terminology.
-
+This vignette is therefore descriptive, documenting how the `iotables` package uses *Eurostat-style terminology* consistent with ESA 2010 and the System of National Accounts (SNA 2008).
 
 ```{r setup}
 library(iotables)
 ```
 
-Retrieve the demo dataset, the Germany 1995 Symmetric Input-Output Table: 
+Retrieve the demo dataset, the Germany 1995 Symmetric Input-Output Table:
 
 ```{r germany}
 germany_siot <- iotable_get()
 ```
 
-### First quadrant
+## Structure of input–output tables
 
-The first quadrant of the symmetric input-output tables, or in other words, the _domestic intermediate matrix_, input-output flows between a simplified, 6 sectors of the German economy in 1995. 
+An *input–output table (IOT)* describes the flow of products and services in an economy, linking industries (producers) with their inputs, outputs, and final uses. In a *symmetric input–output table (SIOT***)**, both rows and columns represent either products or industries.
 
-```{r firstq}
-germany_siot[c(1:7), c(1:7)]
+Eurostat distinguishes four *quadrants* of a SIOT:
+
+| Quadrant | Description | ESA 2010 / SNA 2008 Category |
+|--------------------|--------------------|--------------------------------|
+| **I** | Intermediate consumption — flows between industries or products | *Intermediate use* |
+| **II** | Final demand — purchases by households, government, investment, exports | *Final use* |
+| **III** | Primary inputs — compensation of employees, net taxes, gross operating surplus | *Primary inputs* |
+| **IV** | Output totals — column sums at basic prices | *Output (P.1)* |
+
+Quadrants I–III correspond to the *rows* of the table, while the column totals in Quadrant IV represent the total output of each industry or product.
+
+## Core matrices and notation
+
+Input–output analysis is built on a small set of matrices and vectors.\
+The `iotables` package follows the same notation used in Beutel (2008).
+
+| Symbol | Meaning | Definition | Function in `iotables` |
+|------------------|------------------|------------------|-------------------|
+| **Z** | Intermediate-consumption matrix | Flows of products between industries | `iotable_get()` |
+| **A** | Input (technical) coefficient matrix | `A_ij = Z_ij / X_j` | `input_coefficient_matrix_create()` |
+| **(I − A)** | Leontief matrix | Identity minus A | `leontief_matrix_create()` |
+| **L = (I − A)⁻¹** | Leontief inverse | Total (direct + indirect) requirements | `leontief_inverse_create()` |
+| **f** | Final-demand vector | Exogenous demand by category | retrieved from IOT |
+| **x = Lf** | Total output vector | Fundamental Leontief equation | – |
+
+**Eurostat equation references:**
+
+-   $a_ij$ = $x_ij$ / $x_j$ — technical coefficient (19), (43) identical formulations for SIOTs
+
+-   $x$ = $(I − A)⁻¹$ — total output
+
+## Input and output coefficients
+
+### Input coefficients (technical coefficients)
+
+Each element of the **input coefficient matrix** A shows the share of input *i* used in producing one unit of output of industry *j*: $$
+a_{ij} = \frac{x_{ij}}{x_j}
+$$
+
+where\
+- $a_{ij}$ = input coefficient for domestic goods and services\
+- $x_{ij}$ = flow of product *i* to industry *j* (a cell in Quadrant I)\
+- $x_j$ = total output of industry *j*
+
+These coefficients are sometimes called **direct requirements** or **technical coefficients**.
+
+hey are computed in `iotables` by:
+
+```{r inputcoeff}
+input_coefficient_matrix_create(
+  data_table = iotable_get(source="germany_1995"), 
+  digits = 4)
 ```
-
-Row-wise, we see the flow of inputs. For example, at basic prices, out of the 
-total demand for business services (423 933), 193 176 of the production of 
-business services is used by other business service providers, 65 755 by 
-trade enterprises, and 34 223 by other service industries.
-
-```{r outputflow}
-germany_siot[5, c(1, 5:8)]
-```
-
-The columns describe the structure of the input of the corresponding sector. For example, the business service sectors needed 15058 input from the other services, and 13371 imports from abroad (shown in the table below), to meet the final domestic demand of 423933 for business services (shown in the table above):
-
-```{r inputflow}
-germany_siot[c(5:9), c(1, 6)]
-```
-
-## Coefficients
-
-### Input coefficients for domestic intermediates
-
-The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.
-
-(9)  \deqn{a_{ij} = x_{ij} / x_j}{a_ij = x_ij / x_j}  [recap: (43) is the same]
-
-$a_{ij}$: input coefficient for domestic goods and services</br>
-$x_{ij}$: flow of domestic commodity i to sector j, i.e., a cell in the first quadrant.</br>
-$x_j$: output of j
-
-```{r inputcoeffmatrix, eval=FALSE}
-input_coefficient_matrix_create_2(iotable_get(), digits = 2)
-```
-
 
 ### Output coefficients
 
-The output coefficients are ratios derived from quadrant I (intermediates) and
-quadrant II (final demand) of a sector.
+The output coefficient matrix (Ghosh-type) expresses how the output of industry i is distributed across purchasing sectors j:
+
+$$o_{ij} = \frac{x_{ij}}{x_i}$$
+
+where
+
+-   $o_{ij}$ = output coefficient (distribution ratio)
+
+-   $x_{ij}$ = flow of product *i* to industry *j*
+
+-   $x_{i}$ = total output of product *i*
+
+These ratios describe the supply-side distribution structure and are computed by `output_coefficient_matrix_create()`.
+
+## Linkages between industries (inter-industry analysis)
+
+Two types of linkages are typically analysed:
+
+-   **Backward linkage** – measures the strength of a sector’s demand on its suppliers.\
+    It is given by the **column sum** of input coefficients or, when based on the Leontief inverse, includes all indirect effects through the supply chain.
+
+-   **Forward linkage** – measures the influence of a sector as a supplier to others. It is given by the **row sum** of output coefficients, describing how the sector’s output feeds into other industries.
+
+## Indicators and multipliers
+
+### Direct indicators
+
+An **input indicator** represents a specific row of the coefficient matrix A,\
+for example value added (GVA), labour, or emissions per unit of output.
+
+```{r inputindicatr}
+input_indicator_create(
+  data_table = iotable_get(), input_row = "gva")
+```
+
+### Output coefficients
+
+The output coefficients are ratios derived from quadrant I (intermediates) and quadrant II (final demand) of a sector.
 
 The `output_coefficient_matrix_create()` function creates these coefficients based on equation (5) in the Eurostat Manual.
 
-(5) $o_{ij}$ = $x_{ij}$ / $x_i$ 
- 
-$o_{ij}$ = output coefficient for domestic goods and services (i = 1, ..., 6; j = 1, ..., 6)
-$x_{ij}$ = flow of commodity i to sector j
-$x_j$ = output of sector i
+(5) $o_{ij}$ = $x_{ij}$ / $x_i$
 
+$o_{ij}$ = output coefficient for domestic goods and services (i = 1, ..., 6; j = 1, ..., 6) $x_{ij}$ = flow of commodity i to sector j $x_j$ = output of sector i
 
-## Inter-industry analysis
+## Summary of key equations
 
-The term **forward linkage** refers to the interconnection of a sector 
-to those to which it sells its output. In its simplest form, the 
-strength of the forward linkage of a sector *i* is given by the 
-row-wise sum of the direct output coefficients. This considers the 
-direct supply-side economic effects of sector *i* on the entire economy.
+| No.        | Formula                     | Description                      |
+|:-----------------|:----------------------|:------------------------------|
+| (5)        | $o_{ij}$ = $x_{ij}$ / $x_i$ | Output coefficient (Ghosh model) |
+| (9)        | $a_{ij}$ = $x_{ij}$ / $x_j$ | Input (technical) coefficient    |
+| (19), (43) | –                           | Identical to (9) for SIOTs       |
+| (47)       | $x$ = $(I - A)^{-1}$        | Leontief model for total output  |
+| (L)        | $L$ = $(I - A)^{-1}$        | Leontief inverse                 |
+| (m)        | $m$ = $a \times L$          | Multiplier equation              |
 
-The **backward linkage** of a sector *j* is given by the column sum 
-of the direct input coefficients. This captures the direct demand-side 
-effects of sector *j* on the economy. When calculated from the 
-Leontief inverse, backward linkages also include the **indirect effects** 
-propagated through the supply chain.
+## Validation summary (Eurostat Manual, Beutel 2008)
 
-## Next steps
+All analytical functions of `iotables` reproduce the benchmark examples from Beutel (2008), *Eurostat Manual of Supply, Use and Input–Output Tables.*
 
-This terminology vignette is intended as a descriptive overview. 
-Future releases of `iotables` will expand this section to align 
-with the UN *Handbook on Supply and Use Tables and Input–Output 
-Tables with Extensions and Applications* (2018), OECD input–output 
-matrices, and recent economics literature. A systematic review of 
-terminology and extended validation tests are planned for the next 
-major release.
+| Function | Concept | Beutel Table | Page |
+|:-----------------|:-----------------|:------------------|:----------------:|
+| `input_coefficient_matrix_create()` | Direct requirements (A) | 15.6 | 485 |
+| `leontief_matrix_create()` | Leontief matrix $(I − A)$ | 15.9 | 487 |
+| `leontief_inverse_create()` | Total requirements ($L$ = $(I − A)^{1}$) | 15.10 | 488 |
+| `supplementary_add()` | Environmental extension (CO₂, CH₄) | 15.13 | 494 |
+| `input_indicator_create()` | Input indicators (GVA, Compensation) | 15.14 | 498 |
+| `multiplier_create()` | Total multipliers (GVA, Employment) | 15.16 | 503–504 |
+
+## References
+
+-   **Beutel, J.** (2008). *Eurostat Manual of Supply, Use and Input–Output Tables.*\
+    Luxembourg: Office for Official Publications of the European Communities.
+-   **United Nations** (2018). *Handbook on Supply and Use Tables and Input–Output Tables with Extensions and Applications*, Rev. 1.\
+    New York: United Nations.
+-   **OECD** (2021). *Inter-Country Input–Output (ICIO) Manual.* Paris: OECD Publishing.
+-   **United Nations** (2012). *System of Environmental-Economic Accounting 2012: Central Framework.*\
+    New York: United Nations.

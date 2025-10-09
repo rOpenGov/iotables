@@ -57,7 +57,6 @@ cm_de <- input_coefficient_matrix_create(
   data_table = iotable_get(source = "germany_1995")
 )
 leontief_inverse_create(cm_de)
-
 }
 \references{
 Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and

@@ -57,7 +57,7 @@
 #'   data_table = iotable_get(source = "germany_1995")
 #' )
 #' leontief_inverse_create(cm_de)
-#'
+#' @export
 leontief_inverse_create <- function(technology_coefficients_matrix,
                                     digits = NULL) {
   leontief_matrix <- leontief_matrix_create(
