@@ -7,7 +7,8 @@
 #' internally by [iotable_get()].
 #'
 #' @details
-#' Files are cached under `tempdir()` as RDS (e.g. `"naio_10_cp1750_processed.rds"`).
+#' Files are cached under `tempdir()` as RDS
+#' (e.g. `"naio_10_cp1750_processed.rds"`).
 #' The temporary directory is cleared when the R session ends. To persist
 #' downloads across sessions (recommended for analytics), supply
 #' `data_directory`.

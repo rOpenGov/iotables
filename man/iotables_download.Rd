@@ -40,7 +40,8 @@ datasets (\code{germany_1995}, \verb{croatia_2010_*}, \verb{uk_2010_*}) which ar
 internally by \code{\link[=iotable_get]{iotable_get()}}.
 }
 \details{
-Files are cached under \code{tempdir()} as RDS (e.g. \code{"naio_10_cp1750_processed.rds"}).
+Files are cached under \code{tempdir()} as RDS
+(e.g. \code{"naio_10_cp1750_processed.rds"}).
 The temporary directory is cleared when the R session ends. To persist
 downloads across sessions (recommended for analytics), supply
 \code{data_directory}.
