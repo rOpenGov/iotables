@@ -52,13 +52,15 @@ input_coefficient_matrix_create <- function(data_table,
     cpa_total = "total"
   )
   for (nm in names(alias_map)) {
-    if (nm %in% names(data_table) && !(alias_map[[nm]] %in% names(data_table))) {
+    if (nm %in% names(data_table) && 
+        !(alias_map[[nm]] %in% names(data_table))) {
       names(data_table)[names(data_table) == nm] <- alias_map[[nm]]
     }
   }
 
   # --- Handle missing total row (toy tables) ----------------------------------
-  if (!any(grepl("total|cpa_total|total output", tolower(data_table[[1]])))) {
+  if (!any(grepl("total|cpa_total|total output", 
+                 tolower(data_table[[1]])))) {
     return_part_arg <- NULL
     warning("No 'total' or 'cpa_total' row found; returning full matrix without subsetting.")
   } else {
@@ -73,9 +75,9 @@ input_coefficient_matrix_create <- function(data_table,
     digits = digits
   )
 
-  potential_total_names <- c("cpa_total", "total")
+  potential_total_names <- c("cpa_total", "total", "TOTAL", "CPA_TOTAL")
 
-  key_column <- tolower(as.character(unlist(cm[, 1])))
+  key_column <- as.character(unlist(cm[, 1]))
   remove_col <- which(names(cm) %in% potential_total_names)
   remove_row <- which(key_column %in% potential_total_names)
 

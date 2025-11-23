@@ -89,3 +89,36 @@ test_that("Households are handled correctly in coefficient_matrix_create", {
   expect_true(all(vapply(cm_with_hh[-1], is.numeric, logical(1))))
   expect_true(all(vapply(cm_no_hh[-1], is.numeric, logical(1))))
 })
+
+
+test_that("coefficient_matrix_create preserves row/column name casing", {
+  
+  # A minimal symmetric toy table with precise uppercase CPA names
+  small_io <- data.frame(
+    prod_na = c("CPA_A01", "forestry", "CPA_A03", "TOTAL"),
+    CPA_A01 = c(1, 2, 3, 6),
+    forestry = c(4, 5, 6, 17),
+    CPA_A03 = c(7, 8, 9, 24),
+    TOTAL  = c(12, 15, 18, 47),
+    check.names = FALSE
+  )
+  
+  cm <- coefficient_matrix_create(small_io)
+  
+  # Check that coefficient matrix still has uppercase names
+  expect_identical(names(cm), names(small_io)[1:4])
+  
+  # Check that row names in column 1 are preserved in uppercase
+  expect_identical(
+    as.character(cm$prod_na),
+    as.character(small_io$prod_na)
+  )
+  
+  # Check that the set of row industry codes matches the set of column codes
+  # (this confirms that row/column name matching was not broken)
+  row_codes  <- as.character(cm$prod_na[cm$prod_na != "output"])
+  col_codes  <- names(cm)[-1]  # drop key column
+  
+  expect_identical(sort(row_codes[1:3]), sort(col_codes))
+})
+

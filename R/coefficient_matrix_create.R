@@ -89,7 +89,7 @@ coefficient_matrix_create <- function(
     data_table <- data_table[, 1:last_column]
   }
 
-  key_column <- tolower(as.character(unlist(data_table[, 1])))
+  key_column <- as.character(unlist(data_table[, 1]))
 
   # find denominator row
   if (total %in% c("output", "p1", "output_bp")) {
