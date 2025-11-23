@@ -1,5 +1,5 @@
 test_that("align_to_io_codes works with a minimal fictitious example", {
-  # --- Minimal IO table ----------------------------------------------
+  # --- Minimal IO table -----------------------------------------------
   io_example <- data.frame(
     prod_na = c("A", "B", "C31_32"),
     A = c(10, 2, 1),
@@ -7,7 +7,6 @@ test_that("align_to_io_codes works with a minimal fictitious example", {
     C31_32 = c(0, 1, 20),
     check.names = FALSE
   )
-
   # --- External satellite account ------------------------------------
   # Includes:
   # * indicator column

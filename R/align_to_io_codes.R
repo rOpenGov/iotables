@@ -72,6 +72,7 @@
 #'   \code{\link{leontief_inverse_create}}
 #'
 #' @examples
+<<<<<<< HEAD
 #' # Minimal fictitious IO table with three industries
 #' io_example <- data.frame(
 #'   prod_na = c("A", "B", "C31_32"),
