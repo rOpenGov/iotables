@@ -57,8 +57,6 @@ The matrix of coefficients is described on page 14-15 and the data can be found 
 uk_input_coeff <- input_coefficient_matrix_create(
   data_table = uk_siot)
 
-names(uk_input_coeff) <- tolower(names(uk_input_coeff))
-
 coeff_comparison <- select(uk_input_coeff, 1) %>%
   left_join(uk_published_coeff, by = "prod_na")
 
@@ -82,8 +80,7 @@ uk_calculated_inverse <- leontief_inverse_create(uk_input_coeff)
 inverse_comparison <- select(uk_calculated_inverse, 1) %>%
   left_join(uk_calculated_inverse, by = "prod_na")
 ```
-```{r compare_inverse_2, eval=FALSE}
-# Not evaluated in the vignette:
+```{r compare_inverse_2}
 test_that("correct data is returned", {
   expect_equal(
     round(uk_calculated_inverse[, 2:8], 8),
@@ -136,14 +133,22 @@ The comparison of output multipliers show that our code gives the same results. 
 GVA is not shown in the Excel table explicitly, but can be calculated as the sum of corporate income (*Operating surplus and mixed income*), household income (*Compensation of employees*) and net taxes on production (not products.)
 
 ```{r gva_effects}
+# --- 1. Add GVA row using primary incomes
+
 uk_siot2 <- uk_siot %>%
   filter(prod_na %in% c("B2A3G", "D1", "D29X39")) %>%
-  summarize_if(is.numeric, sum, na.rm = TRUE) %>%
-  cbind(data.frame(prod_na = "GVA"), .) %>%
-  rbind(uk_siot, .)
+  summarise(across(where(is.numeric), 
+                   ~ sum(.x, na.rm = TRUE))) %>%
+  mutate(prod_na = "GVA") %>%
+  bind_rows(uk_siot, .)
+
+
+# --- 2. Published GVA effects (from results table) 
 
 gva_effect_results <- uk_test_results %>%
   select(uk_row_label, `GVA effects`)
+
+# --- 3. Extract GVA row from primary input coefficients
 
 gva_input <- coefficient_matrix_create(
   data_table  = uk_siot2,
@@ -152,19 +157,31 @@ gva_input <- coefficient_matrix_create(
 ) %>%
   filter(prod_na == "GVA")
 
+
+# --- 4. Direct GVA effects calculation 
+
 gva_effects <- direct_effects_create(
   gva_input,
   uk_calculated_inverse
 ) %>%
-  gather(prod, values, !!2:ncol(.)) %>%
+  # previously gather(prod, values, 2:ncol(.))
+  pivot_longer(
+    cols = -prod_na,
+    names_to = "prod",
+    values_to = "values"
+  ) %>%
   mutate(prod_na = prod) %>%
   select(-prod) %>%
-  left_join(select(metadata_uk_2010, prod_na, uk_row_label),
+  left_join(
+    metadata_uk_2010 %>% select(prod_na, uk_row_label),
     by = "prod_na"
   ) %>%
   left_join(gva_effect_results, by = "uk_row_label") %>%
   filter(!is.na(uk_row_label)) %>%
   select(prod_na, uk_row_label, values, `GVA effects`)
+
+
+# --- 5. Output the knitr table
 
 iotables:::create_knitr_table(
   data_table = gva_effects[1:10, ],
@@ -173,6 +190,7 @@ iotables:::create_knitr_table(
   col.names = c("industry code", "row label", "calculated", "published"),
   col_width = c(2, 11, 3, 3)
 )
+
 ```
 
 ## Employment cost multipliers
@@ -187,14 +205,18 @@ empc_indicator_uk <- coefficient_matrix_create(
   data_table  = uk_siot,
   total       = "output",
   return_part = "primary_inputs"
-) %>%
-  filter(prod_na == "D1")
+) 
 
 empc_multipliers <- input_multipliers_create(
-  input_requirements = empc_indicator_uk,
-  uk_calculated_inverse
+  Im = uk_calculated_inverse,
+  input_requirements = empc_indicator_uk, 
+  multiplier_name = "Employment cost multiplier"
 ) %>%
-  gather(prod, values, !!2:ncol(.)) %>%
+  pivot_longer(
+    cols = -prod_na,
+    names_to = "prod",
+    values_to = "values"
+  ) %>% 
   mutate(prod_na = prod) %>%
   select(-prod) %>%
   left_join(select(metadata_uk_2010, prod_na, uk_row_label),
@@ -218,10 +240,14 @@ Following from the GVA effects, after summarizing GVA and adding it to the input
 
 ```{r gva_comp, eval=FALSE}
 gva_multipliers <- input_multipliers_create(
-  input_requirements = gva_input,
-  uk_calculated_inverse
+  Im = uk_calculated_inverse, 
+  input_requirements = gva_input
 ) %>%
-  gather(prod, values, !!2:ncol(.)) %>%
+  pivot_longer(
+    cols = -prod_na,
+    names_to = "prod",
+    values_to = "values"
+  ) %>%
   mutate(prod_na = prod) %>%
   select(-prod) %>%
   left_join(select(metadata_uk_2010, prod_na, uk_row_label),
@@ -253,7 +279,11 @@ output_multiplier_results <- uk_test_results %>%
   select(uk_row_label, `Output multiplier`)
 
 uk_output_multipliers <- output_multiplier_create(uk_input_coeff) %>%
-  gather(prod, values, !!2:ncol(.)) %>%
+  pivot_longer(
+    cols = -prod_na,
+    names_to = "prod",
+    values_to = "values"
+  ) %>%
   mutate(prod_na = prod) %>%
   select(-prod) %>%
   left_join(select(metadata_uk_2010, prod_na, uk_row_label),
