@@ -32,6 +32,63 @@
 direct_effects_create <- function(input_requirements,
                                   inverse,
                                   digits = NULL) {
+  # 1. Identify key (indicator) column ----------------------
+  key_name <- names(input_requirements)[1]
+  indicator_label <- as.character(input_requirements[[1]][1])
+
+  # Construct standardized effect name
+  effect_name <- paste0(
+    sub("_indicator$", "", indicator_label),
+    "_effect"
+  )
+
+  # 2. Ensure column matching between indicator and inverse -----
+  req_cols <- names(input_requirements)[-1]
+  inv_cols <- names(inverse)[-1]
+
+  if (!setequal(req_cols, inv_cols)) {
+    stop(
+      "Column mismatch between input requirements and inverse.\n",
+      "Missing in inverse: ", paste(setdiff(req_cols, inv_cols), collapse = ", "),
+      "\nMissing in input requirements: ", paste(setdiff(inv_cols, req_cols), collapse = ", ")
+    )
+  }
+
+  # order requirements to match inverse
+  input_requirements_matrix <- as.matrix(
+    input_requirements[, inv_cols, drop = FALSE]
+  )
+  inverse_matrix <- as.matrix(
+    inverse[, inv_cols, drop = FALSE]
+  )
+
+  # 3. Compute direct effects ---------------------------
+  effects <- input_requirements_matrix %*% inverse_matrix
+
+  if (!is.null(digits) && digits >= 0) {
+    effects <- round(effects, digits)
+  }
+
+  # 4. Construct final output ---------------------------
+  out <- data.frame(
+    effects,
+    check.names = FALSE
+  )
+
+  # Prepend the key column manually
+  out <- cbind(key_name = effect_name, out)
+
+  # And rename the key column to the actual key_name
+  names(out)[1] <- key_name
+
+  out
+}
+
+
+
+direct_effects_create_2 <- function(input_requirements,
+                                    inverse,
+                                    digits = NULL) {
   names_direct <- names(input_requirements)
   key_column <- names(input_requirements)[1]
   replace_dot <- function(x) gsub(pattern = "_indicator", "", x)

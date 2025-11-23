@@ -202,9 +202,10 @@ primary_inputs_sk <- coefficient_matrix_create(
 )
 
 direct_cz <- direct_effects_create(
-  input_requirements = primary_inputs_cz, 
-  inverse = I_cz, 
-  digits = 4)
+  input_requirements = primary_inputs_cz,
+  inverse = I_cz,
+  digits = 4
+)
 direct_sk <- direct_effects_create(primary_inputs_sk, I_sk)
 
 knitr::kable(head(direct_cz[, 1:8]), digits = 4)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/coefficient_matrix_create.R
 \name{coefficient_matrix_create}
 \alias{coefficient_matrix_create}
-\title{Create an input (technical) coefficient matrix}
+\title{Create a technology (input) coefficient matrix}
 \usage{
 coefficient_matrix_create(
   data_table,
@@ -10,79 +10,115 @@ coefficient_matrix_create(
   digits = NULL,
   remove_empty = TRUE,
   households = FALSE,
-  return_part = NULL,
-  ...
+  return_part = NULL
 )
 }
 \arguments{
-\item{data_table}{A symmetric input–output table, use table, margins or
-tax table retrieved by \code{\link[=iotable_get]{iotable_get()}}.}
+\item{data_table}{A symmetric input–output table or any wide-format
+product × product table returned by \code{\link[=iotable_get]{iotable_get()}} or built-in datasets.
+Must contain a key row column (e.g. \code{prod_na}, \code{t_rows2},
+\code{uk_row}, or \code{iotables_row}).}
 
-\item{total}{Character. Label of the row used as denominator.
-Defaults to \code{"output"}. Accepts \code{"P1"}, \code{"output_bp"}, \code{"total"},
-or \code{"cpa_total"}.}
+\item{total}{Character. Name of the row used for denominator (output).
+Defaults to \code{"output"}. Recognised values include:
+\code{"output"}, \code{"P1"}, \code{"output_bp"}, \code{"total"}, \code{"cpa_total"},
+and synonyms found in the data.}
 
-\item{digits}{Optional integer. Number of digits for rounding.
-Default \code{NULL} (no rounding).}
+\item{digits}{Integer. Number of digits to round the result to.
+Defaults to \code{NULL} (no rounding).}
 
-\item{remove_empty}{Logical. Should empty rows be removed?
-Defaults to \code{TRUE}.}
+\item{remove_empty}{Logical. Remove empty rows/columns (default \code{TRUE}).
+Recommended for avoiding division by zero.}
 
-\item{households}{Logical. If \code{TRUE}, include the household column.
-Default \code{FALSE}.}
+\item{households}{Logical. When \code{TRUE}, constructs a Type-II extended
+coefficient matrix including a household consumption column and
+household earnings row. Default \code{FALSE}.}
 
-\item{return_part}{Optional. \code{"products"}, \code{"industries"}, or
-\code{"primary_inputs"} to select part of the matrix. Default \code{NULL}
-returns the full matrix.}
-
-\item{...}{Reserved for future extensions.}
+\item{return_part}{Optional. One of:
+\itemize{
+\item \code{"products"} or \code{"industries"} – return only the technology matrix
+\item \code{"primary_inputs"} – return only primary input coefficients
+\item \code{NULL} – return the full matrix (default)
+}}
 }
 \value{
 A \code{data.frame} containing:
 \itemize{
-\item the key (row label) column from \code{data_table}
-\item numeric columns with input (technical) coefficients
+\item the key row identifier (first column),
+\item technology coefficients (columns 2…n),
+\item and, when \code{households = TRUE}, the household coefficient column.
 }
+
+If \code{return_part} is used, only the requested block is returned.
 }
 \description{
-Computes the \strong{input (technical) coefficient matrix} from a symmetric
-input–output table (SIOT), use table, or supply table. Each element
-represents the amount of a product used as input per unit of output
-(usually at basic prices).
+Creates an \strong{input (technical) coefficient matrix} from a symmetric
+input–output table (SIOT) or similar product × product table.
+
+The function divides every element of the inter-industry use block
+by an output (or other) total, producing the classical
+technology matrix \(A\) used for Leontief models.
+
+In addition, when \code{households = TRUE}, the function constructs the
+\strong{Type-II extension}:
+\itemize{
+\item a \emph{household consumption column} (typically \code{P3_S14}) rescaled as
+coefficients, and
+\item a \emph{household earnings row} (typically \code{D1}) identifying labour income.
+}
+
+This produces an augmented coefficient matrix that can be used directly
+for Type-II multipliers (closed household sector).
 }
 \details{
-The coefficient matrix \eqn{A}—also called the \emph{technological} or
-\emph{direct requirements} matrix—is obtained by dividing each element of
-the inter-industry (intermediate use) block \eqn{Z} by the corresponding
-column total of output \eqn{x}:
+The coefficient matrix is computed as:
+\deqn{
+A_{ij} = Z_{ij} / x_j
+}
+where \(Z\) is the intermediate use matrix and \(x\) is the chosen
+denominator row (usually output \code{P1}).
 
-\deqn{A_{ij} = Z_{ij} / x_j}
+The denominator row is detected case-insensitively using the vocabulary:
+\code{"output"}, \code{"p1"}, \code{"output_bp"}, \code{"total output"},
+or \code{"total"} / \code{"cpa_total"} depending on the \code{total} argument.
 
-where \eqn{Z_{ij}} denotes the use of product \emph{i} by industry (or product)
-\emph{j}, and \eqn{x_j} is total output at basic prices.
+The function supports returning either:
+\itemize{
+\item the full matrix (\code{return_part = NULL}),
+\item only the technology block (\code{return_part = "products"} or \code{"industries"}),
+\item only the primary inputs (\code{return_part = "primary_inputs"}).
+}
 
-This formulation follows the \emph{Eurostat Manual of Supply, Use and
-Input–Output Tables} (Beutel, 2008, §15.1–15.3) and the \emph{System of
-National Accounts 2008} (§14.90–14.91).
+When \code{households = TRUE}:
+\itemize{
+\item the function identifies the household final-consumption column
+(e.g. \code{P3_S14} or \code{final_consumption_households}),
+\item divides it by the corresponding output totals,
+\item constructs the appropriate coefficient column,
+\item includes the household earnings row (e.g. \code{D1}) for
+Type-II multiplier calculations.
+}
 
-By default, the denominator row is \code{"output"} (equivalent to ESA 2010
-transaction \code{"P1"} or \code{"output_bp"}). Alternative totals such as
-\code{"total"} or \code{"cpa_total"} may be used through the \code{total} argument.
+This behaviour matches traditional Type-II IO modelling practice.
 }
 \examples{
+# Technology matrix (Germany 1995 example)
 cm <- coefficient_matrix_create(
   data_table = iotable_get(source = "germany_1995"),
   total = "output",
   digits = 4
 )
-head(cm)
+
+# Type-II coefficient matrix with household column
+cm_hh <- coefficient_matrix_create(
+  data_table = iotable_get(source = "germany_1995"),
+  households = TRUE
+)
 
 }
 \references{
 Beutel, J. (2008). \emph{Eurostat Manual of Supply, Use and Input–Output
-Tables}. Luxembourg: Publications Office of the European Union, ch. 15.
-United Nations et al. (2009). \emph{System of National Accounts 2008},
-§§14.90–14.91.
+Tables}, ch. 15. Luxembourg: Publications Office of the European Union.
 }
 \seealso{
 Other indicator functions: 

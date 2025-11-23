@@ -348,9 +348,9 @@ iotable_get_eurostat <- function(
     version = 2
     )
   }
-  
-  # Normalise row + column names to uppercase to ensure symmetry 
-  # and joinability if not the custom iotables snake case names are 
+
+  # Normalise row + column names to uppercase to ensure symmetry
+  # and joinability if not the custom iotables snake case names are
   # used
   if (labelling != "iotables") {
     names(out) <- toupper(names(out))
@@ -358,7 +358,6 @@ iotable_get_eurostat <- function(
       out$prod_na <- toupper(out$prod_na)
     }
   }
-  
+
   out
 }
-

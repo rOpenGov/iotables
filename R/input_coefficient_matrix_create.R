@@ -40,10 +40,80 @@
 #' head(cm)
 #'
 #' @export
-input_coefficient_matrix_create <- function(data_table,
-                                            households = FALSE,
-                                            digits = NULL) {
-  # --- Normalize column names (case-insensitive) ------------------------------
+input_coefficient_matrix_create <- function(
+    data_table,
+    households = FALSE,
+    digits = NULL) {
+  # --- Inspect original names ---------------------------------------
+  original_names <- names(data_table)
+
+  # --- Detect presence of a TOTAL row --------------------------------
+  key_column <- as.character(data_table[[1]])
+
+  has_total_row <- any(toupper(key_column) %in% c(
+    "TOTAL",
+    "CPA_TOTAL",
+    "TOTAL OUTPUT"
+  ))
+
+  # We always use "output" row as denominator—never TOTAL.
+  return_part_arg <- if (has_total_row) "products" else NULL
+
+  # Determine the denominator row name ---------------------
+  key <- as.character(data_table[[1]])
+  key_upper <- toupper(key) # helper for matching
+
+  if ("OUTPUT" %in% key_upper) {
+    denom <- key[key_upper == "OUTPUT"]
+  } else if ("P1" %in% key_upper) {
+    denom <- key[key_upper == "P1"]
+  } else if ("OUTPUT_BP" %in% key_upper) {
+    denom <- key[key_upper == "OUTPUT_BP"]
+  } else if ("CPA_TOTAL" %in% key_upper) {
+    denom <- key[key_upper == "CPA_TOTAL"]
+  } else if ("TOTAL" %in% key_upper) {
+    denom <- key[key_upper == "TOTAL"]
+  } else {
+    stop("Could not identify denominator row among: OUTPUT, P1, OUTPUT_BP, CPA_TOTAL, TOTAL.")
+  }
+
+  # --- Compute coefficient matrix --------------------------------
+  cm <- coefficient_matrix_create(
+    data_table   = data_table,
+    total        = denom,
+    return_part  = return_part_arg,
+    households   = households,
+    digits       = digits
+  )
+
+  # --- Remove TOTAL or CPA_TOTAL rows/columns from cm -------------
+  # (They MUST NOT appear in coefficient matrix)
+  total_labels <- c("TOTAL", "CPA_TOTAL", "TOTAL OUTPUT")
+
+  # Remove TOTAL rows
+  key_cm <- as.character(cm[[1]])
+  remove_rows <- which(toupper(key_cm) %in% total_labels)
+  if (length(remove_rows) > 0) {
+    cm <- cm[-remove_rows, , drop = FALSE]
+  }
+
+  # Remove TOTAL columns
+  remove_cols <- which(toupper(names(cm)) %in% total_labels)
+  if (length(remove_cols) > 0) {
+    cm <- cm[, -remove_cols, drop = FALSE]
+  }
+
+  # --- Return coefficient matrix with names preserved ------------
+  cm
+}
+
+
+
+#' @keywords internal
+input_coefficient_matrix_create_2 <- function(data_table,
+                                              households = FALSE,
+                                              digits = NULL) {
+  # --- Normalize column names (case-insensitive) ------------------
   names(data_table) <- tolower(names(data_table))
 
   alias_map <- c(
@@ -52,17 +122,21 @@ input_coefficient_matrix_create <- function(data_table,
     cpa_total = "total"
   )
   for (nm in names(alias_map)) {
-    if (nm %in% names(data_table) && 
-        !(alias_map[[nm]] %in% names(data_table))) {
+    if (nm %in% names(data_table) &&
+      !(alias_map[[nm]] %in% names(data_table))) {
       names(data_table)[names(data_table) == nm] <- alias_map[[nm]]
     }
   }
 
-  # --- Handle missing total row (toy tables) ----------------------------------
-  if (!any(grepl("total|cpa_total|total output", 
-                 tolower(data_table[[1]])))) {
+  # --- Handle missing total row (toy tables) --------------------
+  if (!any(grepl(
+    "total|cpa_total|total output",
+    tolower(data_table[[1]])
+  ))) {
     return_part_arg <- NULL
-    warning("No 'total' or 'cpa_total' row found; returning full matrix without subsetting.")
+    warning(
+      "No 'total' or 'cpa_total' row found; returning full matrix without subsetting."
+    )
   } else {
     return_part_arg <- "products"
   }

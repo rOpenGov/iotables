@@ -79,9 +79,9 @@ table (e.g., via \code{supplementary_add()}).
 # Minimal fictitious IO table with three industries
 io_example <- data.frame(
   prod_na = c("A", "B", "C31_32"),
-  A       = c(10,  2,  1),
-  B       = c( 1, 15,  3),
-  C31_32  = c( 0,  1, 20),
+  A = c(10, 2, 1),
+  B = c(1, 15, 3),
+  C31_32 = c(0, 1, 20),
   check.names = FALSE
 )
 
@@ -92,10 +92,10 @@ io_example <- data.frame(
 # * includes TOTAL which should be dropped
 ext_example <- data.frame(
   indicator = "GHG_emission",
-  A         = 0.5,
-  B         = 0.2,
-  `C31-32`  = 0.3,
-  TOTAL     = 0.7,
+  A = 0.5,
+  B = 0.2,
+  `C31-32` = 0.3,
+  TOTAL = 0.7,
   check.names = FALSE
 )
 

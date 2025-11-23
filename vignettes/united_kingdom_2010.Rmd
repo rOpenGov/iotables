@@ -55,7 +55,8 @@ The matrix of coefficients is described on page 14-15 and the data can be found 
 
 ```{r compare_coeff}
 uk_input_coeff <- input_coefficient_matrix_create(
-  data_table = uk_siot)
+  data_table = uk_siot
+)
 
 coeff_comparison <- select(uk_input_coeff, 1) %>%
   left_join(uk_published_coeff, by = "prod_na")
@@ -119,8 +120,10 @@ iotables:::create_knitr_table(
   data_table = employment_effects[1:10, ],
   digits = 4,
   caption = "Comparison of Calculated And Published Employment Cost Effects",
-  col.names = c("industry code", "row label", 
-                "calculated", "published"),
+  col.names = c(
+    "industry code", "row label",
+    "calculated", "published"
+  ),
   col_width = c(2, 11, 3, 3)
 )
 ```
@@ -137,13 +140,15 @@ GVA is not shown in the Excel table explicitly, but can be calculated as the sum
 
 uk_siot2 <- uk_siot %>%
   filter(prod_na %in% c("B2A3G", "D1", "D29X39")) %>%
-  summarise(across(where(is.numeric), 
-                   ~ sum(.x, na.rm = TRUE))) %>%
+  summarise(across(
+    where(is.numeric),
+    ~ sum(.x, na.rm = TRUE)
+  )) %>%
   mutate(prod_na = "GVA") %>%
   bind_rows(uk_siot, .)
 
 
-# --- 2. Published GVA effects (from results table) 
+# --- 2. Published GVA effects (from results table)
 
 gva_effect_results <- uk_test_results %>%
   select(uk_row_label, `GVA effects`)
@@ -158,7 +163,7 @@ gva_input <- coefficient_matrix_create(
   filter(prod_na == "GVA")
 
 
-# --- 4. Direct GVA effects calculation 
+# --- 4. Direct GVA effects calculation
 
 gva_effects <- direct_effects_create(
   gva_input,
@@ -190,7 +195,6 @@ iotables:::create_knitr_table(
   col.names = c("industry code", "row label", "calculated", "published"),
   col_width = c(2, 11, 3, 3)
 )
-
 ```
 
 ## Employment cost multipliers
@@ -205,18 +209,18 @@ empc_indicator_uk <- coefficient_matrix_create(
   data_table  = uk_siot,
   total       = "output",
   return_part = "primary_inputs"
-) 
+)
 
 empc_multipliers <- input_multipliers_create(
   Im = uk_calculated_inverse,
-  input_requirements = empc_indicator_uk, 
+  input_requirements = empc_indicator_uk,
   multiplier_name = "Employment cost multiplier"
 ) %>%
   pivot_longer(
     cols = -prod_na,
     names_to = "prod",
     values_to = "values"
-  ) %>% 
+  ) %>%
   mutate(prod_na = prod) %>%
   select(-prod) %>%
   left_join(select(metadata_uk_2010, prod_na, uk_row_label),
@@ -240,7 +244,7 @@ Following from the GVA effects, after summarizing GVA and adding it to the input
 
 ```{r gva_comp, eval=FALSE}
 gva_multipliers <- input_multipliers_create(
-  Im = uk_calculated_inverse, 
+  Im = uk_calculated_inverse,
   input_requirements = gva_input
 ) %>%
   pivot_longer(
