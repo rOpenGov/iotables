@@ -24,8 +24,10 @@ test_that("built-in datasets return correctly", {
 })
 
 
-test_that("iotables_download() handles Eurostat download + nesting correctly", {
-  suppressPackageStartupMessages(library(mockery, quietly = TRUE))
+test_that("iotables_download() handles Eurostat 
+          download + nesting correctly", {
+  suppressPackageStartupMessages(
+    library(mockery, quietly = TRUE))
 
   fake_data <- data.frame(
     geo = c("BE", "BE"),

@@ -32,7 +32,7 @@ uk_test_results <- iotables:::uk_2010_results_get()
 
 For the actual symmetric input-output table (see ) you can use the download function originally designed for the Eurostat bulk downloader. 
 
-```{r downloaded_excel_data}
+```{r downloaded_excel_data, warning=FALSE}
 library(iotables)
 data(uk_2010_data)
 uk_siot <- iotable_get(
@@ -54,15 +54,18 @@ uk_published_inverse <- iotable_get(
 The matrix of coefficients is described on page 14-15 and the data can be found in the _Matrix of coefficients (product by product) sheet_ of the Excel file. 
 
 ```{r compare_coeff}
-uk_input_coeff <- input_coefficient_matrix_create(data_table = uk_siot)
+uk_input_coeff <- input_coefficient_matrix_create(
+  data_table = uk_siot)
+
+names(uk_input_coeff) <- tolower(names(uk_input_coeff))
 
 coeff_comparison <- select(uk_input_coeff, 1) %>%
   left_join(uk_published_coeff, by = "prod_na")
 
 test_that("correct data is returned", {
   expect_equal(
-    round(uk_input_coeff[, 2:8], 8),
-    round(coeff_comparison[, 2:8], 8)
+    round(as.numeric(unlist(uk_input_coeff[, 2:8], 8))),
+    round(as.numeric(unlist(coeff_comparison[, 2:8], 8)))
   )
 })
 ```
@@ -119,7 +122,8 @@ iotables:::create_knitr_table(
   data_table = employment_effects[1:10, ],
   digits = 4,
   caption = "Comparison of Calculated And Published Employment Cost Effects",
-  col.names = c("industry code", "row label", "calculated", "published"),
+  col.names = c("industry code", "row label", 
+                "calculated", "published"),
   col_width = c(2, 11, 3, 3)
 )
 ```
