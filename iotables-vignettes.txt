@@ -1,0 +1,1746 @@
+---
+title: "Environmental Impacts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Environmental Impacts}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setupknitr, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+load(system.file(
+  file.path("extdata", "environmental_impact_vignette.rda"),
+  package = "iotables"
+))
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library(iotables)
+library(dplyr, quietly = TRUE)
+library(tidyr, quietly = TRUE)
+```
+
+In this example, we show which economic activities contribute most to greenhouse gas emissions in Belgium. We want to know how much an additional unit of production increases the CO₂-equivalent of various greenhouse gases, including methane (CH₄), nitrous oxide (N₂O), and fluorinated gases (e.g., chlorofluorocarbons, hydrochlorofluorocarbons, and halons).
+
+While CO₂ is emitted in the greatest quantity, it is not the only culprit for global warming, and fluorinated gases have a particularly high potential to increase the greenhouse effect; therefore, in this example, we will work with the combined CO₂-equivalent effect of all greenhouse gases, abbreviated with `GHG`.
+
+## Importing the data
+
+The following expression will import the symmetric input-output table for Belgium (product-by-product, ESA 2010 transmission `naio_10_cp1700`). The \`stk_flow = "TOTAL"\`\`makes clear that we are not only considering effects in the domestic (Belgian) economy, but imports, too, because TOTAL covers both domestic and imported intermediate and final uses (ESA 2010 code TOTAL = DOM + IMP)
+
+More about importing and working with matrices can be found in the articles ([Introduction to iotables](https://iotables.dataobservatory.eu/articles/intro.html), [Working with Eurostat Data](https://iotables.dataobservatory.eu/articles/working_with_eurostat.html).)
+
+```{r getiotable, eval=FALSE}
+# For faster building this data can be loaded from "../extdata/environmental_impact_vignette.rda"
+BE <- iotable_get(
+  source = "naio_10_cp1700",
+  geo = "BE",
+  year = 2020,
+  labelling = "short",
+  unit = "MIO_EUR",
+  stk_flow = "TOTAL"
+)
+```
+
+The following expression gets the the greenhouse gas emissions in CO₂ CO₂ equivalent thousand tons for Belgium in 2020. Under the hood, we download the air emissions accounts from the Eurostat data warehouse. Air Emissions Accounts (AEA), an official satellite account compiled according to the SEEA-CF (*System of Environmental-Economic Accounting 2012: Central Framework*), present data on air emissions in a way that is fully compatible with the concepts, principles and data of the national accounts, but needs further adjustment to input-output tables, which is accomplished by `airpol_get()`
+
+```{r getairpol, eval=FALSE}
+# For faster building this data has been loaded from "../extdata/environmental_impact_vignette.rda"
+ghg <- airpol_get(
+  airpol = "GHG",
+  geo = "BE",
+  year = 2020,
+  unit = "THS_T"
+)
+```
+
+See `?airpol_get` for the type of air pollutants that you can add to a European standard SIOT. In this case, we will first use the calculated CO₂-equivalent of mix of gases. We are calculating in thousands of tons in this case (`unit="THS_T"`).
+
+Because we work with the `naio_10_cp1700` matrix, which is derived from product x product sources, the industry names of the SIOT start with `CPA`.
+
+```{r siotnames}
+names(BE)[1:3]
+```
+
+The AEA uses NACE Rev. 2 (industry basis):
+
+```{r ghgnames}
+names(ghg)[1:3]
+```
+
+The following utility will adjust the supplementary data. This corresponds to the bridge matrix (B) defined in Eurostat Manual §15.4.2 that is used to transform industry-based extensions to product-based form.
+
+You do not need to make this step if you work with `naio_10_cp1750` SIOT data, which is estimated from industry x industry sources, and it uses NACE-like abbreviations.
+
+```{r convertocpa}
+ghg_prod <- convert_industry_to_product(ghg)
+names(ghg_prod)[1:3]
+```
+
+## Direct and multiplied effects
+
+The direct effects will show how many thousand tons of extra greenhouse gases will be emitted per million euros of output at basic prices (t CO₂-eq / million €) from Belgium's industries. We are adding with `supplementary_add()`—which wraps `rows_add()`—the greenhouse gas vector in a conforming form to inter-industry matrix of Belgium. We will only print the top five emitters.
+
+```{r ghgindicators}
+be_io <- BE %>%
+  supplementary_add(ghg_prod)
+
+ghg_indicator <- input_indicator_create(
+  data_table = be_io,
+  input_row  = "GHG_emission"
+)
+```
+
+The greenhouse gas intensity indicator (direct emissions per unit of output):
+
+```{r ghgindicator}
+# Only the top 5 is printed, rename, arrange and top_n are tidyverse functions:
+ghg_indicator %>%
+  vector_transpose_longer(.keep = TRUE) %>%
+  rename(GHG_emission_indicator = .data$value) %>%
+  arrange(-.data$GHG_emission_indicator) %>%
+  top_n(5)
+```
+
+In Belgium (based on the 2020 structure of the economy and considering 2020 emission levels) the most greenhouse gas intensive sectors are the usual suspects, but with a bit surprising top emitter.
+
+| NACE code | Activity |
+|:----------------------------|:-----------------------------------------:|
+| A03 | Fishing and aquaculture |
+| A01 | Crop and animal production, hunting and related service activities |
+| H51 | Air transport |
+| C23 | Manufacture of other non-metallic mineral products |
+| D | Electricity, gas, steam and air conditioning supply |
+
+This indicator shows only the direct greenhouse-gas emissions (CO₂, CH₄, N₂O and fluorinated gases) generated by each economic activity itself. It does not yet include the indirect emissions that occur along the value chain — the upstream supplier industries that provide intermediate inputs (backward linkages) or the downstream users that purchase and transform the outputs (forward linkages).
+
+To capture the full environmental impact of final demand, these indirect effects are estimated using the Leontief inverse, which traces how additional demand for one product propagates through all interconnected industries.
+
+The category *Manufacture of other non-metallic mineral products* requires some clarification. It covers a range of activities transforming mined or quarried non-metallic minerals — such as sand, gravel, stone, clay and refractory materials — by grinding, mixing, cutting, shaping or firing them into products for intermediate or final use. In practice, these are largely construction-related materials, so this sector reflects the environmental footprint of the building-products supply chain.
+
+Let's make a reality check, and calculate only with CO₂:
+
+```{r getco2indicators, eval=FALSE}
+co2 <- airpol_get(
+  airpol = "CO2",
+  geo = "BE",
+  year = 2020,
+  unit = "THS_T"
+)
+```
+
+```{r co2indicators}
+be_io_c <- BE %>%
+  supplementary_add(
+    co2 %>% convert_industry_to_product()
+  )
+
+co2_indicator <- input_indicator_create(
+  data_table  = be_io_c,
+  input_row   = "CO2_emission"
+)
+
+# Only the top 5 is printed:
+co2_indicator %>%
+  vector_transpose_longer(.keep = TRUE) %>%
+  rename(CO2_emission_indicator = .data$value) %>%
+  arrange(-.data$CO2_emission_indicator) %>%
+  top_n(5)
+```
+
+*Crop and animal production, hunting and related service activities* falls out, and *CPA_H50 Water transport* comes back. Are those barges really so clean? And what happened with the agriculture?
+
+Let's check methane, which is a far more potent green house gas than CO₂.
+
+```{r getmethaneindicators, eval=FALSE}
+methane <- airpol_get(
+  airpol = "CH4",
+  geo = "BE",
+  year = 2020,
+  unit = "THS_T"
+)
+```
+
+```{r methaneindicators}
+be_io_m <- BE %>%
+  supplementary_add(
+    methane %>% convert_industry_to_product()
+  )
+
+methane_indicator <- input_indicator_create(
+  data_table = be_io_m,
+  input_row  = "CH4_emission"
+)
+
+# Only the top 5 is printed:
+methane_indicator %>%
+  vector_transpose_longer(.keep = TRUE) %>%
+  rename(CH4_emission_indicator = .data$value) %>%
+  arrange(-.data$CH4_emission_indicator) %>%
+  top_n(5)
+```
+
+| NACE code | Activity |
+|:----------------------------|:-----------------------------------------:|
+| A01 | Crop and animal production, hunting and related service activities |
+| E37-39 | Sewerage, waste management, remediation activities |
+| D | Electricity, gas, steam and air conditioning supply |
+| B | Mining and quarrying |
+| A02 | Forestry and logging |
+
+The appearance of *Mining and quarrying* is important, because it is the main input for the *Manufacture of other non-metallic mineral products*. Their effect may or may not be combined *in Belgium*, because the Belgian manufacturers can import mined or quarried products, too.
+
+## Total effects
+
+The multiplier considers these indirect effects, too. The top five polluters remain the same, but their ordering changes. *Crop and animal production, hunting and related service activities* goes ahead of *Fishing and aquaculture*---because methane is a more potent green house gas than CO₂. Cattle and sheep emit plenty of methane, and there are plenty of cattle and sheep in Belgium. The reason why it is important to consider these effects for each and every country, or, when possible, for regions, is that different countries produce different crops and animals. Producing poultry is far less problematic from a green house emission point of view than producing beef products.
+
+As expected, the *Manufacture of other non-metallic mineral products* gets ahead of *Air transport* as it is highly interrelated with *Mining and quarrying*. Making building more sustainable would be a great achievement, but there is no really clear path: as we can see, *Forestry and logging* come with their problems, too.
+
+```{r ghgmultiplier, message=FALSE, eval=FALSE}
+I_be <- input_coefficient_matrix_create(
+  data_table = BE,
+  digits = 4
+) %>%
+  leontief_inverse_create()
+
+ghg_multipliers <- multiplier_create(
+  input_vector = ghg_indicator,
+  Im = I_be,
+  multiplier_name = "GHG_multiplier",
+  digits = 4
+)
+
+# Only the top 5 is printed:
+ghg_multipliers %>%
+  vector_transpose_longer(.keep = TRUE) %>%
+  rename(GHG_multiplier = .data$value) %>%
+  arrange(-.data$GHG_multiplier) %>%
+  top_n(5)
+```
+
+## Validation Summary
+
+All analytical and extension functions used in this vignette were validated against the official numerical examples published in **Beutel (2008)**, *Eurostat Manual of Supply, Use and Input–Output Tables* (Luxembourg: Office for Official Publications of the European Communities).\
+The table below lists the correspondence between each function and the reference table reproduced during package testing.
+
+```{r validation, results='asis'}
+cat(knitr::kable(
+  data.frame(
+    Function = c(
+      "input_coefficient_matrix_create()",
+      "leontief_matrix_create()",
+      "leontief_inverse_create()",
+      "supplementary_add()",
+      "input_indicator_create()",
+      "multiplier_create()"
+    ),
+    Concept = c(
+      "Direct requirements (A)",
+      "Leontief matrix (I − A)",
+      "Total requirements (L = (I − A)⁻¹)",
+      "Environmental extension (CO₂, CH₄)",
+      "Input indicators (GVA, Compensation)",
+      "Total multipliers (GVA, Employment)"
+    ),
+    Table = c("15.6", "15.9", "15.10", "15.13", "15.14", "15.16"),
+    Page = c("485", "487", "488", "494", "498", "503–504")
+  ),
+  caption = "Cross-reference of package functions with Eurostat Manual (Beutel 2008)"
+))
+```
+
+All functions were numerically cross-checked against the corresponding Eurostat tables within rounding tolerance (\< 1e-3), confirming that the `iotables` analytical pipeline—\
+**A → (I − A) → L → extensions → indicators → multipliers**—\
+faithfully reproduces the canonical Eurostat and UN SNA 2010 results.
+
+```{r savevignettedata, eval=FALSE}
+save(methane, co2, ghg, BE,
+  file = here::here(
+    "inst", "extdata", "environmental_impact_vignette.rda"
+  )
+)
+```
+---
+title: "Introduction to iotables"
+author: "Daniel Antal, based on the work of Jorg Beutel"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to iotables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setupknitr, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r setup,  message=FALSE}
+library(iotables)
+library(dplyr, quietly = T)
+library(tidyr, quietly = T)
+```
+
+This introduction shows the reproducible workflow of iotables with the examples of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). by Joerg Beutel (*Eurostat Manual*).
+
+This vignette uses `library(tidyverse)`, more particularly `dplyr` and `tidyr`, just like all analytical functions of `iotables`.  Even if you do not use `tidyverse`, this packages will be installed together with `iotables`. These functions are only used in the vignette to print the output, and they are not essential for the examples.
+
+## Germany sample files
+
+The `germany_1995` dataset is a simplified 6x6 sized SIOT taken from the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (page 481). It is brought to a long form similar to the Eurostat bulk files. The testthat infrastructure of the iotables package is checking data processing functions and analytical calculations against these published results.
+
+The following data processing functions select and order the data from the Eurostat-type bulk file. Since the first version of this package, Eurostat moved all SIOT data products to the ESA2010 vocabulary, but the manual still follows the ESA95 vocabulary. The labels of the dataset were slightly changed to match the current metadata names. The changes are minor and self-evident, the comparison of the `germany_1995` dataset and the Manual should cause no misunderstandings.
+
+```{r iotables}
+germany_io <- iotable_get(labelling = "iotables")
+input_flow <- input_flow_get(
+  data_table = germany_io,
+  households = FALSE
+)
+
+de_output <- primary_input_get(germany_io, "output")
+print(de_output[c(1:4)])
+```
+
+The `input_flow()` function selects the first quadrant, often called the input flow matrix, or inter-industry matrix, from the German input-output table. The `primary_input_get()` selects one of the primary inputs, in this case, the output from the table.
+
+## Direct effects
+
+The input coefficient matrix shows what happens in the whole domestic economy when an industry is facing additional demand, and it increases production. In the Germany example, all results are rounded to 4 digits for easier comparison with the Eurostat manual.
+
+The input coefficients for domestic intermediates are defined in the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) on page 486. You can check the following results against Table 15.8 of the Eurostat manual. (Only the top-right corner of the resulting input coefficient matrix is printed for readability.)
+
+\deqn{sum_{i=1}^n X_i}
+
+The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the *Eurostat Manual*.
+
+(9) \deqn{a_{ij} = X_{ij} / x_{j}}{a_ij = X_ij / x_j}  [recap: (43) is the same, and the same equation is (2) on page 484 with comparative results]
+
+It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.
+
+```{r inputcoeff, echo=TRUE}
+de_input_coeff <- input_coefficient_matrix_create(
+  data_table = germany_io,
+  digits = 4
+)
+
+## which is equivalent to:
+de_input_coeff <- coefficient_matrix_create(
+  data_table = germany_io,
+  total = "output",
+  return_part = "products",
+  households = FALSE,
+  digits = 4
+)
+
+print(de_input_coeff[1:3, 1:3])
+```
+These results are identical after similar rounding to the Table 15.6 of the Manual (on page 485.)
+
+Similarly, the output coefficient matrix is defined in the following way:
+
+(5)  \eqn{o_{ij}} = \eqn{x_{ij} / x_{i}}
+
+\eqn{o_{ij}} = output coefficient for domestic goods and services (i = 1, ..., 6; j = 1, ..., 6)
+\eqn{x_{ij}= flow of commodity i to sector j
+\eqn{x_{i} = output of sector i
+
+
+```{r outputcoeff, echo=FALSE}
+de_out <- output_coefficient_matrix_create(
+  data_table = germany_io,
+  total = "tfu",
+  digits = 4
+)
+
+# Rounding is slightly different in the Eurostat manual:
+print(de_out[1:3, 1:3])
+```
+
+These results are identical after similar rounding to the Table 15.7 of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) on page 485. The diagonal values are the same in the input coefficient matrix and the output coefficient matrix.
+
+The Leontief matrix is derived from Leontief equation system.
+
+(19) \eqn{(I-A)x = y}
+
+The Leontief matrix is defined as \eqn{(I-A)} and it is created with the `leontief_matrix_create()` function.
+
+The Leontief inverse is \eqn{(I-A)^{-1}} and it is created with the `leontief_inverse_create()` function from the Leontief-matrix.
+
+```{r leontief}
+L_de <- leontief_matrix_create(
+  technology_coefficients_matrix = de_input_coeff
+)
+I_de <- leontief_inverse_create(de_input_coeff)
+I_de_4 <- leontief_inverse_create(
+  technology_coefficients_matrix = de_input_coeff,
+  digits = 4
+)
+print(I_de_4[, 1:3])
+```
+
+*You can check the Leontief matrix against Table 15.9 on page 487 of the* Eurostat Manual, *and the Leontief inverse against Table 15.10 on page 488. The ordering of the industries is different in the manual.*
+
+## Creating indicators
+
+### Creating technical indicators
+
+Technical indicators assume constant returns to scale and fixed relationship of all inputs to each industry. With these conditions the technical input coefficients show how much input products, labour or capital is required to produce a unit of industry output.
+
+(60) $a_{ij}$ = $z_{ij}$ / $x_j$  [technical input coefficients]
+
+The helper function `primary_input_get()` selects a row from the SIOT and brings it to a conforming form. The `input_indicator_create()` creates the vector of technical input coefficients.
+
+```{r employment_indicator}
+de_emp <- primary_input_get(germany_io,
+  primary_input = "employment_domestic_total"
+)
+
+de_emp_indicator <- input_indicator_create(
+  data_table = germany_io,
+  input_row  = "employment_domestic_total"
+)
+
+vector_transpose_longer(de_emp_indicator)
+```
+
+Often we want to analyse the effect of growing domestic demand on some natural units, such as employment or $CO_2$ emissions. The only difficulty is that we need data that is aggregated or disaggregated precisely with the same industry breakup as our SIOT table.
+
+European employment statistics have greater detail than our tables, so employment statistics must be aggregated to conform the 60 (61, 62) columns of the SIOT.  There is a difference in the columns based on how national statistics offices treat imputed real estate income and household production, and trade margins. Czech SIOTs are smaller than most SIOTs because they do not have these columns and rows.
+
+In another vignette we will show examples on how to work with these real-life data. For the sake of following the calculations, we are continuing with the simplified 1990 German data.
+
+### Creating income indicators
+
+The input coefficients for value added are created with `input_indicator_create()`.
+
+```{r gva_indicator}
+de_gva <- primary_input_get(germany_io,
+  primary_input = "gva"
+)
+
+de_gva_indicator <- input_indicator_create(
+  data_table  = germany_io,
+  input_row   = "gva"
+)
+
+vector_transpose_longer(de_gva_indicator)
+```
+
+
+This is equal to the equation on page 495 of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0). The results above can be checked on the bottom of page 498.
+
+(44) $w_{ij}$ = $W_{j}$ / $x_j$  [input coefficients for value added]
+
+You can create a matrix of input indicators, or direct effects on (final) demand with `direct_supply_effects_create()`. The function by default creates input requirements for final demand.  With the code below it re-creates the Table 15.14 of the *Eurostat Manual*.
+
+```{r input_indicator}
+direct_effects_de <- coefficient_matrix_create(
+  data_table  = germany_io,
+  total       = "output",
+  return_part = "primary_inputs"
+)
+
+direct_effects_de[1:6, 1:4]
+```
+
+*The 'total' row above is labelled as Domestic goods and services in the* Eurostat Manual. *The table can be found on page 498.*
+
+## Multipliers
+
+### Income multipliers
+
+The SIOTs contain (with various breakups) three types of income:
+
+* Employee wages, which is usually a proxy for all household income.
+
+* Gross operating surplus, which is a form of corporate sector income.
+
+* Taxes that are the income of government.
+
+These together make gross value added (GVA).  If you are working with SIOTs that use basic prices, then GVA = GDP at producers' prices, or basic prices.
+
+The GVA multiplier shows the additional gross value created in the economy if demand for the industry products is growing with unity. The wage multiplier (not shown here) shows the increase in household income.
+
+The following equation is used to work with different income effects and multipliers:
+
+(63) Z = B(I-A)^-1^
+
+B = vector of input coefficients for wages or GVA or taxes.
+
+Z = direct and indirect requirements for wages (or other income)
+
+The indicator shows that manufacturing has the lowest, and other services has the highest gross value added component. This is hardly surprising, because manufacturing needs a lot of materials and imported components. When the demand for manufacturing in the domestic economy is growing by 1 unit, the gross value added is `r as.numeric(de_gva_indicator[3])`.
+
+*You can check these values against the Table 15.16 of the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) on page 501 (row 10).*
+
+You can recreate the whole matrix, when the data permits, with `input_multipliers_create()` as shown here. Alternatively, you can create your own custom multipliers with `multiplier_create()` as shown in the following example.
+
+```{r inputmultipliers}
+input_reqr <- coefficient_matrix_create(
+  data_table  = iotable_get(),
+  total       = "output",
+  return_part = "primary_inputs"
+)
+
+multipliers <- input_multipliers_create(
+  input_requirements = input_reqr,
+  Im = I_de
+)
+
+multipliers
+```
+
+*You can check these results against the Table 15.16 on page 501 of the* Eurostat Manual. *The label 'total' refers to domestic intermediaries. The ordering of the rows is different from the* Manual.
+
+These multipliers are Type-I multipliers. The type-I GVA multiplier shows the total effect in the domestic economy. The initial extra demand creates new orders in the backward linking industries, offers new product to build on in the forward-linking industry and creates new corporate and employee income that can be spent. Type-II multipliers will be introduced in a forthcoming vignette [not yet available.]
+
+### Employment multipliers
+
+The E matrix contains the input coefficients for labour (created by `input_indicator_create()`). The following matrix equation defines the employment multipliers.
+
+(64) Z = E(I-A)^-1^
+
+The `multiplier_create()` function performs the matrix multiplication, after handling many exceptions and problems with real-life data, such as different missing columns and rows in the national variations of the standard European table.
+
+Please send a bug report on [Github](https://github.com/rOpenGov/iotables/issues) if you run into further real-life problems.
+
+```{r employment_multiplier}
+de_emp_indicator <- input_indicator_create(
+  data_table = germany_io,
+  input = "employment_domestic_total"
+)
+
+employment_multipliers <- multiplier_create(
+  input_vector = de_emp_indicator,
+  Im = I_de,
+  multiplier_name = "employment_multiplier",
+  digits = 4
+)
+
+vector_transpose_longer(employment_multipliers,
+  values_to = "employment_multipliers"
+)
+```
+
+You can check against the [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) page 501 that these values are correct and on page 501 that the highest employment multiplier is indeed $z_i$ = `r max (as.numeric(employment_multipliers), na.rm=TRUE)`, the employment multiplier of agriculture.
+
+For working with real-life, current employment data, there is a helper function to retrieve and process Eurostat employment statistics to a SIOT-conforming vector `employment_get()`. This function will be explained in a separate vignette.
+
+### Output multipliers
+
+`Output multipliers` and `forward linkages` are calculated with the help of output coefficients for product as defined on p486 and p495 of the the Eurostat Manual. The Eurostat Manual uses the definition of _output at basic prices_ to define output coefficients which is no longer part of SNA as of SNA2010.
+
+(5) $b_{ij}$ = $X_{ij}$ / $x_i$  [also (45) output coefficients for products / intermediates].
+
+$x_i$: output of sector i
+
+```{r outputmult}
+de_input_coeff <- input_coefficient_matrix_create(
+  data_table = iotable_get(),
+  digits = 4
+)
+
+output_multipliers <- output_multiplier_create(input_coefficient_matrix = de_input_coeff)
+
+vector_transpose_longer(output_multipliers,
+  values_to = "output_multipliers"
+)
+```
+
+*These multipliers can be checked against the Table 15.15 (The 8th, 'Total' row) on the page 500 of the* Eurostat Manual.
+
+## Interindustrial linkage analysis
+
+The `backward linkages`, i.e. demand side linkages, show how much incremental demand is created in the supplier sector when an industry is facing increased demand, produces more, and requires more inputs from suppliers.
+
+`Forward linkages` on the other hand show the effect of increased production, which gives either more or cheaper supplies for other industries that rely on the output of the given industry.
+
+For example, when a new concert is put on stage, orders are filled for real estate, security services, catering, etc, which show in the backward linkages. The concert attracts visitors that creates new opportunities for the hotel industry in forward linkages.
+
+### Backward linkages
+
+```{r backward}
+de_coeff <- input_coefficient_matrix_create(iotable_get(), digits = 4)
+I_de <- leontief_inverse_create(de_coeff)
+
+vector_transpose_longer(backward_linkages(I_de),
+  values_to = "backward_linkage_strength"
+)
+```
+
+*You can check the results against Table 15.19 on page 506 of the* Eurostat Manual.
+
+Manufacturing has the highest backward linkages, and other services the least. An increased demand for manufacturing usually affects supplier industries. Service industry usually have a high labour input, and their main effect is increased spending of the wages earned in the services.
+
+### Forward linkages
+
+Forward linkages show the strength of the new business opportunities when industry i starts to increase its production. Whereas backward linkages show the increased demand of the suppliers in industry i, forward linkages show the increased availability of inputs for other industries that rely on industry i as a supplier.
+
+The forward linkages are defined as the sums of the rows in the Ghosh-inverse. The Ghosh-inverse is not explicitly named in the *Eurostat Manual*, but it is described in more detail in the United Nations' similar manual [Handbook on Supply and Use Tables and Input-Output Tables with Extensions and Applications](https://unstats.un.org/unsd/nationalaccount/docs/SUT_IOT_HB_Final_Cover.pdf) (see pp 636--638).
+
+```{r ghoshinverse}
+de_out <- output_coefficient_matrix_create(
+  data_table = germany_io,
+  total = "final_demand",
+  digits = 4
+)
+
+ghosh_inverse_create(de_out, digits = 4)[, 1:4]
+```
+
+The Ghosh-inverse is \deqn{G = (I-B)^-1}
+
+where B = the output coefficient matrix.
+
+The forward linkages are the row-wise sums of the Ghosh-inverse
+
+
+```{r forwardlinkages}
+forward_linkages(output_coefficient_matrix = de_out)
+```
+
+*You can check the values of the forward linkages against the Table 15.20 on page 507 of* the Eurostat Manual.
+
+## Environmental Impacts
+
+At last, let's extend the input-output system with emissions data. For getting Eurostat's air pollution account data, use `airpol_get()`. We have included in the package the German emissions data from the *Eurostat Manual*.
+
+```{r emissions}
+data("germany_airpol")
+emissions_de <- germany_airpol[, -3] %>%
+  vector_transpose_wider(
+    names_from = "iotables_col",
+    values_from = "value"
+  )
+```
+```{r emissionsprint}
+emissions_de
+```
+
+```{r outputbp}
+output_bp <- output_get(germany_io)
+```
+
+The output coefficients are created from the emission matrix with
+\eqn{B_{ij}} = \eqn{Em_{ij} / output_{j}}
+
+```{r emmissioncoeffs}
+emission_coeffs <- germany_io %>%
+  supplementary_add(emissions_de) %>%
+  input_indicator_create(input_row = as.character(emissions_de$airpol), digits = 4)
+```
+
+The emissions coefficients are expressed as 1000 tons per millions of euro output (at basic prices).
+
+```{r emmissioncoeffsprint}
+emission_coeffs[-1, 1:3]
+```
+
+And the multipliers (which include both the direct and indirect emissions of the industries) are created with
+
+\eqn{B(I-A)^{-1}}
+
+You can create a single multiplier with `?multiplier_create`.
+
+```{r CO2multiplier}
+multiplier_create(
+  input_vector = emission_coeffs[2, ],
+  Im = I_de,
+  multiplier_name = "CO2_multiplier",
+  digits = 4
+)
+```
+
+To create a tidy table of indicators of using a loop:
+
+```{r emissionmultipliers}
+names(emission_coeffs)[1] <- names(I_de)[1]
+emission_multipliers <- cbind(
+  key_column_create(
+    names(emission_coeffs)[1],
+    gsub("_indicator", "_multiplier", unlist(emission_coeffs[-1, 1]))
+  ),
+  do.call(
+    rbind,
+    lapply(
+      2:nrow(emission_coeffs),
+      function(x) equation_solve(emission_coeffs[x, ], I_de)
+    )
+  ) %>% as.data.frame()
+)
+
+emission_multipliers[, -1] <- round(emission_multipliers[, -1], 4)
+
+emission_multipliers[1:3, 1:4]
+```
+
+*You can check the results against the Table 15.13 of the* [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0)  *on page 494.*
+
+Because the equation of the final demand is:
+
+`r paste0("final_demand = ", paste(names(germany_io)[9:13], collapse = " + "))`
+
+we can calculate the final demand for the products of industries with creating the row-wise sums of the appropriate columns
+
+```{r finaldemand}
+final_demand <- rowSums(germany_io[1:6, 9:13])
+```
+
+And at last the emission content of the final demand is given by
+
+
+\eqn{Z = B(I-A)^{-1}Y}
+
+where the term
+
+\eqn{B(I-A)^{-1}}
+
+is the definition of the emission multipliers.
+
+```{r emissioncontent}
+emission_content <- as.data.frame(
+  round(as.matrix(emission_multipliers[1:3, -1]) %*% diag(final_demand), 0)
+)
+names(emission_content) <- names(emission_multipliers[, -1])
+
+emission_content <- data.frame(
+  iotables_row = gsub("_multiplier", "_content", emission_multipliers[1:3, 1])
+) %>%
+  cbind(emission_content)
+
+emission_content[, 1:4]
+```
+
+*This final result can be found on the bottom of the page 494 of the* [Eurostat Manual of Supply, Use and Input-Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0).
+---
+title: "Metadata Vocabularies for Input–Output Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Metadata Vocabularies for Input–Output Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(iotables)
+```
+
+## Import and Normalisation Workflow
+
+The five Eurostat vocabularies —\
+`ind_ava`, `ind_use`, `prd_ava`, `prd_use`, and `cpa2_1` — were imported directly from the official Eurostat metadata registry (<https://dd.eionet.europa.eu/vocabulary/eurostat/>).\
+Each dataset mirrors the structure of its corresponding SDMX codelist and preserves Eurostat’s identifiers and validity information.
+
+### Data Sources
+
+| Vocabulary | Description | Source URL |
+|------------------------|------------------------|------------------------|
+| `ind_ava` | Industries, adjustments and value added (rows for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_ava/> |
+| `ind_use` | Industry uses (columns for industry × industry SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/ind_use/> |
+| `prd_ava` | Products, adjustments and value added (rows for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_ava/> |
+| `prd_use` | Product uses (columns for product × product SIOTs) | <https://dd.eionet.europa.eu/vocabulary/eurostat/prd_use/> |
+| `cpa2_1` | Statistical Classification of Products by Activity (CPA 2.1) | <https://dd.eionet.europa.eu/vocabulary/eurostat/cpa2_1/> |
+
+### Import Steps
+
+1.  **Raw Download**\
+    Each vocabulary was retrieved as an Excel export from EIONET’s vocabulary registry.
+
+2.  **Column Standardisation**\
+    Columns were renamed to a unified schema: `id, label, status, status_modified, notation, group, quadrant, numeric_order, iotables_label, block, uri`
+
+3.  **Quadrant and Block Assignment**\
+    Each item was assigned a `quadrant` and a semantic `block` consistent across vocabularies:
+
+    -   `10` = intermediate (Quadrant 1)
+
+    -   `20` = primary_inputs (Quadrant 3)
+
+    -   `30` = final_use (Quadrant 2)
+
+    -   `50` = extension / diagnostic\
+        Control totals such as *“Total supply at basic prices”* were retained as `block = "control_total"`.
+
+4.  **Ordinal Ordering**\
+    `numeric_order` was reindexed within each quadrant with consistent gaps (10, 20, …) to ensure reproducible ordering for matrix construction.
+
+5.  **URI Generation**\
+    Each code was linked to its SKOS concept using:
+
+```{r uri, eval=FALSE}
+df$uri <- sprintf(
+  "https://dd.eionet.europa.eu/vocabularyconcept/eurostat/%s/%s",
+  vocabulary_id,
+  df$notation
+)
+```
+
+6.  **Validation**\
+    Each table was checked for:
+
+    -   missing or duplicate IDs
+
+    -   monotone numeric order
+
+    -   alignment of quadrant ↔ block semantics
+
+7.  **Storage and Naming**
+
+The cleaned tibbles were stored as exported data objects:
+
+```
+data/ind_ava.rda data/ind_use.rda data/prd_ava.rda data/prd_use.rda
+```
+
+Each dataset can be loaded directly with `data(<name>)`.
+
+### Adjustments to Vocabularies
+
+Although the four Eurostat vocabularies (`ind_ava`, `ind_use`, `prd_ava`, `prd_use`) were imported directly from the official Eurostat metadata registry, some modifications were necessary to ensure compatibility with the actual Eurostat input–output datasets. The main data sources, in particular `naio_10_cp1750` and `naio_10_cp1700`, occasionally include variables that are not coded according to the published and standardised vocabularies. While these inconsistencies are usually clear to a manual user, they can create ambiguity in a reproducible workflow where automated matching is required.
+
+For example, the *product × product* SIOTs for the Slovak Republic contain a more detailed industry breakdown than that defined in prd_ava and prd_use. To maintain alignment across datasets, all 0-, 1-, and 2-digit codes from the `cpa2_1` vocabulary were imputed into the four vocabularies. Each entry includes a validity flag in the status column, indicating whether the code is valid in the official Eurostat vocabulary or was adopted from observed but non-standard codes in the data. This approach preserves reproducibility while ensuring complete coverage of all codes encountered in current Eurostat data releases.
+
+### Versioning
+
+All four vocabularies correspond to the 2025 Eurostat CPA 2.1 / ESA 2010 edition.
+---
+title: "Terminology"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Terminology}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setupvignette, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(scipen = 999)
+```
+
+## Introduction
+
+This vignette reviews the terminology used in input–output analysis, with reference to the *Eurostat Manual of Supply, Use and Input–Output Tables* (Beutel, 2008).
+
+This vignette is therefore descriptive, documenting how the `iotables` package uses *Eurostat-style terminology* consistent with ESA 2010 and the System of National Accounts (SNA 2008).
+
+```{r setup}
+library(iotables)
+```
+
+Retrieve the demo dataset, the Germany 1995 Symmetric Input-Output Table:
+
+```{r germany}
+germany_siot <- iotable_get()
+```
+
+## Structure of input–output tables
+
+An *input–output table (IOT)* describes the flow of products and services in an economy, linking industries (producers) with their inputs, outputs, and final uses. In a *symmetric input–output table (SIOT***)**, both rows and columns represent either products or industries.
+
+Eurostat distinguishes four *quadrants* of a SIOT:
+
+| Quadrant | Description | ESA 2010 / SNA 2008 Category |
+|----|----|----|
+| **I** | Intermediate consumption — flows between industries or products | *Intermediate use* |
+| **II** | Final demand — purchases by households, government, investment, exports | *Final use* |
+| **III** | Primary inputs — compensation of employees, net taxes, gross operating surplus | *Primary inputs* |
+| **IV** | Output totals — column sums at basic prices | *Output (P.1)* |
+
+Quadrants I–III correspond to the *rows* of the table, while the column totals in Quadrant IV represent the total output of each industry or product.
+
+## Core matrices and notation
+
+Input–output analysis is built on a small set of matrices and vectors.\
+The `iotables` package follows the same notation used in Beutel (2008).
+
+| Symbol | Meaning | Definition | Function in `iotables` |
+|----|----|----|----|
+| **Z** | Intermediate-consumption matrix | Flows of products between industries | `iotable_get()` |
+| **A** | Input (technical) coefficient matrix | `A_ij = Z_ij / X_j` | `input_coefficient_matrix_create()` |
+| **(I − A)** | Leontief matrix | Identity minus A | `leontief_matrix_create()` |
+| **L = (I − A)⁻¹** | Leontief inverse | Total (direct + indirect) requirements | `leontief_inverse_create()` |
+| **f** | Final-demand vector | Exogenous demand by category | retrieved from IOT |
+| **x = Lf** | Total output vector | Fundamental Leontief equation | – |
+
+**Eurostat equation references:**
+
+-   $a_ij$ = $x_ij$ / $x_j$ — technical coefficient (19), (43) identical formulations for SIOTs
+
+-   $x$ = $(I − A)⁻¹$ — total output
+
+## Input and output coefficients
+
+### Input coefficients (technical coefficients)
+
+Each element of the **input coefficient matrix** A shows the share of input *i* used in producing one unit of output of industry *j*: $$
+a_{ij} = \frac{x_{ij}}{x_j}
+$$
+
+where\
+- $a_{ij}$ = input coefficient for domestic goods and services\
+- $x_{ij}$ = flow of product *i* to industry *j* (a cell in Quadrant I)\
+- $x_j$ = total output of industry *j*
+
+These coefficients are sometimes called **direct requirements** or **technical coefficients**.
+
+hey are computed in `iotables` by:
+
+```{r inputcoeff}
+input_coefficient_matrix_create(
+  data_table = iotable_get(source="germany_1995"),
+  digits = 4)
+```
+
+### Output coefficients
+
+The output coefficient matrix (Ghosh-type) expresses how the output of industry i is distributed across purchasing sectors j:
+
+$$o_{ij} = \frac{x_{ij}}{x_i}$$
+
+where
+
+-   $o_{ij}$ = output coefficient (distribution ratio)
+
+-   $x_{ij}$ = flow of product *i* to industry *j*
+
+-   $x_{i}$ = total output of product *i*
+
+These ratios describe the supply-side distribution structure and are computed by `output_coefficient_matrix_create()`.
+
+## Linkages between industries (inter-industry analysis)
+
+Two types of linkages are typically analysed:
+
+-   **Backward linkage** – measures the strength of a sector’s demand on its suppliers.\
+    It is given by the **column sum** of input coefficients or, when based on the Leontief inverse, includes all indirect effects through the supply chain.
+
+-   **Forward linkage** – measures the influence of a sector as a supplier to others. It is given by the **row sum** of output coefficients, describing how the sector’s output feeds into other industries.
+
+## Indicators and multipliers
+
+### Direct indicators
+
+An **input indicator** represents a specific row of the coefficient matrix A,\
+for example value added (GVA), labour, or emissions per unit of output.
+
+```{r inputindicatr}
+input_indicator_create(
+  data_table = iotable_get(), input_row = "gva")
+```
+
+### Output coefficients
+
+The output coefficients are ratios derived from quadrant I (intermediates) and quadrant II (final demand) of a sector.
+
+The `output_coefficient_matrix_create()` function creates these coefficients based on equation (5) in the Eurostat Manual.
+
+(5) $o_{ij}$ = $x_{ij}$ / $x_i$
+
+$o_{ij}$ = output coefficient for domestic goods and services (i = 1, ..., 6; j = 1, ..., 6) $x_{ij}$ = flow of commodity i to sector j $x_j$ = output of sector i
+
+## Summary of key equations
+
+| No.        | Formula                     | Description                      |
+|:-----------|:----------------------------|:---------------------------------|
+| (5)        | $o_{ij}$ = $x_{ij}$ / $x_i$ | Output coefficient (Ghosh model) |
+| (9)        | $a_{ij}$ = $x_{ij}$ / $x_j$ | Input (technical) coefficient    |
+| (19), (43) | –                           | Identical to (9) for SIOTs       |
+| (47)       | $x$ = $(I - A)^{-1}$        | Leontief model for total output  |
+| (L)        | $L$ = $(I - A)^{-1}$        | Leontief inverse                 |
+| (m)        | $m$ = $a \times L$          | Multiplier equation              |
+
+## Validation summary (Eurostat Manual, Beutel 2008)
+
+All analytical functions of `iotables` reproduce the benchmark examples from Beutel (2008), *Eurostat Manual of Supply, Use and Input–Output Tables.*
+
+| Function | Concept | Beutel Table | Page |
+|:---|:---|:---|:--:|
+| `input_coefficient_matrix_create()` | Direct requirements (A) | 15.6 | 485 |
+| `leontief_matrix_create()` | Leontief matrix $(I − A)$ | 15.9 | 487 |
+| `leontief_inverse_create()` | Total requirements ($L$ = $(I − A)^{1}$) | 15.10 | 488 |
+| `supplementary_add()` | Environmental extension (CO₂, CH₄) | 15.13 | 494 |
+| `input_indicator_create()` | Input indicators (GVA, Compensation) | 15.14 | 498 |
+| `multiplier_create()` | Total multipliers (GVA, Employment) | 15.16 | 503–504 |
+
+## References
+
+-   **Beutel, J.** (2008). *Eurostat Manual of Supply, Use and Input–Output Tables.*\
+    Luxembourg: Office for Official Publications of the European Communities.
+-   **United Nations** (2018). *Handbook on Supply and Use Tables and Input–Output Tables with Extensions and Applications*, Rev. 1.\
+    New York: United Nations.
+-   **OECD** (2021). *Inter-Country Input–Output (ICIO) Manual.* Paris: OECD Publishing.
+-   **United Nations** (2012). *System of Environmental-Economic Accounting 2012: Central Framework.*\
+    New York: United Nations.
+---
+title: "United Kingdom Input-Output Analytical Tables"
+author: "Daniel Antal, based on the work edited by Richard Wild"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{United Kingdom Input-Output Analytical Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(dplyr, quietly = TRUE)
+library(tidyr, quietly = TRUE)
+library(testthat, quietly = TRUE)
+```
+
+The [United Kingdom Input-Output Analytical Tables 2010](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html) are used for testing the `iotables` package, because they are well-documented and detailed, and organised data is available. The analytical tables are published in an Excel table. A special reader function (which is not exported) was created to read-in all sheets of the Excel table.
+
+It is unlikely these tables will be required for purposes other than validating the package. The UK IO tables for other years are available these are consistent with different Blue Books and there could therefore be important methodological and classification changes. Furthermore, ONS currently publishes ESA2010 compatible SIOTs with analytical tables annually.
+
+```{r read_control_data, eval=FALSE}
+uk_2010_data <- iotables_download(source = "uk_2010")
+save(uk_2010_data, file = file.path("data-raw", "uk_2010_data.rda"))
+uk_test_results <- iotables:::uk_2010_results_get()
+# saved as package data
+```
+
+For the actual symmetric input-output table (see ) you can use the download function originally designed for the Eurostat bulk downloader.
+
+```{r downloaded_excel_data}
+library(iotables)
+data(uk_2010_data)
+uk_siot <- iotable_get(
+  labelled_io_data = uk_2010_data,
+  source = "uk_2010_siot"
+)
+uk_published_coeff <- iotable_get(
+  labelled_io_data = uk_2010_data,
+  source = "uk_2010_coeff"
+)
+uk_published_inverse <- iotable_get(
+  labelled_io_data = uk_2010_data,
+  source = "uk_2010_inverse"
+)
+```
+
+## Matrix of Coefficients
+
+The matrix of coefficients is described on page 14-15 and the data can be found in the _Matrix of coefficients (product by product) sheet_ of the Excel file.
+
+```{r compare_coeff}
+uk_input_coeff <- input_coefficient_matrix_create(data_table = uk_siot)
+
+coeff_comparison <- select(uk_input_coeff, 1) %>%
+  left_join(uk_published_coeff, by = "prod_na")
+
+test_that("correct data is returned", {
+  expect_equal(
+    round(uk_input_coeff[, 2:8], 8),
+    round(coeff_comparison[, 2:8], 8)
+  )
+})
+```
+
+Comparing the first seven columns of the two coefficient matrices are equal to eight decimal places. Given the size of the matrixes, not all columns are compared here, but such a comparison could be performed if needed. However, it is not necessary, because the latter results would show a deviation if parts of the matrix would be different.
+
+## Leontief-inverse
+
+The Leontief-inverse is described on pages 16-17 of the article. Again, comparing the first seven numerical columns we see that the recalculated inverse and the published inverse are identical to eight decimal places.
+
+```{r compare_inverse}
+uk_calculated_inverse <- leontief_inverse_create(uk_input_coeff)
+
+inverse_comparison <- select(uk_calculated_inverse, 1) %>%
+  left_join(uk_calculated_inverse, by = "prod_na")
+```
+```{r compare_inverse_2, eval=FALSE}
+# Not evaluated in the vignette:
+test_that("correct data is returned", {
+  expect_equal(
+    round(uk_calculated_inverse[, 2:8], 8),
+    round(inverse_comparison[, 2:8], 8)
+  )
+})
+```
+
+## Employment cost effects
+
+```{r compare_effects}
+employment_effect_results <- uk_test_results %>%
+  select(uk_row_label, `Employment cost effects`)
+
+primary_inputs_uk <- coefficient_matrix_create(
+  data_table  = uk_siot,
+  total       = "output",
+  return_part = "primary_inputs"
+)
+
+employment_input <- filter(primary_inputs_uk, prod_na == "D1")
+
+employment_effects <- direct_effects_create(employment_input, uk_calculated_inverse) %>%
+  gather(prod, values, !!2:ncol(.)) %>%
+  mutate(prod_na = prod) %>%
+  select(-prod) %>%
+  left_join(select(metadata_uk_2010, prod_na, uk_row_label),
+    by = "prod_na"
+  ) %>%
+  left_join(employment_effect_results, by = "uk_row_label") %>%
+  filter(!is.na(uk_row_label)) %>%
+  select(prod_na, uk_row_label, values, `Employment cost effects`)
+
+
+iotables:::create_knitr_table(
+  data_table = employment_effects[1:10, ],
+  digits = 4,
+  caption = "Comparison of Calculated And Published Employment Cost Effects",
+  col.names = c("industry code", "row label", "calculated", "published"),
+  col_width = c(2, 11, 3, 3)
+)
+```
+
+
+The comparison of output multipliers show that our code gives the same results. Only ten industries are shown.
+
+## GVA effects
+
+GVA is not shown in the Excel table explicitly, but can be calculated as the sum of corporate income (*Operating surplus and mixed income*), household income (*Compensation of employees*) and net taxes on production (not products.)
+
+```{r gva_effects}
+uk_siot2 <- uk_siot %>%
+  filter(prod_na %in% c("B2A3G", "D1", "D29X39")) %>%
+  summarize_if(is.numeric, sum, na.rm = TRUE) %>%
+  cbind(data.frame(prod_na = "GVA"), .) %>%
+  rbind(uk_siot, .)
+
+gva_effect_results <- uk_test_results %>%
+  select(uk_row_label, `GVA effects`)
+
+gva_input <- coefficient_matrix_create(
+  data_table  = uk_siot2,
+  total       = "output",
+  return_part = "primary_inputs"
+) %>%
+  filter(prod_na == "GVA")
+
+gva_effects <- direct_effects_create(
+  gva_input,
+  uk_calculated_inverse
+) %>%
+  gather(prod, values, !!2:ncol(.)) %>%
+  mutate(prod_na = prod) %>%
+  select(-prod) %>%
+  left_join(select(metadata_uk_2010, prod_na, uk_row_label),
+    by = "prod_na"
+  ) %>%
+  left_join(gva_effect_results, by = "uk_row_label") %>%
+  filter(!is.na(uk_row_label)) %>%
+  select(prod_na, uk_row_label, values, `GVA effects`)
+
+iotables:::create_knitr_table(
+  data_table = gva_effects[1:10, ],
+  digits = 4,
+  caption = "Comparison of Calculated And Published GVA Effects",
+  col.names = c("industry code", "row label", "calculated", "published"),
+  col_width = c(2, 11, 3, 3)
+)
+```
+
+## Employment cost multipliers
+
+Turning to multipliers, using the same inputs we get them back with the following code.
+
+```{r compare_emp_multipliers}
+empc_multiplier_results <- uk_test_results %>%
+  select(uk_row_label, `Employment cost multiplier`)
+
+empc_indicator_uk <- coefficient_matrix_create(
+  data_table  = uk_siot,
+  total       = "output",
+  return_part = "primary_inputs"
+) %>%
+  filter(prod_na == "D1")
+
+empc_multipliers <- input_multipliers_create(
+  input_requirements = empc_indicator_uk,
+  uk_calculated_inverse
+) %>%
+  gather(prod, values, !!2:ncol(.)) %>%
+  mutate(prod_na = prod) %>%
+  select(-prod) %>%
+  left_join(select(metadata_uk_2010, prod_na, uk_row_label),
+    by = "prod_na"
+  ) %>%
+  left_join(empc_multiplier_results, by = "uk_row_label") %>%
+  filter(!is.na(uk_row_label)) %>%
+  select(prod_na, uk_row_label, values, `Employment cost multiplier`)
+
+iotables:::create_knitr_table(
+  data_table = empc_multipliers[1:10, ], digits = 4,
+  caption = "Comparison of Calculated And Published Employment Cost Multipliers",
+  col.names = c("industry code", "row label", "calculated", "published"),
+  col_width = c(2, 11, 3, 3)
+)
+```
+
+## GVA multipliers
+
+Following from the GVA effects, after summarizing GVA and adding it to the input requirements we can calculate the `GVA multipliers`.
+
+```{r gva_comp, eval=FALSE}
+gva_multipliers <- input_multipliers_create(
+  input_requirements = gva_input,
+  uk_calculated_inverse
+) %>%
+  gather(prod, values, !!2:ncol(.)) %>%
+  mutate(prod_na = prod) %>%
+  select(-prod) %>%
+  left_join(select(metadata_uk_2010, prod_na, uk_row_label),
+    by = "prod_na"
+  ) %>%
+  left_join(gva_multiplier_results, by = "uk_row_label") %>%
+  filter(!is.na(uk_row_label)) %>%
+  select(prod_na, uk_row_label, values, `GVA multiplier`)
+
+iotables:::create_knitr_table(
+  data_table = gva_multipliers[1:10, ],
+  digits = 4,
+  caption = "Comparison of Calculated And Published GVA Multipliers",
+  col.names = c(
+    "industry code", "row label",
+    "calculated", "published"
+  ),
+  col_width = c(2, 11, 3, 3)
+)
+```
+
+
+## Output multipliers
+
+At last, the comparison of output multipliers show that our code gives the same results. Only ten industries are shown.
+
+```{r compare_output_multipliers}
+output_multiplier_results <- uk_test_results %>%
+  select(uk_row_label, `Output multiplier`)
+
+uk_output_multipliers <- output_multiplier_create(uk_input_coeff) %>%
+  gather(prod, values, !!2:ncol(.)) %>%
+  mutate(prod_na = prod) %>%
+  select(-prod) %>%
+  left_join(select(metadata_uk_2010, prod_na, uk_row_label),
+    by = "prod_na"
+  ) %>%
+  left_join(output_multiplier_results,
+    by = "uk_row_label"
+  ) %>%
+  filter(!is.na(uk_row_label)) %>%
+  select(prod_na, uk_row_label, values, `Output multiplier`)
+
+iotables:::create_knitr_table(
+  data_table = uk_output_multipliers[1:10, ],
+  digits = 4,
+  caption = "Comparison of Calculated And Published Output Multipliers",
+  col.names = c(
+    "industry code", "row label",
+    "calculated", "published"
+  ),
+  col_width = c(2, 11, 3, 3)
+)
+```
+
+---
+title: "Working With Eurostat Data"
+author: "Daniel Antal, CFA"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working With Eurostat Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(iotables)
+require(dplyr)
+```
+
+Symmetric input–output tables and their auxiliary tables are among the most complex and structured statistical products. They describe relationships across roughly 63×63 industries, covering the supply and use of GDP/GNP, as well as income distribution, trade and transport margins, and tax receipts for each industry.
+
+Eurostat publishes symmetric input–output data in long form. Working with these data requires knowledge of the [Eurostat SNA vocabulary](https://dd.eionet.europa.eu/vocabulary/eurostat/na_item/view) to arrange them in the correct order of rows and columns. The preprocessing functions of the `iotables` package perform this task.
+
+Beyond managing an extensive and sometimes poorly documented vocabulary, users often face “real-world” data issues such as missing rows or columns in some Member States or spelling inconsistencies in the vocabulary. Many hours of testing and exception handling have gone into the current processing functions, but further issues may still appear. Most testing has been carried out on `product x product` type SIOTs, as these are the most common among Member States. The functions also support `industry x industry` SIOTs, though additional vocabulary exceptions may occur in these cases. Please report such issues on [GitHub](https://github.com/rOpenGov/iotables/issues).
+
+You are most likely to work with the product × product tables. For information about the availability of other data, see `?iotables_download`.
+
+The analytical functions are described in more detail in the Germany 1990 vignette. The numbering of the equations follows the [Eurostat Manual of Supply, Use and Input–Output Tables](https://ec.europa.eu/eurostat/documents/3859598/5902113/KS-RA-07-013-EN.PDF/b0b3d71e-3930-4442-94be-70b36cea9b39?version=1.0) (Chapter 15). The manual was prepared in 2008 under the ESA95 standards. Eurostat now uses ESA2010 definitions, and some indicators in the manual are no longer available, though this generally does not cause problems.
+
+Another useful reference on working with input–output tables is [Input–Output Analytical Tables: Methods and Application to UK National Accounts](https://webarchive.nationalarchives.gov.uk/20160114044923/http://www.ons.gov.uk/ons/rel/input-output/input-output-analytical-tables/2010/index.html). At the time of publication, the United Kingdom was a member of the European Union, and its national accounts followed EU ESA standards.
+
+## Getting and processing Eurostat data
+
+The following code, if specifically run (it will not run on default), will download the latest relevant data from the Eurostat data warehouse, and save it to a directory named *../not_included* . The iotables package uses the other rOpenGov package [Eurostat](https://github.com/rOpenGov/eurostat) with additional processing of the rather complex SIOT bulk files.
+
+The contents of the [not_included](https://github.com/rOpenGov/iotables/tree/master/not_included) directory can be found on GitHub, but they are not released and distributed with the package.
+
+```{r download, eval=FALSE}
+# Not run
+not_included_directory <- file.path("..", "not_included")
+if (!dir.exists(not_included_directory)) dir.create(not_included_directory)
+# The contents of the 'not_included' directory can be found on GitHub,
+# but they are not released and distributed with the package.
+
+naio_10_cp1700 <- iotables_download(
+  "naio_10_cp1700", # SIOT
+  data_directory = not_included_directory
+)
+
+# For inclusion in the package, the files must be smaller.
+# Reducing the size of the bulk files will not affect
+# the demonstration.
+
+naio_10_cp1700 <- naio_10_cp1700 %>%
+  dplyr::filter(geo %in% c("CZ", "SK")) %>%
+  dplyr::filter(year %in% c(2010, 2015))
+
+# Conforming employment data both sexes from 15 years old, year 2015.
+# prod_na vocabulary for product x product conformity
+emp_cz <- employment_get(
+  geo = "CZ", year = "2015", sex = "Total",
+  age = "Y_GE15", labelling = "prod_na",
+  data_directory = not_included_directory,
+  force_download = TRUE
+)
+
+# Conforming employment data #both sexes from 15 years old, year 2017.
+emp_sk <- employment_get(
+  geo = "SK",
+  year = "2017", sex = "Total",
+  age = "Y_GE15", labelling = "prod_na",
+  data_directory = not_included_directory,
+  force_download = TRUE
+)
+
+save(naio_10_cp1700, emp_sk, emp_cz,
+  file = file.path(
+    "..", "inst", "extdata",
+    "naio_10_product_x_product.rda"
+  )
+)
+```
+
+For a quicker building of the vignette, the data is retrieved from the *not_included* directory. The chunk above can reproduce this data file.
+
+```{r load}
+# load from pre-saved file to increase running speed
+load(system.file("extdata",
+  "naio_10_product_x_product.rda",
+  package = "iotables"
+))
+```
+
+In this vignette example the Czech (2015) national currency unit and the Slovak (2010) euro tables are created.  Since the Slovak national currency is the euro, there is no difference between the Slovak national currency unit and euro tables.
+
+```{r preprocess, eval=FALSE}
+cz_io <- iotable_get(
+  source = "naio_10_cp1700",
+  geo = "CZ",
+  year = 2015,
+  unit = "MIO_NAC",
+  stk_flow = "TOTAL",
+  labelling = "short"
+)
+
+sk_io <- iotable_get(
+  source = "naio_10_cp1700",
+  geo = "SK",
+  year = 2015,
+  unit = "MIO_EUR",
+  stk_flow = "TOTAL",
+  labelling = "short"
+)
+
+cz_input_flow <- input_flow_get(data_table = cz_io)
+
+sk_input_flow <- input_flow_get(data_table = sk_io)
+
+cz_output <- output_get(data_table = cz_io)
+sk_output <- output_get(data_table = sk_io)
+```
+
+By default, total rows and columns are removed when creating use tables.
+## Analytic functions {#analytic-functions}
+
+### Input coefficients matrix
+
+Iotables removes the columns and rows that are completely empty and creates the input coefficient matrix, which is used for most of the analytical functions.
+
+The `input_coefficient_matrix_create()` function relies on the following equation. The numbering of the equations is the numbering of the Eurostat Manual.
+
+(9)  $a_{ij}$ = $X_{ij}$ / $x_j$  [recap: (43) is the same]
+
+It checks the correct ordering of columns, and furthermore it fills up 0 values with 0.000001 to avoid division with zero.
+
+```{r inputcoeff, results='asis'}
+input_coeff_matrix_cz <- input_coefficient_matrix_create(
+  data_table = cz_io
+)
+
+input_coeff_matrix_sk <- input_coefficient_matrix_create(
+  data_table = sk_io
+)
+
+knitr::kable(head(input_coeff_matrix_cz[, 1:8]))
+```
+
+In the Czech SIOTs, they are removed by the statistical authority, so the Czech SIOTs appear smaller.
+
+Most countries do not use the *L_68A*, *CPA_U* [Services provided by extraterritorial organisations and bodies] and *CPA_T* [Services of households as employers; undifferentiated goods and services produced by households for own use]industries, instead they use *L_68B* for the income component of real estates, and they do not calculate the   In order to prevent division by zero errors, they are symmetrically removed from rows and columns.  This will not change the results.
+
+### Creating the Leontief-matrix and its inverse {#leontieff-inverse}
+
+The Leontief matrix is derived from Leontief equation system.
+
+(19) $(I-A)x = y$
+
+The Leontief matrix is defined as $(I-A)$ and it is created with the `leontieff_matrix_create()` function.
+
+The Leontief inverse is (I-A)^-1^ and it is created with the `leontieff_inverse_create()` function from the Leontief-matrix.
+
+The code chunk below prints a small part of the Czech Leontief-inverse.
+
+```{r leontieff, results='asis'}
+L_cz <- leontieff_matrix_create(input_coeff_matrix_cz)
+I_cz <- leontieff_inverse_create(input_coeff_matrix_cz)
+
+L_sk <- leontieff_matrix_create(input_coeff_matrix_sk)
+I_sk <- leontieff_inverse_create(input_coeff_matrix_sk)
+
+knitr::kable(head(I_cz[, 1:8]))
+```
+
+You can create the Leontief-matrix and its inverse from the output coefficient matrix, too, starting with `output_coefficient_matrix_create()` if you know what you are doing!
+
+## Direct effect indicators
+
+The direct effects can be compared to intermediate production, domestic product or total supply.
+
+>The calculation follows the Eurostat Manual on p497-499
+
+(60)  $a_{ij}$ = $z_{ij}$ / $x_j$  [recap: (43) is the same]
+
+$a_{ij}$ = input coefficient
+$z_{ij}$ = input of type i in sector j (i.e. products or capital or labour)
+$x_j$ = output of sector j
+
+By default, `direct_supply_effects_create()` will compare inputs to total final demand / supply. You can make comparisons to total product or total output, too. The code below prints a part of the Czech direct effects rounded to 4 digits.
+
+```{r direct, results='asis'}
+primary_inputs_cz <- coefficient_matrix_create(
+  data_table = cz_io,
+  total = "output",
+  return = "primary_inputs"
+)
+
+primary_inputs_sk <- coefficient_matrix_create(
+  data_table = sk_io,
+  total = "output",
+  return = "primary_inputs"
+)
+
+direct_cz <- direct_effects_create(primary_inputs_cz, I_cz)
+direct_sk <- direct_effects_create(primary_inputs_sk, I_sk)
+
+knitr::kable(head(direct_cz[, 1:8]), digits = 4)
+```
+
+Direct effects measure the initial, direct impact of the change in demand and supply for a product. When production goes up, it will create demand in all supply industries (backward linkages) and create opportunities in the industries that use the product themselves (forward linkages.)
+
+This is not the total effect, because some of the increased production will translate into income, which in turn will be used to create further demand in all parts of the domestic economy. The total effect is characterized by multipliers.
+
+## Total effects {#total-effects}
+
+### Input multipliers
+The `input_multipliers_create` function will create the various multipliers for each product.
+
+(63) Z = B(I-A)^-1^
+
+B = vector of input coefficients compared to final demand / supply.
+
+Z = direct and indirect requirements for wages (or other income)
+
+>The calculation follows the Eurostat Manual p 499-502.
+
+The code chunk below prints a part of the Czech multipliers, rounded to 4 digits.
+
+```{r total, results='asis' }
+primary_inputs_cz <- coefficient_matrix_create(
+  data_table = cz_io,
+  total = "output",
+  return = "primary_inputs"
+)
+
+primary_inputs_sk <- coefficient_matrix_create(
+  data_table = sk_io,
+  total = "output",
+  return = "primary_inputs"
+)
+
+multipliers_cz <- input_multipliers_create(primary_inputs_cz, I_cz)
+multipliers_sk <- input_multipliers_create(primary_inputs_sk, I_sk)
+
+knitr::kable(head(multipliers_cz[, 1:8]), digits = 4)
+```
+
+### Employment indicators and multipliers {#employment-multipliers}
+
+The creation of the employment indicator is facilitated with the data processing function `employment_get`. The employment data as input data is not part of the Eurostat SIOT files, and the Eurostat employment data uses a more disaggregated structure. This function downloads and brings the employment data to conforming aggregate vector.
+
+Other inputs, for example, CO2 emissions may be used, but they are likely to be need a manual aggregation.  The helper function `conforming_vector_create` will create an empty vector that you can save as a .csv or Excel file and fill up manually with customary input data.
+
+```{r employmenteffect, results='asis', message=FALSE}
+# New function is needed to add employment vector to SIOT
+names(emp_sk)[1] <- "prod_na"
+names(emp_cz)[1] <- "prod_na"
+
+emp_indicator_cz <- full_join(
+  cz_io,
+  emp_cz
+) %>%
+  coefficient_matrix_create(.,
+    return_part = "primary_inputs"
+  ) %>%
+  filter(prod_na == "employment_total")
+
+
+emp_effect_cz <- direct_effects_create(emp_indicator_cz, I_cz)
+
+knitr::kable(emp_effect_cz[1:8], digits = 5)
+```
+
+
+```{r employmentindicator, results='asis'}
+# New function is needed to add employment vector to SIOT
+
+emp_multiplier_cz <- input_multipliers_create(
+  emp_indicator_cz, I_cz
+)
+
+knitr::kable(emp_multiplier_cz[1:8], digits = 5)
+```
+
+
+### Output multipliers {#output-multipliers}
+
+```{r output_multipliers, results='asis'}
+output_multipliers_cz <- output_multiplier_create(input_coeff_matrix_cz)
+output_multipliers_sk <- output_multiplier_create(input_coeff_matrix_sk)
+
+knitr::kable(head(output_multipliers_cz[, 1:8]), digits = 4)
+```
+
+## Interindustrial linkage analysis {#interindustrial-linkage-analysis}
+
+## Backward linkages {#backward-linkages}
+
+Backward linkages show the effect on industries that are suppliers to the production (industry) in question.
+
+```{r backward, results='asis'}
+cz_bw <- backward_linkages(I_cz)
+sk_bw <- backward_linkages(I_sk)
+
+knitr::kable(head(cz_bw[, 1:8]), digits = 4)
+```
+
+## Forward linkages {#forward-linkages}
+
+Forward linkages show the effects on other industries that use the product (industry output) at question as an input. Forward linkages can be derived from the ouput coefficient table.
+
+```{r output_coeff, results='asis'}
+output_coeff_cz <- output_coefficient_matrix_create(
+  data_table = cz_io, total = "TFU", digits = 4
+)
+
+output_coeff_sk <- output_coefficient_matrix_create(
+  data_table = sk_io, total = "TFU", digits = 4
+)
+
+knitr::kable(head(output_coeff_cz[, 1:8]))
+```
+
+From the output coefficient matrix we can create the Leontief-matrix for outputs, its inverse, and summarize for forward linkages.  These steps are taking place in the `forward_linkages` function.
+
+```{r forward, results='asis', eval=FALSE}
+cz_fw <- forward_linkages(output_coeff_cz)
+sk_fw <- forward_linkages(output_coeff_sk)
+
+knitr::kable(head(cz_fw), digits = 4)
+```
+
+
+## Write results into Excel files
+
+This code will not run, unless you run it separately. The resulting files can be used to check calculations in Excel or other application.
+
+The contents of the [not_included](https://github.com/rOpenGov/iotables/tree/master/not_included) directory can be found on GitHub, but they are not released and distributed with the package.
+
+
+```{r reproduction_data, eval=FALSE }
+require(xlsx)
+cz_file_name <- file.path("..", "not_included", "CzechRep_test.xlsx")
+# Czech Republic data
+xlsx::write.xlsx(cz_io,
+  file = cz_file_name, sheetName = "io_table",
+  col.names = TRUE, row.names = TRUE, append = FALSE
+)
+xlsx::write.xlsx(cz_output,
+  file = cz_file_name, sheetName = "cz_output",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(input_coeff_matrix_cz,
+  file = cz_file_name,
+  sheetName = "input_coeff_matrix_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(L_cz,
+  file = cz_file_name, sheetName = "L_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(I_cz,
+  file = cz_file_name, sheetName = "I_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(direct_cz,
+  file = cz_file_name,
+  sheetName = "direct_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(multipliers_cz,
+  file = cz_file_name,
+  sheetName = "multipliers_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(emp_effect_cz,
+  file = cz_file_name,
+  sheetName = "emp_effect_cz_2015",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(emp_indicator_cz,
+  file = cz_file_name,
+  sheetName = "emp_indicator_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(emp_multiplier_cz,
+  file = cz_file_name,
+  sheetName = "emp_multiplier_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(cz_bw,
+  file = cz_file_name,
+  sheetName = "cz_backward_linkages",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(output_coeff_cz,
+  file = cz_file_name,
+  sheetName = "output_coeff_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(cz_fw,
+  file = cz_file_name,
+  sheetName = "cz_forward_linkages",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(output_multipliers_cz,
+  file = cz_file_name,
+  sheetName = "output_multipliers_cz",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+
+
+sk_file_name <- file.path("..", "not_included", "SlovakRep_test.xlsx")
+# Czech Republic data
+xlsx::write.xlsx(sk_io,
+  file = sk_file_name, sheetName = "io_table",
+  col.names = TRUE, row.names = TRUE, append = FALSE
+)
+xlsx::write.xlsx(sk_output,
+  file = sk_file_name, sheetName = "sk_output",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(input_coeff_matrix_sk,
+  file = sk_file_name,
+  sheetName = "input_coeff_matrix_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(L_sk,
+  file = sk_file_name, sheetName = "L_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(I_sk,
+  file = sk_file_name, sheetName = "I_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(direct_sk,
+  file = sk_file_name,
+  sheetName = "direct_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(multipliers_sk,
+  file = sk_file_name,
+  sheetName = "multipliers_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(emp_effect_sk,
+  file = sk_file_name,
+  sheetName = "emp_effect_sk_2015",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(emp_indicator_sk,
+  file = sk_file_name,
+  sheetName = "emp_indicator_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(emp_multiplier_sk,
+  file = sk_file_name,
+  sheetName = "employment_multipliers_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(sk_bw,
+  file = sk_file_name,
+  sheetName = "sk_backward_linkages",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(output_coeff_sk,
+  file = sk_file_name,
+  sheetName = "output_coeff_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(sk_fw,
+  file = sk_file_name,
+  sheetName = "sk_forward_linkages",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+xlsx::write.xlsx(output_multipliers_sk,
+  file = sk_file_name,
+  sheetName = "output_multipliers_sk",
+  col.names = TRUE, row.names = TRUE, append = TRUE
+)
+```

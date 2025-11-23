@@ -54,7 +54,7 @@ The `iotables` package follows the same notation used in Beutel (2008).
 | Symbol | Meaning | Definition | Function in `iotables` |
 |------------------|------------------|------------------|------------------|
 | **Z** | Intermediate-consumption matrix | Flows of products between industries | `iotable_get()` |
-| **A** | Input (technical) coefficient matrix | `A_ij = Z_ij / X_j` | `input_coefficient_matrix_create()` |
+| **A** | Input (technical) coefficient matrix | $A_{ij} = Z_{ij} / X_{j}$` | `input_coefficient_matrix_create()` |
 | **(I − A)** | Leontief matrix | Identity minus A | `leontief_matrix_create()` |
 | **L = (I − A)⁻¹** | Leontief inverse | Total (direct + indirect) requirements | `leontief_inverse_create()` |
 | **f** | Final-demand vector | Exogenous demand by category | retrieved from IOT |
@@ -87,8 +87,9 @@ hey are computed in `iotables` by:
 
 ```{r inputcoeff}
 input_coefficient_matrix_create(
-  data_table = iotable_get(source="germany_1995"), 
-  digits = 4)
+  data_table = iotable_get(source = "germany_1995"),
+  digits = 4
+)
 ```
 
 ### Output coefficients
@@ -125,8 +126,39 @@ for example value added (GVA), labour, or emissions per unit of output.
 
 ```{r inputindicatr}
 input_indicator_create(
-  data_table = iotable_get(), input_row = "gva")
+  data_table = iotable_get(), input_row = "gva"
+)
 ```
+
+### Multipliers
+
+The income, product, employment, or emission multipliers are calculated with the following generic formula: 
+
+
+$$
+(63) Z = B(I-A)^{1}
+$$
+- $B$ = matrix of input coefficients for primary input (income, employment, product, or pollutant)
+- $I$ = unit matrix
+- $A$ = matrix of input coefficients for intermediates
+- $Y$ = Diagonal matrix for final demand by product
+- $Z$ = matrix with results for direct and indirect requirements for primary inputs[^multipliers].
+
+[^multipliers]: In the *Eurostat Manual*, the calculations are shown with (63) wages, (64) employment, (65) capital. 
+
+**Embodied emissions in final demand**:\
+ 
+$$
+(66) Z = B(I-A)^{1}Y
+$$
+
+- $B$ = matrix of input coefficients for primary input
+- $I$ = unit matrix
+- $A$ = matrix of input coefficients for intermediates
+- $Y$ = Diagonal matrix for final demand by product
+- $Z$ = matrix with results for direct and indirect requirements for primary inputs
+
+See  *Eurostat Manual of Supply, Use and Input–Output Tables* (Beutel, 2008, pp.503-506.)
 
 ### Output coefficients
 

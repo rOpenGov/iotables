@@ -72,19 +72,37 @@
 #'   \code{\link{leontief_inverse_create}}
 #'
 #' @examples
-#' \dontrun{
-#' # Italian GHG example
-#' it_io <- iotables::iotable_get(geo = "IT", year = 2020)
-#' it_ghg <- iotables::airpol_get(geo = "IT", year = 2020, airpol = "GHG")
+#' # Minimal fictitious IO table with three industries
+#' io_example <- data.frame(
+#'   prod_na = c("A", "B", "C31_32"),
+#'   A       = c(10,  2,  1),
+#'   B       = c( 1, 15,  3),
+#'   C31_32  = c( 0,  1, 20),
+#'   check.names = FALSE
+#' )
 #'
-#' # Harmonise NAMEA emissions to IO structure
-#' it_ghg_aligned <- align_to_io_codes(it_ghg, it_io)
+#' # External satellite account:
+#' # * includes an identifier column
+#' # * matches industries A and B
+#' # * uses a hyphenated code C31-32 that needs harmonisation
+#' # * includes TOTAL which should be dropped
+#' ext_example <- data.frame(
+#'   indicator = "GHG_emission",
+#'   A         = 0.5,
+#'   B         = 0.2,
+#'   `C31-32`  = 0.3,
+#'   TOTAL     = 0.7,
+#'   check.names = FALSE
+#' )
 #'
-#' # Add GHG row to IO table and compute direct GHG intensity
-#' it_io_ghg <- iotables::supplementary_add(it_io, it_ghg_aligned)
-#' ghg_ind <- iotables::input_indicator_create(it_io_ghg, "GHG_emission")
-#' }
+#' # Align external data to the IO industry codes
+#' aligned <- align_to_io_codes(ext_example, io_example)
 #'
+#' # The aligned table contains:
+#' # * a single identifier column named 'prod_na'
+#' # * only IO industries (A, B, C31_32)
+#' # * renamed and reordered industry columns
+#' aligned
 #' @importFrom dplyr recode rename_with
 #' @export
 
